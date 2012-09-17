@@ -1,0 +1,91 @@
+* {
+	font-family: 'Numans', sans-serif;
+}
+
+body {
+	background-color: #e8eadf;
+
+}
+
+#container {
+	background-color: #f0f0e6;
+	-webkit-border-radius: 12px;
+	   -moz-border-radius: 12px;
+	        border-radius: 12px;
+	border: 2px solid #91928d;
+	padding: 0px;
+	-webkit-box-shadow:6px 6px 3px rgba(0, 0, 0, 0.06) inset;	
+	   -moz-box-shadow:6px 6px 3px rgba(0, 0, 0, 0.06) inset;	
+	        box-shadow:10px 10px 3px rgba(0, 0, 0, 0.06) inset;	
+}
+
+#container .cards {
+
+}
+
+#container h2 {
+	background-color: #e9e6dd;
+	font-size: 18px;
+	font-weight: 300;
+	padding: 3px 40px 3px 40px;
+	margin: 0px 0px 20px 0px;
+
+	-webkit-box-shadow:1px 5px 5px rgba(0, 0, 0, 0.4), 10px 0px 3px rgba(0, 0, 0, 0.06) inset;	
+	   -moz-box-shadow:1px 5px 5px rgba(0, 0, 0, 0.4), 10px 0px 3px rgba(0, 0, 0, 0.06) inset;	
+	        box-shadow:1px 5px 5px rgba(0, 0, 0, 0.4), 10px 0px 3px rgba(0, 0, 0, 0.06) inset;	
+
+}
+
+#container h2.first {
+	-webkit-border-radius: 12px 12px 0px 0px;
+	   -moz-border-radius: 12px 12px 0px 0px;
+	        border-radius: 12px 12px 0px 0px;
+
+	-webkit-box-shadow:1px 5px 5px rgba(0, 0, 0, 0.4), 10px 10px 3px rgba(0, 0, 0, 0.06) inset;	
+	   -moz-box-shadow:1px 5px 5px rgba(0, 0, 0, 0.4), 10px 10px 3px rgba(0, 0, 0, 0.06) inset;	
+	        box-shadow:1px 5px 5px rgba(0, 0, 0, 0.4), 10px 10px 3px rgba(0, 0, 0, 0.06) inset;	
+
+}
+
+#container .item {
+	background-color: #f0f0e6;
+	margin: 0px 40px 0px 40px;
+
+}
+
+#container h3 {
+	background-color: #f0f0e6;
+	font-size: 16px;
+
+}
+
+div.list-chunk {
+  padding-bottom: 1px ;
+  }
+
+div.list-item {
+  margin: 0px 0px 13px 0px ;
+  padding: 10px 10px 10px 10px ;
+  }
+
+div.list-item a.thumbnail {
+  float: left ;
+  height: 150px ;
+  margin: 0px 15px 10px 0px ;
+  width: 100px ;
+  }
+
+div.list-item a.thumbnail img {
+  display: block ;
+  }
+
+div.list-item h4 {
+  font-size: 18px ;
+  margin: 0px 0px 12px 0px ;
+  }
+
+div.list-item div.offset {
+  clear: both ;
+  font-size: 11px ;
+  padding-top: 4px ;
+  }
