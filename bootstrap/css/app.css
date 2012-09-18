@@ -16,7 +16,7 @@ body {
 	} /* temporarily hidden DG-18sept2012 */
 
 .needle { 
-	position:relative; 
+	position:fixed; 
 	top: 50%;
 	width: 100%;
 	height: 1px;
