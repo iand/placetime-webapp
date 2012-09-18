@@ -11,6 +11,8 @@ body {
         background-attachment: fixed;
 }
 
+.navbar-inner { display: none; } /* temporarily hidden DG-18sept2012 */
+
 #container {
 	background-color: #fff;
 	-webkit-border-radius: 12px;
