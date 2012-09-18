@@ -11,6 +11,8 @@ body {
         background-attachment: fixed;
         margin-left:0px;
         margin-right:0px;
+        padding-left: 0px;
+        padding-right: 0px;
 }
 
 .navbar-inner { 
@@ -25,6 +27,12 @@ body {
 	color: #fff;
 	background-color: #ff9900;
 	margin-top: 17px;
+}
+
+#nowbtn {
+    left: 29px;
+    position: fixed;
+    top: 50%;
 }
 
 .container, .span8 {
