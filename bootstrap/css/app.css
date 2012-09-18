@@ -29,6 +29,16 @@ body {
 	margin-top: 17px;
 }
 
+.btn-large {
+	border-radius: 20px;
+}
+
+.btn {
+	background-color: #ff9900;
+	background-image: none;
+}
+	
+
 #nowbtn {
     left: 29px;
     position: fixed;
