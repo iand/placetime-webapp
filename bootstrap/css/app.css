@@ -11,7 +11,17 @@ body {
         background-attachment: fixed;
 }
 
-.navbar-inner { display: none; } /* temporarily hidden DG-18sept2012 */
+.navbar-inner { 
+	display: none; 
+	} /* temporarily hidden DG-18sept2012 */
+
+.needle { 
+	position:relative; 
+	top: 50%;
+	width: 100%;
+	color: #ff9900;
+	background-color: #ff9900;
+}
 
 #container {
 	background-color: #fff;
