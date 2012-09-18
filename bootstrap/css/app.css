@@ -55,7 +55,9 @@ body {
 
 #container h3 {
 	background-color: #fff;
+	color: #c00;
 	font-size: 24px;
+	font-weight: 200;
 
 }
 
@@ -64,7 +66,7 @@ div.list-chunk {
   }
 
 div.list-item {
-  font-size: 14px;
+  font-size: 18px;
   margin: 0px 0px 13px 0px ;
   padding: 10px 10px 10px 10px ;
   
