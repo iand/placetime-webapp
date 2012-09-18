@@ -27,12 +27,12 @@ body {
 	background-color: #fff;
 	font-size: 36px;
 	font-weight: 200;
-	padding: 3px 40px 3px 40px;
-	margin: 0px 0px 20px 0px;
+	padding: 30px 40px 3px 40px;
+	margin: 0px 0px 20px 10px;
 
-	-moz-box-shadow: inset 5px 5px 5px -5px rgba(68,68,68,0.6);
-	-webkit-box-shadow: inset 5px 5px 5px -5px rgba(68,68,68,0.6);
-	box-shadow: inset 5px 5px 5px -5px rgba(68,68,68,0.6);	
+	-moz-box-shadow: inset 5px 5px 10px -10px rgba(68,68,68,0.6);
+	-webkit-box-shadow: inset 5px 5px 10px -10x rgba(68,68,68,0.6);
+	box-shadow: inset 5px 5px 10px -10px rgba(68,68,68,0.6);	
 
 }
 
