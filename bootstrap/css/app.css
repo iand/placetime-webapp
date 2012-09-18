@@ -32,6 +32,9 @@ body {
 	margin-left: 30px;
 }
 
+.row { margin-left: 0px;
+}
+
 #container {
 	background-color: #fff;
 	-webkit-border-radius: 12px;
