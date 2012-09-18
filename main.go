@@ -21,7 +21,20 @@ var (
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/", timelineHandler).Methods("GET", "HEAD")
+
+	r.PathPrefix("/policies").HandlerFunc(vocabRedirectHandler).Methods("GET", "HEAD")
+	r.PathPrefix("/instant").HandlerFunc(vocabRedirectHandler).Methods("GET", "HEAD")
+	r.PathPrefix("/interval").HandlerFunc(vocabRedirectHandler).Methods("GET", "HEAD")
+	r.PathPrefix("/geopoint").HandlerFunc(vocabRedirectHandler).Methods("GET", "HEAD")
+	r.PathPrefix("/technical").HandlerFunc(vocabRedirectHandler).Methods("GET", "HEAD")
+	r.PathPrefix("/uridocs").HandlerFunc(vocabRedirectHandler).Methods("GET", "HEAD")
+	r.PathPrefix("/changes.html").HandlerFunc(vocabRedirectHandler).Methods("GET", "HEAD")
+	r.PathPrefix("/2003").HandlerFunc(vocabRedirectHandler).Methods("GET", "HEAD")
+	r.PathPrefix("/2008").HandlerFunc(vocabRedirectHandler).Methods("GET", "HEAD")
+
+	r.HandleFunc("/", vocabRedirectHandler).Methods("GET", "HEAD")
+
+	r.HandleFunc("/timeline", timelineHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-init", initHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-follow", followHandler).Methods("POST")
 	r.HandleFunc("/-jtl", jsonTimelineHandler).Methods("GET", "HEAD")
@@ -29,6 +42,7 @@ func main() {
 
 	r.PathPrefix("/-assets/").HandlerFunc(assetsHandler).Methods("GET", "HEAD")
 
+	fmt.Print("Listening on 0.0.0.0:8081\n")
 	http.Handle("/", r)
 	http.ListenAndServe("0.0.0.0:8081", nil)
 }
@@ -248,4 +262,8 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
+}
+
+func vocabRedirectHandler(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "http://vocab.org/placetime"+r.URL.Path, http.StatusMovedPermanently)
 }
