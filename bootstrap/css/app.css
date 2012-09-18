@@ -24,7 +24,7 @@ body {
 }
 
 #container h2 {
-	background-color: #999;
+	background-color: #fff;
 	font-size: 36px;
 	font-weight: 200;
 	padding: 3px 40px 3px 40px;
@@ -48,13 +48,13 @@ body {
 }
 
 #container .item {
-	background-color: #999;
+	background-color: #fff;
 	margin: 0px 40px 0px 40px;
 
 }
 
 #container h3 {
-	background-color: #ccc;
+	background-color: #fff;
 	font-size: 24px;
 
 }
