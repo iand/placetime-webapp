@@ -25,7 +25,7 @@ body {
 	margin-top: 17px;
 }
 
-.span8 {
+.container, .span8 {
 	width: 650px;
 	min-width: 650px;
 	float: left;
