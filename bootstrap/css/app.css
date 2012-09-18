@@ -18,7 +18,7 @@ body {
 .needle { 
 	position:fixed; 
 	top: 50%;
-	width: 100%;
+	width: 600px;
 	height: 1px;
 	color: #fff;
 	background-color: #ff9900;
