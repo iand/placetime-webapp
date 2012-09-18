@@ -9,6 +9,8 @@ body {
         background-size:2000px;
         background-repeat:no-repeat;
         background-attachment: fixed;
+        margin-left:0px;
+        margin-right:0px;
 }
 
 .navbar-inner { 
