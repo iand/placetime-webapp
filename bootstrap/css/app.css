@@ -5,8 +5,8 @@
 body {
 	background-color: #eee;
 	background-image: url('http://davidgalbraith.org/blg/wp-content/uploads/2012/09/1284963531-blonde_girl_holding_phone-jpg.jpg');
-        -moz-background-size:1440px; /* Firefox 3.6 */
-        background-size:1440px;
+        -moz-background-size:2000px; /* Firefox 3.6 */
+        background-size:2000px;
         background-repeat:no-repeat;
         background-attachment: fixed;
 }
