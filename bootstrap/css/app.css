@@ -45,7 +45,7 @@ body {
     top: 50%;
 }
 
-.container, .span8 {
+/*.container, .span8 {
 	width: 650px;
 	min-width: 650px;
 	float: left;
@@ -53,9 +53,9 @@ body {
 }
 
 .row { margin-left: 0px;
-}
+}*/
 
-#container {
+/*#container {
 	background-color: #fff;
 	-webkit-border-radius: 12px;
 	   -moz-border-radius: 12px;
@@ -66,7 +66,7 @@ body {
 	   -moz-box-shadow:inset 0px 0px 12px rgba(0, 0, 0, 0.5);	
 	        box-shadow:inset 0px 0px 12px rgba(0, 0, 0, 0.5);	
 }
-
+*/
 #container .cards {
 
 }

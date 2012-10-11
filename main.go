@@ -35,6 +35,7 @@ func main() {
 	r.HandleFunc("/", vocabRedirectHandler).Methods("GET", "HEAD")
 
 	r.HandleFunc("/timeline", timelineHandler).Methods("GET", "HEAD")
+	r.HandleFunc("/-tl/{filter:[0-9]}", timelineFilterHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-init", initHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-follow", followHandler).Methods("POST")
 	r.HandleFunc("/-jtl", jsonTimelineHandler).Methods("GET", "HEAD")
@@ -62,7 +63,7 @@ func assetsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func timelineHandler(w http.ResponseWriter, r *http.Request) {
-	templates := template.Must(template.ParseFiles("templates/timeline.html", "templates/profile.html"))
+	templates := template.Must(template.ParseFiles("templates/timeline_main.html"))
 
 	s := NewRedisStore()
 	tl, err := s.TimelineRange("iand", time.Now(), time.Now().AddDate(1000, 0, 0), 5)
@@ -71,7 +72,25 @@ func timelineHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = templates.ExecuteTemplate(w, "timeline.html", tl)
+	err = templates.ExecuteTemplate(w, "timeline_main.html", tl)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+func timelineFilterHandler(w http.ResponseWriter, r *http.Request) {
+	//	f := vars["filter"]
+
+	templates := template.Must(template.ParseFiles("templates/timeline_filter.html"))
+
+	s := NewRedisStore()
+	tl, err := s.TimelineRange("iand", time.Now(), time.Now().AddDate(1000, 0, 0), 5)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	err = templates.ExecuteTemplate(w, "timeline_filter.html", tl)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
