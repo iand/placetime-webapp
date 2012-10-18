@@ -66,24 +66,16 @@
     </div>
 
     <div class="container">
+
     
      <div class="needle">.</div>
 
       <!-- Example row of columns -->
       <div class="row">
-        <div class="span2">
-
-        </div>
-        <div class="span8">
-          <div id="container">
-            <!-- Content will be loaded here dynamically. -->
-          </div>        
-          <div id="nowbtn"><a class="btn btn-large" href="#">now</a></div>  
-       </div>
-        <div class="span2">
-
-        </div>
-
+        <div class="span3" id="col1">&nbsp;</div>
+        <div class="span3" id="col2">&nbsp;</div>
+        <div class="span3" id="col3">&nbsp;</div>
+        <div class="span3" id="col4">&nbsp;</div>
       </div>
 
 
@@ -103,6 +95,7 @@
     // them to the list depending on the target area.
     function getMoreListItems(
       container,
+      sourceurl,
       targetArea,
       onComplete
       ){
@@ -158,7 +151,7 @@
           "xhr",
           $.ajax({
             type: "get",
-            url: "/-jtl",
+            url: sourceurl,
             data: {
               group: baseGroup,
               count: count
@@ -405,7 +398,7 @@
  
     // I check to see if more list items are needed, and, if
     // they are, I load them.
-    function checkListItemContents( container ){
+    function checkListItemContents( container, sourceurl ){
       // Check to see if more items need to be loaded at
       // the top or the bottom (based purely on position).
       // Returns: { top: boolean, bottom: boolean }.
@@ -433,6 +426,7 @@
         // Load and prepend more list items.
         getMoreListItems(
           container,
+          sourceurl,
           "top",
           onComplete
         );
@@ -446,6 +440,7 @@
         // Load and append more list items.
         getMoreListItems(
           container,
+          sourceurl,
           "bottom",
           onComplete
         );
@@ -467,7 +462,10 @@
     jQuery(function( $ ){
  
       // Get a reference to the list container.
-      var container = $( "#container" );
+      var col1 = $( "#col1" );
+      var col2 = $( "#col2" );
+      var col3 = $( "#col3" );
+      var col4 = $( "#col4" );
  
       // Bind the scroll and resize events to the window.
       // Whenever the user scrolls or resizes the window,
@@ -478,14 +476,24 @@
         function( event ){
           // Hand the control-flow off to the method
           // that worries about the list content.
-          checkListItemContents( container );
-          positionNeedle( container );
+          checkListItemContents( col1, "/-jtl" );
+          positionNeedle( col1 );
+          checkListItemContents( col2, "/-jit/0" );
+          positionNeedle( col2 );
+          checkListItemContents( col3, "/-jit/1" );
+          positionNeedle( col3 );
+          checkListItemContents( col4, "/-jit/2" );
+          positionNeedle( col4 );          
+
         }
       );
  
       // Now that the page is loaded, trigger the "Get"
       // method to populate the list with data.
-      checkListItemContents( container );
+      checkListItemContents( col1, "/-jtl" );
+      checkListItemContents( col2, "/-jit/0" );
+      checkListItemContents( col3, "/-jit/1" );
+      checkListItemContents( col4, "/-jit/2" );
 
 
     });

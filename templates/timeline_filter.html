@@ -213,7 +213,7 @@
                 // to the HTML buffer.
                 htmlBuffer.push(
                   template.html().replace(
-                    new RegExp( "\\$\\{(ts|pid|text|label)\\}", "g" ),
+                    new RegExp( "\\$\\{(ts|pid|text|label|link)\\}", "g" ),
                     function( $0, $1 ){
                       // Return property.
                       return( item[ $1.toLowerCase() ] );
@@ -374,9 +374,7 @@
       // the transition feel a bit *safer*.
       var topScrollBuffer = 80;
       var bottomScrollBuffer = 200;
- console.log("containerTop: " + containerTop);
- console.log("topScrollBuffer: " + topScrollBuffer);
- console.log("viewTop: " + viewTop);
+
       // Check to see if the container top is close enough
       // (with buffer) to the top scroll of the view frame
       // to trigger loading more items (at the top).
@@ -498,6 +496,7 @@
       <div class="item">
         <h3>${label}</h3>
         <p>${text}</p>
+        <p><a href="${link}">${link}</a></p>
       </div> 
     </div>
  

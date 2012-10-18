@@ -1,15 +1,20 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"strconv"
+	"strings"
 	"time"
 )
 
 type Item struct {
+	Id        int64     `json:"id"`
 	Timestamp time.Time `json:"ts"`
 	Pid       string    `json:"pid"`
 	Label     string    `json:"label"`
 	Text      string    `json:"text"`
+	Link      string    `json:"link"`
 }
 
 type ItemGroup struct {
@@ -17,7 +22,7 @@ type ItemGroup struct {
 	Items []Item `json:"items"`
 }
 
-func NewItem(pid string, d string, text string) Item {
+func NewItem(pid string, d string, text string, link string) Item {
 
 	t, err := time.Parse("_2 Jan 2006", d)
 	if err != nil {
@@ -34,7 +39,7 @@ func NewItem(pid string, d string, text string) Item {
 	}
 }
 
-func NewItemTs(pid string, t time.Time, text string) Item {
+func NewItemTs(pid string, t time.Time, text string, link string) Item {
 
 	label := t.Format("Mon _2")
 
@@ -56,4 +61,20 @@ func NewItemGroup(label string) ItemGroup {
 
 func (i Item) Date() string {
 	return i.Timestamp.Format("Mon Jan 2 2006")
+}
+
+func (i Item) Packed() string {
+	return fmt.Sprintf("%d\t%d\t%s\t%s\t%s", i.Id, i.Timestamp.Unix(), i.Pid, i.Text, i.Link)
+}
+
+func UnpackItem(val string) (Item, error) {
+	parts := strings.SplitN(val, "\t", 5)
+
+	unixtime, _ := strconv.ParseInt(parts[1], 10, 64)
+	timestamp := time.Unix(unixtime, 0)
+
+	item := NewItemTs(parts[2], timestamp, parts[3], parts[4])
+	item.Id, _ = strconv.ParseInt(parts[0], 10, 64)
+
+	return item, nil
 }
