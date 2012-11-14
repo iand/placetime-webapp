@@ -103,12 +103,12 @@ func (s *RedisStore) Profile(pid string) (*Profile, error) {
 		p.MaybeCount, _ = rs.ValueAsInt()
 	}
 
-	rs = s.db.Command("ZCARD", followingKey(pid))
+	rs = s.db.Command("SCARD", followingKey(pid))
 	if rs.IsOK() {
 		p.FollowingCount, _ = rs.ValueAsInt()
 	}
 
-	rs = s.db.Command("ZCARD", followersKey(pid))
+	rs = s.db.Command("SCARD", followersKey(pid))
 	if rs.IsOK() {
 		p.FollowerCount, _ = rs.ValueAsInt()
 	}
@@ -476,17 +476,19 @@ func (s *RedisStore) Unfollow(pid string, followpid string) error {
 		return rs.Error()
 	}
 
-	// TODO
-	// rs = es.db.Command("ZRANGEBYSCORE", itemsKey(pid, 0), "-Inf", "+Inf")
-	// if !rs.IsOK() {
-	// 	return rs.Error()
-	// }
+	rs = s.db.Command("ZRANGEBYSCORE", maybeKey(followpid, "ts"), "-Inf", "+Inf")
+	if !rs.IsOK() {
+		return rs.Error()
+	}
 
-	// timelineKey := timelineKey(user)
-	// items := rs.ValuesAsStrings()
-	// for _, item := range items {
-	// 	es.db.Command("ZREM", timelineKey, item)
-	// }
+	poss_ts := possiblyKey(pid, "ts")
+	poss_ets := possiblyKey(pid, "ets")
+	items := rs.ValuesAsStrings()
+	for _, item := range items {
+		s.db.Command("ZREM", poss_ts, item)
+		s.db.Command("ZREM", poss_ets, item)
+	}
+
 	return nil
 }
 

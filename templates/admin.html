@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Placetime Admin</title>
+	</head>
+
+	<body>
+		<h1>Placetime Admin</h1>
+		<p>Blurb...</p>
+
+		<h2>API</h2>
+
+		<p>Convenient access to API calls. Remember these output JSON.</p>
+
+		<h3>Items for a user</h3>
+		<p>Retrieve timeline items for a user.</p>
+		<form action="/-jtl" method="get">
+			<label for="pid">User id: <input type="text" name="pid" size="20" value="nasa"></label><br>
+			<label for="order">Sort order: <select name="order"><option value="ts">Creation date</option><option value="ets">Event date</option></select></label><br>
+			<label for="status">Status: <select name="status"><option value="p">Possibly</option><option value="m">Maybe</option></select></label><br>			
+
+			<label for="count">Count: <input type="text" name="count" size="5"></label><br>
+			<label for="tstart">Starting timestamp: <input type="text" name="tstart" size="5"></label> (not implemented yet)<br>
+			<label for="tend">Ending timestamp: <input type="text" name="tend" size="5"></label> (not implemented yet)<br>
+
+
+			<input type="submit" value="GO">
+
+		</form>
+		<hr>
+
+
+		<h3>Item details</h3>
+		<p>Retrieve a single item. </p>
+		<form action="/-jit" method="get">
+			<label for="id">Item id: <input type="text" name="id" size="20" value="item:nasa:10"></label><br>
+
+			<input type="submit" value="GO">
+
+		</form>
+		<hr>
+
+		<h3>Profile details</h3>
+		<p>Retrieve information about a profile </p>
+		<form action="/-jpr" method="get">
+			<label for="pid">Profile id: <input type="text" name="pid" size="20" value="nasa"></label><br>
+
+			<input type="submit" value="GO">
+
+		</form>
+		<hr>
+
+		<h3>Follow a user</h3>
+		<p>Make one user follow another </p>
+		<form action="/-tfollow" method="post">
+			<label for="pid">Profile id: <input type="text" name="pid" size="20" value="iand"></label><br>
+			<label for="followpid">Profile id to follow: <input type="text" name="followpid" size="20" value="nasa"></label><br>
+
+			<input type="submit" value="GO">
+
+		</form>
+		<hr>
+
+		<h3>Unfollow a user</h3>
+		<p>Stop one user following another </p>
+		<form action="/-tunfollow" method="post">
+			<label for="pid">Profile id: <input type="text" name="pid" size="20" value="iand"></label><br>
+			<label for="followpid">Profile id to unfollow: <input type="text" name="followpid" size="20" value="nasa"></label><br>
+
+			<input type="submit" value="GO">
+
+		</form>
+		<hr>
+
+	</body>
+
+
+</html>

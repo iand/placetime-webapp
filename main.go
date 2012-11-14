@@ -4,7 +4,7 @@ import (
 	"code.google.com/p/gorilla/mux"
 	"encoding/json"
 	"fmt"
-	// "html/template"
+	"html/template"
 	"net/http"
 	"path"
 	"strconv"
@@ -36,7 +36,7 @@ func main() {
 
 	//	r.HandleFunc("/timeline", timelineHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-init", initHandler).Methods("GET", "HEAD")
-	r.HandleFunc("/-admin", initHandler).Methods("GET", "HEAD")
+	r.HandleFunc("/-admin", adminHandler).Methods("GET", "HEAD")
 	//	r.HandleFunc("/-refresh", refreshHandler).Methods("GET", "HEAD")
 	//	r.HandleFunc("/-follow", followHandler).Methods("POST")
 
@@ -45,6 +45,9 @@ func main() {
 	r.HandleFunc("/-jit", jsonItemHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-jtl", jsonTimelineHandler).Methods("GET", "HEAD")
 	//	r.HandleFunc("/{pid:[0-9a-zA-Z]+}", profileHandler).Methods("GET", "HEAD")
+
+	r.HandleFunc("/-tfollow", followHandler).Methods("POST")
+	r.HandleFunc("/-tunfollow", unfollowHandler).Methods("POST")
 
 	r.PathPrefix("/-assets/").HandlerFunc(assetsHandler).Methods("GET", "HEAD")
 
@@ -214,21 +217,21 @@ func jsonProfileHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// func followHandler(w http.ResponseWriter, r *http.Request) {
-// 	pid := r.FormValue("pid")
-// 	s := NewRedisStore()
+func followHandler(w http.ResponseWriter, r *http.Request) {
+	pid := r.FormValue("pid")
+	followpid := r.FormValue("followpid")
+	s := NewRedisStore()
+	s.Follow(pid, followpid)
+	fmt.Fprint(w, "ACK")
+}
 
-// 	isFollowing, err := s.IsFollowing("iand", pid)
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 	}
-// 	if isFollowing {
-// 		s.Unfollow("iand", pid)
-// 	} else {
-// 		s.Follow("iand", pid)
-// 	}
-// 	fmt.Fprint(w, "ACK")
-// }
+func unfollowHandler(w http.ResponseWriter, r *http.Request) {
+	pid := r.FormValue("pid")
+	followpid := r.FormValue("followpid")
+	s := NewRedisStore()
+	s.Unfollow(pid, followpid)
+	fmt.Fprint(w, "ACK")
+}
 
 // func refreshHandler(w http.ResponseWriter, r *http.Request) {
 // 	fmt.Fprint(w, "ACK\n")
@@ -376,4 +379,15 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 
 func vocabRedirectHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "http://vocab.org/placetime"+r.URL.Path, http.StatusMovedPermanently)
+}
+
+func adminHandler(w http.ResponseWriter, r *http.Request) {
+	templates := template.Must(template.ParseFiles("templates/admin.html"))
+
+	err := templates.ExecuteTemplate(w, "admin.html", nil	)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 }
