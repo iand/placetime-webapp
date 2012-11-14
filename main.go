@@ -48,6 +48,7 @@ func main() {
 
 	r.HandleFunc("/-tfollow", followHandler).Methods("POST")
 	r.HandleFunc("/-tunfollow", unfollowHandler).Methods("POST")
+	r.HandleFunc("/-tadd", addHandler).Methods("POST")
 
 	r.PathPrefix("/-assets/").HandlerFunc(assetsHandler).Methods("GET", "HEAD")
 
@@ -390,4 +391,18 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+}
+
+func addHandler(w http.ResponseWriter, r *http.Request) {
+	pid := r.FormValue("pid")
+	text := r.FormValue("text")
+	link := r.FormValue("link")
+	ets := r.FormValue("ets")
+	s := NewRedisStore()
+	itemid, err := s.AddItem(pid, ets, text, link)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	fmt.Fprintf(w, "ACK. (itemid=%s)", itemid)
 }

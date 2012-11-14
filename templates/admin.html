@@ -23,7 +23,7 @@
 			 <div class="span12">
 
 					<p>Blurb...</p>
-
+					<p><a href="https://github.com/iand/timescroll/wiki/API">API docs are here</a></p>
 			    <ul>
 			    
 			    <li><a href="#jtl">User timelines</a></li>
@@ -31,6 +31,7 @@
 			    <li><a href="#jpr">Profile details</a></li>
 			    <li><a href="#tfollow">Follow a user</a></li>
 			    <li><a href="#tunfollow">Unfollow a user</a></li>
+			    <li><a href="#tadd">Add an item</a></li>
 			    </ul>
 
 
@@ -102,7 +103,7 @@
 					<h3 id="tunfollow">Unfollow a user</h3>
 					<p>Stop one user following another </p>
 					
-					<form action="/-tun follow" method="post" class="form-horizontal">
+					<form action="/-tunfollow" method="post" class="form-horizontal">
 						<div class="control-group">
 						<label class="control-label" for="pid">Profile id: </label>
 						<div class="controls"><input type="text" name="pid" size="20" value="iand"></div></div>
@@ -116,6 +117,58 @@
 					</div></div>
 					</form>
 					<hr>
+
+
+
+					<h3 id="tadd">Add an item to a user's maybe timeline</h3>
+					
+					<form action="/-tadd" method="post" class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="pid">Profile id: </label>
+							<div class="controls">
+								<input type="text" name="pid" size="20" value="iand">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="text">Item text: </label>
+							<div class="controls">
+								<input type="text" name="text" size="40">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="link">Link: </label>
+							<div class="controls">
+								<input type="text" name="link" size="40">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="ets">Event timestamp: </label>
+							<div class="controls">
+								<input type="text" name="ets" size="20"> (like 26 Aug 2012)
+							</div>
+						</div>
+
+						<div class="control-group">
+							<div class="controls">
+								<input type="submit" value="GO">
+							</div>
+						</div>
+					</form>
+					<hr>
+
+
+
+
+
+
+
+
+
+
+
 				</div>
 			</div>
 		</div>
