@@ -384,7 +384,7 @@ func vocabRedirectHandler(w http.ResponseWriter, r *http.Request) {
 func adminHandler(w http.ResponseWriter, r *http.Request) {
 	templates := template.Must(template.ParseFiles("templates/admin.html"))
 
-	err := templates.ExecuteTemplate(w, "admin.html", nil	)
+	err := templates.ExecuteTemplate(w, "admin.html", nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

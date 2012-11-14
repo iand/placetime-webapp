@@ -3,75 +3,122 @@
 
 	<head>
 		<title>Placetime Admin</title>
+	    <link href="/-assets/css/bootstrap.css" rel="stylesheet">
+	    <style type="text/css">
+	      body {
+	        padding-top: 60px;
+	        padding-bottom: 40px;
+	      }
+	    </style>
+	    <link href="/-assets/css/bootstrap-responsive.css" rel="stylesheet">
+	    <link href='http://fonts.googleapis.com/css?family=Numans' rel='stylesheet' type='text/css'>
+
 	</head>
 
 	<body>
-		<h1>Placetime Admin</h1>
-		<p>Blurb...</p>
+		<div class="container">
+			<h1>Placetime Admin</h1>
+			<div class="row">
 
-		<h2>API</h2>
+			 <div class="span12">
 
-		<p>Convenient access to API calls. Remember these output JSON.</p>
+					<p>Blurb...</p>
 
-		<h3>Items for a user</h3>
-		<p>Retrieve timeline items for a user.</p>
-		<form action="/-jtl" method="get">
-			<label for="pid">User id: <input type="text" name="pid" size="20" value="nasa"></label><br>
-			<label for="order">Sort order: <select name="order"><option value="ts">Creation date</option><option value="ets">Event date</option></select></label><br>
-			<label for="status">Status: <select name="status"><option value="p">Possibly</option><option value="m">Maybe</option></select></label><br>			
-
-			<label for="count">Count: <input type="text" name="count" size="5"></label><br>
-			<label for="tstart">Starting timestamp: <input type="text" name="tstart" size="5"></label> (not implemented yet)<br>
-			<label for="tend">Ending timestamp: <input type="text" name="tend" size="5"></label> (not implemented yet)<br>
-
-
-			<input type="submit" value="GO">
-
-		</form>
-		<hr>
+			    <ul>
+			    
+			    <li><a href="#jtl">User timelines</a></li>
+			    <li><a href="#jit">Item details</a></li>
+			    <li><a href="#jpr">Profile details</a></li>
+			    <li><a href="#tfollow">Follow a user</a></li>
+			    <li><a href="#tunfollow">Unfollow a user</a></li>
+			    </ul>
 
 
-		<h3>Item details</h3>
-		<p>Retrieve a single item. </p>
-		<form action="/-jit" method="get">
-			<label for="id">Item id: <input type="text" name="id" size="20" value="item:nasa:10"></label><br>
+					<h2>API</h2>
 
-			<input type="submit" value="GO">
+					<p>Convenient access to API calls. Remember these output JSON.</p>
 
-		</form>
-		<hr>
+					<h3 id="jtl">User timelines</h3>
+					<p>Retrieve timeline items for a user.</p>
+					<form action="/-jtl" method="get" class="form-horizontal">
+						<div class="control-group"><label class="control-label" for="pid">User id: </label><div class="controls"><input type="text" name="pid" size="20" value="nasa"></div></div>
+						<div class="control-group"><label class="control-label" for="order">Sort order: </label><div class="controls"><select name="order"><option value="ts">Creation date</option><option value="ets">Event date</option></select></div></div>
+						<div class="control-group"><label class="control-label" for="status">Status: </label><div class="controls"><select name="status"><option value="p">Possibly</option><option value="m">Maybe</option></select></div></div>	
 
-		<h3>Profile details</h3>
-		<p>Retrieve information about a profile </p>
-		<form action="/-jpr" method="get">
-			<label for="pid">Profile id: <input type="text" name="pid" size="20" value="nasa"></label><br>
+						<div class="control-group"><label class="control-label" for="count">Count: </label><div class="controls"><input type="text" name="count" size="5"></div></div>
+						<div class="control-group"><label class="control-label" for="tstart">Starting timestamp: </label><div class="controls"><input type="text" name="tstart" size="5"> (not implemented yet)</div></div>
+						<div class="control-group"><label class="control-label" for="tend">Ending timestamp: </label><div class="controls"><input type="text" name="tend" size="5"> (not implemented yet)</div></div>
 
-			<input type="submit" value="GO">
 
-		</form>
-		<hr>
+						<div class="control-group"><div class="controls"><input type="submit" value="GO"></div></div>
 
-		<h3>Follow a user</h3>
-		<p>Make one user follow another </p>
-		<form action="/-tfollow" method="post">
-			<label for="pid">Profile id: <input type="text" name="pid" size="20" value="iand"></label><br>
-			<label for="followpid">Profile id to follow: <input type="text" name="followpid" size="20" value="nasa"></label><br>
+					</form>
+					<hr>
 
-			<input type="submit" value="GO">
 
-		</form>
-		<hr>
+					<h3 id="jit">Item details</h3>
+					<p>Retrieve a single item. </p>
+					<form action="/-jit" method="get" class="form-horizontal">
+						<div class="control-group">
+						<label class="control-label" for="id">Item id:</label>
+						<div class="controls"><input type="text" name="id" size="20" value="item:nasa:10"></div></div>
 
-		<h3>Unfollow a user</h3>
-		<p>Stop one user following another </p>
-		<form action="/-tunfollow" method="post">
-			<label for="pid">Profile id: <input type="text" name="pid" size="20" value="iand"></label><br>
-			<label for="followpid">Profile id to unfollow: <input type="text" name="followpid" size="20" value="nasa"></label><br>
+						<div class="control-group"><div class="controls">
+						<input type="submit" value="GO">
+						</div></div>
+					</form>
+					<hr>
 
-			<input type="submit" value="GO">
+					<h3 id="jpr">Profile details</h3>
+					<p>Retrieve information about a profile </p>
+					<form action="/-jpr" method="get" class="form-horizontal">
+						<div class="control-group">
+						<label class="control-label" for="pid">Profile id: </label>
+						<div class="controls"><input type="text" name="pid" size="20" value="nasa"></div></div>
 
-		</form>
-		<hr>
+						<div class="control-group"><div class="controls">
+						<input type="submit" value="GO">
+						</div></div>
+					</form>
+					<hr>
+
+					<h3 id="tfollow">Follow a user</h3>
+					<p>Make one user follow another </p>
+					<form action="/-tfollow" method="post" class="form-horizontal">
+						<div class="control-group">
+						<label class="control-label" for="pid">Profile id: </label>
+						<div class="controls"><input type="text" name="pid" size="20" value="iand"></div></div>
+
+						<div class="control-group">
+						<label class="control-label" class="control-label" for="followpid">Profile id to follow: </label>
+						<div class="controls"><input type="text" name="followpid" size="20" value="nasa"></div></div>
+
+						<div class="control-group"><div class="controls">
+						<input type="submit" value="GO">
+						</div></div>
+					</form>
+					<hr>
+
+					<h3 id="tunfollow">Unfollow a user</h3>
+					<p>Stop one user following another </p>
+					
+					<form action="/-tun follow" method="post" class="form-horizontal">
+						<div class="control-group">
+						<label class="control-label" for="pid">Profile id: </label>
+						<div class="controls"><input type="text" name="pid" size="20" value="iand"></div></div>
+
+						<div class="control-group">
+						<label class="control-label" for="followpid">Profile id to unfollow: </label>
+						<div class="controls"><input type="text" name="followpid" size="20" value="nasa"></div></div>
+
+						<div class="control-group"><div class="controls">
+						<input type="submit" value="GO">
+					</div></div>
+					</form>
+					<hr>
+				</div>
+			</div>
+		</div>
 
 	</body>
 
