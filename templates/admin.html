@@ -11,7 +11,6 @@
 	      }
 	    </style>
 	    <link href="/-assets/css/bootstrap-responsive.css" rel="stylesheet">
-	    <link href='http://fonts.googleapis.com/css?family=Numans' rel='stylesheet' type='text/css'>
 
 	</head>
 
@@ -29,9 +28,16 @@
 			    <li><a href="#jtl">User timelines</a></li>
 			    <li><a href="#jit">Item details</a></li>
 			    <li><a href="#jpr">Profile details</a></li>
+			    <li><a href="#jfollowers">Followers</a></li>
+			    <li><a href="#jfollowing">Following</a></li>
+			    <li><a href="#jsp">Suggested profiles</a></li>
 			    <li><a href="#tfollow">Follow a user</a></li>
 			    <li><a href="#tunfollow">Unfollow a user</a></li>
 			    <li><a href="#tadd">Add an item</a></li>
+			    <li><a href="#tpromote">Promote an item</a></li>
+			    <li><a href="#tdemote">Demote an item</a></li>
+			    <li><a href="#taddsuggest">Add a suggested profile</a></li>
+			    <li><a href="#tremsuggest">Remove a suggested profile</a></li>
 			    </ul>
 
 
@@ -82,6 +88,89 @@
 						</div></div>
 					</form>
 					<hr>
+
+					<h3 id="jfollowers">Followers</h3>
+					<p>List a user's followers </p>
+					<form action="/-jfollowers" method="get" class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="pid">Profile id: </label>
+							<div class="controls">
+								<input type="text" name="pid" size="20" value="nasa">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="count">Max number of results: </label>
+							<div class="controls">
+								<input type="text" name="count" size="5" value="20">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="count">Starting index: </label>
+							<div class="controls">
+								<input type="text" name="count" size="5" value="0"> (for paging)
+							</div>
+						</div>
+
+						<div class="control-group">
+							<div class="controls">
+								<input type="submit" value="GO">
+							</div>
+						</div>
+					</form>
+					<hr>
+
+					<h3 id="jfollowing">Following</h3>
+					<p>List who the user follows</p>
+					<form action="/-jfollowing" method="get" class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="pid">Profile id: </label>
+							<div class="controls">
+								<input type="text" name="pid" size="20" value="nasa">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="count">Max number of results: </label>
+							<div class="controls">
+								<input type="text" name="count" size="5" value="20">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="count">Starting index: </label>
+							<div class="controls">
+								<input type="text" name="count" size="5" value="0"> (for paging)
+							</div>
+						</div>
+
+						<div class="control-group">
+							<div class="controls">
+								<input type="submit" value="GO">
+							</div>
+						</div>
+					</form>
+					<hr>
+
+					<h3 id="jsp">Suggested profiles</h3>
+					<p>Retrieve a list of suggested profiles for a location.</p>
+					<form action="/-jsp" method="get" class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="loc">Location: </label>
+							<div class="controls">
+								<input type="text" name="loc" size="20" value="london">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<div class="controls">
+								<input type="submit" value="GO">
+							</div>
+						</div>
+					</form>
+					<hr>
+
 
 					<h3 id="tfollow">Follow a user</h3>
 					<p>Make one user follow another </p>
@@ -160,13 +249,106 @@
 					<hr>
 
 
+					<h3 id="tpromote">Promote an item</h3>
+					<p>Promote an item from possibly to maybe</p>
+					<form action="/-tpromote" method="post" class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="pid">Profile id: </label>
+							<div class="controls">
+								<input type="text" name="pid" size="20" value="iand">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="id">Item id: </label>
+							<div class="controls">
+								<input type="text" name="id" size="40">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<div class="controls">
+								<input type="submit" value="GO">
+							</div>
+						</div>
+					</form>
+					<hr>
+
+					<h3 id="tdemote">Demote an item</h3>
+					<p>Demote an item from maybe to possibly.</p>
+					<form action="/-tdemote" method="post" class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="pid">Profile id: </label>
+							<div class="controls">
+								<input type="text" name="pid" size="20" value="iand">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="id">Item id: </label>
+							<div class="controls">
+								<input type="text" name="id" size="40">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<div class="controls">
+								<input type="submit" value="GO">
+							</div>
+						</div>
+					</form>
+					<hr>
 
 
 
 
+					<h3 id="taddsuggest">Add a suggested profile</h3>
+					<form action="/-taddsuggest" method="post" class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="pid">Profile id: </label>
+							<div class="controls">
+								<input type="text" name="pid" size="20" value="nasa">
+							</div>
+						</div>
 
+						<div class="control-group">
+							<label class="control-label" for="loc">Location: </label>
+							<div class="controls">
+								<input type="text" name="loc" size="20" value="london">
+							</div>
+						</div>
 
+						<div class="control-group">
+							<div class="controls">
+								<input type="submit" value="GO">
+							</div>
+						</div>
+					</form>
+					<hr>
 
+					<h3 id="tremsuggest">Remove a suggested profile</h3>
+					<form action="/-tremsuggest" method="post" class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="pid">Profile id: </label>
+							<div class="controls">
+								<input type="text" name="pid" size="20" value="nasa">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="loc">Location: </label>
+							<div class="controls">
+								<input type="text" name="loc" size="20" value="london">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<div class="controls">
+								<input type="submit" value="GO">
+							</div>
+						</div>
+					</form>
+					<hr>
 
 
 				</div>

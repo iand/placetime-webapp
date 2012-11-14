@@ -44,11 +44,18 @@ func main() {
 	r.HandleFunc("/-jpr", jsonProfileHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-jit", jsonItemHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-jtl", jsonTimelineHandler).Methods("GET", "HEAD")
+	r.HandleFunc("/-jsp", jsonSuggestedProfilesHandler).Methods("GET", "HEAD")
+	r.HandleFunc("/-jfollowers", jsonFollowersHandler).Methods("GET", "HEAD")
+	r.HandleFunc("/-jfollowing", jsonFollowingHandler).Methods("GET", "HEAD")
 	//	r.HandleFunc("/{pid:[0-9a-zA-Z]+}", profileHandler).Methods("GET", "HEAD")
 
 	r.HandleFunc("/-tfollow", followHandler).Methods("POST")
 	r.HandleFunc("/-tunfollow", unfollowHandler).Methods("POST")
 	r.HandleFunc("/-tadd", addHandler).Methods("POST")
+	r.HandleFunc("/-tpromote", promoteHandler).Methods("POST")
+	r.HandleFunc("/-tdemote", demoteHandler).Methods("POST")
+	r.HandleFunc("/-taddsuggest", addSuggestHandler).Methods("POST")
+	r.HandleFunc("/-tremsuggest", remSuggestHandler).Methods("POST")
 
 	r.PathPrefix("/-assets/").HandlerFunc(assetsHandler).Methods("GET", "HEAD")
 
@@ -197,6 +204,72 @@ func jsonSuggestedProfilesHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func jsonFollowersHandler(w http.ResponseWriter, r *http.Request) {
+	pid := r.FormValue("pid")
+
+	countParam := r.FormValue("count")
+	count, err := strconv.ParseInt(countParam, 10, 0)
+	if err != nil {
+		count = 10
+	}
+
+	startParam := r.FormValue("start")
+	start, err := strconv.ParseInt(startParam, 10, 0)
+	if err != nil {
+		start = 0
+	}
+
+	s := NewRedisStore()
+
+	plist, err := s.Followers(pid, int(count), int(start))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	json, err := json.MarshalIndent(plist, "", "  ")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/javascript")
+	w.Write(json)
+
+}
+
+func jsonFollowingHandler(w http.ResponseWriter, r *http.Request) {
+	pid := r.FormValue("pid")
+
+	countParam := r.FormValue("count")
+	count, err := strconv.ParseInt(countParam, 10, 0)
+	if err != nil {
+		count = 10
+	}
+
+	startParam := r.FormValue("start")
+	start, err := strconv.ParseInt(startParam, 10, 0)
+	if err != nil {
+		start = 0
+	}
+
+	s := NewRedisStore()
+
+	plist, err := s.Following(pid, int(count), int(start))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	json, err := json.MarshalIndent(plist, "", "  ")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/javascript")
+	w.Write(json)
+
+}
+
 func jsonProfileHandler(w http.ResponseWriter, r *http.Request) {
 	pid := r.FormValue("pid")
 
@@ -320,6 +393,7 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 	// }
 
 	s.AddProfile("iand", "Ian", "Timefloes.", "")
+	s.AddSuggestedProfile("iand", "london")
 
 	s.Follow("iand", "nasa")
 
@@ -405,4 +479,52 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Fprintf(w, "ACK. (itemid=%s)", itemid)
+}
+
+func promoteHandler(w http.ResponseWriter, r *http.Request) {
+	pid := r.FormValue("pid")
+	id := r.FormValue("id")
+	s := NewRedisStore()
+	err := s.Promote(pid, id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	fmt.Fprint(w, "ACK")
+}
+
+func demoteHandler(w http.ResponseWriter, r *http.Request) {
+	pid := r.FormValue("pid")
+	id := r.FormValue("id")
+	s := NewRedisStore()
+	err := s.Demote(pid, id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	fmt.Fprint(w, "ACK")
+}
+
+func addSuggestHandler(w http.ResponseWriter, r *http.Request) {
+	pid := r.FormValue("pid")
+	loc := r.FormValue("loc")
+	s := NewRedisStore()
+	err := s.AddSuggestedProfile(pid, loc)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	fmt.Fprint(w, "ACK")
+}
+
+func remSuggestHandler(w http.ResponseWriter, r *http.Request) {
+	pid := r.FormValue("pid")
+	loc := r.FormValue("loc")
+	s := NewRedisStore()
+	err := s.RemoveSuggestedProfile(pid, loc)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	fmt.Fprint(w, "ACK")
 }

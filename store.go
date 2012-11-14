@@ -11,6 +11,7 @@ import (
 const (
 	FEED_DRIVEN_PROFILES = "feeddrivenprofiles"
 	ITEM_ID              = "itemid"
+	MaxInt               = int(^uint(0) >> 1)
 )
 
 func NewRedisStore() *RedisStore {
@@ -26,6 +27,10 @@ type RedisStore struct {
 }
 
 func itemScore(t time.Time) float64 {
+	return float64(t.Unix())
+}
+
+func followerScore(t time.Time) float64 {
 	return float64(t.Unix())
 }
 
@@ -57,25 +62,48 @@ func itemKey(pid string, seq int) string {
 	return fmt.Sprintf("item:%s:%d", pid, seq)
 }
 
-// DEFUNCT
-func timelineKey(pid string) string {
-	return fmt.Sprintf("%s:timeline", pid)
-}
-
-// DEFUNCT
-func itemsKey(pid string, status int) string {
-	return fmt.Sprintf("%s:items:%d", pid, status)
+func suggestedProfileKey(loc string) string {
+	return fmt.Sprintf("suggestedprofiles:%s", loc)
 }
 
 func (s *RedisStore) SuggestedProfiles(loc string) ([]*Profile, error) {
-	return nil, nil
+	rs := s.db.Command("SMEMBERS", suggestedProfileKey(loc))
+	if !rs.IsOK() {
+		return nil, rs.Error()
+	}
+
+	profiles := make([]*Profile, 0)
+
+	vals := rs.ValuesAsStrings()
+
+	for _, pid := range vals {
+		profile, err := s.Profile(pid)
+		if err != nil {
+			// TODO: log
+		} else {
+
+		}
+		profiles = append(profiles, profile)
+	}
+
+	return profiles, nil
 }
 
 func (s *RedisStore) AddSuggestedProfile(pid string, loc string) error {
+	rs := s.db.Command("SADD", suggestedProfileKey(loc), pid)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
 	return nil
 }
 
 func (s *RedisStore) RemoveSuggestedProfile(pid string, loc string) error {
+	rs := s.db.Command("SREM", suggestedProfileKey(loc), pid)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
 	return nil
 }
 
@@ -103,12 +131,12 @@ func (s *RedisStore) Profile(pid string) (*Profile, error) {
 		p.MaybeCount, _ = rs.ValueAsInt()
 	}
 
-	rs = s.db.Command("SCARD", followingKey(pid))
+	rs = s.db.Command("ZCARD", followingKey(pid))
 	if rs.IsOK() {
 		p.FollowingCount, _ = rs.ValueAsInt()
 	}
 
-	rs = s.db.Command("SCARD", followersKey(pid))
+	rs = s.db.Command("ZCARD", followersKey(pid))
 	if rs.IsOK() {
 		p.FollowerCount, _ = rs.ValueAsInt()
 	}
@@ -151,14 +179,14 @@ func (s *RedisStore) RemoveProfile(pid string) error {
 		return rs.Error()
 	}
 
-	rs = s.db.Command("SMEMBERS", followingKey(pid))
+	rs = s.db.Command("ZRANGE", followingKey(pid), 0, MaxInt)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
 	vals := rs.ValuesAsStrings()
 	for _, val := range vals {
-		rs = s.db.Command("SREM", followersKey(val), pid)
+		rs = s.db.Command("ZREM", followersKey(val), pid)
 		if !rs.IsOK() {
 			return rs.Error()
 		}
@@ -281,7 +309,7 @@ func (s *RedisStore) AddItem(pid string, etstext string, text string, link strin
 		return itemid, rs.Error()
 	}
 
-	rs = s.db.Command("SMEMBERS", followersKey(pid))
+	rs = s.db.Command("ZRANGE", followersKey(pid), 0, MaxInt)
 	if !rs.IsOK() {
 		return itemid, rs.Error()
 	}
@@ -301,89 +329,6 @@ func (s *RedisStore) AddItem(pid string, etstext string, text string, link strin
 	return itemid, nil
 }
 
-// func (s *RedisStore) TimelineRange(pid string, tstart time.Time, tend time.Time, limit int) (*TimelineRange, error) {
-// 	return s.FetchRange(timelineKey(pid), pid, tstart, tend, limit)
-// }
-
-// func (s *RedisStore) ItemsRange(pid string, tstart time.Time, tend time.Time, status int, limit int) (*TimelineRange, error) {
-// 	return s.FetchRange(itemsKey(pid, status), pid, tstart, tend, limit)
-// }
-
-// func (s *RedisStore) FetchRange(key string, pid string, tstart time.Time, tend time.Time, limit int) (*TimelineRange, error) {
-// 	scoreStart := itemScore(tstart)
-// 	scoreEnd := itemScore(tend)
-// 	rs := s.db.Command("ZRANGEBYSCORE", key, scoreStart, scoreEnd, "LIMIT", 0, limit)
-// 	if !rs.IsOK() {
-// 		return nil, rs.Error()
-// 	}
-
-// 	tl := TimelineRange{
-// 		Pid:    pid,
-// 		Tstart: tstart,
-// 		Tend:   tend,
-// 		Groups: make([]ItemGroup, 0),
-// 	}
-
-// 	vals := rs.ValuesAsStrings()
-
-// 	currentGroup, currentGroupIndex := "", -1
-
-// 	for i := len(vals) - 1; i >= 0; i-- {
-
-// 		val := vals[i]
-// 		item, _ := UnpackItem(val)
-
-// 		timestamp := item.Timestamp
-
-// 		if i == len(vals)-1 {
-// 			tl.Tstart = timestamp
-// 		}
-// 		if i == 0 {
-// 			tl.Tend = timestamp
-// 		}
-
-// 		group := timestamp.Format("Jan 2006")
-// 		if currentGroup != group {
-// 			// start a new group
-// 			tl.Groups = append(tl.Groups, NewItemGroup(group))
-// 			currentGroup = group
-// 			currentGroupIndex = len(tl.Groups) - 1
-// 		}
-// 		tl.Groups[currentGroupIndex].Items = append(tl.Groups[currentGroupIndex].Items, item)
-// 	}
-
-// 	return &tl, nil
-// }
-
-// func (s *RedisStore) Add(item Item) (Item, error) {
-// 	rs := s.db.Command("INCR", ITEM_ID)
-// 	if !rs.IsOK() {
-// 		return item, rs.Error()
-// 	}
-
-// 	val, _ := rs.ValueAsInt()
-
-// 	item.Id = int64(val)
-
-// 	rs = s.db.Command("SET", fmt.Sprintf("item:%d", item.Id), item.Packed())
-// 	if !rs.IsOK() {
-// 		return item, rs.Error()
-// 	}
-
-// 	s.AddToItems(item.Pid, item, 0)
-
-// 	return item, nil
-
-// }
-
-// func (s *RedisStore) AddToItems(pid string, item Item, status int) error {
-// 	rs := s.db.Command("ZADD", itemsKey(pid, status), itemScore(item.Timestamp), item.Packed())
-// 	if !rs.IsOK() {
-// 		return rs.Error()
-// 	}
-// 	return nil
-// }
-
 func (es *RedisStore) ResetAll() error {
 	rs := es.db.Command("FLUSHDB")
 	if !rs.IsOK() {
@@ -392,55 +337,15 @@ func (es *RedisStore) ResetAll() error {
 	return nil
 }
 
-// func (es *RedisStore) DeleteItems(pid string) error {
-// 	rs := es.db.Command("DEL", itemsKey(pid, 0))
-// 	if !rs.IsOK() {
-// 		return rs.Error()
-// 	}
-// 	rs = es.db.Command("DEL", itemsKey(pid, 1))
-// 	if !rs.IsOK() {
-// 		return rs.Error()
-// 	}
-// 	rs = es.db.Command("DEL", itemsKey(pid, 2))
-// 	if !rs.IsOK() {
-// 		return rs.Error()
-// 	}
-// 	return nil
-// }
-
-// func (s *RedisStore) FeedDrivenProfiles() ([]string, error) {
-// 	rs := s.db.Command("SMEMBERS", FEED_DRIVEN_PROFILES)
-// 	if !rs.IsOK() {
-// 		return nil, rs.Error()
-// 	}
-
-// 	return rs.ValuesAsStrings(), nil
-// }
-
-// func (es *RedisStore) SetProfile(p *Profile) error {
-// 	rs := es.db.Command("HMSET", profileKey(p.Pid), "name", p.Name, "bio", p.Bio, "feed", p.Feed)
-// 	if !rs.IsOK() {
-// 		return rs.Error()
-// 	}
-
-// 	if len(p.Feed) > 0 {
-// 		_ = es.db.Command("SADD", FEED_DRIVEN_PROFILES, p.Pid)
-
-// 	} else {
-// 		_ = es.db.Command("SREM", FEED_DRIVEN_PROFILES, p.Pid)
-// 	}
-
-// 	return nil
-// }
-
 func (s *RedisStore) Follow(pid string, followpid string) error {
+	score := followerScore(time.Now())
 
-	rs := s.db.Command("SADD", followingKey(pid), followpid)
+	rs := s.db.Command("ZADD", followingKey(pid), score, followpid)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
-	rs = s.db.Command("SADD", followersKey(followpid), pid)
+	rs = s.db.Command("ZADD", followersKey(followpid), score, pid)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
@@ -466,17 +371,17 @@ func (s *RedisStore) Follow(pid string, followpid string) error {
 
 func (s *RedisStore) Unfollow(pid string, followpid string) error {
 
-	rs := s.db.Command("SREM", followingKey(pid), followpid)
+	rs := s.db.Command("ZREM", followingKey(pid), followpid)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
-	rs = s.db.Command("SREM", followersKey(followpid), pid)
+	rs = s.db.Command("ZREM", followersKey(followpid), pid)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
-	rs = s.db.Command("ZRANGEBYSCORE", maybeKey(followpid, "ts"), "-Inf", "+Inf")
+	rs = s.db.Command("ZRANGE", maybeKey(followpid, "ts"), 0, MaxInt)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
@@ -487,6 +392,100 @@ func (s *RedisStore) Unfollow(pid string, followpid string) error {
 	for _, item := range items {
 		s.db.Command("ZREM", poss_ts, item)
 		s.db.Command("ZREM", poss_ets, item)
+	}
+
+	return nil
+}
+
+func (s *RedisStore) Promote(pid string, id string) error {
+
+	// TODO: abort if item is not in possibly timeline
+	poss_ts := possiblyKey(pid, "ts")
+
+	rs := s.db.Command("ZSCORE", poss_ts, id)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	score_ts, _ := rs.Value().Float64()
+
+	poss_ets := possiblyKey(pid, "ets")
+	rs = s.db.Command("ZSCORE", poss_ets, id)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	score_ets, _ := rs.Value().Float64()
+
+	s.db.Command("ZREM", poss_ts, id)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	s.db.Command("ZREM", poss_ets, id)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	maybe_ts := maybeKey(pid, "ts")
+	maybe_ets := maybeKey(pid, "ets")
+
+	rs = s.db.Command("ZADD", maybe_ts, score_ts, id)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	rs = s.db.Command("ZADD", maybe_ets, score_ets, id)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	return nil
+}
+
+func (s *RedisStore) Demote(pid string, id string) error {
+
+	// TODO: abort if item is not in possibly timeline
+	maybe_ts := maybeKey(pid, "ts")
+
+	rs := s.db.Command("ZSCORE", maybe_ts, id)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	score_ts, _ := rs.Value().Float64()
+
+	maybe_ets := maybeKey(pid, "ets")
+	rs = s.db.Command("ZSCORE", maybe_ets, id)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	score_ets, _ := rs.Value().Float64()
+
+	s.db.Command("ZREM", maybe_ts, id)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	s.db.Command("ZREM", maybe_ets, id)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	// TODO: don't add them here if they were manually added by the user
+
+	poss_ts := possiblyKey(pid, "ts")
+	poss_ets := possiblyKey(pid, "ets")
+
+	rs = s.db.Command("ZADD", poss_ts, score_ts, id)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	rs = s.db.Command("ZADD", poss_ets, score_ets, id)
+	if !rs.IsOK() {
+		return rs.Error()
 	}
 
 	return nil
@@ -542,3 +541,51 @@ func (s *RedisStore) Unfollow(pid string, followpid string) error {
 // 	}
 // 	return nil
 // }
+
+func (s *RedisStore) Followers(pid string, count int, start int) ([]*Profile, error) {
+	rs := s.db.Command("ZRANGE", followersKey(pid), start, start+count)
+	if !rs.IsOK() {
+		return nil, rs.Error()
+	}
+
+	profiles := make([]*Profile, 0)
+
+	vals := rs.ValuesAsStrings()
+
+	for _, pid := range vals {
+		profile, err := s.Profile(pid)
+		if err != nil {
+			// TODO: log
+		} else {
+
+		}
+		profiles = append(profiles, profile)
+	}
+
+	return profiles, nil
+
+}
+
+func (s *RedisStore) Following(pid string, count int, start int) ([]*Profile, error) {
+	rs := s.db.Command("ZRANGE", followingKey(pid), start, start+count)
+	if !rs.IsOK() {
+		return nil, rs.Error()
+	}
+
+	profiles := make([]*Profile, 0)
+
+	vals := rs.ValuesAsStrings()
+
+	for _, pid := range vals {
+		profile, err := s.Profile(pid)
+		if err != nil {
+			// TODO: log
+		} else {
+
+		}
+		profiles = append(profiles, profile)
+	}
+
+	return profiles, nil
+
+}
