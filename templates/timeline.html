@@ -20,11 +20,11 @@
     
 
     <section id="main">
-      <button class="nav">possible</button>
-      <button class="nav">maybe</button>
-      <button class="nav">new</button>
-      <button class="nav">added</button>
-      <button class="nav">calendar</button>
+      <button class="nav" id="possiblebtn">possible</button>
+      <button class="nav" id="maybebtn">maybe</button>
+      <button class="nav" id="newbtn">new</button>
+      <button class="nav" id="addedbtn">added</button>
+      <button class="nav" id="calendarbtn">calendar</button>
 
       <div id="items">
       </div>
@@ -53,10 +53,10 @@
     <div class="item feature">
       <div class="profile">
         <img src="/-assets/img/nyan.jpg" width="96" height="96"><br>
-        <button id="followbtn">follow</button>
+        <button class="followbtn">follow</button>
       </div>
       <div class="detail">
-        <div class="pid">BLAH @<%= pid %></div>
+        <div class="pid">@<%= pid %></div>
         <div class="text"><%= text %></div>
         <div class="link"><a href="<%= link %>"><%= link %></a></div>
         <button class="addbtn">add</button>
