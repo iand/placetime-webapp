@@ -35,12 +35,17 @@ $(function(){
         },
 
 
-        promote: function(eventName) {
-          alert("Promote item to maybe list");
+        promote: function(e) {
+          var clickedEl = $(e.currentTarget);
+          var id = clickedEl.data("itemid");
+          alert("Promote item '" + id + "' to maybe list");
+
         },
 
-        follow: function(eventName) {
-          alert("Follow this user");
+        follow: function(e) {
+          var clickedEl = $(e.currentTarget);
+          var pid = clickedEl.data("pid");
+          alert("Follow user '" + pid + "'");
         }
 
     });
@@ -76,24 +81,24 @@ $(function(){
       }
 
 
-      ,possible: function(eventName) {
+      ,possible: function(e) {
         alert("View possible items");
       }
 
 
-      ,maybe: function(eventName) {
+      ,maybe: function(e) {
         alert("View maybe items");
       }
 
-      ,newitem: function(eventName) {
+      ,newitem: function(e) {
         alert("Add a new item");
       }
 
-      ,added: function(eventName) {
+      ,added: function(e) {
         alert("Sort by date added");
       }
 
-      ,calendar: function(eventName) {
+      ,calendar: function(e) {
         alert("Sort by event date");
       }      
 
