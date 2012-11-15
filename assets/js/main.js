@@ -2,25 +2,47 @@ $(function(){
     var Item = Backbone.Model.extend({});
 
     var ItemList = Backbone.Collection.extend({
-        model: Item,
-        url: '/-jtl?pid=iand',
+         model: Item
+        ,url: '/-jtl?pid=iand'
+
+
+        ,refresh:function () {
+            var url = '/-jtl?pid=iand&status=' + this.status + '&order=' + this.order;
+            var self = this;
+            $.ajax({
+                url:url,
+                dataType:"json",
+                success:function (data) {
+                    console.log("refresh retrieved: " + data.length);
+                    self.reset(data);
+                }
+            });
+        }
+
 
     });
 
 
     var ItemsView = Backbone.View.extend({
-        template: _.template($("#item-template").html()),
-        templatefeature: _.template($("#itemfeature-template").html()),
+         template: _.template($("#item-template").html())
+        ,templatefeature: _.template($("#itemfeature-template").html())
 
-        events:{
+        ,events:{
           'click .addbtn'        :  'promote',
           'click .followbtn'        :  'follow'
-        },
+        }
 
+        ,initialize:function () {
+          var self = this;
+          this.model.bind("reset", this.render, this);
+        }
 
-        render: function(eventName) {
+        ,render: function(eventName) {
 
+          $(this.el).html('');
           var done = false;
+
+
           _.each(this.model.models, function(item){
             if (done) {
               var lTemplate = this.template(item.toJSON());
@@ -32,17 +54,36 @@ $(function(){
             $(this.el).append(lTemplate);
           }, this);
           return this;
-        },
+        }
 
 
-        promote: function(e) {
+        ,promote: function(e) {
           var clickedEl = $(e.currentTarget);
           var id = clickedEl.data("itemid");
-          alert("Promote item '" + id + "' to maybe list");
+          //alert("Promote item '" + id + "' to maybe list");
+          var self = this;
 
-        },
+          if (this.model.status == 'p') {
+              var url = '/-tpromote';
 
-        follow: function(e) {
+          } else {
+              var url = '/-tdemote';
+          }
+
+
+          $.ajax({
+              url:url,
+              type:'post',
+              data: { pid: 'iand', id: id },
+              success:function (data) {
+                  console.log("posted to " + url);
+                  self.model.refresh();
+              }
+          });          
+
+        }
+
+        ,follow: function(e) {
           var clickedEl = $(e.currentTarget);
           var pid = clickedEl.data("pid");
           alert("Follow user '" + pid + "'");
@@ -53,7 +94,7 @@ $(function(){
 
 
 
-    items = new ItemList();
+    var items = new ItemList( { pid: 'iand', status:'p', order:'ts'} );
     
 
     var AppView = Backbone.View.extend({
@@ -82,12 +123,14 @@ $(function(){
 
 
       ,possible: function(e) {
-        alert("View possible items");
+        items.status = 'p';
+        items.refresh();
       }
 
 
       ,maybe: function(e) {
-        alert("View maybe items");
+        items.status = 'm';
+        items.refresh();
       }
 
       ,newitem: function(e) {
@@ -95,11 +138,13 @@ $(function(){
       }
 
       ,added: function(e) {
-        alert("Sort by date added");
+        items.order = 'ts';
+        items.refresh();
       }
 
       ,calendar: function(e) {
-        alert("Sort by event date");
+        items.order = 'ets';
+        items.refresh();
       }      
 
     });
