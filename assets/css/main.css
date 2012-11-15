@@ -1,0 +1,70 @@
+* {
+	font-family:"DIN 1451 Mittelschrift Standard", Calibri, Helvetica, Arial, sans-serif, serif; font-size-adjust:0.48; font-weight:normal; font-style:normal;
+}
+
+
+body {
+
+	padding: 1em 3em 1em 3em;
+}
+#main {
+}
+
+div.item {
+	clear: both;
+	height: 64px;
+}
+
+
+div.item div.profile {
+	height: 64px;
+	width: 64px;
+	margin-bottom: 10px;
+}
+
+div.item div.detail {
+	height: 64px;
+	width: 450px;
+	margin-left: 6px;
+	margin-bottom: 10px;
+}
+
+
+div.feature div.profile {
+	height: 140px;
+	width: 96px;
+
+}
+
+div.feature div.detail {
+	height: 140px;
+	width: 420px;
+	margin-left: 6px;
+}
+
+
+div.feature {
+	height: 140px;
+}
+
+div.detail, div.profile {
+	-webkit-box-shadow:1px 2px 5px rgba(0, 0, 0, 0.4);	
+	   -moz-box-shadow:1px 2px 5px rgba(0, 0, 0, 0.4);	
+	        box-shadow:1px 2px 5px rgba(0, 0, 0, 0.4);	
+
+	        border: 1px solid #DDD;
+
+	padding: 8px;
+	float:left;
+
+}
+
+
+
+button.nav {
+	height: 40px;
+	padding: 5px;
+	margin: 10px 0 10px 0;
+    border: 1px solid #DDD;
+    font-size: 20px;
+}

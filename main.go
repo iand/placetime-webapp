@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	assetsDir = "./bootstrap"
+	assetsDir = "./assets"
 )
 
 var (
@@ -34,7 +34,7 @@ func main() {
 
 	r.HandleFunc("/", vocabRedirectHandler).Methods("GET", "HEAD")
 
-	//	r.HandleFunc("/timeline", timelineHandler).Methods("GET", "HEAD")
+	r.HandleFunc("/timeline", timelineHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-init", initHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-admin", adminHandler).Methods("GET", "HEAD")
 	//	r.HandleFunc("/-refresh", refreshHandler).Methods("GET", "HEAD")
@@ -71,22 +71,16 @@ func assetsHandler(w http.ResponseWriter, r *http.Request) {
 	// w.Write([]byte(p))
 }
 
-// func timelineHandler(w http.ResponseWriter, r *http.Request) {
-// 	templates := template.Must(template.ParseFiles("templates/timeline.html"))
+func timelineHandler(w http.ResponseWriter, r *http.Request) {
+	templates := template.Must(template.ParseFiles("templates/timeline.html"))
 
-// 	s := NewRedisStore()
-// 	tl, err := s.TimelineRange("iand", time.Now(), time.Now().AddDate(1000, 0, 0), 5)
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 		return
-// 	}
+	err := templates.ExecuteTemplate(w, "timeline.html", nil)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
 
-// 	err = templates.ExecuteTemplate(w, "timeline.html", tl)
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 		return
-// 	}
-// }
 // func timelineFilterHandler(w http.ResponseWriter, r *http.Request) {
 // 	vars := mux.Vars(r)
 

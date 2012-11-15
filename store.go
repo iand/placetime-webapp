@@ -200,7 +200,7 @@ func (s *RedisStore) RemoveProfile(pid string) error {
 	return nil
 }
 
-func (s *RedisStore) Timeline(pid string, status string, ordering string, tstart time.Time, tend time.Time, limit int) (*TimelineRange, error) {
+func (s *RedisStore) Timeline(pid string, status string, ordering string, tstart time.Time, tend time.Time, limit int) ([]*Item, error) {
 
 	scoreStart := itemScore(tstart)
 	scoreEnd := itemScore(tend)
@@ -245,7 +245,7 @@ func (s *RedisStore) Timeline(pid string, status string, ordering string, tstart
 			tl.Items = append(tl.Items, item)
 		}
 	}
-	return &tl, nil
+	return tl.Items, nil
 }
 
 func (s *RedisStore) Item(id string) (*Item, error) {
