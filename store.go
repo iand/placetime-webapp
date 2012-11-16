@@ -200,7 +200,7 @@ func (s *RedisStore) RemoveProfile(pid string) error {
 	return nil
 }
 
-func (s *RedisStore) Timeline(pid string, status string, ordering string, tstart time.Time, tend time.Time, limit int) ([]*Item, error) {
+func (s *RedisStore) Timeline(pid string, status string, ordering string, tstart time.Time, tend time.Time, limit int) ([]*FormattedItem, error) {
 
 	scoreStart := itemScore(tstart)
 	scoreEnd := itemScore(tend)
@@ -212,7 +212,7 @@ func (s *RedisStore) Timeline(pid string, status string, ordering string, tstart
 		key = maybeKey(pid, ordering)
 	}
 
-	rs := s.db.Command("ZRANGEBYSCORE", key, scoreStart, scoreEnd, "LIMIT", 0, limit)
+	rs := s.db.Command("ZREVRANGEBYSCORE", key, scoreEnd, scoreStart, "LIMIT", 0, limit)
 	if !rs.IsOK() {
 		return nil, rs.Error()
 	}
@@ -224,12 +224,7 @@ func (s *RedisStore) Timeline(pid string, status string, ordering string, tstart
 		itemids[index] = val
 	}
 
-	tl := TimelineRange{
-		Pid:    pid,
-		Tstart: tstart,
-		Tend:   tend,
-		Items:  make([]*Item, 0),
-	}
+	items := make([]*FormattedItem, 0)
 
 	if len(itemids) > 0 {
 		rs = s.db.Command("MGET", itemids...)
@@ -239,13 +234,22 @@ func (s *RedisStore) Timeline(pid string, status string, ordering string, tstart
 
 		item_infos := rs.ValuesAsStrings()
 		for _, item_info := range item_infos {
-			item := &Item{}
+			item := &FormattedItem{}
 
 			_ = json.Unmarshal([]byte(item_info), item)
-			tl.Items = append(tl.Items, item)
+
+			if ordering == "ets" {
+				item.Date = item.Ets.Format("Jan 2006")
+				item.Time = item.Ets.Format("Mon _2 15:04")
+			} else {
+				item.Date = item.Ts.Format("Jan 2006")
+				item.Time = item.Ts.Format("Mon _2 15:04")
+			}
+
+			items = append(items, item)
 		}
 	}
-	return tl.Items, nil
+	return items, nil
 }
 
 func (s *RedisStore) Item(id string) (*Item, error) {

@@ -116,9 +116,9 @@ func jsonTimelineHandler(w http.ResponseWriter, r *http.Request) {
 		statusParam = "p"
 	}
 
-	orderingParam := r.FormValue("ordering")
-	if orderingParam != "ets" {
-		orderingParam = "ts"
+	orderParam := r.FormValue("order")
+	if orderParam != "ets" {
+		orderParam = "ts"
 	}
 
 	countParam := r.FormValue("count")
@@ -141,7 +141,7 @@ func jsonTimelineHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	s := NewRedisStore()
-	tl, err := s.Timeline(pidParam, statusParam, orderingParam, tsStart, tsEnd, int(count))
+	tl, err := s.Timeline(pidParam, statusParam, orderParam, tsStart, tsEnd, int(count))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -393,16 +393,16 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 
 	s.AddProfile("nasa", "Nasa Missions", "Upcoming NASA mission information.", "")
 
+	s.AddItem("nasa", "1 Jan 2015", "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "")
 	s.AddItem("nasa", "26 Aug 2012", "Dawn - Leaves asteroid Vesta, heads for asteroid 1 Ceres", "")
 	s.AddItem("nasa", "1 Sep 2012", "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "")
-	s.AddItem("nasa", "1 Mar 2013", "LADEE - Launch of NASA Orbiter to the Moon", "")
-	s.AddItem("nasa", "1 Nov 2013", "MAVEN - Launch of Mars Orbiter", "")
-	s.AddItem("nasa", "1 May 2014", "Rosetta - ESA mission reaches Comet Churyumov-Gerasimenko", "")
-	s.AddItem("nasa", "1 Nov 2014", "Philae - ESA Rosetta Lander touches down on Comet Churyumov-Gerasimenko", "")
-	s.AddItem("nasa", "1 Jan 2014", "Mars Sample Return Mission - Launch of NASA sample return mission to Mars", "")
 	s.AddItem("nasa", "1 Feb 2015", "Dawn - Goes into orbit around asteroid 1 Ceres", "")
 	s.AddItem("nasa", "14 Jul 2015", "New Horizons - NASA mission reaches Pluto and Charon", "")
-	s.AddItem("nasa", "1 Jan 2015", "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "")
+	s.AddItem("nasa", "1 Mar 2013", "LADEE - Launch of NASA Orbiter to the Moon", "")
+	s.AddItem("nasa", "1 Nov 2014", "Philae - ESA Rosetta Lander touches down on Comet Churyumov-Gerasimenko", "")
+	s.AddItem("nasa", "1 Nov 2013", "MAVEN - Launch of Mars Orbiter", "")
+	s.AddItem("nasa", "1 May 2014", "Rosetta - ESA mission reaches Comet Churyumov-Gerasimenko", "")
+	s.AddItem("nasa", "1 Jan 2014", "Mars Sample Return Mission - Launch of NASA sample return mission to Mars", "")
 	s.AddItem("nasa", "5 Apr 2231", "Pluto - is passed by Neptune in distance from the Sun for the next 20 years", "")
 
 	// s.SetProfile(&Profile{Pid: "o2shepherdsbushempire ", Name: "O2 Shepherd's Bush Empire Events", Bio: "", Feed: "http://www.o2shepherdsbushempire.co.uk/RSS"})

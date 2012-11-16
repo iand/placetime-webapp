@@ -22,3 +22,16 @@ type Item struct {
 	Link  string    `json:"link"`
 	Media string    `json:"media"`
 }
+
+type FormattedItem struct {
+	Id    string    `json:"id"`
+	Ts    time.Time `json:"ts"`
+	Ets   time.Time `json:"ets"`
+	Pid   string    `json:"pid"`
+	PName string    `json:"pname,omitempty"`
+	Text  string    `json:"text"`
+	Link  string    `json:"link"`
+	Media string    `json:"media"`
+	Date  string    `json:"date"`
+	Time  string    `json:"time"`
+}
