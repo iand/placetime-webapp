@@ -1,10 +1,12 @@
 package main
 
 import (
+	"code.google.com/p/go.crypto/bcrypt"
 	"code.google.com/p/tcgl/redis"
 	"encoding/json"
 	"fmt"
 	"log"
+	"math/rand"
 	"time"
 )
 
@@ -64,6 +66,10 @@ func itemKey(pid string, seq int) string {
 
 func suggestedProfileKey(loc string) string {
 	return fmt.Sprintf("suggestedprofiles:%s", loc)
+}
+
+func sessionKey(num int64) string {
+	return fmt.Sprintf("session:%d", num)
 }
 
 func (s *RedisStore) SuggestedProfiles(loc string) ([]*Profile, error) {
@@ -144,8 +150,13 @@ func (s *RedisStore) Profile(pid string) (*Profile, error) {
 	return &p, nil
 }
 
-func (s *RedisStore) AddProfile(pid string, pname string, bio string, feedurl string) error {
-	rs := s.db.Command("HMSET", profileKey(pid), "name", pname, "bio", bio, "feedurl", feedurl)
+func (s *RedisStore) AddProfile(pid string, password string, pname string, bio string, feedurl string) error {
+	pwdhash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.MaxCost)
+	if err != nil {
+		return err
+	}
+
+	rs := s.db.Command("HMSET", profileKey(pid), "name", pname, "bio", bio, "feedurl", feedurl, "pwdhash", pwdhash)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
@@ -591,5 +602,41 @@ func (s *RedisStore) Following(pid string, count int, start int) ([]*Profile, er
 	}
 
 	return profiles, nil
+
+}
+
+func (s *RedisStore) VerifyPassword(pid string, password string) (bool, error) {
+	rs := s.db.Command("HGET", profileKey(pid), "pwdhash")
+	if !rs.IsOK() {
+		return false, rs.Error()
+	}
+
+	pwdhash := rs.ValueAsString()
+
+	err := bcrypt.CompareHashAndPassword([]byte(pwdhash), []byte(password))
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
+}
+
+func (s *RedisStore) SessionId(pid string) (int64, error) {
+	sessionId := rand.Int63()
+	rs := s.db.Command("SET", sessionKey(sessionId), pid)
+	if !rs.IsOK() {
+		return 0, rs.Error()
+	}
+
+	return sessionId, nil
+}
+
+func (s *RedisStore) ValidSession(pid string, sessionId int64) (bool, error) {
+	rs := s.db.Command("GET", sessionKey(sessionId))
+	if !rs.IsOK() {
+		return false, rs.Error()
+	}
+
+	return (rs.ValueAsString() == pid), nil
 
 }

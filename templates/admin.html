@@ -38,6 +38,8 @@
 			    <li><a href="#tdemote">Demote an item</a></li>
 			    <li><a href="#taddsuggest">Add a suggested profile</a></li>
 			    <li><a href="#tremsuggest">Remove a suggested profile</a></li>
+			    <li><a href="#taddprofile">Register a new user</a></li>
+			    <li><a href="#session">Login as a user</a></li>
 			    </ul>
 
 
@@ -350,7 +352,75 @@
 					</form>
 					<hr>
 
+					<h3 id="taddprofile">Register a new user</h3>
+					<p>Careful: no checking of duplicate profile ids is done yet</p>
+					<form action="/-taddprofile" method="post" class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label">Profile id: </label>
+							<div class="controls">
+								<input type="text" name="pid" size="20" value="">
+							</div>
+						</div>
 
+						<div class="control-group">
+							<label class="control-label">Name: </label>
+							<div class="controls">
+								<input type="text" name="name" size="20" value="">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label">Password: </label>
+							<div class="controls">
+								<input type="text" name="pwd" size="20" value="">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label">Bio: </label>
+							<div class="controls">
+								<input type="text" name="bio" size="20" value="">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label">Feed URL: </label>
+							<div class="controls">
+								<input type="text" name="feedurl" size="40" value="">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<div class="controls">
+								<input type="submit" value="GO">
+							</div>
+						</div>
+					</form>
+					<hr>
+
+					<h3 id="session">Login as user</h3>
+					<form action="/-session" method="post" class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="pid">Profile id: </label>
+							<div class="controls">
+								<input type="text" name="pid" size="20" value="nasa">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="loc">Password: </label>
+							<div class="controls">
+								<input type="text" name="pwd" size="20" value="london">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<div class="controls">
+								<input type="submit" value="GO">
+							</div>
+						</div>
+					</form>
+					<hr>
 				</div>
 			</div>
 		</div>

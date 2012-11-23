@@ -8,11 +8,14 @@ import (
 	"net/http"
 	"path"
 	"strconv"
+	"strings"
 	"time"
 )
 
 const (
-	assetsDir = "./assets"
+	assetsDir         = "./assets"
+	sessionCookieName = "ptsession"
+	sessionExpiry     = 86400 * 14
 )
 
 var (
@@ -20,6 +23,8 @@ var (
 )
 
 func main() {
+	// TODO: set random number seed
+
 	r := mux.NewRouter()
 
 	r.PathPrefix("/policies").HandlerFunc(vocabRedirectHandler).Methods("GET", "HEAD")
@@ -56,6 +61,10 @@ func main() {
 	r.HandleFunc("/-tdemote", demoteHandler).Methods("POST")
 	r.HandleFunc("/-taddsuggest", addSuggestHandler).Methods("POST")
 	r.HandleFunc("/-tremsuggest", remSuggestHandler).Methods("POST")
+	r.HandleFunc("/-taddprofile", addProfileHandler).Methods("POST")
+
+	r.HandleFunc("/-session", sessionHandler).Methods("POST")
+	r.HandleFunc("/-chksession", checkSessionHandler).Methods("GET")
 
 	r.PathPrefix("/-assets/").HandlerFunc(assetsHandler).Methods("GET", "HEAD")
 
@@ -81,35 +90,18 @@ func timelineHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// func timelineFilterHandler(w http.ResponseWriter, r *http.Request) {
-// 	vars := mux.Vars(r)
-
-// 	f := vars["filter"]
-// 	status, err := strconv.ParseInt(f, 10, 8)
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 		return
-// 	}
-
-// 	templates := template.Must(template.ParseFiles("templates/timeline_filter.html"))
-
-// 	s := NewRedisStore()
-// 	tl, err := s.ItemsRange("iand", time.Now(), time.Now().AddDate(1000, 0, 0), int(status), 5)
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 		return
-// 	}
-
-// 	err = templates.ExecuteTemplate(w, "timeline_filter.html", tl)
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 		return
-// 	}
-// }
-
 func jsonTimelineHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, sessionPid := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
 
 	pidParam := r.FormValue("pid")
+	if pidParam != sessionPid {
+		// TODO: allow admin to see all timelines?
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
 	statusParam := r.FormValue("status")
 
 	if statusParam != "m" {
@@ -157,6 +149,11 @@ func jsonTimelineHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsonItemHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, _ := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
+
 	id := r.FormValue("id")
 
 	s := NewRedisStore()
@@ -178,6 +175,11 @@ func jsonItemHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsonSuggestedProfilesHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, _ := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
+
 	loc := r.FormValue("loc")
 
 	s := NewRedisStore()
@@ -199,6 +201,11 @@ func jsonSuggestedProfilesHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsonFollowersHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, _ := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
+
 	pid := r.FormValue("pid")
 
 	countParam := r.FormValue("count")
@@ -232,6 +239,11 @@ func jsonFollowersHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsonFollowingHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, _ := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
+
 	pid := r.FormValue("pid")
 
 	countParam := r.FormValue("count")
@@ -265,6 +277,11 @@ func jsonFollowingHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsonProfileHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, _ := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
+
 	pid := r.FormValue("pid")
 
 	s := NewRedisStore()
@@ -286,7 +303,17 @@ func jsonProfileHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func followHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, sessionPid := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
+
 	pid := r.FormValue("pid")
+	if pid != sessionPid {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
 	followpid := r.FormValue("followpid")
 	s := NewRedisStore()
 	s.Follow(pid, followpid)
@@ -294,7 +321,17 @@ func followHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func unfollowHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, sessionPid := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
+
 	pid := r.FormValue("pid")
+	if pid != sessionPid {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
 	followpid := r.FormValue("followpid")
 	s := NewRedisStore()
 	s.Unfollow(pid, followpid)
@@ -354,10 +391,17 @@ func unfollowHandler(w http.ResponseWriter, r *http.Request) {
 // }
 
 func initHandler(w http.ResponseWriter, r *http.Request) {
+	// sessionValid, _ := checkSession(w, r)
+	// if !sessionValid {
+	// 	return
+	// }
+
+	// TODO: restrict to admins
+
 	s := NewRedisStore()
 	s.ResetAll()
 
-	s.AddProfile("ukfestivals", "UK Festivals", "Every musical festival in the UK.", "")
+	s.AddProfile("ukfestivals", "sunshine", "UK Festivals", "Every musical festival in the UK.", "")
 	s.AddItem("ukfestivals", "22 Jul 2012", "Isle of Wight Festival, Isle of Wight, Newport", "http://www.last.fm/festival/3162276+Isle+of+Wight+Festival")
 	s.AddItem("ukfestivals", "24 Aug 2012", "Leeds Festival 2012, Bramham Park, Leeds", "http://www.last.fm/festival/2048182+Leeds+Festival+2012")
 	s.AddItem("ukfestivals", "24 Aug 2012", "Reading Festival 2012, Little John's Farm, Reading", "http://www.last.fm/festival/2043239+Reading+Festival+2012")
@@ -386,12 +430,12 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 	// 	s.AddItem("testdata", date.Format("02 Jan 2006"), fmt.Sprintf("Test data, item number %d", i), fmt.Sprintf("http://example.com/%d", i)))
 	// }
 
-	s.AddProfile("iand", "Ian", "Timefloes.", "")
+	s.AddProfile("iand", "sunshine", "Ian", "Timefloes.", "")
 	s.AddSuggestedProfile("iand", "london")
 
 	s.Follow("iand", "nasa")
 
-	s.AddProfile("nasa", "Nasa Missions", "Upcoming NASA mission information.", "")
+	s.AddProfile("nasa", "nasa", "Nasa Missions", "Upcoming NASA mission information.", "")
 
 	s.AddItem("nasa", "1 Jan 2015", "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "")
 	s.AddItem("nasa", "26 Aug 2012", "Dawn - Leaves asteroid Vesta, heads for asteroid 1 Ceres", "")
@@ -451,6 +495,12 @@ func vocabRedirectHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func adminHandler(w http.ResponseWriter, r *http.Request) {
+	// sessionValid, sessionPid := checkSession(w, r)
+	// if !sessionValid {
+	// 	return
+	// }
+	// TODO: restrict to admins
+
 	templates := template.Must(template.ParseFiles("templates/admin.html"))
 
 	err := templates.ExecuteTemplate(w, "admin.html", nil)
@@ -462,6 +512,12 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func addHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, _ := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
+	// TODO: restrict to admins
+
 	pid := r.FormValue("pid")
 	text := r.FormValue("text")
 	link := r.FormValue("link")
@@ -476,7 +532,17 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func promoteHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, sessionPid := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
+
 	pid := r.FormValue("pid")
+	if pid != sessionPid {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
 	id := r.FormValue("id")
 	s := NewRedisStore()
 	err := s.Promote(pid, id)
@@ -488,7 +554,17 @@ func promoteHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func demoteHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, sessionPid := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
+
 	pid := r.FormValue("pid")
+	if pid != sessionPid {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
 	id := r.FormValue("id")
 	s := NewRedisStore()
 	err := s.Demote(pid, id)
@@ -500,6 +576,12 @@ func demoteHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func addSuggestHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, _ := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
+	// TODO: restrict to admins
+
 	pid := r.FormValue("pid")
 	loc := r.FormValue("loc")
 	s := NewRedisStore()
@@ -512,6 +594,12 @@ func addSuggestHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func remSuggestHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, _ := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
+	// TODO: restrict to admins
+
 	pid := r.FormValue("pid")
 	loc := r.FormValue("loc")
 	s := NewRedisStore()
@@ -521,4 +609,103 @@ func remSuggestHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Fprint(w, "ACK")
+}
+
+func sessionHandler(w http.ResponseWriter, r *http.Request) {
+	pid := r.FormValue("pid")
+	pwd := r.FormValue("pwd")
+
+	s := NewRedisStore()
+
+	validPassword, err := s.VerifyPassword(pid, pwd)
+	if err != nil || !validPassword {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	createSession(pid, w, r)
+}
+
+func checkSession(w http.ResponseWriter, r *http.Request) (bool, string) {
+	var pid string
+	valid := false
+
+	cookie, err := r.Cookie(sessionCookieName)
+	if err == nil {
+		parts := strings.Split(cookie.Value, "|")
+		if len(parts) == 2 {
+			pid = parts[0]
+			sessionId, err := strconv.ParseInt(parts[1], 10, 64)
+			s := NewRedisStore()
+
+			if err == nil {
+				valid, err = s.ValidSession(pid, sessionId)
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusInternalServerError)
+					return false, ""
+				}
+
+				if valid {
+					newSessionId, err := s.SessionId(pid)
+					if err != nil {
+						http.Error(w, err.Error(), http.StatusInternalServerError)
+						return false, ""
+					}
+
+					value := fmt.Sprintf("%s|%d", pid, newSessionId)
+
+					cookie := http.Cookie{Name: sessionCookieName, Value: value, Path: "/", MaxAge: sessionExpiry}
+					http.SetCookie(w, &cookie)
+				}
+
+			}
+		}
+	}
+
+	if !valid {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+	}
+
+	return valid, pid
+
+}
+func createSession(pid string, w http.ResponseWriter, r *http.Request) {
+	s := NewRedisStore()
+
+	sessionId, err := s.SessionId(pid)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	value := fmt.Sprintf("%s|%d", pid, sessionId)
+
+	cookie := http.Cookie{Name: sessionCookieName, Value: value, Path: "/", MaxAge: 86400}
+	http.SetCookie(w, &cookie)
+
+	fmt.Fprint(w, "")
+}
+
+func checkSessionHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, _ := checkSession(w, r)
+	if !sessionValid {
+		return
+	}
+}
+
+func addProfileHandler(w http.ResponseWriter, r *http.Request) {
+	pid := r.FormValue("pid")
+	pwd := r.FormValue("pwd")
+	name := r.FormValue("name")
+	feedurl := r.FormValue("feedurl")
+	bio := r.FormValue("bio")
+
+	s := NewRedisStore()
+
+	err := s.AddProfile(pid, pwd, name, bio, feedurl)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	createSession(pid, w, r)
 }
