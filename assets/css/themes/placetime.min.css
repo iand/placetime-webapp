@@ -53,7 +53,7 @@
 .ui-bar-a select,
 .ui-bar-a textarea,
 .ui-bar-a button {
-	 font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 /*font-family: Helvetica, Arial, sans-serif {global-font-family}*/;
 }
 .ui-body-a,
 .ui-overlay-a {
@@ -77,7 +77,7 @@
 .ui-body-a select,
 .ui-body-a textarea,
 .ui-body-a button {
-	 font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 /*font-family: Helvetica, Arial, sans-serif {global-font-family}*/;
 }
 .ui-body-a .ui-link-inherit {
 	color: #000 /*{a-body-color}*/;
