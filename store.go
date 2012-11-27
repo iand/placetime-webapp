@@ -113,6 +113,16 @@ func (s *RedisStore) RemoveSuggestedProfile(pid string, loc string) error {
 	return nil
 }
 
+func (s *RedisStore) ProfileExists(pid string) (bool, error) {
+	rs := s.db.Command("EXISTS", profileKey(pid))
+	if !rs.IsOK() {
+		return false, rs.Error()
+	}
+
+	val, err := rs.ValueAsBool()
+	return val, err
+}
+
 func (s *RedisStore) Profile(pid string) (*Profile, error) {
 	rs := s.db.Command("HMGET", profileKey(pid), "name", "bio", "feedurl")
 	if !rs.IsOK() {

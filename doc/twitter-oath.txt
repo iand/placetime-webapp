@@ -1,0 +1,7 @@
+Twitter account information for placetime
+
+Consumer key: Fnky4HZ8z4NsOxRniTvCA
+
+Consumer secret: iv9q7CTYfrls05eFlhyEkPpHcJqseSWpbDx8GIyGvg
+
+Callback url: http://placetime.com/-soauth

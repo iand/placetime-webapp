@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
+	"os"
 	"path"
 	"strconv"
 	"strings"
@@ -65,12 +67,26 @@ func main() {
 
 	r.HandleFunc("/-session", sessionHandler).Methods("POST")
 	r.HandleFunc("/-chksession", checkSessionHandler).Methods("GET")
+	r.HandleFunc("/-twitter", twitterHandler).Methods("GET")
+	r.HandleFunc("/-soauth", soauthHandler).Methods("GET")
 
 	r.PathPrefix("/-assets/").HandlerFunc(assetsHandler).Methods("GET", "HEAD")
 
 	fmt.Print("Listening on 0.0.0.0:8081\n")
+
+	// authHeader, _ := CreateAuthHeader("POST", "https://api.twitter.com/oauth/request_token", make(map[string]string), "http://localhost/sign-in-with-twitter/")
+	// fmt.Printf("authHeader: %s\n", authHeader)
+
 	http.Handle("/", r)
 	http.ListenAndServe("0.0.0.0:8081", nil)
+}
+
+func Hostname() string {
+	h, _ := os.Hostname()
+	if h == "ursa" {
+		return "127.0.0.1:8081"
+	}
+	return "placetime.com"
 }
 
 func assetsHandler(w http.ResponseWriter, r *http.Request) {
@@ -624,6 +640,7 @@ func sessionHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	createSession(pid, w, r)
+	fmt.Fprint(w, "")
 }
 
 func checkSession(w http.ResponseWriter, r *http.Request) (bool, string) {
@@ -683,7 +700,6 @@ func createSession(pid string, w http.ResponseWriter, r *http.Request) {
 	cookie := http.Cookie{Name: sessionCookieName, Value: value, Path: "/", MaxAge: 86400}
 	http.SetCookie(w, &cookie)
 
-	fmt.Fprint(w, "")
 }
 
 func checkSessionHandler(w http.ResponseWriter, r *http.Request) {
@@ -708,4 +724,67 @@ func addProfileHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	createSession(pid, w, r)
+	fmt.Fprint(w, "")
+}
+
+func twitterHandler(w http.ResponseWriter, r *http.Request) {
+
+	callback := fmt.Sprintf("http://%s/-soauth", Hostname())
+
+	token, tokenSecret, callbackConfirmed, err := GetTwitterRequestToken(callback)
+	log.Printf("token: %s\n", token)
+	log.Printf("tokenSecret: %s\n", tokenSecret)
+	log.Printf("callbackConfirmed: %s\n", callbackConfirmed)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	http.Redirect(w, r, fmt.Sprintf("https://api.twitter.com/oauth/authenticate?oauth_token=%s", token), http.StatusFound)
+
+}
+func soauthHandler(w http.ResponseWriter, r *http.Request) {
+	oauth_token := r.FormValue("oauth_token")
+	oauth_verifier := r.FormValue("oauth_verifier")
+	log.Printf("oauth_token: %s\n", oauth_token)
+	log.Printf("oauth_verifier: %s\n", oauth_verifier)
+
+	token, tokenSecret, userid, screenName, err := GetTwitterAccessToken(oauth_token, oauth_verifier)
+
+	log.Printf("token: %s\n", token)
+	log.Printf("tokenSecret: %s\n", tokenSecret)
+	log.Printf("userid: %s\n", userid)
+	log.Printf("screenName: %s\n", screenName)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	s := NewRedisStore()
+
+	exists, err := s.ProfileExists(screenName)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	if !exists {
+		pwd, err := RandomString(18)
+		if err != nil {
+			log.Printf("Could not generate password: %s", err.Error())
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		err = s.AddProfile(screenName, pwd, screenName, "", "")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	}
+
+	createSession(screenName, w, r)
+	http.Redirect(w, r, "/timeline", http.StatusFound)
+
 }
