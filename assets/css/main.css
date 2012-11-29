@@ -1,5 +1,5 @@
 /* widen the toggle button */
 .flipsort .ui-slider-switch { width: 9em } 
 body, .main-itemusername, .main-itemtext { font-family: "ff-dagny-web-pro-1","ff-dagny-web-pro-2"; }
-.main-itemusername { font-size: 16px; }
-.main-itemtext{font-size: 16px;}
+.main-itemusername { font-family: "ff-dagny-web-pro-1","ff-dagny-web-pro-2"; font-size: 20px; }
+.main-itemtext{ font-family: "ff-dagny-web-pro-1","ff-dagny-web-pro-2"; font-size: 20px; }
