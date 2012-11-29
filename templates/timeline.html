@@ -57,8 +57,8 @@
     <div data-role="footer" data-id="foo1" data-position="fixed">
       <div data-role="navbar">
         <ul>
-          <li><a href="#app" data-role="button" id="possiblebtn" class="ui-btn-active ui-state-persist">Possible</a></li>
-          <li><a href="#app" data-role="button" id="maybebtn">Maybe</a></li>
+          <li><a href="#app" data-role="button" id="possiblebtn" class="ui-btn-active ui-state-persist">Playlists I follow</a></li>
+          <li><a href="#app" data-role="button" id="maybebtn">My Playlist</a></li>
         </ul>
       </div>
     </div>
@@ -80,8 +80,8 @@
   <script type="text/template" id="itemfeature-template" data-enhance="false">
     <li data-date="<%= date %>"><a>
       <img src="/-assets/img/nasa.jpg">
-      <h3>@<%= pid %></h3>
-      <p><%= text %></p></a>
+      <p class="main-itemusername">@<%= pid %></p>
+      <p class="main-itemtext"><%= text %></p></a>
       <a href="#app" class="addbtn" data-icon="plus" data-itemid="<%= id %>" data-rel="popup" data-position-to="window" data-transition="pop">Add</a>
     </li> 
   </script>
