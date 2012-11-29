@@ -171,7 +171,15 @@ func (s *RedisStore) AddProfile(pid string, password string, pname string, bio s
 		return rs.Error()
 	}
 
+	if feedurl != "" {
+		rs := s.db.Command("SADD", FEED_DRIVEN_PROFILES, pid)
+		if !rs.IsOK() {
+			return rs.Error()
+		}
+	}
+
 	return nil
+
 }
 
 func (s *RedisStore) RemoveProfile(pid string) error {
@@ -219,6 +227,29 @@ func (s *RedisStore) RemoveProfile(pid string) error {
 	}
 
 	return nil
+}
+
+func (s *RedisStore) FeedDrivenProfiles() ([]*Profile, error) {
+	rs := s.db.Command("SMEMBERS", FEED_DRIVEN_PROFILES)
+	if !rs.IsOK() {
+		return nil, rs.Error()
+	}
+
+	profiles := make([]*Profile, 0)
+
+	vals := rs.ValuesAsStrings()
+
+	for _, pid := range vals {
+		profile, err := s.Profile(pid)
+		if err != nil {
+			// TODO: log
+		} else {
+
+		}
+		profiles = append(profiles, profile)
+	}
+
+	return profiles, nil
 }
 
 func (s *RedisStore) Timeline(pid string, status string, ordering string, tstart time.Time, tend time.Time, limit int) ([]*FormattedItem, error) {
@@ -354,8 +385,22 @@ func (s *RedisStore) AddItem(pid string, etstext string, text string, link strin
 	return itemid, nil
 }
 
-func (es *RedisStore) ResetAll() error {
-	rs := es.db.Command("FLUSHDB")
+func (s *RedisStore) DeleteMaybeItems(pid string) error {
+	rs := s.db.Command("DEL", maybeKey(pid, "ts"))
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	rs = s.db.Command("DEL", maybeKey(pid, "ets"))
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	return nil
+}
+
+func (s *RedisStore) ResetAll() error {
+	rs := s.db.Command("FLUSHDB")
 	if !rs.IsOK() {
 		return rs.Error()
 	}
@@ -515,57 +560,6 @@ func (s *RedisStore) Demote(pid string, id string) error {
 
 	return nil
 }
-
-// func (s *RedisStore) IsFollowing(user string, pid string) (bool, error) {
-// 	rs := s.db.Command("SISMEMBER", followingKey(user), pid)
-// 	if !rs.IsOK() {
-// 		return false, rs.Error()
-// 	}
-
-// 	return rs.ValueAsBool()
-// }
-
-// func (s *RedisStore) Followers(pid string) ([]string, error) {
-// 	rs := s.db.Command("SMEMBERS", followersKey(pid))
-// 	if !rs.IsOK() {
-// 		return nil, rs.Error()
-// 	}
-
-// 	return rs.ValuesAsStrings(), nil
-// }
-
-// func (s *RedisStore) Item(itemid int64) (Item, error) {
-// 	rs := s.db.Command("GET", fmt.Sprintf("item:%d", itemid))
-// 	if !rs.IsOK() {
-// 		return Item{}, rs.Error()
-// 	}
-
-// 	val := rs.ValueAsString()
-// 	return UnpackItem(val)
-// }
-
-// func (s *RedisStore) CopyToItems(pid string, itemid int64) error {
-// 	item, _ := s.Item(itemid)
-// 	s.AddToItems(pid, item, 0)
-
-// 	return nil
-// }
-
-// func (s *RedisStore) Promote(pid string, itemid int64, status int) error {
-// 	item, _ := s.Item(itemid)
-// 	s.RemoveFromItems(pid, item, status)
-// 	s.AddToItems(pid, item, status+1)
-
-// 	return nil
-// }
-
-// func (s *RedisStore) RemoveFromItems(pid string, item Item, status int) error {
-// 	rs := s.db.Command("ZREM", itemsKey(pid, status), item.Packed())
-// 	if !rs.IsOK() {
-// 		return rs.Error()
-// 	}
-// 	return nil
-// }
 
 func (s *RedisStore) Followers(pid string, count int, start int) ([]*Profile, error) {
 	rs := s.db.Command("ZRANGE", followersKey(pid), start, start+count)

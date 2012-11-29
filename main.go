@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"net/http/httputil"
 	"os"
 	"path"
 	"strconv"
@@ -44,8 +45,7 @@ func main() {
 	r.HandleFunc("/timeline", timelineHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-init", initHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-admin", adminHandler).Methods("GET", "HEAD")
-	//	r.HandleFunc("/-refresh", refreshHandler).Methods("GET", "HEAD")
-	//	r.HandleFunc("/-follow", followHandler).Methods("POST")
+	r.HandleFunc("/-refresh", refreshHandler).Methods("GET", "HEAD")
 
 	r.HandleFunc("/-jsp", jsonSuggestedProfilesHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-jpr", jsonProfileHandler).Methods("GET", "HEAD")
@@ -354,57 +354,56 @@ func unfollowHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "ACK")
 }
 
-// func refreshHandler(w http.ResponseWriter, r *http.Request) {
-// 	fmt.Fprint(w, "ACK\n")
+func refreshHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "ACK\n")
 
-// 	s := NewRedisStore()
-// 	profiles, _ := s.FeedDrivenProfiles()
-// 	for _, pid := range profiles {
-// 		fmt.Fprint(w, "\nChecking ", pid, " ")
-// 		p, err := s.Profile(pid)
-// 		if err != nil {
-// 			fmt.Fprint(w, "no profile matches that pid")
-// 			continue
-// 		}
+	s := NewRedisStore()
+	profiles, _ := s.FeedDrivenProfiles()
+	for _, p := range profiles {
+		fmt.Fprint(w, "\nChecking ", p.Pid, " <")
 
-// 		fmt.Fprint(w, p.Feed, "\n")
+		fmt.Fprint(w, p.FeedUrl, ">\n")
 
-// 		resp, err := http.Get(p.Feed)
-// 		if err != nil {
-// 			fmt.Fprint(w, " got http error ", err.Error())
-// 			continue
-// 		}
-// 		defer resp.Body.Close()
+		resp, err := http.Get(p.FeedUrl)
+		responsedump, err := httputil.DumpResponse(resp, true)
+		fmt.Fprint(w, string(responsedump))
+		return
 
-// 		feed, err := NewFeed(resp.Body)
-// 		if err != nil {
-// 			fmt.Fprint(w, " got feed parse error ", err.Error())
-// 			continue
-// 		}
+		if err != nil {
+			fmt.Fprint(w, " got http error ", err.Error())
+			continue
+		}
+		defer resp.Body.Close()
 
-// 		followers, err := s.Followers(pid)
-// 		if err != nil {
-// 			fmt.Fprint(w, " could not get followers ", err.Error())
-// 			continue
-// 		}
+		feed, err := NewFeed(resp.Body)
+		if err != nil {
+			fmt.Fprint(w, " got feed parse error ", err.Error())
+			continue
+		}
 
-// 		for _, fpid := range followers {
-// 			s.Unfollow(fpid, pid)
-// 		}
+		followers, err := s.Followers(p.Pid, p.FollowerCount, 0)
+		if err != nil {
+			fmt.Fprint(w, " could not get followers ", err.Error())
+			continue
+		}
 
-// 		s.DeleteItems(pid)
-// 		for _, item := range feed.Items {
-// 			fmt.Fprint(w, "\n item: ", item.Title, " (", item.Link, ") - ", item.When, " - ", item.Id)
-// 			s.AddItem(pid, "22 Jul 2012", item.Title, item.Link))
-// 		}
+		for _, f := range followers {
+			s.Unfollow(f.Pid, p.Pid)
+		}
 
-// 		for _, fpid := range followers {
-// 			s.Follow(fpid, pid)
-// 		}
+		s.DeleteMaybeItems(p.Pid)
+		for _, item := range feed.Items {
+			fmt.Fprint(w, "\n item: ", item.Title, " (", item.Link, ") - ", item.When, " - ", item.Id)
+			s.AddItem(p.Pid, time.Now().Format("02 Jan 2006"), item.Title, item.Link)
+		}
 
-// 	}
+		for _, f := range followers {
+			s.Follow(f.Pid, p.Pid)
+		}
 
-// }
+	}
+
+}
 
 func initHandler(w http.ResponseWriter, r *http.Request) {
 	// sessionValid, _ := checkSession(w, r)
