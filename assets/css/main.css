@@ -3,4 +3,5 @@
 body, .main-itemusername, .main-itemtext { font-family: "ff-dagny-web-pro-1","ff-dagny-web-pro-2"; }
 .main-itemusername { font-family: "ff-dagny-web-pro-1","ff-dagny-web-pro-2"; font-size: 20px; }
 .main-itemtext{ font-family: "ff-dagny-web-pro-1","ff-dagny-web-pro-2"; font-size: 20px; }
-.main-pagewrapper { max-width: 400px; margin-left: auto; margin-right: auto; }
+.main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
+.main-pagewrapper { max-width: 400px; }
