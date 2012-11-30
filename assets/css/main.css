@@ -5,4 +5,5 @@ body, .main-itemusername, .main-itemtext { font-family: "ff-dagny-web-pro-1","ff
 .main-itemtext{ font-family: "ff-dagny-web-pro-1","ff-dagny-web-pro-2"; font-size: 16px; }
 .main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
 .main-pagewrapper { max-width: 400px; }
+.main-timelinecol { max-width: 500px; float: left; }
 .ui-header-fixed, .ui-footer-fixed { left: 0; right: 0; width: 1000px; position: relative; z-index: 1000; }
