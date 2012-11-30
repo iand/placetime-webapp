@@ -189,7 +189,8 @@ $(function(){
           ,'click #possiblebtn'      :  'possible'
           ,'click #maybebtn'         :  'maybe'
           ,'click #newbtn'           :  'newitem'
-          ,'change #sorter'          :  'togglesort'
+          ,'click #ts'               :  'ts'
+          ,'click #ets'              :  'ets'
         }
 
         ,initialize:function () {
@@ -282,15 +283,17 @@ $(function(){
         }
 
 
-        ,togglesort: function(e) {
-          var clickedEl = $("#sorter");
-          this.model.order = clickedEl.val();
+        ,ts: function(e) {
+          this.model.order = "ts";
           this.model.refresh();
-        }      
+        }  
+        
+         ,ets: function(e) {
+          this.model.order = "ets";
+          this.model.refresh();
+        } 
+        
     });
-
-
-
 
 
     var LoginView = Backbone.View.extend({
