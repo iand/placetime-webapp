@@ -30,7 +30,8 @@
 
 
   
-  <div id="itemlist" data-role="page"><div class="main-wrapper"><!-- main-wrapper begins -->
+  <div id="itemlist" data-role="page"><!-- open page --> 
+  <div class="main-wrapper"><!-- main-wrapper begins -->
     
     <div data-role="header" data-position="fixed" data-theme="a" data-mini="true">
       <a href="#login" data-role="button" data-icon="plus" id="newbtn" data-mini="true">new</a>
@@ -63,6 +64,34 @@
     </div>
  </div><!-- close main-wrapper -->    
   </div><!-- close page --> 
+  
+    <div id="mytimeline" data-role="page"><!-- open page --> 
+    <div class="main-wrapper"><!-- main-wrapper begins -->
+    
+    <div data-role="header" data-position="fixed" data-theme="a" data-mini="true">
+
+      <h1>My Timeline</h1>
+      
+      <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal" data-mini="true">
+        <a href="#" id="myets" data-role="button" data-icon="arrow-u">calendar</a>
+  	<a href="#"  id="myts" data-role="button" data-icon="arrow-d">added</a>
+      </div>
+          
+    </div>
+
+    <section id="mymain" data-role="content" data-theme="b">
+      <div class="content-primary">
+      <ul id="items" class="items" data-role="listview"  data-split-icon="plus" data-autodividers="true" data-split-theme="b" data-divider-theme="b">
+      </ul>
+    </div>
+    </section>
+
+    <div data-role="footer" data-id="foo1" data-position="fixed" data-theme="a">
+      
+    </div>
+ </div><!-- close main-wrapper -->    
+  </div><!-- close page --> 
+  
   
 
 
