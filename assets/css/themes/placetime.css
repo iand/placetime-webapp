@@ -251,7 +251,7 @@
 }
 
 .ui-btn-up-b {
-	border: 1px solid #cccccc /*{b-bup-border}*/;
+	border: 0px solid #ccc /*{b-bup-border}*/;
 	background: #fff /*{b-bup-background-color}*/;
 	font-weight: bold;
 	color: #000 /*{b-bup-color}*/;
