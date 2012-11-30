@@ -253,7 +253,7 @@
 .ui-btn-up-b {
 	border: 0px solid #ccc /*{b-bup-border}*/;
 	background: #fff /*{b-bup-background-color}*/;
-	font-weight: bold;
+	font-weight: regular;
 	color: #000 /*{b-bup-color}*/;
 	text-shadow: 0 /*{b-bup-shadow-x}*/ 1px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #ffffff /*{b-bup-shadow-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #ff0fNaN /*{b-bup-background-start}*/), to( #ff0fNaN /*{b-bup-background-end}*/)); /* Saf4 , Chrome */
