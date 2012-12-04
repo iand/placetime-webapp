@@ -80,13 +80,10 @@ $(function(){
 
     var ItemList = Backbone.Collection.extend({
          model: Item
-        ,order:'ts'
-        ,status:'p'
-        ,url: '/-jtl?pid=iand'
 
 
         ,refresh:function () {
-            var url = '/-jtl?pid=iand&status=' + this.status + '&order=' + this.order;
+            var url = '/-jtl?pid=' + this.pid + '&status=' + this.status + '&order=' + this.order;
             var self = this;
             $.ajax({
                 url:url,
@@ -184,24 +181,28 @@ $(function(){
         el: "#itemlist"
 
         ,events:{
-           'click .addbtn'           :  'promote'
-          ,'click .followbtn'        :  'follow'
-          ,'click #possiblebtn'      :  'possible'
-          ,'click #maybebtn'         :  'maybe'
-          ,'click #newbtn'           :  'newitem'
-          ,'click #ts'               :  'ts'
-          ,'click #ets'              :  'ets'
+           'click .promotebtn'          :  'promote'
+          ,'click .demotebtn'           :  'demote'
+          ,'click .followbtn'           :  'follow'
+          ,'click #possiblebtn'         :  'possible'
+          ,'click #maybebtn'            :  'maybe'
+          ,'click #newbtn'              :  'newitem'
+          ,'click #ts'                  :  'ts'
+          ,'click #myts'                :  'myts'
+          ,'click #ets'                 :  'ets'
+          ,'click #myets'               :  'myets'
         }
 
         ,initialize:function () {
           var self = this;
           this.templateitem = _.template($("#item-template").html());
           this.templatefeature = _.template($("#item-template").html());
-          this.listelem = $(".items", this.el);
+          this.itemsElem = $("#items", this.el);
+          this.myitemsElem = $("#myitems", this.el);
 
 
 
-          this.listelem.listview({
+          this.itemsElem.listview({
             autodividers: true
 
             ,autodividersSelector: function ( li ) {
@@ -210,26 +211,48 @@ $(function(){
             }
 
           });
-          this.model.bind("reset", this.render, this);
+
+          this.myitemsElem.listview({
+            autodividers: true
+
+            ,autodividersSelector: function ( li ) {
+              var out = li.data("date");
+              return out;
+            }
+
+          });
+          this.itemsModel = this.options.itemsModel;
+          this.myitemsModel = this.options.myitemsModel;
+
+
+          this.itemsModel.bind("reset", this.render, this);
+          this.myitemsModel.bind("reset", this.render, this);
         }
 
         ,render: function(eventName) {
-          this.listelem.html('');
-          var done = false;
+          this.itemsElem.html('');
+          this.myitemsElem.html('');
           var self = this;
 
-          _.each(this.model.models, function(item){
-            if (done) {
-              var lTemplate = this.templateitem(item.toJSON());
-            } else {
-              var lTemplate = this.templatefeature(item.toJSON());
-              done = true;
-            }
+          _.each(this.itemsModel.models, function(item){
+            var data = item.toJSON();
+            data.action = 'promote';
+            var lTemplate = this.templateitem(data);
             console.log("Adding");
-            self.listelem.append(lTemplate);
+            self.itemsElem.append(lTemplate);
           }, this);
 
-          this.listelem.listview('refresh');
+          _.each(this.myitemsModel.models, function(item){
+            var data = item.toJSON();
+            data.action = 'demote';
+            var lTemplate = this.templateitem(data);
+
+            console.log("Adding");
+            self.myitemsElem.append(lTemplate);
+          }, this);
+
+          this.itemsElem.listview('refresh');
+          this.myitemsElem.listview('refresh');
           return this;
         }
 
@@ -237,28 +260,39 @@ $(function(){
         ,promote: function(e) {
           var clickedEl = $(e.currentTarget);
           var id = clickedEl.data("itemid");
-          // alert("Promote item '" + id + "' to maybe list");
           var self = this;
 
-          if (this.model.status == 'p') {
-              var url = '/-tpromote';
-
-          } else {
-              var url = '/-tdemote';
-          }
-
-
           $.ajax({
-              url:url,
+              url:'/-tpromote',
               type:'post',
-              data: { pid: 'iand', id: id },
+              data: { pid: session.get("pid"), id: id },
               success:function (data) {
-                  console.log("posted to " + url);
-                  self.model.refresh();
+                  self.itemsModel.refresh();
+                  self.myitemsModel.refresh();
               }
           });          
 
+          this.render();
         }
+
+        ,demote: function(e) {
+          var clickedEl = $(e.currentTarget);
+          var id = clickedEl.data("itemid");
+          // alert("Promote item '" + id + "' to maybe list");
+          var self = this;
+
+          $.ajax({
+              url:'/-tdemote',
+              type:'post',
+              data: { pid: session.get("pid"), id: id },
+              success:function (data) {
+                  self.itemsModel.refresh();
+                  self.myitemsModel.refresh();
+              }
+          });          
+
+          this.render();
+        }        
 
         ,follow: function(e) {
           var clickedEl = $(e.currentTarget);
@@ -268,14 +302,14 @@ $(function(){
 
 
         ,possible: function(e) {
-          this.model.status = 'p';
-          this.model.refresh();
+          //this.itemsModel.status = 'p';
+          //this.itemsModel.refresh();
         }
 
 
         ,maybe: function(e) {
-          this.model.status = 'm';
-          this.model.refresh();
+          //this.itemsModel.status = 'm';
+          //this.itemsModel.refresh();
         }
 
         ,newitem: function(e) {
@@ -284,13 +318,23 @@ $(function(){
 
 
         ,ts: function(e) {
-          this.model.order = "ts";
-          this.model.refresh();
+          this.itemsModel.order = "ts";
+          this.itemsModel.refresh();
         }  
         
-         ,ets: function(e) {
-          this.model.order = "ets";
-          this.model.refresh();
+        ,ets: function(e) {
+          this.itemsModel.order = "ets";
+          this.itemsModel.refresh();
+        } 
+
+        ,myts: function(e) {
+          this.myitemsModel.order = "ts";
+          this.myitemsModel.refresh();
+        }  
+        
+        ,myets: function(e) {
+          this.myitemsModel.order = "ets";
+          this.myitemsModel.refresh();
         } 
         
     });
@@ -342,7 +386,7 @@ $(function(){
       },
     
       login: function(){
-      
+          var self = this;
           $.ajax({
               url:"/-session"
               ,type:'post'
@@ -350,10 +394,12 @@ $(function(){
               ,success:function (data) {
                   console.log("Logged in successfully");
                   console.log("doing navigate");
+                  session.set("pid",self.model.get('pid'));
                   Backbone.history.navigate("", true);
                   console.log("stopped navigate");
               }
               ,error: function (model, response, options) {
+                session.set("pid",null);
                 console.log("Error thrown when logging in: " + response.responseText);
               }
           });  
@@ -438,26 +484,39 @@ $(function(){
 
 
         ,initialize:function() {
-          this.session = new Session();
-          this.session.set("ptsession", getCookie("ptsession"));
+          session.set("ptsession", getCookie("ptsession"));
         }
 
         ,timeline:function () {
           console.log("Routed to timeline");
           var self = this;
-          this.session.set("ptsession", getCookie("ptsession"));
-          pts = this.session.get("ptsession");
+          session.set("ptsession", getCookie("ptsession"));
+          pts = session.get("ptsession");
           if (pts) {
             $.ajax({
                 url:"/-chksession"
                 ,dataType:"json"
                 ,success:function (data) {
-                  console.log("Valid session");
+                  session.set("pid", session.get("ptsession").split("|")[0]);
+
+                  console.log("Valid session for pid: " +session.get("pid"));
+
                   var items = new ItemList();
+                  items.order = "ets";
+                  items.pid = session.get("pid");
+                  items.status = 'p';
                   items.refresh();
-                  self.changePage(new ItemsView({ model:items}));
+
+                  var myItems = new ItemList();
+                  myItems.order = items.order;
+                  myItems.pid = items.pid;
+                  myItems.status = 'm';
+                  myItems.refresh();
+                  self.changePage(new ItemsView({ itemsModel:items, myitemsModel: myItems}));
+
                 }
                 ,error:function (data) {
+                  session.set("pid", null);
                   console.log("Invalid session");
                   self.login();
                 }
@@ -471,7 +530,7 @@ $(function(){
         ,login:function () {
           console.log("Routed to login");
           var self = this;
-          this.session.set("ptsession", null);
+          session.set("ptsession", null);
           setCookie('ptsession', null);
           this.changePage(new LoginView({model: new Credentials()}));
         }
@@ -479,7 +538,7 @@ $(function(){
         ,register:function () {
           console.log("Routed to register");
           var self = this;
-          this.session.set("ptsession", null);
+          session.set("ptsession", null);
           setCookie('ptsession', null);
           this.changePage(new RegisterView({model: new RegistrationInfo()} ));
         }        
@@ -502,6 +561,8 @@ $(function(){
 
 
     });
+
+    var session = new Session();
 
     var approute = new AppRouter();
     Backbone.history.start();
