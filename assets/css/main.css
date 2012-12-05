@@ -17,7 +17,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
     border: 0px;
     border-bottom: 3px solid #000;
     color: #444;
-    font-weight: regular;
+    font-weight: normal;
     font-size: 12px;
     text-shadow: 0 0px 0px #696969; }
 }
