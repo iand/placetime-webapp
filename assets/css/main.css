@@ -12,4 +12,5 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
   .main-timelinecol { max-width: 484px; float: left; }
   .ui-header-fixed .ui-footer-fixed { left: 0; right: 0; width: 1000px; position: relative; z-index: 1000; }
   .ui-content .ui-listview { margin: 0; }
+  .main-loginwrapper { width: 400px; margin-left: auto; margin-right: auto; }
 }
