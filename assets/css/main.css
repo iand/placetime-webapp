@@ -7,9 +7,16 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 /* Note: Layout for non-mobile and  1000px + */
 @media only screen and (min-width: 1000px) {
   .main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
-  .main-pagewrapper { width: 400px; margin-left: auto; margin-right: auto; }}
+  .main-pagewrapper { width: 400px; margin-left: auto; margin-right: auto; }
   .main-header { margin-bottom: 20px; }
   .main-timelinecol { max-width: 484px; float: left; }
   .ui-header-fixed .ui-footer-fixed { left: 0; right: 0; width: 1000px; position: relative; z-index: 1000; }
   .ui-content .ui-listview { margin: 0; }
+.ui-bar-b {
+    background: linear-gradient(#fff, #fff) repeat scroll 0 0 #EEEEEE;
+    border-bottom: 3px solid #000;
+    color: #444;
+    font-weight: regular;
+    font-size: 12px;
+    text-shadow: 0 1px 1px #696969; }
 }
