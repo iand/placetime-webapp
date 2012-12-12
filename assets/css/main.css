@@ -25,12 +25,6 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
   cursor: default;
 }
 
-
-.ui-btn-inner {
-	border-top: 0px
-	border-bottom: 1px solid: eee;
-}
-
 .ui-bar-b, .ui-btn-hover-b {
   border: 0px /*{b-bar-border}*/;
   border-bottom: 1px solid #c55;
