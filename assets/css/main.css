@@ -26,7 +26,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 }
 
 
-.ui-btn-up-b {
+.ui-btn-inner {
 	border-top: 0px
 	border-bottom: 1px solid: eee;
 }
