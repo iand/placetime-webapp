@@ -53,5 +53,5 @@ li.ui.li, li.ui.li:hover {
 }
 
 .ui-li-link-alt .ui-btn {
-border: 0px;
+margin: 16px 0 0 0;
 }
