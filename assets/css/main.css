@@ -27,7 +27,6 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 
 .ui-bar-b, .ui-btn-hover-b {
   border: 0px /*{b-bar-border}*/;
-  border-bottom: 1px solid #c55;
 	background: #eeeeee /*{b-bar-background-color}*/;
 	color: #444 /*{b-bar-color}*/;
 	text-shadow: 0 /*{b-bar-shadow-x}*/ 0px /*{b-bar-shadow-y}*/ 0px /*{b-bar-shadow-radius}*/ #696969 /*{b-bar-shadow-color}*/;
@@ -39,4 +38,6 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 	background-image:         linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/);
 }
 
-
+.ui-bar-b {
+  border-bottom: 1px solid #c55;	
+}
