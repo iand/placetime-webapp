@@ -20,9 +20,10 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 	font-family: "proxima-nova-soft-1","proxima-nova-soft-2",sans-serif;
         font-style: normal;
         font-weight: 600;
-        font-size:33px;
+        font-size:23px;
         color: #fff;
         margin-left: 20px;
+        text-shadow: none;
 }
 
 .ui-page {
@@ -77,5 +78,5 @@ li.ui.li, li.ui.li:hover {
 
 .main-header {
 	height: 25px;
-	border-bottom: 16px solid #c33;
+	border-bottom: 8px solid #c99;
 }
