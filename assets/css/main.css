@@ -64,3 +64,8 @@ li.ui.li, li.ui.li:hover {
 .ui-li-thumb {
    margin-top: 6px;
 }
+
+.main-header {
+	height: 25px;
+	border-bottom: 16px solid #c33;
+}
