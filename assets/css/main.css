@@ -44,19 +44,23 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 }
 
 .ui-li {
-border-top: 1px solid #eee;
-border-bottom: 1px solid #fff;
+   border-top: 1px solid #eee;
+   border-bottom: 1px solid #fff;
 }
 
 .ui-li:hover {
-border-top: 1px solid #eee;	
-border-bottom: 1px solid #d33;
+   border-top: 1px solid #eee;	
+   border-bottom: 1px solid #d33;
 }
 
 li.ui.li, li.ui.li:hover { 
-	border: 0px;
+   border: 0px;
 }
 
 .ui-li-link-alt .ui-btn {
-margin: 10px 0 0 0;
+   margin: 10px 0 0 0;
+}
+
+.ui-li-thumb {
+   margin-top: 6px;
 }
