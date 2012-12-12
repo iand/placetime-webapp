@@ -53,7 +53,7 @@
 .ui-bar-a select,
 .ui-bar-a textarea,
 .ui-bar-a button {
-	   font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-a,
 .ui-overlay-a {
@@ -77,7 +77,7 @@
 .ui-body-a select,
 .ui-body-a textarea,
 .ui-body-a button {
-	   font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-a .ui-link-inherit {
 	color: #ffffff /*{a-body-color}*/;
@@ -156,7 +156,7 @@
 .ui-btn-up-a,
 .ui-btn-hover-a,
 .ui-btn-down-a {
-	   font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
 	text-decoration: none;
 }
 
@@ -203,7 +203,7 @@
 .ui-bar-b select,
 .ui-bar-b textarea,
 .ui-bar-b button {
-	   font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-b,
 .ui-overlay-b {
@@ -227,7 +227,7 @@
 .ui-body-b select,
 .ui-body-b textarea,
 .ui-body-b button {
-	   font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-b .ui-link-inherit {
 	color: #333333 /*{b-body-color}*/;
@@ -251,34 +251,34 @@
 }
 
 .ui-btn-up-b {
-	border: 0px solid #ccc /*{b-bup-border}*/;
+	border: 1px solid #fff /*{b-bup-border}*/;
 	background: #fff /*{b-bup-background-color}*/;
-	font-weight: regular;
+	font-weight: bold;
 	color: #000 /*{b-bup-color}*/;
-	text-shadow: 0 /*{b-bup-shadow-x}*/ 1px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #ffffff /*{b-bup-shadow-color}*/;
-	background-image: -webkit-gradient(linear, left top, left bottom, from( #ff0fNaN /*{b-bup-background-start}*/), to( #ff0fNaN /*{b-bup-background-end}*/)); /* Saf4 , Chrome */
-	background-image: -webkit-linear-gradient( #ff0fNaN /*{b-bup-background-start}*/, #ff0fNaN /*{b-bup-background-end}*/); /* Chrome 10 , Saf5.1  */
-	background-image:    -moz-linear-gradient( #ff0fNaN /*{b-bup-background-start}*/, #ff0fNaN /*{b-bup-background-end}*/); /* FF3.6 */
-	background-image:     -ms-linear-gradient( #ff0fNaN /*{b-bup-background-start}*/, #ff0fNaN /*{b-bup-background-end}*/); /* IE10 */
-	background-image:      -o-linear-gradient( #ff0fNaN /*{b-bup-background-start}*/, #ff0fNaN /*{b-bup-background-end}*/); /* Opera 11.10  */
-	background-image:         linear-gradient( #ff0fNaN /*{b-bup-background-start}*/, #ff0fNaN /*{b-bup-background-end}*/);
+	text-shadow: 0 /*{b-bup-shadow-x}*/ 0px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #ffffff /*{b-bup-shadow-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #fff /*{b-bup-background-start}*/), to( #fff /*{b-bup-background-end}*/)); /* Saf4 , Chrome */
+	background-image: -webkit-linear-gradient( #fff /*{b-bup-background-start}*/, #fff /*{b-bup-background-end}*/); /* Chrome 10 , Saf5.1  */
+	background-image:    -moz-linear-gradient( #fff /*{b-bup-background-start}*/, #fff /*{b-bup-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #fff /*{b-bup-background-start}*/, #fff /*{b-bup-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #fff /*{b-bup-background-start}*/, #fff /*{b-bup-background-end}*/); /* Opera 11.10  */
+	background-image:         linear-gradient( #fff /*{b-bup-background-start}*/, #fff /*{b-bup-background-end}*/);
 }
 .ui-btn-up-b:visited,
 .ui-btn-up-b a.ui-link-inherit {
 	color: #000 /*{b-bup-color}*/;
 }
 .ui-btn-hover-b {
-	border: 1px solid #bbbbbb /*{b-bhover-border}*/;
-	background: #dfdfdf /*{b-bhover-background-color}*/;
+	border: 1px solid #fff /*{b-bhover-border}*/;
+	background: #fff /*{b-bhover-background-color}*/;
 	font-weight: bold;
 	color: #2f3e46 /*{b-bhover-color}*/;
 	text-shadow: 0 /*{b-bhover-shadow-x}*/ 1px /*{b-bhover-shadow-y}*/ 0 /*{b-bhover-shadow-radius}*/ #ffffff /*{b-bhover-shadow-color}*/;
-	background-image: -webkit-gradient(linear, left top, left bottom, from( #f6f6f6 /*{b-bhover-background-start}*/), to( #e0e0e0 /*{b-bhover-background-end}*/)); /* Saf4 , Chrome */
-	background-image: -webkit-linear-gradient( #f6f6f6 /*{b-bhover-background-start}*/, #e0e0e0 /*{b-bhover-background-end}*/); /* Chrome 10 , Saf5.1  */
-	background-image:    -moz-linear-gradient( #f6f6f6 /*{b-bhover-background-start}*/, #e0e0e0 /*{b-bhover-background-end}*/); /* FF3.6 */
-	background-image:     -ms-linear-gradient( #f6f6f6 /*{b-bhover-background-start}*/, #e0e0e0 /*{b-bhover-background-end}*/); /* IE10 */
-	background-image:      -o-linear-gradient( #f6f6f6 /*{b-bhover-background-start}*/, #e0e0e0 /*{b-bhover-background-end}*/); /* Opera 11.10  */
-	background-image:         linear-gradient( #f6f6f6 /*{b-bhover-background-start}*/, #e0e0e0 /*{b-bhover-background-end}*/);
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #fff /*{b-bhover-background-start}*/), to( #fff /*{b-bhover-background-end}*/)); /* Saf4 , Chrome */
+	background-image: -webkit-linear-gradient( #fff /*{b-bhover-background-start}*/, #fff /*{b-bhover-background-end}*/); /* Chrome 10 , Saf5.1  */
+	background-image:    -moz-linear-gradient( #fff /*{b-bhover-background-start}*/, #fff /*{b-bhover-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #fff /*{b-bhover-background-start}*/, #fff /*{b-bhover-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #fff /*{b-bhover-background-start}*/, #fff /*{b-bhover-background-end}*/); /* Opera 11.10  */
+	background-image:         linear-gradient( #fff /*{b-bhover-background-start}*/, #fff /*{b-bhover-background-end}*/);
 }
 .ui-btn-hover-b:visited,
 .ui-btn-hover-b:hover,
@@ -306,7 +306,7 @@
 .ui-btn-up-b,
 .ui-btn-hover-b,
 .ui-btn-down-b {
-	   font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
 	text-decoration: none;
 }
 
@@ -355,7 +355,7 @@
 .ui-bar-c select,
 .ui-bar-c textarea,
 .ui-bar-c button {
-	   font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-c,
 .ui-overlay-c {
@@ -379,7 +379,7 @@
 .ui-body-c select,
 .ui-body-c textarea,
 .ui-body-c button {
-	   font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-c .ui-link-inherit {
 	color: #fff /*{c-body-color}*/;
@@ -458,7 +458,7 @@
 .ui-btn-up-c,
 .ui-btn-hover-c,
 .ui-btn-down-c {
-	   font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
 	text-decoration: none;
 }
 
@@ -507,7 +507,7 @@
 .ui-bar-d select,
 .ui-bar-d textarea,
 .ui-bar-d button {
-	   font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-d,
 .ui-overlay-d {
@@ -531,7 +531,7 @@
 .ui-body-d select,
 .ui-body-d textarea,
 .ui-body-d button {
-	   font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-d .ui-link-inherit {
 	color: #333333 /*{d-body-color}*/;
@@ -610,11 +610,9 @@
 .ui-btn-up-d,
 .ui-btn-hover-d,
 .ui-btn-down-d {
-	   font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
 	text-decoration: none;
 }
-
-
 
 
 
@@ -645,7 +643,7 @@ a.ui-link-inherit {
 	background-image:     -ms-linear-gradient( #9909NaN /*{global-active-background-start}*/, #9909NaN /*{global-active-background-end}*/); /* IE10 */
 	background-image:      -o-linear-gradient( #9909NaN /*{global-active-background-start}*/, #9909NaN /*{global-active-background-end}*/); /* Opera 11.10  */
 	background-image:         linear-gradient( #9909NaN /*{global-active-background-start}*/, #9909NaN /*{global-active-background-end}*/);
-	   font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	 font-family: proxima-nova-1,proxima-nova-2,Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-btn-active:visited,
 .ui-btn-active:hover,
@@ -657,9 +655,11 @@ a.ui-link-inherit {
 /* button inner top highlight
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn-inner, .ui-btn-inner:hover {
-border: 0px;
+.ui-btn-inner {
+	border-top: 1px solid 	#fff;
+	border-color: 			rgba(255,255,255,.3);
 }
+
 
 /* corner rounding classes
 -----------------------------------------------------------------------------------------------------------*/
@@ -998,9 +998,9 @@ border: 0px;
 	box-shadow: 0px 0px 12px 				rgba(0,0,0,.6);
 }
 .ui-shadow {
-	-moz-box-shadow: 0px 1px 2px /*{global-box-shadow-size}*/ rgba(0,0,0,0.3) /*{global-box-shadow-color}*/;
-	-webkit-box-shadow: 0px 1px 2px /*{global-box-shadow-size}*/ rgba(0,0,0,0.3) /*{global-box-shadow-color}*/;
-	box-shadow: 0px 1px 2px /*{global-box-shadow-size}*/ rgba(0,0,0,0.3) /*{global-box-shadow-color}*/;
+	-moz-box-shadow: 0px 1px 0px /*{global-box-shadow-size}*/ rgba(0,0,0,0.3) /*{global-box-shadow-color}*/;
+	-webkit-box-shadow: 0px 1px 0px /*{global-box-shadow-size}*/ rgba(0,0,0,0.3) /*{global-box-shadow-color}*/;
+	box-shadow: 0px 1px 0px /*{global-box-shadow-size}*/ rgba(0,0,0,0.3) /*{global-box-shadow-color}*/;
 }
 .ui-bar-a .ui-shadow,
 .ui-bar-b .ui-shadow ,
