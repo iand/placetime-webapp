@@ -80,3 +80,7 @@ li.ui.li, li.ui.li:hover {
 	height: 25px;
 	border-bottom: 8px solid #c99;
 }
+
+.custom-newbuttonwrapper {
+	width: 170px;
+}
