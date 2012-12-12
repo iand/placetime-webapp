@@ -48,6 +48,6 @@ border-top: 1px solid #eee;
 border-bottom: 1px solid #d33;
 }
 
-div.ui.li, div.ui.li:hover { 
+li.ui.li, li.ui.li:hover { 
 	border: 0px;
 }
