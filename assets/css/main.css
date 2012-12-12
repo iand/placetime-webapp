@@ -25,9 +25,15 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
   cursor: default;
 }
 
+
+.ui-btn-b {
+	border-top: 0px
+	border-bottom: 1px solid: eee;
+}
+
 .ui-bar-b, .ui-btn-hover-b {
   border: 0px /*{b-bar-border}*/;
-  border-top: 1px solid #c55;
+  border-bottom: 1px solid #c55;
 	background: #eeeeee /*{b-bar-background-color}*/;
 	color: #444 /*{b-bar-color}*/;
 	text-shadow: 0 /*{b-bar-shadow-x}*/ 0px /*{b-bar-shadow-y}*/ 0px /*{b-bar-shadow-radius}*/ #696969 /*{b-bar-shadow-color}*/;
