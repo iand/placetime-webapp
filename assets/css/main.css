@@ -60,6 +60,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 }
 
 .ui-li:hover {
+   background-color: #f6f6f6;
    border-top: 1px solid #eee;	
    border-bottom: 1px solid #d33;
 }
