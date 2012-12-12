@@ -657,14 +657,8 @@ a.ui-link-inherit {
 /* button inner top highlight
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn-inner {
+.ui-btn-inner, .ui-btn-inner:hover {
 border: 0px;
-border-bottom: 1px solid #eee;  
-}
-
-.ui-btn-inner:hover {
-border: 0px;
-border-bottom: 1px solid #c55; 
 }
 
 /* corner rounding classes
