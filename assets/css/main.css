@@ -51,3 +51,7 @@ border-bottom: 1px solid #d33;
 li.ui.li, li.ui.li:hover { 
 	border: 0px;
 }
+
+.ui-li-link-alt .ui-btn {
+border: 0px;
+}
