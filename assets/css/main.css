@@ -37,3 +37,13 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 	background-image:      -o-linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/); /* Opera 11.10  */
 	background-image:         linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/);
 }
+
+.ui-li {
+border-top: 1px solid #eee;
+border-bottom: 1px solid #fff;
+}
+
+.ui-li:hover {
+border-top: 1px solid #eee;	
+border-bottom: 1px solid #d33;
+}
