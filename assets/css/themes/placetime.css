@@ -658,12 +658,13 @@ a.ui-link-inherit {
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-btn-inner {
-	border-top: 0px;
-	border-bottom: 1px solid #eee;
+border: 0px;
+border-bottom: 1px solid #eee;  
 }
 
 .ui-btn-inner:hover {
-	border-bottom: 0px;
+border: 0px;
+border-bottom: 1px solid #c55; 
 }
 
 /* corner rounding classes
