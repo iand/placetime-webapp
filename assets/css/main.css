@@ -25,7 +25,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
   cursor: default;
 }
 
-.ui-bar-b {
+.ui-bar-b, .ui-btn-hover-b {
   border: 0px /*{b-bar-border}*/;
   border-bottom: 2px solid #aaa;
 	background: #eeeeee /*{b-bar-background-color}*/;
