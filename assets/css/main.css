@@ -19,8 +19,18 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 .custom-logo {
 	font-family: "proxima-nova-soft-1","proxima-nova-soft-2",sans-serif;
         font-style: normal;
-        font-weight: 500;
+        font-weight: 400;
         font-size:23px;
+        color: #fff;
+        margin-left: 20px;
+        text-shadow: none;
+}
+
+
+.custom-strapline {
+	font-family: "proxima-nova-1","proxima-nova-2",sans-serif;
+        font-style: normal;
+        font-size:14px;
         color: #fff;
         margin-left: 20px;
         text-shadow: none;
