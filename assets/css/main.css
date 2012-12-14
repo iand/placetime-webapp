@@ -21,7 +21,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
         font-style: normal;
         font-weight: 400;
         font-size:23px;
-        color: #aaa;
+        color: #fff;
         margin-left: 20px;
         text-shadow: none;
 }
@@ -31,7 +31,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 	font-family: "proxima-nova-1","proxima-nova-2",sans-serif;
         font-style: normal;
         font-size:14px;
-        color: #fff;
+        color: #aaa;
         margin-left: 20px;
         text-shadow: none;
 }
@@ -89,7 +89,7 @@ li.ui.li, li.ui.li:hover {
 
 .main-header {
 	height: 25px;
-	border-bottom: 8px solid #c99;
+	border-bottom: 8px solid #ccc;
 }
 
 .custom-newbuttonwrapper {
