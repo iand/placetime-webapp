@@ -24,6 +24,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
         color: #fff;
         margin-left: 20px;
         text-shadow: none;
+        font-stretch: expanded;
 }
 
 
@@ -34,6 +35,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
         color: #ededed;
         margin-left: 20px;
         text-shadow: none;
+        font-weight: 400;
 }
 
 .ui-page {
