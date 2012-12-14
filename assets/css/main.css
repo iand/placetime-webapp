@@ -101,3 +101,7 @@ li.ui.li, li.ui.li:hover {
 .custom-newbuttonwrapper {
 	width: 170px;
 }
+
+.ui-mobile a img {
+	border: 1px solid #eee;
+}
