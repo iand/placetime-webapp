@@ -6,8 +6,8 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
   .main-pagewrapper { width: 400px; margin-left: auto; margin-right: auto; position: relative; }
   .main-header { margin-bottom: 20px; height: 45px; background: #aaa; border-bottom: 8px solid #ccc; }
   .main-timelinecol { width: 484px; float: left; }
-  .ui-header-fixed .ui-footer-fixed { left: 0; right: 0; width: 1000px; position: relative; z-index: 1000; }
   .ui-content .ui-listview { margin: 0; }
+}
 
 .main-logo {
 	font-family: "proxima-nova-soft-1","proxima-nova-soft-2",sans-serif;
@@ -39,9 +39,12 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 
 /* horiz bars class="ui-li ui-li-divider ui-bar-b" */
 
+/* page overrride */
 .ui-page {
    background-color: #ededed;
 }
+
+
 
 .ui-bar-b, .ui-btn-hover-b {
    border: 0px /*{b-bar-border}*/;
@@ -56,13 +59,6 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
    background-image:         linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/);
 }
 
-.ui-li {
-   list-style:none; padding:0;
-   display: block; margin:0; position: relative; overflow: visible; text-align: left; border-width: 0; border-top-width: 1px;
-   border-top: 1px solid #fff;
-   border-bottom: 1px solid #fff;
-}
-
 
 /* list date divider override */
 .ui-li-divider { 
@@ -72,6 +68,15 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
    border-top: 1px solid #000;
    border-bottom: 1px solid #fff;
    background: #f5f5f5;
+}
+
+
+/* list item and list item hover override */
+.ui-li {
+   list-style:none; padding:0;
+   display: block; margin:0; position: relative; overflow: visible; text-align: left; border-width: 0; border-top-width: 1px;
+   border-top: 1px solid #fff;
+   border-bottom: 1px solid #fff;
 }
 
 .ui-li:hover {
