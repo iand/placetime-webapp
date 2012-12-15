@@ -3,9 +3,8 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 /* Note: Layout for non-mobile and  1000px + */
 @media only screen and (min-width: 1000px) {
   .main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
-/*  .main-pagewrapper { width: 400px; margin-left: auto; margin-right: auto; position: relative; }
-*/
-.main-header { margin-bottom: 20px; height: 45px; border-bottom: 8px solid #ccc; }
+  .main-pagewrapper { width: 400px; margin-left: auto; margin-right: auto; position: relative; }
+  .main-header { margin-bottom: 20px; height: 45px; border-bottom: 8px solid #ccc; }
   .main-timelinecol { width: 484px; float: left; }
   .ui-header-fixed .ui-footer-fixed { left: 0; right: 0; width: 1000px; position: relative; z-index: 1000; }
   .ui-content .ui-listview { margin: 0; }
@@ -44,16 +43,16 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 }
 
 .ui-bar-b, .ui-btn-hover-b {
-  border: 0px /*{b-bar-border}*/;
-	background: #eeeeee /*{b-bar-background-color}*/;
-	color: #444 /*{b-bar-color}*/;
-	text-shadow: 0 /*{b-bar-shadow-x}*/ 0px /*{b-bar-shadow-y}*/ 0px /*{b-bar-shadow-radius}*/ #696969 /*{b-bar-shadow-color}*/;
-	background-image: -webkit-gradient(linear, left top, left bottom, from( #fff /*{b-bar-background-start}*/), to( #fff /*{b-bar-background-end}*/)); /* Saf4 , Chrome */
-	background-image: -webkit-linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/); /* Chrome 10 , Saf5.1  */
-	background-image:    -moz-linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/); /* FF3.6 */
-	background-image:     -ms-linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/); /* IE10 */
-	background-image:      -o-linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/); /* Opera 11.10  */
-	background-image:         linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/);
+   border: 0px /*{b-bar-border}*/;
+   background: #eeeeee /*{b-bar-background-color}*/;
+   color: #444 /*{b-bar-color}*/;
+   text-shadow: 0 /*{b-bar-shadow-x}*/ 0px /*{b-bar-shadow-y}*/ 0px /*{b-bar-shadow-radius}*/ #696969 /*{b-bar-shadow-color}*/;
+   background-image: -webkit-gradient(linear, left top, left bottom, from( #fff /*{b-bar-background-start}*/), to( #fff /*{b-bar-background-end}*/)); /* Saf4 , Chrome */
+   background-image: -webkit-linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/); /* Chrome 10 , Saf5.1  */
+   background-image:    -moz-linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/); /* FF3.6 */
+   background-image:     -ms-linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/); /* IE10 */
+   background-image:      -o-linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/); /* Opera 11.10  */
+   background-image:         linear-gradient( #fff /*{b-bar-background-start}*/, #fff /*{b-bar-background-end}*/);
 }
 
 .ui-li {
@@ -65,11 +64,11 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 
 
 .ui-li-divider { 
-  padding: .5em 0px; font-size: 12px; font-weight: normal;
-  cursor: default;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #000;
-  background-color: #ededed;
+   padding: .5em 0px; font-size: 12px; font-weight: normal;
+   cursor: default;
+   border-top: 1px solid #fff;
+   border-bottom: 1px solid #000;
+   background: #ededed;
 }
 
 .ui-li:hover {
