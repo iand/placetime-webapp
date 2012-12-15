@@ -1,8 +1,4 @@
 body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima-nova-2"; }
-.main-itemusername { font-family: "proxima-nova-1","proxima-nova-2"; font-size: 13px; color: #aaa; }
-.main-itemtext{ font-family: "proxima-nova-1","proxima-nova-2"; font-size: 13px; }
-
-/* alternate fonts "ff-dagny-web-pro-1","ff-dagny-web-pro-2"; */
 
 /* Note: Layout for non-mobile and  1000px + */
 @media only screen and (min-width: 1000px) {
@@ -34,6 +30,9 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
         text-shadow: none;
         font-weight: 400;
 }
+
+.main-itemusername { font-size: 13px; color: #aaa; }
+.main-itemtext{ font-size: 13px; }
 
 
 /* horiz bars class="ui-li ui-li-divider ui-bar-b" */
