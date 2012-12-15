@@ -31,6 +31,8 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
         font-weight: 400;
 }
 
+.main-timelinetitle { font-size: 17px; color: #000; }
+.main-timelinestrapline { font-size: 13px; color: #ccc; }
 .main-itemusername { font-size: 13px; color: #aaa; }
 .main-itemtext{ font-size: 13px; }
 .main-itemtime { font-size: 12px; color: #aaa; }
