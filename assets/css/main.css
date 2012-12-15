@@ -8,15 +8,12 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 @media only screen and (min-width: 1000px) {
   .main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
   .main-pagewrapper { width: 400px; margin-left: auto; margin-right: auto; position: relative; }
-  .main-header { margin-bottom: 20px; }
+  .main-header { margin-bottom: 20px; height: 45px; border-bottom: 8px solid #ccc; }
   .main-timelinecol { width: 484px; float: left; }
   .ui-header-fixed .ui-footer-fixed { left: 0; right: 0; width: 1000px; position: relative; z-index: 1000; }
   .ui-content .ui-listview { margin: 0; }
-  
-/* horiz bars class="ui-li ui-li-divider ui-bar-b" */
 
-
-.custom-logo {
+.main-logo {
 	font-family: "proxima-nova-soft-1","proxima-nova-soft-2",sans-serif;
         font-style: normal;
         font-weight: 400;
@@ -28,7 +25,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 }
 
 
-.custom-strapline {
+.main-strapline {
 	font-family: "proxima-nova-1","proxima-nova-2",sans-serif;
         font-style: normal;
         font-size:14px;
@@ -37,6 +34,9 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
         text-shadow: none;
         font-weight: 400;
 }
+
+
+/* horiz bars class="ui-li ui-li-divider ui-bar-b" */
 
 .ui-page {
   /*background-color: #e1e0c9;*/
@@ -88,11 +88,6 @@ li.ui.li, li.ui.li:hover {
 
 .ui-li-thumb {
    margin-top: 6px;
-}
-
-.main-header {
-	height: 45px;
-	border-bottom: 8px solid #ccc;
 }
 
 .ui-mobile a img {
