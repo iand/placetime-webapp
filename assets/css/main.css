@@ -67,8 +67,8 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
    padding: .5em 5px; font-size: 13px; font-weight: bold;
    color: #bbb;
    cursor: default;
-   border-top: 1px solid #fff;
-   border-bottom: 1px solid #000;
+   border-top: 1px solid #000;
+   border-bottom: 1px solid #fff;
    background: #f5f5f5;
 }
 
