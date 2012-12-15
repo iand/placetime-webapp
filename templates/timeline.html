@@ -17,27 +17,26 @@
   <script src="/-assets/js/backbone-min.js"></script>
   <script src="/-assets/js/main.js"></script>
 
-
   <!-- Typekit font loader -->
   <script type="text/javascript" src="http://use.typekit.net/bsa5hge.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   
   <link rel="stylesheet" href="/-assets/css/main.css"/>  
-
 </head>
 
 <body>
 
-
-  
   <div id="itemlist" data-role="page" data-theme="b"><!-- open page --> 
   <div class="main-wrapper"><!-- main-wrapper begins -->
-    
-    <div class="main-header" data-role="header" data-position="fixed" data-theme="a" data-mini="true">
+   
+      
+    <div class="main-header" data-role="header" data-position="fixed" data-theme="a" data-mini="true"><!-- start header --> 
       <span class="main-logo">placetime</span> <span class="main-strapline">playlists for your life</span>    
-    </div>
+    </div><!-- end header -->
+       
 
-    <section id="main" data-role="content" data-theme="b">
+    <section id="main" data-role="content" data-theme="b"><!-- start content -->
+    
       <div class="ui-bar ui-bar-b"><a href="#login" data-role="button" data-icon="plus" id="newbtn" data-inline="true" data-mini="true" data-theme="b">new</a></div>
     
     <div class="main-timelinecol">
@@ -63,28 +62,24 @@
       <ul id="myitems" class="items" data-role="listview"  data-icon="minus" data-autodividers="true" data-split-theme="b" data-divider-theme="b"></ul>
     </div>
     </div><!-- close timeline col -->
-  
-    </section>
+    </section><!-- end content -->    
+        
 
-    <div data-role="footer" data-id="foo1" data-position="fixed" data-theme="a">
-<!-- open show only for mobile  -->   
-      <div data-role="navbar">
+    <div data-role="footer" data-id="foo1" data-position="fixed" data-theme="a"><!-- start footer -->      
+      <div data-role="navbar"><!-- open show only for mobile  --> 
         <ul>
           <li><a href="#app" data-role="button" id="possiblebtn" class="ui-btn-active ui-state-persist">Timelines I follow</a></li>
           <li><a href="#app" data-role="button" id="maybebtn">My Timeline</a></li>
         </ul>
-      </div>
-<!-- close show only for mobile  -->  
-    </div>
+      </div><!-- close show only for mobile  -->  
+    </div><!-- end footer -->
     
- </div><!-- close main-wrapper -->    
+
+</div><!-- close main-wrapper -->    
   </div><!-- close page --> 
 
  </div><!-- close main-wrapper -->    
   </div><!-- close page --> 
-  
-  
-
 
   <div id="login" data-role="page" class="main-pagewrapper"><div class="main-wrapper"><!-- main-wrapper begins -->
 
@@ -96,9 +91,10 @@
   </div><!-- close main-wrapper -->    
   </div><!-- close page -->  
 
-  <!-- Templates -->
 
+<!-- Templates -->
 
+  <!-- item template -->
   <script type="text/template" id="item-template" data-enhance="false">
     <li data-date="<%= date %>"><a>
       <img src="/-assets/img/nasa.jpg" width="50px" height="50px">
@@ -109,7 +105,7 @@
   </script>
 
 
-
+  <!-- login template -->
   <script type="text/template" id="login-template">
     <div data-role="header" data-position="fixed">
       <p class="main-signin">Sign in</p>
@@ -141,6 +137,7 @@
     </section>
   </script>
 
+  <!-- register template -->
   <script type="text/template" id="register-template">
     <div data-role="header" data-position="fixed">
       <p class="main-h1">Register</p>
@@ -164,8 +161,6 @@
         <input type="text" name="pwd" id="pwd" value=""  />
         <div class="hint"></div>
       </div>
-
-
       
       <input id="Submit1" class="submitBtn" type="submit" value="Register" data-role="button" data-inline="true" />
 
