@@ -64,11 +64,11 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 
 
 .ui-li-divider { 
-   padding: .5em 0px; font-size: 12px; font-weight: normal;
+   padding: .5em 5px; font-size: 12px; font-weight: bold;
    cursor: default;
    border-top: 1px solid #fff;
    border-bottom: 1px solid #000;
-   background: #ededed;
+   background: #f5f5f5;
 }
 
 .ui-li:hover {
