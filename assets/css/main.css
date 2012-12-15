@@ -5,7 +5,6 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
   .main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
   .main-pagewrapper { width: 400px; margin-left: auto; margin-right: auto; position: relative; }
   .main-header { margin-bottom: 20px; height: 45px; background: #aaa; border-bottom: 8px solid #ccc; box-shadow: 0px 4px 5px #888888; }
-}
   .main-alltimelinecol { width: 477px; padding-right 5px; float: left; }
   .main-mytimelinecol { width: 477px; padding-left: 5px; float: left; }
   .ui-content .ui-listview { margin: 0; }
