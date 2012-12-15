@@ -38,8 +38,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 /* horiz bars class="ui-li ui-li-divider ui-bar-b" */
 
 .ui-page {
-  /*background-color: #e1e0c9;*/
-  background-color: #ededed;
+   background-color: #ededed;
 }
 
 .ui-bar-b, .ui-btn-hover-b {
@@ -63,8 +62,10 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 }
 
 
+/* list date divider override */
 .ui-li-divider { 
-   padding: .5em 5px; font-size: 12px; font-weight: bold;
+   padding: .5em 5px; font-size: 13px; font-weight: bold;
+   color: #ddd;
    cursor: default;
    border-top: 1px solid #fff;
    border-bottom: 1px solid #000;
@@ -85,6 +86,7 @@ li.ui.li, li.ui.li:hover {
    margin: 10px 0 0 0;
 }
 
+/* item thumbnail override */
 .ui-li-thumb {
    margin-top: 6px;
 }
