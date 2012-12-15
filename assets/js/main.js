@@ -195,8 +195,11 @@ $(function(){
 
         ,initialize:function () {
           var self = this;
-          this.templateitem = _.template($("#item-template").html());
-          this.templatefeature = _.template($("#item-template").html());
+          this.templateitem = _.template($("#tmpl-item").html());
+          this.templatemyitem = _.template($("#tmpl-myitem").html());
+          this.templatecalitem = _.template($("#tmpl-calitem").html());
+          this.templatemycalitem = _.template($("#tmpl-mycalitem").html());
+
           this.itemsElem = $("#items", this.el);
           this.myitemsElem = $("#myitems", this.el);
 
@@ -237,18 +240,22 @@ $(function(){
           _.each(this.itemsModel.models, function(item){
             var data = item.toJSON();
             data.action = 'promote';
-            var lTemplate = this.templateitem(data);
-            console.log("Adding");
-            self.itemsElem.append(lTemplate);
+            if (this.itemsModel.order == "ets") {
+              self.itemsElem.append(this.templatecalitem(data));
+            } else {
+              self.itemsElem.append(this.templateitem(data));
+            }
           }, this);
 
           _.each(this.myitemsModel.models, function(item){
             var data = item.toJSON();
             data.action = 'demote';
-            var lTemplate = this.templateitem(data);
 
-            console.log("Adding");
-            self.myitemsElem.append(lTemplate);
+            if (this.myitemsModel.order == "ets") {
+              self.myitemsElem.append(this.templatemycalitem(data));
+            } else {
+              self.myitemsElem.append(this.templatemyitem(data));
+            }
           }, this);
 
           this.itemsElem.listview('refresh');

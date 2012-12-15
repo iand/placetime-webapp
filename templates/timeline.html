@@ -97,15 +97,78 @@
 
 <!-- Templates -->
 
-  <!-- item template -->
-  <script type="text/template" id="item-template" data-enhance="false">
+  <!-- A template for others items -->
+  <script type="text/template" id="tmpl-item" data-enhance="false">
     <li data-date="<%= date %>">
+    <% if (media == "video") { %>
+      <!-- video specific markup here -->
+    <% } else if (media == "audio") { %>
+      <!-- audio specific markup here -->
+    <% } else { %>
       <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
       <p class="main-itemusername">@<%= pid %></p>
-      <p class="main-itemtext"><%= text %></p>
+      <p class="main-itemtext">[item] <%= text %></p>
       <p class="main-itemtime"><%= time %></p></a>
       <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
       <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-position-to="window" data-transition="fade">Add</a>
+    <% } %>
+    </li> 
+  </script>
+
+  <!-- A template for my items -->
+  <script type="text/template" id="tmpl-myitem" data-enhance="false">
+    <li data-date="<%= date %>">
+    <% if (media == "video") { %>
+      <!-- video specific markup here -->
+    <% } else if (media == "audio") { %>
+      <!-- audio specific markup here -->
+    <% } else { %>
+      <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
+      <p class="main-itemusername">@<%= pid %></p>
+      <p class="main-itemtext">[myitem] <%= text %></p>
+      <p class="main-itemtime"><%= time %></p></a>
+      <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
+      <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-position-to="window" data-transition="fade">Add</a>
+
+    <% } %>
+
+    </li> 
+  </script>
+
+  <!-- A template for others items in calendar view -->
+  <script type="text/template" id="tmpl-calitem" data-enhance="false">
+    <li data-date="<%= date %>">
+    <% if (media == "video") { %>
+      <!-- video specific markup here -->
+    <% } else if (media == "audio") { %>
+      <!-- audio specific markup here -->
+    <% } else { %>
+      <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
+      <p class="main-itemusername">@<%= pid %></p>
+      <p class="main-itemtext">[calitem] <%= text %></p>
+      <p class="main-itemtime"><%= time %></p></a>
+      <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
+      <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-position-to="window" data-transition="fade">Add</a>
+    <% } %>
+    </li> 
+  </script>
+
+
+  <!-- A template for my items in calendar view -->
+  <script type="text/template" id="tmpl-mycalitem" data-enhance="false">
+    <li data-date="<%= date %>">
+    <% if (media == "video") { %>
+      <!-- video specific markup here -->
+    <% } else if (media == "audio") { %>
+      <!-- audio specific markup here -->
+    <% } else { %>
+      <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
+      <p class="main-itemusername">@<%= pid %></p>
+      <p class="main-itemtext">[mycalitem] <%= text %></p>
+      <p class="main-itemtime"><%= time %></p></a>
+      <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
+      <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-position-to="window" data-transition="fade">Add</a>
+    <% } %>
     </li> 
   </script>
 
