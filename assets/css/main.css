@@ -47,7 +47,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 
 
 .ui-bar-b, .ui-btn-hover-b {
-   border: 1px solid #fff /*{b-bar-border}*/;
+   border: 1px solid #fff /*{b-bar-border} 1px white border in b theme*/;
    background: #eeeeee /*{b-bar-background-color}*/;
    color: #444 /*{b-bar-color}*/;
    text-shadow: 0 /*{b-bar-shadow-x}*/ 1px /*{b-bar-shadow-y}*/ 0px /*{b-bar-shadow-radius}*/ #fff /*{b-bar-shadow-color}*/;
