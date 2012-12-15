@@ -4,7 +4,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 @media only screen and (min-width: 1000px) {
   .main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
   .main-pagewrapper { width: 400px; margin-left: auto; margin-right: auto; position: relative; }
-  .main-header { margin-bottom: 20px; height: 45px; border-bottom: 8px solid #ccc; }
+  .main-header { margin-bottom: 20px; height: 45px; background: #aaa; border-bottom: 8px solid #ccc; }
   .main-timelinecol { width: 484px; float: left; }
   .ui-header-fixed .ui-footer-fixed { left: 0; right: 0; width: 1000px; position: relative; z-index: 1000; }
   .ui-content .ui-listview { margin: 0; }
@@ -65,7 +65,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 /* list date divider override */
 .ui-li-divider { 
    padding: .5em 5px; font-size: 13px; font-weight: bold;
-   color: #ddd;
+   color: #bbb;
    cursor: default;
    border-top: 1px solid #fff;
    border-bottom: 1px solid #000;
