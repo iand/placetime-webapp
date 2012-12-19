@@ -83,13 +83,25 @@ $(function(){
 
 
         ,refresh:function () {
-            var url = '/-jtl?pid=' + this.pid + '&status=' + this.status + '&order=' + this.order;
+            var url = '/-jtl?count=40&pid=' + this.pid + '&status=' + this.status + '&order=' + this.order;
             var self = this;
             $.ajax({
                 url:url,
                 dataType:"json",
                 success:function (data) {
                     console.log("refresh retrieved " + data.length + " items");
+                    _.each(data, function(item){
+                      var dt = moment(item.ms);
+                      item.year = dt.year();
+                      item.month = dt.month();
+                      item.day = dt.date();
+                      item.hours = dt.hours();
+                      item.minutes = dt.minutes();
+                      item.seconds = dt.seconds();
+                      item.fromnow = dt.fromNow();
+
+                    });
+
                     self.reset(data);
                 }
             });

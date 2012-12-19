@@ -15,6 +15,7 @@
   <script src="/-assets/js/json2.js"></script>
   <script src="/-assets/js/underscore.js"></script>
   <script src="/-assets/js/backbone-min.js"></script>
+  <script src="/-assets/js/moment.min.js"></script>
   <script src="/-assets/js/main.js"></script>
 
   <!-- Typekit font loader -->
@@ -108,7 +109,7 @@
       <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
       <p class="main-itemusername">@<%= pid %></p>
       <p class="main-itemtext">[item] <%= text %></p>
-      <p class="main-itemtime"><%= time %></p></a>
+      <p class="main-itemtime"><%= fromnow %></p></a>
       <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
       <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-position-to="window" data-transition="fade">Add</a>
     <% } %>
@@ -126,7 +127,7 @@
       <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
       <p class="main-itemusername">@<%= pid %></p>
       <p class="main-itemtext">[myitem] <%= text %></p>
-      <p class="main-itemtime"><%= time %></p></a>
+      <p class="main-itemtime"><%= fromnow %></p></a>
       <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
       <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-position-to="window" data-transition="fade">Add</a>
 
@@ -146,7 +147,7 @@
       <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
       <p class="main-itemusername">@<%= pid %></p>
       <p class="main-itemtext">[calitem] <%= text %></p>
-      <p class="main-itemtime"><%= time %></p></a>
+      <p class="main-itemtime"><%= fromnow %></p></a>
       <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
       <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-position-to="window" data-transition="fade">Add</a>
     <% } %>
@@ -165,7 +166,7 @@
       <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
       <p class="main-itemusername">@<%= pid %></p>
       <p class="main-itemtext">[mycalitem] <%= text %></p>
-      <p class="main-itemtime"><%= time %></p></a>
+      <p class="main-itemtime"><%= fromnow %></p></a>
       <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
       <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-position-to="window" data-transition="fade">Add</a>
     <% } %>

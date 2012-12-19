@@ -34,4 +34,5 @@ type FormattedItem struct {
 	Media string    `json:"media"`
 	Date  string    `json:"date"`
 	Time  string    `json:"time"`
+	Ms    int64     `json:"ms"`
 }

@@ -293,9 +293,11 @@ func (s *RedisStore) Timeline(pid string, status string, ordering string, tstart
 			if ordering == "ets" {
 				item.Date = item.Ets.Format("Jan 2006")
 				item.Time = item.Ets.Format("Mon _2 15:04")
+				item.Ms = item.Ets.UnixNano() / 1000000
 			} else {
 				item.Date = item.Ts.Format("Jan 2006")
 				item.Time = item.Ts.Format("Mon _2 15:04")
+				item.Ms = item.Ts.UnixNano() / 1000000
 			}
 
 			items = append(items, item)
