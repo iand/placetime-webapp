@@ -5,9 +5,9 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
   .main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
   .main-pagewrapper { width: 400px; margin-left: auto; margin-right: auto; position: relative; }
   .main-header { margin-bottom: 20px; height: 45px; background: #aaa; border-bottom: 8px solid #ccc; box-shadow: 0px 4px 5px #888888; }
-}
-  .main-alltimelinecol { width: 478px; border-right: 3px solid #ededed; float: left; }
-  .main-mytimelinecol { width: 478px; border-left: 3px solid #ededed; float: left; }
+  .main-topbaritems { width: 1000px; margin-left: auto; margin-right: auto; margin-top:10px; }
+  .main-alltimelinecol { width: 477px; padding-right 5px; float: left; }
+  .main-mytimelinecol { width: 477px; padding-left: 5px; float: left; }
   .ui-content .ui-listview { margin: 0; }
 }
 
@@ -33,7 +33,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
         font-weight: 400;
 }
 
-.main-timelinetitle { font-size: 17px; color: #000; box-shadow: 0px 3px 4px -2px #888888; margin-bottom: 8px; padding: 4px;  }
+.main-timelinetitle { font-size: 17px; color: #000; padding: 4px;  }
 .main-timelinestrapline { font-size: 13px; color: #ccc; }
 .main-itemusername { font-size: 13px; color: #aaa; }
 .main-itemtext{ font-size: 13px; }
@@ -83,7 +83,8 @@ li.ui.li, li.ui.li:hover {
 }
 
 .ui-li-link-alt .ui-btn {
-   margin: 10px 0 0 0;
+   margin: 0px 0 0 0;
+   top: 5px;
 }
 
 /* list date divider override */

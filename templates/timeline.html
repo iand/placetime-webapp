@@ -32,7 +32,7 @@
    
       
     <div class="main-header" data-role="header" data-position="fixed" data-theme="a" data-mini="true"><!-- start header --> 
-      <span class="main-logo">placetime</span> <span class="main-strapline"> playlists for your life</span>    
+      <div class="main-topbaritems"><span class="main-logo">placetime</span> <span class="main-strapline"> playlists for your life</span></div>   
     </div><!-- end header -->
        
 
@@ -47,7 +47,7 @@
   	  <a href="#"  id="ts" class="ui-btn-right" data-role="button" data-icon="arrow-d" data-theme="b">added</a>
     </div>
     </div>
-    <div class="main-timelinetitle">Following <span class="main-timelinestrapline">possible things to do or check out</span></div>
+    <div class="main-timelinetitle">Following <span class="main-timelinestrapline"><span style="color:#ff9900;">possible</span> things to do or check out</span></div>
     <div class="content-primary">
       <ul id="items" class="items" data-role="listview"  data-icon="check" data-autodividers="true" data-split-theme="b" data-divider-theme="b"></ul>
     </div>
@@ -60,7 +60,7 @@
       <a href="#"  id="myts" class="ui-btn-right" data-role="button" data-icon="arrow-d" data-theme="b">added</a>
     </div>
     </div>
-    <div class="main-timelinetitle">My Playlist <span class="main-timelinestrapline">things to maybe check out</span></div>
+    <div class="main-timelinetitle">My Playlist <span class="main-timelinestrapline">things to <span style="color:#ff9900;">maybe</span> check out</span></div>
     <div class="content-primary">
       <ul id="myitems" class="items" data-role="listview"  data-icon="minus" data-autodividers="true" data-split-theme="b" data-divider-theme="b"></ul>
     </div>
@@ -71,8 +71,8 @@
     <div data-role="footer" data-id="foo1" data-position="fixed" data-theme="a"><!-- start footer -->      
       <div data-role="navbar"><!-- open show only for mobile  --> 
         <ul>
-          <li><a href="#app" data-role="button" id="possiblebtn" class="ui-btn-active ui-state-persist">Timelines I follow</a></li>
-          <li><a href="#app" data-role="button" id="maybebtn">My Timeline</a></li>
+          <li><a href="#app" data-role="button" data-icon="arrow-l" id="possiblebtn" class="ui-btn-active ui-state-persist">Timelines I follow</a></li>
+          <li><a href="#app" data-role="button" data-icon="arrow-r" id="maybebtn">My Timeline</a></li>
         </ul>
       </div><!-- close show only for mobile  -->  
     </div><!-- end footer -->
@@ -111,7 +111,7 @@
       <p class="main-itemtext">[item] <%= text %></p>
       <p class="main-itemtime"><%= fromnow %></p></a>
       <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
-      <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-position-to="window" data-transition="fade">Add</a>
+      <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="check" data-position-to="window" data-transition="fade">Add</a>
     <% } %>
     </li> 
   </script>
@@ -129,7 +129,7 @@
       <p class="main-itemtext">[myitem] <%= text %></p>
       <p class="main-itemtime"><%= fromnow %></p></a>
       <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
-      <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-position-to="window" data-transition="fade">Add</a>
+      <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="delete" data-position-to="window" data-transition="fade">Add</a>
 
     <% } %>
 
@@ -149,7 +149,7 @@
       <p class="main-itemtext">[calitem] <%= text %></p>
       <p class="main-itemtime"><%= fromnow %></p></a>
       <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
-      <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-position-to="window" data-transition="fade">Add</a>
+      <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="check" data-position-to="window" data-transition="fade">Add</a>
     <% } %>
     </li> 
   </script>
@@ -168,7 +168,7 @@
       <p class="main-itemtext">[mycalitem] <%= text %></p>
       <p class="main-itemtime"><%= fromnow %></p></a>
       <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
-      <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-position-to="window" data-transition="fade">Add</a>
+      <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="delete" data-position-to="window" data-transition="fade">Add</a>
     <% } %>
     </li> 
   </script>
