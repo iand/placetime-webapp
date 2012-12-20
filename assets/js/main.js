@@ -217,25 +217,25 @@ $(function(){
 
 
 
-          this.itemsElem.listview({
-            autodividers: true
+          // this.itemsElem.listview({
+          //   autodividers: true
 
-            ,autodividersSelector: function ( li ) {
-              var out = li.data("date");
-              return out;
-            }
+          //   ,autodividersSelector: function ( li ) {
+          //     var out = li.data("date");
+          //     return out;
+          //   }
 
-          });
+          // });
 
-          this.myitemsElem.listview({
-            autodividers: true
+          // this.myitemsElem.listview({
+          //   autodividers: true
 
-            ,autodividersSelector: function ( li ) {
-              var out = li.data("date");
-              return out;
-            }
+          //   ,autodividersSelector: function ( li ) {
+          //     var out = li.data("date");
+          //     return out;
+          //   }
 
-          });
+          // });
           this.itemsModel = this.options.itemsModel;
           this.myitemsModel = this.options.myitemsModel;
 
@@ -253,9 +253,9 @@ $(function(){
             var data = item.toJSON();
             data.action = 'promote';
             if (this.itemsModel.order == "ets") {
-              self.itemsElem.append(this.templatecalitem(data));
+              self.itemsElem.append(this.templatecalitem(data)).trigger('create');
             } else {
-              self.itemsElem.append(this.templateitem(data));
+              self.itemsElem.append(this.templateitem(data)).trigger('create');
             }
           }, this);
 
@@ -264,14 +264,13 @@ $(function(){
             data.action = 'demote';
 
             if (this.myitemsModel.order == "ets") {
-              self.myitemsElem.append(this.templatemycalitem(data));
+              self.myitemsElem.append(this.templatemycalitem(data)).trigger('create');
             } else {
-              self.myitemsElem.append(this.templatemyitem(data));
+              self.myitemsElem.append(this.templatemyitem(data)).trigger('create');
             }
           }, this);
-
-          this.itemsElem.listview('refresh');
-          this.myitemsElem.listview('refresh');
+          // this.itemsElem.listview('refresh');
+          // this.myitemsElem.listview('refresh');
           return this;
         }
 

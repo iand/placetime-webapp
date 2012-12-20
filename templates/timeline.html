@@ -49,7 +49,7 @@
     </div>
     <div class="main-timelinetitle">Following <span class="main-timelinestrapline"><span style="color:#ff9900;">possible</span> things to do or check out</span></div>
     <div class="content-primary">
-      <ul id="items" class="items" data-role="listview"  data-icon="check" data-autodividers="true" data-split-theme="b" data-divider-theme="b"></ul>
+      <div id="items" class="items"></div>
     </div>
     </div><!-- close timeline col -->
     
@@ -62,7 +62,7 @@
     </div>
     <div class="main-timelinetitle">My Playlist <span class="main-timelinestrapline">things to <span style="color:#ff9900;">maybe</span> check out</span></div>
     <div class="content-primary">
-      <ul id="myitems" class="items" data-role="listview"  data-icon="minus" data-autodividers="true" data-split-theme="b" data-divider-theme="b"></ul>
+      <div id="myitems" class="items"></div>
     </div>
     </div><!-- close timeline col -->
     </section><!-- end content -->    
@@ -100,7 +100,7 @@
 
   <!-- A template for others items -->
   <script type="text/template" id="tmpl-item" data-enhance="false">
-    <li data-date="<%= date %>">
+    <div>
     <% if (media == "video") { %>
       <!-- video specific markup here -->
     <% } else if (media == "audio") { %>
@@ -113,12 +113,12 @@
       <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
       <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="check" data-position-to="window" data-transition="fade">Add</a>
     <% } %>
-    </li> 
+    </div> 
   </script>
 
   <!-- A template for my items -->
   <script type="text/template" id="tmpl-myitem" data-enhance="false">
-    <li data-date="<%= date %>">
+    <div>
     <% if (media == "video") { %>
       <!-- video specific markup here -->
     <% } else if (media == "audio") { %>
@@ -133,12 +133,12 @@
 
     <% } %>
 
-    </li> 
+    </div> 
   </script>
 
   <!-- A template for others items in calendar view -->
   <script type="text/template" id="tmpl-calitem" data-enhance="false">
-    <li data-date="<%= date %>">
+    <div>
     <% if (media == "video") { %>
       <!-- video specific markup here -->
     <% } else if (media == "audio") { %>
@@ -151,13 +151,13 @@
       <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
       <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="check" data-position-to="window" data-transition="fade">Add</a>
     <% } %>
-    </li> 
+    </div> 
   </script>
 
 
   <!-- A template for my items in calendar view -->
   <script type="text/template" id="tmpl-mycalitem" data-enhance="false">
-    <li data-date="<%= date %>">
+    <div>
     <% if (media == "video") { %>
       <!-- video specific markup here -->
     <% } else if (media == "audio") { %>
@@ -170,7 +170,7 @@
       <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
       <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="delete" data-position-to="window" data-transition="fade">Add</a>
     <% } %>
-    </li> 
+    </div> 
   </script>
 
 
