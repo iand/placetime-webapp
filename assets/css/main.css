@@ -60,7 +60,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
         font-weight: 400;
 }
 
-.main-timelineheader { position: relative; height: 39px; width: 477px; position: fixed; border-bottom: 2px solid #000; }
+.main-timelineheader { position: relative; height: 39px; width: 477px; position: fixed; border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); }
 .main-timelineheadertext {position: absolute; bottom: 0px; left: 0px; }
 
 .main-timelinetitle { font-size: 17px; color: #000; padding: 4px;  }
