@@ -77,7 +77,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 
 
 
-.ui-bar-b, .ui-btn-hover-b {
+.delme {
    border: 1px solid #fff /*{b-bar-border} 1px white border in b theme*/;
    background: #eeeeee /*{b-bar-background-color}*/;
    color: #444 /*{b-bar-color}*/;
