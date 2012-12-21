@@ -1,4 +1,4 @@
-body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima-nova-2"; }
+body, .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima-nova-2"; }
 
 div { border: 1px solid #ddd; }
 
