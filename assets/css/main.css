@@ -2,7 +2,7 @@ body, .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxim
 
 div { border: 0px solid #ddd; }
 
-a { text-decoration: none; }
+a { text-decoration: none; color: #000; }
 p { margin: 2px; padding: 0px; }
 
 img {
