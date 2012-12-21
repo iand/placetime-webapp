@@ -20,7 +20,7 @@ img:hover {
 .icon-circle-arrow-up, .icon-circle-arrow-down, .icon-ok, .icon-remove { text-shadow: 0.1em 0.1em 0.2em #aaa; font-size: 30px; }
 a .icon-circle-arrow-up, a .icon-circle-arrow-down, a .icon-ok, a .icon-remove { color: #000; text-decoration: none; }
 a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok, a:hover .icon-remove:hover { color: #999; text-decoration: none; }
-.o-ring { z-index:50; font-size: 40px; color: #aaa; position: relative; left: 20px; }
+.o-ring { z-index:50; font-size: 40px; color: #ff9900; position: relative; left: 20px; }
 
 .sort-menu { float: right; }
 
