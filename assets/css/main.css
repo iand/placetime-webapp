@@ -2,6 +2,8 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 
 a { color: #999; text-decoration: none; }
 
+.icon-circle-arrow-up, .icon-circle-arrow-up { text-shadow: 0.1em 0.1em 0.2em #333; }
+
 #main { margin-top: 50px; }
 
 
