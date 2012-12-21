@@ -17,7 +17,7 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
   	width: 100%;
   	top:0px;
   	left: 0px;
-  	z-index: 1000px;
+  	z-index: 1000;
   	}
   .main-topbaritems { width: 1000px; margin-left: auto; margin-right: auto; margin-top:10px; }
   .main-alltimelinecol { width: 477px; padding-right 5px; float: left; }
