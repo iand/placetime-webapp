@@ -2,7 +2,9 @@ body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima
 
 div { border: 1px solid #ddd; }
 
-.icon-circle-arrow-up, .icon-circle-arrow-down, .icon-ok, .icon-remove { text-shadow: 0.1em 0.1em 0.2em #aaa; }
+a ( text-decoration: none; )
+
+.icon-circle-arrow-up, .icon-circle-arrow-down, .icon-ok, .icon-remove { text-shadow: 0.1em 0.1em 0.2em #aaa; font-size: 30px; }
 a .icon-circle-arrow-up, a .icon-circle-arrow-down, a .icon-ok, a .icon-remove { color: #999; text-decoration: none; }
 a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok, a:hover .icon-remove:hover { color: #333; text-decoration: none; }
 
