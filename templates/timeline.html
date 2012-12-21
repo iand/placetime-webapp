@@ -36,8 +36,8 @@
     <div class="main-alltimelinecol">
     <div class="ui-bar ui-bar-b">
     <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-      <a href="#" id="ets" class="ui-btn-right" data-role="button" data-icon="arrow-u" data-theme="b"><i class="icon-circle-arrow-up" style="font-size:30px;"></i> calendar</a>
-  	  <a href="#"  id="ts" class="ui-btn-right" data-role="button" data-icon="arrow-d" data-theme="b"><i class="icon-circle-arrow-down" style="font-size:30px;"></i> added</a>
+      <a href="#" id="ets" class="ui-btn-right" data-role="button" data-icon="arrow-u" data-theme="b"><i class="icon-circle-arrow-up"></i> calendar</a>
+  	  <a href="#"  id="ts" class="ui-btn-right" data-role="button" data-icon="arrow-d" data-theme="b"><i class="icon-circle-arrow-down"></i> added</a>
     </div>
     </div>
     <div class="main-timelinetitle">Following <span class="main-timelinestrapline"><span style="color:#ff9900;">possible</span> things to do or check out</span></div>
@@ -49,8 +49,8 @@
     <div class="main-mytimelinecol">
     <div class="ui-bar ui-bar-b">
     <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-      <a href="#" id="myets" class="ui-btn-right" data-role="button" data-icon="arrow-u" data-theme="b"><i class="icon-circle-arrow-up" style="font-size:30px;"></i> calendar</a>
-      <a href="#"  id="myts" class="ui-btn-right" data-role="button" data-icon="arrow-d" data-theme="b"><i class="icon-circle-arrow-down" style="font-size:30px;"></i> added</a>
+      <a href="#" id="myets" class="ui-btn-right" data-role="button" data-icon="arrow-u" data-theme="b"><i class="icon-circle-arrow-up"></i> calendar</a>
+      <a href="#"  id="myts" class="ui-btn-right" data-role="button" data-icon="arrow-d" data-theme="b"><i class="icon-circle-arrow-down"></i> added</a>
     </div>
     </div>
     <div class="main-timelinetitle">My Playlist <span class="main-timelinestrapline">things to <span style="color:#ff9900;">maybe</span> check out</span></div>
@@ -102,8 +102,8 @@
       <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
       <p class="main-itemusername">@<%= pid %></p>
       <p class="main-itemtext">[item] <%= text %></p>
-      <p class="main-itemtime"><%= fromnow %></p></a>
-      <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
+      <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank"><i class="icon-external-link"></i> details</a></p>
+      <p class="main-itemtime">added: <%= fromnow %></p></a>
       <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="check" data-position-to="window" data-transition="fade"><i class="icon-ok"></i></a>
     <% } %>
     </div> 
@@ -120,8 +120,8 @@
       <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
       <p class="main-itemusername">@<%= pid %></p>
       <p class="main-itemtext">[myitem] <%= text %></p>
-      <p class="main-itemtime"><%= fromnow %></p></a>
-      <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
+      <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank"><i class="icon-external-link"></i> details</a></p>
+      <p class="main-itemtime">added: <%= fromnow %></p></a>
       <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="delete" data-position-to="window" data-transition="fade"><i class="icon-remove"></i></a>
 
     <% } %>
@@ -140,8 +140,8 @@
       <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
       <p class="main-itemusername">@<%= pid %></p>
       <p class="main-itemtext">[calitem] <%= text %></p>
-      <p class="main-itemtime"><%= fromnow %></p></a>
-      <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
+      <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank"><i class="icon-external-link"></i> details</a></p>
+      <p class="main-itemtime">event: <%= fromnow %></p></a>
       <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="check" data-position-to="window" data-transition="fade"><i class="icon-ok"></i></a>
     <% } %>
     </div> 
@@ -159,8 +159,8 @@
       <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
       <p class="main-itemusername">@<%= pid %></p>
       <p class="main-itemtext">[mycalitem] <%= text %></p>
-      <p class="main-itemtime"><%= fromnow %></p></a>
-      <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">Details</a></p>
+      <p class="main-itemlink"><a href="<%= link %>" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank"><i class="icon-external-link"></i> details</a></p>
+      <p class="main-itemtime">event: <%= fromnow %></p></a>
       <a href="#app" class="<%= action %>btn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="delete" data-position-to="window" data-transition="fade"><i class="icon-remove"></i></a>
     <% } %>
     </div> 
