@@ -1,5 +1,7 @@
 body .main-itemusername, .main-itemtext { font-family: "proxima-nova-1","proxima-nova-2"; }
 
+a { color: #bbb; text-decoration: none; }
+
 #main { margin-top: 50px; }
 
 
