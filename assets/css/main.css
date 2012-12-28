@@ -171,6 +171,8 @@ li.ui.li, li.ui.li:hover {
     width: 200px;
     margin-top: 4px;
     margin-bottom: 4px;
+    border: 0px;
+    box-shadow: inset 1px 1px 3px #666;
 }
 
 .loginBtn {
