@@ -113,7 +113,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 .main-newitem { position: absolute; top: 18px; right: 50%; margin-right: -450px; color: #fff; }
 .main-newitem a { color: #fff; }
 
-.timestamp { color: #000; size: 14px; }
+.timestamp { color: #000; }
 
 /* horiz bars class="ui-li ui-li-divider ui-bar-b" */
 
