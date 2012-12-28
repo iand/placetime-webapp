@@ -28,7 +28,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 #main { margin-top: 60px; } /* move sort buttons below header bar */
 #items, #myitems { margin-top: 60px; } /* move items below header bar */
 #footer { display: none; } /* visible for mobile */
-#login { background: #fff; font-size: 13px; }
+#login { background: #fff; font-size: 13px; padding: 20px; }
 
 
 /* Note: Layout for non-mobile and  1000px + */
