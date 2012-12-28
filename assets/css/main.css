@@ -41,12 +41,13 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
         
 .timelineitem, .mytimelineitem, .timelinecalitem, .mytimelinecalitem {
         background: #fff;
-	margin-bottom: 4px;  
+	margin-bottom: 7px;  
 	-moz-border-radius: 2px;
         -webkit-border-radius: 2px;
         border-radius: 2px; 
         z-index: 1500; 
         box-shadow: 1px 1px 2px #aaa;
+        padding: 5px;
 	
 }
 
