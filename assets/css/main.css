@@ -223,11 +223,11 @@ li.ui.li, li.ui.li:hover {
 }
 
 .promotebtn {
-	10px 7px 5px 7px
+	10px 7px 5px 7px;
 }
 
 .demotebtn {
-	10px 7px 5px 7px
+	10px 7px 5px 7px;
 }
 
 .promotebtn, .demotebtn {
