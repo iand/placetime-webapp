@@ -222,3 +222,35 @@ li.ui.li, li.ui.li:hover {
         margin-bottom: 4px;
 }
 
+.roundBtn {
+	button.css3button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0px;
+	color: #ffffff;
+	padding: 14px 14px;
+	background: -moz-linear-gradient(
+		top,
+		#deddd8 0%,
+		#deddd8);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#deddd8),
+		to(#deddd8));
+	-moz-border-radius: 31px;
+	-webkit-border-radius: 31px;
+	border-radius: 31px;
+	border: 4px solid #999999;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 1px 1px 5px rgba(51,51,51,0.6);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 1px 1px 5px rgba(51,51,51,0.6);
+	box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 1px 1px 5px rgba(51,51,51,0.6);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,1),
+		0px 1px 0px rgba(255,255,255,0.2);
+}
+
