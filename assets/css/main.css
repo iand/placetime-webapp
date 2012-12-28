@@ -277,5 +277,8 @@ li.ui.li, li.ui.li:hover {
 	border: 1px solid;
 	height: 18px;
 	padding: 7px 8px;
+	text-align: center;
+	display: block;
+	float: right;
 }
 
