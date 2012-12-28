@@ -48,7 +48,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
         border-radius: 2px; 
         z-index: 1500; 
         box-shadow: 1px 1px 2px #aaa;
-        padding: 5px;
+        padding: 15px;
 	
 }
 
@@ -102,7 +102,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 .main-timelinetitle { font-size: 17px; color: #000; padding: 4px;  }
 .main-timelinestrapline { font-size: 13px; color: #ccc; }
 .main-itemusername { font-size: 13px; color: #aaa; }
-.main-itemtext{ font-size: 13px; }
+.main-itemtext{ font-size: 22px; }
 .main-itemtime { font-size: 12px; color: #aaa; }
 .main-itemlink a { font-size: 13px; color: #aaa; }
 .main-newitem { position: absolute; top: 18px; right: 50%; margin-right: -450px; color: #fff; }
@@ -173,6 +173,8 @@ li.ui.li, li.ui.li:hover {
 .ui-mobile a img {
 	border: 1px solid #eee;
 }
+
+/* forms */
 
 #pid, #pwd {
     padding: 9px 8px;
