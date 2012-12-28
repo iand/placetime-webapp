@@ -22,7 +22,7 @@ a .icon-circle-arrow-up, a .icon-circle-arrow-down, a .icon-ok, a .icon-remove {
 a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok, a:hover .icon-remove:hover { color: #ff6600; text-decoration: none; }
 .o-ring { z-index:50; font-size: 40px; color: #aaa; position: relative; left: 20px; }
 
-.sort-menu { float: right; margin-top: 4px; }
+.sort-menu { float: right; margin-top: 4px; margin-right: 5px; }
 
 
 #main { margin-top: 60px; } /* move sort buttons below header bar */
