@@ -82,7 +82,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 .main-itemtext{ font-size: 13px; }
 .main-itemtime { font-size: 12px; color: #aaa; }
 .main-itemlink a { font-size: 13px; color: #aaa; }
-.main-newitem { position: absolute; top: 18px; right: 50% margin-right: -450px; }
+.main-newitem { position: absolute; top: 18px; right: 50%; margin-right: -450px; }
 
 
 /* horiz bars class="ui-li ui-li-divider ui-bar-b" */
