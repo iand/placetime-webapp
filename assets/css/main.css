@@ -10,6 +10,8 @@ img {
     filter: gray; /* IE6-9 */
     -webkit-filter: grayscale(1); /* Google Chrome & Safari 6+ */
     background-color: rgba(100%, 100%, 100%, 0.5);
+    border: 1px solid #dddddd;
+    box-shadow: 1px 1px 2px #dddddd;
 }
 
 img:hover {
