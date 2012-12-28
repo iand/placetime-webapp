@@ -170,3 +170,37 @@ li.ui.li, li.ui.li:hover {
     background: #deddd8;
     width: 200px;
 }
+
+.loginBtn {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #ffffff;
+	padding: 10px 20px;
+	background: -moz-linear-gradient(
+		top,
+		#aaaaaa 0%,
+		#666666 25%,
+		#666666);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#aaaaaa),
+		color-stop(0.25, #666666),
+		to(#666666));
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: 2px solid #ffffff;
+	-moz-box-shadow:
+		2px 2px 4px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(204,204,204,1);
+	-webkit-box-shadow:
+		2px 2px 4px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(204,204,204,1);
+	box-shadow:
+		2px 2px 4px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(204,204,204,1);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.2),
+		0px 1px 0px rgba(255,255,255,0.3);
+}
+
