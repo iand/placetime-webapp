@@ -273,3 +273,9 @@ li.ui.li, li.ui.li:hover {
 		0px 1px 0px rgba(255,255,255,0.2);
 }
 
+.label {
+	border: 1px solid;
+	height: 18px;
+	padding: 7px 8px;
+}
+
