@@ -229,6 +229,7 @@ li.ui.li, li.ui.li:hover {
 		0px 1px 0px rgba(255,255,255,0.3);
         margin-top: 4px;
         margin-bottom: 4px;
+        width: 85px;
 }
 
 .promotebtn {
