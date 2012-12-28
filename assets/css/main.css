@@ -26,7 +26,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 
 
 #main { margin-top: 65px; } /* move sort buttons below header bar */
-#items { margin-top: 100px; }
+#items { margin-top: 80px; } /* move items below header bar */
 
 
 /* Note: Layout for non-mobile and  1000px + */
