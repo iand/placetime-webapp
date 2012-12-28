@@ -169,6 +169,8 @@ li.ui.li, li.ui.li:hover {
     color: #4B4B4B;
     background: #deddd8;
     width: 200px;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 
 .loginBtn {
@@ -202,5 +204,7 @@ li.ui.li, li.ui.li:hover {
 	text-shadow:
 		0px -1px 0px rgba(000,000,000,0.2),
 		0px 1px 0px rgba(255,255,255,0.3);
+        margin-top: 4px;
+        margin-bottom: 4px;
 }
 
