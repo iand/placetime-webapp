@@ -105,7 +105,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 .main-timelineheadertext {position: absolute; bottom: 0px; left: 0px; }
 
 .main-timelinetitle { font-size: 17px; color: #000; padding: 4px;  }
-.main-timelinestrapline { font-size: 13px; color: #ccc; }
+.main-timelinestrapline { font-size: 13px; color: #999; }
 .main-itemusername { font-size: 13px; color: #aaa; }
 .main-itemtext{ font-size: 22px; }
 .main-itemtime { font-size: 12px; color: #aaa; }
