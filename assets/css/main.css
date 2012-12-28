@@ -222,9 +222,16 @@ li.ui.li, li.ui.li:hover {
         margin-bottom: 4px;
 }
 
+.promotebtn {
+	10px 7px 5px 7px
+}
+
+.demotebtn {
+	10px 7px 5px 7px
+}
+
 .promotebtn, .demotebtn {
 	color: #ffffff;
-	padding: 14px 14px;
 	background: -moz-linear-gradient(
 		top,
 		#deddd8 0%,
