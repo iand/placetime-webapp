@@ -224,10 +224,16 @@ li.ui.li, li.ui.li:hover {
 
 .promotebtn {
 	padding: 10px 7px 5px 7px;
+	position: relative;
+	top: -15px;
+	right: -415px;
 }
 
 .demotebtn {
 	padding: 10px 7px 5px 7px;
+        position: relative;
+	top: -15px;
+	right: -415px;
 }
 
 .promotebtn, .demotebtn {
