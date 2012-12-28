@@ -285,13 +285,13 @@ label {
 	margin: 3px;
 }
 
-.registerlink {
+#registerlink {
 	font-size: 18px;
 	color: #000;
 	mergin-top: 10px;
 }
 
-.registerlink a {
+#registerlink a {
 	border-bottom: 3px solid #ff6600;
 }
 
