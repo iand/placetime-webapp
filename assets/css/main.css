@@ -27,7 +27,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 
 
 #main { margin-top: 55px; } /* move sort buttons below header bar */
-#items, #myitems { margin-top: 48px; } /* move items below header bar */
+#items, #myitems { margin-top: 46px; } /* move items below header bar */
 #footer { display: none; } /* visible for mobile */
 #login { 
 	background: #fff; 
@@ -66,7 +66,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
   	width: 100%;
   	top:0px;
   	left: 0px;
-  	z-index: 1000;
+  	z-index: 2000;
   	}
   .main-topbaritems { width: 1000px; margin-left: auto; margin-right: auto; margin-top:10px; }
   .main-alltimelinecol { width: 477px; padding-right 5px; float: left; }
