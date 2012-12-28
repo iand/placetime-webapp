@@ -53,11 +53,11 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 }
 
 .timelineitem:hover, .mytimelineitem:hover, .timelinecalitem:hover, .mytimelinecalitem:hover {
-	background: #dddddd;
+	background: #f6f6f6;
 	box-shadow: 0px 0px 0px #aaa;
 }
 
-.mytimelineitem:hover, .mytimelinecalitem:hover {
+.mytimelineitem, .mytimelinecalitem {
 	background: #eeeeee;
 	box-shadow: 0px 0px 0px #aaa;
 }
