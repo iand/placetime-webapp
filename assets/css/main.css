@@ -275,6 +275,7 @@ li.ui.li, li.ui.li:hover {
 
 label {
 	border: 1px solid;
+	border-right: 0px;
 	height: 18px;
 	padding: 7px 8px;
 	text-align: center;
