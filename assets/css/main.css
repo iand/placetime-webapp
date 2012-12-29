@@ -207,7 +207,7 @@ li.ui.li, li.ui.li:hover {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	color: #ffffff;
-	padding: 10px 20px;
+	padding: 10px;
 	background: -moz-linear-gradient(
 		top,
 		#aaaaaa 0%,
@@ -234,8 +234,7 @@ li.ui.li, li.ui.li:hover {
 	text-shadow:
 		0px -1px 0px rgba(000,000,000,0.2),
 		0px 1px 0px rgba(255,255,255,0.3);
-        margin-top: 4px;
-        margin-bottom: 4px;
+        margin-top: 4px 0px 4px 4px;
         width: 85px;
 }
 
