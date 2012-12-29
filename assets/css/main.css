@@ -188,7 +188,8 @@ li.ui.li, li.ui.li:hover {
 /* forms */
 
 #pid, #pwd {
-    padding: 9px 8px;
+    display: inline-block;
+    padding: 8px 8px;
     height: 18px;
     line-height: 18px;
     font-size: 18px;
@@ -199,6 +200,7 @@ li.ui.li, li.ui.li:hover {
     margin-bottom: 4px;
     border: 0px;
     box-shadow: inset 1px 1px 3px #666;
+    vertical-align: middle;
 }
 
 .loginBtn {
@@ -280,15 +282,16 @@ li.ui.li, li.ui.li:hover {
 }
 
 label {
-	border: 1px solid;
+	border: 0px solid;
+	background: #ccc;
 	border-right: 0px;
 	height: 18px;
-	padding: 7px 8px;
+	padding: 8px 8px;
 	text-align: center;
-	display: block;
-	float: left;
+	display: inline-block;
 	width: 85px;
-	margin: 3px;
+	margin: 4px;
+	vertical-align: middle;
 }
 
 #registerlink {
