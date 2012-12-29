@@ -187,7 +187,7 @@ li.ui.li, li.ui.li:hover {
 
 /* forms */
 
-#pid, #pwd {
+#pid, #pwd, #name {
     display: inline-block;
     padding: 8px 8px;
     height: 18px;
@@ -203,7 +203,7 @@ li.ui.li, li.ui.li:hover {
     vertical-align: middle;
 }
 
-.loginBtn {
+.loginBtn, .submitBtn {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	color: #ffffff;
