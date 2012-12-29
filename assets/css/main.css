@@ -234,7 +234,7 @@ li.ui.li, li.ui.li:hover {
 	text-shadow:
 		0px -1px 0px rgba(000,000,000,0.2),
 		0px 1px 0px rgba(255,255,255,0.3);
-        margin-top: 4px 0px 4px 4px;
+        margin-top: 8px 0px 4px 4px;
         width: 85px;
 }
 
@@ -289,7 +289,7 @@ label {
 	text-align: center;
 	display: inline-block;
 	width: 85px;
-	margin: 4px;
+	margin: 4px 4px 4px 0px;
 	vertical-align: middle;
 }
 
