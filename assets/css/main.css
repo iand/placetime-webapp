@@ -5,6 +5,8 @@ div { border: 0px solid #ddd; }
 a { text-decoration: none; color: #000; }
 p { margin: 2px; padding: 0px; }
 
+.main-h1 { margin-bottom: 5px; }
+
 img {
     filter: url(filters.svg#grayscale); /* Firefox 3.5+ */
     filter: gray; /* IE6-9 */
