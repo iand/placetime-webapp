@@ -40,7 +40,6 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
         border-radius: 3px; 
         z-index: 1500; 
         box-shadow: 3px 3px 4px #888888;
-        box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 200px inset;
         }
         
 .timelineitem, .mytimelineitem, .timelinecalitem, .mytimelinecalitem {
