@@ -1,8 +1,14 @@
-body { font-family: "proxima-nova-1","proxima-nova-2"; background: #deddd8; font-size: 50px; }
+/* Mobile */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 
-@media only screen and (min-width: 1000px) {
-body {font-size: 12px; }
 }
+
+/* Tablet */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+
+}
+
+body { font-family: "proxima-nova-1","proxima-nova-2"; background: #deddd8; }
 
 div { border: 0px solid #ddd; }
 
@@ -68,8 +74,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 	box-shadow: 0px 0px 0px #aaa;
 }
 
-/* Note: Layout for non-mobile and  1000px + */
-@media only screen and (min-width: 1000px) {
+/* Note: poss change for mobile */
   .main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
   .main-pagewrapper { width: 400px; margin-left: auto; margin-right: auto; position: relative; }
   .main-header { 
@@ -84,11 +89,13 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
   	left: 0px;
   	z-index: 2000;
   	}
+ 
   .main-topbaritems { width: 1000px; margin-left: auto; margin-right: auto; margin-top:10px; }
   .main-alltimelinecol { width: 477px; padding-right 5px; float: left; }
   .main-mytimelinecol { width: 477px; padding-left: 5px; float: left; }
   .ui-content .ui-listview { margin: 0; }
-}
+/* close change for mobile */
+
 
 .main-logo {
 	font-family: "proxima-nova-soft-1","proxima-nova-soft-2",sans-serif;
