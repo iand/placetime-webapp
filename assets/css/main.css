@@ -1,6 +1,6 @@
 body { font-family: "proxima-nova-1","proxima-nova-2"; background: #deddd8; font-size: 50px; }
 
-@media only screen and (min-width: 5000px) {
+@media only screen and (min-width: 1000px) {
 body {font-size: 12px; }
 }
 
