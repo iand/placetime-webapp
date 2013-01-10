@@ -1,0 +1,14 @@
+    <div class=timelineitem>
+    <% if (media == "video") { %>
+      <!-- video specific markup here -->
+    <% } else if (media == "audio") { %>
+      <!-- audio specific markup here -->
+    <% } else { %>
+      <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
+      <p class="main-itemusername">@<%= pid %></p>
+      <p class="main-itemtext"><%= text %></p>
+      <p class="main-itemlink"><a href="<%= link %>" class="roundBtn" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank"><i class="icon-play"></i></a></p>
+      <p class="main-itemtime"><i class="icon-time"></i> added: <span class="timestamp"><%= fromnow %></span></p></a>
+      <a href="#app" class="<%= action %>btn" class="roundBtn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="check" data-position-to="window" data-transition="fade"><i class="icon-ok"></i></a>
+    <% } %>
+    </div> 

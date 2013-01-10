@@ -190,9 +190,8 @@ $(function(){
     });
 
     var ItemsView = Backbone.View.extend({
-        el: "#itemlist"
 
-        ,events:{
+        events:{
            'click .promotebtn'          :  'promote'
           ,'click .demotebtn'           :  'demote'
           ,'click .followbtn'           :  'follow'
@@ -207,17 +206,16 @@ $(function(){
 
         ,initialize:function () {
           var self = this;
-          this.templateitem = _.template($("#tmpl-item").html());
-          this.templatemyitem = _.template($("#tmpl-myitem").html());
-          this.templatecalitem = _.template($("#tmpl-calitem").html());
-          this.templatemycalitem = _.template($("#tmpl-mycalitem").html());
-
-          this.itemsElem = $("#items", this.el);
-          this.myitemsElem = $("#myitems", this.el);
+          this.template = _.template(window.templates['itemlist']);
+          this.templateitem = _.template(window.templates['otheritem']);
+          this.templatemyitem = _.template(window.templates['myitem']);
+          this.templatecalitem = _.template(window.templates['otheritemcal']);
+          this.templatemycalitem = _.template(window.templates['myitemcal']);
 
 
 
-          // this.itemsElem.listview({
+
+          // itemsElem.listview({
           //   autodividers: true
 
           //   ,autodividersSelector: function ( li ) {
@@ -227,7 +225,7 @@ $(function(){
 
           // });
 
-          // this.myitemsElem.listview({
+          // myitemsElem.listview({
           //   autodividers: true
 
           //   ,autodividersSelector: function ( li ) {
@@ -245,17 +243,25 @@ $(function(){
         }
 
         ,render: function(eventName) {
-          this.itemsElem.html('');
-          this.myitemsElem.html('');
+
+
+          $(this.el).html(this.template());
+
+          itemsElem = $("#items", this.el);
+          myitemsElem = $("#myitems", this.el);
+
+          console.log("foo");
+          itemsElem.html('');
+          myitemsElem.html('');
           var self = this;
 
           _.each(this.itemsModel.models, function(item){
             var data = item.toJSON();
             data.action = 'promote';
             if (this.itemsModel.order == "ets") {
-              self.itemsElem.append(this.templatecalitem(data)).trigger('create');
+              itemsElem.append(this.templatecalitem(data));
             } else {
-              self.itemsElem.append(this.templateitem(data)).trigger('create');
+              itemsElem.append(this.templateitem(data));
             }
           }, this);
 
@@ -264,13 +270,11 @@ $(function(){
             data.action = 'demote';
 
             if (this.myitemsModel.order == "ets") {
-              self.myitemsElem.append(this.templatemycalitem(data)).trigger('create');
+              myitemsElem.append(this.templatemycalitem(data));
             } else {
-              self.myitemsElem.append(this.templatemyitem(data)).trigger('create');
+              myitemsElem.append(this.templatemyitem(data));
             }
           }, this);
-          // this.itemsElem.listview('refresh');
-          // this.myitemsElem.listview('refresh');
           return this;
         }
 
@@ -359,15 +363,15 @@ $(function(){
 
 
     var LoginView = Backbone.View.extend({
-      el: "#login"
+      
     
-      ,initialize: function(options) {
-       this.template = _.template($("#login-template").html());
+       initialize: function(options) {
+       this.template = _.template(window.templates['login']);
        this.render();
       }
 
       ,render:function () {
-        $(this.el).html(this.template(this.model.toJSON())).trigger('create');
+        $(this.el).html(this.template(this.model.toJSON()));
         return this;
       }
     
@@ -413,7 +417,7 @@ $(function(){
                   console.log("Logged in successfully");
                   console.log("doing navigate");
                   session.set("pid",self.model.get('pid'));
-                  Backbone.history.navigate("", true);
+                  Backbone.history.navigate("tl", true);
                   console.log("stopped navigate");
               }
               ,error: function (model, response, options) {
@@ -431,7 +435,7 @@ $(function(){
       el: "#register"
     
       ,initialize: function(options) {
-       this.template = _.template($("#register-template").html());
+       this.template = _.template(window.templates['register']);
        this.render();
       }
 
@@ -530,7 +534,11 @@ $(function(){
                   myItems.pid = items.pid;
                   myItems.status = 'm';
                   myItems.refresh();
-                  self.changePage(new ItemsView({ itemsModel:items, myitemsModel: myItems}));
+                  self.changePage(new ItemsView({ 
+                                                   el:$('#content')
+                                                  ,itemsModel:items
+                                                  ,myitemsModel: myItems
+                                                }));
 
                 }
                 ,error:function (data) {
@@ -550,7 +558,7 @@ $(function(){
           var self = this;
           session.set("ptsession", null);
           setCookie('ptsession', null);
-          this.changePage(new LoginView({model: new Credentials()}));
+          this.changePage(new LoginView({el:$('#content'), model: new Credentials()}));
         }
 
         ,register:function () {
@@ -558,7 +566,7 @@ $(function(){
           var self = this;
           session.set("ptsession", null);
           setCookie('ptsession', null);
-          this.changePage(new RegisterView({model: new RegistrationInfo()} ));
+          this.changePage(new RegisterView({el:$('#content'), model: new RegistrationInfo()} ));
         }        
 
         ,logout: function() {
@@ -570,11 +578,11 @@ $(function(){
             //$(page.el).attr('data-role', 'page');
             page.render();
             //$('body').append($(page.el));
-            $.mobile.changePage($(page.el), {
-               changeHash: true
-              ,transition: 'slide'
-              ,reloadPage: true
-            });
+            // $.mobile.changePage($(page.el), {
+            //    changeHash: true
+            //   ,transition: 'slide'
+            //   ,reloadPage: true
+            // });
         }
 
 

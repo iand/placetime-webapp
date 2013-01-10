@@ -8,8 +8,10 @@ import (
 	"log"
 	"net/http"
 	//	"net/http/httputil"
+	"io/ioutil"
 	"os"
 	"path"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -17,13 +19,12 @@ import (
 
 const (
 	assetsDir         = "./assets"
+	templatesDir      = "./templates"
 	sessionCookieName = "ptsession"
 	sessionExpiry     = 86400 * 14
 )
 
-var (
-// templates = template.Must(template.ParseFiles("templates/timeline.html", "templates/profile.html"))
-)
+var ()
 
 func main() {
 	// TODO: set random number seed
@@ -69,6 +70,7 @@ func main() {
 	r.HandleFunc("/-chksession", checkSessionHandler).Methods("GET")
 	r.HandleFunc("/-twitter", twitterHandler).Methods("GET")
 	r.HandleFunc("/-soauth", soauthHandler).Methods("GET")
+	r.HandleFunc("/-tmpl", templatesHandler).Methods("GET")
 
 	r.PathPrefix("/-assets/").HandlerFunc(assetsHandler).Methods("GET", "HEAD")
 
@@ -97,7 +99,7 @@ func assetsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func timelineHandler(w http.ResponseWriter, r *http.Request) {
-	templates := template.Must(template.ParseFiles("templates/timeline.html"))
+	templates := template.Must(template.ParseFiles("assets/html/timeline.html"))
 
 	err := templates.ExecuteTemplate(w, "timeline.html", nil)
 	if err != nil {
@@ -591,7 +593,7 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 	// }
 	// TODO: restrict to admins
 
-	templates := template.Must(template.ParseFiles("templates/admin.html"))
+	templates := template.Must(template.ParseFiles("assets/html/admin.html"))
 
 	err := templates.ExecuteTemplate(w, "admin.html", nil)
 	if err != nil {
@@ -860,5 +862,47 @@ func soauthHandler(w http.ResponseWriter, r *http.Request) {
 
 	createSession(screenName, w, r)
 	http.Redirect(w, r, "/timeline", http.StatusFound)
+
+}
+
+type TemplateMap map[string]string
+
+func packageTemplates() (*TemplateMap, error) {
+	filenames, err := filepath.Glob(fmt.Sprintf("%s/*.html", templatesDir))
+
+	if err != nil {
+		return nil, err
+	}
+
+	templateMap := make(TemplateMap, 0)
+
+	for _, filename := range filenames {
+		b, err := ioutil.ReadFile(filename)
+		if err != nil {
+			return nil, err
+		}
+
+		templateMap[filename[len(templatesDir)-1:len(filename)-5]] = string(b)
+	}
+
+	return &templateMap, nil
+}
+
+func templatesHandler(w http.ResponseWriter, r *http.Request) {
+	tm, err := packageTemplates()
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	json, err := json.MarshalIndent(tm, "", "  ")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/javascript")
+
+	w.Write([]byte(fmt.Sprintf("window.templates=%s;", json)))
 
 }

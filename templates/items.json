@@ -1,5 +1,0 @@
-[
-  {{range $item:= .Items}}
-    { 'date':'{{$item.Date}}','pid':'{{$item.Pid}}', 'text':'{{$item.Text}}'},
-  {{end}}
-]
