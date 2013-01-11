@@ -23,6 +23,18 @@ $(function(){
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     */
 
+    function hashCode(){
+        var hash = 0, i, char;
+        if (this.length == 0) return hash;
+        for (i = 0; i < this.length; i++) {
+            char = this.charCodeAt(i);
+            hash = ((hash<<5)-hash)+char;
+            hash = hash & hash; 
+        }
+        return hash;
+    }
+
+
     function getCookie(c_name) {
      
       var i, x, y, ARRcookies = document.cookie.split(";");
@@ -73,7 +85,7 @@ $(function(){
 
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     */
-    var Item = Backbone.Model.extend({});
+    var Item = Backbone.Model.extend({idAttribute: "id"});
     var Session = Backbone.Model.extend({});
 
 
@@ -101,7 +113,7 @@ $(function(){
                       item.fromnow = dt.fromNow();
 
                     });
-
+                    console.log("resetting");
                     self.reset(data);
                 }
             });
@@ -234,16 +246,16 @@ $(function(){
           //   }
 
           // });
+          this.el = this.options.el;
           this.itemsModel = this.options.itemsModel;
           this.myitemsModel = this.options.myitemsModel;
-
-
+          
           this.itemsModel.bind("reset", this.render, this);
           this.myitemsModel.bind("reset", this.render, this);
         }
 
         ,render: function(eventName) {
-
+                    console.log("rendering");
 
           $(this.el).html(this.template());
 
@@ -282,19 +294,26 @@ $(function(){
         ,promote: function(e) {
           var clickedEl = $(e.currentTarget);
           var id = clickedEl.data("itemid");
+          var itemEl = $('#ti-' + id);
           var self = this;
+          self.itemsModel.remove(id);
 
           $.ajax({
               url:'/-tpromote',
               type:'post',
               data: { pid: session.get("pid"), id: id },
               success:function (data) {
-                  self.itemsModel.refresh();
-                  self.myitemsModel.refresh();
+                  itemEl.animate( {height: 0, opacity: 0}, 'slow', function() {
+                      
+                      self.itemsModel.refresh();
+                      self.myitemsModel.refresh();
+                      //self.render();
+                  });
               }
           });          
 
-          this.render();
+          
+          
         }
 
         ,demote: function(e) {
@@ -302,18 +321,21 @@ $(function(){
           var id = clickedEl.data("itemid");
           // alert("Promote item '" + id + "' to maybe list");
           var self = this;
+          var itemEl = $('#ti-' + id);
 
           $.ajax({
               url:'/-tdemote',
               type:'post',
               data: { pid: session.get("pid"), id: id },
               success:function (data) {
-                  self.itemsModel.refresh();
-                  self.myitemsModel.refresh();
+                  itemEl.animate( {height: 0, opacity: 0}, 'slow', function() {
+                    self.itemsModel.refresh();
+                    self.myitemsModel.refresh();
+                  });
               }
           });          
 
-          this.render();
+          
         }        
 
         ,follow: function(e) {
@@ -534,11 +556,15 @@ $(function(){
                   myItems.pid = items.pid;
                   myItems.status = 'm';
                   myItems.refresh();
+
+                  
+
                   self.changePage(new ItemsView({ 
                                                    el:$('#content')
                                                   ,itemsModel:items
                                                   ,myitemsModel: myItems
                                                 }));
+
 
                 }
                 ,error:function (data) {
@@ -575,14 +601,7 @@ $(function(){
 
         ,changePage:function (page) {
             console.log("Changing page to " + $(page.el).attr('id'));
-            //$(page.el).attr('data-role', 'page');
             page.render();
-            //$('body').append($(page.el));
-            // $.mobile.changePage($(page.el), {
-            //    changeHash: true
-            //   ,transition: 'slide'
-            //   ,reloadPage: true
-            // });
         }
 
 

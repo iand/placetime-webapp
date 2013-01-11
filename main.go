@@ -151,6 +151,7 @@ func jsonTimelineHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	s := NewRedisStore()
+	defer s.Close()
 	tl, err := s.Timeline(pidParam, statusParam, orderParam, tsStart, tsEnd, int(count))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -175,6 +176,7 @@ func jsonItemHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.FormValue("id")
 
 	s := NewRedisStore()
+	defer s.Close()
 
 	item, err := s.Item(id)
 	if err != nil {
@@ -201,6 +203,7 @@ func jsonSuggestedProfilesHandler(w http.ResponseWriter, r *http.Request) {
 	loc := r.FormValue("loc")
 
 	s := NewRedisStore()
+	defer s.Close()
 
 	plist, err := s.SuggestedProfiles(loc)
 	if err != nil {
@@ -239,6 +242,7 @@ func jsonFollowersHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	s := NewRedisStore()
+	defer s.Close()
 
 	plist, err := s.Followers(pid, int(count), int(start))
 	if err != nil {
@@ -277,6 +281,7 @@ func jsonFollowingHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	s := NewRedisStore()
+	defer s.Close()
 
 	plist, err := s.Following(pid, int(count), int(start))
 	if err != nil {
@@ -303,6 +308,7 @@ func jsonProfileHandler(w http.ResponseWriter, r *http.Request) {
 	pid := r.FormValue("pid")
 
 	s := NewRedisStore()
+	defer s.Close()
 
 	profile, err := s.Profile(pid)
 	if err != nil {
@@ -334,6 +340,8 @@ func followHandler(w http.ResponseWriter, r *http.Request) {
 
 	followpid := r.FormValue("followpid")
 	s := NewRedisStore()
+	defer s.Close()
+
 	s.Follow(pid, followpid)
 	fmt.Fprint(w, "ACK")
 }
@@ -352,6 +360,8 @@ func unfollowHandler(w http.ResponseWriter, r *http.Request) {
 
 	followpid := r.FormValue("followpid")
 	s := NewRedisStore()
+	defer s.Close()
+
 	s.Unfollow(pid, followpid)
 	fmt.Fprint(w, "ACK")
 }
@@ -360,6 +370,8 @@ func refreshHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "ACK\n")
 
 	s := NewRedisStore()
+	defer s.Close()
+
 	profiles, _ := s.FeedDrivenProfiles()
 	for _, p := range profiles {
 		fmt.Fprint(w, "\nChecking ", p.Pid, " <")
@@ -413,6 +425,8 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 	// TODO: restrict to admins
 
 	s := NewRedisStore()
+	defer s.Close()
+
 	s.ResetAll()
 
 	s.AddProfile("ukfestivals", "sunshine", "UK Festivals", "Every musical festival in the UK.", "")
@@ -615,6 +629,8 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 	link := r.FormValue("link")
 	ets := r.FormValue("ets")
 	s := NewRedisStore()
+	defer s.Close()
+
 	itemid, err := s.AddItem(pid, ets, text, link)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -637,6 +653,8 @@ func promoteHandler(w http.ResponseWriter, r *http.Request) {
 
 	id := r.FormValue("id")
 	s := NewRedisStore()
+	defer s.Close()
+
 	err := s.Promote(pid, id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -659,6 +677,8 @@ func demoteHandler(w http.ResponseWriter, r *http.Request) {
 
 	id := r.FormValue("id")
 	s := NewRedisStore()
+	defer s.Close()
+
 	err := s.Demote(pid, id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -677,6 +697,8 @@ func addSuggestHandler(w http.ResponseWriter, r *http.Request) {
 	pid := r.FormValue("pid")
 	loc := r.FormValue("loc")
 	s := NewRedisStore()
+	defer s.Close()
+
 	err := s.AddSuggestedProfile(pid, loc)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -695,6 +717,8 @@ func remSuggestHandler(w http.ResponseWriter, r *http.Request) {
 	pid := r.FormValue("pid")
 	loc := r.FormValue("loc")
 	s := NewRedisStore()
+	defer s.Close()
+
 	err := s.RemoveSuggestedProfile(pid, loc)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -708,6 +732,7 @@ func sessionHandler(w http.ResponseWriter, r *http.Request) {
 	pwd := r.FormValue("pwd")
 
 	s := NewRedisStore()
+	defer s.Close()
 
 	validPassword, err := s.VerifyPassword(pid, pwd)
 	if err != nil || !validPassword {
@@ -730,6 +755,7 @@ func checkSession(w http.ResponseWriter, r *http.Request) (bool, string) {
 			pid = parts[0]
 			sessionId, err := strconv.ParseInt(parts[1], 10, 64)
 			s := NewRedisStore()
+			defer s.Close()
 
 			if err == nil {
 				valid, err = s.ValidSession(pid, sessionId)
@@ -764,6 +790,7 @@ func checkSession(w http.ResponseWriter, r *http.Request) (bool, string) {
 }
 func createSession(pid string, w http.ResponseWriter, r *http.Request) {
 	s := NewRedisStore()
+	defer s.Close()
 
 	sessionId, err := s.SessionId(pid)
 	if err != nil {
@@ -793,6 +820,7 @@ func addProfileHandler(w http.ResponseWriter, r *http.Request) {
 	bio := r.FormValue("bio")
 
 	s := NewRedisStore()
+	defer s.Close()
 
 	err := s.AddProfile(pid, pwd, name, bio, feedurl)
 	if err != nil {
@@ -839,6 +867,7 @@ func soauthHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	s := NewRedisStore()
+	defer s.Close()
 
 	exists, err := s.ProfileExists(screenName)
 	if err != nil {
