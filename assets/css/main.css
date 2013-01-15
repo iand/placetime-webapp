@@ -34,10 +34,17 @@ body { font-family: "proxima-nova-1","proxima-nova-2"; background: #deddd8; widt
   overflow:auto;
 }
 
+#main { margin-top: 55px; } /* move sort buttons below header bar */
+#items, #myitems { margin-top: 46px;} /* move items below header bar */
+
+/* Note: poss change for mobile */
+.main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
+.main-pagewrapper { width: 400px; margin-left: auto; margin-right: auto; position: relative; }
+.main-alltimelinecol { width: 477px; padding-right 5px; float: left; }
+.main-mytimelinecol { width: 477px; padding-left: 5px; float: left; }
+
     
 div { border: 0px solid #ddd; }
-
-
 a { text-decoration: none; color: #000; }
 p { margin: 2px; padding: 0px; }
 
@@ -60,12 +67,8 @@ img:hover {
 .icon-circle-arrow-up, .icon-circle-arrow-down { text-shadow: 0.1em 0.1em 0.2em #aaa; font-size: 30px; }
 a .icon-circle-arrow-up, a .icon-circle-arrow-down, a .icon-ok, a .icon-remove { color: #000; text-decoration: none; }
 a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok, a:hover .icon-remove:hover { color: #ff6600; text-decoration: none; }
-
 .sort-menu { float: right; margin-top: 4px; margin-right: 5px; }
 
-
-#main { margin-top: 55px; } /* move sort buttons below header bar */
-#items, #myitems { margin-top: 46px;} /* move items below header bar */
 #footer { display: none; } /* visible for mobile */
 #login, #register { 
 	background: #fff; 
@@ -101,8 +104,6 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 }
 
 /* Note: poss change for mobile */
-  .main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
-  .main-pagewrapper { width: 400px; margin-left: auto; margin-right: auto; position: relative; }
   .main-header { 
   	margin-bottom: 20px; 
   	height: 45px; 
@@ -117,8 +118,6 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
   	}
  
   .main-topbaritems { width: 1000px; margin-left: auto; margin-right: auto; margin-top:10px; }
-  .main-alltimelinecol { width: 477px; padding-right 5px; float: left; }
-  .main-mytimelinecol { width: 477px; padding-left: 5px; float: left; }
   .ui-content .ui-listview { margin: 0; }
 /* close change for mobile */
 
