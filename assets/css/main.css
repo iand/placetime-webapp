@@ -35,6 +35,9 @@ itemlist and mainwrapper are currently not closed
 
     .main-alltimelinecol { width: 477px; padding-right 5px; position: relative; top: 46px; left: 0px; }
     .main-mytimelinecol { width: 477px; padding-left: 5px; position: relative; top:46px; left: 477px; }
+      .main-alltimelineheader { height: 39px; width: 477px; position: absolute; border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); z-index: 1000; }
+      .main-mytimelineheader { height: 39px; width: 477px; position: absolute; border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); z-index: 1000; left: 477px; }
+      
 
       #myitemslist { position:absolute; z-index:1; overflow:auto; width: 477px; }
       #itemslist { position:absolute; z-index:1; overflow:auto; width: 477px; }
@@ -135,7 +138,6 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
         font-weight: 400;
 }
 
-.main-timelineheader { position: relative; height: 39px; width: 477px; position: fixed; border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); z-index: 1000; }
 .main-timelineheadertext {position: absolute; bottom: 0px; left: 0px; }
 .main-timelinetitle { font-size: 17px; color: #000; padding: 4px;  }
 .main-timelinestrapline { font-size: 13px; color: #999; }
