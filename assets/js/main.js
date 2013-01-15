@@ -225,34 +225,13 @@ $(function(){
           this.templatemycalitem = _.template(window.templates['myitemcal']);
 
 
-
-
-          // itemsElem.listview({
-          //   autodividers: true
-
-          //   ,autodividersSelector: function ( li ) {
-          //     var out = li.data("date");
-          //     return out;
-          //   }
-
-          // });
-
-          // myitemsElem.listview({
-          //   autodividers: true
-
-          //   ,autodividersSelector: function ( li ) {
-          //     var out = li.data("date");
-          //     return out;
-          //   }
-
-          // });
           this.el = this.options.el;
           this.itemsModel = this.options.itemsModel;
           this.myitemsModel = this.options.myitemsModel;
           
           this.itemsModel.bind("reset", this.render, this);
           this.myitemsModel.bind("reset", this.render, this);
-
+          this.scroller1 = null;
 
         }
 
@@ -260,14 +239,17 @@ $(function(){
           console.log("rendering");
 
 
+          if (this.scroller1) {
+            this.scroller1.destroy();
+          }
+          if (this.scroller2) {
+            this.scroller2.destroy();
+          }
           $(this.el).html(this.template());
 
-          
-          console.log("attaching scrollers");
+          this.scroller1 = new iScroll('itemslist', {momentum: true, hScrollbar: false, vScroll: true, bounce:false } );
+          this.scroller2 = new iScroll('myitemslist', {momentum: true, hScrollbar: false, vScroll: true, bounce:false } );
 
-
-          this.scroller1 = new iScroll('myitemlist', {snap: false, momentum: true, hScrollbar: false, vScrollbar: true } );
-          this.scroller2 = new iScroll('otheritemlist', {snap: false, momentum: true, hScrollbar: false, vScrollbar: true } );
 
 
           itemsElem = $("#items", this.el);
@@ -299,12 +281,16 @@ $(function(){
           }, this);
 
           _.defer(_.bind(function () { 
-            console.log("name: " + self.el);
-            console.log("height: " + $(self.el).height());
+            //console.log("name: " + self.el);
+            //console.log("height: " + $(self.el).height());
             // use window.height for now, but will need to subtract header height etc.
-            $(this.el).css({'overflow':'hidden', 'height': $(window).height(), 'max-height': $(window).height()});
-            this.scroller1.refresh(); 
-            this.scroller2.refresh(); 
+            //$(self.el).height($(window).height() + "px")
+            //$(this.el).css({'overflow':'hidden'});
+            _.defer(_.bind(function () { 
+
+              this.scroller1.refresh(); 
+              this.scroller2.refresh(); 
+              }, self));
           }, self));
 
           return this;
