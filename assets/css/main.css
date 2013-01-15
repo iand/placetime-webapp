@@ -33,14 +33,11 @@ itemlist and mainwrapper are currently not closed
   .main-header { margin-bottom: 20px; height: 45px; background: #aaa; border-bottom: 8px solid #ccc; box-shadow: 0px 4px 5px #888888; position:fixed; width: 100%; top:0px; left: 0px; z-index: 2000;}
   #main { margin-top: 55px; } /* move sort buttons below header bar */
 
-    .main-alltimelinecol { width: 477px; padding-right 5px; position: relative; top: 46px; left: 0px; }
-    .main-mytimelinecol { width: 477px; padding-left: 5px; position: relative; top:46px; left: 477px; }
-      .main-alltimelineheader { height: 39px; width: 477px; position: absolute; border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); z-index: 1000; }
-      .main-mytimelineheader { height: 39px; width: 477px; position: absolute; border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); z-index: 1000; left: 477px; }
-      
-
-      #myitemslist { position:absolute; z-index:1; overflow:auto; width: 477px; }
-      #itemslist { position:absolute; z-index:1; overflow:auto; width: 477px; }
+    .main-alltimelinecol { width: 477px; padding-right 5px; position: relative; left: 0px; }
+    .main-mytimelinecol { width: 477px; padding-left: 5px; position: relative; left: 477px; }
+      .main-alltimelineheader, .main-mytimelineheader { height: 39px; width: 477px; position: absolute; border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); z-index: 1000; }
+      #myitemslist { position:absolute; z-index:1; overflow:auto; width: 477px; top:46px; }
+      #itemslist { position:absolute; z-index:1; overflow:auto; width: 477px; top:46px; }
       
       /*#myitemslist { position:absolute; z-index:1; top:45px; bottom:48px; width: 400px; left: 440px; overflow:auto; }
       #itemslist { position:absolute; z-index:1; top:45px; bottom:48px; width: 400px; left 20px; overflow:auto; }*/
