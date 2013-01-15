@@ -35,7 +35,7 @@ itemlist and mainwrapper are currently not closed
 
 */
 
-.main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
+.main-wrapper { max-width: 1000px; height: 100%; margin-left: auto; margin-right: auto; }
 
   .main-header { margin-bottom: 20px; height: 45px; background: #aaa; border-bottom: 8px solid #ccc; box-shadow: 0px 4px 5px #888888; position:fixed; width: 100%; top:0px; left: 0px; }
   #main { margin-top: 55px; } /* move sort buttons below header bar */
