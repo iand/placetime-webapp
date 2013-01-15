@@ -247,8 +247,8 @@ $(function(){
           }
           $(this.el).html(this.template());
 
-          this.scroller1 = new iScroll('itemslist', {momentum: true, hScrollbar: false, vScroll: true, bounce:false } );
-          this.scroller2 = new iScroll('myitemslist', {momentum: true, hScrollbar: false, vScroll: true, bounce:false } );
+          this.scroller1 = new iScroll('itemslist', {momentum: true, hScrollbar: false, vScroll: true  } );
+          this.scroller2 = new iScroll('myitemslist', {momentum: true, hScrollbar: false, vScroll: true } );
 
 
 

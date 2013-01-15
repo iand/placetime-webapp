@@ -1,4 +1,4 @@
-    <li class=timelinecalitem id="ti-<%= id %>">
+    <div class=timelinecalitem id="ti-<%= id %>">
     <% if (media == "video") { %>
       <!-- video specific markup here -->
     <% } else if (media == "audio") { %>
@@ -11,4 +11,4 @@
       <p class="main-itemtime"><i class="icon-time"></i> event: <span class="timestamp"><%= fromnow %></span></p></a>
       <a href="#app" class="<%= action %>btn" class="roundBtn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="check" data-position-to="window" data-transition="fade"><i class="icon-ok"></i></a>
     <% } %>
-    </li> 
+    </div> 
