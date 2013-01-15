@@ -13,7 +13,7 @@ body { font-family: "proxima-nova-1","proxima-nova-2"; background: #deddd8; widt
 
 
 #myitemslist {
-  position:absolute; 
+  position:relative; 
   z-index:1;
   top:45px; 
   bottom:48px;
@@ -24,7 +24,7 @@ body { font-family: "proxima-nova-1","proxima-nova-2"; background: #deddd8; widt
 
 
 #itemslist {
-  position:absolute; 
+  position:relative; 
   z-index:1;
   left: 30px;
   top:45px; 
