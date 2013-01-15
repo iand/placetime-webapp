@@ -12,47 +12,44 @@ html { height: 100%; }
 body { font-family: "proxima-nova-1","proxima-nova-2"; background: #deddd8; width: 100%; height: 100%; }
 
 /* structure: 
-#itemlist .mainwrapper  
-	(.main-header (.main-topbaritems .main-newitem)) 
-	#main
-		.main-alltimelinecol (.main-timelineheader) (.content-primary + #otheritemlist)
-		.main-mytimelinecol (.main-timelineheader) (.content-primary + #myitemlist)
+#itemlist 
+  .mainwrapper  
+    .main-header 
+      .main-topbaritems 
+        .main-newitem 
+    #main
+      .main-alltimelinecol 
+        .main-timelineheader 
+        .content-primary + #itemslist
+      .main-mytimelinecol
+        .main-timelineheader
+        .content-primary + #myitemslist
 
 itemlist and mainwrapper are currently not closed
 
 */
+.main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
+
+  .main-header { margin-bottom: 20px; height: 45px; background: #aaa; border-bottom: 8px solid #ccc; box-shadow: 0px 4px 5px #888888; position:fixed; width: 100%; top:0px; left: 0px; z-index: 2000;}
+  #main { margin-top: 55px; } /* move sort buttons below header bar */
+
+    .main-alltimelinecol { width: 477px; padding-right 5px; float: left; position: relative; }
+    .main-mytimelinecol { width: 477px; padding-left: 5px; float: left; position: relative; }
+
+      #myitemslist { position:absolute; z-index:1; overflow:auto; }
+      #itemslist { position:absolute; z-index:1; overflow:auto; }
+      
+      /*#myitemslist { position:absolute; z-index:1; top:45px; bottom:48px; width: 400px; left: 440px; overflow:auto; }
+      #itemslist { position:absolute; z-index:1; top:45px; bottom:48px; width: 400px; left 20px; overflow:auto; }*/
+
+/* end structure */
 
 
-#myitemslist {
-  position:relative; 
-  z-index:1;
-  top:45px; 
-  bottom:48px;
-  width: 400px;
-  left: 440px;
-  overflow:auto;
-}
-
-
-#itemslist {
-  position:relative; 
-  z-index:1;
-  left: 30px;
-  top:45px; 
-  bottom:48px;
-  width: 400px;
-  left 20px;
-  overflow:auto;
-}
-
-#main { margin-top: 55px; } /* move sort buttons below header bar */
 #items, #myitems { margin-top: 46px;} /* move items below header bar */
 
-/* Note: poss change for mobile */
-.main-wrapper { max-width: 1000px; margin-left: auto; margin-right: auto; }
+/* poss delme */
 .main-pagewrapper { width: 400px; margin-left: auto; margin-right: auto; position: relative; }
-.main-alltimelinecol { width: 477px; padding-right 5px; float: left; }
-.main-mytimelinecol { width: 477px; padding-left: 5px; float: left; }
+
 
     
 div { border: 0px solid #ddd; }
@@ -113,20 +110,6 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 	background: #eeeeee;
 	box-shadow: 0px 0px 0px #aaa;
 }
-
-/* Note: poss change for mobile */
-  .main-header { 
-  	margin-bottom: 20px; 
-  	height: 45px; 
-  	background: #aaa; 
-  	border-bottom: 8px solid #ccc; 
-  	box-shadow: 0px 4px 5px #888888; 
-  	position:fixed;
-  	width: 100%;
-  	top:0px;
-  	left: 0px;
-  	z-index: 2000;
-  	}
  
   .main-topbaritems { width: 1000px; margin-left: auto; margin-right: auto; margin-top:10px; }
   .ui-content .ui-listview { margin: 0; }
