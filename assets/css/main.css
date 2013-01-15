@@ -68,7 +68,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 
 /*element styles */
 
-#footer { display: none; } /* visible for mobile */
+#footer { display: visible; } /* visible for mobile */
 
 #login, #register { 
 	background: #fff; 
