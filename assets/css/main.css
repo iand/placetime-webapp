@@ -42,7 +42,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 
 
 #main { margin-top: 55px; } /* move sort buttons below header bar */
-#items, #myitems { margin-top: 46px; } /* move items below header bar */
+#items, #myitems { margin-top: 46px; overflow: auto;} /* move items below header bar */
 #footer { display: none; } /* visible for mobile */
 #login, #register { 
 	background: #fff; 
