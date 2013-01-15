@@ -252,17 +252,27 @@ $(function(){
           
           this.itemsModel.bind("reset", this.render, this);
           this.myitemsModel.bind("reset", this.render, this);
+
+
         }
 
         ,render: function(eventName) {
-                    console.log("rendering");
+          console.log("rendering");
+
 
           $(this.el).html(this.template());
+
+          
+          console.log("attaching scrollers");
+
+
+          this.scroller1 = new iScroll('myitemlist', {snap: false, momentum: true, hScrollbar: false, vScrollbar: true } );
+          this.scroller2 = new iScroll('otheritemlist', {snap: false, momentum: true, hScrollbar: false, vScrollbar: true } );
+
 
           itemsElem = $("#items", this.el);
           myitemsElem = $("#myitems", this.el);
 
-          console.log("foo");
           itemsElem.html('');
           myitemsElem.html('');
           var self = this;
@@ -287,6 +297,16 @@ $(function(){
               myitemsElem.append(this.templatemyitem(data));
             }
           }, this);
+
+          _.defer(_.bind(function () { 
+            console.log("name: " + self.el);
+            console.log("height: " + $(self.el).height());
+            // use window.height for now, but will need to subtract header height etc.
+            $(this.el).css({'overflow':'hidden', 'height': $(window).height(), 'max-height': $(window).height()});
+            this.scroller1.refresh(); 
+            this.scroller2.refresh(); 
+          }, self));
+
           return this;
         }
 
@@ -599,9 +619,12 @@ $(function(){
           this.login();
         }
 
-        ,changePage:function (page) {
-            console.log("Changing page to " + $(page.el).attr('id'));
-            page.render();
+        ,changePage:function (view) {
+            console.log("Changing view to " + $(view.el).attr('id'));
+            view.render();
+            if (view.postRender) {
+              view.postRender();
+            }
         }
 
 
