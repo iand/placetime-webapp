@@ -33,9 +33,9 @@ body { font-family: "proxima-nova-1","proxima-nova-2"; background: #deddd8; }
   .main-alltimelineheaderwrapper { z-index: 5; width: 959px; margin-left:auto; margin-right:auto; position: fixed; top: 55px; }
     .main-alltimelineheader { height: 39px; width: 477px;  border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); float: left; } 
     .main-mytimelineheader { height: 39px; width: 477px;  border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); float: right; }
-  .main-timelinewrapper { width: 954px; margin-left:auto; margin-right:auto; }
+  .main-timelinewrapper { width: 959px; margin-left:auto; margin-right:auto; position: absolute; top: 101px; bottom: 30px; }
   .main-alltimelinecol { width: 477px; padding-right 5px; position:relative; top:55px; left:0px; height: 100%; }
-  .main-mytimelinecol { width: 477px; padding-left: 5px; position:static; top:55px; left:477px; height: 100%; }
+  .main-mytimelinecol { width: 477px; padding-left: 5px; position:absolute; top:0px; bottom: 0px; left:477px; }
     #itemslist { position:absolute; z-index:1; width: 477px; top:46px; height: 500px; bottom:0px;}
     #myitemslist { position:absolute; top:101px; bottom: 30px; left: 0px; width: 477px; overflow: auto; }
   #footer { z-index: 10; position:fixed; left:0px; bottom:0px; height:30px; width:100%; background:#999; }
