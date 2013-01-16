@@ -31,7 +31,7 @@ body { font-family: "proxima-nova-1","proxima-nova-2"; background: #deddd8; }
   .main-header { z-index: 10; position:fixed; left:0px; top:0px; margin-bottom: 20px; height: 45px; background: #aaa; border-bottom: 8px solid #ccc; box-shadow: 0px 4px 5px #888888; width: 100%; }
   .main-alltimelineheaderwrapper { z-index: 5; width: 959px; margin-left:auto; margin-right:auto; position: fixed; top: 55px; }
     .main-alltimelineheader { height: 39px; width: 477px;  border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); float: left; } 
-    .main-mytimelineheader { height: 39px; width: 477px;  border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); }
+    .main-mytimelineheader { height: 39px; width: 477px;  border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); float: right; }
   .main-alltimelinecol { width: 477px; padding-right 5px; position:relative; top:55px; left:0px; height: 100%; }
   .main-mytimelinecol { width: 477px; padding-left: 5px; position:relative; top:55px; left:477px; height: 100%; }
     #itemslist { position:absolute; z-index:1; width: 477px; top:46px; height: 500px; bottom:0px;}
@@ -120,7 +120,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
         font-weight: 400;
 }
 
-.main-timelineheadertext {position: relative; top: 5px; left: 0px; }
+.main-timelineheadertext {position: relative; top: 12px; left: 0px; }
 .main-timelinetitle { font-size: 17px; color: #000; padding: 4px;  }
 .main-timelinestrapline { font-size: 13px; color: #999; }
 .main-itemusername { font-size: 13px; color: #aaa; }
