@@ -4,10 +4,10 @@
     <% } else if (media == "audio") { %>
       <!-- audio specific markup here -->
     <% } else { %>
-      <a><img src="/-assets/img/nasa.jpg" width="50px" height="50px">
+      <div style="float:left; padding: 5px;"><img src="/-assets/img/nasa.jpg" width="50px" height="50px"></div>
       <p class="main-itemusername">@<%= pid %></p>
       <p class="main-itemtext"><%= text %></p>
-      <p class="main-itemlink"><a href="<%= link %>" class="roundBtn" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank"><i class="icon-play"></i> details</a></p>
+      <p class="main-itemlink"><a href="<%= link %>" class="roundBtn" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank"><i class="icon-external-link"></i></a></p>
       <p class="main-itemtime"><i class="icon-time"></i> added: <span class="timestamp"><%= fromnow %></span></p></a>
       <a href="#app" class="<%= action %>btn" class="roundBtn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="delete" data-position-to="window" data-transition="fade"><i class="icon-remove"></i></a>
 
