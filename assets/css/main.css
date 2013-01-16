@@ -29,8 +29,8 @@ body { font-family: "proxima-nova-1","proxima-nova-2"; background: #deddd8; }
 #itemlist { max-width: 1000px; margin-left: auto; margin-right: auto; }
   .main-header { z-index: 10; position:fixed; left:0px; top:0px; margin-bottom: 20px; height: 45px; background: #aaa; border-bottom: 8px solid #ccc; box-shadow: 0px 4px 5px #888888; position:fixed; width: 100%; top:0px; left: 0px; }
   .main-alltimelinecol { width: 477px; padding-right 5px; position:relative; top:55px; left:0px; height: 100%; }
-  .main-mytimelinecol { width: 477px; padding-left: 5px; position:relative; top:55px; left:477px; height: 100%; margin-left:auto; margin-right:auto; left: 238px; }
-    .main-alltimelineheader, .main-mytimelineheader { z-index: 5; height: 39px; width: 477px; position: fixed; top: 0px; left: 0px; border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); }
+  .main-mytimelinecol { width: 477px; padding-left: 5px; position:relative; top:55px; left:477px; height: 100%; }
+    .main-alltimelineheader, .main-mytimelineheader { z-index: 5; height: 39px; width: 477px; position: fixed; margin-left:auto; margin-right:auto; left: 238px; top: 55px; border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); }
     #itemslist { position:absolute; z-index:1; width: 477px; top:46px; height: 500px; bottom:0px;}
     #myitemslist { position:absolute; top:46px; width: 477px; overflow: hidden; }
   #footer { position:fixed; left:0px; bottom:0px; height:30px; width:100%; background:#999; }
