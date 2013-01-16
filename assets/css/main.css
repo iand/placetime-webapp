@@ -36,7 +36,7 @@ body { font-family: "proxima-nova-1","proxima-nova-2"; background: #deddd8; }
   .main-mytimelinecol { width: 477px; padding-left: 5px; position:relative; top:55px; left:477px; height: 100%; }
     #itemslist { position:absolute; z-index:1; width: 477px; top:46px; height: 500px; bottom:0px;}
     #myitemslist { position:absolute; top:46px; width: 477px; overflow: hidden; }
-  #footer { position:fixed; left:0px; bottom:0px; height:30px; width:100%; background:#999; }
+  #footer { z-index: 10; position:fixed; left:0px; bottom:0px; height:30px; width:100%; background:#999; }
 
 /* general styles */    
 
