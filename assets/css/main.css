@@ -43,7 +43,7 @@ itemlist and mainwrapper are currently not closed
     .main-alltimelinecol { width: 477px; padding-right 5px; position: relative; left: 0px; }
     .main-mytimelinecol { width: 477px; padding-left: 5px; position: relative; left: 477px; }
       .main-alltimelineheader, .main-mytimelineheader { height: 39px; width: 477px; position: fixed; border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); }
-      #myitemslist { position:absolute; z-index:1; width: 477px; top:46px; height: 500px; bottom:0px;}
+      #myitemslist { position:absolute; z-index:1; width: 477px; top:46px; height: 500px; bottom:0px; overflow: auto; }
       #itemslist { position:absolute; z-index:1; width: 477px; top:46px; height: 500px; bottom:0px;}
 
 /* general styles */    
