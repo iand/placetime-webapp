@@ -35,13 +35,13 @@ itemlist and mainwrapper are currently not closed
 
 */
 
-.main-wrapper { max-width: 1000px; height: 100%; margin-left: auto; margin-right: auto; }
+.main-wrapper { max-width: 1000px; height: 100%; margin-left: auto; margin-right: auto; position:relative; top:0px; left:0px; }
 
   .main-header { margin-bottom: 20px; height: 45px; background: #aaa; border-bottom: 8px solid #ccc; box-shadow: 0px 4px 5px #888888; position:fixed; width: 100%; top:0px; left: 0px; }
   #main { margin-top: 55px; } /* move sort buttons below header bar */
 
-    .main-alltimelinecol { width: 477px; padding-right 5px; position: relative; left: 0px; }
-    .main-mytimelinecol { width: 477px; padding-left: 5px; position: relative; left: 477px; }
+    .main-alltimelinecol { width: 477px; padding-right 5px; position: absolute; left: 0px; }
+    .main-mytimelinecol { width: 477px; padding-left: 5px; position: absolute; left: 477px; }
       .main-alltimelineheader, .main-mytimelineheader { height: 39px; width: 477px; position: fixed; border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); }
       #myitemslist { position:absolute; z-index:1; width: 477px; top:46px; bottom:0px; overflow: auto; }
       #itemslist { position:absolute; z-index:1; width: 477px; top:46px; height: 500px; bottom:0px;}
