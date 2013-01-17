@@ -895,7 +895,7 @@ func templatesHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func backgroundTasks() {
-	ticker := time.Tick(15 * time.Second)
+	ticker := time.Tick(30 * time.Minute)
 	for _ = range ticker {
 		pollFeeds()
 	}
