@@ -29,7 +29,7 @@ var ()
 
 func main() {
 	// TODO: set random number seed
-	//runtime.GOMAXPROCS(runtime.NumCPU())
+	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	go backgroundTasks()
 
@@ -895,16 +895,9 @@ func templatesHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func backgroundTasks() {
-	ticker := time.Tick(15 * time.Minute)
-	for {
-		select {
-
-		case <-ticker:
-			pollFeeds()
-
-		default:
-			runtime.Gosched()
-		}
+	ticker := time.Tick(15 * time.Second)
+	for _ = range ticker {
+		pollFeeds()
 	}
 
 }
@@ -929,14 +922,14 @@ func pollFeeds() {
 	close(jobs)
 
 	for i := 0; i < len(profiles); i++ {
-		println("got a result: ", i)
 		data := <-results
 		if data.Error != nil {
-			log.Printf("Error processing feed for %s: ", data.Profile.Pid, data.Error)
+			log.Printf("Error processing feed for %s: %v", data.Profile.Pid, data.Error)
 		} else {
 			log.Printf("Found %d items in feed for %s", len(data.Feed.Items), data.Profile.Pid)
 		}
 
+		updateProfileFeedData(data)
 		runtime.Gosched()
 	}
 
