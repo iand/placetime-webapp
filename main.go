@@ -429,17 +429,17 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 
 	s.AddProfile("nasa", "nasa", "Nasa Missions", "Upcoming NASA mission information.", "", "")
 
-	s.AddItem("nasa", "1 Jan 2015", "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "")
-	s.AddItem("nasa", "26 Aug 2012", "Dawn - Leaves asteroid Vesta, heads for asteroid 1 Ceres", "")
-	s.AddItem("nasa", "1 Sep 2012", "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "")
-	s.AddItem("nasa", "1 Feb 2015", "Dawn - Goes into orbit around asteroid 1 Ceres", "")
-	s.AddItem("nasa", "14 Jul 2015", "New Horizons - NASA mission reaches Pluto and Charon", "")
-	s.AddItem("nasa", "1 Mar 2013", "LADEE - Launch of NASA Orbiter to the Moon", "")
-	s.AddItem("nasa", "1 Nov 2014", "Philae - ESA Rosetta Lander touches down on Comet Churyumov-Gerasimenko", "")
-	s.AddItem("nasa", "1 Nov 2013", "MAVEN - Launch of Mars Orbiter", "")
-	s.AddItem("nasa", "1 May 2014", "Rosetta - ESA mission reaches Comet Churyumov-Gerasimenko", "")
-	s.AddItem("nasa", "1 Jan 2014", "Mars Sample Return Mission - Launch of NASA sample return mission to Mars", "")
-	s.AddItem("nasa", "5 Apr 2231", "Pluto - is passed by Neptune in distance from the Sun for the next 20 years", "")
+	s.AddItem("nasa", parseKnownTime("1 Jan 2015"), "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "")
+	s.AddItem("nasa", parseKnownTime("26 Aug 2012"), "Dawn - Leaves asteroid Vesta, heads for asteroid 1 Ceres", "")
+	s.AddItem("nasa", parseKnownTime("1 Sep 2012"), "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "")
+	s.AddItem("nasa", parseKnownTime("1 Feb 2015"), "Dawn - Goes into orbit around asteroid 1 Ceres", "")
+	s.AddItem("nasa", parseKnownTime("14 Jul 2015"), "New Horizons - NASA mission reaches Pluto and Charon", "")
+	s.AddItem("nasa", parseKnownTime("1 Mar 2013"), "LADEE - Launch of NASA Orbiter to the Moon", "")
+	s.AddItem("nasa", parseKnownTime("1 Nov 2014"), "Philae - ESA Rosetta Lander touches down on Comet Churyumov-Gerasimenko", "")
+	s.AddItem("nasa", parseKnownTime("1 Nov 2013"), "MAVEN - Launch of Mars Orbiter", "")
+	s.AddItem("nasa", parseKnownTime("1 May 2014"), "Rosetta - ESA mission reaches Comet Churyumov-Gerasimenko", "")
+	s.AddItem("nasa", parseKnownTime("1 Jan 2014"), "Mars Sample Return Mission - Launch of NASA sample return mission to Mars", "")
+	s.AddItem("nasa", parseKnownTime("5 Apr 2231"), "Pluto - is passed by Neptune in distance from the Sun for the next 20 years", "")
 
 	// s.SetProfile(&Profile{Pid: "o2shepherdsbushempire ", Name: "O2 Shepherd's Bush Empire Events", Bio: "", Feed: "http://www.o2shepherdsbushempire.co.uk/RSS"})
 	// s.SetProfile(&Profile{Pid: "skiddlewc2", Name: "Skiddle WC2", Bio: "What's On in London and area", Feed: "http://www.skiddle.com/rss/events.php?c=WC2"})
@@ -534,7 +534,13 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 	s := NewRedisStore()
 	defer s.Close()
 
-	itemid, err := s.AddItem(pid, ets, text, link)
+	etsParsed, err := time.Parse("_2 Jan 2006", ets)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	itemid, err := s.AddItem(pid, etsParsed, text, link)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -985,7 +991,7 @@ func updateProfileFeedData(data *ProfileFeedData) error {
 
 		s.DeleteMaybeItems(p.Pid)
 		for _, item := range feed.Items {
-			s.AddItem(p.Pid, time.Now().Format("02 Jan 2006"), item.Title, item.Link)
+			s.AddItem(p.Pid, item.When, item.Title, item.Link)
 		}
 
 		for _, f := range followers {
@@ -1071,4 +1077,9 @@ func isAdmin(pid string) bool {
 	}
 
 	return false
+}
+
+func parseKnownTime(t string) time.Time {
+	ret, _ := time.Parse("_2 Jan 2006", t)
+	return ret
 }

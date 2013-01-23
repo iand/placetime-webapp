@@ -1,4 +1,3 @@
-// Based on PD code at https://github.com/angusglashier/RSS-Go/blob/master/rss.go
 package main
 
 import (
@@ -20,7 +19,7 @@ type FeedItem struct {
 	Title       string
 	Description string
 	Link        string
-	When        int
+	When        time.Time
 }
 
 const feedTitle = "title"
@@ -50,15 +49,16 @@ const (
 	levelPost = 2
 )
 
-func parseTime(f, v string) int {
+func parseTime(f, v string) time.Time {
 	t, err := time.Parse(f, v)
 	if err != nil || v == "" {
-		return time.Now().Second()
+		return time.Now()
 	}
-	return t.Second()
+	return t
 }
 
 func NewFeed(r io.Reader) (*Feed, error) {
+	var ns string
 	var tag string
 	var atom bool
 	var level int
@@ -74,6 +74,7 @@ func NewFeed(r io.Reader) (*Feed, error) {
 		}
 		switch t := token.(type) {
 		case xml.StartElement:
+			ns = strings.ToLower(t.Name.Space)
 			tag = strings.ToLower(t.Name.Local)
 			switch {
 			case tag == atomFeed:
@@ -84,7 +85,7 @@ func NewFeed(r io.Reader) (*Feed, error) {
 				level = levelFeed
 			case (!atom && tag == rssItem) || (atom && tag == atomEntry):
 				level = levelPost
-				item = &FeedItem{When: time.Now().Nanosecond()}
+				item = &FeedItem{When: time.Now()}
 			case atom && tag == atomLink:
 				for _, a := range t.Attr {
 					if strings.ToLower(a.Name.Local) == atomLinkHref {
@@ -122,7 +123,7 @@ func NewFeed(r io.Reader) (*Feed, error) {
 				switch {
 				case (!atom && tag == rssId) || (atom && tag == atomId):
 					item.Id = text
-				case tag == feedTitle:
+				case ns == "" && tag == feedTitle:
 					item.Title = text
 				case (!atom && tag == rssDescription) || (atom && tag == atomSummary):
 					item.Description = text

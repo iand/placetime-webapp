@@ -5,7 +5,6 @@ import (
 	"code.google.com/p/tcgl/redis"
 	"encoding/json"
 	"fmt"
-	"log"
 	"math/rand"
 	"time"
 )
@@ -386,12 +385,12 @@ func (s *RedisStore) Item(id string) (*Item, error) {
 	return item, nil
 }
 
-func (s *RedisStore) AddItem(pid string, etstext string, text string, link string) (string, error) {
+func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string) (string, error) {
 
-	ets, err := time.Parse("_2 Jan 2006", etstext)
-	if err != nil {
-		log.Printf("Failed to parse date %s. Got error %s.\n", etstext, err.Error())
-	}
+	// ets, err := time.Parse("_2 Jan 2006", etstext)
+	// if err != nil {
+	// 	log.Printf("Failed to parse date %s. Got error %s.\n", etstext, err.Error())
+	// }
 
 	ts := time.Now()
 
