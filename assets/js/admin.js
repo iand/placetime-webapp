@@ -22,7 +22,7 @@ $(function(){
       }
 
       ,url: function() {
-        return '/-jtl?status=m&pid=' + this.pid;
+        return '/-jtl?status=m&count=30&pid=' + this.pid;
       }
     });
 
@@ -67,7 +67,7 @@ $(function(){
 
 
     var MainView = Backbone.View.extend({
-    
+      
       initialize: function(options) {
        this.template = _.template($("#main-tmpl").html());
        this.msg = options.msg;
@@ -292,6 +292,10 @@ $(function(){
 
       ,save: function(){
         console.log("saving feed: " + $('#pname').val());
+        console.log("pid: " + this.model.get('pid'));
+        console.log("pname: " + $('#pname').val());
+        console.log("parentpid: " + $('#parentpid').val());
+        console.log("feedurl: " + $('#feedurl').val());
         var self = this;
         $.ajax({
             url:'/-tupdateprofile',
@@ -506,7 +510,9 @@ $(function(){
 
     var AppRouter = Backbone.Router.extend({
 
-        routes:{
+        _currentView: null
+
+        ,routes:{
 
              "profile/:pid":"profile"
             ,"following/:pid":"following"
@@ -527,7 +533,7 @@ $(function(){
         ,main:function () {
           var self = this;
           session.check( function() {
-                            self.changePage(new MainView({el:$('#content') } ));
+                            self.changePage(new MainView({ } ));
                           }, 
                           function() {
                             self.invalidSession();
@@ -548,18 +554,18 @@ $(function(){
                                   items.fetch({ 
                                     success: function() { 
                                       if (profile.get("parentpid")) {
-                                        self.changePage(new FeedView({el:$('#content'), model: profile, items: items} )); 
+                                        self.changePage(new FeedView({model: profile, items: items} )); 
                                       } else {
-                                        self.changePage(new ProfileView({el:$('#content'), model: profile, items: items} ));
+                                        self.changePage(new ProfileView({model: profile, items: items} ));
                                       }
                                     },
                                     error: function() {
-                                      self.changePage(new MainView({el:$('#content'), msg: "Problem retrieving profile items for '" + pid + "'" } ));
+                                      self.changePage(new MainView({msg: "Problem retrieving profile items for '" + pid + "'" } ));
                                     } 
                                   });                                    
                                 },
                                 error: function() {
-                                  self.changePage(new MainView({el:$('#content'), msg: "Problem retrieving profile '" + pid + "'" } ));
+                                  self.changePage(new MainView({msg: "Problem retrieving profile '" + pid + "'" } ));
                                 }
                             });
 
@@ -578,10 +584,10 @@ $(function(){
                             var list = new FollowingList({'pid':pid});
                             list.fetch({ 
                                 success: function() { 
-                                  self.changePage(new FollowingListView({el:$('#content'), collection: list} )); 
+                                  self.changePage(new FollowingListView({collection: list} )); 
                                 },
                                 error: function() {
-                                  self.changePage(new MainView({el:$('#content'), msg: "Problem retrieving profile '" + pid + "'" } ));
+                                  self.changePage(new MainView({msg: "Problem retrieving profile '" + pid + "'" } ));
                                 }
                             });
 
@@ -600,10 +606,10 @@ $(function(){
                             var list = new FollowersList({'pid':pid});
                             list.fetch({ 
                                 success: function() { 
-                                  self.changePage(new FollowersListView({el:$('#content'), collection: list} )); 
+                                  self.changePage(new FollowersListView({collection: list} )); 
                                 },
                                 error: function() {
-                                  self.changePage(new MainView({el:$('#content'), msg: "Problem retrieving profile '" + pid + "'" } ));
+                                  self.changePage(new MainView({msg: "Problem retrieving profile '" + pid + "'" } ));
                                 }
                             });
 
@@ -622,10 +628,10 @@ $(function(){
                             var list = new FeedsList({'pid':pid});
                             list.fetch({ 
                                 success: function() { 
-                                  self.changePage(new FeedsListView({el:$('#content'), collection: list} )); 
+                                  self.changePage(new FeedsListView({collection: list} )); 
                                 },
                                 error: function() {
-                                  self.changePage(new MainView({el:$('#content'), msg: "Problem retrieving profile '" + pid + "'" } ));
+                                  self.changePage(new MainView({msg: "Problem retrieving profile '" + pid + "'" } ));
                                 }
                             });
 
@@ -645,13 +651,13 @@ $(function(){
                             profile.fetch({ 
                                 success: function() { 
                                   if (profile.get("parentpid")) {
-                                    self.changePage(new EditFeedView({el:$('#content'), model: profile} )); 
+                                    self.changePage(new EditFeedView({model: profile} )); 
                                   } else {
-                                    self.changePage(new EditProfileView({el:$('#content'), model: profile} )); 
+                                    self.changePage(new EditProfileView({model: profile} )); 
                                   }
                                 },
                                 error: function() {
-                                  self.changePage(new MainView({el:$('#content'), msg: "Problem retrieving profile '" + pid + "'" } ));
+                                  self.changePage(new MainView({msg: "Problem retrieving profile '" + pid + "'" } ));
                                 }
                             });
 
@@ -680,10 +686,10 @@ $(function(){
                             var profile = new Profile({'pid':pid});
                             profile.fetch({ 
                                 success: function() { 
-                                  self.changePage(new AddFeedView({el:$('#content'), model: profile} )); 
+                                  self.changePage(new AddFeedView({model: profile} )); 
                                 },
                                 error: function() {
-                                  self.changePage(new MainView({el:$('#content'), msg: "Problem retrieving profile '" + pid + "'" } ));
+                                  self.changePage(new MainView({msg: "Problem retrieving profile '" + pid + "'" } ));
                                 }
                             });
 
@@ -698,7 +704,16 @@ $(function(){
           self.changePage(new StaticView({name:"session"} )); 
         }
         ,changePage:function (view) {
-            view.render();
+
+
+            if (this._currentView) {
+              this._currentView.remove();
+            }
+            this._currentView = view;
+
+            
+            $('#content').html(view.render().el);
+
             if (view.postRender) {
               view.postRender();
             }
