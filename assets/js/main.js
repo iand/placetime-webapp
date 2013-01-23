@@ -153,6 +153,7 @@ $(function(){
           this.el = this.options.el;
           this.itemsModel = this.options.itemsModel;
           this.myitemsModel = this.options.myitemsModel;
+          this.pid = this.options.pid;
           
           this.itemsModel.bind("reset", this.render, this);
           this.myitemsModel.bind("reset", this.render, this);
@@ -161,7 +162,6 @@ $(function(){
         }
 
         ,render: function(eventName) {
-          console.log("rendering");
 
 
           if (this.scroller1) {
@@ -170,7 +170,7 @@ $(function(){
           if (this.scroller2) {
             this.scroller2.destroy();
           }
-          $(this.el).html(this.template());
+          $(this.el).html(this.template({data:{'pid':this.pid}}));
 
           this.scroller1 = new iScroll('itemslist', {momentum: true, hScrollbar: false, vScroll: true  } );
           this.scroller2 = new iScroll('myitemslist', {momentum: true, hScrollbar: false, vScroll: true } );
@@ -206,17 +206,10 @@ $(function(){
           }, this);
 
           _.defer(_.bind(function () { 
-            //console.log("name: " + self.el);
-            //console.log("height: " + $(self.el).height());
-            // use window.height for now, but will need to subtract header height etc.
-            //$(self.el).height($(window).height() + "px")
-            //$(this.el).css({'overflow':'hidden'});
-            _.defer(_.bind(function () { 
 
-              this.scroller1.refresh(); 
-              this.scroller2.refresh(); 
-              }, self));
-          }, self));
+            this.scroller1.refresh(); 
+            this.scroller2.refresh(); 
+            }, self));
 
           return this;
         }
@@ -483,6 +476,7 @@ $(function(){
                                                            el:$('#content')
                                                           ,itemsModel:items
                                                           ,myitemsModel: myItems
+                                                          ,pid: session.get("pid")
                                                         }));
 
                         }, 
