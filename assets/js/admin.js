@@ -311,6 +311,42 @@ $(function(){
         
     });
 
+    var AddProfileView = Backbone.View.extend({
+    
+      initialize: function(options) {
+       this.template = _.template($("#addprofile-tmpl").html());
+      }
+
+      ,render:function () {
+        $(this.el).html(this.template());
+        return this;
+      }
+
+      ,events: {
+        "click .saveBtn" : "save"
+      }
+
+      ,save: function(){
+        var self = this;
+        $.ajax({
+            url:'/-taddprofile',
+            type:'post',
+            data: { 
+               pid: $('#pid').val()
+              ,pname: $('#pname').val()
+              ,pwd: $('#pwd').val()
+              ,bio: $('#bio').val()
+             },
+            success:function (data) {
+              Backbone.history.navigate("profile/" + $('#pid').val(), true);
+            }
+        });          
+
+        return false;
+      }
+        
+    });
+
     var AddFeedView = Backbone.View.extend({
     
       initialize: function(options) {
@@ -341,8 +377,6 @@ $(function(){
               Backbone.history.navigate("profile/" + self.model.get('pid'), true);
             }
         });          
-
-        console.log("save");
         return false;
       }
         
@@ -479,6 +513,7 @@ $(function(){
             ,"followers/:pid":"followers"
             ,"feeds/:pid":"feeds"
             ,"editprofile/:pid":"editprofile"
+            ,"addprofile":"addprofile"
             ,"addfeed/:pid":"addfeed"
             ,"*default":"main"
 
@@ -628,7 +663,16 @@ $(function(){
                         );            
         }
 
-
+        ,addprofile:function () {
+          var self = this;
+          session.check( function() {
+              self.changePage(new AddProfileView({el:$('#content')} )); 
+              }, 
+              function() {
+                self.invalidSession();
+              } 
+            );            
+        }        
         ,addfeed:function (pid) {
           var self = this;
           session.check( function() {

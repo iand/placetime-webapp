@@ -32,6 +32,8 @@
 	    	<label for="pid">User profile:</label> <input type="text" id="pid" name="pid" size="20" value="">
 	    	<input type="submit" value="Manage Profile" class="profileBtn">
 		</form>
+
+		<div><a href="#addprofile">New profile</a></div>
    	</script>
 
     <script type="text/template" id="session-tmpl">
@@ -163,16 +165,49 @@
 
     		<div>
     			<label for="pname">Name: </label>
-    			<input type="text" name="pname" id="pname" value="<%= data.pname %>">
+    			<input type="text" name="pname" id="pname" value="">
     		</div>
 
     		<div>
     			<label for="feedurl">Feed URL: </label>
-    			<input type="text" name="feedurl" id="feedurl" value="<%= data.feedurl %>">
+    			<input type="text" name="feedurl" id="feedurl" value="">
     		</div>
 
     		<div>
     			<a href="#profile/<%= data.pid %>">cancel</a>
+    			<input type="submit" value="Save" class="saveBtn">
+    		</div>
+    	</form>
+   	</script>
+
+    <script type="text/template" id="addprofile-tmpl">
+    	<div><a href="/-admin">Back to admin page</a></div>
+    	<hr>
+    	<h1>Add Profile</h1>
+    	<form action="" method="post">    		
+
+    		<div>
+    			<label for="pid">Profile ID: </label>
+    			<input type="text" name="pid" id="pid" value="">
+    		</div>
+
+    		<div>
+    			<label for="pname">Name: </label>
+    			<input type="text" name="pname" id="pname" value="">
+    		</div>
+
+    		<div>
+    			<label for="pwd">Password: </label>
+    			<input type="text" name="pwd" id="pwd" value="">
+    		</div>    		
+
+    		<div>
+    			<label for="bio">Bio: </label>
+    			<input type="text" name="bio" id="bio" value="">
+    		</div>
+
+    		<div>
+    			<a href="#home">cancel</a>
     			<input type="submit" value="Save" class="saveBtn">
     		</div>
     	</form>
