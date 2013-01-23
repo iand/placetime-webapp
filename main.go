@@ -120,7 +120,7 @@ func timelineHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsonTimelineHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, sessionPid := checkSession(w, r)
+	sessionValid, sessionPid := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -179,7 +179,7 @@ func jsonTimelineHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsonItemHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, _ := checkSession(w, r)
+	sessionValid, _ := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -206,7 +206,7 @@ func jsonItemHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsonSuggestedProfilesHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, _ := checkSession(w, r)
+	sessionValid, _ := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -233,7 +233,7 @@ func jsonSuggestedProfilesHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsonFollowersHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, _ := checkSession(w, r)
+	sessionValid, _ := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -272,7 +272,7 @@ func jsonFollowersHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsonFollowingHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, _ := checkSession(w, r)
+	sessionValid, _ := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -311,7 +311,7 @@ func jsonFollowingHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsonProfileHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, _ := checkSession(w, r)
+	sessionValid, _ := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -338,7 +338,7 @@ func jsonProfileHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func followHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, sessionPid := checkSession(w, r)
+	sessionValid, sessionPid := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -358,7 +358,7 @@ func followHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func unfollowHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, sessionPid := checkSession(w, r)
+	sessionValid, sessionPid := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -378,7 +378,7 @@ func unfollowHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func initHandler(w http.ResponseWriter, r *http.Request) {
-	// sessionValid, _ := checkSession(w, r)
+	// sessionValid, _ := checkSession(w, r, false)
 	// if !sessionValid {
 	// 	return
 	// }
@@ -504,7 +504,7 @@ func vocabRedirectHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func adminHandler(w http.ResponseWriter, r *http.Request) {
-	// sessionValid, sessionPid := checkSession(w, r)
+	// sessionValid, sessionPid := checkSession(w, r, false)
 	// if !sessionValid {
 	// 	return
 	// }
@@ -521,7 +521,7 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func addHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, _ := checkSession(w, r)
+	sessionValid, _ := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -549,7 +549,7 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func promoteHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, sessionPid := checkSession(w, r)
+	sessionValid, sessionPid := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -573,7 +573,7 @@ func promoteHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func demoteHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, sessionPid := checkSession(w, r)
+	sessionValid, sessionPid := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -597,7 +597,7 @@ func demoteHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func addSuggestHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, _ := checkSession(w, r)
+	sessionValid, _ := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -617,7 +617,7 @@ func addSuggestHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func remSuggestHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, _ := checkSession(w, r)
+	sessionValid, _ := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -653,7 +653,7 @@ func sessionHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "")
 }
 
-func checkSession(w http.ResponseWriter, r *http.Request) (bool, string) {
+func checkSession(w http.ResponseWriter, r *http.Request, silent bool) (bool, string) {
 	var pid string
 	valid := false
 
@@ -690,7 +690,7 @@ func checkSession(w http.ResponseWriter, r *http.Request) (bool, string) {
 		}
 	}
 
-	if !valid {
+	if !silent && !valid {
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 	}
 
@@ -715,7 +715,7 @@ func createSession(pid string, w http.ResponseWriter, r *http.Request) {
 }
 
 func checkSessionHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, _ := checkSession(w, r)
+	sessionValid, _ := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -747,7 +747,7 @@ func addProfileHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	sessionValid, _ := checkSession(w, r)
+	sessionValid, _ := checkSession(w, r, true)
 	if !sessionValid {
 		createSession(pid, w, r)
 	}
@@ -755,7 +755,7 @@ func addProfileHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func updateProfileHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, _ := checkSession(w, r)
+	sessionValid, _ := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -778,7 +778,7 @@ func updateProfileHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func removeProfileHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, sessionPid := checkSession(w, r)
+	sessionValid, sessionPid := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -1004,7 +1004,7 @@ func updateProfileFeedData(data *ProfileFeedData) error {
 }
 
 func refreshHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, sessionPid := checkSession(w, r)
+	sessionValid, sessionPid := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
@@ -1044,7 +1044,7 @@ func refreshHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jsonFeedsHandler(w http.ResponseWriter, r *http.Request) {
-	sessionValid, _ := checkSession(w, r)
+	sessionValid, _ := checkSession(w, r, false)
 	if !sessionValid {
 		return
 	}
