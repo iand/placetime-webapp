@@ -40,6 +40,10 @@ func profileKey(pid string) string {
 	return fmt.Sprintf("%s:info", pid)
 }
 
+func feedsKey(pid string) string {
+	return fmt.Sprintf("%s:feeds", pid)
+}
+
 func possiblyKey(pid string, ordering string) string {
 	return fmt.Sprintf("%s:possibly:%s", pid, ordering)
 }
@@ -132,17 +136,18 @@ func (s *RedisStore) ProfileExists(pid string) (bool, error) {
 }
 
 func (s *RedisStore) Profile(pid string) (*Profile, error) {
-	rs := s.db.Command("HMGET", profileKey(pid), "name", "bio", "feedurl")
+	rs := s.db.Command("HMGET", profileKey(pid), "name", "bio", "feedurl", "parentpid")
 	if !rs.IsOK() {
 		return nil, rs.Error()
 	}
 
 	vals := rs.ValuesAsStrings()
 	p := Profile{
-		Pid:     pid,
-		Name:    vals[0],
-		Bio:     vals[1],
-		FeedUrl: vals[2],
+		Pid:       pid,
+		Name:      vals[0],
+		Bio:       vals[1],
+		FeedUrl:   vals[2],
+		ParentPid: vals[3],
 	}
 
 	rs = s.db.Command("ZCARD", possiblyKey(pid, "ts"))
@@ -165,16 +170,21 @@ func (s *RedisStore) Profile(pid string) (*Profile, error) {
 		p.FollowerCount, _ = rs.ValueAsInt()
 	}
 
+	rs = s.db.Command("SCARD", feedsKey(pid))
+	if rs.IsOK() {
+		p.FeedCount, _ = rs.ValueAsInt()
+	}
+
 	return &p, nil
 }
 
-func (s *RedisStore) AddProfile(pid string, password string, pname string, bio string, feedurl string) error {
+func (s *RedisStore) AddProfile(pid string, password string, pname string, bio string, feedurl string, parentpid string) error {
 	pwdhash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.MaxCost)
 	if err != nil {
 		return err
 	}
 
-	rs := s.db.Command("HMSET", profileKey(pid), "name", pname, "bio", bio, "feedurl", feedurl, "pwdhash", pwdhash)
+	rs := s.db.Command("HMSET", profileKey(pid), "name", pname, "bio", bio, "feedurl", feedurl, "pwdhash", pwdhash, "parentpid", parentpid)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
@@ -185,12 +195,48 @@ func (s *RedisStore) AddProfile(pid string, password string, pname string, bio s
 			return rs.Error()
 		}
 	}
+	if parentpid != "" {
+		rs := s.db.Command("SADD", feedsKey(parentpid), pid)
+		if !rs.IsOK() {
+			return rs.Error()
+		}
+	}
+
+	return nil
+
+}
+
+func (s *RedisStore) UpdateProfile(pid string, pname string, bio string, feedurl string, parentpid string) error {
+
+	rs := s.db.Command("HMSET", profileKey(pid), "name", pname, "bio", bio, "feedurl", feedurl, "parentpid", parentpid)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	if feedurl != "" {
+		rs := s.db.Command("SADD", FEED_DRIVEN_PROFILES, pid)
+		if !rs.IsOK() {
+			return rs.Error()
+		}
+	}
+	if parentpid != "" {
+		rs := s.db.Command("SADD", feedsKey(parentpid), pid)
+		if !rs.IsOK() {
+			return rs.Error()
+		}
+	}
 
 	return nil
 
 }
 
 func (s *RedisStore) RemoveProfile(pid string) error {
+
+	p, err := s.Profile(pid)
+	if err != nil {
+		return err
+	}
+
 	rs := s.db.Command("DEL", possiblyKey(pid, "ts"))
 	if !rs.IsOK() {
 		return rs.Error()
@@ -232,6 +278,18 @@ func (s *RedisStore) RemoveProfile(pid string) error {
 	rs = s.db.Command("DEL", followingKey(pid))
 	if !rs.IsOK() {
 		return rs.Error()
+	}
+
+	rs = s.db.Command("SREM", FEED_DRIVEN_PROFILES, pid)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	if p.ParentPid != "" {
+		rs = s.db.Command("SREM", feedsKey(p.ParentPid), pid)
+		if !rs.IsOK() {
+			return rs.Error()
+		}
 	}
 
 	return nil
@@ -657,5 +715,29 @@ func (s *RedisStore) ValidSession(pid string, sessionId int64) (bool, error) {
 	}
 
 	return (rs.ValueAsString() == pid), nil
+
+}
+
+func (s *RedisStore) Feeds(pid string) ([]*Profile, error) {
+	rs := s.db.Command("SMEMBERS", feedsKey(pid))
+	if !rs.IsOK() {
+		return nil, rs.Error()
+	}
+
+	feeds := make([]*Profile, 0)
+
+	vals := rs.ValuesAsStrings()
+
+	for _, fid := range vals {
+		feed, err := s.Profile(fid)
+		if err != nil {
+			// TODO: log
+		} else {
+
+		}
+		feeds = append(feeds, feed)
+	}
+
+	return feeds, nil
 
 }

@@ -1,435 +1,219 @@
 <!DOCTYPE html>
-<html>
-
-	<head>
-		<title>Placetime Admin</title>
-	    <link href="/-assets/bootstrap/css/bootstrap.css" rel="stylesheet">
-	    <style type="text/css">
-	      body {
-	        padding-top: 60px;
-	        padding-bottom: 40px;
-	      }
-	    </style>
-	    <link href="/-assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-	    
-	    <!-- Typekit font loader -->
-    	    <script type="text/javascript" src="http://use.typekit.net/bsa5hge.js"></script>
-            <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-
-	</head>
-
-	<body>
-		<div class="container">
-			<h1>Placetime Admin</h1>
-			<div class="row">
-
-			 <div class="span12">
-
-					<p>Blurb...</p>
-					<p><a href="https://github.com/iand/timescroll/wiki/API">API docs are here</a></p>
-			    <ul>
-			    
-			    <li><a href="#jtl">User timelines</a></li>
-			    <li><a href="#jit">Item details</a></li>
-			    <li><a href="#jpr">Profile details</a></li>
-			    <li><a href="#jfollowers">Followers</a></li>
-			    <li><a href="#jfollowing">Following</a></li>
-			    <li><a href="#jsp">Suggested profiles</a></li>
-			    <li><a href="#tfollow">Follow a user</a></li>
-			    <li><a href="#tunfollow">Unfollow a user</a></li>
-			    <li><a href="#tadd">Add an item</a></li>
-			    <li><a href="#tpromote">Promote an item</a></li>
-			    <li><a href="#tdemote">Demote an item</a></li>
-			    <li><a href="#taddsuggest">Add a suggested profile</a></li>
-			    <li><a href="#tremsuggest">Remove a suggested profile</a></li>
-			    <li><a href="#taddprofile">Register a new user</a></li>
-			    <li><a href="#session">Login as a user</a></li>
-			    </ul>
-
-
-					<h2>API</h2>
-
-					<p>Convenient access to API calls. Remember these output JSON.</p>
-
-					<h3 id="jtl">User timelines</h3>
-					<p>Retrieve timeline items for a user.</p>
-					<form action="/-jtl" method="get" class="form-horizontal">
-						<div class="control-group"><label class="control-label" for="pid">User id: </label><div class="controls"><input type="text" name="pid" size="20" value="nasa"></div></div>
-						<div class="control-group"><label class="control-label" for="order">Sort order: </label><div class="controls"><select name="order"><option value="ts">Creation date</option><option value="ets">Event date</option></select></div></div>
-						<div class="control-group"><label class="control-label" for="status">Status: </label><div class="controls"><select name="status"><option value="p">Possibly</option><option value="m">Maybe</option></select></div></div>	
-
-						<div class="control-group"><label class="control-label" for="count">Count: </label><div class="controls"><input type="text" name="count" size="5"></div></div>
-						<div class="control-group"><label class="control-label" for="tstart">Starting timestamp: </label><div class="controls"><input type="text" name="tstart" size="5"> (not implemented yet)</div></div>
-						<div class="control-group"><label class="control-label" for="tend">Ending timestamp: </label><div class="controls"><input type="text" name="tend" size="5"> (not implemented yet)</div></div>
-
-
-						<div class="control-group"><div class="controls"><input type="submit" value="GO"></div></div>
-
-					</form>
-					<hr>
-
-
-					<h3 id="jit">Item details</h3>
-					<p>Retrieve a single item. </p>
-					<form action="/-jit" method="get" class="form-horizontal">
-						<div class="control-group">
-						<label class="control-label" for="id">Item id:</label>
-						<div class="controls"><input type="text" name="id" size="20" value="item:nasa:10"></div></div>
-
-						<div class="control-group"><div class="controls">
-						<input type="submit" value="GO">
-						</div></div>
-					</form>
-					<hr>
-
-					<h3 id="jpr">Profile details</h3>
-					<p>Retrieve information about a profile </p>
-					<form action="/-jpr" method="get" class="form-horizontal">
-						<div class="control-group">
-						<label class="control-label" for="pid">Profile id: </label>
-						<div class="controls"><input type="text" name="pid" size="20" value="nasa"></div></div>
-
-						<div class="control-group"><div class="controls">
-						<input type="submit" value="GO">
-						</div></div>
-					</form>
-					<hr>
-
-					<h3 id="jfollowers">Followers</h3>
-					<p>List a user's followers </p>
-					<form action="/-jfollowers" method="get" class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label" for="pid">Profile id: </label>
-							<div class="controls">
-								<input type="text" name="pid" size="20" value="nasa">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label" for="count">Max number of results: </label>
-							<div class="controls">
-								<input type="text" name="count" size="5" value="20">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label" for="count">Starting index: </label>
-							<div class="controls">
-								<input type="text" name="count" size="5" value="0"> (for paging)
-							</div>
-						</div>
-
-						<div class="control-group">
-							<div class="controls">
-								<input type="submit" value="GO">
-							</div>
-						</div>
-					</form>
-					<hr>
-
-					<h3 id="jfollowing">Following</h3>
-					<p>List who the user follows</p>
-					<form action="/-jfollowing" method="get" class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label" for="pid">Profile id: </label>
-							<div class="controls">
-								<input type="text" name="pid" size="20" value="nasa">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label" for="count">Max number of results: </label>
-							<div class="controls">
-								<input type="text" name="count" size="5" value="20">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label" for="count">Starting index: </label>
-							<div class="controls">
-								<input type="text" name="count" size="5" value="0"> (for paging)
-							</div>
-						</div>
-
-						<div class="control-group">
-							<div class="controls">
-								<input type="submit" value="GO">
-							</div>
-						</div>
-					</form>
-					<hr>
-
-					<h3 id="jsp">Suggested profiles</h3>
-					<p>Retrieve a list of suggested profiles for a location.</p>
-					<form action="/-jsp" method="get" class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label" for="loc">Location: </label>
-							<div class="controls">
-								<input type="text" name="loc" size="20" value="london">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<div class="controls">
-								<input type="submit" value="GO">
-							</div>
-						</div>
-					</form>
-					<hr>
-
-
-					<h3 id="tfollow">Follow a user</h3>
-					<p>Make one user follow another </p>
-					<form action="/-tfollow" method="post" class="form-horizontal">
-						<div class="control-group">
-						<label class="control-label" for="pid">Profile id: </label>
-						<div class="controls"><input type="text" name="pid" size="20" value="iand"></div></div>
-
-						<div class="control-group">
-						<label class="control-label" class="control-label" for="followpid">Profile id to follow: </label>
-						<div class="controls"><input type="text" name="followpid" size="20" value="nasa"></div></div>
-
-						<div class="control-group"><div class="controls">
-						<input type="submit" value="GO">
-						</div></div>
-					</form>
-					<hr>
-
-					<h3 id="tunfollow">Unfollow a user</h3>
-					<p>Stop one user following another </p>
-					
-					<form action="/-tunfollow" method="post" class="form-horizontal">
-						<div class="control-group">
-						<label class="control-label" for="pid">Profile id: </label>
-						<div class="controls"><input type="text" name="pid" size="20" value="iand"></div></div>
-
-						<div class="control-group">
-						<label class="control-label" for="followpid">Profile id to unfollow: </label>
-						<div class="controls"><input type="text" name="followpid" size="20" value="nasa"></div></div>
-
-						<div class="control-group"><div class="controls">
-						<input type="submit" value="GO">
-					</div></div>
-					</form>
-					<hr>
-
-
-
-					<h3 id="tadd">Add an item to a user's maybe timeline</h3>
-					
-					<form action="/-tadd" method="post" class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label" for="pid">Profile id: </label>
-							<div class="controls">
-								<input type="text" name="pid" size="20" value="iand">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label" for="text">Item text: </label>
-							<div class="controls">
-								<input type="text" name="text" size="40">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label" for="link">Link: </label>
-							<div class="controls">
-								<input type="text" name="link" size="40">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label" for="ets">Event timestamp: </label>
-							<div class="controls">
-								<input type="text" name="ets" size="20"> (like 26 Aug 2012)
-							</div>
-						</div>
-
-						<div class="control-group">
-							<div class="controls">
-								<input type="submit" value="GO">
-							</div>
-						</div>
-					</form>
-					<hr>
-
-
-					<h3 id="tpromote">Promote an item</h3>
-					<p>Promote an item from possibly to maybe</p>
-					<form action="/-tpromote" method="post" class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label" for="pid">Profile id: </label>
-							<div class="controls">
-								<input type="text" name="pid" size="20" value="iand">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label" for="id">Item id: </label>
-							<div class="controls">
-								<input type="text" name="id" size="40">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<div class="controls">
-								<input type="submit" value="GO">
-							</div>
-						</div>
-					</form>
-					<hr>
-
-					<h3 id="tdemote">Demote an item</h3>
-					<p>Demote an item from maybe to possibly.</p>
-					<form action="/-tdemote" method="post" class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label" for="pid">Profile id: </label>
-							<div class="controls">
-								<input type="text" name="pid" size="20" value="iand">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label" for="id">Item id: </label>
-							<div class="controls">
-								<input type="text" name="id" size="40">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<div class="controls">
-								<input type="submit" value="GO">
-							</div>
-						</div>
-					</form>
-					<hr>
-
-
-
-
-					<h3 id="taddsuggest">Add a suggested profile</h3>
-					<form action="/-taddsuggest" method="post" class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label" for="pid">Profile id: </label>
-							<div class="controls">
-								<input type="text" name="pid" size="20" value="nasa">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label" for="loc">Location: </label>
-							<div class="controls">
-								<input type="text" name="loc" size="20" value="london">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<div class="controls">
-								<input type="submit" value="GO">
-							</div>
-						</div>
-					</form>
-					<hr>
-
-					<h3 id="tremsuggest">Remove a suggested profile</h3>
-					<form action="/-tremsuggest" method="post" class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label" for="pid">Profile id: </label>
-							<div class="controls">
-								<input type="text" name="pid" size="20" value="nasa">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label" for="loc">Location: </label>
-							<div class="controls">
-								<input type="text" name="loc" size="20" value="london">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<div class="controls">
-								<input type="submit" value="GO">
-							</div>
-						</div>
-					</form>
-					<hr>
-
-					<h3 id="taddprofile">Register a new user</h3>
-					<p>Careful: no checking of duplicate profile ids is done yet</p>
-					<form action="/-taddprofile" method="post" class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label">Profile id: </label>
-							<div class="controls">
-								<input type="text" name="pid" size="20" value="">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label">Name: </label>
-							<div class="controls">
-								<input type="text" name="name" size="20" value="">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label">Password: </label>
-							<div class="controls">
-								<input type="text" name="pwd" size="20" value="">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label">Bio: </label>
-							<div class="controls">
-								<input type="text" name="bio" size="20" value="">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label">Feed URL: </label>
-							<div class="controls">
-								<input type="text" name="feedurl" size="40" value="">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<div class="controls">
-								<input type="submit" value="GO">
-							</div>
-						</div>
-					</form>
-					<hr>
-
-					<h3 id="session">Login as user</h3>
-					<form action="/-session" method="post" class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label" for="pid">Profile id: </label>
-							<div class="controls">
-								<input type="text" name="pid" size="20" value="nasa">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<label class="control-label" for="loc">Password: </label>
-							<div class="controls">
-								<input type="text" name="pwd" size="20" value="london">
-							</div>
-						</div>
-
-						<div class="control-group">
-							<div class="controls">
-								<input type="submit" value="GO">
-							</div>
-						</div>
-					</form>
-					<hr>
-				</div>
-			</div>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Placetime Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link rel="stylesheet" href="/-assets/css/normalize.min.css">
+    <link rel="stylesheet" href="/-assets/css/admin.css"/>  
+  </head>
+
+  <body>
+
+    <div id="content"></div>
+      
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/-assets/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
+    <script src="/-assets/js/json2.js"></script>
+    <script src="/-assets/js/underscore.js"></script>
+    <script src="/-assets/js/backbone-min.js"></script>
+    <script src="/-assets/js/moment.min.js"></script>
+    <script src="/-assets/js/iscroll.js"></script>
+    <script src="/-tmpl"></script>
+    <script src="/-assets/js/util.js"></script>
+    <script src="/-assets/js/admin.js"></script>
+
+    <script type="text/template" id="main-tmpl">
+    	<h1>Placetime Admin</h1>
+    	<% if (data.msg) { %>
+    		<div class="message"><%= data.msg %></div>
+    	<% } %>
+    	<form action="#profile" method="post">
+	    	<label for="pid">User profile:</label> <input type="text" id="pid" name="pid" size="20" value="">
+	    	<input type="submit" value="Manage Profile" class="profileBtn">
+		</form>
+   	</script>
+
+    <script type="text/template" id="session-tmpl">
+    	<h1>Session Expired</h1>
+		<div><a href="/timeline">Login again</a></div>
+   	</script>
+
+    <script type="text/template" id="profile-tmpl">
+    	<div><a href="/-admin">Back to admin page</a></div>
+    	<hr>
+    	<h1>Manage Profile</h1>
+    	<div>Profile: <%= data.pid %></div>
+    	<div>Name: <%= data.pname %></div>
+    	<div>Bio: <%= data.bio %></div>
+    	<div>Date joined: <%= data.joined %></div>
+    	<div>Followed items: <%= data.pcount %></div>
+    	<div>Bookmarked items: <%= data.mcount %></div>
+
+    	<div>Following: <a href="#following/<%= data.pid %>"><%= data.followingcount %></a></div>
+    	<div>Followers: <a href="#followers/<%= data.pid %>"><%= data.followercount %></a></div>
+
+    	<% if(data.parentpid) { %>
+    		<div>Parent profile: <a href="#profile/<%= data.parentpid %>"><%= data.parentpid %></a></div>
+    		<div>Feed URL: <%= data.feedurl %></div>
+    	<% } else { %>
+	    	<div>Feeds: <a href="#feeds/<%= data.pid %>"><%= data.feedcount %></a></div>
+
+    	<% } %>
+
+
+    	<button class="editBtn">Edit Profile</button>
+    	<button class="feedBtn">Add Feed</button>
+
+
+    	<div class="items">
+    		<h2>Items</h2>
+    	</div>
+    </script>
+
+
+    <script type="text/template" id="feed-tmpl">
+    	<div><a href="/-admin">Back to admin page</a></div>
+    	<hr>
+    	<h1>Manage Feed</h1>
+    	<div>Profile: <%= data.pid %></div>
+    	<div>Name: <%= data.pname %></div>
+    	<div>Items in feed: <%= data.mcount %></div>
+    	<div>Followers: <a href="#followers/<%= data.pid %>"><%= data.followercount %></a></div>
+
+		<div>Parent profile: <a href="#profile/<%= data.parentpid %>"><%= data.parentpid %></a></div>
+		<div>Feed URL: <%= data.feedurl %></div>
+
+
+    	<button class="editBtn">Edit Feed</button>
+    	<button class="deleteBtn">Delete Feed</button>
+    	<button class="refreshBtn">Refresh Feed</button>
+
+
+    	<div class="msg">
+			<!-- this is where any error messages go -->    		
+    	</div>
+
+    	<div class="items">
+    		<h2>Items</h2>
+    	</div>
+
+   	</script>
+
+    <script type="text/template" id="editprofile-tmpl">
+    	<div><a href="/-admin">Back to admin page</a></div>
+    	<hr>
+    	<h1>Edit Profile</h1>
+    	<form action="" method="post">
+    		
+    		<div>
+    			<label for="pname">Name: </label>
+    			<input type="text" name="pname" id="pname" value="<%= data.pname %>">
+    		</div>
+
+    		<div>
+    			<label for="bio">Bio: </label>
+    			<input type="text" name="bio" id="bio" value="<%= data.bio %>">
+    		</div>
+
+    		<div>
+    			<a href="#profile/<%= data.pid %>">cancel</a>
+    			<input type="submit" value="Save" class="saveBtn">
+    		</div>
+    	</form>
+   	</script>
+    <script type="text/template" id="editfeed-tmpl">
+    	<div><a href="/-admin">Back to admin page</a></div>
+    	<hr>
+    	<h1>Edit Feed</h1>
+    	<form action="" method="post">
+    		
+    		<div>
+    			<label for="pname">Name: </label>
+    			<input type="text" name="pname" id="pname" value="<%= data.pname %>">
+    		</div>
+
+    		<div>
+    			<label for="parentpid">Parent profile id: </label>
+    			<input type="text" name="parentpid" id="parentpid" value="<%= data.parentpid %>">
+    		</div>
+
+    		<div>
+    			<label for="feedurl">Feed URL: </label>
+    			<input type="text" name="feedurl" id="feedurl" value="<%= data.feedurl %>">
+    		</div>
+
+    		<div>
+    			<a href="#profile/<%= data.pid %>">cancel</a>
+    			<input type="submit" value="Save" class="saveBtn">
+    		</div>
+    	</form>
+   	</script>
+
+    <script type="text/template" id="addfeed-tmpl">
+    	<div><a href="/-admin">Back to admin page</a></div>
+    	<hr>
+    	<h1>Add Feed</h1>
+    	<form action="" method="post">    		
+
+    		<div>
+    			<label for="feedpid">Feed ID (will be prefixed by "<%= data.pid %>~"): </label>
+    			<input type="text" name="feedpid" id="feedpid" value="">
+    		</div>
+
+    		<div>
+    			<label for="pname">Name: </label>
+    			<input type="text" name="pname" id="pname" value="<%= data.pname %>">
+    		</div>
+
+    		<div>
+    			<label for="feedurl">Feed URL: </label>
+    			<input type="text" name="feedurl" id="feedurl" value="<%= data.feedurl %>">
+    		</div>
+
+    		<div>
+    			<a href="#profile/<%= data.pid %>">cancel</a>
+    			<input type="submit" value="Save" class="saveBtn">
+    		</div>
+    	</form>
+   	</script>
+
+	<script type="text/template" id="briefprofile-tmpl">
+		<div><a href="#/profile/<%= data.pid %>"><%= data.pname %> (@<%= data.pid %>)</a></div>
+	</script>
+
+	<script type="text/template" id="briefitem-tmpl">
+		<div>
+			<div>Title: <%= data.text %></div>
+			<div>URL: <%= data.link %></div>
+			<div>Date: <%= data.ets %></div>
+
 		</div>
+	</script>
 
-	</body>
+    <script type="text/template" id="following-tmpl">
+    	<div><a href="/-admin">Back to admin page</a></div>
+    	<hr>
+    	<h1>Profiles Followed by <%= data.pid %></h1>
+   	</script>
+
+    <script type="text/template" id="followers-tmpl">
+    	<div><a href="/-admin">Back to admin page</a></div>
+    	<hr>
+    	<h1>Profiles Following <%= data.pid %></h1>
+   	</script>
 
 
+    <script type="text/template" id="feeds-tmpl">
+    	<div><a href="/-admin">Back to admin page</a></div>
+    	<hr>
+    	<h1>Feeds for <%= data.pid %></h1>
+   	</script>  	
+
+	<script type="text/template" id="brieffeed-tmpl">
+		<div><a href="#/profile/<%= data.pid %>"><%= data.pname %> (@<%= data.pid %>)</a>: <%= data.feedurl %></div>
+	</script>
+
+  </body>
 </html>
+

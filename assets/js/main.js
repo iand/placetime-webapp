@@ -1,82 +1,8 @@
 $(function(){
 
-    // Disable jquery mobile routing so we can use backbone routing
-    $(document).bind("mobileinit", function () {
-        $.mobile.ajaxEnabled = false;
-        $.mobile.linkBindingEnabled = false;
-        $.mobile.hashListeningEnabled = false;
-        $.mobile.pushStateEnabled = false;
-
-
-      // Remove pages from the DOM when they are hidden (since we disabled jqm routing)
-      $('div[data-role="page"]').live('pagehide', function (event, ui) {
-        $(event.currentTarget).remove();
-      });
-
-    });
 
     /* 
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    HELPERS
-
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-
-    function hashCode(){
-        var hash = 0, i, char;
-        if (this.length == 0) return hash;
-        for (i = 0; i < this.length; i++) {
-            char = this.charCodeAt(i);
-            hash = ((hash<<5)-hash)+char;
-            hash = hash & hash; 
-        }
-        return hash;
-    }
-
-
-    function getCookie(c_name) {
-     
-      var i, x, y, ARRcookies = document.cookie.split(";");
-        
-      for (i = 0; i < ARRcookies.length; i++) {
-        x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
-        y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
-        x = x.replace(/^\s+|\s+$/g,"");
-        if (x === c_name) {
-          return unescape(y);
-        }
-      }
-    }
-    
-    function setCookie(c_name, value) {
-      var exdate = new Date();
-      exdate.setHours(exdate.getHours() + 1);
-      var c_value = escape(value) + "; expires=" + exdate.toUTCString();
-      document.cookie=c_name + "=" + c_value;
-    }
-
-
-    function displayValidationErrors (messages) {
-        for (var key in messages) {
-            if (messages.hasOwnProperty(key)) {
-                console.log(messages[key]);
-                addValidationError(key, messages[key]);
-            }
-        }
-    }
-    
-    function addValidationError(field, message) {
-        var controlGroup = $('#' + field).parent();
-        controlGroup.addClass('error');
-        $('.hint', controlGroup).html(message);
-    }
-
-    function removeValidationError(field) {
-        var controlGroup = $('#' + field).parent();
-        controlGroup.removeClass('error');
-        $('.hint', controlGroup).html('');
-    }
 
     /* 
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -86,7 +12,6 @@ $(function(){
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     */
     var Item = Backbone.Model.extend({idAttribute: "id"});
-    var Session = Backbone.Model.extend({});
 
 
 
@@ -538,51 +463,33 @@ $(function(){
         }
 
         ,timeline:function () {
-          console.log("Routed to timeline");
           var self = this;
-          session.set("ptsession", getCookie("ptsession"));
-          pts = session.get("ptsession");
-          if (pts) {
-            $.ajax({
-                url:"/-chksession"
-                ,dataType:"json"
-                ,success:function (data) {
-                  session.set("pid", session.get("ptsession").split("|")[0]);
+          session.check( function() {
+                          var items = new ItemList();
+                          items.order = "ets";
+                          items.pid = session.get("pid");
+                          items.status = 'p';
+                          items.refresh();
 
-                  console.log("Valid session for pid: " +session.get("pid"));
+                          var myItems = new ItemList();
+                          myItems.order = items.order;
+                          myItems.pid = items.pid;
+                          myItems.status = 'm';
+                          myItems.refresh();
 
-                  var items = new ItemList();
-                  items.order = "ets";
-                  items.pid = session.get("pid");
-                  items.status = 'p';
-                  items.refresh();
+                          
 
-                  var myItems = new ItemList();
-                  myItems.order = items.order;
-                  myItems.pid = items.pid;
-                  myItems.status = 'm';
-                  myItems.refresh();
+                          self.changePage(new ItemsView({ 
+                                                           el:$('#content')
+                                                          ,itemsModel:items
+                                                          ,myitemsModel: myItems
+                                                        }));
 
-                  
-
-                  self.changePage(new ItemsView({ 
-                                                   el:$('#content')
-                                                  ,itemsModel:items
-                                                  ,myitemsModel: myItems
-                                                }));
-
-
-                }
-                ,error:function (data) {
-                  session.set("pid", null);
-                  console.log("Invalid session");
-                  self.login();
-                }
-              });
-            
-          } else {
-            this.login();
-          }
+                        }, 
+                        function() {
+                          self.login();
+                        }
+                      );
         }
 
         ,login:function () {
