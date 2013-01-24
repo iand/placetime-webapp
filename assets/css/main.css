@@ -11,8 +11,8 @@
 /* general styles */
 html { height: 100%; }
 body { font-family: "proxima-nova-1","proxima-nova-2"; background: #deddd8; }
-h1 { font-size: 1.5em; color: #fff; }
-h2 { font-size: 1em; color: #fff; }
+h1 { font-size: 1.5em; color: #fff; font-weight: 500; }
+h2 { font-size: 1em; color: #fff; font-weight: 500;}
 div { border: 0px solid #ddd; }
 a { text-decoration: none; color: #000; }
 p { margin: 2px; padding: 0px; }
