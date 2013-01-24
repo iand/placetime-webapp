@@ -176,9 +176,9 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 		0px -1px 0px rgba(000,000,000,0.2),
 		0px 1px 0px rgba(255,255,255,0.3);
         margin: 8px 0px 4px 4px;
-        -webkit-transition-duration: 0.2s;
-        -moz-transition-duration: 0.2s;
-        transition-duration: 0.2s;
+        -webkit-transition-duration: 0.4s;
+        -moz-transition-duration: 0.4s;
+        transition-duration: 0.4s;
 }
 
 .loginBtn:hover, .submitBtn:hover, .Btn:hover, .editBtn:hover, .saveBtn:hover, .deleteBtn:hover, .refreshBtn:hover, .feedBtn:hover, .profileBtn:hover, .loginBtn:focus, .submitBtn:focus, .Btn:focus, .editBtn:focus, .saveBtn:focus, .deleteBtn:focus, .refreshBtn:focus, .feedBtn:focus, .profileBtn:focus {
