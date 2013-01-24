@@ -142,7 +142,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 
 /* forms */
 
-input {
+input[type=text] {
     display: inline-block;
     padding: 8px 8px;
     height: 18px;
