@@ -189,6 +189,9 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 .loginBtn:active, .submitBtn:active, .Btn:active, .editBtn:active, .saveBtn:active, .deleteBtn:active, .refreshBtn:active, .feedBtn:active, .profileBtn:active {
 	background: #ccc;
 	border: 2px solid #ff9900;
+	-webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+        box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 .promotebtn {
