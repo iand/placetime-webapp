@@ -179,6 +179,10 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
         -webkit-transition-duration: 0.2s;
         -moz-transition-duration: 0.2s;
         transition-duration: 0.2s;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        user-select:none;
 }
 
 .loginBtn:hover, .submitBtn:hover, .Btn:hover, .editBtn:hover, .saveBtn:hover, .deleteBtn:hover, .refreshBtn:hover, .feedBtn:hover, .profileBtn:hover, .loginBtn:focus, .submitBtn:focus, .Btn:focus, .editBtn:focus, .saveBtn:focus, .deleteBtn:focus, .refreshBtn:focus, .feedBtn:focus, .profileBtn:focus {
