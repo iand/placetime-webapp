@@ -120,18 +120,18 @@
     	<form action="" method="post">
     		
     		<div>
-    			<label for="pname">Name: </label>
+    			<label for="pname">Name </label>
     			<input type="text" name="pname" id="pname" value="<%= data.pname %>">
     		</div>
 
     		<div>
-    			<label for="bio">Bio: </label>
+    			<label for="bio">Bio </label>
     			<input type="text" name="bio" id="bio" value="<%= data.bio %>">
     		</div>
 
     		<div>
-    			<a href="#profile/<%= data.pid %>">cancel</a>
     			<input type="submit" value="Save" class="saveBtn">
+    			<a href="#profile/<%= data.pid %>">cancel</a>
     		</div>
     	</form>
    	</script>
@@ -142,23 +142,23 @@
     	<form action="" method="post">
     		
     		<div>
-    			<label for="pname">Name: </label>
+    			<label for="pname">Name </label>
     			<input type="text" name="pname" id="pname" value="<%= data.pname %>">
     		</div>
 
     		<div>
-    			<label for="parentpid">Parent profile id: </label>
+    			<label for="parentpid">Parent profile id </label>
     			<input type="text" name="parentpid" id="parentpid" value="<%= data.parentpid %>">
     		</div>
 
     		<div>
-    			<label for="feedurl">Feed URL: </label>
+    			<label for="feedurl">Feed URL </label>
     			<input type="text" name="feedurl" id="feedurl" value="<%= data.feedurl %>">
     		</div>
 
     		<div>
-    			<a href="#profile/<%= data.pid %>">cancel</a>
     			<input type="submit" value="Save" class="saveBtn">
+    			<a href="#profile/<%= data.pid %>">cancel</a>
     		</div>
     	</form>
    	</script>
@@ -170,23 +170,23 @@
     	<form action="" method="post">    		
 
     		<div>
-    			<label for="feedpid">Feed ID (will be prefixed by "<%= data.pid %>~"): </label>
+    			<label for="feedpid">Feed ID (will be prefixed by "<%= data.pid %>~") </label>
     			<input type="text" name="feedpid" id="feedpid" value="">
     		</div>
 
     		<div>
-    			<label for="pname">Name: </label>
+    			<label for="pname">Name </label>
     			<input type="text" name="pname" id="pname" value="">
     		</div>
 
     		<div>
-    			<label for="feedurl">Feed URL: </label>
+    			<label for="feedurl">Feed URL </label>
     			<input type="text" name="feedurl" id="feedurl" value="">
     		</div>
 
     		<div>
-    			<a href="#profile/<%= data.pid %>">cancel</a>
     			<input type="submit" value="Save" class="saveBtn">
+    			<a href="#profile/<%= data.pid %>">cancel</a>
     		</div>
     	</form>
    	</script>
@@ -198,28 +198,28 @@
     	<form action="" method="post">    		
 
     		<div>
-    			<label for="pid">Profile ID: </label>
+    			<label for="pid">Profile ID </label>
     			<input type="text" name="pid" id="pid" value="">
     		</div>
 
     		<div>
-    			<label for="pname">Name: </label>
+    			<label for="pname">Name </label>
     			<input type="text" name="pname" id="pname" value="">
     		</div>
 
     		<div>
-    			<label for="pwd">Password: </label>
+    			<label for="pwd">Password </label>
     			<input type="text" name="pwd" id="pwd" value="">
     		</div>    		
 
     		<div>
-    			<label for="bio">Bio: </label>
+    			<label for="bio">Bio </label>
     			<input type="text" name="bio" id="bio" value="">
     		</div>
 
     		<div>
-    			<a href="#home">cancel</a>
     			<input type="submit" value="Save" class="saveBtn">
+    			<a href="#home">cancel</a>
     		</div>
     	</form>
    	</script>
@@ -229,10 +229,10 @@
 	</script>
 
 	<script type="text/template" id="briefitem-tmpl">
-		<div>
+		<div class="feed-item">
 			<div>Title: <%= data.text %></div>
-			<div>URL: <%= data.link %></div>
-			<div>Date: <%= data.ets %></div>
+			<div>Link: <%= data.link %></div>
+			<div>Date added: <%= data.ets %></div>
 
 		</div>
 	</script>
