@@ -52,7 +52,7 @@ img:hover { filter: none; -webkit-filter: grayscale(0); }
 /* timeline */
 #itemlist { max-width: 1000px; margin-left: auto; margin-right: auto; }
   #main-header { z-index: 10; position:fixed; left:0px; top:0px; margin-bottom: 20px; height: 45px; background: #aaa; border-bottom: 8px solid #ccc; box-shadow: 0px 4px 5px #888888; width: 100%; }
-  #main-topbaritems { padding-left:5px; }
+  #main-topbaritems { padding-left:5px; max-width: 1000px; margin-left: auto; margin-right: auto; }
   .main-alltimelineheaderwrapper { z-index: 5; width: 959px; margin-left:auto; margin-right:auto; position: fixed; top: 55px; }
     .main-alltimelineheader { height: 39px; width: 477px;  border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); float: left; } 
     .main-mytimelineheader { height: 39px; width: 477px;  border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); float: right; }
