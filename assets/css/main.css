@@ -15,7 +15,7 @@ h1 { font-size: 1.5em; color: #fff; font-weight: 500; }
 h2 { font-size: 1em; color: #fff; font-weight: 500;}
 hr { margin: 18px 0; border: 0; border-top: 1px solid #eee; border-bottom: 1px solid #fff; }
 div { border: 0px solid #ddd; }
-a { text-decoration: none; color: #000; border-bottom: 1px solid #ff6600; }
+a { text-decoration: none; color: #000; border-bottom: 2px solid #ff6600; }
 p { margin: 2px; padding: 0px; }
 .main-h1 { margin-bottom: 5px; }
 img {
