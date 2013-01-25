@@ -46,7 +46,6 @@ img:hover { filter: none; -webkit-filter: grayscale(0); }
 
 /* admin */
 #content { max-width: 1000px; margin-left: auto; margin-right: auto; margin-top: 80px; }
-#content a { text-decoration: underline; }
 .feed-item { margin-bottom: 10px; }
 
 /* timeline */
@@ -64,6 +63,7 @@ img:hover { filter: none; -webkit-filter: grayscale(0); }
   #footer { z-index: 10; position:fixed; left:0px; bottom:0px; height:30px; width:100%; background:#999; }
 
 /*element styles */
+.main-link { border-bottom: 1px solid #ff6600; }
 .icon-ok, .icon-remove { text-shadow: 0.1em 0.1em 0.2em #aaa; font-size: 22px; }
 .icon-circle-arrow-up, .icon-circle-arrow-down { text-shadow: 0.1em 0.1em 0.2em #aaa; font-size: 30px; }
 a .icon-circle-arrow-up, a .icon-circle-arrow-down, a .icon-ok, a .icon-remove { color: #000; text-decoration: none; }
