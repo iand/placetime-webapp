@@ -41,7 +41,7 @@
     		<div class="message"><%= data.msg %></div>
     	<% } %>
     	<form action="#profile" method="post">
-	    	<label for="pid">User profile:</label> <input type="text" id="pid" name="pid" size="20" value="">
+	    	<label for="pid">User profile</label> <input type="text" id="pid" name="pid" size="20" value="">
 	    	<input type="submit" value="Manage Profile" class="profileBtn">
 		</form>
 
@@ -171,7 +171,7 @@
     	<form action="" method="post">    		
 
     		<div>
-    			<label for="feedpid">Feed ID (will be prefixed by "<%= data.pid %>~") </label>
+    			<label for="feedpid">Feed ID*</label>
     			<input type="text" name="feedpid" id="feedpid" value="">
     		</div>
 
@@ -189,6 +189,8 @@
     			<input type="submit" value="Save" class="saveBtn">
     			<a href="#profile/<%= data.pid %>">cancel</a>
     		</div>
+    		
+    		<div>* Feed ID will be prefixed by "<%= data.pid %>~"</div>
     	</form>
    	</script>
 
