@@ -6,9 +6,9 @@
     <% } else { %>
       <div class="main-itemicon"><img src="/-assets/img/nasa.jpg" width="30px" height="30px"></div>
       <p class="main-itemusername">@<%= pid %></p>
-      <p class="main-itemtext"><a href="<%= link %>"><%= text %></a></p>
-      <p class="main-itemlink"><a href="<%= link %>" class="roundBtn" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank"><i class="icon-external-link"></i></a></p>
-      <p class="main-itemtime"><a href="<%= link %>"><i class="icon-time"></i> event: <span class="timestamp"><%= fromnow %></span></a></p>
-      <a href="#app" class="<%= action %>btn" class="roundBtn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="check" data-position-to="window" data-transition="fade"><i class="icon-ok"></i></a>
+      <p class="main-itemtext"><a class="main-hiddenlink" href="<%= link %>"><%= text %></a></p>
+      <p class="main-itemlink"><a class="main-hiddenlink" href="<%= link %>" class="roundBtn" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank"><i class="icon-external-link"></i></a></p>
+      <p class="main-itemtime"><a class="main-hiddenlink" href="<%= link %>"><i class="icon-time"></i> event: <span class="timestamp"><%= fromnow %></span></a></p>
+      <a class="main-hiddenlink" href="#app" class="<%= action %>btn" class="roundBtn" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="check" data-position-to="window" data-transition="fade"><i class="icon-ok"></i></a>
     <% } %>
     </div> 
