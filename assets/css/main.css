@@ -57,7 +57,7 @@ img:hover { filter: none; -webkit-filter: grayscale(0); }
   .main-alltimelineheaderwrapper { z-index: 5; width: 959px; margin-left:auto; margin-right:auto; position: fixed; top: 55px; }
     .main-alltimelineheader { height: 39px; width: 477px;  border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); float: left; } 
     .main-mytimelineheader { height: 39px; width: 477px;  border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); float: right; }
-  .main-timelinewrapper { width: 959px; margin-left:auto; margin-right:auto; position: absolute; top: 101px; bottom: 30px; }
+  .main-timelinewrapper { width: 959px; margin-left:auto; margin-right:auto; position: absolute; top: 97px; bottom: 30px; }
   .main-alltimelinecol { width: 477px; padding-right 5px; position:absolute; top:0px; bottom: 0px; left: 0px; }
   .main-mytimelinecol { width: 477px; padding-left: 5px; position:absolute; top:0px; bottom: 0px; left:482px; }
     #itemslist { position:absolute; top:0px; bottom: 0px; left: 0px; width: 477px; overflow: auto; }
