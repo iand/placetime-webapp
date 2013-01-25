@@ -6,9 +6,9 @@
     <% } else { %>
       <div class="main-itemicon"><img src="/-assets/img/nasa.jpg" width="30px" height="30px"></div>
       <p class="main-itemusername">@<%= pid %></p>
-      <p class="main-itemtext"> <a class="main-hiddenlink" href="<%= link %>"><%= text %></a></p>
-      <p class="main-itemlink"><a href="<%= link %>" class="roundBtn main-hiddenlink" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank"><i class="icon-external-link"></i></a></p>
-      <p class="main-itemtime"> <a class="main-hiddenlink" href="<%= link %>"><i class="icon-time"></i> added: <span class="timestamp"><%= fromnow %></span></a></p>
+      <p class="main-itemtext"> <a class="main-hiddenlink fancybox.iframe" href="<%= link %>"><%= text %></a></p>
+      <p class="main-itemlink"><a href="<%= link %>" class="roundBtn main-hiddenlink fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank"><i class="icon-external-link"></i></a></p>
+      <p class="main-itemtime"> <a class="main-hiddenlink fancybox.iframe" href="<%= link %>"><i class="icon-time"></i> added: <span class="timestamp"><%= fromnow %></span></a></p>
       <a href="#app" class="<%= action %>btn" class="roundBtn main-hiddenlink" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="delete" data-position-to="window" data-transition="fade"><i class="icon-remove"></i></a>
 
     <% } %>
