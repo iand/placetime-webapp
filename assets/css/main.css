@@ -147,7 +147,7 @@ a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down, a:hover .icon-ok
 
 input[type=text] {
     display: inline-block;
-    padding: 8px 8px;
+    padding: 12px 12px;
     height: 18px;
     line-height: 18px;
     font-size: 18px;
@@ -172,7 +172,7 @@ input[type=text] {
 .loginBtn, .submitBtn, .Btn, .editBtn, .saveBtn, .deleteBtn, .refreshBtn, .feedBtn, .profileBtn {
 	font-size: 14px;
 	color: #000;
-	padding: 10px;
+	padding: 12px;
 	background: #ccc;
 	border: 2px solid #eee;
 	-moz-border-radius: 3px;
@@ -260,7 +260,7 @@ label {
 	background: #eee;
 	border-right: 0px;
 	height: 18px;
-	padding: 8px 8px;
+	padding: 12px 12px;
 	text-align: center;
 	display: inline-block;
 	width: 85px;
