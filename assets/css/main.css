@@ -152,7 +152,7 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
 
 /* forms */
 
-input[type=text] {
+input[type=text], input[type=password] {
     display: inline-block;
     padding: 12px 12px;
     height: 18px;
