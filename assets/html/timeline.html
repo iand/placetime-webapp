@@ -46,10 +46,20 @@
     <li><a class="main-hiddenlink" href="#login" id="loginbtn"><i class="icon-signout" style="font-size:20px;"></i> logout</a></li>
     </ul>
     </div> <!-- close dropdown -->
-        <script type="text/javascript">
-      $(document).ready(function() {
-		    $(".fancybox").fancybox();
-	    });
+    <script type="text/javascript">
+    $(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 800,
+		maxHeight	: 600,
+		fitToView	: false,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: false,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
     </script>
   </body>
 </html>
