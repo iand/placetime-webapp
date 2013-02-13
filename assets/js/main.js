@@ -490,7 +490,7 @@ $(function(){
           var self = this;
           session.set("ptsession", null);
           setCookie('ptsession', null);
-          this.changePage(new LoginView({el:$('#content'), model: new Credentials()}));
+          this.changePage(new LoginView({el:$('#content'), model: new Credentials()}), 'login');
         }
 
         ,register:function () {
@@ -505,11 +505,16 @@ $(function(){
           this.login();
         }
 
-        ,changePage:function (view) {
+        ,changePage:function (view, route) {
             console.log("Changing view to " + $(view.el).attr('id'));
             view.render();
             if (view.postRender) {
               view.postRender();
+            }
+
+            if (route) {
+              console.log("Changing route to " + route);
+              Backbone.history.navigate(route, true);
             }
         }
 
