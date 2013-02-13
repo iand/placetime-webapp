@@ -227,8 +227,7 @@ $(function(){
               type:'post',
               data: { pid: session.get("pid"), id: id },
               success:function (data) {
-                  itemEl.animate( {height: 0, opacity: 0}, 'slow', function() {
-                      
+                  itemEl.slideUp('slow').fadeOut('slow', function() {
                       self.itemsModel.refresh();
                       self.myitemsModel.refresh();
                       //self.render();
@@ -252,7 +251,7 @@ $(function(){
               type:'post',
               data: { pid: session.get("pid"), id: id },
               success:function (data) {
-                  itemEl.animate( {height: 0, opacity: 0}, 'slow', function() {
+                  itemEl.slideUp('slow').fadeOut('slow', function() {
                     self.itemsModel.refresh();
                     self.myitemsModel.refresh();
                   });
