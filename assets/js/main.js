@@ -236,7 +236,7 @@ $(function(){
           });          
 
           
-          
+          return false;
         }
 
         ,demote: function(e) {
@@ -258,7 +258,7 @@ $(function(){
               }
           });          
 
-          
+          return false;
         }        
 
         ,follow: function(e) {
