@@ -1,0 +1,202 @@
+Application.View.ItemsView = Backbone.View.extend({
+    events: {
+        'click .promotebtn': 'promote',
+        'click .demotebtn': 'demote',
+        'click .followbtn': 'follow',
+        'click #possiblebtn': 'possible',
+        'click #maybebtn': 'maybe',
+        'click #newbtn': 'newitem',
+        'click #ts': 'ts',
+        'click #myts': 'myts',
+        'click #ets': 'ets',
+        'click #myets': 'myets'
+    },
+
+
+    initialize: function () {
+        var self = this;
+        this.template = _.template(window.templates['itemlist']);
+        this.templateitem = _.template(window.templates['otheritem']);
+        this.templatemyitem = _.template(window.templates['myitem']);
+        this.templatecalitem = _.template(window.templates['otheritemcal']);
+        this.templatemycalitem = _.template(window.templates['myitemcal']);
+
+
+        this.el = this.options.el;
+        this.itemsModel = this.options.itemsModel;
+        this.myitemsModel = this.options.myitemsModel;
+        this.pid = this.options.pid;
+
+        this.itemsModel.bind("reset", this.render, this);
+        this.myitemsModel.bind("reset", this.render, this);
+        this.scroller1 = null;
+    },
+
+
+    render: function (eventName) {
+
+
+        if (this.scroller1) {
+            this.scroller1.destroy();
+        }
+        if (this.scroller2) {
+            this.scroller2.destroy();
+        }
+        $(this.el).html(this.template({
+            data: {
+                'pid': this.pid
+            }
+        }));
+
+        this.scroller1 = new iScroll('itemslist', {
+            momentum: true,
+            hScrollbar: false,
+            vScroll: true
+        });
+        this.scroller2 = new iScroll('myitemslist', {
+            momentum: true,
+            hScrollbar: false,
+            vScroll: true
+        });
+
+
+
+        itemsElem = $("#items", this.el);
+        myitemsElem = $("#myitems", this.el);
+
+        itemsElem.html('');
+        myitemsElem.html('');
+        var self = this;
+
+        _.each(this.itemsModel.models, function (item) {
+            var data = item.toJSON();
+            data.action = 'promote';
+            if (this.itemsModel.order == "ets") {
+                itemsElem.append(this.templatecalitem(data));
+            } else {
+                itemsElem.append(this.templateitem(data));
+            }
+        }, this);
+
+        _.each(this.myitemsModel.models, function (item) {
+            var data = item.toJSON();
+            data.action = 'demote';
+
+            if (this.myitemsModel.order == "ets") {
+                myitemsElem.append(this.templatemycalitem(data));
+            } else {
+                myitemsElem.append(this.templatemyitem(data));
+            }
+        }, this);
+
+        _.defer(_.bind(function () {
+
+            this.scroller1.refresh();
+            this.scroller2.refresh();
+        }, self));
+
+        return this;
+    },
+
+
+    promote: function (e) {
+        var clickedEl = $(e.currentTarget);
+        var id = clickedEl.data("itemid");
+        var itemEl = $('#ti-' + id);
+        var self = this;
+        self.itemsModel.remove(id);
+
+        $.ajax({
+            url: '/-tpromote',
+            type: 'post',
+            data: {
+                pid: session.get("pid"),
+                id: id
+            },
+            success: function (data) {
+                itemEl.slideUp('slow').fadeOut('slow', function () {
+                    self.itemsModel.refresh();
+                    self.myitemsModel.refresh();
+                    //self.render();
+                });
+            }
+        });
+
+
+        return false;
+    },
+
+
+    demote: function (e) {
+        var clickedEl = $(e.currentTarget);
+        var id = clickedEl.data("itemid");
+        // alert("Promote item '" + id + "' to maybe list");
+        var self = this;
+        var itemEl = $('#ti-' + id);
+
+        $.ajax({
+            url: '/-tdemote',
+            type: 'post',
+            data: {
+                pid: session.get("pid"),
+                id: id
+            },
+            success: function (data) {
+                itemEl.slideUp('slow').fadeOut('slow', function () {
+                    self.itemsModel.refresh();
+                    self.myitemsModel.refresh();
+                });
+            }
+        });
+
+        return false;
+    },
+
+
+    follow: function (e) {
+        var clickedEl = $(e.currentTarget);
+        var pid = clickedEl.data("pid");
+        alert("Follow user '" + pid + "'");
+    },
+
+
+    possible: function (e) {
+        //this.itemsModel.status = 'p';
+        //this.itemsModel.refresh();
+    },
+
+
+    maybe: function (e) {
+        //this.itemsModel.status = 'm';
+        //this.itemsModel.refresh();
+    },
+
+
+    newitem: function (e) {
+        //alert("Add a new item");
+    },
+
+
+    ts: function (e) {
+        this.itemsModel.order = "ts";
+        this.itemsModel.refresh();
+    },
+
+
+    ets: function (e) {
+        this.itemsModel.order = "ets";
+        this.itemsModel.refresh();
+    },
+
+
+    myts: function (e) {
+        this.myitemsModel.order = "ts";
+        this.myitemsModel.refresh();
+    },
+
+
+    myets: function (e) {
+        this.myitemsModel.order = "ets";
+        this.myitemsModel.refresh();
+    }
+});
