@@ -8,6 +8,12 @@ import (
 	"log"
 	"net/http"
 	//	"net/http/httputil"
+	"crypto/rand"
+	"encoding/base64"
+	"github.com/iand/feedparser"
+	"github.com/iand/imgpick"
+	"github.com/iand/salience"
+	"image/png"
 	"io/ioutil"
 	"os"
 	"path"
@@ -20,6 +26,7 @@ import (
 
 const (
 	assetsDir         = "./assets"
+	imgDir            = "/var/opt/timescroll/img"
 	templatesDir      = "./templates"
 	sessionCookieName = "ptsession"
 	sessionExpiry     = 86400 * 14
@@ -30,6 +37,8 @@ var ()
 func main() {
 	// TODO: set random number seed
 	runtime.GOMAXPROCS(runtime.NumCPU())
+
+	checkEnvironment()
 
 	go backgroundTasks()
 
@@ -51,6 +60,7 @@ func main() {
 	r.HandleFunc("/-init", initHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-admin", adminHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-refresh", refreshHandler).Methods("GET", "HEAD")
+	r.HandleFunc("/-fetchimages", fetchImagesHandler).Methods("GET", "HEAD")
 
 	r.HandleFunc("/-jsp", jsonSuggestedProfilesHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-jpr", jsonProfileHandler).Methods("GET", "HEAD")
@@ -80,11 +90,32 @@ func main() {
 	r.HandleFunc("/-tmpl", templatesHandler).Methods("GET")
 
 	r.PathPrefix("/-assets/").HandlerFunc(assetsHandler).Methods("GET", "HEAD")
+	r.PathPrefix("/-img/").HandlerFunc(imgHandler).Methods("GET", "HEAD")
 
 	log.Print("Listening on 0.0.0.0:8081\n")
 
 	http.Handle("/", Log(r))
 	http.ListenAndServe("0.0.0.0:8081", nil)
+}
+
+func checkEnvironment() {
+	f, err := os.Open(imgDir)
+	if err != nil {
+		log.Printf("Could not open image path %s: %s", imgDir, err.Error())
+		os.Exit(1)
+	}
+	defer f.Close()
+	fi, err := f.Stat()
+	if err != nil {
+		log.Printf("Could not stat image path %s: %s", imgDir, err.Error())
+		os.Exit(1)
+	}
+
+	if !fi.IsDir() {
+		log.Printf("Image path is not a directory %s: %s", imgDir, err.Error())
+		os.Exit(1)
+	}
+
 }
 
 func Hostname() string {
@@ -107,6 +138,12 @@ func assetsHandler(w http.ResponseWriter, r *http.Request) {
 	p = path.Join(assetsDir, p)
 	http.ServeFile(w, r, p)
 	// w.Write([]byte(p))
+}
+
+func imgHandler(w http.ResponseWriter, r *http.Request) {
+	p := r.URL.Path[6:]
+	p = path.Join(imgDir, p)
+	http.ServeFile(w, r, p)
 }
 
 func timelineHandler(w http.ResponseWriter, r *http.Request) {
@@ -429,17 +466,17 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 
 	s.AddProfile("nasa", "nasa", "Nasa Missions", "Upcoming NASA mission information.", "", "")
 
-	s.AddItem("nasa", parseKnownTime("1 Jan 2015"), "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "")
-	s.AddItem("nasa", parseKnownTime("26 Aug 2012"), "Dawn - Leaves asteroid Vesta, heads for asteroid 1 Ceres", "")
-	s.AddItem("nasa", parseKnownTime("1 Sep 2012"), "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "")
-	s.AddItem("nasa", parseKnownTime("1 Feb 2015"), "Dawn - Goes into orbit around asteroid 1 Ceres", "")
-	s.AddItem("nasa", parseKnownTime("14 Jul 2015"), "New Horizons - NASA mission reaches Pluto and Charon", "")
-	s.AddItem("nasa", parseKnownTime("1 Mar 2013"), "LADEE - Launch of NASA Orbiter to the Moon", "")
-	s.AddItem("nasa", parseKnownTime("1 Nov 2014"), "Philae - ESA Rosetta Lander touches down on Comet Churyumov-Gerasimenko", "")
-	s.AddItem("nasa", parseKnownTime("1 Nov 2013"), "MAVEN - Launch of Mars Orbiter", "")
-	s.AddItem("nasa", parseKnownTime("1 May 2014"), "Rosetta - ESA mission reaches Comet Churyumov-Gerasimenko", "")
-	s.AddItem("nasa", parseKnownTime("1 Jan 2014"), "Mars Sample Return Mission - Launch of NASA sample return mission to Mars", "")
-	s.AddItem("nasa", parseKnownTime("5 Apr 2231"), "Pluto - is passed by Neptune in distance from the Sun for the next 20 years", "")
+	s.AddItem("nasa", parseKnownTime("1 Jan 2015"), "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "", "")
+	s.AddItem("nasa", parseKnownTime("26 Aug 2012"), "Dawn - Leaves asteroid Vesta, heads for asteroid 1 Ceres", "", "")
+	s.AddItem("nasa", parseKnownTime("1 Sep 2012"), "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "", "")
+	s.AddItem("nasa", parseKnownTime("1 Feb 2015"), "Dawn - Goes into orbit around asteroid 1 Ceres", "", "")
+	s.AddItem("nasa", parseKnownTime("14 Jul 2015"), "New Horizons - NASA mission reaches Pluto and Charon", "", "")
+	s.AddItem("nasa", parseKnownTime("1 Mar 2013"), "LADEE - Launch of NASA Orbiter to the Moon", "", "")
+	s.AddItem("nasa", parseKnownTime("1 Nov 2014"), "Philae - ESA Rosetta Lander touches down on Comet Churyumov-Gerasimenko", "", "")
+	s.AddItem("nasa", parseKnownTime("1 Nov 2013"), "MAVEN - Launch of Mars Orbiter", "", "")
+	s.AddItem("nasa", parseKnownTime("1 May 2014"), "Rosetta - ESA mission reaches Comet Churyumov-Gerasimenko", "", "")
+	s.AddItem("nasa", parseKnownTime("1 Jan 2014"), "Mars Sample Return Mission - Launch of NASA sample return mission to Mars", "", "")
+	s.AddItem("nasa", parseKnownTime("5 Apr 2231"), "Pluto - is passed by Neptune in distance from the Sun for the next 20 years", "", "")
 
 	// s.SetProfile(&Profile{Pid: "o2shepherdsbushempire ", Name: "O2 Shepherd's Bush Empire Events", Bio: "", Feed: "http://www.o2shepherdsbushempire.co.uk/RSS"})
 	// s.SetProfile(&Profile{Pid: "skiddlewc2", Name: "Skiddle WC2", Bio: "What's On in London and area", Feed: "http://www.skiddle.com/rss/events.php?c=WC2"})
@@ -531,6 +568,7 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 	text := r.FormValue("text")
 	link := r.FormValue("link")
 	ets := r.FormValue("ets")
+	image := r.FormValue("image")
 	s := NewRedisStore()
 	defer s.Close()
 
@@ -540,7 +578,7 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	itemid, err := s.AddItem(pid, etsParsed, text, link)
+	itemid, err := s.AddItem(pid, etsParsed, text, link, image)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -910,6 +948,7 @@ func backgroundTasks() {
 	ticker := time.Tick(30 * time.Minute)
 	for _ = range ticker {
 		pollFeeds()
+		pollImages()
 	}
 
 }
@@ -922,7 +961,7 @@ func pollFeeds() {
 	profiles, _ := s.FeedDrivenProfiles()
 
 	jobs := make(chan *Profile, len(profiles))
-	results := make(chan *ProfileFeedData, len(profiles))
+	results := make(chan *ProfileItemData, len(profiles))
 
 	for w := 0; w < 3; w++ {
 		go feedWorker(w, jobs, results)
@@ -938,22 +977,61 @@ func pollFeeds() {
 		if data.Error != nil {
 			log.Printf("Error processing feed for %s: %v", data.Profile.Pid, data.Error)
 		} else {
-			log.Printf("Found %d items in feed for %s", len(data.Feed.Items), data.Profile.Pid)
+			log.Printf("Found %d items in feed for %s", len(data.Items), data.Profile.Pid)
 		}
 
-		updateProfileFeedData(data)
+		updateProfileItemData(data)
 		runtime.Gosched()
 	}
 
 }
 
-type ProfileFeedData struct {
+func pollImages() {
+	log.Print("Fetching images")
+	s := NewRedisStore()
+	defer s.Close()
+
+	items, _ := s.GrabItemsNeedingImages(30)
+	log.Printf("%d images need to be fetched", len(items))
+	if len(items) > 0 {
+		jobs := make(chan *Item, len(items))
+		results := make(chan *ItemImageData, len(items))
+
+		for w := 0; w < 3; w++ {
+			go imageWorker(w, jobs, results)
+		}
+
+		for _, p := range items {
+			jobs <- p
+		}
+		close(jobs)
+
+		for i := 0; i < len(items); i++ {
+			data := <-results
+			if data.Error != nil {
+				log.Printf("Error processing images for %s: %v", data.Item.Id, data.Error)
+			} else {
+				log.Printf("Found image %s for %s", data.Item.Image, data.Item.Id)
+			}
+
+			s.UpdateItem(data.Item)
+			runtime.Gosched()
+		}
+	}
+}
+
+type ProfileItemData struct {
 	Profile *Profile
-	Feed    *Feed
+	Items   []*Item
 	Error   error
 }
 
-func feedWorker(id int, jobs <-chan *Profile, results chan<- *ProfileFeedData) {
+type ItemImageData struct {
+	Item  *Item
+	Error error
+}
+
+func feedWorker(id int, jobs <-chan *Profile, results chan<- *ProfileItemData) {
 	for p := range jobs {
 		log.Printf("Feed worker %d processing feed %s", id, p.FeedUrl)
 
@@ -961,24 +1039,65 @@ func feedWorker(id int, jobs <-chan *Profile, results chan<- *ProfileFeedData) {
 
 		if err != nil {
 			log.Printf("Feed worker %d got http error  %s", id, err.Error())
-			results <- &ProfileFeedData{p, nil, err}
+			results <- &ProfileItemData{p, nil, err}
 			continue
 		}
 		defer resp.Body.Close()
 
-		feed, err := NewFeed(resp.Body)
+		feed, err := feedparser.NewFeed(resp.Body)
 
-		results <- &ProfileFeedData{p, feed, err}
+		results <- &ProfileItemData{p, itemsFromFeed(p.Pid, feed), err}
 	}
 }
 
-func updateProfileFeedData(data *ProfileFeedData) error {
-	if data.Feed != nil {
+func itemsFromFeed(pid string, feed *feedparser.Feed) []*Item {
+	items := make([]*Item, 0)
+	for _, item := range feed.Items {
+		items = append(items, &Item{Pid: pid, Ets: item.When, Text: item.Title, Link: item.Link})
+	}
+	return items
+}
+
+func imageWorker(id int, jobs <-chan *Item, results chan<- *ItemImageData) {
+
+	for item := range jobs {
+		log.Printf("Image worker %d processing item %s", id, item.Id)
+		img, err := imgpick.PickImage(item.Link)
+
+		if err != nil {
+			results <- &ItemImageData{item, err}
+		}
+
+		imgOut := salience.Crop(img, 460, 160)
+
+		filename := fmt.Sprintf("%s.png", item.Id)
+
+		foutName := path.Join(imgDir, filename)
+
+		fout, err := os.OpenFile(foutName, os.O_CREATE|os.O_WRONLY, 0666)
+		if err != nil {
+			results <- &ItemImageData{item, err}
+			continue
+		}
+
+		if err = png.Encode(fout, imgOut); err != nil {
+			results <- &ItemImageData{item, err}
+			continue
+		}
+
+		item.Image = filename
+
+		results <- &ItemImageData{item, err}
+
+	}
+}
+
+func updateProfileItemData(data *ProfileItemData) error {
+	if data.Items != nil {
 		s := NewRedisStore()
 		defer s.Close()
 
 		p := data.Profile
-		feed := data.Feed
 
 		followers, err := s.Followers(p.Pid, p.FollowerCount, 0)
 		if err != nil {
@@ -990,8 +1109,8 @@ func updateProfileFeedData(data *ProfileFeedData) error {
 		}
 
 		s.DeleteMaybeItems(p.Pid)
-		for _, item := range feed.Items {
-			s.AddItem(p.Pid, item.When, item.Title, item.Link)
+		for _, item := range data.Items {
+			s.AddItem(item.Pid, item.Ets, item.Text, item.Link, item.Image)
 		}
 
 		for _, f := range followers {
@@ -1032,13 +1151,13 @@ func refreshHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		defer resp.Body.Close()
 
-		feed, err := NewFeed(resp.Body)
+		feed, err := feedparser.NewFeed(resp.Body)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
-		updateProfileFeedData(&ProfileFeedData{profile, feed, err})
+		updateProfileItemData(&ProfileItemData{profile, itemsFromFeed(pid, feed), err})
 	}
 
 }
@@ -1070,6 +1189,14 @@ func jsonFeedsHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func fetchImagesHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, _ := checkSession(w, r, false)
+	if !sessionValid {
+		return
+	}
+	pollImages()
+}
+
 func isAdmin(pid string) bool {
 	// TODO look up in database
 	if pid == "iand" || pid == "daveg" {
@@ -1082,4 +1209,13 @@ func isAdmin(pid string) bool {
 func parseKnownTime(t string) time.Time {
 	ret, _ := time.Parse("_2 Jan 2006", t)
 	return ret
+}
+
+func randomString(length int) string {
+	b := make([]byte, length)
+	rand.Read(b)
+	en := base64.URLEncoding
+	d := make([]byte, en.EncodedLen(len(b)))
+	en.Encode(d, b)
+	return string(d)
 }

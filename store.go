@@ -11,6 +11,7 @@ import (
 
 const (
 	FEED_DRIVEN_PROFILES = "feeddrivenprofiles"
+	ITEMS_NEEDING_IMAGES = "itemsneedingimages"
 	ITEM_ID              = "itemid"
 	MaxInt               = int(^uint(0) >> 1)
 )
@@ -336,15 +337,15 @@ func (s *RedisStore) Timeline(pid string, status string, ordering string, tstart
 
 	vals := rs.ValuesAsStrings()
 
-	itemids := make([]interface{}, len(vals))
+	itemkeys := make([]interface{}, len(vals))
 	for index, val := range vals {
-		itemids[index] = val
+		itemkeys[index] = val
 	}
 
 	items := make([]*FormattedItem, 0)
 
-	if len(itemids) > 0 {
-		rs = s.db.Command("MGET", itemids...)
+	if len(itemkeys) > 0 {
+		rs = s.db.Command("MGET", itemkeys...)
 		if !rs.IsOK() {
 			return nil, rs.Error()
 		}
@@ -385,12 +386,7 @@ func (s *RedisStore) Item(id string) (*Item, error) {
 	return item, nil
 }
 
-func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string) (string, error) {
-
-	// ets, err := time.Parse("_2 Jan 2006", etstext)
-	// if err != nil {
-	// 	log.Printf("Failed to parse date %s. Got error %s.\n", etstext, err.Error())
-	// }
+func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string, image string) (string, error) {
 
 	ts := time.Now()
 
@@ -451,7 +447,30 @@ func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string
 		}
 	}
 
+	if item.Link != "" && item.Image == "" {
+		rs := s.db.Command("SADD", ITEMS_NEEDING_IMAGES, itemid)
+		if !rs.IsOK() {
+			return itemKey, rs.Error()
+		}
+	}
+
 	return itemKey, nil
+}
+
+func (s *RedisStore) UpdateItem(item *Item) error {
+	itemKey := itemKey(item.Id)
+
+	json, err := json.Marshal(item)
+	if err != nil {
+		return err
+	}
+
+	rs := s.db.Command("SET", itemKey, json)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+	return nil
+
 }
 
 func (s *RedisStore) DeleteMaybeItems(pid string) error {
@@ -739,4 +758,25 @@ func (s *RedisStore) Feeds(pid string) ([]*Profile, error) {
 
 	return feeds, nil
 
+}
+
+func (s *RedisStore) GrabItemsNeedingImages(max int) ([]*Item, error) {
+	rs := s.db.Command("SRANDMEMBER", ITEMS_NEEDING_IMAGES, max)
+	if !rs.IsOK() {
+		return nil, rs.Error()
+	}
+
+	itemids := rs.ValuesAsStrings()
+
+	items := make([]*Item, 0)
+
+	for _, itemid := range itemids {
+		s.db.Command("SREM", ITEMS_NEEDING_IMAGES, itemid)
+		item, err := s.Item(itemid)
+		if err == nil {
+			items = append(items, item)
+		}
+	}
+
+	return items, nil
 }

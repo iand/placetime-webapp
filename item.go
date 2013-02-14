@@ -21,6 +21,7 @@ type Item struct {
 	Text  string    `json:"text"`
 	Link  string    `json:"link"`
 	Media string    `json:"media"`
+	Image string    `json:"image"`
 }
 
 type FormattedItem struct {
@@ -35,4 +36,5 @@ type FormattedItem struct {
 	Date  string    `json:"date"`
 	Time  string    `json:"time"`
 	Ms    int64     `json:"ms"`
+	Image string    `json:"image"`
 }
