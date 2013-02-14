@@ -761,16 +761,17 @@ func (s *RedisStore) Feeds(pid string) ([]*Profile, error) {
 }
 
 func (s *RedisStore) GrabItemsNeedingImages(max int) ([]*Item, error) {
-	rs := s.db.Command("SRANDMEMBER", ITEMS_NEEDING_IMAGES, max)
-	if !rs.IsOK() {
-		return nil, rs.Error()
-	}
-
-	itemids := rs.ValuesAsStrings()
-
 	items := make([]*Item, 0)
 
-	for _, itemid := range itemids {
+	for i := 0; i < max; i++ {
+
+		rs := s.db.Command("SRANDMEMBER", ITEMS_NEEDING_IMAGES)
+		if !rs.IsOK() {
+			return items, rs.Error()
+		}
+
+		itemid := rs.ValueAsString()
+
 		s.db.Command("SREM", ITEMS_NEEDING_IMAGES, itemid)
 		item, err := s.Item(itemid)
 		if err == nil {
