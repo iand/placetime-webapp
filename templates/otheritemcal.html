@@ -1,5 +1,7 @@
     <div class=timelinecalitem id="ti-<%= id %>" style="background-image: url(/-img/<%= image %>);">
+    <% if (image == 1) { %>
     <div class="main-imageoverlay"><!-- --></div> 
+    <% } %> 
     <% if (media == "video") { %>
       <!-- video specific markup here -->
     <% } else if (media == "audio") { %>
