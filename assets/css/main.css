@@ -144,6 +144,7 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
 .main-itemusername { font-size: 14px; color: #333; margin-left: 7px; padding: 7px; float: left; }
 .main-itemicon { float: left; }
 .main-itemtext{ clear: both; font-size: 22px; }
+.main-itemtext a { color: #fff; }
 .main-itemtime { font-size: 13px; color: #999; position: relative; top: -33px; }
 .main-itemlink { position: relative; top: 20px; }
 .main-itemlink a { font-size: 25px; color: #999; }
