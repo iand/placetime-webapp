@@ -54,7 +54,7 @@ img:hover { filter: none; -webkit-filter: grayscale(0); }
   #main-topbaritems { padding-left:5px; max-width: 1000px; margin-left: auto; margin-right: auto; position: relative; }
   #main-lefttopbaritems { float: left; }
   #main-righttopbaritems { float: right; margin: 4px 50px 0px 0px;}
-  .main-imageoverlay { background-color: rgba(15, 15, 15, 0.4); }
+  .main-imageoverlay { background-color: rgba(15, 15, 15, 0.4); position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; }
   .main-alltimelineheaderwrapper { z-index: 5; width: 959px; margin-left:auto; margin-right:auto; position: fixed; top: 55px; }
     .main-alltimelineheader { height: 39px; width: 477px;  border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); float: left; } 
     .main-mytimelineheader { height: 39px; width: 477px;  border-bottom: 2px solid #000; background-color:rgba(255,255,255,0.5); float: right; }
@@ -94,10 +94,10 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
 	margin-bottom: 7px;  
 	-moz-border-radius: 2px;
         -webkit-border-radius: 2px;
-        border-radius: 2px; 
-        z-index: 1500; 
+        border-radius: 2px;  
         box-shadow: 1px 1px 2px #aaa;
         padding: 15px;
+        position: relative;
 	
 }
 
@@ -108,7 +108,7 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
 
 .mytimelineitem, .mytimelinecalitem {
 	background-color: #777;
-	box-shadow: 0px 0px 0px #aaa;
+	box-shadow: 1px 1px 2px #aaa;
 }
  
   .main-topbaritems { width: 1000px; margin-left: auto; margin-right: auto; margin-top:10px; }
