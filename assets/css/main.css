@@ -63,7 +63,7 @@ img:hover { filter: none; -webkit-filter: grayscale(0); }
   .main-mytimelinecol { width: 477px; padding-left: 5px; position:absolute; top:0px; bottom: 0px; left:482px; }
     #itemslist { position:absolute; top:0px; bottom: 0px; left: 0px; width: 477px; overflow: auto; }
     #myitemslist { position:absolute; top:0px; bottom: 0px; left: 0px; width: 477px; overflow: auto; }
-  #footer { z-index: 10; position:fixed; left:0px; bottom:0px; height:30px; width:100%; background:#999; }
+  #footer { z-index: 10; position:fixed; left:0px; bottom:0px; height:30px; width:100%; background:#999; display:none; }
 
 /*element styles */
 .main-hiddenlink { border-bottom: 0px; }
