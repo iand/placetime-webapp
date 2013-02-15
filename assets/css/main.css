@@ -228,16 +228,16 @@ input[type=text], input[type=password] {
 
 .promotebtn {
 	padding: 10px 7px 5px 7px;
-	position: relative;
-	top: -9px;
-	right: -405px;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
 }
 
 .demotebtn {
 	padding: 11px 8px 4px 9px;
-        position: relative;
-	top: -9px;
-	right: -405px;
+        position: abolute;
+	bottom: 10px;
+	right: 10px;
 }
 
 .promotebtn, .demotebtn {
