@@ -89,7 +89,7 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
         }
 */        
 .timelineitem, .mytimelineitem, .timelinecalitem, .mytimelinecalitem {
-        background-color: #ff6600;
+        background-color: #fe792b;
         background-size: cover;
 	margin-bottom: 7px;  
 	-moz-border-radius: 2px;
@@ -107,7 +107,7 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
 }
 
 .mytimelineitem, .mytimelinecalitem {
-	background-color: #ff6600;
+	background-color: #fe792b;
 	box-shadow: 1px 1px 2px #aaa;
 }
  
