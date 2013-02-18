@@ -228,6 +228,7 @@ Application.Collection.ItemList = Backbone.Collection.extend({
                     item.minutes = dt.minutes();
                     item.seconds = dt.seconds();
                     item.fromnow = dt.fromNow();
+                    item.diff = moment().diff(dt);
 
                 });
                 console.log("resetting");
@@ -254,6 +255,7 @@ Application.View.ItemsView = Backbone.View.extend({
     initialize: function () {
         var self = this;
         this.template = _.template(window.templates['itemlist']);
+        this.templatenow = _.template(window.templates['now']);
         this.templateitem = _.template(window.templates['otheritem']);
         this.templatemyitem = _.template(window.templates['myitem']);
         this.templatecalitem = _.template(window.templates['otheritemcal']);
@@ -272,19 +274,20 @@ Application.View.ItemsView = Backbone.View.extend({
 
 
     render: function (eventName) {
-
-
         if (this.scroller1) {
             this.scroller1.destroy();
         }
+
         if (this.scroller2) {
             this.scroller2.destroy();
         }
+
         $(this.el).html(this.template({
             data: {
                 'pid': this.pid
             }
         }));
+
 
         this.scroller1 = new iScroll('itemslist', {
             momentum: true,
@@ -299,16 +302,19 @@ Application.View.ItemsView = Backbone.View.extend({
 
 
 
-        itemsElem = $("#items", this.el);
+        itemsElem   = $("#items", this.el);
         myitemsElem = $("#myitems", this.el);
 
         itemsElem.html('');
         myitemsElem.html('');
+
+
         var self = this;
 
         _.each(this.itemsModel.models, function (item) {
             var data = item.toJSON();
-            data.action = 'promote';
+                data.action = 'promote';
+
             if (this.itemsModel.order == "ets") {
                 itemsElem.append(this.templatecalitem(data));
             } else {
@@ -316,9 +322,10 @@ Application.View.ItemsView = Backbone.View.extend({
             }
         }, this);
 
+
         _.each(this.myitemsModel.models, function (item) {
             var data = item.toJSON();
-            data.action = 'demote';
+                data.action = 'demote';
 
             if (this.myitemsModel.order == "ets") {
                 myitemsElem.append(this.templatemycalitem(data));
@@ -327,13 +334,64 @@ Application.View.ItemsView = Backbone.View.extend({
             }
         }, this);
 
-        _.defer(_.bind(function () {
 
+
+        var itemClosest = this.closest(this.itemsModel.models),
+            myitemClosest = this.closest(this.myitemsModel.models);
+
+        _.defer(_.bind(function () {
             this.scroller1.refresh();
             this.scroller2.refresh();
+
+            this.now(this.scroller1, itemClosest, 'top');
+            this.now(this.scroller2, myitemClosest, 'bottom');
         }, self));
 
         return this;
+    },
+
+
+    now: function(scroller, item, relative) {
+        if (scroller === undefined || item === undefined) {
+            return;
+        }
+
+        // Get item
+        var $item = $('#ti-' + item.attributes.id);
+
+        // Get wrapper and remove existing now
+        var $wrapper = $(scroller.wrapper);
+            $wrapper.find('.now').remove();
+
+        // Insert now
+        var $now = $(this.templatenow());
+            $now.insertBefore($item);
+
+
+        var position = $item.position(),
+            offset   = 0;
+
+        if (relative === 'bottom') {
+            offset = $wrapper.height() - $item.height();
+        } else {
+            offset = $item.height();
+        }
+
+        // Scroll to
+        scroller.scrollTo(0, -(position.top - offset));
+    },
+
+
+    closest: function(items) {
+        var closest = items[0];
+
+        items.forEach(function(item) {
+            if (Math.abs(item.attributes.diff) < Math.abs(closest.attributes.diff)) {
+                closest = item;
+            }
+        });
+
+        return closest;
     },
 
 
