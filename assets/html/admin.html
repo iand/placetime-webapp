@@ -3,260 +3,258 @@
   <head>
     <meta charset="utf-8">
     <title>Placetime Admin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/css" rel="stylesheet" href="/-assets/css/jquery.dropdown.css">
     <link rel="stylesheet" href="/-assets/css/normalize.min.css">
     <!-- Typekit font loader -->
     <script type="text/javascript" src="http://use.typekit.net/bsa5hge.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-    <link rel="stylesheet" href="/-assets/css/main.css"/>  
-    <script src="/-assets/js/modernizr-2.6.2.min.js"></script>
+    <link rel="stylesheet" href="/-assets/css/main.css"/>
+    <script src="/-assets/js/lib/modernizr.js"></script>
     <link rel="stylesheet" href="/-assets/css/font-awesome.css">
   </head>
 
   <body>
-    <div id="main-header"><!-- start header --> 
+    <div id="main-header"><!-- start header -->
     <div id="main-topbaritems">
-    <div id="main-lefttopbaritems"><a href="/" class="main-hiddenlink" ><i class="icon-ok-circle" style="font-size:32px; color:#555; position: relative; left: 2px; top: 4px;"></i><i class="icon-time" style="font-size:32px; color:#555; position: relative; top:4px;"></i><span class="main-logo">placetime</span> <span class="main-strapline"> a playlist for your life</span></a></div> 
+    <div id="main-lefttopbaritems"><a href="/" class="main-hiddenlink" ><i class="icon-ok-circle" style="font-size:32px; color:#555; position: relative; left: 2px; top: 4px;"></i><i class="icon-time" style="font-size:32px; color:#555; position: relative; top:4px;"></i><span class="main-logo">placetime</span> <span class="main-strapline"> a playlist for your life</span></a></div>
     <div id="main-righttopbaritems"><a class="main-hiddenlink" href="#" data-dropdown="#dropdown-1"><i class="icon-cog" style="font-size:33px;"></i></a></div>
     </div><!-- close topbaritems -->
     </div><!-- close header -->
 
     <div id="content"></div>
-      
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/-assets/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
-    <script src="/-assets/js/json2.js"></script>
-    <script src="/-assets/js/underscore.js"></script>
-    <script src="/-assets/js/backbone-min.js"></script>
-    <script src="/-assets/js/moment.min.js"></script>
-    <script src="/-assets/js/iscroll.js"></script>
+    <script>window.jQuery || document.write('<script src="/-assets/js/lib/jquery.js"><\/script>')</script>
+    <script type="text/javascript" src="/-assets/js/lib/jquery.dropdown.js"></script>
+    <script src="/-assets/js/lib/json2.js"></script>
+    <script src="/-assets/js/lib/underscore.js"></script>
+    <script src="/-assets/js/lib/backbone.js"></script>
+    <script src="/-assets/js/lib/moment.js"></script>
+    <script src="/-assets/js/lib/iscroll.js"></script>
     <script src="/-tmpl"></script>
-    <script src="/-assets/js/util.js"></script>
+    <script src="/-assets/js/app/helpers/helpers.js"></script>
     <script src="/-assets/js/admin.js"></script>
 
     <script type="text/template" id="main-tmpl">
-    	<h1>Placetime Admin</h1>
-    	<% if (data.msg) { %>
-    		<div class="message"><%= data.msg %></div>
-    	<% } %>
-    	<form action="#profile" method="post">
-	    	<label for="pid">User profile</label> <input type="text" id="pid" name="pid" size="20" value="">
-	    	<input type="submit" value="Manage Profile" class="profileBtn">
-		</form>
+        <h1>Placetime Admin</h1>
+        <% if (data.msg) { %>
+            <div class="message"><%= data.msg %></div>
+        <% } %>
+        <form action="#profile" method="post">
+            <label for="pid">User profile</label> <input type="text" id="pid" name="pid" size="20" value="">
+            <input type="submit" value="Manage Profile" class="profileBtn">
+        </form>
 
-		<div><a href="#addprofile">New profile</a></div>
-   	</script>
+        <div><a href="#addprofile">New profile</a></div>
+       </script>
 
     <script type="text/template" id="session-tmpl">
-    	<h1>Session Expired</h1>
-		<div><a href="/timeline">Login again</a></div>
-   	</script>
+        <h1>Session Expired</h1>
+        <div><a href="/timeline">Login again</a></div>
+       </script>
 
     <script type="text/template" id="profile-tmpl">
-    	<div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-    	<h1>Manage Profile</h1>
-    	<div>Profile: <%= data.pid %></div>
-    	<div>Name: <%= data.pname %></div>
-    	<div>Bio: <%= data.bio %></div>
-    	<div>Date joined: <%= data.joined %></div>
-    	<div>Followed items: <%= data.pcount %></div>
-    	<div>Bookmarked items: <%= data.mcount %></div>
+        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+        <h1>Manage Profile</h1>
+        <div>Profile: <%= data.pid %></div>
+        <div>Name: <%= data.pname %></div>
+        <div>Bio: <%= data.bio %></div>
+        <div>Date joined: <%= data.joined %></div>
+        <div>Followed items: <%= data.pcount %></div>
+        <div>Bookmarked items: <%= data.mcount %></div>
 
-    	<div>Following: <a href="#following/<%= data.pid %>"><%= data.followingcount %></a></div>
-    	<div>Followers: <a href="#followers/<%= data.pid %>"><%= data.followercount %></a></div>
+        <div>Following: <a href="#following/<%= data.pid %>"><%= data.followingcount %></a></div>
+        <div>Followers: <a href="#followers/<%= data.pid %>"><%= data.followercount %></a></div>
 
-    	<% if(data.parentpid) { %>
-    		<div>Parent profile: <a href="#profile/<%= data.parentpid %>"><%= data.parentpid %></a></div>
-    		<div>Feed URL: <%= data.feedurl %></div>
-    	<% } else { %>
-	    	<div>Feeds: <a href="#feeds/<%= data.pid %>"><%= data.feedcount %></a></div>
+        <% if(data.parentpid) { %>
+            <div>Parent profile: <a href="#profile/<%= data.parentpid %>"><%= data.parentpid %></a></div>
+            <div>Feed URL: <%= data.feedurl %></div>
+        <% } else { %>
+            <div>Feeds: <a href="#feeds/<%= data.pid %>"><%= data.feedcount %></a></div>
 
-    	<% } %>
-
-
-    	<button class="editBtn">Edit Profile</button>
-    	<button class="feedBtn">Add Feed</button>
+        <% } %>
 
 
-    	<div class="items">
-    		<h1>Items</h1>
-    	</div>
+        <button class="editBtn">Edit Profile</button>
+        <button class="feedBtn">Add Feed</button>
+
+
+        <div class="items">
+            <h1>Items</h1>
+        </div>
     </script>
 
 
     <script type="text/template" id="feed-tmpl">
-    	<div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-    	<h1>Manage Feed</h1>
-    	<div>Profile: <%= data.pid %></div>
-    	<div>Name: <%= data.pname %></div>
-    	<div>Items in feed: <%= data.mcount %></div>
-    	<div>Followers: <a href="#followers/<%= data.pid %>"><%= data.followercount %></a></div>
+        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+        <h1>Manage Feed</h1>
+        <div>Profile: <%= data.pid %></div>
+        <div>Name: <%= data.pname %></div>
+        <div>Items in feed: <%= data.mcount %></div>
+        <div>Followers: <a href="#followers/<%= data.pid %>"><%= data.followercount %></a></div>
 
-		<div>Parent profile: <a href="#profile/<%= data.parentpid %>"><%= data.parentpid %></a></div>
-		<div>Feed URL: <%= data.feedurl %></div>
-
-
-    	<button class="editBtn">Edit Feed</button>
-    	<button class="deleteBtn">Delete Feed</button>
-    	<button class="refreshBtn">Refresh Feed</button>
+        <div>Parent profile: <a href="#profile/<%= data.parentpid %>"><%= data.parentpid %></a></div>
+        <div>Feed URL: <%= data.feedurl %></div>
 
 
-    	<div class="msg">
-			<!-- this is where any error messages go -->    		
-    	</div>
+        <button class="editBtn">Edit Feed</button>
+        <button class="deleteBtn">Delete Feed</button>
+        <button class="refreshBtn">Refresh Feed</button>
 
-    	<div class="items">
-    		<h1>Items</h1>
-    	</div>
 
-   	</script>
+        <div class="msg">
+            <!-- this is where any error messages go -->
+        </div>
+
+        <div class="items">
+            <h1>Items</h1>
+        </div>
+
+       </script>
 
     <script type="text/template" id="editprofile-tmpl">
-    	<div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-    	<h1>Edit Profile</h1>
-    	<form action="" method="post">
-    		
-    		<div>
-    			<label for="pname">Name </label>
-    			<input type="text" name="pname" id="pname" value="<%= data.pname %>">
-    		</div>
+        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+        <h1>Edit Profile</h1>
+        <form action="" method="post">
 
-    		<div>
-    			<label for="bio">Bio </label>
-    			<input type="text" name="bio" id="bio" value="<%= data.bio %>">
-    		</div>
+            <div>
+                <label for="pname">Name </label>
+                <input type="text" name="pname" id="pname" value="<%= data.pname %>">
+            </div>
 
-    		<div>
-    			<input type="submit" value="Save" class="saveBtn">
-    			<a href="#profile/<%= data.pid %>">cancel</a>
-    		</div>
-    	</form>
-   	</script>
+            <div>
+                <label for="bio">Bio </label>
+                <input type="text" name="bio" id="bio" value="<%= data.bio %>">
+            </div>
+
+            <div>
+                <input type="submit" value="Save" class="saveBtn">
+                <a href="#profile/<%= data.pid %>">cancel</a>
+            </div>
+        </form>
+       </script>
     <script type="text/template" id="editfeed-tmpl">
-    	<div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-    	<h1>Edit Feed</h1>
-    	<form action="" method="post">
-    		
-    		<div>
-    			<label for="pname">Name </label>
-    			<input type="text" name="pname" id="pname" value="<%= data.pname %>">
-    		</div>
+        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+        <h1>Edit Feed</h1>
+        <form action="" method="post">
 
-    		<div>
-    			<label for="parentpid">Parent profile id </label>
-    			<input type="text" name="parentpid" id="parentpid" value="<%= data.parentpid %>">
-    		</div>
+            <div>
+                <label for="pname">Name </label>
+                <input type="text" name="pname" id="pname" value="<%= data.pname %>">
+            </div>
 
-    		<div>
-    			<label for="feedurl">Feed URL </label>
-    			<input type="text" name="feedurl" id="feedurl" value="<%= data.feedurl %>">
-    		</div>
+            <div>
+                <label for="parentpid">Parent profile id </label>
+                <input type="text" name="parentpid" id="parentpid" value="<%= data.parentpid %>">
+            </div>
 
-    		<div>
-    			<input type="submit" value="Save" class="saveBtn">
-    			<a href="#profile/<%= data.pid %>">cancel</a>
-    		</div>
-    	</form>
-   	</script>
+            <div>
+                <label for="feedurl">Feed URL </label>
+                <input type="text" name="feedurl" id="feedurl" value="<%= data.feedurl %>">
+            </div>
+
+            <div>
+                <input type="submit" value="Save" class="saveBtn">
+                <a href="#profile/<%= data.pid %>">cancel</a>
+            </div>
+        </form>
+       </script>
 
     <script type="text/template" id="addfeed-tmpl">
-    	<div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-    	<h1>Add Feed</h1>
-    	<form action="" method="post">    		
+        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+        <h1>Add Feed</h1>
+        <form action="" method="post">
 
-    		<div>
-    			<label for="feedpid">Feed ID*</label>
-    			<input type="text" name="feedpid" id="feedpid" value="">
-    		</div>
+            <div>
+                <label for="feedpid">Feed ID*</label>
+                <input type="text" name="feedpid" id="feedpid" value="">
+            </div>
 
-    		<div>
-    			<label for="pname">Name </label>
-    			<input type="text" name="pname" id="pname" value="">
-    		</div>
+            <div>
+                <label for="pname">Name </label>
+                <input type="text" name="pname" id="pname" value="">
+            </div>
 
-    		<div>
-    			<label for="feedurl">Feed URL </label>
-    			<input type="text" name="feedurl" id="feedurl" value="">
-    		</div>
+            <div>
+                <label for="feedurl">Feed URL </label>
+                <input type="text" name="feedurl" id="feedurl" value="">
+            </div>
 
-    		<div>
-    			<input type="submit" value="Save" class="saveBtn">
-    			<a href="#profile/<%= data.pid %>">cancel</a>
-    		</div>
-    		
-    		<div class="main-notabene">* Feed ID will be prefixed by "<%= data.pid %>~"</div>
-    	</form>
-   	</script>
+            <div>
+                <input type="submit" value="Save" class="saveBtn">
+                <a href="#profile/<%= data.pid %>">cancel</a>
+            </div>
+
+            <div class="main-notabene">* Feed ID will be prefixed by "<%= data.pid %>~"</div>
+        </form>
+       </script>
 
     <script type="text/template" id="addprofile-tmpl">
-    	<div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-    	<h1>Add Profile</h1>
-    	<form action="" method="post">    		
+        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+        <h1>Add Profile</h1>
+        <form action="" method="post">
 
-    		<div>
-    			<label for="pid">Profile ID </label>
-    			<input type="text" name="pid" id="pid" value="">
-    		</div>
+            <div>
+                <label for="pid">Profile ID </label>
+                <input type="text" name="pid" id="pid" value="">
+            </div>
 
-    		<div>
-    			<label for="pname">Name </label>
-    			<input type="text" name="pname" id="pname" value="">
-    		</div>
+            <div>
+                <label for="pname">Name </label>
+                <input type="text" name="pname" id="pname" value="">
+            </div>
 
-    		<div>
-    			<label for="pwd">Password </label>
-    			<input type="text" name="pwd" id="pwd" value="">
-    		</div>    		
+            <div>
+                <label for="pwd">Password </label>
+                <input type="text" name="pwd" id="pwd" value="">
+            </div>
 
-    		<div>
-    			<label for="bio">Bio </label>
-    			<input type="text" name="bio" id="bio" value="">
-    		</div>
+            <div>
+                <label for="bio">Bio </label>
+                <input type="text" name="bio" id="bio" value="">
+            </div>
 
-    		<div>
-    			<input type="submit" value="Save" class="saveBtn">
-    			<a href="#home">cancel</a>
-    		</div>
-    	</form>
-   	</script>
+            <div>
+                <input type="submit" value="Save" class="saveBtn">
+                <a href="#home">cancel</a>
+            </div>
+        </form>
+       </script>
 
-	<script type="text/template" id="briefprofile-tmpl">
-		<div><a href="#/profile/<%= data.pid %>"><%= data.pname %> (@<%= data.pid %>)</a></div>
-	</script>
+    <script type="text/template" id="briefprofile-tmpl">
+        <div><a href="#/profile/<%= data.pid %>"><%= data.pname %> (@<%= data.pid %>)</a></div>
+    </script>
 
-	<script type="text/template" id="briefitem-tmpl">
-		<div class="feed-item">
-			<div>Title: <%= data.text %></div>
-			<div>Link: <%= data.link %></div>
-			<div>When: <%= data.ets %></div>
+    <script type="text/template" id="briefitem-tmpl">
+        <div class="feed-item">
+            <div>Title: <%= data.text %></div>
+            <div>Link: <%= data.link %></div>
+            <div>When: <%= data.ets %></div>
 
-		</div>
-	</script>
+        </div>
+    </script>
 
     <script type="text/template" id="following-tmpl">
-    	<div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-    	<h1>Profiles Followed by <%= data.pid %></h1>
-   	</script>
+        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+        <h1>Profiles Followed by <%= data.pid %></h1>
+       </script>
 
     <script type="text/template" id="followers-tmpl">
-    	<div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-    	<h1>Profiles Following <%= data.pid %></h1>
-   	</script>
+        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+        <h1>Profiles Following <%= data.pid %></h1>
+       </script>
 
 
     <script type="text/template" id="feeds-tmpl">
-    	<div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-    	<h1>Feeds for <%= data.pid %></h1>
-   	</script>  	
+        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+        <h1>Feeds for <%= data.pid %></h1>
+       </script>
 
-	<script type="text/template" id="brieffeed-tmpl">
-		<div><a href="#/profile/<%= data.pid %>"><%= data.pname %> (@<%= data.pid %>)</a>: <%= data.feedurl %></div>
-	</script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/-assets/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
-        <script type="text/javascript" src="/-assets/js/jquery.dropdown.js"></script>
-        
+    <script type="text/template" id="brieffeed-tmpl">
+        <div><a href="#/profile/<%= data.pid %>"><%= data.pname %> (@<%= data.pid %>)</a>: <%= data.feedurl %></div>
+    </script>
+
     <div id="dropdown-1" class="dropdown-menu has-tip anchor-right">
     <ul>
     <li><a class="main-hiddenlink" href="#new" id="newbtn"><i class="icon-edit" style="font-size:20px;"></i> new</a></li>
