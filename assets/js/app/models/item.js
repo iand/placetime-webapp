@@ -1,0 +1,1 @@
+Application.Model.Item = Backbone.Model.extend({idAttribute: "id"});
