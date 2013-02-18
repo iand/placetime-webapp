@@ -19,6 +19,7 @@ Application.Collection.ItemList = Backbone.Collection.extend({
                     item.minutes = dt.minutes();
                     item.seconds = dt.seconds();
                     item.fromnow = dt.fromNow();
+                    item.diff = moment().diff(dt);
 
                 });
                 console.log("resetting");

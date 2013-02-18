@@ -101,6 +101,18 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
 	
 }
 
+#items,
+#myitems {
+    position: relative;
+}
+
+.now {
+    background-color: #fe792b;
+    margin: 5px 0;
+    height: 3px;
+    width: 100%;
+}
+
 .timelineitem:hover, .mytimelineitem:hover, .timelinecalitem:hover, .mytimelinecalitem:hover {
 	background-color: #999;
 	box-shadow: 0px 0px 0px #aaa;
