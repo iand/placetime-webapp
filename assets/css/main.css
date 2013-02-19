@@ -115,6 +115,10 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
     position: absolute;
     width: 100%;
     z-index: 999;
+    border-bottom: 20px solid rgba(110,110,110,0.2);
+    box-shadow: 0px 2px 5px #888888;
+    border-top: 20px solid rgba(110,110,110,0.2);
+    background-clip: padding-box;
 }
 
 .now span {
@@ -127,15 +131,16 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
     position: absolute;
     text-align: center;
     width: 50px;
+    box-shadow: 0px 2px 5px #888888;
 }
 
 .main-alltimelinecol .now {
-    top: 165px;
+    top: 148px;
 }
 
 .main-alltimelinecol .now span {
-    left: -50px;
-    top: -25px;
+    left: -26px;
+    top: -24px;
 }
 
 .main-mytimelinecol .now {
