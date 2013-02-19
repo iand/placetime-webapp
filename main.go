@@ -26,7 +26,7 @@ import (
 
 const (
 	assetsDir         = "./assets"
-	imgDir            = "./tmp/"
+	imgDir            = "/var/opt/timescroll/img"
 	templatesDir      = "./templates"
 	sessionCookieName = "ptsession"
 	sessionExpiry     = 86400 * 14
@@ -1069,6 +1069,7 @@ func imageWorker(id int, jobs <-chan *Item, results chan<- *ItemImageData) {
 
 		if img == nil || err != nil {
 			results <- &ItemImageData{item, err}
+			continue
 		}
 
 		imgOut := salience.Crop(img, 460, 160)
