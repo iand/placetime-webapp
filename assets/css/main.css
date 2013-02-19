@@ -88,10 +88,14 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
         box-shadow: 3px 3px 4px #888888;
         }
 */        
+.items {
+    padding-top: 5px;
+}
+
 .timelineitem, .mytimelineitem, .timelinecalitem, .mytimelinecalitem {
         background-color: #fe792b;
         background-size: cover;
-	margin-bottom: 7px;  
+	margin: 0 0 7px;  
 	-moz-border-radius: 2px;
         -webkit-border-radius: 2px;
         border-radius: 2px;  
@@ -110,7 +114,6 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
     background-color: black;
     font-size: 12px;
     left: 0;
-    margin: 5px 0;
     height: 3px;
     position: absolute;
     width: 100%;
@@ -129,17 +132,17 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
     width: 50px;
 }
 
-.main-alltimelinecol .now {
-    top: 165px;
+.ts .now {
+    top: 0px;
+}
+
+.ets .now {
+    bottom: 170px;
 }
 
 .main-alltimelinecol .now span {
     left: -50px;
     top: -25px;
-}
-
-.main-mytimelinecol .now {
-    bottom: 139px;
 }
 
 .main-mytimelinecol .now span {

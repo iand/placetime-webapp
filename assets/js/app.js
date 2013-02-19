@@ -308,12 +308,18 @@ Application.View.ItemsView = Backbone.View.extend({
         });
 
 
-
-        itemsElem   = $("#items", this.el);
-        myitemsElem = $("#myitems", this.el);
+        itemsElem   = $("#items", this.el).data('models', this.itemsModel);
+        myitemsElem = $("#myitems", this.el).data('models', this.myitemsModel);
 
         itemsElem.html('');
+        itemsElem.closest('div[class^=main-][class$=col]')
+                   .removeClass('ts ets')
+                   .addClass(this.itemsModel.order);
+
         myitemsElem.html('');
+        myitemsElem.closest('div[class^=main-][class$=col]')
+                     .removeClass('ts ets')
+                     .addClass(this.myitemsModel.order);
 
 
         var self = this;
@@ -356,36 +362,47 @@ Application.View.ItemsView = Backbone.View.extend({
 
 
     refresh: function() {
-        var $wrapper = $(this.wrapper);
-        var $items = $(this.scroller).children();
+        var $wrapper  = $(this.wrapper);
+        var $scroller = $(this.scroller);
+
+
+        var $items = $scroller.children();
 
         if ($items.length === 0) {
             return;
         }
 
 
-        // Code de-dup call this.closest
-        var $closest = $items.first();
-        $items.each(function(){
-            var $this = $(this);
+        // Events
+        if ($scroller.data('models').order == 'ets') {
+            // Code de-dup call this.closest
+            var $closest = $items.first();
+            $items.each(function(){
+                var $this = $(this);
 
-            if (Math.abs($this.data('model').diff) < Math.abs($closest.data('model').diff)) {
-                $closest = $this;
-            }
-        });
+                // TODO: Rework
+                if (Math.abs($this.data('model').diff) < Math.abs($closest.data('model').diff)) {
+                    $closest = $this;
+                }
+            });
+            // $closest = $items.eq(4);
 
+            $closest.css('background-color', 'red');
 
-        var position = $closest.position(),
-            offset   = 0;
+            // Scroll to element
+            this.scrollTo(0, -($wrapper.height() - 168));
 
-        if (this.wrapper.id === 'myitemslist') {
-            offset = $wrapper.height() - 175;
-        } else {
-            offset = 175;
+            // if ($closest.position().top < $)
+            console.log($closest.position().top);
+            // $wrapper.parent().find('.now').css({
+            //     top: $closest.position().top + 170 + 'px'
+            // });
         }
 
-        // Scroll to
-        this.scrollTo(0, -(position.top - offset));
+        // Added
+        else {
+            this.scrollTo(0, 0);
+        }
     },
 
 
@@ -409,7 +426,7 @@ Application.View.ItemsView = Backbone.View.extend({
         );
 
 
-        $now.stop(true).fadeTo(0, 1).fadeTo(3000, 0);
+        // $now.stop(true).fadeTo(0, 1).fadeTo(3000, 0);
     },
 
 
