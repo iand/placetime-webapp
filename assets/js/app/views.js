@@ -6,6 +6,9 @@ Application.View.ItemsView = Backbone.View.extend({
         'click #possiblebtn': 'possible',
         'click #maybebtn': 'maybe',
         'click #newbtn': 'newitem',
+
+        'click #now': 'now',
+
         'click #ts': 'ts',
         'click #myts': 'myts',
         'click #ets': 'ets',
@@ -53,12 +56,16 @@ Application.View.ItemsView = Backbone.View.extend({
         this.scroller1 = new iScroll('itemslist', {
             momentum: true,
             hScrollbar: false,
-            vScroll: true
+            vScroll: true,
+            onScrollEnd: this.scrollEnd,
+            onRefresh: this.refresh
         });
         this.scroller2 = new iScroll('myitemslist', {
             momentum: true,
             hScrollbar: false,
-            vScroll: true
+            vScroll: true,
+            onScrollEnd: this.scrollEnd,
+            onRefresh: this.refresh
         });
 
 
@@ -81,6 +88,8 @@ Application.View.ItemsView = Backbone.View.extend({
             } else {
                 itemsElem.append(this.templateitem(data));
             }
+
+            itemsElem.find('#ti-' + data.id).data('model', data);
         }, this);
 
 
@@ -93,66 +102,126 @@ Application.View.ItemsView = Backbone.View.extend({
             } else {
                 myitemsElem.append(this.templatemyitem(data));
             }
+
+            myitemsElem.find('#ti-' + data.id).data('model', data);
         }, this);
 
-
-
-        var itemClosest = this.closest(this.itemsModel.models),
-            myitemClosest = this.closest(this.myitemsModel.models);
 
         _.defer(_.bind(function () {
             this.scroller1.refresh();
             this.scroller2.refresh();
-
-            this.now(this.scroller1, itemClosest, 'top');
-            this.now(this.scroller2, myitemClosest, 'bottom');
         }, self));
 
         return this;
     },
 
 
-    now: function(scroller, item, relative) {
-        if (scroller === undefined || item === undefined) {
+    refresh: function() {
+        var $wrapper = $(this.wrapper);
+        var $items = $(this.scroller).children();
+
+        if ($items.length === 0) {
             return;
         }
 
-        // Get item
-        var $item = $('#ti-' + item.attributes.id);
 
-        // Get wrapper and remove existing now
-        var $wrapper = $(scroller.wrapper);
-            $wrapper.find('.now').remove();
+        // Code de-dup call this.closest
+        var $closest = $items.first();
+        $items.each(function(){
+            var $this = $(this);
 
-        // Insert now
-        var $now = $(this.templatenow());
-            $now.insertBefore($item);
+            if (Math.abs($this.data('model').diff) < Math.abs($closest.data('model').diff)) {
+                $closest = $this;
+            }
+        });
 
 
-        var position = $item.position(),
+        var position = $closest.position(),
             offset   = 0;
 
-        if (relative === 'bottom') {
-            offset = $wrapper.height() - $item.height();
+        if (this.wrapper.id === 'myitemslist') {
+            offset = $wrapper.height() - 175;
         } else {
-            offset = $item.height();
+            offset = 175;
         }
 
         // Scroll to
-        scroller.scrollTo(0, -(position.top - offset));
+        this.scrollTo(0, -(position.top - offset));
+    },
+
+
+    scrollEnd: function() {
+        var $wrapper = $(this.wrapper).parent(),
+            $now     = $(this.wrapper).parent().find('.now');
+
+        var position = $now.offset();
+
+        var $element = $(document.elementFromPoint(
+            position.left,
+            position.top + $now.height()
+        ));
+
+        if ($element.is('.timelinecalitem') === false) {
+            return;
+        }
+
+        $now.find('span').text(
+            moment($element.data('model').ets).format('DD MMM YYYY')
+        );
+
+
+        $now.stop(true).fadeTo(0, 1).fadeTo(3000, 0);
     },
 
 
     closest: function(items) {
         var closest = items[0];
-
-        items.forEach(function(item) {
+        _.each(items, function(item){
             if (Math.abs(item.attributes.diff) < Math.abs(closest.attributes.diff)) {
                 closest = item;
             }
         });
 
-        return closest;
+        return $('#ti-' + closest.attributes.id);
+
+        // TODO: Support iterating over both DOM and models
+        // var $closest = $items.first();
+        // $items.each(function(){
+        //     var $this = $(this);
+
+        //     if (Math.abs($this.data('model').diff) < Math.abs($closest.data('model').diff)) {
+        //         $closest = $this;
+        //     }
+        // });
+
+        // return $closest;
+    },
+
+
+    now: function(event) {
+        var $target = $(event.target);
+
+        if ($target.closest('.main-alltimelineheader').length > 0) {
+            $closest = this.closest(this.itemsModel.models);
+            $wrapper = $('.main-alltimelinecol');
+
+            scroller = this.scroller1;
+            offset   = 175;
+        } else {
+            $closest = this.closest(this.myitemsModel.models);
+            $wrapper = $('.main-mytimelinecol');
+
+            scroller = this.scroller2;
+            offset   = $wrapper.height() - 175;
+        }
+
+        var $now = $wrapper.find('.now');
+
+        $now.stop(true).fadeTo(0, 1);
+        $now.find('span').text('Now');
+
+        // Scroll to
+        scroller.scrollTo(0, -($closest.position().top - offset), 1000);
     },
 
 
