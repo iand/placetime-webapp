@@ -1051,9 +1051,12 @@ func feedWorker(id int, jobs <-chan *Profile, results chan<- *ProfileItemData) {
 }
 
 func itemsFromFeed(pid string, feed *feedparser.Feed) []*Item {
+
 	items := make([]*Item, 0)
-	for _, item := range feed.Items {
-		items = append(items, &Item{Pid: pid, Ets: item.When, Text: item.Title, Link: item.Link})
+	if feed != nil {
+		for _, item := range feed.Items {
+			items = append(items, &Item{Pid: pid, Ets: item.When, Text: item.Title, Link: item.Link})
+		}
 	}
 	return items
 }
@@ -1064,7 +1067,7 @@ func imageWorker(id int, jobs <-chan *Item, results chan<- *ItemImageData) {
 		log.Printf("Image worker %d processing item %s", id, item.Id)
 		img, err := imgpick.PickImage(item.Link)
 
-		if err != nil {
+		if img == nil || err != nil {
 			results <- &ItemImageData{item, err}
 		}
 
