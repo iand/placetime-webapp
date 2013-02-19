@@ -1,49 +1,80 @@
-  <div id="itemlist"><!-- open page --> 
-    
-      <div class="main-alltimelineheaderwrapper"><!-- open timelineheaderwrapper -->
-        <div class="main-alltimelineheader"><!-- open timelineheader -->
-        <div class="sort-menu">
+<div id="itemlist">
+  <!-- open page -->
+  <div class="main-alltimelineheaderwrapper">
+    <!-- open timelineheaderwrapper -->
+    <div class="main-alltimelineheader">
+      <!-- open timelineheader -->
+      <div class="sort-menu">
         <div>
+          <a href="#" id="now" class="ui-btn-right main-hiddenlink"><i class="icon-circle"></i> now</a>
           <a href="#" id="ets" class="ui-btn-right main-hiddenlink"><i class="icon-circle-arrow-up"></i> event</a>
           <a href="#" id="ts" class="ui-btn-right main-hiddenlink"><i class="icon-circle-arrow-down"></i> added</a>
         </div>
+      </div>
+      <div class="main-timelineheadertext">
+        <!-- open headertext -->
+        <div class="main-timelinetitle">
+          Following <span class="main-timelinestrapline"><span style="color:#ff9900;">possible</span> things to do or check out</span>
         </div>
-        <div class="main-timelineheadertext"><!-- open headertext --> 
-        <div class="main-timelinetitle">Following <span class="main-timelinestrapline"><span style="color:#ff9900;">possible</span> things to do or check out</span></div>
-        </div><!-- close headertext -->  
-        </div><!-- close timelineheader -->
-        <div class="main-mytimelineheader"><!-- open timelineheader -->
-        <div class="sort-menu">
+      </div>
+      <!-- close headertext -->
+    </div>
+    <!-- close timelineheader -->
+    <div class="main-mytimelineheader">
+      <!-- open timelineheader -->
+      <div class="sort-menu">
         <div>
+          <a href="#" id="now" class="ui-btn-right main-hiddenlink"><i class="icon-circle"></i> now</a>
           <a href="#" id="myets" class="ui-btn-right main-hiddenlink"><i class="icon-circle-arrow-up"></i> event</a>
-          <a href="#"  id="myts" class="ui-btn-right main-hiddenlink"><i class="icon-circle-arrow-down"></i> added</a>
+          <a href="#" id="myts" class="ui-btn-right main-hiddenlink"><i class="icon-circle-arrow-down"></i> added</a>
         </div>
+      </div>
+      <div class="main-timelineheadertext">
+        <!-- open headertext -->
+        <div class="main-timelinetitle">
+          My Playlist <span class="main-timelinestrapline">things to <span style="color:#ff9900;">maybe</span> check out</span>
         </div>
-        <div class="main-timelineheadertext"><!-- open headertext -->
-        <div class="main-timelinetitle">My Playlist <span class="main-timelinestrapline">things to <span style="color:#ff9900;">maybe</span> check out</span></div>
-        </div><!-- close headertext -->  
-        </div><!-- close timelineheader -->
-        </div><!-- close timelineheaderwrapper -->
-      <div style="clear:both;"></div> 
-      
-      <div class="main-timelinewrapper"><!-- open timeline wrapper -->
-      <div class="main-alltimelinecol"><!-- open alltimeline col -->
-        <div class="content-primary" id="itemslist">
-          <div id="items" class="items"></div>
+      </div>
+      <!-- close headertext -->
+    </div>
+    <!-- close timelineheader -->
+  </div>
+  <!-- close timelineheaderwrapper -->
+  <div style="clear:both;">
+  </div>
+  <div class="main-timelinewrapper">
+    <!-- open timeline wrapper -->
+    <div class="main-alltimelinecol">
+      <!-- open alltimeline col -->
+      <div class="content-primary" id="itemslist">
+        <div id="items" class="items">
         </div>
-      </div><!-- close alltimeline col -->
-        
-      <div class="main-mytimelinecol"><!-- open mytimeline col -->
-        <div class="content-primary" id="myitemslist">
-          <div id="myitems" class="items"></div>
+      </div>
+      <div class="now">
+        <span>Now</span>
+      </div>
+    </div>
+    <!-- close alltimeline col -->
+    <div class="main-mytimelinecol">
+      <!-- open mytimeline col -->
+      <div class="content-primary" id="myitemslist">
+        <div id="myitems" class="items">
         </div>
-      </div><!-- close mytimeline col -->
-      </div><!-- close timeline wrapper -->
-      
-      <div id="footer"><!-- start footer -->      
-          <ul>
-          <li><a href="#app" data-icon="arrow-l" id="possiblebtn" class="ui-btn-active ui-state-persist">Timelines I follow</a></li>
-          <li><a href="#app" data-icon="arrow-r" id="maybebtn">My Timeline</a></li>
-          </ul>  
-      </div><!-- end footer -->        
-    </div><!-- close itemlist -->
+      </div>
+      <div class="now">
+        <span>Now</span>
+      </div>
+    </div>
+    <!-- close mytimeline col -->
+  </div>
+  <!-- close timeline wrapper -->
+  <div id="footer">
+    <!-- start footer -->
+    <ul>
+      <li><a href="#app" data-icon="arrow-l" id="possiblebtn" class="ui-btn-active ui-state-persist">Timelines I follow</a></li>
+      <li><a href="#app" data-icon="arrow-r" id="maybebtn">My Timeline</a></li>
+    </ul>
+  </div>
+  <!-- end footer -->
+</div>
+<!-- close itemlist -->
