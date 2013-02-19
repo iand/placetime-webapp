@@ -107,22 +107,22 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
 }
 
 .now {
-    background-color: black;
+    background-color: #fff;
     font-size: 12px;
     left: 0;
     margin: 5px 0;
-    height: 3px;
+    height: 1px;
     position: absolute;
     width: 100%;
     z-index: 999;
     border-bottom: 20px solid rgba(110,110,110,0.2);
-    box-shadow: 0px 2px 5px #888888;
+    box-shadow: 0px 0px 2px #888888;
     border-top: 20px solid rgba(110,110,110,0.2);
     background-clip: padding-box;
 }
 
 .now span {
-    background-color: #000;
+    background-color: #ff6600;
     border-radius: 30px;
     color: #fff;
     display: block;
@@ -144,12 +144,12 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
 }
 
 .main-mytimelinecol .now {
-    bottom: 139px;
+    top: 148px;
 }
 
 .main-mytimelinecol .now span {
-    right: -50px;
-    top: -25px;
+    right: -26px;
+    top: -24px;
 }
 
 
