@@ -94,8 +94,13 @@ func main() {
 
 	log.Print("Listening on 0.0.0.0:8081\n")
 
-	http.Handle("/", Log(r))
-	http.ListenAndServe("0.0.0.0:8081", nil)
+	server := &http.Server{
+		Addr:        "0.0.0.0:8081",
+		Handler:     Log(r),
+		ReadTimeout: 30 * time.Second,
+	}
+
+	server.ListenAndServe()
 }
 
 func checkEnvironment() {
