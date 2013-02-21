@@ -386,20 +386,24 @@ func (s *RedisStore) Item(id string) (*Item, error) {
 	return item, nil
 }
 
-func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string, image string) (string, error) {
+func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string, image string, itemid string) (string, error) {
 
-	ts := time.Now()
+	if itemid == "" {
+		rs := s.db.Command("INCR", itemSeqKey(pid))
+		if !rs.IsOK() {
+			return "", rs.Error()
+		}
+		seq, _ := rs.ValueAsInt()
 
-	rs := s.db.Command("INCR", itemSeqKey(pid))
-	if !rs.IsOK() {
-		return "", rs.Error()
+		itemid = itemId(pid, seq)
 	}
 
-	seq, _ := rs.ValueAsInt()
-
-	itemid := itemId(pid, seq)
 	itemKey := itemKey(itemid)
 
+	if exists, _ := s.ItemExists(itemid); exists {
+		return itemKey, nil
+	}
+	ts := time.Now()
 	item := &Item{
 
 		Id:   itemid,
@@ -415,7 +419,7 @@ func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string
 		return itemKey, err
 	}
 
-	rs = s.db.Command("SET", itemKey, json)
+	rs := s.db.Command("SET", itemKey, json)
 	if !rs.IsOK() {
 		return "", rs.Error()
 	}
@@ -455,6 +459,16 @@ func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string
 	}
 
 	return itemKey, nil
+}
+
+func (s *RedisStore) ItemExists(id string) (bool, error) {
+	rs := s.db.Command("EXISTS", itemKey(id))
+	if !rs.IsOK() {
+		return false, rs.Error()
+	}
+
+	val, err := rs.ValueAsBool()
+	return val, err
 }
 
 func (s *RedisStore) UpdateItem(item *Item) error {
