@@ -8,12 +8,14 @@ import (
 	"log"
 	"net/http"
 	//	"net/http/httputil"
+	"crypto/md5"
 	"crypto/rand"
 	"encoding/base64"
 	"github.com/iand/feedparser"
 	"github.com/iand/imgpick"
 	"github.com/iand/salience"
 	"image/png"
+	"io"
 	"io/ioutil"
 	"os"
 	"path"
@@ -471,17 +473,17 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 
 	s.AddProfile("nasa", "nasa", "Nasa Missions", "Upcoming NASA mission information.", "", "")
 
-	s.AddItem("nasa", parseKnownTime("1 Jan 2015"), "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "", "")
-	s.AddItem("nasa", parseKnownTime("26 Aug 2012"), "Dawn - Leaves asteroid Vesta, heads for asteroid 1 Ceres", "", "")
-	s.AddItem("nasa", parseKnownTime("1 Sep 2012"), "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "", "")
-	s.AddItem("nasa", parseKnownTime("1 Feb 2015"), "Dawn - Goes into orbit around asteroid 1 Ceres", "", "")
-	s.AddItem("nasa", parseKnownTime("14 Jul 2015"), "New Horizons - NASA mission reaches Pluto and Charon", "", "")
-	s.AddItem("nasa", parseKnownTime("1 Mar 2013"), "LADEE - Launch of NASA Orbiter to the Moon", "", "")
-	s.AddItem("nasa", parseKnownTime("1 Nov 2014"), "Philae - ESA Rosetta Lander touches down on Comet Churyumov-Gerasimenko", "", "")
-	s.AddItem("nasa", parseKnownTime("1 Nov 2013"), "MAVEN - Launch of Mars Orbiter", "", "")
-	s.AddItem("nasa", parseKnownTime("1 May 2014"), "Rosetta - ESA mission reaches Comet Churyumov-Gerasimenko", "", "")
-	s.AddItem("nasa", parseKnownTime("1 Jan 2014"), "Mars Sample Return Mission - Launch of NASA sample return mission to Mars", "", "")
-	s.AddItem("nasa", parseKnownTime("5 Apr 2231"), "Pluto - is passed by Neptune in distance from the Sun for the next 20 years", "", "")
+	s.AddItem("nasa", parseKnownTime("1 Jan 2015"), "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "", "", "")
+	s.AddItem("nasa", parseKnownTime("26 Aug 2012"), "Dawn - Leaves asteroid Vesta, heads for asteroid 1 Ceres", "", "", "")
+	s.AddItem("nasa", parseKnownTime("1 Sep 2012"), "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "", "", "")
+	s.AddItem("nasa", parseKnownTime("1 Feb 2015"), "Dawn - Goes into orbit around asteroid 1 Ceres", "", "", "")
+	s.AddItem("nasa", parseKnownTime("14 Jul 2015"), "New Horizons - NASA mission reaches Pluto and Charon", "", "", "")
+	s.AddItem("nasa", parseKnownTime("1 Mar 2013"), "LADEE - Launch of NASA Orbiter to the Moon", "", "", "")
+	s.AddItem("nasa", parseKnownTime("1 Nov 2014"), "Philae - ESA Rosetta Lander touches down on Comet Churyumov-Gerasimenko", "", "", "")
+	s.AddItem("nasa", parseKnownTime("1 Nov 2013"), "MAVEN - Launch of Mars Orbiter", "", "", "")
+	s.AddItem("nasa", parseKnownTime("1 May 2014"), "Rosetta - ESA mission reaches Comet Churyumov-Gerasimenko", "", "", "")
+	s.AddItem("nasa", parseKnownTime("1 Jan 2014"), "Mars Sample Return Mission - Launch of NASA sample return mission to Mars", "", "", "")
+	s.AddItem("nasa", parseKnownTime("5 Apr 2231"), "Pluto - is passed by Neptune in distance from the Sun for the next 20 years", "", "", "")
 
 	// s.SetProfile(&Profile{Pid: "o2shepherdsbushempire ", Name: "O2 Shepherd's Bush Empire Events", Bio: "", Feed: "http://www.o2shepherdsbushempire.co.uk/RSS"})
 	// s.SetProfile(&Profile{Pid: "skiddlewc2", Name: "Skiddle WC2", Bio: "What's On in London and area", Feed: "http://www.skiddle.com/rss/events.php?c=WC2"})
@@ -583,7 +585,7 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	itemid, err := s.AddItem(pid, etsParsed, text, link, image)
+	itemid, err := s.AddItem(pid, etsParsed, text, link, image, "")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -1060,7 +1062,10 @@ func itemsFromFeed(pid string, feed *feedparser.Feed) []*Item {
 	items := make([]*Item, 0)
 	if feed != nil {
 		for _, item := range feed.Items {
-			items = append(items, &Item{Pid: pid, Ets: item.When, Text: item.Title, Link: item.Link})
+			hasher := md5.New()
+			io.WriteString(hasher, item.Id)
+			id := fmt.Sprintf("%x", hasher.Sum(nil))
+			items = append(items, &Item{Id: id, Pid: pid, Ets: item.When, Text: item.Title, Link: item.Link})
 		}
 	}
 	return items
@@ -1117,9 +1122,9 @@ func updateProfileItemData(data *ProfileItemData) error {
 			s.Unfollow(f.Pid, p.Pid)
 		}
 
-		s.DeleteMaybeItems(p.Pid)
+		//s.DeleteMaybeItems(p.Pid)
 		for _, item := range data.Items {
-			s.AddItem(item.Pid, item.Ets, item.Text, item.Link, item.Image)
+			s.AddItem(item.Pid, item.Ets, item.Text, item.Link, item.Image, item.Id)
 		}
 
 		for _, f := range followers {
