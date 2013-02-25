@@ -311,8 +311,8 @@ func (s *RedisStore) FlagProfile(pid string) error {
 
 }
 
-func (s *RedisStore) FlaggedProfiles(offset int, limit int) ([]*ScoredProfile, error) {
-	rs := s.db.Command("ZRANGE", FLAGGED_PROFILES, offset, offset+limit, "WITHSCORES")
+func (s *RedisStore) FlaggedProfiles(start int, count int) ([]*ScoredProfile, error) {
+	rs := s.db.Command("ZRANGE", FLAGGED_PROFILES, start, start+count, "WITHSCORES")
 	if !rs.IsOK() {
 		return nil, rs.Error()
 	}

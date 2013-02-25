@@ -1275,21 +1275,21 @@ func jsonFlaggedProfilesHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	offsetParam := r.FormValue("offset")
-	offset, err := strconv.ParseInt(offsetParam, 10, 0)
+	startParam := r.FormValue("start")
+	start, err := strconv.ParseInt(startParam, 10, 0)
 	if err != nil {
-		offset = 0
+		start = 0
 	}
 
-	limitParam := r.FormValue("limit")
-	limit, err := strconv.ParseInt(limitParam, 10, 0)
+	countParam := r.FormValue("count")
+	count, err := strconv.ParseInt(countParam, 10, 0)
 	if err != nil {
-		limit = 10
+		count = 10
 	}
 
 	s := NewRedisStore()
 	defer s.Close()
-	profiles, err := s.FlaggedProfiles(int(offset), int(limit))
+	profiles, err := s.FlaggedProfiles(int(start), int(count))
 	if err != nil {
 		ErrorResponse(w, r, err)
 		return
