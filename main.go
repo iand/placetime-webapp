@@ -11,6 +11,7 @@ import (
 	"crypto/md5"
 	"crypto/rand"
 	"encoding/base64"
+	"errors"
 	"github.com/iand/feedparser"
 	"github.com/iand/imgpick"
 	"github.com/iand/salience"
@@ -72,6 +73,7 @@ func main() {
 	r.HandleFunc("/-jfollowers", jsonFollowersHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-jfollowing", jsonFollowingHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-jfeeds", jsonFeedsHandler).Methods("GET", "HEAD")
+	r.HandleFunc("/-jflaggedprofiles", jsonFlaggedProfilesHandler).Methods("GET", "HEAD")
 	//	r.HandleFunc("/{pid:[0-9a-zA-Z]+}", profileHandler).Methods("GET", "HEAD")
 
 	r.HandleFunc("/-tfollow", followHandler).Methods("POST")
@@ -858,7 +860,11 @@ func flagProfileHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	pid := r.FormValue("pid")
+	if pid == "" {
+		ErrorResponse(w, r, errors.New("Missing required parameter 'pid'"))
+		return
 
+	}
 	s := NewRedisStore()
 	defer s.Close()
 
@@ -1256,4 +1262,44 @@ func randomString(length int) string {
 	d := make([]byte, en.EncodedLen(len(b)))
 	en.Encode(d, b)
 	return string(d)
+}
+
+func jsonFlaggedProfilesHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, sessionPid := checkSession(w, r, false)
+	if !sessionValid {
+		return
+	}
+
+	if !isAdmin(sessionPid) {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	offsetParam := r.FormValue("offset")
+	offset, err := strconv.ParseInt(offsetParam, 10, 0)
+	if err != nil {
+		offset = 0
+	}
+
+	limitParam := r.FormValue("limit")
+	limit, err := strconv.ParseInt(limitParam, 10, 0)
+	if err != nil {
+		limit = 10
+	}
+
+	s := NewRedisStore()
+	defer s.Close()
+	profiles, err := s.FlaggedProfiles(int(offset), int(limit))
+	if err != nil {
+		ErrorResponse(w, r, err)
+		return
+	}
+
+	json, err := json.MarshalIndent(profiles, "", "  ")
+	if err != nil {
+		ErrorResponse(w, r, err)
+		return
+	}
+	w.Header().Set("Content-Type", "application/javascript")
+	w.Write(json)
 }

@@ -293,6 +293,11 @@ func (s *RedisStore) RemoveProfile(pid string) error {
 		}
 	}
 
+	rs = s.db.Command("ZREM", FLAGGED_PROFILES, pid)
+	if !rs.IsOK() {
+		// OK TO IGNORE
+	}
+
 	return nil
 }
 
@@ -304,6 +309,28 @@ func (s *RedisStore) FlagProfile(pid string) error {
 	}
 	return nil
 
+}
+
+func (s *RedisStore) FlaggedProfiles(offset int, limit int) ([]*ScoredProfile, error) {
+	rs := s.db.Command("ZRANGE", FLAGGED_PROFILES, offset, offset+limit, "WITHSCORES")
+	if !rs.IsOK() {
+		return nil, rs.Error()
+	}
+
+	vals := rs.Values()
+	profiles := make([]*ScoredProfile, 0)
+
+	for i := 0; i < len(vals); i += 2 {
+		pid := vals[i].String()
+		score, err := vals[i+1].Float64()
+		if err == nil {
+			sp := &ScoredProfile{Pid: pid, Score: score}
+
+			profiles = append(profiles, sp)
+		}
+	}
+
+	return profiles, nil
 }
 
 func (s *RedisStore) FeedDrivenProfiles() ([]*Profile, error) {

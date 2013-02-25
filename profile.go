@@ -18,3 +18,8 @@ type Profile struct {
 	FeedUrl        string    `json:"feedurl,omitempty"`
 	ParentPid      string    `json:"parentpid,omitempty"`
 }
+
+type ScoredProfile struct {
+	Pid   string  `json:"pid"`
+	Score float64 `json:"score"`
+}
