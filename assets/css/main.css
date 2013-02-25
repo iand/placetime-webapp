@@ -68,7 +68,7 @@ img:hover { filter: none; -webkit-filter: grayscale(0); }
 .main-hiddenlink { border-bottom: 0px; }
 .icon-ok, .icon-remove { text-shadow: 0.1em 0.1em 0.2em #aaa; font-size: 22px; }
 .icon-circle { background-color: #fe792b; border-radius: 20px; height: 24px; width: 24px; }
-.icon-circle-arrow-up, .icon-circle-arrow-down { text-shadow: 0.1em 0.1em 0.2em #aaa; font-size: 30px; }
+.icon-circle, .icon-circle-arrow-up, .icon-circle-arrow-down { text-shadow: 0.1em 0.1em 0.2em #aaa; font-size: 30px; }
 a .icon-ok, a .icon-remove { color: #000; text-decoration: none; }
 a .icon-circle-arrow-up, a .icon-circle-arrow-down { color: #fff; text-decoration: none; }
 a:hover .icon-ok, a:hover .icon-remove:hover { color: #fff; text-decoration: none; }
@@ -87,7 +87,8 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
         z-index: 1500; 
         box-shadow: 3px 3px 4px #888888;
         }
-*/        
+*/       
+
 .items {
     padding-top: 5px;
 }
