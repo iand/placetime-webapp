@@ -12,6 +12,7 @@ import (
 const (
 	FEED_DRIVEN_PROFILES = "feeddrivenprofiles"
 	ITEMS_NEEDING_IMAGES = "itemsneedingimages"
+	FLAGGED_PROFILES     = "flaggedprofiles"
 	ITEM_ID              = "itemid"
 	MaxInt               = int(^uint(0) >> 1)
 )
@@ -293,6 +294,16 @@ func (s *RedisStore) RemoveProfile(pid string) error {
 	}
 
 	return nil
+}
+
+func (s *RedisStore) FlagProfile(pid string) error {
+
+	rs := s.db.Command("ZINCRBY", FLAGGED_PROFILES, "1.0", pid)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+	return nil
+
 }
 
 func (s *RedisStore) FeedDrivenProfiles() ([]*Profile, error) {

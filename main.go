@@ -84,6 +84,7 @@ func main() {
 	r.HandleFunc("/-taddprofile", addProfileHandler).Methods("POST")
 	r.HandleFunc("/-tupdateprofile", updateProfileHandler).Methods("POST")
 	r.HandleFunc("/-tremprofile", removeProfileHandler).Methods("POST")
+	r.HandleFunc("/-tflagprofile", flagProfileHandler).Methods("POST")
 
 	r.HandleFunc("/-session", sessionHandler).Methods("POST")
 	r.HandleFunc("/-chksession", checkSessionHandler).Methods("GET")
@@ -140,6 +141,11 @@ func Log(handler http.Handler) http.Handler {
 	})
 }
 
+func ErrorResponse(w http.ResponseWriter, r *http.Request, err error) {
+	log.Printf("[Error] %s (%s)", err.Error(), r.URL)
+	http.Error(w, err.Error(), http.StatusInternalServerError)
+}
+
 func assetsHandler(w http.ResponseWriter, r *http.Request) {
 	p := r.URL.Path[9:]
 	p = path.Join(assetsDir, p)
@@ -158,7 +164,7 @@ func timelineHandler(w http.ResponseWriter, r *http.Request) {
 
 	err := templates.ExecuteTemplate(w, "timeline.html", nil)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 }
@@ -209,13 +215,13 @@ func jsonTimelineHandler(w http.ResponseWriter, r *http.Request) {
 	defer s.Close()
 	tl, err := s.Timeline(pidParam, statusParam, orderParam, tsStart, tsEnd, int(count))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 
 	json, err := json.MarshalIndent(tl, "", "  ")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	w.Header().Set("Content-Type", "application/javascript")
@@ -235,13 +241,13 @@ func jsonItemHandler(w http.ResponseWriter, r *http.Request) {
 
 	item, err := s.Item(id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 
 	json, err := json.MarshalIndent(item, "", "  ")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	w.Header().Set("Content-Type", "application/javascript")
@@ -262,13 +268,13 @@ func jsonSuggestedProfilesHandler(w http.ResponseWriter, r *http.Request) {
 
 	plist, err := s.SuggestedProfiles(loc)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 
 	json, err := json.MarshalIndent(plist, "", "  ")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	w.Header().Set("Content-Type", "application/javascript")
@@ -301,13 +307,13 @@ func jsonFollowersHandler(w http.ResponseWriter, r *http.Request) {
 
 	plist, err := s.Followers(pid, int(count), int(start))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 
 	json, err := json.MarshalIndent(plist, "", "  ")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	w.Header().Set("Content-Type", "application/javascript")
@@ -340,13 +346,13 @@ func jsonFollowingHandler(w http.ResponseWriter, r *http.Request) {
 
 	plist, err := s.Following(pid, int(count), int(start))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 
 	json, err := json.MarshalIndent(plist, "", "  ")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	w.Header().Set("Content-Type", "application/javascript")
@@ -367,13 +373,13 @@ func jsonProfileHandler(w http.ResponseWriter, r *http.Request) {
 
 	profile, err := s.Profile(pid)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 
 	json, err := json.MarshalIndent(profile, "", "  ")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	w.Header().Set("Content-Type", "application/javascript")
@@ -558,7 +564,7 @@ func adminHandler(w http.ResponseWriter, r *http.Request) {
 
 	err := templates.ExecuteTemplate(w, "admin.html", nil)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 
@@ -581,13 +587,13 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 
 	etsParsed, err := time.Parse("_2 Jan 2006", ets)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 
 	itemid, err := s.AddItem(pid, etsParsed, text, link, image, "")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	fmt.Fprintf(w, "ACK. (itemid=%s)", itemid)
@@ -611,7 +617,7 @@ func promoteHandler(w http.ResponseWriter, r *http.Request) {
 
 	err := s.Promote(pid, id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	fmt.Fprint(w, "ACK")
@@ -635,7 +641,7 @@ func demoteHandler(w http.ResponseWriter, r *http.Request) {
 
 	err := s.Demote(pid, id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	fmt.Fprint(w, "ACK")
@@ -655,7 +661,7 @@ func addSuggestHandler(w http.ResponseWriter, r *http.Request) {
 
 	err := s.AddSuggestedProfile(pid, loc)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	fmt.Fprint(w, "ACK")
@@ -675,7 +681,7 @@ func remSuggestHandler(w http.ResponseWriter, r *http.Request) {
 
 	err := s.RemoveSuggestedProfile(pid, loc)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	fmt.Fprint(w, "ACK")
@@ -714,14 +720,14 @@ func checkSession(w http.ResponseWriter, r *http.Request, silent bool) (bool, st
 			if err == nil {
 				valid, err = s.ValidSession(pid, sessionId)
 				if err != nil {
-					http.Error(w, err.Error(), http.StatusInternalServerError)
+					ErrorResponse(w, r, err)
 					return false, ""
 				}
 
 				if valid {
 					newSessionId, err := s.SessionId(pid)
 					if err != nil {
-						http.Error(w, err.Error(), http.StatusInternalServerError)
+						ErrorResponse(w, r, err)
 						return false, ""
 					}
 
@@ -748,7 +754,7 @@ func createSession(pid string, w http.ResponseWriter, r *http.Request) {
 
 	sessionId, err := s.SessionId(pid)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 
@@ -779,7 +785,7 @@ func addProfileHandler(w http.ResponseWriter, r *http.Request) {
 		pwd, err = RandomString(18)
 		if err != nil {
 			log.Printf("Could not generate password: %s", err.Error())
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			ErrorResponse(w, r, err)
 			return
 		}
 	}
@@ -789,7 +795,7 @@ func addProfileHandler(w http.ResponseWriter, r *http.Request) {
 
 	err = s.AddProfile(pid, pwd, name, bio, feedurl, parentpid)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	sessionValid, _ := checkSession(w, r, true)
@@ -816,7 +822,7 @@ func updateProfileHandler(w http.ResponseWriter, r *http.Request) {
 
 	err := s.UpdateProfile(pid, name, bio, feedurl, parentpid)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	fmt.Fprint(w, "")
@@ -840,7 +846,25 @@ func removeProfileHandler(w http.ResponseWriter, r *http.Request) {
 
 	err := s.RemoveProfile(pid)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
+		return
+	}
+	fmt.Fprint(w, "")
+}
+
+func flagProfileHandler(w http.ResponseWriter, r *http.Request) {
+	sessionValid, _ := checkSession(w, r, false)
+	if !sessionValid {
+		return
+	}
+	pid := r.FormValue("pid")
+
+	s := NewRedisStore()
+	defer s.Close()
+
+	err := s.FlagProfile(pid)
+	if err != nil {
+		ErrorResponse(w, r, err)
 		return
 	}
 	fmt.Fprint(w, "")
@@ -856,7 +880,7 @@ func twitterHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("callbackConfirmed: %s\n", callbackConfirmed)
 
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 
@@ -877,7 +901,7 @@ func soauthHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("screenName: %s\n", screenName)
 
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 
@@ -886,20 +910,20 @@ func soauthHandler(w http.ResponseWriter, r *http.Request) {
 
 	exists, err := s.ProfileExists(screenName)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	if !exists {
 		pwd, err := RandomString(18)
 		if err != nil {
 			log.Printf("Could not generate password: %s", err.Error())
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			ErrorResponse(w, r, err)
 			return
 		}
 
 		err = s.AddProfile(screenName, pwd, screenName, "", "", "")
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			ErrorResponse(w, r, err)
 			return
 		}
 	}
@@ -936,13 +960,13 @@ func templatesHandler(w http.ResponseWriter, r *http.Request) {
 	tm, err := packageTemplates()
 
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 
 	json, err := json.MarshalIndent(tm, "", "  ")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	w.Header().Set("Content-Type", "application/javascript")
@@ -1153,21 +1177,21 @@ func refreshHandler(w http.ResponseWriter, r *http.Request) {
 	defer s.Close()
 	profile, err := s.Profile(pid)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	if profile.FeedUrl != "" {
 		resp, err := http.Get(profile.FeedUrl)
 
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			ErrorResponse(w, r, err)
 			return
 		}
 		defer resp.Body.Close()
 
 		feed, err := feedparser.NewFeed(resp.Body)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			ErrorResponse(w, r, err)
 			return
 		}
 
@@ -1189,13 +1213,13 @@ func jsonFeedsHandler(w http.ResponseWriter, r *http.Request) {
 
 	flist, err := s.Feeds(pid)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 
 	json, err := json.MarshalIndent(flist, "", "  ")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		ErrorResponse(w, r, err)
 		return
 	}
 	w.Header().Set("Content-Type", "application/javascript")
