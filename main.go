@@ -201,16 +201,34 @@ func jsonTimelineHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var tsStart, tsEnd time.Time
-
 	ts := time.Now()
 
-	if count < 0 {
-		tsStart = ts.AddDate(-1000, 0, 0)
-		tsEnd = ts.Add(-time.Second)
-		count = -count
+	tstartParam := r.FormValue("tstart")
+	tstart, err := strconv.ParseInt(tstartParam, 10, 64)
+	if err != nil {
+		if count < 0 {
+			tsStart = ts.AddDate(-1000, 0, 0)
+		} else {
+			tsStart = ts.AddDate(-1000, 0, 0)
+		}
 	} else {
-		tsStart = ts.AddDate(-1000, 0, 0)
-		tsEnd = ts.AddDate(1000, 0, 0)
+		tsStart = time.Unix(tstart, 0)
+	}
+
+	tendParam := r.FormValue("tend")
+	tend, err := strconv.ParseInt(tendParam, 10, 64)
+	if err != nil {
+		if count < 0 {
+			tsEnd = ts.Add(-time.Second)
+		} else {
+			tsEnd = ts.AddDate(1000, 0, 0)
+		}
+	} else {
+		tsEnd = time.Unix(tend, 0)
+	}
+
+	if count < 0 {
+		count = -count
 	}
 
 	s := NewRedisStore()
