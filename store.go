@@ -17,11 +17,21 @@ const (
 	MaxInt               = int(^uint(0) >> 1)
 )
 
+var (
+	thedb *redis.Database
+)
+
 func NewRedisStore() *RedisStore {
-	db := redis.Connect(redis.Configuration{Database: 0})
+	if thedb == nil {
+		thedb = redis.Connect(redis.Configuration{
+			Database: 0,
+			Timeout:  10 * time.Second,
+			PoolSize: 60,
+		})
+	}
 
 	return &RedisStore{
-		db: db,
+		db: thedb,
 	}
 }
 
@@ -82,7 +92,7 @@ func sessionKey(num int64) string {
 }
 
 func (s *RedisStore) Close() {
-	s.db.Close()
+
 }
 
 func (s *RedisStore) SuggestedProfiles(loc string) ([]*Profile, error) {
