@@ -1,66 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Timeline</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" rel="stylesheet" href="/-assets/css/jquery.dropdown.css">
-    <link rel="stylesheet" href="/-assets/css/normalize.min.css">
-    <!-- Typekit font loader -->
-    <script type="text/javascript" src="http://use.typekit.net/bsa5hge.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-    <link rel="stylesheet" href="/-assets/css/main.css"/>
-    <script src="/-assets/js/lib/modernizr.js"></script>
-    <link rel="stylesheet" href="/-assets/css/font-awesome.css">
-    <!-- fancyBox -->
-    <link rel="stylesheet" href="/-assets/css/jquery.fancybox.css?v=2.1.4" type="text/css" media="screen" />
-  </head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <body>
-  <div id="main-header"><!-- start header -->
-    <div id="main-topbaritems">
-    <div id="main-lefttopbaritems"><a href="/" class="main-hiddenlink" ><i class="icon-ok-circle" style="font-size:32px; color:#555; position: relative; left: 2px; top: 4px;"></i><i class="icon-time" style="font-size:32px; color:#555; position: relative; top:4px;"></i><span class="main-logo">placetime</span> <span class="main-strapline"> a playlist for your life</span></a></div>
-    <div id="main-righttopbaritems"><a class="main-hiddenlink" href="#" data-dropdown="#dropdown-1"><i class="icon-cog" style="font-size:33px;"></i></a></div>
-    </div><!-- close topbaritems -->
-    </div><!-- close header -->
+        <!-- Typekit font loader -->
+        <script type="text/javascript" src="http://use.typekit.net/bsa5hge.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
-    <div id="content"></div>
+        <script src="/-assets/javascripts/vendor/modernizr.js"></script>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/-assets/js/lib/jquery.js"><\/script>')</script>
-    <script type="text/javascript" src="/-assets/js/lib/jquery.dropdown.js"></script>
-    <script type="text/javascript" src="/-assets/js/lib/jquery.fancybox.js"></script>
+        <link rel="stylesheet" href="/-assets/stylesheets/vendor.css"/>
+        <link rel="stylesheet" href="/-assets/stylesheets/user.css"/>
 
-    <script src="/-assets/js/lib/json2.js"></script>
-    <script src="/-assets/js/lib/underscore.js"></script>
-    <script src="/-assets/js/lib/backbone.js"></script>
-    <script src="/-assets/js/lib/moment.js"></script>
-    <script src="/-assets/js/lib/iscroll.js"></script>
-    <script src="/-tmpl"></script>
-    <script src="/-assets/js/app.js"></script>
+        <title>PlaceTime - Timeline</title>
+    </head>
+    <body>
 
-    <div id="dropdown-1" class="dropdown-menu has-tip anchor-right">
-    <ul>
-    <li><a class="main-hiddenlink" href="#new" id="newbtn"><i class="icon-edit" style="font-size:20px;"></i> new</a></li>
-    <li>@  <%= data.pid %></li>
-    <li><a class="main-hiddenlink" href="#login" id="loginbtn"><i class="icon-signout" style="font-size:20px;"></i> logout</a></li>
-    </ul>
-    </div> <!-- close dropdown -->
-    <script type="text/javascript">
-    $(document).ready(function() {
-	$(".fancymodal").fancybox({
-		maxWidth	: 970,
-		maxHeight	: 800,
-		fitToView	: false,
-		width		: '70%',
-		height		: '70%',
-		autoSize	: false,
-		closeClick	: false,
-		openEffect	: 'none',
-		closeEffect	: 'none'
-	});
-});
-    </script>
-  </body>
+        <div id="header"></div>
+        <div id="content"></div>
+
+
+        <script type="text/template" id="header-template">
+            <div id="main-topbaritems">
+                <div id="main-lefttopbaritems">
+                    <a href="/" class="main-hiddenlink" >
+                        <i class="icon-ok-circle" style="font-size:32px; color:#555; position: relative; left: 2px; top: 4px;"></i>
+                        <i class="icon-time" style="font-size:32px; color:#555; position: relative; top:4px;"></i>
+
+                        <span class="main-logo">placetime</span>
+                        <span class="main-strapline"> a playlist for your life</span>
+                    </a>
+                </div>
+                <div id="main-righttopbaritems">
+                    <a class="main-hiddenlink" href="#" data-dropdown="#dropdown-1">
+                        <i class="icon-cog" style="font-size:33px;"></i>
+                    </a>
+                </div>
+            </div>
+
+
+            <div id="dropdown-1" class="dropdown dropdown-tip dropdown-anchor-right">
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="main-hiddenlink" href="#new" id="newbtn">
+                            <i class="icon-edit" style="font-size:20px;"></i>
+                            new
+                        </a>
+                    </li>
+                    <li>@  <%= pid %></li>
+                    <li>
+                        <a class="main-hiddenlink" href="#login" id="loginbtn">
+                            <i class="icon-signout" style="font-size:20px;"></i>
+                            logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </script>
+
+
+        <script type="text/template" id="login-template">
+            <section id="login" data-role="content">
+                <div class="content-primary">
+                    <div class="main-twitterbutton main-h1">
+                        <a href="/-twitter" data-role="button" rel="external">
+                            Sign in with Twitter
+                        </a>
+                    </div>
+                    <div class="main-h1">Or login</div>
+
+                    <form action="#" method="post">
+                        <div data-role="fieldcontain">
+                            <label for="name">User name</label>
+                            <input type="text" name="pid" id="pid" value=""  />
+                            <div class="hint"></div>
+                        </div>
+
+                        <div data-role="fieldcontain">
+                            <label for="name">Password</label>
+                            <input type="password" name="pwd" id="pwd" value=""  />
+                            <div class="hint"></div>
+                        </div>
+
+                        <input id="Submit1" class="loginBtn" type="submit" value="Login" data-role="button" data-inline="true" />
+                    </form>
+
+
+                    <div id="registerlink">
+                        Dont have an account? <a href="#register">Sign Up</a>
+                    </div>
+                </div>
+            </section>
+        </script>
+
+
+        <script type="text/template" id="register-template">
+            <div data-role="header" data-position="fixed">
+                <p class="main-h1">Register</p>
+            </div>
+
+            <div data-role="content">
+                <form action="#" method="post">
+                    <div data-role="fieldcontain">
+                        <label for="name">User name</label>
+                        <input type="text" name="pid" id="pid" value=""  />
+                        <div class="hint"></div>
+                    </div>
+
+                    <div data-role="fieldcontain">
+                        <label for="name">Full name</label>
+                        <input type="text" name="name" id="name" value=""  />
+                        <div class="hint"></div>
+                    </div>
+
+                    <div data-role="fieldcontain">
+                        <label for="name">Password</label>
+                        <input type="text" name="pwd" id="pwd" value=""  />
+                        <div class="hint"></div>
+                    </div>
+
+                    <input id="Submit1" class="submitBtn" type="submit" value="Register" data-role="button" data-inline="true" />
+                </form>
+            </div>
+        </script>
+
+
+        <script type="text/template" id="my-item-template">
+            <div class="mytimelineitem" id="ti-<%= id %>" style="background-image: url(/-img/<%= image %>);">
+                <% if (image) { %>
+                    <div class="main-imageoverlay"><!-- --></div>
+                <% } %>
+
+                <% if (media == "video") { %>
+                <!-- video specific markup here -->
+                <% } else if (media == "audio") { %>
+                <!-- audio specific markup here -->
+                <% } else { %>
+                    <div class="main-itemicon">
+                        <img src="/-assets/img/nasa.jpg" width="30px" height="30px">
+                    </div>
+                    <p class="main-itemusername">@<%= pid %></p>
+                    <p class="main-itemtext">
+                        <a class="main-hiddenlink fancymodal fancybox.iframe" href="<%= link %>">
+                            <%= text %>
+                        </a>
+                    </p>
+                    <p class="main-itemlink">
+                        <a href="<%= link %>" class="roundBtn main-hiddenlink fancymodal fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
+                            <i class="icon-external-link"></i>
+                        </a>
+                    </p>
+                    <p class="main-itemtime">
+                        <a class="main-hiddenlink fancymodal fancybox.iframe" href="<%= link %>">
+                            <i class="icon-time"></i> added:
+                            <span class="timestamp"><%= fromnow %></span>
+                        </a>
+                    </p>
+                    <a href="#app" class="<%= action %>btn" class="roundBtn main-hiddenlink" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="delete" data-position-to="window" data-transition="fade">
+                        <i class="icon-remove"></i>
+                    </a>
+                <% } %>
+            </div>
+        </script>
+
+
+
+        <script type="text/template" id="my-cal-item-template">
+            <div class="mytimelinecalitem" id="ti-<%= id %>" style="background-image: url(/-img/<%= image %>);">
+                <% if (image) { %>
+                    <div class="main-imageoverlay"><!-- --></div>
+                <% } %>
+
+                <% if (media == "video") { %>
+                <!-- video specific markup here -->
+                <% } else if (media == "audio") { %>
+                <!-- audio specific markup here -->
+                <% } else { %>
+                    <div class="main-itemicon">
+                        <img src="/-assets/img/nasa.jpg" width="30px" height="30px">
+                    </div>
+                    <p class="main-itemusername">@<%= pid %></p>
+                    <p class="main-itemtext">
+                        <a class="main-hiddenlink fancymodal fancybox.iframe" href="<%= link %>">
+                            <%= text %>
+                        </a>
+                    </p>
+                    <p class="main-itemlink">
+                        <a href="<%= link %>" class="roundBtn main-hiddenlink fancymodal fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
+                            <i class="icon-external-link"></i>
+                        </a>
+                    </p>
+                    <p class="main-itemtime">
+                        <a class="main-hiddenlink fancymodal fancybox.iframe" href="<%= link %>">
+                            <i class="icon-time"></i>
+                            event: <span class="timestamp"><%= fromnow %></span>
+                        </a>
+                    </p>
+                    <a href="#app" class="<%= action %>btn" class="roundBtn main-hiddenlink" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="delete" data-position-to="window" data-transition="fade">
+                        <i class="icon-remove"></i>
+                    </a>
+                <% } %>
+            </div>
+        </script>
+
+
+
+        <script type="template/text" id="timeline-private-template">
+            <div class="main-mytimelinecol ets">
+                <div class="content-primary" id="itemslist">
+                    <div class="items"></div>
+                    <div class="now">
+                        <span>Now</span>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+
+
+        <script type="text/template" id="timeline-template">
+            <div id="itemlist">
+                <div class="main-alltimelineheaderwrapper">
+                    <!-- open timelineheaderwrapper -->
+                    <div class="main-alltimelineheader">
+                      <!-- open timelineheader -->
+                      <div class="sort-menu">
+                        <div>
+                          <a href="#" id="now" class="ui-btn-right main-hiddenlink"><i class="icon-repeat"></i> now</a>
+                          <a href="#" id="ets" class="ui-btn-right main-hiddenlink"><i class="icon-circle-arrow-up"></i> event</a>
+                          <a href="#" id="ts" class="ui-btn-right main-hiddenlink"><i class="icon-circle-arrow-down"></i> added</a>
+                        </div>
+                      </div>
+                      <div class="main-timelineheadertext">
+                        <!-- open headertext -->
+                        <div class="main-timelinetitle">
+                          Following <span class="main-timelinestrapline"><span style="color:#000;">possible</span> things to do or check out</span>
+                        </div>
+                      </div>
+                      <!-- close headertext -->
+                    </div>
+                    <!-- close timelineheader -->
+                    <div class="main-mytimelineheader">
+                      <!-- open timelineheader -->
+                      <div class="sort-menu">
+                        <div>
+                          <a href="#" id="now" class="ui-btn-right main-hiddenlink"><i class="icon-repeat"></i> now</a>
+                          <a href="#" id="myets" class="ui-btn-right main-hiddenlink"><i class="icon-circle-arrow-up"></i> event</a>
+                          <a href="#" id="myts" class="ui-btn-right main-hiddenlink"><i class="icon-circle-arrow-down"></i> added</a>
+                        </div>
+                      </div>
+                      <div class="main-timelineheadertext">
+                        <!-- open headertext -->
+                        <div class="main-timelinetitle">
+                          My Playlist <span class="main-timelinestrapline">things to <span style="color:#000;">maybe</span> check out</span>
+                        </div>
+                      </div>
+                      <!-- close headertext -->
+                    </div>
+                    <!-- close timelineheader -->
+                  </div>
+
+
+                  <div style="clear:both;"></div>
+
+
+                  <div class="main-timelinewrapper">
+                      <div data-subview="publicTimeline"></div>
+                  </div>
+            </div>
+        </script>
+
+
+        <script src="/-tmpl"></script>
+        <script src="/-assets/javascripts/vendor.js"></script>
+        <script src="/-assets/javascripts/application.js"></script>
+
+        <script type="text/javascript">
+        Application.start({
+            router: 'user'
+        });
+        </script>
+    </body>
 </html>
-

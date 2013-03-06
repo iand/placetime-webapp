@@ -29,7 +29,7 @@ import (
 
 const (
 	assetsDir         = "./assets"
-	imgDir            = "/var/opt/timescroll/img"
+	imgDir            = "./tmp"
 	templatesDir      = "./templates"
 	sessionCookieName = "ptsession"
 	sessionExpiry     = 86400 * 14
