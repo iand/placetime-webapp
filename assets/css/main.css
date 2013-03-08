@@ -113,7 +113,7 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
 .now {
     background-color: #000;
     border-bottom: 1px solid #fff;
-    font-size: 12px;
+    font-size: 16px;
     left: 0;
     height: 1px;
     position: absolute;
@@ -122,9 +122,8 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
 }
 
 .now span {
-    background-color: #000;
     border-radius: 30px;
-    color: #fff;
+    color: #ff6600;
     display: block;
     height: 38px;
     padding-top: 12px;
