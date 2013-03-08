@@ -71,8 +71,8 @@ img:hover { filter: none; -webkit-filter: grayscale(0); }
 a .icon-ok, a .icon-remove { color: #000; text-decoration: none; }
 a .icon-repeat, a .icon-circle-arrow-up, a .icon-circle-arrow-down { color: #fff; text-decoration: none; }
 a:hover .icon-ok, a:hover .icon-remove:hover { color: #fff; text-decoration: none; }
-a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down { color: #000; text-decoration: none; }
-a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon-ok, a:active .icon-remove:active { color: #ff6600; text-decoration: none; }
+a:hover .icon-repeat, a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down { color: #000; text-decoration: none; }
+a:hover .icon-repeat, a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon-ok, a:active .icon-remove:active { color: #ff6600; text-decoration: none; }
 .sort-menu { float: right; margin-top: 4px; margin-right: 5px; }
 
 /* poss add for signup too
