@@ -112,10 +112,10 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
 }
 
 .now {
-    background-color: #aaa;
+    background-color: #000;
     font-size: 12px;
     left: 0;
-    height: 3px;
+    height: 1px;
     position: absolute;
     width: 100%;
     z-index: 999;
