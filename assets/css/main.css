@@ -94,7 +94,7 @@ a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon
 }
 
 .timelineitem, .mytimelineitem, .timelinecalitem, .mytimelinecalitem {
-        background-color: #bbb;
+        background-color: #aaa;
         background-size: cover;
         margin: 0 0 7px;  
         -moz-border-radius: 2px;
