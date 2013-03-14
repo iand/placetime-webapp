@@ -1,3 +1,4 @@
 Application.View.Header = Backbone.Marionette.ItemView.extend({
-    template: '#header-template'
+    template: '#header-template',
+    className: 'navbar'
 });

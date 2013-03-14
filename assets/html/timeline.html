@@ -17,112 +17,103 @@
     </head>
     <body>
 
-        <div id="header"></div>
-        <div id="content"></div>
+
+        <div class="header"></div>
+        <div class="content"></div>
 
 
         <script type="text/template" id="header-template">
-            <div id="main-topbaritems">
-                <div id="main-lefttopbaritems">
-                    <a href="/" class="main-hiddenlink" >
-                        <i class="icon-ok-circle" style="font-size:32px; color:#555; position: relative; left: 2px; top: 4px;"></i>
-                        <i class="icon-time" style="font-size:32px; color:#555; position: relative; top:4px;"></i>
+            <div class="navbar-inner container">
+                <a class="brand pull-left" href="/">
+                    <i class="icon-ok-circle"></i>
+                    <i class="icon-time"></i>
+                    placetime
+                </a>
 
-                        <span class="main-logo">placetime</span>
-                        <span class="main-strapline"> a playlist for your life</span>
-                    </a>
-                </div>
-                <div id="main-righttopbaritems">
-                    <a class="main-hiddenlink" href="#" data-dropdown="#dropdown-1">
-                        <i class="icon-cog" style="font-size:33px;"></i>
-                    </a>
-                </div>
-            </div>
+                <a class="tagline pull-left" href="/">a playlist for your life</a>
 
-
-            <div id="dropdown-1" class="dropdown dropdown-tip dropdown-anchor-right">
-                <ul class="dropdown-menu">
+                <ul class="nav pull-right">
                     <li>
-                        <a class="main-hiddenlink" href="#new" id="newbtn">
-                            <i class="icon-edit" style="font-size:20px;"></i>
-                            new
-                        </a>
-                    </li>
-                    <li>@  <%= pid %></li>
-                    <li>
-                        <a class="main-hiddenlink" href="#logout" id="logoutbtn">
-                            <i class="icon-signout" style="font-size:20px;"></i>
-                            logout
+                        <a data-dropdown=".navbar .dropdown">
+                            <i class="icon-cog"></i>
                         </a>
                     </li>
                 </ul>
+
+                <div class="dropdown dropdown-tip dropdown-anchor-right">
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="main-hiddenlink" href="#new">
+                                <i class="icon-edit"></i>
+                                new
+                            </a>
+                        </li>
+                        <li>@<%= pid %></li>
+                        <li>
+                            <a class="main-hiddenlink" href="#logout">
+                                <i class="icon-signout"></i>
+                                logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </script>
 
 
         <script type="text/template" id="login-template">
-            <section id="login" data-role="content">
-                <div class="content-primary">
-                    <div class="main-twitterbutton main-h1">
-                        <a href="/-twitter" data-role="button" rel="external">
-                            Sign in with Twitter
-                        </a>
-                    </div>
-                    <div class="main-h1">Or login</div>
+            <p>
+                <a href="/-twitter" data-role="button" rel="external">
+                    Sign in with Twitter
+                </a>
+            </p>
 
-                    <form action="#" method="post">
-                        <div data-role="fieldcontain">
-                            <label for="name">User name</label>
-                            <input type="text" name="pid" id="pid" value=""  />
-                            <div class="hint"></div>
-                        </div>
-
-                        <div data-role="fieldcontain">
-                            <label for="name">Password</label>
-                            <input type="password" name="pwd" id="pwd" value=""  />
-                            <div class="hint"></div>
-                        </div>
-
-                        <input id="Submit1" class="loginBtn" type="submit" value="Login" data-role="button" data-inline="true" />
-                    </form>
-
-
-                    <div id="registerlink">
-                        Dont have an account? <a href="#register">Sign Up</a>
-                    </div>
+            <h1>Or login</h1>
+            <form action="#" method="post">
+                <div class="field">
+                    <label for="name">User name</label>
+                    <input type="text" name="pid" id="pid" value="" />
+                    <div class="hint"></div>
                 </div>
-            </section>
+
+                <div class="field">
+                    <label for="name">Password</label>
+                    <input type="password" name="pwd" id="pwd" value=""  />
+                    <div class="hint"></div>
+                </div>
+
+                <input type="submit" value="Login" />
+            </form>
+
+            <p>
+                Dont have an account? <a href="#register">Sign Up</a>
+            </p>
         </script>
 
 
         <script type="text/template" id="register-template">
-            <div data-role="header" data-position="fixed">
-                <p class="main-h1">Register</p>
-            </div>
+            <h1>Register</h1>
+            <form action="#" method="post">
+                <div class="field">
+                    <label for="name">User name</label>
+                    <input type="text" name="pid" />
+                    <div class="hint"></div>
+                </div>
 
-            <div data-role="content">
-                <form action="#" method="post">
-                    <div data-role="fieldcontain">
-                        <label for="name">User name</label>
-                        <input type="text" name="pid" id="pid" value=""  />
-                        <div class="hint"></div>
-                    </div>
+                <div class="field">
+                    <label for="name">Full name</label>
+                    <input type="text" name="name" />
+                    <div class="hint"></div>
+                </div>
 
-                    <div data-role="fieldcontain">
-                        <label for="name">Full name</label>
-                        <input type="text" name="name" id="name" value=""  />
-                        <div class="hint"></div>
-                    </div>
+                <div class="field">
+                    <label for="name">Password</label>
+                    <input type="text" name="pwd" />
+                    <div class="hint"></div>
+                </div>
 
-                    <div data-role="fieldcontain">
-                        <label for="name">Password</label>
-                        <input type="text" name="pwd" id="pwd" value=""  />
-                        <div class="hint"></div>
-                    </div>
-
-                    <input id="Submit1" class="submitBtn" type="submit" value="Register" data-role="button" data-inline="true" />
-                </form>
-            </div>
+                <input type="submit" value="Register" />
+            </form>
         </script>
 
 
@@ -176,16 +167,10 @@
 
 
         <script type="template/text" id="timeline-private-template">
-            <% if (status == 'm') { %>
-            <div class="main-mytimelinecol">
-            <% } else { %>
-            <div class="main-timelinecol">
-            <% } %>
-                <div class="content-primary" id="itemslist">
-                    <div class="items"></div>
-                    <div class="now">
-                        <span>Now</span>
-                    </div>
+            <div class="content-primary">
+                <div class="items"></div>
+                <div class="now">
+                    <span>Now</span>
                 </div>
             </div>
         </script>
@@ -236,7 +221,7 @@
                   <div style="clear:both;"></div>
 
 
-                  <div class="main-timelinewrapper">
+                  <div class="timeline">
                       <div data-subview="publicTimeline"></div>
                       <div data-subview="privateTimeline"></div>
                   </div>

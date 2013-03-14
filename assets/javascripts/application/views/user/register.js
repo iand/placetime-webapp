@@ -1,5 +1,6 @@
 Application.View.Register = Backbone.Marionette.ItemView.extend({
     template: '#register-template',
+    className: 'container',
 
     events: {
         'keyup input': 'change',

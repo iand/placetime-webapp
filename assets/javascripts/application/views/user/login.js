@@ -1,9 +1,10 @@
 Application.View.Login = Backbone.Marionette.ItemView.extend({
     template: '#login-template',
+    className: 'container',
 
     events: {
-        "keyup input": "change",
-        "submit form": "submit"
+        'keyup input': 'change',
+        'submit form': 'submit'
     },
 
 
@@ -44,9 +45,9 @@ Application.View.Login = Backbone.Marionette.ItemView.extend({
         session.set('pwd', data.pwd);
 
         session.save(function (data) {
-            console.log("doing navigate");
+            console.log('doing navigate');
             Backbone.history.navigate('timeline', true);
-            console.log("stopped navigate");
+            console.log('stopped navigate');
         }, function () {});
     }
 });

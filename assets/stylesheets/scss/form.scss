@@ -1,0 +1,71 @@
+label {
+    @include border-radius(3px);
+    background-color: #eee;
+    border: 0px;
+    display: inline-block;
+    font-size: 13px;
+    height: 18px;
+    padding: 12px 12px;
+    margin: 4px 4px 4px 0px;
+    text-align: center;
+    vertical-align: middle;
+    width: 100px;
+}
+
+input {
+    outline: none;
+}
+
+input[type=text],
+input[type=password] {
+    @include border-radius(3px);
+    @include single-box-shadow(#666666, 1px, 1px, 3px, 0px, inset);
+    @include transition(
+        border 0.2s linear,
+        box-shadow 0.2s linear
+    );
+
+    background-color: #deddd8;
+    border: 0px;
+    color: #4B4B4B;
+    display: inline-block;
+    font-size: 18px;
+    height: 18px;
+    margin: 4px 0;
+    padding: 12px 12px;
+    vertical-align: middle;
+    width: 200px;
+}
+
+input[type=submit] {
+    @include border-radius(3px);
+    @include box-shadow(
+        rgba(0, 0, 0, 0.5) 2px 2px 4px,
+        rgba(204, 204, 204, 1) 0px 0px 1px 0px inset
+    );
+    @include text-shadow(
+        rgba(000, 000, 000, 0.2) 0px -1px 0px,
+        rgba(255, 255, 255, 0.3) 0px 1px 0px
+    );
+    @include transition-duration(0.2s);
+
+    background-color: #cccccc;
+    border: 2px solid #eeeeee;
+    color: #000000;
+    font-size: 14px;
+    margin: 8px 10px 4px 0px;
+    padding: 12px;
+
+    &:hover {
+        background-color: #fff;
+        border: 2px solid #666666;
+    }
+
+    &:active {
+        @include box-shadow(
+             rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset
+        );
+        background-color: #cccccc;
+        border: 2px solid #ff9900;
+    }
+}

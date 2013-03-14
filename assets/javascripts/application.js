@@ -8,9 +8,9 @@ Application.Router = {};
 
 // Regions
 Application.addRegions({
-    header: '#header',
-    content: '#content',
-    footer: '#footer'
+    header: '.header',
+    content: '.content',
+    footer: '.footer'
 });
 
 
@@ -990,7 +990,8 @@ var StaticView = Backbone.View.extend({
     }
 });
 Application.View.Header = Backbone.Marionette.ItemView.extend({
-    template: '#header-template'
+    template: '#header-template',
+    className: 'navbar'
 });
 Application.View.Item = Backbone.Marionette.ItemView.extend({
     template: '#item-template',
@@ -1016,6 +1017,7 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
 });
 Application.View.Items = Backbone.Marionette.CompositeView.extend({
     template: '#timeline-private-template',
+    className: 'column',
 
     events: {
         'click .button.promote': 'promote',
@@ -1056,7 +1058,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         });
 
         this.collection.remove(
-            $item.data('itemid')
+            $item.data('id')
         );
 
 
@@ -1065,7 +1067,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
 
-    demote: function (e) {
+    demote: function (event) {
         var $item = $(event.currentTarget).closest('[data-id]');
 
 
@@ -1074,7 +1076,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         });
 
         this.collection.remove(
-            $item.data('itemid')
+            $item.data('id')
         );
 
 
@@ -1097,10 +1099,11 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 });
 Application.View.Login = Backbone.Marionette.ItemView.extend({
     template: '#login-template',
+    className: 'container',
 
     events: {
-        "keyup input": "change",
-        "submit form": "submit"
+        'keyup input': 'change',
+        'submit form': 'submit'
     },
 
 
@@ -1141,36 +1144,15 @@ Application.View.Login = Backbone.Marionette.ItemView.extend({
         session.set('pwd', data.pwd);
 
         session.save(function (data) {
-            console.log("doing navigate");
+            console.log('doing navigate');
             Backbone.history.navigate('timeline', true);
-            console.log("stopped navigate");
+            console.log('stopped navigate');
         }, function () {});
-    }
-});
-Application.View.MyCalItem = Backbone.Marionette.ItemView.extend({
-    template: '#my-cal-item-template',
-
-
-    close: function() {
-        if (this.isClosed) {
-            return;
-        }
-
-        this.triggerMethod('item:before:close');
-
-        var self = this;
-        this.$el.animate({opacity: 0, height: 0}, 'slow', function () {
-            Marionette.View.prototype.close.apply(
-                self,
-                Array.prototype.slice.apply(arguments)
-            );
-        });
-
-        this.triggerMethod('item:closed');
     }
 });
 Application.View.Register = Backbone.Marionette.ItemView.extend({
     template: '#register-template',
+    className: 'container',
 
     events: {
         'keyup input': 'change',

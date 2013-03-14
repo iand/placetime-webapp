@@ -1,580 +1,28 @@
-/* Mobile */
-/* Tablet */
-/* general styles */
-/* line 14, scss/user.scss */
-html {
-  height: 100%;
-  overflow: hidden;
-}
-
-/* line 15, scss/user.scss */
-body {
-  height: 100%;
-  font-family: "proxima-nova-1", "proxima-nova-2", "arial";
-  background: #deddd8;
-  overflow: auto;
-}
-
-/* line 16, scss/user.scss */
-h1 {
-  font-size: 1.5em;
-  color: #fff;
-  font-weight: 500;
-}
-
-/* line 17, scss/user.scss */
-h2 {
-  font-size: 1em;
-  color: #fff;
-  font-weight: 500;
-}
-
-/* line 18, scss/user.scss */
-hr {
-  margin: 18px 0;
-  border: 0;
-  border-top: 1px solid #eeeeee;
-  border-bottom: 1px solid white;
-}
-
-/* line 19, scss/user.scss */
-div {
-  border: 0px solid #dddddd;
-}
-
-/* line 20, scss/user.scss */
-a {
-  text-decoration: none;
-  color: #000;
-  border-bottom: 2px solid #ff6600;
-}
-
-/* line 21, scss/user.scss */
-p {
-  margin: 2px;
-  padding: 0px;
-}
-
-/* line 22, scss/user.scss */
-.main-h1 {
-  margin-bottom: 5px;
-}
-
-/* line 23, scss/user.scss */
-img {
-  filter: url(filters.svg#grayscale);
-  /* Firefox 3.5+ */
-  filter: gray;
-  /* IE6-9 */
-  -webkit-filter: grayscale(1);
-  /* Google Chrome & Safari 6+ */
-  background-color: rgba(255, 255, 255, 0.5);
-  border: 1px solid #dddddd;
-}
-
-/* line 30, scss/user.scss */
-img:hover {
-  filter: none;
-  -webkit-filter: grayscale(0);
-}
-
-/* structure:
-#itemlist
-    .main-header
-      .main-topbaritems
-        .main-newitem
-    .main-alltimelineheaderwrapper
-      .main-alltimelineheader
-      .main-mytimelineheader
-
-     .main-tmelinewrapper
-      .main-alltimelinecol
-        #itemslist
-      .main-mytimelinecol
-        #myitemslist
-
-*/
-/* admin */
-/* line 49, scss/user.scss */
-#content {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 80px;
-  clear: both;
-}
-
-/* line 50, scss/user.scss */
-.feed-item {
-  margin-bottom: 10px;
-}
-
-/* timeline */
-/* line 53, scss/user.scss */
-#itemlist {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* line 54, scss/user.scss */
-#header {
-  z-index: 10;
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  margin-bottom: 20px;
-  height: 45px;
-  background: #aaa;
-  border-bottom: 8px solid #cccccc;
-  box-shadow: 0px 4px 5px #888888;
-  width: 100%;
-}
-
-/* line 55, scss/user.scss */
-#main-topbaritems {
-  padding-left: 5px;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-}
-
-/* line 56, scss/user.scss */
-#main-lefttopbaritems {
-  float: left;
-}
-
-/* line 57, scss/user.scss */
-#main-righttopbaritems {
-  float: right;
-  margin: 4px 50px 0px 0px;
-}
-
-/* line 58, scss/user.scss */
-.main-imageoverlay {
-  background-color: rgba(15, 15, 15, 0.4);
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-}
-
-/* line 59, scss/user.scss */
-.main-alltimelineheaderwrapper {
-  z-index: 5;
-  width: 959px;
-  margin-left: auto;
-  margin-right: auto;
-  position: fixed;
-  top: 55px;
-}
-
-/* line 60, scss/user.scss */
-.main-alltimelineheader {
-  height: 39px;
-  width: 477px;
-  border-bottom: 0px solid black;
-  background-color: #ccc;
-  float: left;
-}
-
-/* line 61, scss/user.scss */
-.main-mytimelineheader {
-  height: 39px;
-  width: 477px;
-  border-bottom: 0px solid black;
-  background-color: #ccc;
-  float: right;
-}
-
-/* line 62, scss/user.scss */
-.main-timelinewrapper {
-  width: 959px;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
-  top: 97px;
-  bottom: 30px;
-}
-
-/* line 63, scss/user.scss */
-.main-alltimelinecol {
-  width: 477px;
-  padding-right: 5px;
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-}
-
-/* line 64, scss/user.scss */
-.main-mytimelinecol {
-  width: 477px;
-  padding-left: 5px;
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 482px;
-}
-
-/* line 65, scss/user.scss */
-#itemslist {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  width: 477px;
-  overflow: auto;
-}
-
-/* line 66, scss/user.scss */
-#myitemslist {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  width: 477px;
-  overflow: auto;
-}
-
-/* line 67, scss/user.scss */
-#footer {
-  z-index: 10;
-  position: fixed;
-  left: 0px;
-  bottom: 0px;
-  height: 30px;
-  width: 100%;
-  background: #999;
-  display: none;
-}
-
-/*element styles */
-/* line 70, scss/user.scss */
-.main-hiddenlink {
-  border-bottom: 0px;
-}
-
-/* line 73, scss/user.scss */
-.icon-ok,
-.icon-remove {
-  text-shadow: 0.1em 0.1em 0.2em #aaaaaa;
-  font-size: 22px;
-}
-
-/* line 77, scss/user.scss */
-.icon-circle {
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
-  border-radius: 20px;
-  background-color: #fe792b;
-  height: 24px;
-  width: 24px;
-}
-
-/* line 85, scss/user.scss */
-.icon-circle,
-.icon-circle-arrow-up,
-.icon-circle-arrow-down {
-  text-shadow: 0.1em 0.1em 0.2em #aaaaaa;
-  font-size: 30px;
-}
-
-/* line 87, scss/user.scss */
-a .icon-ok, a .icon-remove {
-  color: #000;
-  text-decoration: none;
-}
-
-/* line 88, scss/user.scss */
-a .icon-repeat, a .icon-circle-arrow-up, a .icon-circle-arrow-down {
-  color: #fff;
-  text-decoration: none;
-}
-
-/* line 89, scss/user.scss */
-a:hover .icon-ok, a:hover .icon-remove:hover {
-  color: #fff;
-  text-decoration: none;
-}
-
-/* line 90, scss/user.scss */
-a:hover .icon-repeat, a:hover .icon-circle-arrow-up, a:hover .icon-circle-arrow-down {
-  color: #000;
-  text-decoration: none;
-}
-
-/* line 91, scss/user.scss */
-a:active .icon-repeat, a:active .icon-circle-arrow-up, a:active .icon-circle-arrow-down, a:active .icon-ok, a:active .icon-remove:active {
-  color: #ff6600;
-  text-decoration: none;
-}
-
-/* line 92, scss/user.scss */
-.sort-menu {
-  float: right;
-  margin-top: 4px;
-  margin-right: 5px;
-}
-
-/* poss add for signup too
-#login, #register {
-    @include border-radius(3px);
-
-    background: #fff;
-    font-size: 13px;
-    padding: 20px;
-    z-index: 1500;
-    box-shadow: 3px 3px 4px #888888;
-}
-*/
-/* line 106, scss/user.scss */
-.items {
-  padding-top: 5px;
-}
-
-/* line 113, scss/user.scss */
-.timelineitem,
-.mytimelineitem,
-.timelinecalitem,
-.mytimelinecalitem {
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  background-color: #aaa;
-  background-size: cover;
-  margin: 0 0 7px;
-  box-shadow: 1px 1px 2px #aaaaaa;
-  padding: 15px;
-  position: relative;
-}
-
-/* line 124, scss/user.scss */
-#items,
-#myitems {
-  position: relative;
-}
-
-/* line 128, scss/user.scss */
-.now {
-  background-color: #ff6600;
-  border-bottom: 1px solid white;
-  font-size: 16px;
-  left: 0;
-  height: 1px;
-  position: absolute;
-  width: 100%;
-  z-index: 999;
-}
-
-/* line 139, scss/user.scss */
-.now span {
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  -ms-border-radius: 30px;
-  -o-border-radius: 30px;
-  border-radius: 30px;
-  background-color: #000;
-  color: #ff6600;
-  display: block;
-  height: 38px;
-  padding-top: 12px;
-  position: absolute;
+/* line 1, scss/form.scss */
+label {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #eee;
+  border: 0px;
+  display: inline-block;
+  font-size: 13px;
+  height: 18px;
+  padding: 12px 12px;
+  margin: 4px 4px 4px 0px;
   text-align: center;
-  width: 50px;
+  vertical-align: middle;
+  width: 100px;
 }
 
-/* line 151, scss/user.scss */
-.ts .now {
-  top: 0px;
+/* line 15, scss/form.scss */
+input {
+  outline: none;
 }
 
-/* line 155, scss/user.scss */
-.ets .now {
-  bottom: 170px;
-}
-
-/* line 159, scss/user.scss */
-.main-alltimelinecol .now span {
-  left: -50px;
-  top: -25px;
-}
-
-/* line 164, scss/user.scss */
-.main-mytimelinecol .now span {
-  right: -50px;
-  top: -25px;
-}
-
-/* line 173, scss/user.scss */
-.timelineitem:hover,
-.mytimelineitem:hover,
-.timelinecalitem:hover,
-.mytimelinecalitem:hover {
-  background-color: #999;
-  box-shadow: 0px 0px 0px #aaaaaa;
-}
-
-/* line 180, scss/user.scss */
-.mytimelineitem,
-.mytimelinecalitem {
-  background-color: #fe792b;
-  box-shadow: 1px 1px 2px #aaaaaa;
-}
-
-/* line 185, scss/user.scss */
-.main-topbaritems {
-  width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-}
-
-/* line 186, scss/user.scss */
-.ui-content .ui-listview {
-  margin: 0;
-}
-
-/* close change for mobile */
-/* line 190, scss/user.scss */
-.main-logo {
-  font-family: "proxima-nova-soft-1","proxima-nova-soft-2",sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 23px;
-  color: #fff;
-  margin-left: 20px;
-  text-shadow: none;
-  font-stretch: expanded;
-}
-
-/* line 202, scss/user.scss */
-.main-strapline {
-  font-family: "proxima-nova-1","proxima-nova-2",sans-serif;
-  font-style: normal;
-  font-size: 14px;
-  color: #ededed;
-  margin-left: 20px;
-  text-shadow: none;
-  font-weight: 400;
-}
-
-/* line 212, scss/user.scss */
-.main-timelineheadertext {
-  position: relative;
-  top: 12px;
-  left: 0px;
-}
-
-/* line 213, scss/user.scss */
-.main-timelinetitle {
-  font-size: 17px;
-  color: #fff;
-  padding: 4px;
-  float: left;
-}
-
-/* line 214, scss/user.scss */
-.main-timelinestrapline {
-  font-size: 13px;
-  color: #999;
-}
-
-/* line 215, scss/user.scss */
-.main-itemusername {
-  font-size: 14px;
-  color: #ddd;
-  margin-left: 7px;
-  padding: 7px;
-  position: relative;
-  top: 0px;
-  left: 10px;
-}
-
-/* line 216, scss/user.scss */
-.main-itemicon {
-  float: left;
-}
-
-/* line 217, scss/user.scss */
-.main-itemtext {
-  clear: both;
-  font-size: 22px;
-  position: relative;
-}
-
-/* line 218, scss/user.scss */
-.main-itemtext a {
-  color: #fff;
-}
-
-/* line 219, scss/user.scss */
-.main-itemtime {
-  font-size: 13px;
-  color: #ddd;
-  position: relative;
-  top: -33px;
-}
-
-/* line 220, scss/user.scss */
-.main-itemtime a {
-  color: #eee;
-}
-
-/* line 221, scss/user.scss */
-.main-itemlink {
-  position: relative;
-  top: 20px;
-}
-
-/* line 222, scss/user.scss */
-.main-itemlink a {
-  font-size: 25px;
-  color: #ddd;
-}
-
-/* line 223, scss/user.scss */
-.main-newitem {
-  position: absolute;
-  top: 10px;
-  right: 50%;
-  margin-right: -450px;
-  color: #fff;
-}
-
-/* line 224, scss/user.scss */
-.main-newitem a {
-  color: #fff;
-}
-
-/* line 225, scss/user.scss */
-.main-twitterbutton {
-  margin-bottom: 20px;
-}
-
-/* line 226, scss/user.scss */
-.ui-btn-right {
-  font-size: 11px;
-}
-
-/* line 228, scss/user.scss */
-.timestamp {
-  color: #ddd;
-}
-
-/* line 229, scss/user.scss */
-.main-notabene {
-  margin-top: 6px;
-}
-
-/* forms */
-/* line 234, scss/user.scss */
+/* line 20, scss/form.scss */
 input[type=text],
 input[type=password] {
   -webkit-border-radius: 3px;
@@ -582,162 +30,164 @@ input[type=password] {
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
-  display: inline-block;
-  padding: 12px 12px;
-  height: 18px;
-  line-height: 18px;
-  font-size: 18px;
-  color: #4B4B4B;
-  background: #deddd8;
-  width: 200px;
-  margin-top: 4px;
-  margin-bottom: 4px;
+  -webkit-box-shadow: inset 1px 1px 3px 0px #666666;
+  -moz-box-shadow: inset 1px 1px 3px 0px #666666;
+  box-shadow: inset 1px 1px 3px 0px #666666;
+  -webkit-transition: border 0.2s linear, box-shadow 0.2s linear;
+  -moz-transition: border 0.2s linear, box-shadow 0.2s linear;
+  -o-transition: border 0.2s linear, box-shadow 0.2s linear;
+  transition: border 0.2s linear, box-shadow 0.2s linear;
+  background-color: #deddd8;
   border: 0px;
-  box-shadow: inset 1px 1px 3px #666666;
+  color: #4B4B4B;
+  display: inline-block;
+  font-size: 18px;
+  height: 18px;
+  margin: 4px 0;
+  padding: 12px 12px;
   vertical-align: middle;
-  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
-  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-  transition: border linear 0.2s, box-shadow linear 0.2s;
+  width: 200px;
 }
 
-/* line 265, scss/user.scss */
-.loginBtn,
-.submitBtn,
-.Btn,
-.editBtn,
-.saveBtn,
-.deleteBtn,
-.refreshBtn,
-.feedBtn,
-.profileBtn {
+/* line 40, scss/form.scss */
+input[type=submit] {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
-  font-size: 14px;
-  color: #000;
-  padding: 12px;
-  background: #ccc;
-  border: 2px solid #eeeeee;
-  -moz-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), inset 0px 0px 1px #cccccc;
-  -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), inset 0px 0px 1px #cccccc;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), inset 0px 0px 1px #cccccc;
-  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(255, 255, 255, 0.3);
-  margin: 8px 10px 4px 0px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px, #cccccc 0px 0px 1px 0px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px, #cccccc 0px 0px 1px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px, #cccccc 0px 0px 1px 0px inset;
+  text-shadow: rgba(0, 0, 0, 0.2) 0px -1px 0px, rgba(255, 255, 255, 0.3) 0px 1px 0px;
   -webkit-transition-duration: 0.2s;
   -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
   transition-duration: 0.2s;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  background-color: #cccccc;
+  border: 2px solid #eeeeee;
+  color: #000000;
+  font-size: 14px;
+  margin: 8px 10px 4px 0px;
+  padding: 12px;
 }
-
-/* line 312, scss/user.scss */
-.loginBtn:hover,
-.submitBtn:hover,
-.Btn:hover,
-.editBtn:hover,
-.saveBtn:hover,
-.deleteBtn:hover,
-.refreshBtn:hover,
-.feedBtn:hover,
-.profileBtn:hover,
-.loginBtn:focus,
-.submitBtn:focus,
-.Btn:focus,
-.editBtn:focus,
-.saveBtn:focus,
-.deleteBtn:focus,
-.refreshBtn:focus,
-.feedBtn:focus,
-.profileBtn:focus {
-  background: #fff;
+/* line 59, scss/form.scss */
+input[type=submit]:hover {
+  background-color: #fff;
   border: 2px solid #666666;
 }
-
-/* line 325, scss/user.scss */
-.loginBtn:active,
-.submitBtn:active,
-.Btn:active,
-.editBtn:active,
-.saveBtn:active,
-.deleteBtn:active,
-.refreshBtn:active,
-.feedBtn:active,
-.profileBtn:active {
-  background: #ccc;
+/* line 64, scss/form.scss */
+input[type=submit]:active {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
+  background-color: #cccccc;
   border: 2px solid #ff9900;
-  -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-  -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
-/* line 336, scss/user.scss */
-.button.demote, .button.promote {
-  -webkit-border-radius: 31px;
-  -moz-border-radius: 31px;
-  -ms-border-radius: 31px;
-  -o-border-radius: 31px;
-  border-radius: 31px;
-  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5), inset 1px 1px 5px rgba(51, 51, 51, 0.6);
-  -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5), inset 1px 1px 5px rgba(51, 51, 51, 0.6);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5), inset 1px 1px 5px rgba(51, 51, 51, 0.6);
-  text-shadow: 0px -1px 0px black, 0px 1px 0px rgba(255, 255, 255, 0.2);
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #deddd8), color-stop(100%, #deddd8));
-  background: -webkit-linear-gradient(top, #deddd8, #deddd8);
-  background: -moz-linear-gradient(top, #deddd8, #deddd8);
-  background: -o-linear-gradient(top, #deddd8, #deddd8);
-  background: linear-gradient(top, #deddd8, #deddd8);
-  bottom: 10px;
-  color: #ffffff;
-  cursor: pointer;
-  border: 4px solid white;
-  position: absolute;
-  right: 10px;
+/* line 2, scss/content.scss */
+.content a {
+  color: #000000;
+  border-bottom: 2px solid #ff6600;
+  text-decoration: none;
 }
-/* line 361, scss/user.scss */
-.button.demote {
-  padding: 5px 8px;
-}
-/* line 365, scss/user.scss */
-.button.promote {
-  padding: 6px 6px 4px 6px;
-}
-
-/* line 371, scss/user.scss */
-label {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-  border: 0px solid;
-  background: #eee;
-  border-right: 0px;
-  height: 18px;
-  padding: 12px 12px;
-  text-align: center;
-  display: inline-block;
-  width: 100px;
-  margin: 4px 4px 4px 0px;
-  vertical-align: middle;
-  font-size: 13px;
+/* line 8, scss/content.scss */
+.content h1 {
+  font-size: 16px;
   font-weight: normal;
-  line-height: 18px;
+  margin-bottom: 5px;
 }
 
-/* line 389, scss/user.scss */
-#registerlink {
-  color: #000;
-  margin-top: 10px;
+/* line 6, scss/user.scss */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
 }
 
-/* line 394, scss/user.scss */
-#registerlink a {
-  font-size: 18px;
-  margin-left: 5px;
+/* line 12, scss/user.scss */
+body {
+  background-color: #deddd8;
+}
+
+/* line 16, scss/user.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 21, scss/user.scss */
+.container {
+  margin: 0 auto;
+  width: 960px;
+}
+
+/* line 27, scss/user.scss */
+.navbar {
+  -webkit-box-shadow: 0px 4px 5px #888888;
+  -moz-box-shadow: 0px 4px 5px #888888;
+  box-shadow: 0px 4px 5px #888888;
+  background-color: #aaaaaa;
+  border-bottom: 8px solid #cccccc;
+  height: 45px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+/* line 35, scss/user.scss */
+.navbar .navbar-inner {
+  overflow: hidden;
+}
+/* line 39, scss/user.scss */
+.navbar .brand {
+  color: #ffffff;
+  font-size: 23px;
+  padding-top: 8px;
+}
+/* line 45, scss/user.scss */
+.navbar .brand .icon-ok-circle,
+.navbar .brand .icon-time {
+  color: #555555;
+  font-size: 30px;
+  float: left;
+  margin-top: 0px;
+}
+/* line 52, scss/user.scss */
+.navbar .brand .icon-time {
+  margin-right: 20px;
+}
+/* line 57, scss/user.scss */
+.navbar .tagline {
+  color: #ededed;
+  font-size: 14px;
+  margin: 16px 0 0 25px;
+}
+/* line 63, scss/user.scss */
+.navbar .nav {
+  list-style: none;
+  margin: 5px 0 0;
+  padding: 0;
+}
+/* line 68, scss/user.scss */
+.navbar .nav .icon-cog {
+  cursor: pointer;
+  font-size: 33px;
+}
+/* line 73, scss/user.scss */
+.navbar .nav [class^="icon-"] {
+  width: 1em;
+}
+/* line 80, scss/user.scss */
+.navbar .dropdown .icon-edit,
+.navbar .dropdown .icon-signout {
+  font-size: 20px;
+}
+
+/* line 87, scss/user.scss */
+.pull-left {
+  float: left;
+}
+
+/* line 91, scss/user.scss */
+.pull-right {
+  float: right;
 }

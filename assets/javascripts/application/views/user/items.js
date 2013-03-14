@@ -1,5 +1,6 @@
 Application.View.Items = Backbone.Marionette.CompositeView.extend({
     template: '#timeline-private-template',
+    className: 'column',
 
     events: {
         'click .button.promote': 'promote',
@@ -40,7 +41,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         });
 
         this.collection.remove(
-            $item.data('itemid')
+            $item.data('id')
         );
 
 
@@ -49,7 +50,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
 
-    demote: function (e) {
+    demote: function (event) {
         var $item = $(event.currentTarget).closest('[data-id]');
 
 
@@ -58,7 +59,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         });
 
         this.collection.remove(
-            $item.data('itemid')
+            $item.data('id')
         );
 
 
