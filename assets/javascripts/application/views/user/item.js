@@ -1,8 +1,8 @@
-Application.View.MyCalItem = Backbone.Marionette.ItemView.extend({
-    template: '#my-cal-item-template',
+Application.View.Item = Backbone.Marionette.ItemView.extend({
+    template: '#item-template',
 
 
-    close: function() {
+    destroy: function() {
         if (this.isClosed) {
             return;
         }

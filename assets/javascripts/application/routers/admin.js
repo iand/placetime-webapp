@@ -15,7 +15,7 @@ Application.Router.Admin = Backbone.Router.extend({
 
 
     initialize: function () {
-        session.set("ptsession", getCookie("ptsession"));
+        session.set("ptsession", $.cookie('ptsession'));
     },
 
 

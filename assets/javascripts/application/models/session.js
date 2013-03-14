@@ -1,51 +1,85 @@
 Application.Model.Session = Backbone.Model.extend({
-    check: function (successfn, failfn) {
+    initialize: function () {},
+
+
+    check: function (done, fail) {
         var self = this;
-        self.set("ptsession", getCookie("ptsession"));
-        pts = self.get("ptsession");
 
-        if (pts) {
+
+        var defer = $.Deferred();
+
+        defer.done(done);
+        defer.fail(fail);
+
+
+        if (this.get('ptsession')) {
             $.ajax({
-                url: "/-chksession",
-                success: function (data) {
-                    self.set("pid", self.get("ptsession").split("|")[0]);
+                url: '/-chksession'
+            })
+            .done(function () {
+                var pid = self.get('ptsession').split('|')[0];
 
-                    console.log("Valid session for pid: " + self.get("pid"));
+                console.log('Valid session for pid: ' + pid);
 
-                    successfn(data);
-                },
-                error: function (data) {
-                    self.set("pid", null);
-                    failfn(data);
-                }
+                self.set('pid', pid);
+                defer.resolve();
+            })
+            .fail(function () {
+                self.set('pid', null);
+                defer.reject();
             });
         } else {
-            failfn();
+            defer.reject();
         }
+
+
+        return defer.promise();
     },
 
-    save: function (successfn, failfn) {
+
+
+    save: function (done, fail) {
         var self = this;
 
+
+        var defer = $.Deferred();
+
+        defer.done(done);
+        defer.fail(fail);
+
         $.ajax({
-            url: "/-session",
+            url: '/-session',
             type: 'post',
             data: {
                 pid: self.get('pid'),
                 pwd: self.get('pwd')
-            },
-            success: function (data) {
-                console.log("Logged in successfully");
-                self.set("pwd", null);
-
-                successfn.call(self, data);
-            },
-            error: function (data) {
-                console.log("Error thrown when logging in: " + response.responseText);
-                self.set("pwd", null);
-
-                failfn.call(self, data);
             }
+        })
+        .done(function (data) {
+            console.log('Logged in successfully');
+
+            self.set('pwd', null);
+            self.set('ptsession', $.cookie('ptsession'));
+
+            defer.resolve(data);
+        })
+        .fail(function (data) {
+            console.log('Error thrown when logging in: ' + response.responseText);
+            self.set('pwd', null);
+
+            defer.fail(data);
         });
+
+
+        return defer.promise();
+    },
+
+
+
+    destroy: function () {
+        // TODO: Replace with XHR call
+        $.cookie('ptsession', null);
+
+        Backbone.Model.prototype.destroy.apply(this);
     }
 });

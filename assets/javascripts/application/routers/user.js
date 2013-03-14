@@ -1,14 +1,13 @@
 Application.Router.User = Backbone.Router.extend({
     routes: {
-        "login": "login",
-        "register": "register",
-        "timeline": "timeline"
+        'login': 'login',
+        'logout': 'logout',
+        'register': 'register',
+        'timeline': 'timeline'
     },
 
 
     initialize: function () {
-        session.set("ptsession", getCookie("ptsession"));
-
         var header = new Application.View.Header({
             model: new Backbone.Model({
                 pid: session.get('pid')
@@ -22,7 +21,10 @@ Application.Router.User = Backbone.Router.extend({
     timeline: function () {
         var self = this;
 
-        session.check(function(){
+
+        var check = session.check();
+
+        check.done(function(){
             var publicItems = new Application.Collection.ItemList();
             var privateItems = new Application.Collection.ItemList();
 
@@ -48,7 +50,12 @@ Application.Router.User = Backbone.Router.extend({
                 privateItems: privateItems
             });
 
-            self.changePage(timeline, 'timeline');
+            Application.content.show(timeline);
+        });
+
+
+        check.fail(function(){
+            Backbone.history.navigate('login', true);
         });
     },
 
@@ -58,7 +65,7 @@ Application.Router.User = Backbone.Router.extend({
             model: new Application.Model.Credentials()
         });
 
-        this.changePage(login, 'login');
+        Application.content.show(login);
     },
 
 
@@ -67,26 +74,13 @@ Application.Router.User = Backbone.Router.extend({
             model: new Application.Model.RegistrationInfo()
         });
 
-        this.changePage(register, 'register');
+        Application.content.show(register);
     },
 
 
     logout: function () {
-        session.set("ptsession", null);
-        setCookie('ptsession', null);
+        session.destroy();
 
-        this.login();
-    },
-
-
-    changePage: function (view, route) {
-        console.log("Changing view to " + $(view.el).attr('id'));
-
-        Application.content.show(view);
-
-        if (route) {
-            console.log("Changing route to " + route);
-            Backbone.history.navigate(route, true);
-        }
+        Backbone.history.navigate('login', true);
     }
 });

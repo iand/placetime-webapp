@@ -7,18 +7,32 @@ Application.View.Timeline = Marionette.ItemView.extend({
 
 
     subviewCreators : {
-        publicTimeline: function(a,b,c) {
-            return new Application.View.Items({
-                pid: session.get('pid'),
+        publicTimeline: function() {
+            var foo = new Application.View.Items({
+                model: new Backbone.Model({
+                    status: 'p',
+                    pid: this.options.pid
+                }),
                 collection: this.options.publicItems
             });
+
+            foo.on('promote', function(){
+                console.log('test');
+            });
+
+            return foo;
         },
 
         privateTimeline: function() {
-            return new Application.View.Items({
-                pid: session.get('pid'),
+            var foo = new Application.View.Items({
+                model: new Backbone.Model({
+                    status: 'm',
+                    pid: this.options.pid
+                }),
                 collection: this.options.privateItems
             });
+
+            return foo;
         }
     }
 });

@@ -50,7 +50,7 @@
                     </li>
                     <li>@  <%= pid %></li>
                     <li>
-                        <a class="main-hiddenlink" href="#login" id="loginbtn">
+                        <a class="main-hiddenlink" href="#logout" id="logoutbtn">
                             <i class="icon-signout" style="font-size:20px;"></i>
                             logout
                         </a>
@@ -126,8 +126,8 @@
         </script>
 
 
-        <script type="text/template" id="my-item-template">
-            <div class="mytimelineitem" id="ti-<%= id %>" style="background-image: url(/-img/<%= image %>);">
+        <script type="text/template" id="item-template">
+            <div class="mytimelineitem" data-id="<%= id %>" style="background-image: url(/-img/<%= image %>);">
                 <% if (image) { %>
                     <div class="main-imageoverlay"><!-- --></div>
                 <% } %>
@@ -138,7 +138,7 @@
                 <!-- audio specific markup here -->
                 <% } else { %>
                     <div class="main-itemicon">
-                        <img src="/-assets/img/nasa.jpg" width="30px" height="30px">
+                        <img src="/-assets/img/nasa.jpg" width="30" height="30">
                     </div>
                     <p class="main-itemusername">@<%= pid %></p>
                     <p class="main-itemtext">
@@ -157,57 +157,30 @@
                             <span class="timestamp"><%= fromnow %></span>
                         </a>
                     </p>
-                    <a href="#app" class="<%= action %>btn" class="roundBtn main-hiddenlink" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="delete" data-position-to="window" data-transition="fade">
-                        <i class="icon-remove"></i>
-                    </a>
+
+                    <% if (action === 'demote') { %>
+                        <a class="button demote">
+                            <i class="icon-remove"></i>
+                        </a>
+                    <% } else { %>
+                        <a class="button promote">
+                            <i class="icon-ok"></i>
+                        </a>
+                    <% } %>
                 <% } %>
             </div>
         </script>
 
 
-
-        <script type="text/template" id="my-cal-item-template">
-            <div class="mytimelinecalitem" id="ti-<%= id %>" style="background-image: url(/-img/<%= image %>);">
-                <% if (image) { %>
-                    <div class="main-imageoverlay"><!-- --></div>
-                <% } %>
-
-                <% if (media == "video") { %>
-                <!-- video specific markup here -->
-                <% } else if (media == "audio") { %>
-                <!-- audio specific markup here -->
-                <% } else { %>
-                    <div class="main-itemicon">
-                        <img src="/-assets/img/nasa.jpg" width="30px" height="30px">
-                    </div>
-                    <p class="main-itemusername">@<%= pid %></p>
-                    <p class="main-itemtext">
-                        <a class="main-hiddenlink fancymodal fancybox.iframe" href="<%= link %>">
-                            <%= text %>
-                        </a>
-                    </p>
-                    <p class="main-itemlink">
-                        <a href="<%= link %>" class="roundBtn main-hiddenlink fancymodal fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
-                            <i class="icon-external-link"></i>
-                        </a>
-                    </p>
-                    <p class="main-itemtime">
-                        <a class="main-hiddenlink fancymodal fancybox.iframe" href="<%= link %>">
-                            <i class="icon-time"></i>
-                            event: <span class="timestamp"><%= fromnow %></span>
-                        </a>
-                    </p>
-                    <a href="#app" class="<%= action %>btn" class="roundBtn main-hiddenlink" data-iconpos="notext" data-itemid="<%= id %>" data-rel="popup" data-icon="delete" data-position-to="window" data-transition="fade">
-                        <i class="icon-remove"></i>
-                    </a>
-                <% } %>
-            </div>
-        </script>
 
 
 
         <script type="template/text" id="timeline-private-template">
-            <div class="main-mytimelinecol ets">
+            <% if (status == 'm') { %>
+            <div class="main-mytimelinecol">
+            <% } else { %>
+            <div class="main-timelinecol">
+            <% } %>
                 <div class="content-primary" id="itemslist">
                     <div class="items"></div>
                     <div class="now">
@@ -222,27 +195,28 @@
         <script type="text/template" id="timeline-template">
             <div id="itemlist">
                 <div class="main-alltimelineheaderwrapper">
-                    <!-- open timelineheaderwrapper -->
                     <div class="main-alltimelineheader">
-                      <!-- open timelineheader -->
                       <div class="sort-menu">
                         <div>
-                          <a href="#" id="now" class="ui-btn-right main-hiddenlink"><i class="icon-repeat"></i> now</a>
-                          <a href="#" id="ets" class="ui-btn-right main-hiddenlink"><i class="icon-circle-arrow-up"></i> event</a>
-                          <a href="#" id="ts" class="ui-btn-right main-hiddenlink"><i class="icon-circle-arrow-down"></i> added</a>
+                          <a href="#" id="now" class="ui-btn-right main-hiddenlink">
+                              <i class="icon-repeat"></i> now
+                          </a>
+                          <a href="#" id="ets" class="ui-btn-right main-hiddenlink">
+                              <i class="icon-circle-arrow-up"></i> event
+                          </a>
+                          <a href="#" id="ts" class="ui-btn-right main-hiddenlink">
+                              <i class="icon-circle-arrow-down"></i> added
+                          </a>
                         </div>
                       </div>
                       <div class="main-timelineheadertext">
-                        <!-- open headertext -->
                         <div class="main-timelinetitle">
                           Following <span class="main-timelinestrapline"><span style="color:#000;">possible</span> things to do or check out</span>
                         </div>
                       </div>
-                      <!-- close headertext -->
                     </div>
-                    <!-- close timelineheader -->
+
                     <div class="main-mytimelineheader">
-                      <!-- open timelineheader -->
                       <div class="sort-menu">
                         <div>
                           <a href="#" id="now" class="ui-btn-right main-hiddenlink"><i class="icon-repeat"></i> now</a>
@@ -251,14 +225,11 @@
                         </div>
                       </div>
                       <div class="main-timelineheadertext">
-                        <!-- open headertext -->
                         <div class="main-timelinetitle">
                           My Playlist <span class="main-timelinestrapline">things to <span style="color:#000;">maybe</span> check out</span>
                         </div>
                       </div>
-                      <!-- close headertext -->
                     </div>
-                    <!-- close timelineheader -->
                   </div>
 
 
@@ -267,6 +238,7 @@
 
                   <div class="main-timelinewrapper">
                       <div data-subview="publicTimeline"></div>
+                      <div data-subview="privateTimeline"></div>
                   </div>
             </div>
         </script>

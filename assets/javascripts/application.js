@@ -18,6 +18,12 @@ Application.addRegions({
 var session;
 Application.addInitializer(function(options){
     session = new Application.Model.Session();
+
+
+    var cookie = $.cookie('ptsession');
+    if (cookie) {
+        session.set('ptsession', cookie);
+    }
 });
 
 
@@ -84,28 +90,6 @@ function hashCode(){
         hash = hash & hash;
     }
     return hash;
-}
-
-
-function getCookie(c_name) {
-
-  var i, x, y, ARRcookies = document.cookie.split(";");
-
-  for (i = 0; i < ARRcookies.length; i++) {
-    x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
-    y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
-    x = x.replace(/^\s+|\s+$/g,"");
-    if (x === c_name) {
-      return unescape(y);
-    }
-  }
-}
-
-function setCookie(c_name, value) {
-  var exdate = new Date();
-  exdate.setHours(exdate.getHours() + 1);
-  var c_value = escape(value) + "; expires=" + exdate.toUTCString();
-  document.cookie=c_name + "=" + c_value;
 }
 
 
@@ -189,7 +173,56 @@ var Feed = Backbone.Model.extend({
 
 });
 Application.Model.Item = Backbone.Model.extend({
-    idAttribute: "id"
+    idAttribute: 'id',
+
+    promote: function(done, fail) {
+        var defer = $.Deferred();
+
+        defer.done(done);
+        defer.fail(fail);
+
+        $.ajax({
+            url: '/-tpromote',
+            type: 'post',
+            data: {
+                pid: session.get("pid"),
+                id: this.get('id')
+            },
+            success: function() {
+                defer.resolve();
+            },
+            failure: function() {
+                defer.reject();
+            }
+        });
+
+        return defer.promise();
+    },
+
+
+    demote: function(done, fail) {
+        var defer = $.Deferred();
+
+        defer.done(done);
+        defer.fail(fail);
+
+        $.ajax({
+            url: '/-tdemote',
+            type: 'post',
+            data: {
+                pid: session.get("pid"),
+                id: this.get('id')
+            },
+            success: function() {
+                defer.resolve();
+            },
+            failure: function() {
+                defer.reject();
+            }
+        });
+
+        return defer.promise();
+    }
 });
 
 var Item = Backbone.Model.extend({
@@ -266,54 +299,88 @@ Application.Model.RegistrationInfo = Backbone.Model.extend({
     }
 });
 Application.Model.Session = Backbone.Model.extend({
-    check: function (successfn, failfn) {
+    initialize: function () {},
+
+
+    check: function (done, fail) {
         var self = this;
-        self.set("ptsession", getCookie("ptsession"));
-        pts = self.get("ptsession");
 
-        if (pts) {
+
+        var defer = $.Deferred();
+
+        defer.done(done);
+        defer.fail(fail);
+
+
+        if (this.get('ptsession')) {
             $.ajax({
-                url: "/-chksession",
-                success: function (data) {
-                    self.set("pid", self.get("ptsession").split("|")[0]);
+                url: '/-chksession'
+            })
+            .done(function () {
+                var pid = self.get('ptsession').split('|')[0];
 
-                    console.log("Valid session for pid: " + self.get("pid"));
+                console.log('Valid session for pid: ' + pid);
 
-                    successfn(data);
-                },
-                error: function (data) {
-                    self.set("pid", null);
-                    failfn(data);
-                }
+                self.set('pid', pid);
+                defer.resolve();
+            })
+            .fail(function () {
+                self.set('pid', null);
+                defer.reject();
             });
         } else {
-            failfn();
+            defer.reject();
         }
+
+
+        return defer.promise();
     },
 
-    save: function (successfn, failfn) {
+
+
+    save: function (done, fail) {
         var self = this;
 
+
+        var defer = $.Deferred();
+
+        defer.done(done);
+        defer.fail(fail);
+
         $.ajax({
-            url: "/-session",
+            url: '/-session',
             type: 'post',
             data: {
                 pid: self.get('pid'),
                 pwd: self.get('pwd')
-            },
-            success: function (data) {
-                console.log("Logged in successfully");
-                self.set("pwd", null);
-
-                successfn.call(self, data);
-            },
-            error: function (data) {
-                console.log("Error thrown when logging in: " + response.responseText);
-                self.set("pwd", null);
-
-                failfn.call(self, data);
             }
+        })
+        .done(function (data) {
+            console.log('Logged in successfully');
+
+            self.set('pwd', null);
+            self.set('ptsession', $.cookie('ptsession'));
+
+            defer.resolve(data);
+        })
+        .fail(function (data) {
+            console.log('Error thrown when logging in: ' + response.responseText);
+            self.set('pwd', null);
+
+            defer.fail(data);
         });
+
+
+        return defer.promise();
+    },
+
+
+
+    destroy: function () {
+        // TODO: Replace with XHR call
+        $.cookie('ptsession', null);
+
+        Backbone.Model.prototype.destroy.apply(this);
     }
 });
 var FeedsList = Backbone.Collection.extend({
@@ -925,68 +992,47 @@ var StaticView = Backbone.View.extend({
 Application.View.Header = Backbone.Marionette.ItemView.extend({
     template: '#header-template'
 });
+Application.View.Item = Backbone.Marionette.ItemView.extend({
+    template: '#item-template',
+
+
+    destroy: function() {
+        if (this.isClosed) {
+            return;
+        }
+
+        this.triggerMethod('item:before:close');
+
+        var self = this;
+        this.$el.animate({opacity: 0, height: 0}, 'slow', function () {
+            Marionette.View.prototype.close.apply(
+                self,
+                Array.prototype.slice.apply(arguments)
+            );
+        });
+
+        this.triggerMethod('item:closed');
+    }
+});
 Application.View.Items = Backbone.Marionette.CompositeView.extend({
     template: '#timeline-private-template',
 
-    appendHtml: function(collectionView, itemView, index){
-        collectionView.$('.items').append(itemView.el);
-    },
-
-
-    buildItemView: function(item, ItemViewType, itemViewOptions) {
-        item.set('action', 'promote');
-
-        if (item.order == 'ets') {
-            return new Application.View.MyCalItem({
-                model: item
-            });
-        } else {
-            return new Application.View.MyItem({
-                model: item
-            });
-        }
-    },
-
-
     events: {
-        'click .promotebtn': 'promote',
-        'click .demotebtn': 'demote',
-        'click .followbtn': 'follow',
-        'click #possiblebtn': 'possible',
-        'click #maybebtn': 'maybe',
-        'click #newbtn': 'newitem',
+        'click .button.promote': 'promote',
+        'click .button.demote': 'demote'
+    },
 
-        'click #now': 'now',
+    itemViewContainer: '.items',
 
-        'click #ts': 'ts',
-        'click #myts': 'myts',
-        'click #ets': 'ets',
-        'click #myets': 'myets'
+
+
+    initialize: function (options) {
+        this.on('composite:collection:rendered', this.rendered);
     },
 
 
-    initialize: function () {
-        var self = this;
 
-        // this.template = _.template(window.templates['itemlist']);
-        // this.templatenow = _.template(window.templates['now']);
-        // this.templateitem = _.template(window.templates['otheritem']);
-        // this.templatemyitem = _.template(window.templates['myitem']);
-        // this.templatecalitem = _.template(window.templates['otheritemcal']);
-        // this.templatemycalitem = _.template(window.templates['myitemcal']);
-
-
-        // this.el = this.options.el;
-        // this.itemsModel = this.options.itemsModel;
-        // this.myitemsModel = this.options.myitemsModel;
-        // this.pid = this.options.pid;
-
-        // this.itemsModel.bind("reset", this.render, this);
-        // this.myitemsModel.bind("reset", this.render, this);
-        // this.scroller1 = null;
-    },
-
-    onCompositeRendered: function (eventName) {
+    rendered: function (eventName) {
         if (this.scroller) {
             this.scroller.destroy();
         }
@@ -994,301 +1040,59 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         this.scroller = new iScroll(this.$el.find('.content-primary').get(0), {
             momentum: true,
             hScrollbar: false,
-            vScroll: true,
-            onScrollEnd: this.scrollEnd,
-            onRefresh: this.refresh
+            vScroll: true
         });
-
-        // if (this.scroller2) {
-        //     this.scroller2.destroy();
-        // }
-
-        // $(this.el).html(this.template({
-        //     data: {
-        //         'pid': this.pid
-        //     }
-        // }));
-
-        // this.scroller2 = new iScroll('myitemslist', {
-        //     momentum: true,
-        //     hScrollbar: false,
-        //     vScroll: true,
-        //     onScrollEnd: this.scrollEnd,
-        //     onRefresh: this.refresh
-        // });
-
-
-        // itemsElem   = $("#items", this.el).data('models', this.itemsModel);
-        // myitemsElem = $("#myitems", this.el).data('models', this.myitemsModel);
-
-        // itemsElem.html('');
-        // itemsElem.closest('div[class^=main-][class$=col]')
-        //            .removeClass('ts ets')
-        //            .addClass(this.itemsModel.order);
-
-        // myitemsElem.html('');
-        // myitemsElem.closest('div[class^=main-][class$=col]')
-        //              .removeClass('ts ets')
-        //              .addClass(this.myitemsModel.order);
-
-
-        // var self = this;
-
-        // _.each(this.itemsModel.models, function (item) {
-        //     var data = item.toJSON();
-        //         data.action = 'promote';
-
-        //     if (this.itemsModel.order == "ets") {
-        //         itemsElem.append(this.templatecalitem(data));
-        //     } else {
-        //         itemsElem.append(this.templateitem(data));
-        //     }
-
-        //     itemsElem.find('#ti-' + data.id).data('model', data);
-        // }, this);
-
-
-        // _.each(this.myitemsModel.models, function (item) {
-        //     var data = item.toJSON();
-        //         data.action = 'demote';
-
-        //     if (this.myitemsModel.order == "ets") {
-        //         myitemsElem.append(this.templatemycalitem(data));
-        //     } else {
-        //         myitemsElem.append(this.templatemyitem(data));
-        //     }
-
-        //     myitemsElem.find('#ti-' + data.id).data('model', data);
-        // }, this);
-
-
-        // _.defer(_.bind(function () {
-        //     this.scroller1.refresh();
-        //     this.scroller2.refresh();
-        // }, self));
 
         return this;
     },
 
 
-    refresh: function() {
-        var $wrapper  = $(this.wrapper);
-        var $scroller = $(this.scroller);
 
+    promote: function (event) {
+        var $item = $(event.currentTarget).closest('[data-id]');
 
-        var $items = $scroller.children();
+        this.on('item:removed', function(event) {
+            event.model.promote();
+        });
 
-        if ($items.length === 0) {
-            return;
-        }
-
-
-        // Events
-        if ($scroller.data('models').order == 'ets') {
-            // Code de-dup call this.closest
-            var $closest = $items.first();
-            $items.each(function(){
-                var $this = $(this);
-
-                // TODO: Rework
-                if (Math.abs($this.data('model').diff) < Math.abs($closest.data('model').diff)) {
-                    $closest = $this;
-                }
-            });
-            // $closest = $items.eq(4);
-
-            $closest.css('background-color', 'red');
-
-            // Scroll to element
-            this.scrollTo(0, -($wrapper.height() - 168));
-
-            // if ($closest.position().top < $)
-            // $wrapper.parent().find('.now').css({
-            //     top: $closest.position().top + 170 + 'px'
-            // });
-        }
-
-        // Added
-        else {
-            this.scrollTo(0, 0);
-        }
-    },
-
-
-    scrollEnd: function() {
-        var $wrapper = $(this.wrapper).parent(),
-            $now     = $(this.wrapper).parent().find('.now');
-
-        var position = $now.offset();
-
-        var $element = $(document.elementFromPoint(
-            position.left,
-            position.top + $now.height()
-        ));
-
-        if ($element.is('.timelinecalitem') === false) {
-            return;
-        }
-
-        $now.find('span').text(
-            moment($element.data('model').ets).format('DD MMM YYYY')
+        this.collection.remove(
+            $item.data('itemid')
         );
 
 
-        // $now.stop(true).fadeTo(0, 1).fadeTo(3000, 0);
-    },
-
-
-    closest: function(items) {
-        var closest = items[0];
-        _.each(items, function(item){
-            if (Math.abs(item.attributes.diff) < Math.abs(closest.attributes.diff)) {
-                closest = item;
-            }
-        });
-
-        return $('#ti-' + closest.attributes.id);
-
-        // TODO: Support iterating over both DOM and models
-        // var $closest = $items.first();
-        // $items.each(function(){
-        //     var $this = $(this);
-
-        //     if (Math.abs($this.data('model').diff) < Math.abs($closest.data('model').diff)) {
-        //         $closest = $this;
-        //     }
-        // });
-
-        // return $closest;
-    },
-
-
-    now: function(event) {
-        var $target = $(event.target);
-
-        if ($target.closest('.main-alltimelineheader').length > 0) {
-            $closest = this.closest(this.itemsModel.models);
-            $wrapper = $('.main-alltimelinecol');
-
-            scroller = this.scroller1;
-            offset   = 175;
-        } else {
-            $closest = this.closest(this.myitemsModel.models);
-            $wrapper = $('.main-mytimelinecol');
-
-            scroller = this.scroller2;
-            offset   = $wrapper.height() - 175;
-        }
-
-        var $now = $wrapper.find('.now');
-
-        $now.stop(true).fadeTo(0, 1);
-        $now.find('span').text('Now');
-
-        // Scroll to
-        scroller.scrollTo(0, -($closest.position().top - offset), 1000);
-    },
-
-
-    promote: function (e) {
-        var clickedEl = $(e.currentTarget);
-        var id = clickedEl.data("itemid");
-        var itemEl = $('#ti-' + id);
-        var self = this;
-        self.itemsModel.remove(id);
-
-        $.ajax({
-            url: '/-tpromote',
-            type: 'post',
-            data: {
-                pid: session.get("pid"),
-                id: id
-            },
-            success: function (data) {
-                itemEl.slideUp('slow').fadeOut('slow', function () {
-                    self.itemsModel.refresh();
-                    self.myitemsModel.refresh();
-                    //self.render();
-                });
-            }
-        });
-
-
         return false;
     },
+
 
 
     demote: function (e) {
-        var clickedEl = $(e.currentTarget);
-        var id = clickedEl.data("itemid");
-        // alert("Promote item '" + id + "' to maybe list");
-        var self = this;
-        var itemEl = $('#ti-' + id);
+        var $item = $(event.currentTarget).closest('[data-id]');
 
-        $.ajax({
-            url: '/-tdemote',
-            type: 'post',
-            data: {
-                pid: session.get("pid"),
-                id: id
-            },
-            success: function (data) {
-                itemEl.slideUp('slow').fadeOut('slow', function () {
-                    self.itemsModel.refresh();
-                    self.myitemsModel.refresh();
-                });
-            }
+
+        this.on('item:removed', function(event) {
+            event.model.demote();
         });
+
+        this.collection.remove(
+            $item.data('itemid')
+        );
+
 
         return false;
     },
 
 
-    follow: function (e) {
-        var clickedEl = $(e.currentTarget);
-        var pid = clickedEl.data("pid");
-        alert("Follow user '" + pid + "'");
-    },
 
+    buildItemView: function(item, ItemViewType, itemViewOptions) {
+        if (this.model.get('status') === 'p') {
+            item.set('action', 'promote');
+        } else {
+            item.set('action', 'demote');
+        }
 
-    possible: function (e) {
-        //this.itemsModel.status = 'p';
-        //this.itemsModel.refresh();
-    },
-
-
-    maybe: function (e) {
-        //this.itemsModel.status = 'm';
-        //this.itemsModel.refresh();
-    },
-
-
-    newitem: function (e) {
-        //alert("Add a new item");
-    },
-
-
-    ts: function (e) {
-        this.itemsModel.order = "ts";
-        this.itemsModel.refresh();
-    },
-
-
-    ets: function (e) {
-        this.itemsModel.order = "ets";
-        this.itemsModel.refresh();
-    },
-
-
-    myts: function (e) {
-        this.myitemsModel.order = "ts";
-        this.myitemsModel.refresh();
-    },
-
-
-    myets: function (e) {
-        this.myitemsModel.order = "ets";
-        this.myitemsModel.refresh();
+        return new Application.View.Item({
+            model: item
+        });
     }
 });
 Application.View.Login = Backbone.Marionette.ItemView.extend({
@@ -1344,10 +1148,26 @@ Application.View.Login = Backbone.Marionette.ItemView.extend({
     }
 });
 Application.View.MyCalItem = Backbone.Marionette.ItemView.extend({
-    template: '#my-cal-item-template'
-});
-Application.View.MyItem = Backbone.Marionette.ItemView.extend({
-    template: '#my-item-template'
+    template: '#my-cal-item-template',
+
+
+    close: function() {
+        if (this.isClosed) {
+            return;
+        }
+
+        this.triggerMethod('item:before:close');
+
+        var self = this;
+        this.$el.animate({opacity: 0, height: 0}, 'slow', function () {
+            Marionette.View.prototype.close.apply(
+                self,
+                Array.prototype.slice.apply(arguments)
+            );
+        });
+
+        this.triggerMethod('item:closed');
+    }
 });
 Application.View.Register = Backbone.Marionette.ItemView.extend({
     template: '#register-template',
@@ -1417,18 +1237,32 @@ Application.View.Timeline = Marionette.ItemView.extend({
 
 
     subviewCreators : {
-        publicTimeline: function(a,b,c) {
-            return new Application.View.Items({
-                pid: session.get('pid'),
+        publicTimeline: function() {
+            var foo = new Application.View.Items({
+                model: new Backbone.Model({
+                    status: 'p',
+                    pid: this.options.pid
+                }),
                 collection: this.options.publicItems
             });
+
+            foo.on('promote', function(){
+                console.log('test');
+            });
+
+            return foo;
         },
 
         privateTimeline: function() {
-            return new Application.View.Items({
-                pid: session.get('pid'),
+            var foo = new Application.View.Items({
+                model: new Backbone.Model({
+                    status: 'm',
+                    pid: this.options.pid
+                }),
                 collection: this.options.privateItems
             });
+
+            return foo;
         }
     }
 });
@@ -1449,7 +1283,7 @@ Application.Router.Admin = Backbone.Router.extend({
 
 
     initialize: function () {
-        session.set("ptsession", getCookie("ptsession"));
+        session.set("ptsession", $.cookie('ptsession'));
     },
 
 
@@ -1693,15 +1527,14 @@ Application.Router.Admin = Backbone.Router.extend({
 });
 Application.Router.User = Backbone.Router.extend({
     routes: {
-        "login": "login",
-        "register": "register",
-        "timeline": "timeline"
+        'login': 'login',
+        'logout': 'logout',
+        'register': 'register',
+        'timeline': 'timeline'
     },
 
 
     initialize: function () {
-        session.set("ptsession", getCookie("ptsession"));
-
         var header = new Application.View.Header({
             model: new Backbone.Model({
                 pid: session.get('pid')
@@ -1715,7 +1548,10 @@ Application.Router.User = Backbone.Router.extend({
     timeline: function () {
         var self = this;
 
-        session.check(function(){
+
+        var check = session.check();
+
+        check.done(function(){
             var publicItems = new Application.Collection.ItemList();
             var privateItems = new Application.Collection.ItemList();
 
@@ -1741,7 +1577,12 @@ Application.Router.User = Backbone.Router.extend({
                 privateItems: privateItems
             });
 
-            self.changePage(timeline, 'timeline');
+            Application.content.show(timeline);
+        });
+
+
+        check.fail(function(){
+            Backbone.history.navigate('login', true);
         });
     },
 
@@ -1751,7 +1592,7 @@ Application.Router.User = Backbone.Router.extend({
             model: new Application.Model.Credentials()
         });
 
-        this.changePage(login, 'login');
+        Application.content.show(login);
     },
 
 
@@ -1760,26 +1601,13 @@ Application.Router.User = Backbone.Router.extend({
             model: new Application.Model.RegistrationInfo()
         });
 
-        this.changePage(register, 'register');
+        Application.content.show(register);
     },
 
 
     logout: function () {
-        session.set("ptsession", null);
-        setCookie('ptsession', null);
+        session.destroy();
 
-        this.login();
-    },
-
-
-    changePage: function (view, route) {
-        console.log("Changing view to " + $(view.el).attr('id'));
-
-        Application.content.show(view);
-
-        if (route) {
-            console.log("Changing route to " + route);
-            Backbone.history.navigate(route, true);
-        }
+        Backbone.history.navigate('login', true);
     }
 });

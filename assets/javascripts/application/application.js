@@ -18,6 +18,12 @@ Application.addRegions({
 var session;
 Application.addInitializer(function(options){
     session = new Application.Model.Session();
+
+
+    var cookie = $.cookie('ptsession');
+    if (cookie) {
+        session.set('ptsession', cookie);
+    }
 });
 
 
