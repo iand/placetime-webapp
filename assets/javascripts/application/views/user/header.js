@@ -1,4 +1,4 @@
 Application.View.Header = Backbone.Marionette.ItemView.extend({
     template: '#header-template',
-    className: 'navbar'
+    className: 'navbar navbar-fixed'
 });

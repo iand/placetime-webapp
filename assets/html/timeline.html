@@ -10,8 +10,8 @@
 
         <script src="/-assets/javascripts/vendor/modernizr.js"></script>
 
-        <link rel="stylesheet" href="/-assets/stylesheets/vendor.css"/>
-        <link rel="stylesheet" href="/-assets/stylesheets/user.css"/>
+        <link rel="stylesheet" href="/-assets/stylesheets/vendor.css">
+        <link rel="stylesheet" href="/-assets/stylesheets/user.css">
 
         <title>PlaceTime - Timeline</title>
     </head>
@@ -32,6 +32,7 @@
 
                 <a class="tagline pull-left" href="/">a playlist for your life</a>
 
+                <% if (pid !== undefined) { %>
                 <ul class="nav pull-right">
                     <li>
                         <a data-dropdown=".navbar .dropdown">
@@ -39,6 +40,7 @@
                         </a>
                     </li>
                 </ul>
+                <% } %>
 
                 <div class="dropdown dropdown-tip dropdown-anchor-right">
                     <ul class="dropdown-menu">
@@ -72,17 +74,17 @@
             <form action="#" method="post">
                 <div class="field">
                     <label for="name">User name</label>
-                    <input type="text" name="pid" id="pid" value="" />
+                    <input type="text" name="pid" id="pid" value="">
                     <div class="hint"></div>
                 </div>
 
                 <div class="field">
                     <label for="name">Password</label>
-                    <input type="password" name="pwd" id="pwd" value=""  />
+                    <input type="password" name="pwd" id="pwd" value="">
                     <div class="hint"></div>
                 </div>
 
-                <input type="submit" value="Login" />
+                <input type="submit" value="Login">
             </form>
 
             <p>
@@ -96,29 +98,29 @@
             <form action="#" method="post">
                 <div class="field">
                     <label for="name">User name</label>
-                    <input type="text" name="pid" />
+                    <input type="text" name="pid">
                     <div class="hint"></div>
                 </div>
 
                 <div class="field">
                     <label for="name">Full name</label>
-                    <input type="text" name="name" />
+                    <input type="text" name="name">
                     <div class="hint"></div>
                 </div>
 
                 <div class="field">
                     <label for="name">Password</label>
-                    <input type="text" name="pwd" />
+                    <input type="text" name="pwd">
                     <div class="hint"></div>
                 </div>
 
-                <input type="submit" value="Register" />
+                <input type="submit" value="Register">
             </form>
         </script>
 
 
         <script type="text/template" id="item-template">
-            <div class="mytimelineitem" data-id="<%= id %>" style="background-image: url(/-img/<%= image %>);">
+            <div data-id="<%= id %>" style="background-image: url(/-img/<%= image %>);">
                 <% if (image) { %>
                     <div class="main-imageoverlay"><!-- --></div>
                 <% } %>
@@ -128,24 +130,24 @@
                 <% } else if (media == "audio") { %>
                 <!-- audio specific markup here -->
                 <% } else { %>
-                    <div class="main-itemicon">
-                        <img src="/-assets/img/nasa.jpg" width="30" height="30">
+                    <div class="icon pull-left">
+                        <img src="/-assets/images/nasa.jpg" width="30" height="30">
                     </div>
-                    <p class="main-itemusername">@<%= pid %></p>
-                    <p class="main-itemtext">
-                        <a class="main-hiddenlink fancymodal fancybox.iframe" href="<%= link %>">
+                    <p class="username pull-left">@<%= pid %></p>
+                    <p class="text pull-left">
+                        <a class="fancymodal fancybox.iframe" href="<%= link %>">
                             <%= text %>
                         </a>
                     </p>
-                    <p class="main-itemlink">
-                        <a href="<%= link %>" class="roundBtn main-hiddenlink fancymodal fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
-                            <i class="icon-external-link"></i>
-                        </a>
-                    </p>
-                    <p class="main-itemtime">
+                    <p class="time pull-left">
                         <a class="main-hiddenlink fancymodal fancybox.iframe" href="<%= link %>">
                             <i class="icon-time"></i> added:
                             <span class="timestamp"><%= fromnow %></span>
+                        </a>
+                    </p>
+                    <p class="link pull-left">
+                        <a href="<%= link %>" class="fancymodal fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
+                            <i class="icon-external-link"></i>
                         </a>
                     </p>
 
@@ -166,66 +168,45 @@
 
 
 
-        <script type="template/text" id="timeline-private-template">
-            <div class="content-primary">
-                <div class="items"></div>
-                <div class="now">
-                    <span>Now</span>
+        <script type="template/text" id="timeline-template">
+            <div class="timeline">
+                <div class="header">
+                    <h2 class="title pull-left">Following</h2>
+                    <p class="tagline pull-left">
+                        <em>possible</em> things to do or check out
+                    </p>
+
+                    <ul class="nav nav-inline pull-right">
+                        <li>
+                            <a class="now">
+                                <i class="icon-repeat"></i> now
+                            </a>
+                        </li>
+                        <li>
+                            <a class="ets">
+                                <i class="icon-circle-arrow-up"></i> event
+                            </a>
+                        </li>
+                        <li>
+                            <a class="ts">
+                                <i class="icon-circle-arrow-down"></i> added
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="items">
+                    <div class="scroller">
+                        <div class="foo"></div>
+                    </div>
                 </div>
             </div>
         </script>
 
-
-
-        <script type="text/template" id="timeline-template">
-            <div id="itemlist">
-                <div class="main-alltimelineheaderwrapper">
-                    <div class="main-alltimelineheader">
-                      <div class="sort-menu">
-                        <div>
-                          <a href="#" id="now" class="ui-btn-right main-hiddenlink">
-                              <i class="icon-repeat"></i> now
-                          </a>
-                          <a href="#" id="ets" class="ui-btn-right main-hiddenlink">
-                              <i class="icon-circle-arrow-up"></i> event
-                          </a>
-                          <a href="#" id="ts" class="ui-btn-right main-hiddenlink">
-                              <i class="icon-circle-arrow-down"></i> added
-                          </a>
-                        </div>
-                      </div>
-                      <div class="main-timelineheadertext">
-                        <div class="main-timelinetitle">
-                          Following <span class="main-timelinestrapline"><span style="color:#000;">possible</span> things to do or check out</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="main-mytimelineheader">
-                      <div class="sort-menu">
-                        <div>
-                          <a href="#" id="now" class="ui-btn-right main-hiddenlink"><i class="icon-repeat"></i> now</a>
-                          <a href="#" id="myets" class="ui-btn-right main-hiddenlink"><i class="icon-circle-arrow-up"></i> event</a>
-                          <a href="#" id="myts" class="ui-btn-right main-hiddenlink"><i class="icon-circle-arrow-down"></i> added</a>
-                        </div>
-                      </div>
-                      <div class="main-timelineheadertext">
-                        <div class="main-timelinetitle">
-                          My Playlist <span class="main-timelinestrapline">things to <span style="color:#000;">maybe</span> check out</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div style="clear:both;"></div>
-
-
-                  <div class="timeline">
-                      <div data-subview="publicTimeline"></div>
-                      <div data-subview="privateTimeline"></div>
-                  </div>
-            </div>
+        <script type="text/template" id="timelines-template">
+            <div data-subview="publicTimeline"></div>
+            <div data-subview="privateTimeline"></div>
         </script>
 
 

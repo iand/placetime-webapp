@@ -1,5 +1,5 @@
 Application.View.Items = Backbone.Marionette.CompositeView.extend({
-    template: '#timeline-private-template',
+    template: '#timeline-template',
     className: 'column',
 
     events: {
@@ -7,22 +7,41 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         'click .button.demote': 'demote'
     },
 
-    itemViewContainer: '.items',
+    itemViewContainer: '.foo',
 
 
 
     initialize: function (options) {
-        this.on('composite:collection:rendered', this.rendered);
+        var self = this;
+
+
+        this.on('composite:rendered', this.foo);
+        this.on('composite:collection:rendered', this.foo);
+
+
+        // Adjust scroller height
+        $(window).resize(function(){
+            var $scroller = self.$el.find('.scroller');
+
+            $scroller.height(
+                $(this).height() - 100
+            );
+        });
     },
 
 
-
-    rendered: function (eventName) {
+    foo: function () {
         if (this.scroller) {
             this.scroller.destroy();
         }
 
-        this.scroller = new iScroll(this.$el.find('.content-primary').get(0), {
+        var $scroller = this.$el.find('.scroller');
+
+        $scroller.height(
+            $(window).height() - 100
+        );
+
+        this.scroller = new iScroll($scroller.get(0), {
             momentum: true,
             hScrollbar: false,
             vScroll: true

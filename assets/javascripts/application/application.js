@@ -8,9 +8,9 @@ Application.Router = {};
 
 // Regions
 Application.addRegions({
-    header: '.header',
-    content: '.content',
-    footer: '.footer'
+    header: 'body > .header',
+    content: 'body > .content',
+    footer: 'body > .footer'
 });
 
 

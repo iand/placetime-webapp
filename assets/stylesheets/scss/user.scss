@@ -29,8 +29,12 @@ a {
     background-color: #aaaaaa;
     border-bottom: 8px solid #ccc;
     height: 45px;
-    margin-bottom: 20px;
     width: 100%;
+
+    &.navbar-fixed {
+        position: fixed;
+        top: 0;
+    }
 
     .navbar-inner {
         overflow: hidden;
@@ -61,17 +65,11 @@ a {
     }
 
     .nav {
-        list-style: none;
         margin: 5px 0 0;
-        padding: 0;
 
+        // TODO: Move;
         .icon-cog {
-            cursor: pointer;
             font-size: 33px;
-        }
-
-        [class^="icon-"] {
-            width: 1em;
         }
     }
 
@@ -79,6 +77,218 @@ a {
         .icon-edit,
         .icon-signout {
             font-size: 20px;
+        }
+    }
+}
+
+
+.nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &.nav-inline {
+        li {
+            display: inline-block;
+        }
+    }
+
+    a {
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    li [class^="icon-"],
+    li [class*=" icon-"] {
+        width: auto;
+    }
+}
+
+.content {
+    padding-top: 54px;
+}
+
+.timelines {
+    .column {
+        float: left;
+        width: 50%;
+    }
+}
+
+.timeline {
+    padding: 0 3px;
+
+    .header {
+        background-color: #ccc;
+        border-bottom: 0px solid #000;
+        height: 39px;
+        width: 100%;
+
+        .title {
+            color: #fff;
+            font-size: 17px;
+            font-weight: normal;
+            margin: 16px 6px 4px 4px;
+            padding: 0;
+        }
+
+        .tagline {
+            color: #999;
+            font-size: 13px;
+            margin: 20px 0 0 0;
+
+            em {
+                color: #000000;
+                font-style: normal;
+            }
+        }
+
+        .nav {
+            margin: 4px 4px 0 0;
+
+            .now,
+            .ets,
+            .ts {
+                border-bottom: 0;
+                font-size: 11px;
+
+                &:hover {
+                    .icon-repeat,
+                    .icon-circle-arrow-up,
+                    .icon-circle-arrow-down {
+                        color: #000000;
+                    }
+                }
+
+                &:active {
+                    .icon-repeat,
+                    .icon-circle-arrow-up,
+                    .icon-circle-arrow-down {
+                        color: #ff6600;
+                    }
+                }
+            }
+
+            .icon-repeat,
+            .icon-circle-arrow-down,
+            .icon-circle-arrow-up {
+                @include single-text-shadow(
+                    #aaaaaa, 0.1em, 0.1em, 0.2em
+                );
+                color: #ffffff;
+                font-size: 30px;
+            }
+        }
+    }
+
+    .scroller {
+        position: relative;
+        width: 100%;
+    }
+
+    .items {
+        padding-top: 5px;
+
+        .item {
+            @include border-radius(2px);
+            @include single-box-shadow(
+                #aaaaaa, 1px, 1px, 2px
+            );
+            background-color: #aaaaaa;
+            background-size: cover;
+            margin: 0 0 7px;
+            overflow: hidden;
+            padding: 15px;
+            position: relative;
+
+            &:hover {
+                @include single-box-shadow(
+                    #aaaaaa, 0px, 0px, 0px
+                );
+                background-color: #999;
+            }
+
+            .username {
+                font-size: 14px;
+                color: #ddd;
+                padding: 7px;
+                margin: 0 0 0 7px;
+            }
+
+            .text {
+                margin: 0;
+
+                a {
+                    color: #fff;
+                    font-size: 22px;
+                }
+            }
+
+            .link {
+                margin: 0;
+
+                a {
+                    font-size: 25px;
+                    color: #ddd;
+                }
+            }
+
+            .time {
+                margin: 0;
+
+                a {
+                    color: #eee;
+                    font-size: 13px;
+                }
+            }
+
+            .text,
+            .link,
+            .time {
+                width: 100%;
+
+                a {
+                    border-bottom: 0;
+                }
+            }
+
+            .promote,
+            .demote {
+                @include border-radius(31px);
+                @include box-shadow(
+                    rgba(000, 000, 000, 0.5) 0px 1px 3px,
+                    rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset
+                );
+                @include text-shadow(
+                    #aaa 0.1em 0.1em 0.2em
+                );
+                @include background(
+                    linear-gradient(top, #deddd8, #deddd8)
+                );
+                color: #000;
+                cursor: pointer;
+                border: 4px solid #fff;
+                bottom: 10px;
+                font-size: 22px;
+                position: absolute;
+                right: 10px;
+
+                &:hover {
+                    color: #ffffff;
+                }
+
+                &:active {
+                    color: #ff6600;
+                }
+            }
+
+            .promote {
+                padding: 6px 7px 5px 8px;
+            }
+
+            .demote {
+                padding: 6px 9px 5px 10px;
+            }
         }
     }
 }

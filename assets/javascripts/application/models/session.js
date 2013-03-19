@@ -1,5 +1,11 @@
 Application.Model.Session = Backbone.Model.extend({
-    initialize: function () {},
+    initialize: function () {
+        var cookie = $.cookie('ptsession');
+
+        if (cookie !== undefined) {
+            this.set('pid', cookie.split('|')[0]);
+        }
+    },
 
 
     check: function (done, fail) {
@@ -17,11 +23,12 @@ Application.Model.Session = Backbone.Model.extend({
                 url: '/-chksession'
             })
             .done(function () {
-                var pid = self.get('ptsession').split('|')[0];
+                var cookie = $.cookie('ptsession');
 
-                console.log('Valid session for pid: ' + pid);
+                if (cookie !== undefined) {
+                    self.set('pid', cookie.split('|')[0]);
+                }
 
-                self.set('pid', pid);
                 defer.resolve();
             })
             .fail(function () {
@@ -56,15 +63,12 @@ Application.Model.Session = Backbone.Model.extend({
             }
         })
         .done(function (data) {
-            console.log('Logged in successfully');
-
             self.set('pwd', null);
             self.set('ptsession', $.cookie('ptsession'));
 
             defer.resolve(data);
         })
         .fail(function (data) {
-            console.log('Error thrown when logging in: ' + response.responseText);
             self.set('pwd', null);
 
             defer.fail(data);

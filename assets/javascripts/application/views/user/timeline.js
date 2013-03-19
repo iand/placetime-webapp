@@ -1,5 +1,6 @@
 Application.View.Timeline = Marionette.ItemView.extend({
-    template: '#timeline-template',
+    template: '#timelines-template',
+    className: 'container timelines',
 
     initialize: function() {
         Backbone.Subviews.add(this);
@@ -8,7 +9,7 @@ Application.View.Timeline = Marionette.ItemView.extend({
 
     subviewCreators : {
         publicTimeline: function() {
-            var foo = new Application.View.Items({
+            var timeline = new Application.View.Items({
                 model: new Backbone.Model({
                     status: 'p',
                     pid: this.options.pid
@@ -16,15 +17,11 @@ Application.View.Timeline = Marionette.ItemView.extend({
                 collection: this.options.publicItems
             });
 
-            foo.on('promote', function(){
-                console.log('test');
-            });
-
-            return foo;
+            return timeline;
         },
 
         privateTimeline: function() {
-            var foo = new Application.View.Items({
+            var timeline = new Application.View.Items({
                 model: new Backbone.Model({
                     status: 'm',
                     pid: this.options.pid
@@ -32,7 +29,7 @@ Application.View.Timeline = Marionette.ItemView.extend({
                 collection: this.options.privateItems
             });
 
-            return foo;
+            return timeline;
         }
     }
 });

@@ -8,9 +8,9 @@ Application.Router = {};
 
 // Regions
 Application.addRegions({
-    header: '.header',
-    content: '.content',
-    footer: '.footer'
+    header: 'body > .header',
+    content: 'body > .content',
+    footer: 'body > .footer'
 });
 
 
@@ -299,7 +299,13 @@ Application.Model.RegistrationInfo = Backbone.Model.extend({
     }
 });
 Application.Model.Session = Backbone.Model.extend({
-    initialize: function () {},
+    initialize: function () {
+        var cookie = $.cookie('ptsession');
+
+        if (cookie !== undefined) {
+            this.set('pid', cookie.split('|')[0]);
+        }
+    },
 
 
     check: function (done, fail) {
@@ -317,11 +323,12 @@ Application.Model.Session = Backbone.Model.extend({
                 url: '/-chksession'
             })
             .done(function () {
-                var pid = self.get('ptsession').split('|')[0];
+                var cookie = $.cookie('ptsession');
 
-                console.log('Valid session for pid: ' + pid);
+                if (cookie !== undefined) {
+                    self.set('pid', cookie.split('|')[0]);
+                }
 
-                self.set('pid', pid);
                 defer.resolve();
             })
             .fail(function () {
@@ -356,15 +363,12 @@ Application.Model.Session = Backbone.Model.extend({
             }
         })
         .done(function (data) {
-            console.log('Logged in successfully');
-
             self.set('pwd', null);
             self.set('ptsession', $.cookie('ptsession'));
 
             defer.resolve(data);
         })
         .fail(function (data) {
-            console.log('Error thrown when logging in: ' + response.responseText);
             self.set('pwd', null);
 
             defer.fail(data);
@@ -991,11 +995,11 @@ var StaticView = Backbone.View.extend({
 });
 Application.View.Header = Backbone.Marionette.ItemView.extend({
     template: '#header-template',
-    className: 'navbar'
+    className: 'navbar navbar-fixed'
 });
 Application.View.Item = Backbone.Marionette.ItemView.extend({
     template: '#item-template',
-
+    className: 'item',
 
     destroy: function() {
         if (this.isClosed) {
@@ -1016,7 +1020,7 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
     }
 });
 Application.View.Items = Backbone.Marionette.CompositeView.extend({
-    template: '#timeline-private-template',
+    template: '#timeline-template',
     className: 'column',
 
     events: {
@@ -1024,22 +1028,41 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         'click .button.demote': 'demote'
     },
 
-    itemViewContainer: '.items',
+    itemViewContainer: '.foo',
 
 
 
     initialize: function (options) {
-        this.on('composite:collection:rendered', this.rendered);
+        var self = this;
+
+
+        this.on('composite:rendered', this.foo);
+        this.on('composite:collection:rendered', this.foo);
+
+
+        // Adjust scroller height
+        $(window).resize(function(){
+            var $scroller = self.$el.find('.scroller');
+
+            $scroller.height(
+                $(this).height() - 100
+            );
+        });
     },
 
 
-
-    rendered: function (eventName) {
+    foo: function () {
         if (this.scroller) {
             this.scroller.destroy();
         }
 
-        this.scroller = new iScroll(this.$el.find('.content-primary').get(0), {
+        var $scroller = this.$el.find('.scroller');
+
+        $scroller.height(
+            $(window).height() - 100
+        );
+
+        this.scroller = new iScroll($scroller.get(0), {
             momentum: true,
             hScrollbar: false,
             vScroll: true
@@ -1211,7 +1234,8 @@ Application.View.Register = Backbone.Marionette.ItemView.extend({
     }
 });
 Application.View.Timeline = Marionette.ItemView.extend({
-    template: '#timeline-template',
+    template: '#timelines-template',
+    className: 'container timelines',
 
     initialize: function() {
         Backbone.Subviews.add(this);
@@ -1220,7 +1244,7 @@ Application.View.Timeline = Marionette.ItemView.extend({
 
     subviewCreators : {
         publicTimeline: function() {
-            var foo = new Application.View.Items({
+            var timeline = new Application.View.Items({
                 model: new Backbone.Model({
                     status: 'p',
                     pid: this.options.pid
@@ -1228,15 +1252,11 @@ Application.View.Timeline = Marionette.ItemView.extend({
                 collection: this.options.publicItems
             });
 
-            foo.on('promote', function(){
-                console.log('test');
-            });
-
-            return foo;
+            return timeline;
         },
 
         privateTimeline: function() {
-            var foo = new Application.View.Items({
+            var timeline = new Application.View.Items({
                 model: new Backbone.Model({
                     status: 'm',
                     pid: this.options.pid
@@ -1244,7 +1264,7 @@ Application.View.Timeline = Marionette.ItemView.extend({
                 collection: this.options.privateItems
             });
 
-            return foo;
+            return timeline;
         }
     }
 });

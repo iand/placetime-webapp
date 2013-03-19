@@ -1,6 +1,6 @@
 Application.View.Item = Backbone.Marionette.ItemView.extend({
     template: '#item-template',
-
+    className: 'item',
 
     destroy: function() {
         if (this.isClosed) {

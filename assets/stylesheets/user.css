@@ -130,20 +130,24 @@ a {
   background-color: #aaaaaa;
   border-bottom: 8px solid #cccccc;
   height: 45px;
-  margin-bottom: 20px;
   width: 100%;
 }
-/* line 35, scss/user.scss */
+/* line 34, scss/user.scss */
+.navbar.navbar-fixed {
+  position: fixed;
+  top: 0;
+}
+/* line 39, scss/user.scss */
 .navbar .navbar-inner {
   overflow: hidden;
 }
-/* line 39, scss/user.scss */
+/* line 43, scss/user.scss */
 .navbar .brand {
   color: #ffffff;
   font-size: 23px;
   padding-top: 8px;
 }
-/* line 45, scss/user.scss */
+/* line 49, scss/user.scss */
 .navbar .brand .icon-ok-circle,
 .navbar .brand .icon-time {
   color: #555555;
@@ -151,43 +155,264 @@ a {
   float: left;
   margin-top: 0px;
 }
-/* line 52, scss/user.scss */
+/* line 56, scss/user.scss */
 .navbar .brand .icon-time {
   margin-right: 20px;
 }
-/* line 57, scss/user.scss */
+/* line 61, scss/user.scss */
 .navbar .tagline {
   color: #ededed;
   font-size: 14px;
   margin: 16px 0 0 25px;
 }
-/* line 63, scss/user.scss */
+/* line 67, scss/user.scss */
 .navbar .nav {
-  list-style: none;
   margin: 5px 0 0;
-  padding: 0;
 }
-/* line 68, scss/user.scss */
+/* line 71, scss/user.scss */
 .navbar .nav .icon-cog {
-  cursor: pointer;
   font-size: 33px;
 }
-/* line 73, scss/user.scss */
-.navbar .nav [class^="icon-"] {
-  width: 1em;
-}
-/* line 80, scss/user.scss */
+/* line 78, scss/user.scss */
 .navbar .dropdown .icon-edit,
 .navbar .dropdown .icon-signout {
   font-size: 20px;
 }
 
-/* line 87, scss/user.scss */
+/* line 85, scss/user.scss */
+.nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 91, scss/user.scss */
+.nav.nav-inline li {
+  display: inline-block;
+}
+/* line 96, scss/user.scss */
+.nav a {
+  cursor: pointer;
+  display: inline-block;
+}
+/* line 102, scss/user.scss */
+.nav li [class^="icon-"],
+.nav li [class*=" icon-"] {
+  width: auto;
+}
+
+/* line 107, scss/user.scss */
+.content {
+  padding-top: 54px;
+}
+
+/* line 112, scss/user.scss */
+.timelines .column {
+  float: left;
+  width: 50%;
+}
+
+/* line 118, scss/user.scss */
+.timeline {
+  padding: 0 3px;
+}
+/* line 121, scss/user.scss */
+.timeline .header {
+  background-color: #ccc;
+  border-bottom: 0px solid black;
+  height: 39px;
+  width: 100%;
+}
+/* line 127, scss/user.scss */
+.timeline .header .title {
+  color: #fff;
+  font-size: 17px;
+  font-weight: normal;
+  margin: 16px 6px 4px 4px;
+  padding: 0;
+}
+/* line 135, scss/user.scss */
+.timeline .header .tagline {
+  color: #999;
+  font-size: 13px;
+  margin: 20px 0 0 0;
+}
+/* line 140, scss/user.scss */
+.timeline .header .tagline em {
+  color: #000000;
+  font-style: normal;
+}
+/* line 146, scss/user.scss */
+.timeline .header .nav {
+  margin: 4px 4px 0 0;
+}
+/* line 151, scss/user.scss */
+.timeline .header .nav .now,
+.timeline .header .nav .ets,
+.timeline .header .nav .ts {
+  border-bottom: 0;
+  font-size: 11px;
+}
+/* line 158, scss/user.scss */
+.timeline .header .nav .now:hover .icon-repeat,
+.timeline .header .nav .now:hover .icon-circle-arrow-up,
+.timeline .header .nav .now:hover .icon-circle-arrow-down,
+.timeline .header .nav .ets:hover .icon-repeat,
+.timeline .header .nav .ets:hover .icon-circle-arrow-up,
+.timeline .header .nav .ets:hover .icon-circle-arrow-down,
+.timeline .header .nav .ts:hover .icon-repeat,
+.timeline .header .nav .ts:hover .icon-circle-arrow-up,
+.timeline .header .nav .ts:hover .icon-circle-arrow-down {
+  color: #000000;
+}
+/* line 166, scss/user.scss */
+.timeline .header .nav .now:active .icon-repeat,
+.timeline .header .nav .now:active .icon-circle-arrow-up,
+.timeline .header .nav .now:active .icon-circle-arrow-down,
+.timeline .header .nav .ets:active .icon-repeat,
+.timeline .header .nav .ets:active .icon-circle-arrow-up,
+.timeline .header .nav .ets:active .icon-circle-arrow-down,
+.timeline .header .nav .ts:active .icon-repeat,
+.timeline .header .nav .ts:active .icon-circle-arrow-up,
+.timeline .header .nav .ts:active .icon-circle-arrow-down {
+  color: #ff6600;
+}
+/* line 174, scss/user.scss */
+.timeline .header .nav .icon-repeat,
+.timeline .header .nav .icon-circle-arrow-down,
+.timeline .header .nav .icon-circle-arrow-up {
+  text-shadow: 0.1em 0.1em 0.2em #aaaaaa;
+  color: #ffffff;
+  font-size: 30px;
+}
+/* line 184, scss/user.scss */
+.timeline .scroller {
+  position: relative;
+  width: 100%;
+}
+/* line 189, scss/user.scss */
+.timeline .items {
+  padding-top: 5px;
+}
+/* line 192, scss/user.scss */
+.timeline .items .item {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 1px 1px 2px #aaaaaa;
+  -moz-box-shadow: 1px 1px 2px #aaaaaa;
+  box-shadow: 1px 1px 2px #aaaaaa;
+  background-color: #aaaaaa;
+  background-size: cover;
+  margin: 0 0 7px;
+  overflow: hidden;
+  padding: 15px;
+  position: relative;
+}
+/* line 204, scss/user.scss */
+.timeline .items .item:hover {
+  -webkit-box-shadow: 0px 0px 0px #aaaaaa;
+  -moz-box-shadow: 0px 0px 0px #aaaaaa;
+  box-shadow: 0px 0px 0px #aaaaaa;
+  background-color: #999;
+}
+/* line 211, scss/user.scss */
+.timeline .items .item .username {
+  font-size: 14px;
+  color: #ddd;
+  padding: 7px;
+  margin: 0 0 0 7px;
+}
+/* line 218, scss/user.scss */
+.timeline .items .item .text {
+  margin: 0;
+}
+/* line 221, scss/user.scss */
+.timeline .items .item .text a {
+  color: #fff;
+  font-size: 22px;
+}
+/* line 227, scss/user.scss */
+.timeline .items .item .link {
+  margin: 0;
+}
+/* line 230, scss/user.scss */
+.timeline .items .item .link a {
+  font-size: 25px;
+  color: #ddd;
+}
+/* line 236, scss/user.scss */
+.timeline .items .item .time {
+  margin: 0;
+}
+/* line 239, scss/user.scss */
+.timeline .items .item .time a {
+  color: #eee;
+  font-size: 13px;
+}
+/* line 247, scss/user.scss */
+.timeline .items .item .text,
+.timeline .items .item .link,
+.timeline .items .item .time {
+  width: 100%;
+}
+/* line 250, scss/user.scss */
+.timeline .items .item .text a,
+.timeline .items .item .link a,
+.timeline .items .item .time a {
+  border-bottom: 0;
+}
+/* line 256, scss/user.scss */
+.timeline .items .item .promote,
+.timeline .items .item .demote {
+  -webkit-border-radius: 31px;
+  -moz-border-radius: 31px;
+  -ms-border-radius: 31px;
+  -o-border-radius: 31px;
+  border-radius: 31px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px, rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px, rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px, rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset;
+  text-shadow: #aaaaaa 0.1em 0.1em 0.2em;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #deddd8), color-stop(100%, #deddd8));
+  background: -webkit-linear-gradient(top, #deddd8, #deddd8);
+  background: -moz-linear-gradient(top, #deddd8, #deddd8);
+  background: -o-linear-gradient(top, #deddd8, #deddd8);
+  background: linear-gradient(top, #deddd8, #deddd8);
+  color: #000;
+  cursor: pointer;
+  border: 4px solid white;
+  bottom: 10px;
+  font-size: 22px;
+  position: absolute;
+  right: 10px;
+}
+/* line 276, scss/user.scss */
+.timeline .items .item .promote:hover,
+.timeline .items .item .demote:hover {
+  color: #ffffff;
+}
+/* line 280, scss/user.scss */
+.timeline .items .item .promote:active,
+.timeline .items .item .demote:active {
+  color: #ff6600;
+}
+/* line 285, scss/user.scss */
+.timeline .items .item .promote {
+  padding: 6px 7px 5px 8px;
+}
+/* line 289, scss/user.scss */
+.timeline .items .item .demote {
+  padding: 6px 9px 5px 10px;
+}
+
+/* line 297, scss/user.scss */
 .pull-left {
   float: left;
 }
 
-/* line 91, scss/user.scss */
+/* line 301, scss/user.scss */
 .pull-right {
   float: right;
 }
