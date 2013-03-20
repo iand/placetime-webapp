@@ -137,7 +137,7 @@ Application.Router.Admin = Backbone.Router.extend({
         var self = this;
         session.check(function () {
 
-            var list = new FeedsList({
+            var list = new Application.Collection.Feeds({
                 'pid': pid
             });
             list.fetch({

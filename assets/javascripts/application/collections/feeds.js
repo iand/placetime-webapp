@@ -1,4 +1,4 @@
-var FeedsList = Backbone.Collection.extend({
+Application.Collection.Feeds = Backbone.Collection.extend({
     model: Feed,
 
     initialize: function (options) {

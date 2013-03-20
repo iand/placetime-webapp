@@ -1,4 +1,4 @@
-Application.Collection.ItemList = Backbone.Collection.extend({
+Application.Collection.Items = Backbone.Collection.extend({
     model: Application.Model.Item,
     url: '/-jtl',
 
@@ -54,5 +54,10 @@ Application.Collection.ItemList = Backbone.Collection.extend({
         });
 
         return promise;
+    },
+
+
+    comparator: function(model) {
+        return -moment(model.get('ets')).unix();
     }
 });

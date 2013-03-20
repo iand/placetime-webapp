@@ -387,7 +387,7 @@ Application.Model.Session = Backbone.Model.extend({
         Backbone.Model.prototype.destroy.apply(this);
     }
 });
-var FeedsList = Backbone.Collection.extend({
+Application.Collection.Feeds = Backbone.Collection.extend({
     model: Feed,
 
     initialize: function (options) {
@@ -420,7 +420,7 @@ var FollowingList = Backbone.Collection.extend({
         return '/-jfollowing?count=40&pid=' + this.pid;
     }
 });
-Application.Collection.ItemList = Backbone.Collection.extend({
+Application.Collection.Items = Backbone.Collection.extend({
     model: Application.Model.Item,
     url: '/-jtl',
 
@@ -476,6 +476,11 @@ Application.Collection.ItemList = Backbone.Collection.extend({
         });
 
         return promise;
+    },
+
+
+    comparator: function(model) {
+        return -moment(model.get('ets')).unix();
     }
 });
 var ProfileItems = Backbone.Collection.extend({
@@ -1001,22 +1006,35 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
     template: '#item-template',
     className: 'item',
 
-    destroy: function() {
-        if (this.isClosed) {
-            return;
-        }
-
-        this.triggerMethod('item:before:close');
-
-        var self = this;
-        this.$el.animate({opacity: 0, height: 0}, 'slow', function () {
-            Marionette.View.prototype.close.apply(
-                self,
-                Array.prototype.slice.apply(arguments)
-            );
+    remove: function() {
+        this.$el.animate({
+            opacity: 0,
+            height: 0,
+            marginTop: 0,
+            paddingTop: 0,
+            marginBottom: 0,
+            paddingBottom: 0
+        }, 'slow', function () {
+            $(this).remove();
         });
 
-        this.triggerMethod('item:closed');
+        this.stopListening();
+
+        return this;
+    },
+
+    beforeRender: function() {
+        this.$el.css({
+            opacity: 0,
+            height: 0
+        });
+    },
+
+    onRender: function() {
+        this.$el.animate({
+            height: 150,
+            opacity: 1
+        }, 'slow');
     }
 });
 Application.View.Items = Backbone.Marionette.CompositeView.extend({
@@ -1031,14 +1049,13 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     itemViewContainer: '.foo',
 
 
-
     initialize: function (options) {
         var self = this;
 
-
-        this.on('composite:rendered', this.foo);
-        this.on('composite:collection:rendered', this.foo);
-
+        // Scroller events
+        this.on('composite:rendered', this.bindScroller);
+        this.on('after:item:added', this.refreshScroller);
+        this.on('item:removed', this.refreshScroller);
 
         // Adjust scroller height
         $(window).resize(function(){
@@ -1051,7 +1068,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    foo: function () {
+    bindScroller: function () {
         if (this.scroller) {
             this.scroller.destroy();
         }
@@ -1072,18 +1089,33 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
+    refreshScroller: function() {
+        var self = this;
+
+        clearTimeout(this.timeout);
+
+        this.timeout = setTimeout(function(){
+            self.scroller.refresh();
+        }, jQuery.fx.speeds.slow);
+    },
+
+
+    addItem: function(item) {
+        this.collection.add(item);
+    },
+
 
     promote: function (event) {
         var $item = $(event.currentTarget).closest('[data-id]');
 
-        this.on('item:removed', function(event) {
-            event.model.promote();
-        });
-
-        this.collection.remove(
+        var model = this.collection.get(
             $item.data('id')
         );
+        model.promote();
 
+        // TODO: Look into event bubbling
+        this.collection.trigger('item:promoted', model);
+        this.collection.remove(model);
 
         return false;
     },
@@ -1093,19 +1125,35 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     demote: function (event) {
         var $item = $(event.currentTarget).closest('[data-id]');
 
+        var self = this;
 
-        this.on('item:removed', function(event) {
-            event.model.demote();
-        });
-
-        this.collection.remove(
+        var model = this.collection.get(
             $item.data('id')
         );
+        model.demote();
 
+        // TODO: Look into event bubbling
+        this.collection.trigger('item:demoted', model);
+        this.collection.remove(model);
 
         return false;
     },
 
+
+    appendHtml: function(collectionView, itemView, index) {
+        var itemViewContainer;
+        if (collectionView.itemViewContainer) {
+            itemViewContainer = collectionView.$(collectionView.itemViewContainer);
+        } else {
+            itemViewContainer = collectionView.$el;
+        }
+
+        if (itemViewContainer.children().size() <= index) {
+            itemViewContainer.append(itemView.el);
+        } else {
+            itemViewContainer.children().eq(index).before(itemView.el);
+        }
+    },
 
 
     buildItemView: function(item, ItemViewType, itemViewOptions) {
@@ -1251,6 +1299,7 @@ Application.View.Timeline = Marionette.ItemView.extend({
                 }),
                 collection: this.options.publicItems
             });
+            timeline.listenTo(this.options.privateItems, 'item:demoted', timeline.addItem);
 
             return timeline;
         },
@@ -1263,6 +1312,7 @@ Application.View.Timeline = Marionette.ItemView.extend({
                 }),
                 collection: this.options.privateItems
             });
+            timeline.listenTo(this.options.publicItems, 'item:promoted', timeline.addItem);
 
             return timeline;
         }
@@ -1407,7 +1457,7 @@ Application.Router.Admin = Backbone.Router.extend({
         var self = this;
         session.check(function () {
 
-            var list = new FeedsList({
+            var list = new Application.Collection.Feeds({
                 'pid': pid
             });
             list.fetch({
@@ -1554,8 +1604,8 @@ Application.Router.User = Backbone.Router.extend({
         var check = session.check();
 
         check.done(function(){
-            var publicItems = new Application.Collection.ItemList();
-            var privateItems = new Application.Collection.ItemList();
+            var publicItems = new Application.Collection.Items();
+            var privateItems = new Application.Collection.Items();
 
             publicItems.fetch({
                 data: {

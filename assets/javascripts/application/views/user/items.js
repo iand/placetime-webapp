@@ -10,14 +10,13 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     itemViewContainer: '.foo',
 
 
-
     initialize: function (options) {
         var self = this;
 
-
-        this.on('composite:rendered', this.foo);
-        this.on('composite:collection:rendered', this.foo);
-
+        // Scroller events
+        this.on('composite:rendered', this.bindScroller);
+        this.on('after:item:added', this.refreshScroller);
+        this.on('item:removed', this.refreshScroller);
 
         // Adjust scroller height
         $(window).resize(function(){
@@ -30,7 +29,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    foo: function () {
+    bindScroller: function () {
         if (this.scroller) {
             this.scroller.destroy();
         }
@@ -51,18 +50,33 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
+    refreshScroller: function() {
+        var self = this;
+
+        clearTimeout(this.timeout);
+
+        this.timeout = setTimeout(function(){
+            self.scroller.refresh();
+        }, jQuery.fx.speeds.slow);
+    },
+
+
+    addItem: function(item) {
+        this.collection.add(item);
+    },
+
 
     promote: function (event) {
         var $item = $(event.currentTarget).closest('[data-id]');
 
-        this.on('item:removed', function(event) {
-            event.model.promote();
-        });
-
-        this.collection.remove(
+        var model = this.collection.get(
             $item.data('id')
         );
+        model.promote();
 
+        // TODO: Look into event bubbling
+        this.collection.trigger('item:promoted', model);
+        this.collection.remove(model);
 
         return false;
     },
@@ -72,19 +86,35 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     demote: function (event) {
         var $item = $(event.currentTarget).closest('[data-id]');
 
+        var self = this;
 
-        this.on('item:removed', function(event) {
-            event.model.demote();
-        });
-
-        this.collection.remove(
+        var model = this.collection.get(
             $item.data('id')
         );
+        model.demote();
 
+        // TODO: Look into event bubbling
+        this.collection.trigger('item:demoted', model);
+        this.collection.remove(model);
 
         return false;
     },
 
+
+    appendHtml: function(collectionView, itemView, index) {
+        var itemViewContainer;
+        if (collectionView.itemViewContainer) {
+            itemViewContainer = collectionView.$(collectionView.itemViewContainer);
+        } else {
+            itemViewContainer = collectionView.$el;
+        }
+
+        if (itemViewContainer.children().size() <= index) {
+            itemViewContainer.append(itemView.el);
+        } else {
+            itemViewContainer.children().eq(index).before(itemView.el);
+        }
+    },
 
 
     buildItemView: function(item, ItemViewType, itemViewOptions) {

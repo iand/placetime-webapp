@@ -25,8 +25,8 @@ Application.Router.User = Backbone.Router.extend({
         var check = session.check();
 
         check.done(function(){
-            var publicItems = new Application.Collection.ItemList();
-            var privateItems = new Application.Collection.ItemList();
+            var publicItems = new Application.Collection.Items();
+            var privateItems = new Application.Collection.Items();
 
             publicItems.fetch({
                 data: {

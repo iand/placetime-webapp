@@ -16,6 +16,7 @@ Application.View.Timeline = Marionette.ItemView.extend({
                 }),
                 collection: this.options.publicItems
             });
+            timeline.listenTo(this.options.privateItems, 'item:demoted', timeline.addItem);
 
             return timeline;
         },
@@ -28,6 +29,7 @@ Application.View.Timeline = Marionette.ItemView.extend({
                 }),
                 collection: this.options.privateItems
             });
+            timeline.listenTo(this.options.publicItems, 'item:promoted', timeline.addItem);
 
             return timeline;
         }
