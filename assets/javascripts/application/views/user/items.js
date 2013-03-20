@@ -3,8 +3,9 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     className: 'column',
 
     events: {
-        'click .button.promote': 'promote',
-        'click .button.demote': 'demote'
+        'click .button.promote': 'promoteItem',
+        'click .button.demote': 'demoteItem',
+        'click .nav .now': 'now'
     },
 
     itemViewContainer: '.foo',
@@ -66,7 +67,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    promote: function (event) {
+    promoteItem: function (event) {
         var $item = $(event.currentTarget).closest('[data-id]');
 
         var model = this.collection.get(
@@ -82,8 +83,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-
-    demote: function (event) {
+    demoteItem: function (event) {
         var $item = $(event.currentTarget).closest('[data-id]');
 
         var self = this;
@@ -99,6 +99,24 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
         return false;
     },
+
+
+
+    now: function() {
+        var sorted = _.sortBy(this.collection.models, function(model){
+            return Math.abs(moment().diff(model.get('ets')));
+        });
+
+        // TODO: Don't set id on child but parent
+        var closest = this.$el.find('.item > div[data-id='+sorted[0].get('id')+']').parent();
+            closest.css('background-color', '#ff6600');
+
+        // Scroll to the closest element
+        this.scroller.scrollToElement(
+            closest.get(0)
+        );
+    },
+
 
 
     appendHtml: function(collectionView, itemView, index) {
