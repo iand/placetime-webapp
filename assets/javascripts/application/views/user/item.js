@@ -6,10 +6,9 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
         this.$el.animate({
             opacity: 0,
             height: 0,
-            marginTop: 0,
             paddingTop: 0,
-            marginBottom: 0,
-            paddingBottom: 0
+            paddingBottom: 0,
+            marginBottom: 0
         }, 'slow', function () {
             $(this).remove();
         });
@@ -19,17 +18,23 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
         return this;
     },
 
-    beforeRender: function() {
+    onBeforeRender: function() {
         this.$el.css({
             opacity: 0,
-            height: 0
+            height: 0,
+            paddingTop: 0,
+            paddingBottom: 0,
+            marginBottom: 0
         });
     },
 
     onRender: function() {
         this.$el.animate({
-            height: 150,
-            opacity: 1
+            height: 140,
+            opacity: 1,
+            paddingTop: 15,
+            paddingBottom: 15,
+            marginBottom: 7
         }, 'slow');
     }
 });

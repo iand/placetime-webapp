@@ -32,6 +32,7 @@ Application.Router.User = Backbone.Router.extend({
                 data: {
                     status: 'p',
                     order: 'ets',
+                    count: 40,
                     pid: session.get('pid')
                 }
             });
@@ -40,6 +41,7 @@ Application.Router.User = Backbone.Router.extend({
                 data: {
                     status: 'm',
                     order: 'ets',
+                    count: 40,
                     pid: session.get('pid')
                 }
             });
@@ -47,7 +49,9 @@ Application.Router.User = Backbone.Router.extend({
 
             var timeline = new Application.View.Timeline({
                 publicItems: publicItems,
-                privateItems: privateItems
+                privateItems: privateItems,
+
+                pid: session.get('pid')
             });
 
             Application.content.show(timeline);

@@ -115,6 +115,11 @@ a {
     }
 }
 
+.page.header {
+    position: relative;
+    z-index: 100;
+}
+
 .timeline {
     padding: 0 3px;
 
@@ -225,7 +230,7 @@ a {
             }
 
             .link {
-                margin: 0;
+                margin: 8px 0 0;
 
                 a {
                     font-size: 25px;
@@ -300,4 +305,9 @@ a {
 
 .pull-right {
     float: right;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    -webkit-font-smoothing: inherit;
 }

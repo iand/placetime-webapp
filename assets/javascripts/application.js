@@ -424,32 +424,6 @@ Application.Collection.Items = Backbone.Collection.extend({
     model: Application.Model.Item,
     url: '/-jtl',
 
-    refresh: function () {
-        var url = '/-jtl?count=40&pid=' + this.pid + '&status=' + this.status + '&order=' + this.order;
-        var self = this;
-        $.ajax({
-            url: url,
-            dataType: "json",
-            success: function (data) {
-                console.log("refresh retrieved " + data.length + " items");
-                _.each(data, function (item) {
-                    var dt = moment(item.ms);
-                    item.year = dt.year();
-                    item.month = dt.month();
-                    item.day = dt.date();
-                    item.hours = dt.hours();
-                    item.minutes = dt.minutes();
-                    item.seconds = dt.seconds();
-                    item.fromnow = dt.fromNow();
-                    item.diff = moment().diff(dt);
-                });
-                console.log("resetting");
-                self.reset(data);
-            }
-        });
-    },
-
-
     fetch: function(options) {
         var self = this;
 
@@ -1010,10 +984,9 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
         this.$el.animate({
             opacity: 0,
             height: 0,
-            marginTop: 0,
             paddingTop: 0,
-            marginBottom: 0,
-            paddingBottom: 0
+            paddingBottom: 0,
+            marginBottom: 0
         }, 'slow', function () {
             $(this).remove();
         });
@@ -1023,17 +996,23 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
         return this;
     },
 
-    beforeRender: function() {
+    onBeforeRender: function() {
         this.$el.css({
             opacity: 0,
-            height: 0
+            height: 0,
+            paddingTop: 0,
+            paddingBottom: 0,
+            marginBottom: 0
         });
     },
 
     onRender: function() {
         this.$el.animate({
-            height: 150,
-            opacity: 1
+            height: 140,
+            opacity: 1,
+            paddingTop: 15,
+            paddingBottom: 15,
+            marginBottom: 7
         }, 'slow');
     }
 });
@@ -1044,13 +1023,16 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     events: {
         'click .button.promote': 'promoteItem',
         'click .button.demote': 'demoteItem',
-        'click .nav .now': 'now'
+        'click .nav .now': 'now',
+        'click .nav .ets': 'event',
+        'click .nav .ts': 'added'
     },
 
     itemViewContainer: '.foo',
 
 
     initialize: function (options) {
+
         var self = this;
 
         // Scroller events
@@ -1084,7 +1066,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             momentum: true,
             hScrollbar: false,
             vScroll: true
-        });
+        });console.log(this.scroller);
 
         return this;
     },
@@ -1156,6 +1138,27 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         );
     },
 
+
+    event: function() {
+        this.collection.fetch({
+            data: {
+                pid: this.model.get('pid'),
+                status: this.model.get('status'),
+                order: 'ets'
+            }
+        });
+    },
+
+
+    added: function() {
+        this.collection.fetch({
+            data: {
+                pid: this.model.get('pid'),
+                status: this.model.get('status'),
+                order: 'ts'
+            }
+        });
+    },
 
 
     appendHtml: function(collectionView, itemView, index) {
@@ -1303,7 +1306,7 @@ Application.View.Timeline = Marionette.ItemView.extend({
     template: '#timelines-template',
     className: 'container timelines',
 
-    initialize: function() {
+    initialize: function(options) {
         Backbone.Subviews.add(this);
     },
 
@@ -1629,6 +1632,7 @@ Application.Router.User = Backbone.Router.extend({
                 data: {
                     status: 'p',
                     order: 'ets',
+                    count: 40,
                     pid: session.get('pid')
                 }
             });
@@ -1637,6 +1641,7 @@ Application.Router.User = Backbone.Router.extend({
                 data: {
                     status: 'm',
                     order: 'ets',
+                    count: 40,
                     pid: session.get('pid')
                 }
             });
@@ -1644,7 +1649,9 @@ Application.Router.User = Backbone.Router.extend({
 
             var timeline = new Application.View.Timeline({
                 publicItems: publicItems,
-                privateItems: privateItems
+                privateItems: privateItems,
+
+                pid: session.get('pid')
             });
 
             Application.content.show(timeline);

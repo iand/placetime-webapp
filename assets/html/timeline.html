@@ -18,8 +18,8 @@
     <body>
 
 
-        <div class="header"></div>
-        <div class="content"></div>
+        <div class="page header"></div>
+        <div class="page content"></div>
 
 
         <script type="text/template" id="header-template">
@@ -50,7 +50,12 @@
                                 new
                             </a>
                         </li>
-                        <li>@<%= pid %></li>
+                        <li>
+                            <a class="main-hiddenlink" href="#profile">
+                                <i class="icon-user"></i>
+                                @<%= pid %>
+                            </a>
+                        </li>
                         <li>
                             <a class="main-hiddenlink" href="#logout">
                                 <i class="icon-signout"></i>

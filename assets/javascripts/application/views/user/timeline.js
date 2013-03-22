@@ -2,7 +2,7 @@ Application.View.Timeline = Marionette.ItemView.extend({
     template: '#timelines-template',
     className: 'container timelines',
 
-    initialize: function() {
+    initialize: function(options) {
         Backbone.Subviews.add(this);
     },
 

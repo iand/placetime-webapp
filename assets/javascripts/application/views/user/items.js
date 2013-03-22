@@ -5,13 +5,16 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     events: {
         'click .button.promote': 'promoteItem',
         'click .button.demote': 'demoteItem',
-        'click .nav .now': 'now'
+        'click .nav .now': 'now',
+        'click .nav .ets': 'event',
+        'click .nav .ts': 'added'
     },
 
     itemViewContainer: '.foo',
 
 
     initialize: function (options) {
+
         var self = this;
 
         // Scroller events
@@ -31,8 +34,8 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     bindScroller: function () {
-        if (this.scroller) {
-            this.scroller.destroy();
+        if (this.iscroll) {
+            this.iscroll.destroy();
         }
 
         var $scroller = this.$el.find('.scroller');
@@ -41,7 +44,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             $(window).height() - 100
         );
 
-        this.scroller = new iScroll($scroller.get(0), {
+        this.iscroll = new iScroll($scroller.get(0), {
             momentum: true,
             hScrollbar: false,
             vScroll: true
@@ -112,11 +115,32 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             closest.css('background-color', '#ff6600');
 
         // Scroll to the closest element
-        this.scroller.scrollToElement(
+        this.iscroll.scrollToElement(
             closest.get(0)
         );
     },
 
+
+    event: function() {
+        this.collection.fetch({
+            data: {
+                pid: this.model.get('pid'),
+                status: this.model.get('status'),
+                order: 'ets'
+            }
+        });
+    },
+
+
+    added: function() {
+        this.collection.fetch({
+            data: {
+                pid: this.model.get('pid'),
+                status: this.model.get('status'),
+                order: 'ts'
+            }
+        });
+    },
 
 
     appendHtml: function(collectionView, itemView, index) {
