@@ -1,34 +1,44 @@
 module.exports = function(grunt) {
     grunt.initConfig({
+        uglify: {
+            options: {
+                mangle: false,
+                compress: false,
+                sourceMap: 'javascripts/source-map.js',
+                sourceMapRoot: '/-assets/',
+                sourceMappingURL: '/-assets/javascripts/source-map.js'
+            },
+            application: {
+                files: {
+                    'javascripts/application.js' : [
+                        'javascripts/application/application.js',
+                        'javascripts/application/helpers/*.js',
+                        'javascripts/application/models/*.js',
+                        'javascripts/application/collections/*.js',
+                        'javascripts/application/views/*.js',
+                        'javascripts/application/views/**/*.js',
+                        'javascripts/application/routers/*.js'
+                    ]
+                }
+            },
+            vendor: {
+                files: {
+                    'javascripts/vendor.js' : [
+                        // Include
+                        'javascripts/vendor/underscore.js',
+                        'javascripts/vendor/jquery.js',
+                        'javascripts/vendor/*.js',
+                        'javascripts/vendor/**/*.js',
+
+                        // Exclude
+                        '!javascripts/vendor/modernizr.js'
+                    ]
+                }
+            }
+        },
+
         concat: {
-            javascriptApplication: {
-                src: [
-                    'javascripts/application/application.js',
-                    'javascripts/application/helpers/*.js',
-                    'javascripts/application/models/*.js',
-                    'javascripts/application/collections/*.js',
-                    'javascripts/application/views/*.js',
-                    'javascripts/application/views/**/*.js',
-                    'javascripts/application/routers/*.js'
-                ],
-                dest: 'javascripts/application.js'
-            },
-
-            javascriptVendor: {
-                src: [
-                    // Include
-                    'javascripts/vendor/underscore.js',
-                    'javascripts/vendor/jquery.js',
-                    'javascripts/vendor/*.js',
-                    'javascripts/vendor/**/*.js',
-
-                    // Exclude
-                    '!javascripts/vendor/modernizr.js'
-                ],
-                dest: 'javascripts/vendor.js'
-            },
-
-            stylesheetVendor: {
+            stylesheet: {
                 src: [
                     'stylesheets/vendor/*.css',
                     'stylesheets/vendor/**/*.css'
@@ -54,6 +64,7 @@ module.exports = function(grunt) {
 
             dist: {
                 options: {
+                    compass: true,
                     fontsDir: 'fonts/',
                     imagesDir: 'images/',
                     cssDir: 'stylesheets/',
@@ -67,16 +78,21 @@ module.exports = function(grunt) {
 
 
         watch: {
-            js: {
+            javascriptApplication: {
                 files: [
                     'javascripts/application/**/**/*.js',
-                    'javascripts/application/**/*.js',
+                    'javascripts/application/**/*.js'
+                ],
+                tasks: 'uglify:application'
+            },
+            javascriptVendor: {
+                files: [
                     'javascripts/vendor/**/*.js',
                     'javascripts/vendor/*.js'
                 ],
-                tasks: 'concat'
+                tasks: 'uglify:vendor'
             },
-            compass: {
+            stylesheets: {
                 files: [
                     'stylesheets/scss/*.scss',
 

@@ -14,7 +14,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     initialize: function (options) {
-
         var self = this;
 
         // Scroller events
@@ -34,6 +33,8 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     bindScroller: function () {
+        var self = this;
+
         if (this.iscroll) {
             this.iscroll.destroy();
         }
@@ -47,7 +48,10 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         this.iscroll = new iScroll($scroller.get(0), {
             momentum: true,
             hScrollbar: false,
-            vScroll: true
+            vScroll: true,
+            onScrollEnd: function() {
+                _.bind(self.infiniteScroll, self, this)();
+            }
         });
 
         return this;
@@ -60,8 +64,54 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         clearTimeout(this.timeout);
 
         this.timeout = setTimeout(function(){
-            self.scroller.refresh();
-        }, jQuery.fx.speeds.slow);
+            self.iscroll.refresh();
+        }, jQuery.fx.speeds.slow + 250);
+    },
+
+
+    infiniteScroll: function(event) {
+        var self = this;
+
+
+        clearTimeout(self.infiniteScrollReference);
+
+        self.infiniteScrollLoading = false;
+        self.infiniteScrollReference = setTimeout(function(){
+            if (self.infiniteScrollLoading === true) {
+                return;
+            }
+
+            if (Math.abs(event.y) < Math.abs(event.maxScrollY + 100)) {
+                return;
+            }
+
+            var data = {
+                pid: self.model.get('pid'),
+                status: self.model.get('status'),
+                order: 'ets',
+                count: 2500
+            };
+
+            // TODO: Conditionally set tend/tstart
+            if (self.model.get('order') === 'ets') {
+                data.tend = moment(
+                    self.collection.last().get('ets')
+                ).unix() - 1;
+            } else {
+                data.tend = moment(
+                    self.collection.last().get('ts')
+                ).unix() - 1;
+            }
+
+
+            self.infiniteScrollLoading = true;
+
+            self.collection.fetch({
+                data: data
+            }).done(function(){
+                self.infiniteScrollLoading = false;
+            });
+        }, 150);
     },
 
 
@@ -122,22 +172,28 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     event: function() {
+        this.model.set('order', 'ets');
+
+        this.collection.order = 'ets';
         this.collection.fetch({
             data: {
                 pid: this.model.get('pid'),
                 status: this.model.get('status'),
-                order: 'ets'
+                order: this.model.get('order')
             }
         });
     },
 
 
     added: function() {
+        this.model.set('order', 'ts');
+
+        this.collection.order = 'ts';
         this.collection.fetch({
             data: {
                 pid: this.model.get('pid'),
                 status: this.model.get('status'),
-                order: 'ts'
+                order: this.model.get('order')
             }
         });
     },
@@ -160,11 +216,8 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     buildItemView: function(item, ItemViewType, itemViewOptions) {
-        if (this.model.get('status') === 'p') {
-            item.set('action', 'promote');
-        } else {
-            item.set('action', 'demote');
-        }
+        item.set('status', this.model.get('status'));
+        item.set('order', this.model.get('order'));
 
         return new Application.View.Item({
             model: item

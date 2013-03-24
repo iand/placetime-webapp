@@ -146,8 +146,13 @@
                     </p>
                     <p class="time pull-left">
                         <a class="main-hiddenlink fancymodal fancybox.iframe" href="<%= link %>">
-                            <i class="icon-time"></i> added:
-                            <span class="timestamp"><%= fromnow %></span>
+                            <% if (order === 'ets') { %>
+                                <i class="icon-time"></i> added:
+                                <span class="timestamp"><%= moment(ets).fromNow() %></span>
+                            <% } else { %>
+                                <i class="icon-time"></i> added:
+                                <span class="timestamp"><%= moment(ts).fromNow() %></span>
+                            <% } %>
                         </a>
                     </p>
                     <p class="link pull-left">
@@ -156,7 +161,7 @@
                         </a>
                     </p>
 
-                    <% if (action === 'demote') { %>
+                    <% if (status === 'm') { %>
                         <a class="button demote">
                             <i class="icon-remove"></i>
                         </a>
