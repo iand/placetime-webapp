@@ -12,6 +12,7 @@ Application.View.Timeline = Marionette.ItemView.extend({
             var timeline = new Application.View.Items({
                 model: new Backbone.Model({
                     status: 'p',
+                    order: 'ts',
                     pid: this.options.pid
                 }),
                 collection: this.options.publicItems
@@ -25,6 +26,7 @@ Application.View.Timeline = Marionette.ItemView.extend({
             var timeline = new Application.View.Items({
                 model: new Backbone.Model({
                     status: 'm',
+                    order: 'ts',
                     pid: this.options.pid
                 }),
                 collection: this.options.privateItems

@@ -83,14 +83,14 @@ module.exports = function(grunt) {
                     'javascripts/application/**/**/*.js',
                     'javascripts/application/**/*.js'
                 ],
-                tasks: 'uglify:application'
+                tasks: ['uglify:application']
             },
             javascriptVendor: {
                 files: [
                     'javascripts/vendor/**/*.js',
                     'javascripts/vendor/*.js'
                 ],
-                tasks: 'uglify:vendor'
+                tasks: ['uglify:vendor']
             },
             stylesheets: {
                 files: [

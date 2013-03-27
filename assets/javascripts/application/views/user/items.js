@@ -75,21 +75,20 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
         clearTimeout(self.infiniteScrollReference);
 
-        self.infiniteScrollLoading = false;
         self.infiniteScrollReference = setTimeout(function(){
             if (self.infiniteScrollLoading === true) {
                 return;
             }
 
-            if (Math.abs(event.y) < Math.abs(event.maxScrollY + 100)) {
+            if (Math.abs(event.y) < Math.abs(event.maxScrollY + (140 * 2))) {
                 return;
             }
 
             var data = {
                 pid: self.model.get('pid'),
                 status: self.model.get('status'),
-                order: 'ets',
-                count: 2500
+                order: self.model.get('order'),
+                count: 5
             };
 
             // TODO: Conditionally set tend/tstart
@@ -100,7 +99,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             } else {
                 data.tend = moment(
                     self.collection.last().get('ts')
-                ).unix() - 1;
+                ).unix() + 1;
             }
 
 
