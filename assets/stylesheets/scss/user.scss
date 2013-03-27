@@ -121,6 +121,7 @@ a {
 }
 
 .timeline {
+    position: relative;
     padding: 0 3px;
 
     .header {
@@ -213,6 +214,10 @@ a {
                 background-color: #999;
             }
 
+            &.now {
+                background-color: #ff6600;
+            }
+
             .username {
                 font-size: 14px;
                 color: #ddd;
@@ -295,6 +300,34 @@ a {
                 padding: 6px 9px 5px 10px;
             }
         }
+    }
+
+    .needle {
+        border-top: 1px solid #ff6600;
+        border-bottom: 1px solid #ffffff;
+        position: absolute;
+        top: 200px;
+        height: 1px;
+        width: 99%;
+
+        .date {
+            @include border-radius(5px);
+
+            color: #ff6600;
+            height: 16px;
+            position: absolute;
+            text-align: right;
+            top: -10px;
+            width: 50px;
+        }
+    }
+
+    &.public .needle .date {
+        left: -55px;;
+    }
+
+    &.private .needle .date {
+        right: -55px
     }
 }
 

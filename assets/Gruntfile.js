@@ -99,7 +99,7 @@ module.exports = function(grunt) {
                     'stylesheets/vendor/*.css',
                     'stylesheets/vendor/**/*.css'
                 ],
-                tasks: ['compass', 'concat']
+                tasks: ['compass:dev', 'concat']
             }
         }
     });

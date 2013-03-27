@@ -2,8 +2,32 @@ Application.Collection.Items = Backbone.Collection.extend({
     model: Application.Model.Item,
     url: '/-jtl',
 
+
     initialize: function(collection, options) {
-        this.order = options.order;
+        this.options = options;
+    },
+
+
+    fetch: function(options) {
+        options.data = _.extend(this.options, options.data);
+
+        // TODO: Remove falsey values
+        return Backbone.Collection.prototype.fetch.call(this, options);
+    },
+
+
+    now: function(){
+        var self = this;
+
+        var sorted = _.sortBy(this.models, function(model){
+            var diff = moment().diff(
+                model.get(self.options.order)
+            );
+
+            return Math.abs(diff);
+        });
+
+        return sorted[0];
     },
 
 

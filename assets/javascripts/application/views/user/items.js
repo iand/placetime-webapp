@@ -10,16 +10,35 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         'click .nav .ts': 'added'
     },
 
-    itemViewContainer: '.foo',
-
+    itemViewContainer: '.children',
 
     initialize: function (options) {
         var self = this;
 
         // Scroller events
-        this.on('composite:rendered', this.bindScroller);
-        this.on('after:item:added', this.refreshScroller);
-        this.on('item:removed', this.refreshScroller);
+        this.on('collection:rendered', function(){
+            setTimeout(function(){
+                self.bindScroller();
+            }, jQuery.fx.speeds.slow + 250);
+        });
+        this.on('after:item:added', function(){
+            self.scrollerTimeout = null;
+
+            clearTimeout(self.scrollerTimeout);
+
+            self.scrollerTimeout = setTimeout(function(){
+                self.refreshScroller();
+            }, jQuery.fx.speeds.slow + 250);
+        });
+        this.on('item:removed', function(){
+            self.scrollerTimeout = null;
+
+            clearTimeout(self.scrollerTimeout);
+
+            self.scrollerTimeout = setTimeout(function(){
+                self.refreshScroller();
+            }, jQuery.fx.speeds.slow + 250);
+        });
 
         // Adjust scroller height
         $(window).resize(function(){
@@ -59,13 +78,26 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     refreshScroller: function() {
+        this.iscroll.refresh();
+    },
+
+
+    resetScroller: function() {
+        var defer = $.Deferred();
+
         var self = this;
 
-        clearTimeout(this.timeout);
+        if (self.iscroll.y !== 0) {
+            self.iscroll.scrollTo(0, 0, jQuery.fx.speeds.slow);
 
-        this.timeout = setTimeout(function(){
-            self.iscroll.refresh();
-        }, jQuery.fx.speeds.slow + 250);
+            setTimeout(function(){
+                defer.resolve();
+            }, jQuery.fx.speeds.slow + 200);
+        } else {
+            defer.resolve();
+        }
+
+        return defer.promise();
     },
 
 
@@ -76,11 +108,18 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         clearTimeout(self.infiniteScrollReference);
 
         self.infiniteScrollReference = setTimeout(function(){
-            if (self.infiniteScrollLoading === true) {
+            // Don't execute if not the bottom
+            if (Math.abs(event.y) < Math.abs(event.maxScrollY + (140 * 2))) {
                 return;
             }
 
-            if (Math.abs(event.y) < Math.abs(event.maxScrollY + (140 * 2))) {
+            // Don't try again if already loading
+            if (self.infiniteScrollLoading && self.infiniteScrollLoading === true) {
+                return;
+            }
+
+            // Don't try again if it was within five seconds
+            if (self.infiniteScrollLast && self.infiniteScrollLast.diff() > -5000) {
                 return;
             }
 
@@ -91,23 +130,27 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
                 count: 5
             };
 
-            // TODO: Conditionally set tend/tstart
             if (self.model.get('order') === 'ets') {
-                data.tend = moment(
-                    self.collection.last().get('ets')
+                data.tstart = moment(
+                    self.collection.first().get('ets')
                 ).unix() - 1;
             } else {
                 data.tend = moment(
                     self.collection.last().get('ts')
-                ).unix() + 1;
+                ).unix() - 1;
             }
-
 
             self.infiniteScrollLoading = true;
 
             self.collection.fetch({
+                remove: false,
                 data: data
-            }).done(function(){
+            }).done(function(data){
+                data.forEach(function(item){
+                    console.log(item.text);
+                });
+
+                self.infiniteScrollLast    = moment();
                 self.infiniteScrollLoading = false;
             });
         }, 150);
@@ -155,13 +198,10 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     now: function() {
-        var sorted = _.sortBy(this.collection.models, function(model){
-            return Math.abs(moment().diff(model.get('ets')));
-        });
+        var now = this.collection.now();
 
-        // TODO: Don't set id on child but parent
-        var closest = this.$el.find('.item > div[data-id='+sorted[0].get('id')+']').parent();
-            closest.css('background-color', '#ff6600');
+        var closest = this.$el.find('.item[data-id='+now.get('id')+']');
+            closest.addClass('now');
 
         // Scroll to the closest element
         this.iscroll.scrollToElement(
@@ -170,30 +210,45 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    event: function() {
-        this.model.set('order', 'ets');
 
-        this.collection.order = 'ets';
-        this.collection.fetch({
-            data: {
-                pid: this.model.get('pid'),
-                status: this.model.get('status'),
-                order: this.model.get('order')
-            }
+    event: function() {
+        var self = this;
+
+        self.resetScroller().done(function(){
+            self.model.set('order', 'ets');
+
+            self.collection.order = 'ets';
+            self.collection.fetch({
+                reset: true,
+                data: {
+                    tstart: undefined,
+                    tend: undefined,
+                    pid: self.model.get('pid'),
+                    status: self.model.get('status'),
+                    order: self.model.get('order')
+                }
+            });
         });
     },
 
 
     added: function() {
-        this.model.set('order', 'ts');
+        var self = this;
 
-        this.collection.order = 'ts';
-        this.collection.fetch({
-            data: {
-                pid: this.model.get('pid'),
-                status: this.model.get('status'),
-                order: this.model.get('order')
-            }
+        self.resetScroller().done(function(){
+            self.model.set('order', 'ts');
+
+            self.collection.order = 'ts';
+            self.collection.fetch({
+                reset: true,
+                data: {
+                    tstart: undefined,
+                    tend: undefined,
+                    pid: self.model.get('pid'),
+                    status: self.model.get('status'),
+                    order: self.model.get('order')
+                }
+            });
         });
     },
 

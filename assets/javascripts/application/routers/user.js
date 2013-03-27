@@ -26,26 +26,24 @@ Application.Router.User = Backbone.Router.extend({
 
         check.done(function(){
             var publicItems = new Application.Collection.Items(undefined, {
-                order: 'ets'
+                order: 'ets',
+                status: 'p',
+                count: 10
             });
             var privateItems = new Application.Collection.Items(undefined, {
-                order: 'ets'
+                order: 'ets',
+                status: 'm',
+                count: 10
             });
 
             publicItems.fetch({
                 data: {
-                    status: 'p',
-                    order: 'ets',
-                    count: 10,
                     pid: session.get('pid')
                 }
             });
 
             privateItems.fetch({
                 data: {
-                    status: 'm',
-                    order: 'ets',
-                    count: 10,
                     pid: session.get('pid')
                 }
             });

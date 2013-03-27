@@ -10,9 +10,10 @@ Application.View.Timeline = Marionette.ItemView.extend({
     subviewCreators : {
         publicTimeline: function() {
             var timeline = new Application.View.Items({
+                // TODO: Ideally remove this model
                 model: new Backbone.Model({
-                    status: 'p',
-                    order: 'ts',
+                    status: this.options.publicItems.options.status,
+                    order: this.options.publicItems.options.order,
                     pid: this.options.pid
                 }),
                 collection: this.options.publicItems
@@ -24,9 +25,10 @@ Application.View.Timeline = Marionette.ItemView.extend({
 
         privateTimeline: function() {
             var timeline = new Application.View.Items({
+                // TODO: Ideally remove this model
                 model: new Backbone.Model({
-                    status: 'm',
-                    order: 'ts',
+                    status: this.options.privateItems.options.status,
+                    order: this.options.privateItems.options.order,
                     pid: this.options.pid
                 }),
                 collection: this.options.privateItems
