@@ -434,32 +434,33 @@ a {
   -o-border-radius: 5px;
   border-radius: 5px;
   color: #ff6600;
-  height: 16px;
+  font-size: 12px;
+  height: 12px;
   position: absolute;
   text-align: right;
-  top: -10px;
-  width: 50px;
+  top: -6px;
+  width: 150px;
 }
-/* line 325, scss/user.scss */
+/* line 326, scss/user.scss */
 .timeline.public .needle .date {
-  left: -55px;
+  left: -155px;
 }
-/* line 329, scss/user.scss */
+/* line 330, scss/user.scss */
 .timeline.private .needle .date {
-  right: -55px;
+  right: -155px;
 }
 
-/* line 335, scss/user.scss */
+/* line 336, scss/user.scss */
 .pull-left {
   float: left;
 }
 
-/* line 339, scss/user.scss */
+/* line 340, scss/user.scss */
 .pull-right {
   float: right;
 }
 
-/* line 344, scss/user.scss */
+/* line 345, scss/user.scss */
 [class^="icon-"],
 [class*=" icon-"] {
   -webkit-font-smoothing: inherit;

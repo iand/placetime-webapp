@@ -28,12 +28,12 @@ Application.Router.User = Backbone.Router.extend({
             var publicItems = new Application.Collection.Items(undefined, {
                 order: 'ets',
                 status: 'p',
-                count: 10
+                count: 20
             });
             var privateItems = new Application.Collection.Items(undefined, {
                 order: 'ets',
                 status: 'm',
-                count: 10
+                count: 20
             });
 
             publicItems.fetch({

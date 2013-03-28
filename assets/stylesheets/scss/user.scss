@@ -314,20 +314,21 @@ a {
             @include border-radius(5px);
 
             color: #ff6600;
-            height: 16px;
+            font-size: 12px;
+            height: 12px;
             position: absolute;
             text-align: right;
-            top: -10px;
-            width: 50px;
+            top: -6px;
+            width: 150px;
         }
     }
 
     &.public .needle .date {
-        left: -55px;;
+        left: -155px;;
     }
 
     &.private .needle .date {
-        right: -55px
+        right: -155px
     }
 }
 

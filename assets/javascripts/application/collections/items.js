@@ -11,7 +11,6 @@ Application.Collection.Items = Backbone.Collection.extend({
     fetch: function(options) {
         options.data = _.extend(this.options, options.data);
 
-        // TODO: Remove falsey values
         return Backbone.Collection.prototype.fetch.call(this, options);
     },
 

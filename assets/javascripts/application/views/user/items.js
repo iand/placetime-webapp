@@ -70,6 +70,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             vScroll: true,
             onScrollEnd: function() {
                 _.bind(self.infiniteScroll, self, this)();
+                _.bind(self.updateNeedle, self, this)();
             }
         });
 
@@ -157,6 +158,45 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
+    updateNeedle: function() {
+        var $needle = this.$el.find('.needle');
+
+
+        var offset = $needle.offset();
+
+        // Get element below needle
+        var $item = $(document.elementFromPoint(
+            offset.left,
+            offset.top + 4
+        )).closest('.item');
+
+        if ($item.length === 0) {
+            return;
+        }
+
+        // TODO: Consider storing model on $('.item').data()
+        var model = this.collection.get($item.data('id'));
+
+        // TODO: Consider adding custom method with this logic
+        var time;
+        if (model.get('order') === 'ets') {
+            time = moment(model.get('ets'));
+        } else {
+            time = moment(model.get('ts'));
+        }
+
+        if (Math.abs(time.diff()) > moment().add('months', 1).diff()) {
+            $needle.find('.date').text(
+                time.format('Do MMMM YYYY')
+            );
+        } else {
+            $needle.find('.date').text(
+                time.format('Do MMMM hh:mm A')
+            );
+        }
+    },
+
+
     addItem: function(item) {
         this.collection.add(item);
     },
@@ -223,6 +263,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
                 data: {
                     tstart: undefined,
                     tend: undefined,
+                    count: 20,
                     pid: self.model.get('pid'),
                     status: self.model.get('status'),
                     order: self.model.get('order')
@@ -244,6 +285,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
                 data: {
                     tstart: undefined,
                     tend: undefined,
+                    count: 20,
                     pid: self.model.get('pid'),
                     status: self.model.get('status'),
                     order: self.model.get('order')
