@@ -120,7 +120,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             }
 
             // Don't try again if it was within five seconds
-            if (self.infiniteScrollLast && self.infiniteScrollLast.diff() > -5000) {
+            if (self.infiniteScrollLast && self.infiniteScrollLast.diff() > -2500) {
                 return;
             }
 
@@ -147,6 +147,10 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
                 remove: false,
                 data: data
             }).done(function(data){
+                if (data.length === 0) {
+                    self.showLoadMore();
+                }
+
                 data.forEach(function(item){
                     console.log(item.text);
                 });
@@ -236,7 +240,8 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-
+    // TODO: Consider moving now, event, added to separate view and use
+    // events to communicate
     now: function() {
         var now = this.collection.now();
 
@@ -295,7 +300,17 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
+    showLoadMore: function() {
+
+    },
+
+    hideLoadMore: function() {
+
+    },
+
+
     appendHtml: function(collectionView, itemView, index) {
+        // TODO: Abstract into own method
         var itemViewContainer;
         if (collectionView.itemViewContainer) {
             itemViewContainer = collectionView.$(collectionView.itemViewContainer);
@@ -309,7 +324,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             itemViewContainer.children().eq(index).before(itemView.el);
         }
     },
-
 
     buildItemView: function(item, ItemViewType, itemViewOptions) {
         item.set('status', this.model.get('status'));

@@ -18,14 +18,14 @@ Backbone.Wreqr = (function(Backbone, Marionette, _){
 
 Wreqr.Handlers = (function(Backbone, _){
   "use strict";
-
+  
   // Constructor
   // -----------
 
   var Handlers = function(options){
     this.options = options;
     this._wreqrHandlers = {};
-
+    
     if (_.isFunction(this.initialize)){
       this.initialize(options);
     }
@@ -131,7 +131,7 @@ Wreqr.CommandStorage = (function(){
 
         // build the configuration
         commands = {
-          command: commandName,
+          command: commandName, 
           instances: []
         };
 
