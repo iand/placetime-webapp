@@ -437,30 +437,51 @@ a {
   font-size: 12px;
   height: 12px;
   position: absolute;
-  text-align: right;
   top: -6px;
   width: 150px;
 }
-/* line 326, scss/user.scss */
+/* line 325, scss/user.scss */
 .timeline.public .needle .date {
   left: -155px;
+  text-align: right;
 }
 /* line 330, scss/user.scss */
 .timeline.private .needle .date {
   right: -155px;
+  text-align: left;
+}
+/* line 337, scss/user.scss */
+.timeline .load-more,
+.timeline .no-results {
+  -webkit-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
+  background-color: #ff6600;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 12px;
+  margin-bottom: 10px;
+  padding-top: 5px;
+  height: 20px;
+  text-align: center;
+  width: 100%;
+}
+/* line 353, scss/user.scss */
+.timeline .load-more {
+  cursor: pointer;
 }
 
-/* line 336, scss/user.scss */
+/* line 359, scss/user.scss */
 .pull-left {
   float: left;
 }
 
-/* line 340, scss/user.scss */
+/* line 363, scss/user.scss */
 .pull-right {
   float: right;
 }
 
-/* line 345, scss/user.scss */
+/* line 368, scss/user.scss */
 [class^="icon-"],
 [class*=" icon-"] {
   -webkit-font-smoothing: inherit;

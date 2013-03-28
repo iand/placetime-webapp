@@ -124,36 +124,13 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
                 return;
             }
 
-            var data = {
-                pid: self.model.get('pid'),
-                status: self.model.get('status'),
-                order: self.model.get('order'),
-                count: 5
-            };
-
-            if (self.model.get('order') === 'ets') {
-                data.tstart = moment(
-                    self.collection.first().get('ets')
-                ).unix() - 1;
-            } else {
-                data.tend = moment(
-                    self.collection.last().get('ts')
-                ).unix() - 1;
-            }
-
             self.infiniteScrollLoading = true;
 
-            self.collection.fetch({
-                remove: false,
-                data: data
-            }).done(function(data){
+            self.loadMore().done(function(data){
                 if (data.length === 0) {
-                    self.showLoadMore();
+                    self.showNoResults();
+                    self.refreshScroller();
                 }
-
-                data.forEach(function(item){
-                    console.log(item.text);
-                });
 
                 self.infiniteScrollLast    = moment();
                 self.infiniteScrollLoading = false;
@@ -178,16 +155,9 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             return;
         }
 
-        // TODO: Consider storing model on $('.item').data()
-        var model = this.collection.get($item.data('id'));
+        var model = $item.data('model');
 
-        // TODO: Consider adding custom method with this logic
-        var time;
-        if (model.get('order') === 'ets') {
-            time = moment(model.get('ets'));
-        } else {
-            time = moment(model.get('ts'));
-        }
+        var time = model.time();
 
         if (Math.abs(time.diff()) > moment().add('months', 1).diff()) {
             $needle.find('.date').text(
@@ -300,8 +270,33 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    showLoadMore: function() {
+    showNoResults: function() {
+        var itemViewContainer = this.getItemViewContainer(this);
 
+        if (itemViewContainer.find('.no-results').length > 0) {
+            return;
+        }
+
+        var noResults = new Application.View.NoResults();
+            noResults.render();
+
+        itemViewContainer.append(noResults.el);
+    },
+
+
+    showLoadMore: function() {
+        var itemViewContainer = this.getItemViewContainer(this);
+
+        if (itemViewContainer.find('.load-more').length > 0) {
+            return;
+        }
+
+        var loadMore = new Application.View.LoadMore();
+            loadMore.render();
+
+        this.listenTo(loadMore, 'loadmore', this.loadMore);
+
+        itemViewContainer.append(loadMore.el);
     },
 
     hideLoadMore: function() {
@@ -309,14 +304,35 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    appendHtml: function(collectionView, itemView, index) {
-        // TODO: Abstract into own method
-        var itemViewContainer;
-        if (collectionView.itemViewContainer) {
-            itemViewContainer = collectionView.$(collectionView.itemViewContainer);
+    loadMore: function(){
+        var self = this;
+
+        var data = {
+            pid: self.model.get('pid'),
+            status: self.model.get('status'),
+            order: self.model.get('order'),
+            count: 5
+        };
+
+        if (self.model.get('order') === 'ets') {
+            data.tstart = moment(
+                self.collection.first().get('ets')
+            ).unix() - 1;
         } else {
-            itemViewContainer = collectionView.$el;
+            data.tend = moment(
+                self.collection.last().get('ts')
+            ).unix() - 1;
         }
+
+        return self.collection.fetch({
+            remove: false,
+            data: data
+        });
+    },
+
+
+    appendHtml: function(collectionView, itemView, index) {
+        var itemViewContainer = this.getItemViewContainer(collectionView);
 
         if (itemViewContainer.children().size() <= index) {
             itemViewContainer.append(itemView.el);

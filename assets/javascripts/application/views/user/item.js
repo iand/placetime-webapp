@@ -7,7 +7,6 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
             return {};
         }
 
-
         return {
             'data-id': this.model.get('id'),
             'style': 'background-image: url(/-img/' + this.model.get('id') + '.jpg)'
@@ -27,6 +26,7 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
 
 
     onRender: function() {
+        this.$el.data('model', this.model);
         this.$el.animate({
             height: 140,
             opacity: 1,

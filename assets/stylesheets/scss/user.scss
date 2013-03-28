@@ -317,18 +317,41 @@ a {
             font-size: 12px;
             height: 12px;
             position: absolute;
-            text-align: right;
             top: -6px;
             width: 150px;
         }
     }
 
     &.public .needle .date {
-        left: -155px;;
+        left: -155px;
+        text-align: right;
     }
 
     &.private .needle .date {
-        right: -155px
+        right: -155px;
+        text-align: left;
+    }
+
+
+    .load-more,
+    .no-results {
+        @include single-box-shadow(
+            rgba(0, 0, 0, 0.25), 0px 2px 2px
+        );
+
+        background-color: #ff6600;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 12px;
+        margin-bottom: 10px;
+        padding-top: 5px;
+        height: 20px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .load-more {
+        cursor: pointer;
     }
 }
 
