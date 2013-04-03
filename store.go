@@ -5,7 +5,9 @@ import (
 	"code.google.com/p/tcgl/redis"
 	"encoding/json"
 	"fmt"
+	"log"
 	"math/rand"
+	"strconv"
 	"time"
 )
 
@@ -15,6 +17,11 @@ const (
 	FLAGGED_PROFILES     = "flaggedprofiles"
 	ITEM_ID              = "itemid"
 	MaxInt               = int(^uint(0) >> 1)
+
+	ORDERING_TS  = "ts"
+	ORDERING_ETS = "ets"
+
+	EVENTED_ITEM_PREFIX = '+'
 )
 
 var (
@@ -40,11 +47,17 @@ type RedisStore struct {
 }
 
 func itemScore(t time.Time) float64 {
-	return float64(t.Unix())
+	return float64(t.UnixNano())
+}
+
+func eventedItemScore(t time.Time, ets time.Time) float64 {
+
+	nanos := t.UnixNano() - 1000000000*(t.UnixNano()/1000000000)
+	return float64(ets.Unix()*1000000000 + nanos)
 }
 
 func followerScore(t time.Time) float64 {
-	return float64(t.Unix())
+	return float64(t.UnixNano())
 }
 
 func profileKey(pid string) string {
@@ -161,12 +174,12 @@ func (s *RedisStore) Profile(pid string) (*Profile, error) {
 		ParentPid: vals[3],
 	}
 
-	rs = s.db.Command("ZCARD", possiblyKey(pid, "ts"))
+	rs = s.db.Command("ZCARD", possiblyKey(pid, ORDERING_TS))
 	if rs.IsOK() {
 		p.PossiblyCount, _ = rs.ValueAsInt()
 	}
 
-	rs = s.db.Command("ZCARD", maybeKey(pid, "ts"))
+	rs = s.db.Command("ZCARD", maybeKey(pid, ORDERING_TS))
 	if rs.IsOK() {
 		p.MaybeCount, _ = rs.ValueAsInt()
 	}
@@ -190,12 +203,13 @@ func (s *RedisStore) Profile(pid string) (*Profile, error) {
 }
 
 func (s *RedisStore) AddProfile(pid string, password string, pname string, bio string, feedurl string, parentpid string) error {
-	pwdhash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.MaxCost)
+	pwdhash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return err
 	}
 
 	rs := s.db.Command("HMSET", profileKey(pid), "name", pname, "bio", bio, "feedurl", feedurl, "pwdhash", pwdhash, "parentpid", parentpid)
+
 	if !rs.IsOK() {
 		return rs.Error()
 	}
@@ -248,22 +262,22 @@ func (s *RedisStore) RemoveProfile(pid string) error {
 		return err
 	}
 
-	rs := s.db.Command("DEL", possiblyKey(pid, "ts"))
+	rs := s.db.Command("DEL", possiblyKey(pid, ORDERING_TS))
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
-	rs = s.db.Command("DEL", possiblyKey(pid, "ets"))
+	rs = s.db.Command("DEL", possiblyKey(pid, ORDERING_ETS))
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
-	rs = s.db.Command("DEL", maybeKey(pid, "ts"))
+	rs = s.db.Command("DEL", maybeKey(pid, ORDERING_TS))
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
-	rs = s.db.Command("DEL", maybeKey(pid, "ets"))
+	rs = s.db.Command("DEL", maybeKey(pid, ORDERING_ETS))
 	if !rs.IsOK() {
 		return rs.Error()
 	}
@@ -366,36 +380,70 @@ func (s *RedisStore) FeedDrivenProfiles() ([]*Profile, error) {
 	return profiles, nil
 }
 
-func (s *RedisStore) Timeline(pid string, status string, ordering string, tstart time.Time, tend time.Time, limit int) ([]*FormattedItem, error) {
+func (s *RedisStore) TimelineRange(pid string, status string, ts time.Time, before int, after int) ([]*FormattedItem, error) {
 
-	scoreStart := itemScore(tstart)
-	scoreEnd := itemScore(tend)
+	score := itemScore(ts)
 
 	var key string
 	if status == "p" {
-		key = possiblyKey(pid, ordering)
+		key = possiblyKey(pid, "ts")
 	} else {
-		key = maybeKey(pid, ordering)
+		key = maybeKey(pid, "ts")
 	}
 
-	rs := s.db.Command("ZREVRANGEBYSCORE", key, scoreEnd, scoreStart, "LIMIT", 0, limit)
+	// log.Print("ZRANGEBYSCORE", " ", key, " ", score, " ", "+Inf", " ", "WITHSCORES", " ", "LIMIT", " ", 0, " ", after+1)
+	rs := s.db.Command("ZRANGEBYSCORE", key, score, "+Inf", "WITHSCORES", "LIMIT", 0, after+1)
 	if !rs.IsOK() {
 		return nil, rs.Error()
 	}
 
 	vals := rs.ValuesAsStrings()
 
-	itemkeys := make([]interface{}, len(vals))
-	for index, val := range vals {
-		itemkeys[index] = val
+	itemkeys := make([]string, len(vals))
+	for i := 0; i < len(vals); i += 2 {
+		itemkeys[len(vals)-i-2] = vals[i]
+		itemkeys[len(vals)-i-1] = vals[i+1]
+
+	}
+
+	if before > 0 {
+
+		// Don't include duplicate item
+		delim := ""
+		if len(vals) > 0 {
+			delim = "("
+		}
+		formattedScore := fmt.Sprintf("%s%f", delim, score)
+
+		// log.Print("ZREVRANGEBYSCORE", " ", key, " ", formattedScore, " ", "-Inf", " ", "WITHSCORES", " ", "LIMIT", " ", 0, " ", before)
+		rs := s.db.Command("ZREVRANGEBYSCORE", key, formattedScore, "-Inf", "WITHSCORES", "LIMIT", 0, before)
+		if !rs.IsOK() {
+			return nil, rs.Error()
+		}
+
+		vals := rs.ValuesAsStrings()
+		for i := 0; i < len(vals); i += 2 {
+			itemkeys = append(itemkeys, vals[i])
+			itemkeys = append(itemkeys, vals[i+1])
+		}
+
 	}
 
 	items := make([]*FormattedItem, 0)
 
-	if len(itemkeys) > 0 {
-		rs = s.db.Command("MGET", itemkeys...)
+	for ik := 0; ik < len(itemkeys); ik += 2 {
+
+		key := itemkeys[ik]
+		score := itemkeys[ik+1]
+
+		if key[0] == EVENTED_ITEM_PREFIX {
+			key = key[1:]
+		}
+
+		rs = s.db.Command("GET", key)
 		if !rs.IsOK() {
-			return nil, rs.Error()
+			log.Printf("Could not get key %s from db: %s", key, rs.Error().Error())
+			continue
 		}
 
 		item_infos := rs.ValuesAsStrings()
@@ -404,15 +452,23 @@ func (s *RedisStore) Timeline(pid string, status string, ordering string, tstart
 
 			_ = json.Unmarshal([]byte(item_info), item)
 
-			if ordering == "ets" {
-				item.Date = item.Ets.Format("Jan 2006")
-				item.Time = item.Ets.Format("Mon _2 15:04")
-				item.Ms = item.Ets.UnixNano() / 1000000
-			} else {
-				item.Date = item.Ts.Format("Jan 2006")
-				item.Time = item.Ts.Format("Mon _2 15:04")
-				item.Ms = item.Ts.UnixNano() / 1000000
+			f, err := strconv.ParseFloat(score, 64)
+			if err != nil {
+				log.Printf("Could not parse score from db as float: %s", err.Error())
+				continue
+
 			}
+
+			item.Ts = int64(f)
+			// if ordering == ORDERING_ETS {
+			// 	item.Date = item.Ets.Format("Jan 2006")
+			// 	item.Time = item.Ets.Format("Mon _2 15:04")
+			// 	item.Ms = item.Ets.UnixNano() / 1000000
+			// } else {
+			// item.Date = item.Ts.Format("Jan 2006")
+			// item.Time = item.Ts.Format("Mon _2 15:04")
+			// item.Ms = item.Ts.UnixNano() / 1000000
+			// }
 
 			items = append(items, item)
 		}
@@ -451,15 +507,20 @@ func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string
 	if exists, _ := s.ItemExists(itemid); exists {
 		return itemKey, nil
 	}
-	ts := time.Now()
+	tsnano := time.Now().UnixNano()
+
+	// Fake the precision for event time
+	nanos := tsnano - 1000000000*(tsnano/1000000000)
+	etsnano := ets.Unix()*1000000000 + nanos
+
 	item := &Item{
 
-		Id:   itemid,
-		Text: text,
-		Link: link,
-		Pid:  pid,
-		Ts:   ts,
-		Ets:  ets,
+		Id:    itemid,
+		Text:  text,
+		Link:  link,
+		Pid:   pid,
+		Added: tsnano,
+		Event: etsnano,
 	}
 
 	json, err := json.Marshal(item)
@@ -472,12 +533,12 @@ func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string
 		return "", rs.Error()
 	}
 
-	rs = s.db.Command("ZADD", maybeKey(pid, "ts"), itemScore(ts), itemKey)
+	rs = s.db.Command("ZADD", maybeKey(pid, ORDERING_TS), item.Added, itemKey)
 	if !rs.IsOK() {
 		return itemKey, rs.Error()
 	}
 
-	rs = s.db.Command("ZADD", maybeKey(pid, "ets"), itemScore(ets), itemKey)
+	rs = s.db.Command("ZADD", maybeKey(pid, ORDERING_TS), item.Event, fmt.Sprintf("%c%s", EVENTED_ITEM_PREFIX, itemKey))
 	if !rs.IsOK() {
 		return itemKey, rs.Error()
 	}
@@ -488,15 +549,16 @@ func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string
 	}
 
 	for _, followerpid := range rs.ValuesAsStrings() {
-		rs = s.db.Command("ZADD", possiblyKey(followerpid, "ts"), itemScore(ts), itemKey)
+		rs = s.db.Command("ZADD", possiblyKey(followerpid, ORDERING_TS), item.Added, itemKey)
 		if !rs.IsOK() {
 			return itemKey, rs.Error()
 		}
 
-		rs = s.db.Command("ZADD", possiblyKey(followerpid, "ets"), itemScore(ets), itemKey)
+		rs = s.db.Command("ZADD", possiblyKey(followerpid, ORDERING_TS), item.Event, fmt.Sprintf("%c%s", EVENTED_ITEM_PREFIX, itemKey))
 		if !rs.IsOK() {
 			return itemKey, rs.Error()
 		}
+
 	}
 
 	if item.Link != "" && item.Image == "" {
@@ -536,12 +598,12 @@ func (s *RedisStore) UpdateItem(item *Item) error {
 }
 
 func (s *RedisStore) DeleteMaybeItems(pid string) error {
-	rs := s.db.Command("DEL", maybeKey(pid, "ts"))
+	rs := s.db.Command("DEL", maybeKey(pid, ORDERING_TS))
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
-	rs = s.db.Command("DEL", maybeKey(pid, "ets"))
+	rs = s.db.Command("DEL", maybeKey(pid, ORDERING_ETS))
 	if !rs.IsOK() {
 		return rs.Error()
 	}
@@ -570,16 +632,16 @@ func (s *RedisStore) Follow(pid string, followpid string) error {
 		return rs.Error()
 	}
 
-	poss_ts := possiblyKey(pid, "ts")
-	maybe_ts := maybeKey(followpid, "ts")
+	poss_ts := possiblyKey(pid, ORDERING_TS)
+	maybe_ts := maybeKey(followpid, ORDERING_TS)
 
 	rs = s.db.Command("ZUNIONSTORE", poss_ts, 2, poss_ts, maybe_ts, "WEIGHTS", 1.0, 1.0, "AGGREGATE", "MAX")
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
-	poss_ets := possiblyKey(pid, "ets")
-	maybe_ets := maybeKey(followpid, "ets")
+	poss_ets := possiblyKey(pid, ORDERING_ETS)
+	maybe_ets := maybeKey(followpid, ORDERING_ETS)
 
 	rs = s.db.Command("ZUNIONSTORE", poss_ets, 2, poss_ets, maybe_ets, "WEIGHTS", 1.0, 1.0, "AGGREGATE", "MAX")
 	if !rs.IsOK() {
@@ -601,13 +663,13 @@ func (s *RedisStore) Unfollow(pid string, followpid string) error {
 		return rs.Error()
 	}
 
-	rs = s.db.Command("ZRANGE", maybeKey(followpid, "ts"), 0, MaxInt)
+	rs = s.db.Command("ZRANGE", maybeKey(followpid, ORDERING_TS), 0, MaxInt)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
-	poss_ts := possiblyKey(pid, "ts")
-	poss_ets := possiblyKey(pid, "ets")
+	poss_ts := possiblyKey(pid, ORDERING_TS)
+	poss_ets := possiblyKey(pid, ORDERING_ETS)
 	items := rs.ValuesAsStrings()
 	for _, item := range items {
 		s.db.Command("ZREM", poss_ts, item)
@@ -620,7 +682,7 @@ func (s *RedisStore) Unfollow(pid string, followpid string) error {
 func (s *RedisStore) Promote(pid string, id string) error {
 
 	// TODO: abort if item is not in possibly timeline
-	poss_ts := possiblyKey(pid, "ts")
+	poss_ts := possiblyKey(pid, ORDERING_TS)
 
 	itemKey := itemKey(id)
 
@@ -631,7 +693,7 @@ func (s *RedisStore) Promote(pid string, id string) error {
 
 	score_ts, _ := rs.Value().Float64()
 
-	poss_ets := possiblyKey(pid, "ets")
+	poss_ets := possiblyKey(pid, ORDERING_ETS)
 	rs = s.db.Command("ZSCORE", poss_ets, itemKey)
 	if !rs.IsOK() {
 		return rs.Error()
@@ -649,8 +711,8 @@ func (s *RedisStore) Promote(pid string, id string) error {
 		return rs.Error()
 	}
 
-	maybe_ts := maybeKey(pid, "ts")
-	maybe_ets := maybeKey(pid, "ets")
+	maybe_ts := maybeKey(pid, ORDERING_TS)
+	maybe_ets := maybeKey(pid, ORDERING_ETS)
 
 	rs = s.db.Command("ZADD", maybe_ts, score_ts, itemKey)
 	if !rs.IsOK() {
@@ -668,7 +730,7 @@ func (s *RedisStore) Promote(pid string, id string) error {
 func (s *RedisStore) Demote(pid string, id string) error {
 
 	// TODO: abort if item is not in possibly timeline
-	maybe_ts := maybeKey(pid, "ts")
+	maybe_ts := maybeKey(pid, ORDERING_TS)
 	itemKey := itemKey(id)
 
 	rs := s.db.Command("ZSCORE", maybe_ts, itemKey)
@@ -678,7 +740,7 @@ func (s *RedisStore) Demote(pid string, id string) error {
 
 	score_ts, _ := rs.Value().Float64()
 
-	maybe_ets := maybeKey(pid, "ets")
+	maybe_ets := maybeKey(pid, ORDERING_ETS)
 	rs = s.db.Command("ZSCORE", maybe_ets, itemKey)
 	if !rs.IsOK() {
 		return rs.Error()
@@ -698,8 +760,8 @@ func (s *RedisStore) Demote(pid string, id string) error {
 
 	// TODO: don't add them here if they were manually added by the user
 
-	poss_ts := possiblyKey(pid, "ts")
-	poss_ets := possiblyKey(pid, "ets")
+	poss_ts := possiblyKey(pid, ORDERING_TS)
+	poss_ets := possiblyKey(pid, ORDERING_ETS)
 
 	rs = s.db.Command("ZADD", poss_ts, score_ts, itemKey)
 	if !rs.IsOK() {

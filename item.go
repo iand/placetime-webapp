@@ -13,28 +13,26 @@ type TimelineRange struct {
 }
 
 type Item struct {
-	Id    string    `json:"id"`
-	Ts    time.Time `json:"ts"`
-	Ets   time.Time `json:"ets"`
-	Pid   string    `json:"pid"`
-	PName string    `json:"pname,omitempty"`
-	Text  string    `json:"text"`
-	Link  string    `json:"link"`
-	Media string    `json:"media"`
-	Image string    `json:"image"`
+	Id    string `json:"id"`
+	Added int64  `json:"added"`
+	Event int64  `json:"event"`
+	Pid   string `json:"pid"`
+	PName string `json:"pname,omitempty"`
+	Text  string `json:"text"`
+	Link  string `json:"link"`
+	Media string `json:"media"`
+	Image string `json:"image"`
 }
 
 type FormattedItem struct {
-	Id    string    `json:"id"`
-	Ts    time.Time `json:"ts"`
-	Ets   time.Time `json:"ets"`
-	Pid   string    `json:"pid"`
-	PName string    `json:"pname,omitempty"`
-	Text  string    `json:"text"`
-	Link  string    `json:"link"`
-	Media string    `json:"media"`
-	Date  string    `json:"date"`
-	Time  string    `json:"time"`
-	Ms    int64     `json:"ms"`
-	Image string    `json:"image"`
+	Id    string `json:"id"`
+	Ts    int64  `json:"ts"`
+	Added int64  `json:"added"`
+	Event int64  `json:"event"`
+	Pid   string `json:"pid"`
+	PName string `json:"pname,omitempty"`
+	Text  string `json:"text"`
+	Link  string `json:"link"`
+	Media string `json:"media"`
+	Image string `json:"image"`
 }

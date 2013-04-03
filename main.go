@@ -57,7 +57,7 @@ func main() {
 	r.PathPrefix("/2003").HandlerFunc(vocabRedirectHandler).Methods("GET", "HEAD")
 	r.PathPrefix("/2008").HandlerFunc(vocabRedirectHandler).Methods("GET", "HEAD")
 
-	r.HandleFunc("/", vocabRedirectHandler).Methods("GET", "HEAD")
+	r.HandleFunc("/", timelineHandler).Methods("GET", "HEAD")
 
 	r.HandleFunc("/timeline", timelineHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-init", initHandler).Methods("GET", "HEAD")
@@ -189,51 +189,31 @@ func jsonTimelineHandler(w http.ResponseWriter, r *http.Request) {
 		statusParam = "p"
 	}
 
-	orderParam := r.FormValue("order")
-	if orderParam != "ets" {
-		orderParam = "ts"
+	beforeParam := r.FormValue("before")
+	before, err := strconv.ParseInt(beforeParam, 10, 0)
+	if err != nil {
+		before = 0
 	}
 
-	countParam := r.FormValue("count")
-	count, err := strconv.ParseInt(countParam, 10, 0)
+	afterParam := r.FormValue("after")
+	after, err := strconv.ParseInt(afterParam, 10, 0)
 	if err != nil {
-		count = 5
+		after = 0
 	}
 
-	var tsStart, tsEnd time.Time
-	ts := time.Now()
+	var ts time.Time
 
-	tstartParam := r.FormValue("tstart")
-	tstart, err := strconv.ParseInt(tstartParam, 10, 64)
+	tsParam := r.FormValue("ts")
+	tsVal, err := strconv.ParseInt(tsParam, 10, 64)
 	if err != nil {
-		if count < 0 {
-			tsStart = ts.AddDate(-1000, 0, 0)
-		} else {
-			tsStart = ts.AddDate(-1000, 0, 0)
-		}
+		ts = time.Now()
 	} else {
-		tsStart = time.Unix(tstart, 0)
-	}
-
-	tendParam := r.FormValue("tend")
-	tend, err := strconv.ParseInt(tendParam, 10, 64)
-	if err != nil {
-		if count < 0 {
-			tsEnd = ts.Add(-time.Second)
-		} else {
-			tsEnd = ts.AddDate(1000, 0, 0)
-		}
-	} else {
-		tsEnd = time.Unix(tend, 0)
-	}
-
-	if count < 0 {
-		count = -count
+		ts = time.Unix(0, tsVal)
 	}
 
 	s := NewRedisStore()
 	defer s.Close()
-	tl, err := s.Timeline(pidParam, statusParam, orderParam, tsStart, tsEnd, int(count))
+	tl, err := s.TimelineRange(pidParam, statusParam, ts, int(before), int(after))
 	if err != nil {
 		ErrorResponse(w, r, err)
 		return
@@ -458,6 +438,7 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 	s := NewRedisStore()
 	defer s.Close()
 
+	log.Print("Resetting database")
 	s.ResetAll()
 
 	// s.AddProfile("ukfestivals", "sunshine", "UK Festivals", "Every musical festival in the UK.", "", "")
@@ -489,16 +470,20 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 	// 	s.AddItem("testdata", date.Format("02 Jan 2006"), fmt.Sprintf("Test data, item number %d", i), fmt.Sprintf("http://example.com/%d", i)))
 	// }
 
+	log.Print("Adding profile for iand")
 	s.AddProfile("iand", "sunshine", "Ian", "Timefloes.", "", "")
 
+	log.Print("Adding profile for daveg")
 	s.AddProfile("daveg", "sunshine", "Dave", "", "", "")
 
 	s.AddSuggestedProfile("iand", "london")
 
 	//s.Follow("iand", "nasa")
 
+	log.Print("Adding profile for nasa")
 	s.AddProfile("nasa", "nasa", "Nasa Missions", "Upcoming NASA mission information.", "", "")
 
+	log.Print("Adding items for nasa")
 	s.AddItem("nasa", parseKnownTime("1 Jan 2015"), "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "", "", "")
 	s.AddItem("nasa", parseKnownTime("26 Aug 2012"), "Dawn - Leaves asteroid Vesta, heads for asteroid 1 Ceres", "", "", "")
 	s.AddItem("nasa", parseKnownTime("1 Sep 2012"), "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "", "", "")
@@ -527,9 +512,16 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 	// s.AddProfile("wellcomecollection", "sunshine", "Free events in London - Wellcome Collection", "", "http://www.wellcomecollection.org/feeds/events.aspx", "")
 	// s.AddProfile("indymedia", "sunshine", "Indymedia London | Events | Index", "", "http://london.indymedia.org/events.rss", "")
 
+	log.Print("Adding profile for visitlondon")
 	s.AddProfile("visitlondon", "sunshine", "visitlondon.com", "", "", "")
+
+	log.Print("Adding feed profile for londonsportsguide")
 	s.AddProfile("londonsportsguide", "sunshine", "Football in London - visitlondon.com", "", "http://feeds.visitlondon.com/LondonSportsGuide", "visitlondon")
+
+	log.Print("Adding feed profile for londonartsguide")
 	s.AddProfile("londonartsguide", "sunshine", "London Arts Guide - visitlondon.com", "", "http://feeds.visitlondon.com/LondonArtsGuide", "visitlondon")
+
+	log.Print("Adding feed profile for londondanceguide")
 	s.AddProfile("londondanceguide", "sunshine", "London Dance Guide - visitlondon.com", "", "http://feeds.visitlondon.com/LondonDanceGuide", "visitlondon")
 
 	// s.AddProfile("naturelondonscience", "sunshine", "London Blog: Science Events In London This Week : London Blog", "", "http://blogs.nature.com/london/feed", "")
@@ -552,18 +544,21 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 	// s.AddProfile("jewishmuseum", "sunshine", "What's on - The Jewish Museum London", "", "http://www.jewishmuseum.org.uk/rss", "")
 	// s.AddProfile("architecture", "sunshine", "What's on? - Royal Institute of British Architects", "", "http://www.architecture.com/syndication.riba?feed_type=Events", "")
 
+	log.Print("Adding follows for iand")
 	s.Follow("iand", "londonsportsguide")
 	s.Follow("iand", "londonartsguide")
 	s.Follow("iand", "londondanceguide")
 	s.Follow("iand", "nasa")
 	s.Follow("iand", "daveg")
 
+	log.Print("Adding follows for daveg")
 	s.Follow("daveg", "londonsportsguide")
 	s.Follow("daveg", "londonartsguide")
 	s.Follow("daveg", "londondanceguide")
 	s.Follow("daveg", "nasa")
 	s.Follow("daveg", "iand")
 
+	log.Print("Initialisation complete")
 	w.Header().Set("Content-Type", "text/plain")
 	w.Write([]byte("Initialised"))
 
@@ -1113,7 +1108,7 @@ func itemsFromFeed(pid string, feed *feedparser.Feed) []*Item {
 			hasher := md5.New()
 			io.WriteString(hasher, item.Id)
 			id := fmt.Sprintf("%x", hasher.Sum(nil))
-			items = append(items, &Item{Id: id, Pid: pid, Ets: item.When, Text: item.Title, Link: item.Link})
+			items = append(items, &Item{Id: id, Pid: pid, Event: item.When.Unix(), Text: item.Title, Link: item.Link})
 		}
 	}
 	return items
@@ -1172,7 +1167,7 @@ func updateProfileItemData(data *ProfileItemData) error {
 
 		//s.DeleteMaybeItems(p.Pid)
 		for _, item := range data.Items {
-			s.AddItem(item.Pid, item.Ets, item.Text, item.Link, item.Image, item.Id)
+			s.AddItem(item.Pid, time.Unix(item.Event, 0), item.Text, item.Link, item.Image, item.Id)
 		}
 
 		for _, f := range followers {

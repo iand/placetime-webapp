@@ -22,7 +22,7 @@ $(function(){
       }
 
       ,url: function() {
-        return '/-jtl?status=m&count=30 &pid=' + this.pid;
+        return '/-jtl?status=m&count=30&pid=' + this.pid;
       }
     });
 
