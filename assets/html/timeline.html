@@ -160,7 +160,7 @@
                         <% } else { %>
                             <i class="icon-time"></i> added:
                         <% } %>
-                        <span class="timestamp"><%= moment.unix(ts.toString().substr(0, 10)).fromNow() %></span>
+                        <span class="timestamp"><%= moment.unix(ts.toString().substr(0, 10)).format() %></span>
                     </a>
                 </p>
                 <p class="link pull-left">

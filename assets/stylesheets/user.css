@@ -293,17 +293,18 @@ a {
 }
 /* line 190, scss/user.scss */
 .timeline .scroller {
+  position: relative;
   width: 100%;
 }
-/* line 194, scss/user.scss */
+/* line 195, scss/user.scss */
 .timeline .children {
   position: relative;
 }
-/* line 198, scss/user.scss */
+/* line 199, scss/user.scss */
 .timeline .items {
   padding-top: 5px;
 }
-/* line 201, scss/user.scss */
+/* line 202, scss/user.scss */
 .timeline .items .item {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -320,64 +321,64 @@ a {
   padding: 15px;
   position: relative;
 }
-/* line 213, scss/user.scss */
+/* line 214, scss/user.scss */
 .timeline .items .item:hover {
   -webkit-box-shadow: 0px 0px 0px #aaaaaa;
   -moz-box-shadow: 0px 0px 0px #aaaaaa;
   box-shadow: 0px 0px 0px #aaaaaa;
   background-color: #999;
 }
-/* line 220, scss/user.scss */
+/* line 221, scss/user.scss */
 .timeline .items .item.now {
   background-color: #ff6600;
 }
-/* line 224, scss/user.scss */
+/* line 225, scss/user.scss */
 .timeline .items .item .username {
   font-size: 14px;
   color: #ddd;
   padding: 7px;
   margin: 0 0 0 7px;
 }
-/* line 231, scss/user.scss */
+/* line 232, scss/user.scss */
 .timeline .items .item .text {
   margin: 0;
 }
-/* line 234, scss/user.scss */
+/* line 235, scss/user.scss */
 .timeline .items .item .text a {
   color: #fff;
   font-size: 22px;
 }
-/* line 240, scss/user.scss */
+/* line 241, scss/user.scss */
 .timeline .items .item .link {
   margin: 8px 0 0;
 }
-/* line 243, scss/user.scss */
+/* line 244, scss/user.scss */
 .timeline .items .item .link a {
   font-size: 25px;
   color: #ddd;
 }
-/* line 249, scss/user.scss */
+/* line 250, scss/user.scss */
 .timeline .items .item .time {
   margin: 0;
 }
-/* line 252, scss/user.scss */
+/* line 253, scss/user.scss */
 .timeline .items .item .time a {
   color: #eee;
   font-size: 13px;
 }
-/* line 260, scss/user.scss */
+/* line 261, scss/user.scss */
 .timeline .items .item .text,
 .timeline .items .item .link,
 .timeline .items .item .time {
   width: 100%;
 }
-/* line 263, scss/user.scss */
+/* line 264, scss/user.scss */
 .timeline .items .item .text a,
 .timeline .items .item .link a,
 .timeline .items .item .time a {
   border-bottom: 0;
 }
-/* line 269, scss/user.scss */
+/* line 270, scss/user.scss */
 .timeline .items .item .promote,
 .timeline .items .item .demote {
   -webkit-border-radius: 31px;
@@ -402,25 +403,25 @@ a {
   position: absolute;
   right: 10px;
 }
-/* line 289, scss/user.scss */
+/* line 290, scss/user.scss */
 .timeline .items .item .promote:hover,
 .timeline .items .item .demote:hover {
   color: #ffffff;
 }
-/* line 293, scss/user.scss */
+/* line 294, scss/user.scss */
 .timeline .items .item .promote:active,
 .timeline .items .item .demote:active {
   color: #ff6600;
 }
-/* line 298, scss/user.scss */
+/* line 299, scss/user.scss */
 .timeline .items .item .promote {
   padding: 6px 7px 5px 8px;
 }
-/* line 302, scss/user.scss */
+/* line 303, scss/user.scss */
 .timeline .items .item .demote {
   padding: 6px 9px 5px 10px;
 }
-/* line 308, scss/user.scss */
+/* line 309, scss/user.scss */
 .timeline .needle {
   border-top: 1px solid #ff6600;
   border-bottom: 1px solid #ffffff;
@@ -429,7 +430,7 @@ a {
   height: 1px;
   width: 99%;
 }
-/* line 316, scss/user.scss */
+/* line 317, scss/user.scss */
 .timeline .needle .date {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -443,17 +444,17 @@ a {
   top: -6px;
   width: 150px;
 }
-/* line 328, scss/user.scss */
+/* line 329, scss/user.scss */
 .timeline.public .needle .date {
   left: -155px;
   text-align: right;
 }
-/* line 333, scss/user.scss */
+/* line 334, scss/user.scss */
 .timeline.private .needle .date {
   right: -155px;
   text-align: left;
 }
-/* line 340, scss/user.scss */
+/* line 341, scss/user.scss */
 .timeline .load-more,
 .timeline .no-results {
   -webkit-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
@@ -469,22 +470,22 @@ a {
   text-align: center;
   width: 100%;
 }
-/* line 356, scss/user.scss */
+/* line 357, scss/user.scss */
 .timeline .load-more {
   cursor: pointer;
 }
 
-/* line 362, scss/user.scss */
+/* line 363, scss/user.scss */
 .pull-left {
   float: left;
 }
 
-/* line 366, scss/user.scss */
+/* line 367, scss/user.scss */
 .pull-right {
   float: right;
 }
 
-/* line 371, scss/user.scss */
+/* line 372, scss/user.scss */
 [class^="icon-"],
 [class*=" icon-"] {
   -webkit-font-smoothing: inherit;

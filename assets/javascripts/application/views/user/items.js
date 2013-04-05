@@ -85,6 +85,10 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     refreshScroller: function() {
+        if (this.iscroll === undefined) {
+            return;
+        }
+
         this.iscroll.refresh();
     },
 
@@ -99,7 +103,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
             setTimeout(function(){
                 defer.resolve();
-            }, jQuery.fx.speeds.slow + 200);
+            }, jQuery.fx.speeds.slow + 250);
         } else {
             defer.resolve();
         }
@@ -233,12 +237,17 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         if (now === undefined) {
             return;
         }
+        console.log(now.get('text'), now.get('ts'));
+
+        var defer = $.Deferred();
 
         var $closest = this.$el.find('.item[data-id='+now.get('id')+']'),
             $needle  = this.$el.find('.needle');
 
-        $closest.addClass('now');
-        $needle.find('.date').text('Now');
+        defer.done(function(){
+            $closest.addClass('now');
+            $needle.find('.date').text('Now');
+        });
 
         var position = $closest.position(),
             offset   = $needle.position();
@@ -250,7 +259,11 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             jQuery.fx.speeds.slow * 2
         );
 
-        return false;
+        setTimeout(function(){
+            defer.resolve();
+        }, (jQuery.fx.speeds.slow * 2) + 250);
+
+        return defer.promise();
     },
 
 

@@ -19,10 +19,7 @@ Application.Collection.Items = Backbone.Collection.extend({
         var self = this;
 
         var sorted = _.sortBy(this.models, function(model) {
-            // Get the difference between now and the model time
-            return Math.abs(
-                moment().diff(model.time())
-            );
+            return model.get('ts');
         });
 
         return sorted[0];
@@ -30,6 +27,6 @@ Application.Collection.Items = Backbone.Collection.extend({
 
 
     comparator: function(model) {
-        return -Math.abs(model.time().diff());
+        return -model.get('ts');
     }
 });

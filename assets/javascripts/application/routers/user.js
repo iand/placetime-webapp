@@ -25,22 +25,26 @@ Application.Router.User = Backbone.Router.extend({
         var check = session.check();
 
         check.done(function(){
+            // Load public items
             var publicItems = new Application.Collection.Items(undefined, {
                 status: 'p'
             });
+
+            var publicItemsPromise = publicItems.fetch({
+                data: {
+                    pid: session.get('pid'),
+                    before: 20,
+                    after: 20
+                }
+            });
+
+
+            // Load private items
             var privateItems = new Application.Collection.Items(undefined, {
                 status: 'm'
             });
 
-            publicItems.fetch({
-                data: {
-                    pid: session.get('pid'),
-                    before: 20,
-                    after: 20
-                }
-            });
-
-            privateItems.fetch({
+            var privateItemsPromise = privateItems.fetch({
                 data: {
                     pid: session.get('pid'),
                     before: 20,
@@ -49,14 +53,16 @@ Application.Router.User = Backbone.Router.extend({
             });
 
 
-            var timeline = new Application.View.Timeline({
-                publicItems: publicItems,
-                privateItems: privateItems,
+            $.when(publicItemsPromise, privateItemsPromise).done(function(){
+                var timeline = new Application.View.Timeline({
+                    publicItems: publicItems,
+                    privateItems: privateItems,
 
-                pid: session.get('pid')
+                    pid: session.get('pid')
+                });
+
+                Application.content.show(timeline);
             });
-
-            Application.content.show(timeline);
         });
 
 
