@@ -18,12 +18,11 @@ Application.Collection.Items = Backbone.Collection.extend({
     now: function(){
         var self = this;
 
-        var sorted = _.sortBy(this.models, function(model){
-            var diff = moment().diff(
-                model.get(self.options.order)
+        var sorted = _.sortBy(this.models, function(model) {
+            // Get the difference between now and the model time
+            return Math.abs(
+                moment().diff(model.time())
             );
-
-            return Math.abs(diff);
         });
 
         return sorted[0];
@@ -31,10 +30,6 @@ Application.Collection.Items = Backbone.Collection.extend({
 
 
     comparator: function(model) {
-        if (this.order === 'ets') {
-            return -moment(model.get('ets')).unix();
-        } else {
-            return -moment(model.get('ts')).unix();
-        }
+        return -Math.abs(model.time().diff());
     }
 });

@@ -2,14 +2,11 @@ Application.Model.Item = Backbone.Model.extend({
     idAttribute: 'id',
 
     time: function() {
-        if (this.get('order') === 'ets') {
-            time = moment(this.get('ets'));
-        } else {
-            time = moment(this.get('ts'));
-        }
-
-        return time;
+        return moment.unix(
+            this.get('ts').toString().substr(0, 10)
+        );
     },
+
 
     promote: function(done, fail) {
         var defer = $.Deferred();

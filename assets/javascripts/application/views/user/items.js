@@ -5,9 +5,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     events: {
         'click .button.promote': 'promoteItem',
         'click .button.demote': 'demoteItem',
-        'click .nav .now': 'now',
-        'click .nav .ets': 'event',
-        'click .nav .ts': 'added'
+        'click .nav .now': 'now'
     },
 
     itemViewContainer: '.children',
@@ -15,12 +13,19 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     initialize: function (options) {
         var self = this;
 
-        // Scroller events
+        // Initialize scroller
         this.on('collection:rendered', function(){
+            // Trigger resize to adjust items height, use CSS3 calc in future
+            $(window).trigger('resize');
+
             setTimeout(function(){
                 self.bindScroller();
+                self.now();
             }, jQuery.fx.speeds.slow + 250);
         });
+
+
+        // On item add, refresh scroller
         this.on('after:item:added', function(){
             self.scrollerTimeout = null;
 
@@ -30,6 +35,9 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
                 self.refreshScroller();
             }, jQuery.fx.speeds.slow + 250);
         });
+
+
+        // On item remove refresh scroller
         this.on('item:removed', function(){
             self.scrollerTimeout = null;
 
@@ -40,10 +48,12 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             }, jQuery.fx.speeds.slow + 250);
         });
 
+
         // Adjust scroller height
         $(window).resize(function(){
             var $scroller = self.$el.find('.scroller');
 
+            // - 100 is height space
             $scroller.height(
                 $(this).height() - 100
             );
@@ -59,10 +69,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         }
 
         var $scroller = this.$el.find('.scroller');
-
-        $scroller.height(
-            $(window).height() - 100
-        );
 
         this.iscroll = new iScroll($scroller.get(0), {
             momentum: true,
@@ -108,31 +114,42 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
         clearTimeout(self.infiniteScrollReference);
 
+        // self.infiniteScrollLast = moment();
         self.infiniteScrollReference = setTimeout(function(){
-            // Don't execute if not the bottom
-            if (Math.abs(event.y) < Math.abs(event.maxScrollY + (140 * 2))) {
+            // Loading
+            if (self.infiniteScrollLoading === true) {
                 return;
             }
 
-            // Don't try again if already loading
-            if (self.infiniteScrollLoading && self.infiniteScrollLoading === true) {
+            // Buffer
+            // else if (self.infiniteScrollLast.diff() > -2000) {
+            //     return;
+            // }
+
+            // Top infinite scroll
+            else if (Math.abs(event.y) < (140 * 5)) {
+                loadingMore = self.loadMore({ before: true });
+            }
+
+            // Bottom infinite scroll
+            else if (Math.abs(event.y) > Math.abs(event.maxScrollY + (140 * 5))) {
+                loadingMore = self.loadMore({ after: true });
+            }
+
+            // Somehwere inbetween
+            else {
                 return;
             }
 
-            // Don't try again if it was within five seconds
-            if (self.infiniteScrollLast && self.infiniteScrollLast.diff() > -2500) {
-                return;
-            }
 
             self.infiniteScrollLoading = true;
 
-            self.loadMore().done(function(data){
+            loadingMore.done(function(data){
                 if (data.length === 0) {
-                    self.showNoResults();
                     self.refreshScroller();
                 }
 
-                self.infiniteScrollLast    = moment();
+                // self.infiniteScrollLast    = moment();
                 self.infiniteScrollLoading = false;
             });
         }, 150);
@@ -210,64 +227,32 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    // TODO: Consider moving now, event, added to separate view and use
-    // events to communicate
     now: function() {
         var now = this.collection.now();
 
-        var closest = this.$el.find('.item[data-id='+now.get('id')+']');
-            closest.addClass('now');
+        if (now === undefined) {
+            return;
+        }
+
+        var $closest = this.$el.find('.item[data-id='+now.get('id')+']'),
+            $needle  = this.$el.find('.needle');
+
+        $closest.addClass('now');
+        $needle.find('.date').text('Now');
+
+        var position = $closest.position(),
+            offset   = $needle.position();
 
         // Scroll to the closest element
-        this.iscroll.scrollToElement(
-            closest.get(0)
+        this.iscroll.scrollTo(
+            -(position.left),
+            -(position.top - offset.top + 40),
+            jQuery.fx.speeds.slow * 2
         );
+
+        return false;
     },
 
-
-
-    event: function() {
-        var self = this;
-
-        self.resetScroller().done(function(){
-            self.model.set('order', 'ets');
-
-            self.collection.order = 'ets';
-            self.collection.fetch({
-                reset: true,
-                data: {
-                    tstart: undefined,
-                    tend: undefined,
-                    count: 20,
-                    pid: self.model.get('pid'),
-                    status: self.model.get('status'),
-                    order: self.model.get('order')
-                }
-            });
-        });
-    },
-
-
-    added: function() {
-        var self = this;
-
-        self.resetScroller().done(function(){
-            self.model.set('order', 'ts');
-
-            self.collection.order = 'ts';
-            self.collection.fetch({
-                reset: true,
-                data: {
-                    tstart: undefined,
-                    tend: undefined,
-                    count: 20,
-                    pid: self.model.get('pid'),
-                    status: self.model.get('status'),
-                    order: self.model.get('order')
-                }
-            });
-        });
-    },
 
 
     showNoResults: function() {
@@ -304,24 +289,24 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    loadMore: function(){
+    loadMore: function(options){
         var self = this;
 
         var data = {
             pid: self.model.get('pid'),
-            status: self.model.get('status'),
-            order: self.model.get('order'),
-            count: 5
+            status: self.model.get('status')
         };
 
-        if (self.model.get('order') === 'ets') {
-            data.tstart = moment(
-                self.collection.first().get('ets')
-            ).unix() - 1;
+        if (options.before) {
+            data.after = 0;
+            data.before = 10;
+            data.ts = self.collection.first().get('ts');
+        } else if (options.after) {
+            data.after = 10;
+            data.before = 0;
+            data.ts = self.collection.last().get('ts');
         } else {
-            data.tend = moment(
-                self.collection.last().get('ts')
-            ).unix() - 1;
+            throw new Error('Invalid options provided');
         }
 
         return self.collection.fetch({

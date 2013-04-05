@@ -155,13 +155,12 @@
                 </p>
                 <p class="time pull-left">
                     <a class="main-hiddenlink fancymodal fancybox.iframe" href="<%= link %>">
-                        <% if (order === 'ets') { %>
+                        <% if (ts === event) { %>
                             <i class="icon-time"></i> event:
-                            <span class="timestamp"><%= moment(ets).fromNow() %></span>
                         <% } else { %>
                             <i class="icon-time"></i> added:
-                            <span class="timestamp"><%= moment(ts).fromNow() %></span>
                         <% } %>
+                        <span class="timestamp"><%= moment.unix(ts.toString().substr(0, 10)).fromNow() %></span>
                     </a>
                 </p>
                 <p class="link pull-left">
@@ -193,25 +192,22 @@
             <div class="timeline private">
         <% } %>
                 <div class="header">
-                    <h2 class="title pull-left">Following</h2>
-                    <p class="tagline pull-left">
-                        <em>possible</em> things to do or check out
-                    </p>
+                    <% if (status === 'p') { %>
+                        <h2 class="title pull-left">Following</h2>
+                        <p class="tagline pull-left">
+                            <em>possible</em> things to do or check out
+                        </p>
+                    <% } else { %>
+                        <h2 class="title pull-left">My Playlist</h2>
+                        <p class="tagline pull-left">
+                             things to <em>maybe</em> check out
+                        </p>
+                    <% } %>
 
                     <ul class="nav nav-inline pull-right">
                         <li>
                             <a class="now">
                                 <i class="icon-repeat"></i> now
-                            </a>
-                        </li>
-                        <li>
-                            <a class="ets">
-                                <i class="icon-circle-arrow-up"></i> event
-                            </a>
-                        </li>
-                        <li>
-                            <a class="ts">
-                                <i class="icon-circle-arrow-down"></i> added
                             </a>
                         </li>
                     </ul>
