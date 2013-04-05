@@ -13,7 +13,7 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
 
         return {
             'data-id': this.model.get('id'),
-            'style': 'background-image: url(/-img/' + this.model.get('id') + '.jpg)'
+            'style': 'background-image: url(/-img/' + this.model.get('image') + ')'
         };
     },
 

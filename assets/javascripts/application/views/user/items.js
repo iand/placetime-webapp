@@ -77,6 +77,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             onScrollEnd: function() {
                 _.bind(self.infiniteScroll, self, this)();
                 _.bind(self.updateNeedle, self, this)();
+                _.bind(self.updateNeedlePosition, self, this)();
             }
         });
 
@@ -192,6 +193,18 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
+    updateNeedlePosition: function() {
+        var $needle = this.$el.find('.needle');
+
+        var difference = Math.abs(this.iscroll.maxScrollY) - Math.abs(this.iscroll.y);
+
+        if (difference < 200) {
+            console.log(difference);
+            $needle.css('top', 'calc(50% + ' + difference + 'px)');
+        }
+    },
+
+
     addItem: function(item) {
         this.collection.add(item);
     },
@@ -232,38 +245,30 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     now: function() {
-        var now = this.collection.now();
+        var self = this;
 
-        if (now === undefined) {
-            return;
-        }
-        console.log(now.get('text'), now.get('ts'));
 
-        var defer = $.Deferred();
+        var promise = this.collection.now();
 
-        var $closest = this.$el.find('.item[data-id='+now.get('id')+']'),
-            $needle  = this.$el.find('.needle');
+        promise.done(function(model) {
+            var $closest = self.$el.find('.item[data-id='+model.get('id')+']'),
+                $needle  = self.$el.find('.needle');
 
-        defer.done(function(){
-            $closest.addClass('now');
-            $needle.find('.date').text('Now');
+
+            var position = $closest.position(),
+                offset   = $needle.position();
+
+            self.iscroll.scrollTo(
+                -(position.left),
+                -(position.top - offset.top + 40),
+                jQuery.fx.speeds.slow * 2
+            );
+
+            setTimeout(function(){
+                $closest.addClass('now');
+                $needle.find('.date').text('Now');
+            }, (jQuery.fx.speeds.slow * 2) + 250);
         });
-
-        var position = $closest.position(),
-            offset   = $needle.position();
-
-        // Scroll to the closest element
-        this.iscroll.scrollTo(
-            -(position.left),
-            -(position.top - offset.top + 40),
-            jQuery.fx.speeds.slow * 2
-        );
-
-        setTimeout(function(){
-            defer.resolve();
-        }, (jQuery.fx.speeds.slow * 2) + 250);
-
-        return defer.promise();
     },
 
 

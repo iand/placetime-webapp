@@ -18,11 +18,30 @@ Application.Collection.Items = Backbone.Collection.extend({
     now: function(){
         var self = this;
 
-        var sorted = _.sortBy(this.models, function(model) {
-            return model.get('ts');
+        var options = {
+            data: {
+                pid: this.options.pid,
+                status: this.options.status
+            },
+            remove: false
+        };
+
+
+        var defer = $.Deferred();
+
+        Backbone.Collection.prototype.fetch.call(this, options).done(function(data){
+            if (data.length === 0) {
+                defer.reject();
+            } else {
+                defer.resolve(
+                    self.get(data[0].id)
+                );
+            }
+        }).fail(function(){
+            defer.reject();
         });
 
-        return sorted[0];
+        return defer.promise();
     },
 
 
