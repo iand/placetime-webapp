@@ -18,8 +18,8 @@ const (
 	ITEM_ID              = "itemid"
 	MaxInt               = int(^uint(0) >> 1)
 
-	ORDERING_TS  = "ts"
-	ORDERING_ETS = "ets"
+	ORDERING_TS = "ts"
+	//ORDERING_ETS = "ets"
 
 	EVENTED_ITEM_PREFIX = '+'
 )
@@ -267,17 +267,7 @@ func (s *RedisStore) RemoveProfile(pid string) error {
 		return rs.Error()
 	}
 
-	rs = s.db.Command("DEL", possiblyKey(pid, ORDERING_ETS))
-	if !rs.IsOK() {
-		return rs.Error()
-	}
-
 	rs = s.db.Command("DEL", maybeKey(pid, ORDERING_TS))
-	if !rs.IsOK() {
-		return rs.Error()
-	}
-
-	rs = s.db.Command("DEL", maybeKey(pid, ORDERING_ETS))
 	if !rs.IsOK() {
 		return rs.Error()
 	}
@@ -603,11 +593,6 @@ func (s *RedisStore) DeleteMaybeItems(pid string) error {
 		return rs.Error()
 	}
 
-	rs = s.db.Command("DEL", maybeKey(pid, ORDERING_ETS))
-	if !rs.IsOK() {
-		return rs.Error()
-	}
-
 	return nil
 }
 
@@ -640,14 +625,6 @@ func (s *RedisStore) Follow(pid string, followpid string) error {
 		return rs.Error()
 	}
 
-	poss_ets := possiblyKey(pid, ORDERING_ETS)
-	maybe_ets := maybeKey(followpid, ORDERING_ETS)
-
-	rs = s.db.Command("ZUNIONSTORE", poss_ets, 2, poss_ets, maybe_ets, "WEIGHTS", 1.0, 1.0, "AGGREGATE", "MAX")
-	if !rs.IsOK() {
-		return rs.Error()
-	}
-
 	return nil
 }
 
@@ -669,11 +646,9 @@ func (s *RedisStore) Unfollow(pid string, followpid string) error {
 	}
 
 	poss_ts := possiblyKey(pid, ORDERING_TS)
-	poss_ets := possiblyKey(pid, ORDERING_ETS)
 	items := rs.ValuesAsStrings()
 	for _, item := range items {
 		s.db.Command("ZREM", poss_ts, item)
-		s.db.Command("ZREM", poss_ets, item)
 	}
 
 	return nil
@@ -693,33 +668,14 @@ func (s *RedisStore) Promote(pid string, id string) error {
 
 	score_ts, _ := rs.Value().Float64()
 
-	poss_ets := possiblyKey(pid, ORDERING_ETS)
-	rs = s.db.Command("ZSCORE", poss_ets, itemKey)
-	if !rs.IsOK() {
-		return rs.Error()
-	}
-
-	score_ets, _ := rs.Value().Float64()
-
 	s.db.Command("ZREM", poss_ts, itemKey)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
-	s.db.Command("ZREM", poss_ets, itemKey)
-	if !rs.IsOK() {
-		return rs.Error()
-	}
-
 	maybe_ts := maybeKey(pid, ORDERING_TS)
-	maybe_ets := maybeKey(pid, ORDERING_ETS)
 
 	rs = s.db.Command("ZADD", maybe_ts, score_ts, itemKey)
-	if !rs.IsOK() {
-		return rs.Error()
-	}
-
-	rs = s.db.Command("ZADD", maybe_ets, score_ets, itemKey)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
@@ -740,20 +696,7 @@ func (s *RedisStore) Demote(pid string, id string) error {
 
 	score_ts, _ := rs.Value().Float64()
 
-	maybe_ets := maybeKey(pid, ORDERING_ETS)
-	rs = s.db.Command("ZSCORE", maybe_ets, itemKey)
-	if !rs.IsOK() {
-		return rs.Error()
-	}
-
-	score_ets, _ := rs.Value().Float64()
-
 	s.db.Command("ZREM", maybe_ts, itemKey)
-	if !rs.IsOK() {
-		return rs.Error()
-	}
-
-	s.db.Command("ZREM", maybe_ets, itemKey)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
@@ -761,14 +704,8 @@ func (s *RedisStore) Demote(pid string, id string) error {
 	// TODO: don't add them here if they were manually added by the user
 
 	poss_ts := possiblyKey(pid, ORDERING_TS)
-	poss_ets := possiblyKey(pid, ORDERING_ETS)
 
 	rs = s.db.Command("ZADD", poss_ts, score_ts, itemKey)
-	if !rs.IsOK() {
-		return rs.Error()
-	}
-
-	rs = s.db.Command("ZADD", poss_ets, score_ets, itemKey)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
