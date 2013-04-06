@@ -47,16 +47,24 @@ Application.addInitializer(function(options){
 
 // TODO: Move
 Application.addInitializer(function(){
-    $(".fancymodal").fancybox({
+    var closeBtn = '<a title="Close" class="fancybox-item fancybox-close">';
+        closeBtn += '<i class="icon-remove-circle"></i>';
+        closeBtn += '</a>';
+
+    $('.fancybox').fancybox({
         maxWidth    : 970,
-        maxHeight    : 800,
-        fitToView    : false,
-        width        : '70%',
-        height        : '70%',
+        maxHeight   : 800,
+        fitToView   : false,
+        width       : '70%',
+        height      : '70%',
         autoSize    : false,
-        closeClick    : false,
-        openEffect    : 'none',
-        closeEffect    : 'none'
+        closeClick  : false,
+        openEffect  : 'none',
+        closeEffect : 'none',
+
+        tpl: {
+            closeBtn : closeBtn
+        }
     });
 });
 
