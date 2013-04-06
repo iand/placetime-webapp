@@ -317,7 +317,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             data.before = 10;
             data.ts = self.collection.last().get('ts');
         } else if (options.after) {
-            console.log(self.collection.last().attributes);
             data.after = 10;
             data.before = 0;
             data.ts = self.collection.first().get('ts');
