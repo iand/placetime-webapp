@@ -33,8 +33,8 @@ Application.Router.User = Backbone.Router.extend({
             var publicItemsPromise = publicItems.fetch({
                 data: {
                     pid: session.get('pid'),
-                    before: 20,
-                    after: 20
+                    before: 5,
+                    after: 5
                 }
             });
 
@@ -47,8 +47,8 @@ Application.Router.User = Backbone.Router.extend({
             var privateItemsPromise = privateItems.fetch({
                 data: {
                     pid: session.get('pid'),
-                    before: 20,
-                    after: 20
+                    before: 5,
+                    after: 5
                 }
             });
 

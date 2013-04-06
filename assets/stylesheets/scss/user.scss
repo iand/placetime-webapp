@@ -222,6 +222,26 @@ a {
                 background-color: #ff6600;
             }
 
+            .overlay {
+                background-color: rgba(15, 15, 15, 0.4);
+                left: 0;
+                position: absolute;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                z-index: 1;
+            }
+
+            .icon,
+            .username,
+            .text,
+            .time,
+            .link,
+            .button {
+                position: relative;
+                z-index: 2;
+            }
+
             .username {
                 font-size: 14px;
                 color: #ddd;

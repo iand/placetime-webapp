@@ -77,7 +77,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             onScrollEnd: function() {
                 _.bind(self.infiniteScroll, self, this)();
                 _.bind(self.updateNeedle, self, this)();
-                _.bind(self.updateNeedlePosition, self, this)();
+                // _.bind(self.updateNeedlePosition, self, this)();
             }
         });
 
@@ -133,12 +133,12 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
             // Top infinite scroll
             else if (Math.abs(event.y) < (140 * 5)) {
-                loadingMore = self.loadMore({ before: true });
+                loadingMore = self.loadMore({ after: true });
             }
 
             // Bottom infinite scroll
             else if (Math.abs(event.y) > Math.abs(event.maxScrollY + (140 * 5))) {
-                loadingMore = self.loadMore({ after: true });
+                loadingMore = self.loadMore({ before: true });
             }
 
             // Somehwere inbetween
@@ -199,7 +199,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         var difference = Math.abs(this.iscroll.maxScrollY) - Math.abs(this.iscroll.y);
 
         if (difference < 200) {
-            console.log(difference);
             $needle.css('top', 'calc(50% + ' + difference + 'px)');
         }
     },
@@ -261,13 +260,11 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             self.iscroll.scrollTo(
                 -(position.left),
                 -(position.top - offset.top + 40),
-                jQuery.fx.speeds.slow * 2
+                0
             );
 
-            setTimeout(function(){
-                $closest.addClass('now');
-                $needle.find('.date').text('Now');
-            }, (jQuery.fx.speeds.slow * 2) + 250);
+            $closest.addClass('now');
+            $needle.find('.date').text('Now');
         });
     },
 
@@ -318,11 +315,12 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         if (options.before) {
             data.after = 0;
             data.before = 10;
-            data.ts = self.collection.first().get('ts');
+            data.ts = self.collection.last().get('ts');
         } else if (options.after) {
+            console.log(self.collection.last().attributes);
             data.after = 10;
             data.before = 0;
-            data.ts = self.collection.last().get('ts');
+            data.ts = self.collection.first().get('ts');
         } else {
             throw new Error('Invalid options provided');
         }
