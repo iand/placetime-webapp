@@ -10,23 +10,50 @@ Application.Router.Admin = Backbone.Router.extend({
         "editprofile/:pid": "editprofile",
         "addprofile": "addprofile",
         "addfeed/:pid": "addfeed",
-        "*default": "main"
+        "*default": "home"
     },
 
 
     initialize: function () {
-        session.set("ptsession", $.cookie('ptsession'));
+        var header = new Application.View.Header({
+            model: new Backbone.Model({
+                pid: session.get('pid')
+            })
+        });
+
+        Application.header.show(header);
+
+
+        // var self = this;
+        // session.check(function () {
+        //     self.changePage(new MainView({}));
+        // },
+
+        // function () {
+        //     self.invalidSession();
+        // });
     },
 
 
-    main: function () {
+    home: function () {
         var self = this;
-        session.check(function () {
-            self.changePage(new MainView({}));
-        },
 
-        function () {
-            self.invalidSession();
+
+        var check = session.check();
+
+        check.done(function(){
+            var home = new Application.Admin.View.Home({
+                model: new Backbone.Model({
+                    pid: session.get('pid'),
+                    message: undefined
+                })
+            });
+            Application.content.show(home);
+        });
+
+
+        check.fail(function(){
+            Backbone.history.navigate('login', true);
         });
     },
 

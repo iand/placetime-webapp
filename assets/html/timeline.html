@@ -4,9 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Typekit font loader -->
         <script type="text/javascript" src="http://use.typekit.net/bsa5hge.js"></script>
-        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+        <script type="text/javascript">
+        try {
+            Typekit.load();
+        } catch(e) {}
+        </script>
 
         <script src="/-assets/javascripts/vendor/modernizr.js"></script>
 
@@ -156,9 +159,9 @@
                 <p class="time pull-left">
                     <a class="main-hiddenlink fancymodal fancybox.iframe" href="<%= link %>">
                         <% if (ts === event) { %>
-                            <i class="icon-time"></i> event:
+                            <i class="icon-time"></i> <span class="event">event:</span>
                         <% } else { %>
-                            <i class="icon-time"></i> added:
+                            <i class="icon-time"></i> <span class="added">added:</span>
                         <% } %>
                         <span class="timestamp"><%= moment.unix(ts.toString().substr(0, 10)).fromNow() %></span>
                     </a>

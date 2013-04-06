@@ -219,7 +219,19 @@ a {
             }
 
             &.now {
-                background-color: #ff6600;
+                background-image: none !important;
+                background-color: #ffffff;
+
+                .text a,
+                .username,
+
+                .time a,
+                .time i,
+                .time .timestamp,
+
+                .link i {
+                    color: #000000;
+                }
             }
 
             .overlay {
@@ -269,6 +281,10 @@ a {
 
             .time {
                 margin: 0;
+
+                .event {
+                    color: #ff6600;
+                }
 
                 a {
                     color: #eee;
@@ -327,33 +343,32 @@ a {
     }
 
     .needle {
-        border-top: 1px solid #ff6600;
+        border-top: 1px solid #333333;
         border-bottom: 1px solid #ffffff;
         position: absolute;
         top: 50%;
-        height: 1px;
+        opacity: 0.75;
+        height: 0px;
         width: 99%;
 
         .date {
             @include border-radius(5px);
+            @include single-box-shadow(
+                rgba(0, 0, 0, 0.5), 1px, 1px, 2px
+            );
 
-            color: #ff6600;
-            font-size: 12px;
+            background-color: #444444;
+            color: #ffffff;
+            font-size: 11px;
+            left: 50%;
             height: 12px;
+            padding: 4px 0;
             position: absolute;
-            top: -6px;
+            margin-left: -75px;
+            text-align: center;
+            top: -10px;
             width: 150px;
         }
-    }
-
-    &.public .needle .date {
-        left: -155px;
-        text-align: right;
-    }
-
-    &.private .needle .date {
-        right: -155px;
-        text-align: left;
     }
 
 

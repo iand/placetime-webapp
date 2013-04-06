@@ -1,5 +1,12 @@
 var Application = new Backbone.Marionette.Application();
 
+Application.Admin = {
+    Model: {},
+    View: {},
+    Collection: {},
+    Router: {}
+};
+
 Application.Model = {};
 Application.View = {};
 Application.Collection = {};

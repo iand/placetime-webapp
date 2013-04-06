@@ -181,13 +181,17 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
         var time = model.time();
 
-        if (Math.abs(time.diff()) > moment().add('months', 1).diff()) {
+        if (Math.abs(time.diff()) < moment().add('day', 1).diff()) {
             $needle.find('.date').text(
-                time.format('Do MMMM YYYY')
+                'Today at ' +time.format(' hh:mm:ss A')
+            );
+        } else if (Math.abs(time.diff()) < moment().add('months', 1).diff()) {
+            $needle.find('.date').text(
+                time.format('Do MMMM hh:mm A')
             );
         } else {
             $needle.find('.date').text(
-                time.format('Do MMMM hh:mm A')
+                time.format('Do MMMM YYYY')
             );
         }
     },
@@ -317,6 +321,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             data.before = 10;
             data.ts = self.collection.last().get('ts');
         } else if (options.after) {
+            console.log(self.collection.last().attributes);
             data.after = 10;
             data.before = 0;
             data.ts = self.collection.first().get('ts');

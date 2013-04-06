@@ -330,9 +330,19 @@ a {
 }
 /* line 221, scss/user.scss */
 .timeline .items .item.now {
-  background-color: #ff6600;
+  background-image: none !important;
+  background-color: #ffffff;
 }
-/* line 225, scss/user.scss */
+/* line 232, scss/user.scss */
+.timeline .items .item.now .text a,
+.timeline .items .item.now .username,
+.timeline .items .item.now .time a,
+.timeline .items .item.now .time i,
+.timeline .items .item.now .time .timestamp,
+.timeline .items .item.now .link i {
+  color: #000000;
+}
+/* line 237, scss/user.scss */
 .timeline .items .item .overlay {
   background-color: rgba(15, 15, 15, 0.4);
   left: 0;
@@ -342,7 +352,7 @@ a {
   width: 100%;
   z-index: 1;
 }
-/* line 240, scss/user.scss */
+/* line 252, scss/user.scss */
 .timeline .items .item .icon,
 .timeline .items .item .username,
 .timeline .items .item .text,
@@ -352,53 +362,57 @@ a {
   position: relative;
   z-index: 2;
 }
-/* line 245, scss/user.scss */
+/* line 257, scss/user.scss */
 .timeline .items .item .username {
   font-size: 14px;
   color: #ddd;
   padding: 7px;
   margin: 0 0 0 7px;
 }
-/* line 252, scss/user.scss */
+/* line 264, scss/user.scss */
 .timeline .items .item .text {
   margin: 0;
 }
-/* line 255, scss/user.scss */
+/* line 267, scss/user.scss */
 .timeline .items .item .text a {
   color: #fff;
   font-size: 22px;
 }
-/* line 261, scss/user.scss */
+/* line 273, scss/user.scss */
 .timeline .items .item .link {
   margin: 8px 0 0;
 }
-/* line 264, scss/user.scss */
+/* line 276, scss/user.scss */
 .timeline .items .item .link a {
   font-size: 25px;
   color: #ddd;
 }
-/* line 270, scss/user.scss */
+/* line 282, scss/user.scss */
 .timeline .items .item .time {
   margin: 0;
 }
-/* line 273, scss/user.scss */
+/* line 285, scss/user.scss */
+.timeline .items .item .time .event {
+  color: #ff6600;
+}
+/* line 289, scss/user.scss */
 .timeline .items .item .time a {
   color: #eee;
   font-size: 13px;
 }
-/* line 281, scss/user.scss */
+/* line 297, scss/user.scss */
 .timeline .items .item .text,
 .timeline .items .item .link,
 .timeline .items .item .time {
   width: 100%;
 }
-/* line 284, scss/user.scss */
+/* line 300, scss/user.scss */
 .timeline .items .item .text a,
 .timeline .items .item .link a,
 .timeline .items .item .time a {
   border-bottom: 0;
 }
-/* line 290, scss/user.scss */
+/* line 306, scss/user.scss */
 .timeline .items .item .promote,
 .timeline .items .item .demote {
   -webkit-border-radius: 31px;
@@ -423,58 +437,57 @@ a {
   position: absolute;
   right: 10px;
 }
-/* line 310, scss/user.scss */
+/* line 326, scss/user.scss */
 .timeline .items .item .promote:hover,
 .timeline .items .item .demote:hover {
   color: #ffffff;
 }
-/* line 314, scss/user.scss */
+/* line 330, scss/user.scss */
 .timeline .items .item .promote:active,
 .timeline .items .item .demote:active {
   color: #ff6600;
 }
-/* line 319, scss/user.scss */
+/* line 335, scss/user.scss */
 .timeline .items .item .promote {
   padding: 6px 7px 5px 8px;
 }
-/* line 323, scss/user.scss */
+/* line 339, scss/user.scss */
 .timeline .items .item .demote {
   padding: 6px 9px 5px 10px;
 }
-/* line 329, scss/user.scss */
+/* line 345, scss/user.scss */
 .timeline .needle {
-  border-top: 1px solid #ff6600;
+  border-top: 1px solid #333333;
   border-bottom: 1px solid #ffffff;
   position: absolute;
   top: 50%;
-  height: 1px;
+  opacity: 0.75;
+  height: 0px;
   width: 99%;
 }
-/* line 337, scss/user.scss */
+/* line 354, scss/user.scss */
 .timeline .needle .date {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
-  color: #ff6600;
-  font-size: 12px;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  background-color: #444444;
+  color: #ffffff;
+  font-size: 11px;
+  left: 50%;
   height: 12px;
+  padding: 4px 0;
   position: absolute;
-  top: -6px;
+  margin-left: -75px;
+  text-align: center;
+  top: -10px;
   width: 150px;
 }
-/* line 349, scss/user.scss */
-.timeline.public .needle .date {
-  left: -155px;
-  text-align: right;
-}
-/* line 354, scss/user.scss */
-.timeline.private .needle .date {
-  right: -155px;
-  text-align: left;
-}
-/* line 361, scss/user.scss */
+/* line 376, scss/user.scss */
 .timeline .load-more,
 .timeline .no-results {
   -webkit-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
@@ -490,22 +503,22 @@ a {
   text-align: center;
   width: 100%;
 }
-/* line 377, scss/user.scss */
+/* line 392, scss/user.scss */
 .timeline .load-more {
   cursor: pointer;
 }
 
-/* line 383, scss/user.scss */
+/* line 398, scss/user.scss */
 .pull-left {
   float: left;
 }
 
-/* line 387, scss/user.scss */
+/* line 402, scss/user.scss */
 .pull-right {
   float: right;
 }
 
-/* line 392, scss/user.scss */
+/* line 407, scss/user.scss */
 [class^="icon-"],
 [class*=" icon-"] {
   -webkit-font-smoothing: inherit;

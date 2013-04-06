@@ -2,10 +2,6 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
     template: '#item-template',
     className: 'item',
 
-    time: function() {
-
-    },
-
     attributes: function() {
         if (this.model === undefined) {
             return {};
