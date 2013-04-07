@@ -1,29 +1,17 @@
 Application.Admin.View.Home = Backbone.Marionette.ItemView.extend({
     template: '#home-template',
+    className: 'container',
 
     events: {
-        'click .profileBtn': 'profile'
+        'submit form': 'profile'
     },
 
 
-    // initialize: function (options) {
-    //     this.template = _.template($('#main-tmpl').html());
-    //     this.msg = options.msg;
-    // },
-
-
     profile: function () {
-        Backbone.history.navigate('profile/' + $('#pid').val(), true);
+        var url = 'profile/' + this.$el.find('input[name=pid]').val();
+
+        Backbone.history.navigate(url, true);
+
         return false;
     }
-
-
-    // render: function () {
-    //     $(this.el).html(this.template({
-    //         data: {
-    //             msg: this.msg
-    //         }
-    //     }));
-    //     return this;
-    // }
 });

@@ -1,5 +1,5 @@
 var FollowingList = Backbone.Collection.extend({
-    model: Profile,
+    model: Application.Model.Profile,
 
     initialize: function (options) {
         this.pid = options.pid;

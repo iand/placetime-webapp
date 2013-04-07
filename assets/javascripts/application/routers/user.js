@@ -8,19 +8,21 @@ Application.Router.User = Backbone.Router.extend({
 
 
     initialize: function () {
-        var header = new Application.View.Header({
+        // TODO: Set object name to body class, override Application.content.show
+
+        this.header = new Application.View.Header({
             model: new Backbone.Model({
-                pid: session.get('pid')
+                pid: session.get('pid'),
+                wide: false
             })
         });
 
-        Application.header.show(header);
+        Application.header.show(this.header);
     },
 
 
     timeline: function () {
         var self = this;
-
 
         var check = session.check();
 
@@ -54,6 +56,11 @@ Application.Router.User = Backbone.Router.extend({
 
 
             $.when(publicItemsPromise, privateItemsPromise).done(function(){
+                // Set header to wide and re-render
+                self.header.model.set('wide', true);
+                self.header.render();
+
+                // Render timeline
                 var timeline = new Application.View.Timeline({
                     publicItems: publicItems,
                     privateItems: privateItems,

@@ -26,7 +26,11 @@
 
 
         <script type="text/template" id="header-template">
+            <% if (wide) { %>
+            <div class="navbar-inner container-wide">
+            <% } else { %>
             <div class="navbar-inner container">
+            <% } %>
                 <a class="brand pull-left" href="/">
                     <i class="icon-ok-circle"></i>
                     <i class="icon-time"></i>
@@ -92,7 +96,7 @@
                     <div class="hint"></div>
                 </div>
 
-                <input type="submit" value="Login">
+                <input type="submit" value="Login" class="wide">
             </form>
 
             <p>
@@ -148,7 +152,7 @@
             <!-- audio specific markup here -->
             <% } else { %>
                 <div class="icon pull-left">
-                    <img src="/-assets/images/nasa.jpg" width="30" height="30">
+                    <img src="/-assets/images/user.jpg" width="40" height="40">
                 </div>
                 <p class="username pull-left">@<%= pid %></p>
                 <p class="text pull-left">
@@ -196,7 +200,7 @@
         <% } %>
                 <div class="header">
                     <% if (status === 'p') { %>
-                        <h2 class="title pull-left">Following</h2>
+                        <h2 class="title pull-left">Timeline</h2>
                         <p class="tagline pull-left">
                             <em>possible</em> things to do or check out
                         </p>
@@ -210,7 +214,7 @@
                     <ul class="nav nav-inline pull-right">
                         <li>
                             <a class="now">
-                                <i class="icon-repeat"></i> now
+                                now <i class="icon-repeat"></i>
                             </a>
                         </li>
                     </ul>
@@ -223,7 +227,15 @@
                     </div>
                 </div>
                 <div class="needle">
-                    <div class="date">Now</div>
+                    <div class="date">
+                      <span class="future pull-left">
+                        <i class="icon-arrow-up"></i> Future
+                      </span>
+                      <span class="now">Now</span>
+                      <span class="past pull-right">
+                        Past <i class="icon-arrow-down"></i>
+                      </span>
+                    </div>
                 </div>
             </div>
         </script>

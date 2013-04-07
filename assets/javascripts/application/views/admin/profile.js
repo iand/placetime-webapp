@@ -1,12 +1,12 @@
-var ProfileView = Backbone.View.extend({
+Application.Admin.View.ProfileView = Backbone.View.extend({
     events: {
-        "click .editBtn": "edit",
-        "click .feedBtn": "addfeed"
+        'click .editBtn': 'edit',
+        'click .feedBtn': 'addfeed'
     },
 
 
     initialize: function (options) {
-        this.template = _.template($("#profile-tmpl").html());
+        this.template = _.template($('#profile-tmpl').html());
 
         this._views = [];
 
@@ -20,13 +20,13 @@ var ProfileView = Backbone.View.extend({
 
 
     edit: function () {
-        Backbone.history.navigate("editprofile/" + this.model.get('pid'), true);
+        Backbone.history.navigate('editprofile/' + this.model.get('pid'), true);
         return false;
     },
 
 
     addfeed: function () {
-        Backbone.history.navigate("addfeed/" + this.model.get('pid'), true);
+        Backbone.history.navigate('addfeed/' + this.model.get('pid'), true);
         return false;
     },
 
@@ -37,7 +37,7 @@ var ProfileView = Backbone.View.extend({
         }));
         var self = this;
         _(this._views).each(function (v) {
-            $(".items", self.el).append(v.render().el);
+            $('.items', self.el).append(v.render().el);
         });
         return this;
     }

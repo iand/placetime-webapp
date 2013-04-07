@@ -51,12 +51,13 @@ Application.addInitializer(function(){
         closeBtn += '<i class="icon-remove-circle"></i>';
         closeBtn += '</a>';
 
+    // TOOD: Hide next/prev arrows
     $('.fancybox').fancybox({
         maxWidth    : 970,
         maxHeight   : 800,
         fitToView   : false,
         width       : '70%',
-        height      : '70%',
+        height      : '90%',
         autoSize    : false,
         closeClick  : false,
         openEffect  : 'none',

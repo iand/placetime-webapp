@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="/-assets/stylesheets/vendor.css">
-    <link rel="stylesheet" href="/-assets/stylesheets/user.css">
+    <link rel="stylesheet" href="/-assets/stylesheets/admin.css">
 
     <!-- Typekit font loader -->
     <script type="text/javascript" src="http://use.typekit.net/bsa5hge.js"></script>
@@ -70,6 +70,36 @@
     </script>
 
 
+    <script type="text/template" id="login-template">
+        <p>
+            <a href="/-twitter" data-role="button" rel="external">
+                Sign in with Twitter
+            </a>
+        </p>
+
+        <h1>Or login</h1>
+        <form action="#" method="post">
+            <div class="field">
+                <label for="name">User name</label>
+                <input type="text" name="pid" id="pid" value="">
+                <div class="hint"></div>
+            </div>
+
+            <div class="field">
+                <label for="name">Password</label>
+                <input type="password" name="pwd" id="pwd" value="">
+                <div class="hint"></div>
+            </div>
+
+            <input type="submit" value="Login">
+        </form>
+
+        <p>
+            Dont have an account? <a href="#register">Sign Up</a>
+        </p>
+    </script>
+
+
     <script type="text/template" id="home-template">
         <h1>Placetime Admin</h1>
         <% if (message) { %>
@@ -77,11 +107,12 @@
         <% } %>
         <form action="#profile" method="post">
             <label for="pid">User profile</label>
-            <input type="text" id="pid" name="pid" size="20" value="">
-            <input type="submit" value="Manage Profile" class="profileBtn">
+
+            <input type="text" name="pid" size="20" value="">
+            <input type="submit" value="Manage Profile">
         </form>
 
-        <div><a href="#addprofile">New profile</a></div>
+        <div><a href="#profile/new">New profile</a></div>
    </script>
 
 

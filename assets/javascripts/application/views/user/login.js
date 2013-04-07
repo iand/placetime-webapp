@@ -1,6 +1,6 @@
 Application.View.Login = Backbone.Marionette.ItemView.extend({
     template: '#login-template',
-    className: 'container',
+    className: 'login container',
 
     events: {
         'keyup input': 'change',

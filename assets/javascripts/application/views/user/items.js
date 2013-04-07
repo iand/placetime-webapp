@@ -55,7 +55,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
             // - 100 is height space
             $scroller.height(
-                $(this).height() - 100
+                $(this).height() - 59
             );
         });
     },
@@ -268,7 +268,17 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             );
 
             $closest.addClass('now');
-            $needle.find('.date').text('Now');
+
+            // TODO: Use template
+            $needle.find('.date').html(
+                '<span class="future pull-left">' +
+                  '<i class="icon-arrow-up"></i> Future' +
+                '</span>' +
+                '<span class="now">Now</span>' +
+                '<span class="past pull-right">' +
+                  'Past <i class="icon-arrow-down"></i>' +
+                '</span>'
+            );
         });
     },
 

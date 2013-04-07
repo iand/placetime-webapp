@@ -104,15 +104,15 @@
     background-color: #f9f9f9;
     border-radius: 5px;
     color: #333333;
-    font-size: 25px;
+    font-size: 32px;
     font-weight: normal;
-    line-height: 1;
     padding: 4px 8px;
     position: absolute;
-    top: 0;
+    top: 0px;
     right: 0;
     cursor: pointer;
     z-index: 8040;
+    line-height: 1;
 }
 
 

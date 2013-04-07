@@ -1,5 +1,5 @@
 Application.Collection.Feeds = Backbone.Collection.extend({
-    model: Feed,
+    model: Application.Model.Feed,
 
     initialize: function (options) {
         this.pid = options.pid;

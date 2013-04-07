@@ -3,14 +3,21 @@ Application.Router.Admin = Backbone.Router.extend({
 
 
     routes: {
-        "profile/:pid": "profile",
-        "following/:pid": "following",
-        "followers/:pid": "followers",
-        "feeds/:pid": "feeds",
-        "editprofile/:pid": "editprofile",
-        "addprofile": "addprofile",
-        "addfeed/:pid": "addfeed",
-        "*default": "home"
+        'login': 'login',
+        'logout': 'logout',
+
+        'profile/new' : 'newProfile',
+        'profile/:pid/edit': 'editProfile',
+        'profile/:pid': 'viewProfile',
+
+        'profile/:pid/following': 'following',
+        'profile/:pid/followers': 'followers',
+
+        'profile/:pid/feeds': 'feeds',
+
+        'addfeed/:pid': 'addfeed',
+
+        '*default': 'home'
     },
 
 
@@ -33,6 +40,17 @@ Application.Router.Admin = Backbone.Router.extend({
         //     self.invalidSession();
         // });
     },
+
+
+
+    login: function () {
+        var login = new Application.View.Login({
+            model: new Application.Model.Credentials()
+        });
+
+        Application.content.show(login);
+    },
+
 
 
     home: function () {
@@ -58,52 +76,64 @@ Application.Router.Admin = Backbone.Router.extend({
     },
 
 
-    profile: function (pid) {
+    viewProfile: function (pid) {
         var self = this;
-        session.check(function () {
 
-            var profile = new Profile({
+
+        var check = session.check();
+
+        check.done(function () {
+            var profile = new Application.Model.Profile({
                 'pid': pid
             });
-            profile.fetch({
-                success: function () {
 
-                    var items = new ProfileItems({
-                        'pid': pid
+
+            profile.fetch().done(function(){
+                var items = new ProfileItems({
+                    'pid': pid
+                });
+
+                items.fetch().done(function(){
+                    if (profile.get('parentpid')) {
+                        self.changePage(new FeedView({
+                            model: profile,
+                            items: items
+                        }));
+                    } else {
+                        var view = new Application.Admin.View.ProfileView({
+                            model: new Backbone.Model({
+                                model: profile,
+                                items: items
+                            })
+                        });
+                        Application.content.show(view);
+                    }
+                }).fail(function () {
+                    var view = new Application.Admin.View.Home({
+                        model: new Backbone.Model({
+                            message: "Problem retrieving profile items for '" + pid + "'"
+                        })
                     });
-                    items.fetch({
-                        success: function () {
-                            if (profile.get("parentpid")) {
-                                self.changePage(new FeedView({
-                                    model: profile,
-                                    items: items
-                                }));
-                            } else {
-                                self.changePage(new ProfileView({
-                                    model: profile,
-                                    items: items
-                                }));
-                            }
-                        },
-                        error: function () {
-                            self.changePage(new MainView({
-                                msg: "Problem retrieving profile items for '" + pid + "'"
-                            }));
-                        }
-                    });
-                },
-                error: function () {
-                    self.changePage(new MainView({
-                        msg: "Problem retrieving profile '" + pid + "'"
-                    }));
-                }
+                    Application.content.show(view);
+                });
+            })
+
+            .fail(function(){
+                var view = new Application.Admin.View.Home({
+                    model: new Backbone.Model({
+                        message: "Problem retrieving profile '" + pid + "'"
+                    })
+                });
+                Application.content.show(view);
             });
-        },
+        });
 
-        function () {
+
+        check.fail(function () {
             self.invalidSession();
         });
     },
+
 
 
     following: function (pid) {
@@ -133,6 +163,7 @@ Application.Router.Admin = Backbone.Router.extend({
     },
 
 
+
     followers: function (pid) {
         var self = this;
         session.check(function () {
@@ -158,6 +189,7 @@ Application.Router.Admin = Backbone.Router.extend({
             self.invalidSession();
         });
     },
+
 
 
     feeds: function (pid) {
@@ -187,7 +219,8 @@ Application.Router.Admin = Backbone.Router.extend({
     },
 
 
-    editprofile: function (pid) {
+
+    editProfile: function (pid) {
         var self = this;
         session.check(function () {
 
@@ -222,7 +255,8 @@ Application.Router.Admin = Backbone.Router.extend({
     },
 
 
-    addprofile: function () {
+
+    newProfile: function () {
         var self = this;
         session.check(function () {
             self.changePage(new AddProfileView({
@@ -234,6 +268,7 @@ Application.Router.Admin = Backbone.Router.extend({
             self.invalidSession();
         });
     },
+
 
 
     addfeed: function (pid) {
@@ -263,24 +298,10 @@ Application.Router.Admin = Backbone.Router.extend({
     },
 
 
+
     invalidSession: function () {
         self.changePage(new StaticView({
             name: "session"
         }));
-    },
-
-
-    changePage: function (view) {
-        if (this._currentView) {
-            this._currentView.remove();
-        }
-        this._currentView = view;
-
-
-        $('#content').html(view.render().el);
-
-        if (view.postRender) {
-            view.postRender();
-        }
     }
 });

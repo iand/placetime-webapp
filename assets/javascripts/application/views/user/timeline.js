@@ -1,6 +1,6 @@
 Application.View.Timeline = Marionette.ItemView.extend({
     template: '#timelines-template',
-    className: 'container timelines',
+    className: 'container-wide timelines',
 
     initialize: function(options) {
         Backbone.Subviews.add(this);
@@ -10,7 +10,6 @@ Application.View.Timeline = Marionette.ItemView.extend({
     subviewCreators : {
         publicTimeline: function() {
             var timeline = new Application.View.Items({
-                // TODO: Ideally remove this model
                 model: new Backbone.Model({
                     status: this.options.publicItems.options.status,
                     order: this.options.publicItems.options.order,
@@ -25,7 +24,6 @@ Application.View.Timeline = Marionette.ItemView.extend({
 
         privateTimeline: function() {
             var timeline = new Application.View.Items({
-                // TODO: Ideally remove this model
                 model: new Backbone.Model({
                     status: this.options.privateItems.options.status,
                     order: this.options.privateItems.options.order,

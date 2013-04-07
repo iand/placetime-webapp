@@ -84,3 +84,7 @@ input[type=submit]:active {
   background-color: #cccccc;
   border: 2px solid #ff9900;
 }
+/* line 74, scss/form.scss */
+input[type=submit].wide {
+  width: 100%;
+}

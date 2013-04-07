@@ -1,5 +1,5 @@
 var ProfileItems = Backbone.Collection.extend({
-    model: Item,
+    model: Application.Model.Item,
 
     initialize: function (options) {
         this.pid = options.pid;

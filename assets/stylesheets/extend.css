@@ -1,0 +1,5 @@
+/* line 3, scss/extend.scss */
+[class^="icon-"],
+[class*=" icon-"] {
+  -webkit-font-smoothing: inherit;
+}

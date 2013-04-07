@@ -1,0 +1,99 @@
+@import 'compass';
+
+// Container
+.container {
+    margin: 0 auto;
+    width: 960px;
+}
+
+.container-wide {
+    max-width: 1600px;
+    width: 100%;
+}
+
+
+// Navigation
+.navbar {
+    @include single-box-shadow(#888888, 0px, 4px, 5px);
+    background-color: #868681;
+    border-bottom: 8px solid #ccc;
+    height: 45px;
+    width: 100%;
+
+    &.navbar-fixed {
+        position: fixed;
+        top: 0;
+    }
+
+    .navbar-inner {
+        overflow: hidden;
+    }
+
+    .brand {
+        color: #ffffff;
+        font-size: 23px;
+        margin: 8px 0 0 22px;
+
+        .icon-ok-circle {
+            margin-right: -3px;
+        }
+
+        .icon-ok-circle,
+        .icon-time {
+            color: #555555;
+            font-size: 30px;
+            float: left;
+            margin-top: 0px;
+        }
+
+        .icon-time {
+            margin-right: 10px;
+        }
+    }
+
+    .tagline {
+        color: #ededed;
+        font-size: 14px;
+        margin: 16px 0 0 25px;
+    }
+
+    .nav {
+        margin: 5px 25px 0;
+
+        // TODO: Move;
+        .icon-cog {
+            font-size: 33px;
+        }
+    }
+
+    .dropdown {
+        .icon-edit,
+        .icon-signout {
+            font-size: 20px;
+        }
+    }
+}
+
+
+
+.nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &.nav-inline {
+        li {
+            display: inline-block;
+        }
+    }
+
+    a {
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    li [class^="icon-"],
+    li [class*=" icon-"] {
+        width: auto;
+    }
+}

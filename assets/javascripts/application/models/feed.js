@@ -1,3 +1,3 @@
-var Feed = Backbone.Model.extend({
+Application.Model.Feed = Backbone.Model.extend({
 
 });

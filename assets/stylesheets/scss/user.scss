@@ -1,112 +1,48 @@
 @import 'compass';
+
+@import 'extensions';
+@import 'global';
+@import 'utilities';
+@import 'scaffolding';
 @import 'form';
-@import 'content';
-
-html,
-body {
-    height: 100%;
-    overflow: hidden;
-    width: 100%;
-}
-
-body {
-    background-color: #deddd8;
-}
-
-a {
-    text-decoration: none;
-}
 
 
-.container {
-    margin: 0 auto;
-    width: 960px;
-}
-
-
-.navbar {
-    @include single-box-shadow(#888888, 0px, 4px, 5px);
-    background-color: #aaaaaa;
-    border-bottom: 8px solid #ccc;
-    height: 45px;
-    width: 100%;
-
-    &.navbar-fixed {
-        position: fixed;
-        top: 0;
+// Page level elements
+.page {
+    &.header {
+        position: relative;
+        z-index: 100;
     }
 
-    .navbar-inner {
-        overflow: hidden;
-    }
+    &.content {
+        padding-top: 54px;
 
-    .brand {
-        color: #ffffff;
-        font-size: 23px;
-        padding-top: 8px;
-
-        .icon-ok-circle,
-        .icon-time {
-            color: #555555;
-            font-size: 30px;
-            float: left;
-            margin-top: 0px;
+        a {
+            color: #000000;
+            border-bottom: 2px solid #ff6600;
+            text-decoration: none;
         }
 
-        .icon-time {
-            margin-right: 20px;
-        }
-    }
-
-    .tagline {
-        color: #ededed;
-        font-size: 14px;
-        margin: 16px 0 0 25px;
-    }
-
-    .nav {
-        margin: 5px 0 0;
-
-        // TODO: Move;
-        .icon-cog {
-            font-size: 33px;
-        }
-    }
-
-    .dropdown {
-        .icon-edit,
-        .icon-signout {
-            font-size: 20px;
+        h1 {
+            font-size: 16px;
+            font-weight: normal;
+            margin-bottom: 5px;
         }
     }
 }
 
 
-.nav {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.login {
+    text-align: center;
+    width: 358px;
 
-    &.nav-inline {
-        li {
-            display: inline-block;
-        }
-    }
-
-    a {
-        cursor: pointer;
-        display: inline-block;
-    }
-
-    li [class^="icon-"],
-    li [class*=" icon-"] {
-        width: auto;
+    .hint {
+        padding-left: 136px;
+        text-align: left;
     }
 }
 
-.content {
-    padding-top: 54px;
-}
+
 
 .timelines {
     .column {
@@ -115,31 +51,39 @@ a {
     }
 }
 
-.page.header {
-    position: relative;
-    z-index: 100;
+// Timeline
+.container-wide {
+    .timeline.public {
+        padding: 0 4px 0 8px;
+    }
+
+    .timeline.private {
+        padding: 0 8px 0 4px;
+    }
 }
 
 .timeline {
     position: relative;
-    padding: 0 3px;
 
     .header {
-        background-color: #ccc;
+        background-color: rgba(125, 125, 119, 0.80);
         border-bottom: 0px solid #000;
         height: 39px;
-        width: 100%;
+        position: absolute;
+        top: 5px;
+        width: calc(100% - 12px);
+        z-index: 999;
 
         .title {
             color: #fff;
             font-size: 17px;
             font-weight: normal;
-            margin: 16px 6px 4px 4px;
+            margin: 16px 6px 4px 15px;
             padding: 0;
         }
 
         .tagline {
-            color: #999;
+            color: #fff;
             font-size: 13px;
             margin: 20px 0 0 0;
 
@@ -150,7 +94,7 @@ a {
         }
 
         .nav {
-            margin: 4px 4px 0 0;
+            margin: 4px 18px 0 0;
 
             .now,
             .ets,
@@ -179,7 +123,7 @@ a {
             .icon-circle-arrow-down,
             .icon-circle-arrow-up {
                 @include single-text-shadow(
-                    #aaaaaa, 0.1em, 0.1em, 0.2em
+                    rgba(0, 0, 0, 0.5), 0.1em, 0.1em, 0.2em
                 );
                 color: #ffffff;
                 font-size: 30px;
@@ -232,6 +176,10 @@ a {
                 .link i {
                     color: #000000;
                 }
+
+                .icon img {
+                    border-color: #000000;
+                }
             }
 
             .overlay {
@@ -252,6 +200,13 @@ a {
             .button {
                 position: relative;
                 z-index: 2;
+            }
+
+            .icon {
+                img {
+                    @include border-radius(25px);
+                    border: 3px solid #ffffff;
+                }
             }
 
             .username {
@@ -343,13 +298,14 @@ a {
     }
 
     .needle {
-        border-top: 1px solid #333333;
-        border-bottom: 1px solid #ffffff;
+        @include opacity(0.75);
+
+        border-bottom: 1px solid #333333;
+        border-top: 1px solid #ffffff;
         position: absolute;
         top: 50%;
-        opacity: 0.75;
         height: 0px;
-        width: 99%;
+        width: calc(100% - 12px);
 
         .date {
             @include border-radius(5px);
@@ -359,15 +315,27 @@ a {
 
             background-color: #444444;
             color: #ffffff;
-            font-size: 11px;
+            font-size: 14px;
             left: 50%;
-            height: 12px;
+            height: 16px;
             padding: 4px 0;
             position: absolute;
-            margin-left: -75px;
+            margin-left: -100px;
             text-align: center;
-            top: -10px;
-            width: 150px;
+            top: -12px;
+            width: 200px;
+        }
+
+        .now {
+            color: #ff6600;
+        }
+
+        .future {
+            margin-left: 5px;
+        }
+
+        .past {
+            margin-right: 5px;
         }
     }
 
@@ -392,18 +360,4 @@ a {
     .load-more {
         cursor: pointer;
     }
-}
-
-
-.pull-left {
-    float: left;
-}
-
-.pull-right {
-    float: right;
-}
-
-[class^="icon-"],
-[class*=" icon-"] {
-    -webkit-font-smoothing: inherit;
 }
