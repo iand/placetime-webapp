@@ -1,6 +1,10 @@
 Application.Model.Item = Backbone.Model.extend({
     idAttribute: 'id',
 
+    defaults: {
+        now: false
+    },
+
     time: function() {
         return moment.unix(
             this.get('ts').toString().substr(0, 10)

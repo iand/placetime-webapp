@@ -51,7 +51,6 @@ Application.addInitializer(function(){
         closeBtn += '<i class="icon-remove-circle"></i>';
         closeBtn += '</a>';
 
-    // TOOD: Hide next/prev arrows
     $('.fancybox').fancybox({
         maxWidth    : 970,
         maxHeight   : 800,
@@ -62,6 +61,7 @@ Application.addInitializer(function(){
         closeClick  : false,
         openEffect  : 'none',
         closeEffect : 'none',
+        arrows      : false,
 
         tpl: {
             closeBtn : closeBtn

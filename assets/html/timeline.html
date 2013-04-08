@@ -226,19 +226,36 @@
                         <div class="children"></div>
                     </div>
                 </div>
-                <div class="needle">
-                    <div class="date">
-                      <span class="future pull-left">
-                        <i class="icon-arrow-up"></i> Future
-                      </span>
-                      <span class="now">Now</span>
-                      <span class="past pull-right">
-                        Past <i class="icon-arrow-down"></i>
-                      </span>
-                    </div>
-                </div>
+
+                <div data-subview="needle"></div>
             </div>
         </script>
+
+
+        <script type="text/template" id="needle-template">
+        <div class="date">
+            <span class="future pull-left">
+                <i class="icon-arrow-up"></i> Future
+            </span>
+            <span class="now">Now</span>
+            <span class="past pull-right">
+               Past <i class="icon-arrow-down"></i>
+            </span>
+        </div>
+        </script>
+
+        <script type="text/template" id="needle-now-template">
+        <div class="date">
+            <span class="future pull-left">
+                <i class="icon-arrow-up"></i> Future
+            </span>
+            <span class="now">Now</span>
+            <span class="past pull-right">
+               Past <i class="icon-arrow-down"></i>
+            </span>
+        </div>
+        </script>
+
 
         <script type="text/template" id="timelines-template">
             <div data-subview="publicTimeline"></div>

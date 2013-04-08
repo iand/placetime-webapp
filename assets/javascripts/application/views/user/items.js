@@ -13,6 +13,9 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     initialize: function (options) {
         var self = this;
 
+        // Initialize subviews
+        Backbone.Subviews.add(self);
+
         // Initialize scroller
         this.on('collection:rendered', function(){
             // Trigger resize to adjust items height, use CSS3 calc in future
@@ -61,6 +64,14 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
+
+    subviewCreators : {
+        needle: function() {
+            return new Application.View.Needle();
+        }
+    },
+
+
     bindScroller: function () {
         var self = this;
 
@@ -76,8 +87,8 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             vScroll: true,
             onScrollEnd: function() {
                 _.bind(self.infiniteScroll, self, this)();
-                _.bind(self.updateNeedle, self, this)();
-                // _.bind(self.updateNeedlePosition, self, this)();
+
+                self.subviews.needle.trigger('scroll');
             }
         });
 
@@ -160,52 +171,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         }, 150);
     },
 
-
-    updateNeedle: function() {
-        var $needle = this.$el.find('.needle');
-
-
-        var offset = $needle.offset();
-
-        // Get element below needle
-        var $item = $(document.elementFromPoint(
-            offset.left,
-            offset.top + 4
-        )).closest('.item');
-
-        if ($item.length === 0) {
-            return;
-        }
-
-        var model = $item.data('model');
-
-        var time = model.time();
-
-        if (Math.abs(time.diff()) < moment().add('day', 1).diff()) {
-            $needle.find('.date').text(
-                'Today at ' +time.format(' hh:mm:ss A')
-            );
-        } else if (Math.abs(time.diff()) < moment().add('months', 1).diff()) {
-            $needle.find('.date').text(
-                time.format('Do MMMM hh:mm A')
-            );
-        } else {
-            $needle.find('.date').text(
-                time.format('Do MMMM YYYY')
-            );
-        }
-    },
-
-
-    updateNeedlePosition: function() {
-        var $needle = this.$el.find('.needle');
-
-        var difference = Math.abs(this.iscroll.maxScrollY) - Math.abs(this.iscroll.y);
-
-        if (difference < 200) {
-            $needle.css('top', 'calc(50% + ' + difference + 'px)');
-        }
-    },
 
 
     addItem: function(item) {

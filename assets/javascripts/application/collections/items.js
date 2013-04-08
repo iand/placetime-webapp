@@ -33,9 +33,14 @@ Application.Collection.Items = Backbone.Collection.extend({
             if (data.length === 0) {
                 defer.reject();
             } else {
-                defer.resolve(
-                    self.get(data[0].id)
-                );
+                self.each(function(model){
+                    model.set('now', false);
+                });
+
+                var model = self.get(data[0].id);
+                    model.set('now', true);
+
+                defer.resolve(model);
             }
         }).fail(function(){
             defer.reject();
