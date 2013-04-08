@@ -271,7 +271,7 @@ input[type=submit].wide {
   position: absolute;
   top: 5px;
   width: calc(100% - 12px);
-  z-index: 999;
+  z-index: 3;
 }
 /* line 77, scss/user.scss */
 .timeline .header .title {
