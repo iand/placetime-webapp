@@ -2,22 +2,22 @@ package main
 
 import (
 	"code.google.com/p/gorilla/mux"
-	"encoding/json"
-	"fmt"
-	"html/template"
-	"log"
-	"net/http"
-	//	"net/http/httputil"
 	"crypto/md5"
 	"crypto/rand"
 	"encoding/base64"
+	"encoding/json"
 	"errors"
+	"flag"
+	"fmt"
 	"github.com/iand/feedparser"
 	"github.com/iand/imgpick"
 	"github.com/iand/salience"
+	"html/template"
 	"image/png"
 	"io"
 	"io/ioutil"
+	"log"
+	"net/http"
 	"os"
 	"path"
 	"path/filepath"
@@ -27,12 +27,13 @@ import (
 	"time"
 )
 
-const (
+var (
 	assetsDir         = "./assets"
 	imgDir            = "/var/opt/timescroll/img"
 	templatesDir      = "./templates"
 	sessionCookieName = "ptsession"
 	sessionExpiry     = 86400 * 14
+	doinit            = false
 )
 
 var ()
@@ -41,7 +42,20 @@ func main() {
 	// TODO: set random number seed
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
+	flag.StringVar(&assetsDir, "assets", "./assets", "filesystem directory in which javascript/css/image assets are found")
+	flag.StringVar(&imgDir, "images", "/var/opt/timescroll/img", "filesystem directory to store fetched images")
+	flag.IntVar(&sessionExpiry, "session", 86400*14, "number of seconds session cookies should be valid for")
+	flag.BoolVar(&doinit, "init", false, "re-initialize database (warning: will wipe eveything)")
+	flag.Parse()
+
 	checkEnvironment()
+	log.Printf("Assets directory: %s", assetsDir)
+	log.Printf("Image directory: %s", imgDir)
+	log.Printf("Session expiry: %d", sessionExpiry)
+
+	if doinit {
+		initData()
+	}
 
 	go backgroundTasks()
 
@@ -60,7 +74,7 @@ func main() {
 	r.HandleFunc("/", timelineHandler).Methods("GET", "HEAD")
 
 	r.HandleFunc("/timeline", timelineHandler).Methods("GET", "HEAD")
-	r.HandleFunc("/-init", initHandler).Methods("GET", "HEAD")
+	//r.HandleFunc("/-init", initHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-admin", adminHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-refresh", refreshHandler).Methods("GET", "HEAD")
 	r.HandleFunc("/-fetchimages", fetchImagesHandler).Methods("GET", "HEAD")
@@ -427,14 +441,7 @@ func unfollowHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "ACK")
 }
 
-func initHandler(w http.ResponseWriter, r *http.Request) {
-	// sessionValid, _ := checkSession(w, r, false)
-	// if !sessionValid {
-	// 	return
-	// }
-
-	// TODO: restrict to admins
-
+func initData() {
 	s := NewRedisStore()
 	defer s.Close()
 
@@ -496,6 +503,9 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 	s.AddItem("nasa", parseKnownTime("1 Jan 2014"), "Mars Sample Return Mission - Launch of NASA sample return mission to Mars", "", "", "")
 	s.AddItem("nasa", parseKnownTime("5 Apr 2231"), "Pluto - is passed by Neptune in distance from the Sun for the next 20 years", "", "", "")
 
+	s.AddProfile("nasa", "nasa", "Nasa Missions", "Upcoming NASA mission information.", "", "")
+	//http: //www.ents24.com/web/festival-tickets/T-In-The-Park-2013-2998409.html
+
 	// s.SetProfile(&Profile{Pid: "o2shepherdsbushempire ", Name: "O2 Shepherd's Bush Empire Events", Bio: "", Feed: "http://www.o2shepherdsbushempire.co.uk/RSS"})
 	// s.SetProfile(&Profile{Pid: "skiddlewc2", Name: "Skiddle WC2", Bio: "What's On in London and area", Feed: "http://www.skiddle.com/rss/events.php?c=WC2"})
 
@@ -524,6 +534,9 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 	log.Print("Adding feed profile for londondanceguide")
 	s.AddProfile("londondanceguide", "sunshine", "London Dance Guide - visitlondon.com", "", "http://feeds.visitlondon.com/LondonDanceGuide", "visitlondon")
 
+	log.Print("Adding feed profile for o2shepherdsbushempire")
+	s.AddProfile("o2shepherdsbushempire", "sunshine", "O2 Shepherd's Bush Empire | Concert Dates and Tickets", "", "http://www.o2shepherdsbushempire.co.uk/RSS", "")
+
 	// s.AddProfile("naturelondonscience", "sunshine", "London Blog: Science Events In London This Week : London Blog", "", "http://blogs.nature.com/london/feed", "")
 	// s.AddProfile("lcf", "sunshine", "London College of Fashion - News &amp; Events", "", "http://newsevents.arts.ac.uk/lcf/news/feed/arts/", "")
 	// s.AddProfile("frenchcinemalondon", "sunshine", "London events | French Cinema London", "", "http://www.frenchcinemalondon.com/?feed=rss2", "")
@@ -548,6 +561,7 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 	s.Follow("iand", "londonsportsguide")
 	s.Follow("iand", "londonartsguide")
 	s.Follow("iand", "londondanceguide")
+	s.Follow("iand", "o2shepherdsbushempire")
 	s.Follow("iand", "nasa")
 	s.Follow("iand", "daveg")
 
@@ -555,12 +569,17 @@ func initHandler(w http.ResponseWriter, r *http.Request) {
 	s.Follow("daveg", "londonsportsguide")
 	s.Follow("daveg", "londonartsguide")
 	s.Follow("daveg", "londondanceguide")
+	s.Follow("daveg", "o2shepherdsbushempire")
 	s.Follow("daveg", "nasa")
 	s.Follow("daveg", "iand")
 
+	log.Print(("Fetching feeds\n"))
+	pollFeeds()
+
+	log.Print(("Fetching images\n"))
+	pollImages()
+
 	log.Print("Initialisation complete")
-	w.Header().Set("Content-Type", "text/plain")
-	w.Write([]byte("Initialised"))
 
 }
 
