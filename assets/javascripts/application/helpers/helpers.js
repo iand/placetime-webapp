@@ -13,7 +13,6 @@ function hashCode(){
 function displayValidationErrors (messages) {
     for (var key in messages) {
         if (messages.hasOwnProperty(key)) {
-            console.log(messages[key]);
             addValidationError(key, messages[key]);
         }
     }
