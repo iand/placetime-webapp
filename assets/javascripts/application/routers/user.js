@@ -27,49 +27,16 @@ Application.Router.User = Backbone.Router.extend({
         var check = session.check();
 
         check.done(function(){
-            // Load public items
-            var publicItems = new Application.Collection.Items(undefined, {
-                status: 'p'
+            // Set header to wide and re-render
+            self.header.model.set('wide', true);
+            self.header.render();
+
+            // Render timelines
+            var timeline = new Application.View.Timelines({
+                pid: session.get('pid')
             });
 
-            var publicItemsPromise = publicItems.fetch({
-                data: {
-                    pid: session.get('pid'),
-                    before: 5,
-                    after: 5
-                }
-            });
-
-
-            // Load private items
-            var privateItems = new Application.Collection.Items(undefined, {
-                status: 'm'
-            });
-
-            var privateItemsPromise = privateItems.fetch({
-                data: {
-                    pid: session.get('pid'),
-                    before: 5,
-                    after: 5
-                }
-            });
-
-
-            $.when(publicItemsPromise, privateItemsPromise).done(function(){
-                // Set header to wide and re-render
-                self.header.model.set('wide', true);
-                self.header.render();
-
-                // Render timeline
-                var timeline = new Application.View.Timeline({
-                    publicItems: publicItems,
-                    privateItems: privateItems,
-
-                    pid: session.get('pid')
-                });
-
-                Application.content.show(timeline);
-            });
+            Application.content.show(timeline);
         });
 
 

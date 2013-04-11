@@ -1,66 +1,66 @@
 Application.View.Items = Backbone.Marionette.CompositeView.extend({
-    template: '#timeline-template',
-    className: 'column',
+    template: '#items-template',
+    className: 'items',
 
     events: {
-        'click .button.promote': 'promoteItem',
-        'click .button.demote': 'demoteItem',
-        'click .nav .now': 'now'
+        'click .promote': 'promote',
+        'click .demote': 'demote'
     },
 
+    itemView: Application.View.Item,
     itemViewContainer: '.children',
 
     initialize: function (options) {
         var self = this;
 
+
         // Initialize subviews
         Backbone.Subviews.add(self);
 
-        // Initialize scroller
+        // Initialize courier
+        Backbone.Courier.add(self);
+
+        // Bubble view events, look into passMessage
         this.on('collection:rendered', function(){
-            // Trigger resize to adjust items height, use CSS3 calc in future
-            $(window).trigger('resize');
-
-            setTimeout(function(){
-                self.bindScroller();
-                self.now();
-            }, jQuery.fx.speeds.slow + 250);
+            self.spawn('collection:rendered');
         });
 
+        this.on('composite:collection:rendered', function(){
+            self.spawn('collection:rendered');
+        });
 
-        // On item add, refresh scroller
         this.on('after:item:added', function(){
-            self.scrollerTimeout = null;
-
-            clearTimeout(self.scrollerTimeout);
-
-            self.scrollerTimeout = setTimeout(function(){
-                self.refreshScroller();
-            }, jQuery.fx.speeds.slow + 250);
+            self.spawn('item:added');
         });
 
-
-        // On item remove refresh scroller
         this.on('item:removed', function(){
-            self.scrollerTimeout = null;
-
-            clearTimeout(self.scrollerTimeout);
-
-            self.scrollerTimeout = setTimeout(function(){
-                self.refreshScroller();
-            }, jQuery.fx.speeds.slow + 250);
+            self.spawn('item:removed');
         });
 
 
-        // Adjust scroller height
-        $(window).resize(function(){
-            var $scroller = self.$el.find('.scroller');
-
-            // - 100 is height space
-            $scroller.height(
-                $(this).height() - 59
-            );
+        // Bubble collection events
+        this.listenTo(this.collection, 'item:promoted', function(event) {
+            self.spawn('item:promoted', event);
         });
+
+        this.listenTo(this.collection, 'item:demoted', function(event) {
+            self.spawn('item:demoted', event);
+        });
+
+
+
+
+        // Custom events
+        this.on('item:added', function(event) {
+            self.collection.add(event.data);
+        });
+
+        this.on('scroll', function(event) {
+            this.subviews.needle.scroll(event);
+        });
+
+        this.on('now', this.now);
+        this.on('scroll', this.infiniteScroll);
     },
 
 
@@ -71,57 +71,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         }
     },
 
-
-    bindScroller: function () {
-        var self = this;
-
-        if (this.iscroll) {
-            this.iscroll.destroy();
-        }
-
-        var $scroller = this.$el.find('.scroller');
-
-        this.iscroll = new iScroll($scroller.get(0), {
-            momentum: true,
-            hScrollbar: false,
-            vScroll: true,
-            onScrollEnd: function() {
-                _.bind(self.infiniteScroll, self, this)();
-
-                self.subviews.needle.trigger('scroll');
-            }
-        });
-
-        return this;
-    },
-
-
-    refreshScroller: function() {
-        if (this.iscroll === undefined) {
-            return;
-        }
-
-        this.iscroll.refresh();
-    },
-
-
-    resetScroller: function() {
-        var defer = $.Deferred();
-
-        var self = this;
-
-        if (self.iscroll.y !== 0) {
-            self.iscroll.scrollTo(0, 0, jQuery.fx.speeds.slow);
-
-            setTimeout(function(){
-                defer.resolve();
-            }, jQuery.fx.speeds.slow + 250);
-        } else {
-            defer.resolve();
-        }
-
-        return defer.promise();
-    },
 
 
     infiniteScroll: function(event) {
@@ -178,7 +127,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    promoteItem: function (event) {
+    promote: function (event) {
         var $item = $(event.currentTarget).closest('[data-id]');
 
         var model = this.collection.get(
@@ -186,27 +135,17 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         );
         model.promote();
 
-        // TODO: Look into event bubbling
-        this.collection.trigger('item:promoted', model);
-        this.collection.remove(model);
-
         return false;
     },
 
 
-    demoteItem: function (event) {
+    demote: function (event) {
         var $item = $(event.currentTarget).closest('[data-id]');
-
-        var self = this;
 
         var model = this.collection.get(
             $item.data('id')
         );
         model.demote();
-
-        // TODO: Look into event bubbling
-        this.collection.trigger('item:demoted', model);
-        this.collection.remove(model);
 
         return false;
     },
@@ -214,7 +153,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
     now: function() {
         var self = this;
-
 
         var promise = this.collection.now();
 
@@ -226,11 +164,12 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             var position = $closest.position(),
                 offset   = $needle.position();
 
-            self.iscroll.scrollTo(
-                -(position.left),
-                -(position.top - offset.top + 40),
-                0
-            );
+
+            self.trigger('scroll:to', {
+                left: -(position.left),
+                top: -(position.top - offset.top),
+                duration: 0
+            });
 
             $closest.addClass('now');
 
@@ -249,38 +188,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
 
-    showNoResults: function() {
-        var itemViewContainer = this.getItemViewContainer(this);
-
-        if (itemViewContainer.find('.no-results').length > 0) {
-            return;
-        }
-
-        var noResults = new Application.View.NoResults();
-            noResults.render();
-
-        itemViewContainer.append(noResults.el);
-    },
-
-
-    showLoadMore: function() {
-        var itemViewContainer = this.getItemViewContainer(this);
-
-        if (itemViewContainer.find('.load-more').length > 0) {
-            return;
-        }
-
-        var loadMore = new Application.View.LoadMore();
-            loadMore.render();
-
-        this.listenTo(loadMore, 'loadmore', this.loadMore);
-
-        itemViewContainer.append(loadMore.el);
-    },
-
-    hideLoadMore: function() {
-
-    },
 
 
     loadMore: function(options){
@@ -296,7 +203,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             data.before = 10;
             data.ts = self.collection.last().get('ts');
         } else if (options.after) {
-            console.log(self.collection.last().attributes);
             data.after = 10;
             data.before = 0;
             data.ts = self.collection.first().get('ts');
@@ -311,6 +217,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
+
     appendHtml: function(collectionView, itemView, index) {
         var itemViewContainer = this.getItemViewContainer(collectionView);
 
@@ -321,9 +228,9 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         }
     },
 
+
     buildItemView: function(item, ItemViewType, itemViewOptions) {
         item.set('status', this.model.get('status'));
-        item.set('order', this.model.get('order'));
 
         return new Application.View.Item({
             model: item

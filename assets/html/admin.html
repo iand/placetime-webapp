@@ -290,7 +290,11 @@
        </script>
 
     <script type="text/template" id="briefprofile-tmpl">
-        <div><a href="#/profile/<%= data.pid %>"><%= data.pname %> (@<%= data.pid %>)</a></div>
+        <div>
+            <a href="#/profile/<%= data.pid %>">
+                <%= data.pname %> (@<%= data.pid %>)
+            </a>
+        </div>
     </script>
 
     <script type="text/template" id="briefitem-tmpl">

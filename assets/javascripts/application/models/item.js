@@ -18,11 +18,16 @@ Application.Model.Item = Backbone.Model.extend({
         defer.done(done);
         defer.fail(fail);
 
+        this.collection.trigger('item:promoted', this.attributes);
+        this.collection.remove(this);
+
+        this.trigger('promoted', this.attributes);
+
         $.ajax({
             url: '/-tpromote',
             type: 'post',
             data: {
-                pid: session.get("pid"),
+                pid: session.get('pid'),
                 id: this.get('id')
             },
             success: function() {
@@ -43,11 +48,16 @@ Application.Model.Item = Backbone.Model.extend({
         defer.done(done);
         defer.fail(fail);
 
+        this.collection.trigger('item:demoted', this.attributes);
+        this.collection.remove(this);
+
+        this.trigger('demoted', this.attributes);
+
         $.ajax({
             url: '/-tdemote',
             type: 'post',
             data: {
-                pid: session.get("pid"),
+                pid: session.get('pid'),
                 id: this.get('id')
             },
             success: function() {
@@ -60,8 +70,4 @@ Application.Model.Item = Backbone.Model.extend({
 
         return defer.promise();
     }
-});
-
-var Item = Backbone.Model.extend({
-
 });
