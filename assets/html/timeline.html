@@ -52,18 +52,6 @@
                 <div class="dropdown dropdown-tip dropdown-anchor-right">
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="main-hiddenlink" href="#new">
-                                <i class="icon-edit"></i>
-                                new
-                            </a>
-                        </li>
-                        <li>
-                            <a class="main-hiddenlink" href="#profile">
-                                <i class="icon-user"></i>
-                                @<%= pid %>
-                            </a>
-                        </li>
-                        <li>
                             <a class="main-hiddenlink" href="#logout">
                                 <i class="icon-signout"></i>
                                 logout
@@ -166,7 +154,7 @@
                 </p>
                 <p class="time pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
-                        <% if (ts === event) { %>
+                        <% if (ts.toString().substr(0, 10) == event) { %>
                             <i class="icon-time"></i> <span class="event">event:</span>
                         <% } else { %>
                             <i class="icon-time"></i> <span class="added">added:</span>
@@ -202,6 +190,10 @@
 
             <% if (bio) { %>
             <p class="bio pull-left">
+                <% if (pname) { %>
+                    <span class="name"><%= pname %></span>:
+                <% } %>
+
                 <%= bio %>
             </p>
             <% } %>
@@ -216,7 +208,7 @@
             </ul>
 
             <a class="button unfollow">
-                <i class="icon-remove"></i>
+                <i class="icon-minus"></i>
             </a>
         </script>
 
@@ -246,7 +238,7 @@
 
             <!-- TODO: Conditionally display follow/unfollow -->
             <a class="button follow">
-                <i class="icon-ok"></i>
+                <i class="icon-plus"></i>
             </a>
         </script>
 
@@ -270,11 +262,12 @@
                                 <a href="#followers">Followers</a>
                             </li>
                         </ul>
+
+                        <input class="pull-left search" type="search" placeholder="Search">
                     <% } else { %>
                         <h2 class="title pull-left">My Playlist</h2>
-                        <p class="tagline pull-left">
-                             things to <em>maybe</em> check out
-                        </p>
+
+                        <input class="pull-left add" type="url" placeholder="http://">
                     <% } %>
 
                     <a class="now pull-right">

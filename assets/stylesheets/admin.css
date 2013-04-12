@@ -34,11 +34,12 @@ a {
 
 /* line 9, scss/scaffolding.scss */
 .container-wide {
-  max-width: 1600px;
+  margin: 0 auto;
+  max-width: 1300px;
   width: 100%;
 }
 
-/* line 16, scss/scaffolding.scss */
+/* line 17, scss/scaffolding.scss */
 .navbar {
   -webkit-box-shadow: 0px 4px 5px #888888;
   -moz-box-shadow: 0px 4px 5px #888888;
@@ -48,26 +49,26 @@ a {
   height: 45px;
   width: 100%;
 }
-/* line 23, scss/scaffolding.scss */
+/* line 24, scss/scaffolding.scss */
 .navbar.navbar-fixed {
   position: fixed;
   top: 0;
 }
-/* line 28, scss/scaffolding.scss */
+/* line 29, scss/scaffolding.scss */
 .navbar .navbar-inner {
   overflow: hidden;
 }
-/* line 32, scss/scaffolding.scss */
+/* line 33, scss/scaffolding.scss */
 .navbar .brand {
   color: #ffffff;
   font-size: 23px;
   margin: 8px 0 0 22px;
 }
-/* line 37, scss/scaffolding.scss */
+/* line 38, scss/scaffolding.scss */
 .navbar .brand .icon-ok-circle {
   margin-right: -3px;
 }
-/* line 42, scss/scaffolding.scss */
+/* line 43, scss/scaffolding.scss */
 .navbar .brand .icon-ok-circle,
 .navbar .brand .icon-time {
   color: #555555;
@@ -75,46 +76,46 @@ a {
   float: left;
   margin-top: 0px;
 }
-/* line 49, scss/scaffolding.scss */
+/* line 50, scss/scaffolding.scss */
 .navbar .brand .icon-time {
   margin-right: 10px;
 }
-/* line 54, scss/scaffolding.scss */
+/* line 55, scss/scaffolding.scss */
 .navbar .tagline {
   color: #ededed;
   font-size: 14px;
   margin: 16px 0 0 25px;
 }
-/* line 60, scss/scaffolding.scss */
+/* line 61, scss/scaffolding.scss */
 .navbar .nav {
   margin: 5px 25px 0;
 }
-/* line 64, scss/scaffolding.scss */
+/* line 65, scss/scaffolding.scss */
 .navbar .nav .icon-cog {
   font-size: 33px;
 }
-/* line 71, scss/scaffolding.scss */
+/* line 72, scss/scaffolding.scss */
 .navbar .dropdown .icon-edit,
 .navbar .dropdown .icon-signout {
   font-size: 20px;
 }
 
-/* line 79, scss/scaffolding.scss */
+/* line 80, scss/scaffolding.scss */
 .nav {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 85, scss/scaffolding.scss */
+/* line 86, scss/scaffolding.scss */
 .nav.nav-inline li {
   display: inline-block;
 }
-/* line 90, scss/scaffolding.scss */
+/* line 91, scss/scaffolding.scss */
 .nav a {
   cursor: pointer;
   display: inline-block;
 }
-/* line 96, scss/scaffolding.scss */
+/* line 97, scss/scaffolding.scss */
 .nav li [class^="icon-"],
 .nav li [class*=" icon-"] {
   width: auto;
@@ -144,9 +145,11 @@ input {
   outline: none;
 }
 
-/* line 22, scss/form.scss */
+/* line 24, scss/form.scss */
 input[type=text],
-input[type=password] {
+input[type=password],
+input[type=search],
+input[type=url] {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
@@ -171,7 +174,7 @@ input[type=password] {
   width: 200px;
 }
 
-/* line 42, scss/form.scss */
+/* line 44, scss/form.scss */
 input[type=submit] {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -193,12 +196,12 @@ input[type=submit] {
   margin: 8px 10px 4px 0px;
   padding: 12px;
 }
-/* line 61, scss/form.scss */
+/* line 63, scss/form.scss */
 input[type=submit]:hover {
   background-color: #fff;
   border: 2px solid #666666;
 }
-/* line 66, scss/form.scss */
+/* line 68, scss/form.scss */
 input[type=submit]:active {
   -webkit-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
   -moz-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
@@ -206,7 +209,7 @@ input[type=submit]:active {
   background-color: #cccccc;
   border: 2px solid #ff9900;
 }
-/* line 74, scss/form.scss */
+/* line 76, scss/form.scss */
 input[type=submit].wide {
   width: 100%;
 }
