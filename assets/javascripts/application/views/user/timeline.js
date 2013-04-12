@@ -37,6 +37,56 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     },
 
 
+    onMessages: {
+        // TODO: Unify item:removed, item:added methods
+        'item:removed': function() {
+            var self = this;
+
+            clearTimeout(self.scrollerTimeout);
+
+            self.scrollerTimeout = setTimeout(function(){
+                self.refreshScroller();
+            }, jQuery.fx.speeds.slow + 250);
+        },
+
+
+        // Update scroller
+        'item:added': function() {
+            var self = this;
+
+            clearTimeout(self.scrollerTimeout);
+
+            self.scrollerTimeout = setTimeout(function(){
+                self.refreshScroller();
+            }, jQuery.fx.speeds.slow + 250);
+        },
+
+
+        // Bind scroller
+        'collection:rendered': function() {
+            $(window).trigger('resize');
+
+            // Wait until animation is finished
+            var self = this;
+            setTimeout(function(){
+                self.bindScroller();
+            }, jQuery.fx.speeds.slow + 250);
+        },
+
+
+        'infinite:loaded': function() {
+            this.refreshScroller();
+            this.infiniteScrollLoading = false;
+        }
+    },
+
+
+    passMessages: {
+        'item:promoted': '.',
+        'item:demoted': '.'
+    },
+
+
     onRender: function() {
         var self = this;
 
@@ -83,8 +133,8 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         collection.fetch({
             data: {
                 pid: this.model.get('pid'),
-                before: 10,
-                after: 10
+                before: 20,
+                after: 20
             },
             reset: true
         });
@@ -94,12 +144,17 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
     followings: function() {
         // Load items
-        var collection = new Application.Collection.Followings(undefined, {
-            pid: this.model.get('pid')
+        var collection = new Application.Collection.Followings();
+
+        var model = new Backbone.Model({
+            pid: this.model.get('pid'),
+            count: 20,
+            start: 10
         });
 
         var view = new Application.View.Followings({
-            collection: collection
+            collection: collection,
+            model: model
         });
 
         this.region.show(view);
@@ -107,8 +162,8 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         // Fetch after rendering so events are fired
         var promise = collection.fetch({
             data: {
-                pid: this.model.get('pid'),
-                count: 40
+                pid: model.get('pid'),
+                count: model.get('count')
             },
             reset: true
         });
@@ -118,12 +173,17 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
     followers: function() {
         // Load items
-        var collection = new Application.Collection.Followers(undefined, {
-            pid: this.model.get('pid')
+        var collection = new Application.Collection.Followers();
+
+        var model = new Backbone.Model({
+            pid: this.model.get('pid'),
+            count: 20,
+            start: 10
         });
 
         var view = new Application.View.Followers({
-            collection: collection
+            collection: collection,
+            model: model
         });
 
         this.region.show(view);
@@ -131,8 +191,8 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         // Fetch after rendering so events are fired
         var promise = collection.fetch({
             data: {
-                pid: this.model.get('pid'),
-                count: 40
+                pid: model.get('pid'),
+                count: model.get('count')
             },
             reset: true
         });
@@ -141,50 +201,6 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
     now: function() {
         this.region.currentView.trigger('now', this);
-    },
-
-
-    onMessages: {
-        // TODO: Unify item:removed, item:added methods
-        'item:removed': function() {
-            var self = this;
-
-            clearTimeout(self.scrollerTimeout);
-
-            self.scrollerTimeout = setTimeout(function(){
-                self.refreshScroller();
-            }, jQuery.fx.speeds.slow + 250);
-        },
-
-
-        // Update scroller
-        'item:added': function() {
-            var self = this;
-
-            clearTimeout(self.scrollerTimeout);
-
-            self.scrollerTimeout = setTimeout(function(){
-                self.refreshScroller();
-            }, jQuery.fx.speeds.slow + 250);
-        },
-
-
-        // Bind scroller
-        'collection:rendered': function() {
-            $(window).trigger('resize');
-
-            // Wait until animation is finished
-            var self = this;
-            setTimeout(function(){
-                self.bindScroller();
-            }, jQuery.fx.speeds.slow + 250);
-        }
-    },
-
-
-    passMessages: {
-        'item:promoted': '.',
-        'item:demoted': '.'
     },
 
 
@@ -201,8 +217,12 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         this.iscroll = new iScroll($scroller.get(0), {
             momentum: true,
             hScrollbar: false,
+            hScroll: false,
             vScroll: true,
+            vScrollbar: true,
+
             onScrollEnd: function(event) {
+                self.infiniteScroll(this);
                 self.region.currentView.trigger('scroll', this);
             }
         });
@@ -219,12 +239,42 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     },
 
 
-
     refreshScroller: function() {
         if (this.iscroll === undefined) {
             return;
         }
 
         this.iscroll.refresh();
+    },
+
+
+
+    infiniteScroll: function(event) {
+        var self = this;
+
+
+        clearTimeout(self.infiniteScrollReference);
+
+        self.infiniteScrollReference = setTimeout(function(){
+            // Loading
+            if (self.infiniteScrollLoading === true) {
+                return;
+            }
+
+            // Top infinite scroll
+            else if (Math.abs(event.y) < (140 * 5)) {
+                self.region.currentView.trigger('infinite:load', {after: true});
+            }
+
+            // Bottom infinite scroll
+            else if (Math.abs(event.y) > Math.abs(event.maxScrollY + (140 * 5))) {
+                self.region.currentView.trigger('infinite:load', {before: true});
+            }
+
+            // Somewhere inbetween
+            else {
+                return;
+            }
+        }, 150);
     }
 });

@@ -10,57 +10,54 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     itemView: Application.View.Item,
     itemViewContainer: '.children',
 
+
     initialize: function (options) {
-        var self = this;
-
-
         // Initialize subviews
-        Backbone.Subviews.add(self);
+        Backbone.Subviews.add(this);
 
         // Initialize courier
-        Backbone.Courier.add(self);
+        Backbone.Courier.add(this);
 
-        // Bubble view events, look into passMessage
+
+        // Bubble view events, passMessages didn't work
         this.on('collection:rendered', function(){
-            self.spawn('collection:rendered');
+            this.spawn('collection:rendered');
         });
 
         this.on('composite:collection:rendered', function(){
-            self.spawn('collection:rendered');
+            this.spawn('collection:rendered');
         });
 
         this.on('after:item:added', function(){
-            self.spawn('item:added');
+            this.spawn('item:added');
         });
 
         this.on('item:removed', function(){
-            self.spawn('item:removed');
+            this.spawn('item:removed');
         });
 
 
-        // Bubble collection events
+        // Bubble certain collection events
         this.listenTo(this.collection, 'item:promoted', function(event) {
-            self.spawn('item:promoted', event);
+            this.spawn('item:promoted', event);
         });
 
         this.listenTo(this.collection, 'item:demoted', function(event) {
-            self.spawn('item:demoted', event);
+            this.spawn('item:demoted', event);
         });
-
-
 
 
         // Custom events
         this.on('item:added', function(event) {
-            self.collection.add(event.data);
+            this.collection.add(event.data);
         });
 
         this.on('scroll', function(event) {
             this.subviews.needle.scroll(event);
         });
 
+        this.on('infinite:load', this.loadMore);
         this.on('now', this.now);
-        this.on('scroll', this.infiniteScroll);
     },
 
 
@@ -71,54 +68,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         }
     },
 
-
-
-    infiniteScroll: function(event) {
-        var self = this;
-
-
-        clearTimeout(self.infiniteScrollReference);
-
-        // self.infiniteScrollLast = moment();
-        self.infiniteScrollReference = setTimeout(function(){
-            // Loading
-            if (self.infiniteScrollLoading === true) {
-                return;
-            }
-
-            // Buffer
-            // else if (self.infiniteScrollLast.diff() > -2000) {
-            //     return;
-            // }
-
-            // Top infinite scroll
-            else if (Math.abs(event.y) < (140 * 5)) {
-                loadingMore = self.loadMore({ after: true });
-            }
-
-            // Bottom infinite scroll
-            else if (Math.abs(event.y) > Math.abs(event.maxScrollY + (140 * 5))) {
-                loadingMore = self.loadMore({ before: true });
-            }
-
-            // Somehwere inbetween
-            else {
-                return;
-            }
-
-
-            self.infiniteScrollLoading = true;
-
-            loadingMore.done(function(data){
-                if (data.length === 0) {
-                    self.refreshScroller();
-                }
-
-                // self.infiniteScrollLast    = moment();
-                self.infiniteScrollLoading = false;
-            });
-        }, 150);
-    },
 
 
 
@@ -210,9 +159,13 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             throw new Error('Invalid options provided');
         }
 
-        return self.collection.fetch({
+        self.collection.fetch({
             remove: false,
             data: data
+        }).done(function(){
+            self.trigger('infinite:loaded');
+        }).fail(function(){
+            self.trigger('infinite:failed');
         });
     },
 
