@@ -141,6 +141,10 @@
         </script>
 
 
+
+
+
+
         <script type="text/template" id="item-template">
             <% if (image) { %>
                 <div class="overlay"><!-- --></div>
@@ -189,21 +193,83 @@
         </script>
 
 
+        <script type="text/template" id="following-template">
+            <div class="icon pull-left">
+                <img src="/-assets/images/user.jpg" width="40" height="40">
+            </div>
 
+            <p class="username pull-left">@<%= pid %></p>
+
+            <% if (bio) { %>
+            <p class="bio pull-left">
+                <%= bio %>
+            </p>
+            <% } %>
+
+            <ul class="statistics pull-left">
+                <li class="followings">
+                    <%= followingcount %> following
+                </li>
+                <li class='followers'>
+                    <%= followercount %> followers
+                </li>
+            </ul>
+
+            <a class="button unfollow">
+                <i class="icon-remove"></i>
+            </a>
+        </script>
+
+
+
+        <script type="text/template" id="follower-template">
+            <div class="icon pull-left">
+                <img src="/-assets/images/user.jpg" width="40" height="40">
+            </div>
+
+            <p class="username pull-left">@<%= pid %></p>
+
+            <% if (bio) { %>
+            <p class="bio pull-left">
+                <%= bio %>
+            </p>
+            <% } %>
+
+            <ul class="statistics pull-left">
+                <li class="followings">
+                    <%= followingcount %> following
+                </li>
+                <li class='followers'>
+                    <%= followercount %> followers
+                </li>
+            </ul>
+
+            <!-- TODO: Conditionally display follow/unfollow -->
+            <a class="button follow">
+                <i class="icon-ok"></i>
+            </a>
+        </script>
 
 
         <script type="template/text" id="timeline-template">
-        <% if (status === 'p') { %>
+            <% if (status === 'p') { %>
             <div class="timeline public">
-        <% } else { %>
+            <% } else { %>
             <div class="timeline private">
-        <% } %>
+            <% } %>
                 <div class="header">
                     <% if (status === 'p') { %>
-                        <h2 class="title pull-left">Timeline</h2>
-                        <p class="tagline pull-left">
-                            <em>possible</em> things to do or check out
-                        </p>
+                        <ul class="nav nav-inline pull-left">
+                            <li class="timeline <%= (view == 'timeline')? 'active':'' %>">
+                                <a href="#timeline">Timeline</a>
+                            </li>
+                            <li class="followings <%= (view == 'followings')? 'active':'' %>">
+                                <a>Following</a>
+                            </li>
+                            <li class="followers <%= (view == 'timeline')? 'followers':'' %>">
+                                <a href="#followers">Followers</a>
+                            </li>
+                        </ul>
                     <% } else { %>
                         <h2 class="title pull-left">My Playlist</h2>
                         <p class="tagline pull-left">
@@ -211,25 +277,39 @@
                         </p>
                     <% } %>
 
-                    <ul class="nav nav-inline pull-right">
-                        <li>
-                            <a class="now">
-                                now <i class="icon-repeat"></i>
-                            </a>
-                        </li>
-                    </ul>
+                    <a class="now pull-right">
+                        now <i class="icon-repeat"></i>
+                    </a>
                 </div>
 
 
-                <div class="items">
-                    <div class="scroller">
-                        <div class="children"></div>
-                    </div>
-                </div>
-
-                <div data-subview="needle"></div>
+                <div class="collection"></div>
             </div>
         </script>
+
+
+        <script type="text/template" id="items-template">
+        <div class="scroller">
+            <div class="children"></div>
+        </div>
+        <div data-subview="needle"></div>
+        </script>
+
+
+        <script type="text/template" id="followings-template">
+        <div class="scroller">
+            <div class="children"></div>
+        </div>
+        </script>
+
+
+
+        <script type="text/template" id="followers-template">
+        <div class="scroller">
+            <div class="children"></div>
+        </div>
+        </script>
+
 
 
         <script type="text/template" id="needle-template">

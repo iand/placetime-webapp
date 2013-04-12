@@ -93,35 +93,26 @@
             }
         }
 
-        .nav {
+
+        // Now
+        .now {
+            border-bottom: 0;
+            font-size: 11px;
             margin: 4px 18px 0 0;
 
-            .now,
-            .ets,
-            .ts {
-                border-bottom: 0;
-                font-size: 11px;
-
-                &:hover {
-                    .icon-repeat,
-                    .icon-circle-arrow-up,
-                    .icon-circle-arrow-down {
-                        color: #000000;
-                    }
-                }
-
-                &:active {
-                    .icon-repeat,
-                    .icon-circle-arrow-up,
-                    .icon-circle-arrow-down {
-                        color: #ff6600;
-                    }
+            &:hover {
+                .icon-repeat {
+                    color: #000000;
                 }
             }
 
-            .icon-repeat,
-            .icon-circle-arrow-down,
-            .icon-circle-arrow-up {
+            &:active {
+                .icon-repeat {
+                    color: #ff6600;
+                }
+            }
+
+            .icon-repeat {
                 @include single-text-shadow(
                     rgba(0, 0, 0, 0.5), 0.1em, 0.1em, 0.2em
                 );
@@ -130,6 +121,27 @@
             }
         }
     }
+
+    .nav {
+        font-size: 14px;
+        margin: 8px 12px;
+
+
+        li {
+            margin-right: 15px;
+
+            &.active {
+                a {
+                    color: #ff6600;
+                }
+            }
+
+            a {
+                border-bottom: 0;
+            }
+        }
+    }
+
 
     .scroller {
         position: relative;
@@ -141,9 +153,137 @@
         position: relative;
     }
 
-    .items {
+    .items,
+    .followers,
+    .followings {
         padding-top: 5px;
 
+        .item {
+            .icon,
+            .username,
+            .text,
+            .time,
+            .link,
+            .button {
+                position: relative;
+                z-index: 2;
+            }
+
+            .text,
+            .bio,
+            .link,
+            .statistics,
+            .time {
+                width: 100%;
+
+                a {
+                    border-bottom: 0;
+                }
+            }
+
+            .icon {
+                img {
+                    @include border-radius(25px);
+                    border: 3px solid #ffffff;
+                }
+            }
+
+
+            .username {
+                font-size: 14px;
+                padding: 7px;
+                margin: 0 0 0 7px;
+            }
+
+
+            .text,
+            .bio {
+                font-size: 22px;
+                margin: 0;
+            }
+
+            .button {
+                @include border-radius(31px);
+                @include box-shadow(
+                    rgba(000, 000, 000, 0.5) 0px 1px 3px,
+                    rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset
+                );
+                @include text-shadow(
+                    #aaa 0.1em 0.1em 0.2em
+                );
+                @include background(
+                    linear-gradient(top, #deddd8, #deddd8)
+                );
+                color: #000;
+                cursor: pointer;
+                border: 4px solid #fff;
+                bottom: 10px;
+                font-size: 22px;
+                position: absolute;
+                right: 10px;
+
+                &:hover {
+                    color: #ffffff;
+                }
+
+                &:active {
+                    color: #ff6600;
+                }
+            }
+        }
+    }
+
+
+    // Following and followers view
+    .followings,
+    .followers {
+        .item {
+            @include border-radius(2px);
+            @include single-box-shadow(
+                #aaaaaa, 1px, 1px, 2px
+            );
+            background-color: #fff;
+            margin: 0 0 7px;
+            overflow: hidden;
+            padding: 15px;
+            position: relative;
+
+            .username {
+                color: #000000;
+            }
+
+            .bio {
+                margin-bottom: 15px;
+            }
+
+            .statistics {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+
+                .followings,
+                .followers {
+                    display: inline;
+                }
+
+                .followings {
+                    padding-right: 15px;
+                }
+            }
+
+            .unfollow {
+                padding: 6px 9px 5px 10px;
+            }
+
+            .follow {
+                padding: 6px 7px 5px 8px;
+            }
+        }
+    }
+
+
+    // Items view
+    .items {
         .item {
             @include border-radius(2px);
             @include single-box-shadow(
@@ -193,36 +333,13 @@
                 z-index: 1;
             }
 
-            .icon,
-            .username,
-            .text,
-            .time,
-            .link,
-            .button {
-                position: relative;
-                z-index: 2;
-            }
-
-            .icon {
-                img {
-                    @include border-radius(25px);
-                    border: 3px solid #ffffff;
-                }
-            }
-
             .username {
-                font-size: 14px;
                 color: #ddd;
-                padding: 7px;
-                margin: 0 0 0 7px;
             }
 
             .text {
-                margin: 0;
-
                 a {
                     color: #fff;
-                    font-size: 22px;
                 }
             }
 
@@ -248,46 +365,6 @@
                 }
             }
 
-            .text,
-            .link,
-            .time {
-                width: 100%;
-
-                a {
-                    border-bottom: 0;
-                }
-            }
-
-            .promote,
-            .demote {
-                @include border-radius(31px);
-                @include box-shadow(
-                    rgba(000, 000, 000, 0.5) 0px 1px 3px,
-                    rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset
-                );
-                @include text-shadow(
-                    #aaa 0.1em 0.1em 0.2em
-                );
-                @include background(
-                    linear-gradient(top, #deddd8, #deddd8)
-                );
-                color: #000;
-                cursor: pointer;
-                border: 4px solid #fff;
-                bottom: 10px;
-                font-size: 22px;
-                position: absolute;
-                right: 10px;
-
-                &:hover {
-                    color: #ffffff;
-                }
-
-                &:active {
-                    color: #ff6600;
-                }
-            }
-
             .promote {
                 padding: 6px 7px 5px 8px;
             }
@@ -298,6 +375,8 @@
         }
     }
 
+
+    // Needle
     .needle {
         @include opacity(0.75);
 

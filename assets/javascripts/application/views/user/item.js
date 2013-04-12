@@ -3,10 +3,6 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
     className: 'item',
 
     attributes: function() {
-        if (this.model === undefined) {
-            return {};
-        }
-
         return {
             'data-id': this.model.get('id'),
             'style': 'background-image: url(/-img/' + this.model.get('image') + ')'

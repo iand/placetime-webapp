@@ -1,27 +1,39 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         uglify: {
-            options: {
-                mangle: false,
-                compress: false,
-                sourceMap: 'javascripts/source-map.js',
-                sourceMapRoot: '/-assets/',
-                sourceMappingURL: '/-assets/javascripts/source-map.js'
-            },
             application: {
+                options: {
+                    mangle: false,
+                    compress: false,
+                    sourceMap: 'javascripts/application/source-map.js',
+                    sourceMapRoot: '/-assets/',
+                    sourceMappingURL: '/-assets/javascripts/application/source-map.js'
+                },
                 files: {
                     'javascripts/application.js' : [
+
+                        // Include
                         'javascripts/application/application.js',
                         'javascripts/application/helpers/*.js',
                         'javascripts/application/models/*.js',
                         'javascripts/application/collections/*.js',
                         'javascripts/application/views/*.js',
                         'javascripts/application/views/**/*.js',
-                        'javascripts/application/routers/*.js'
+                        'javascripts/application/routers/*.js',
+
+                        // Exclude
+                        '!javascripts/application/source-map.js'
                     ]
                 }
             },
             vendor: {
+                options: {
+                    mangle: false,
+                    compress: false,
+                    sourceMap: 'javascripts/vendor/source-map.js',
+                    sourceMapRoot: '/-assets/',
+                    sourceMappingURL: '/-assets/javascripts/vendor/source-map.js'
+                },
                 files: {
                     'javascripts/vendor.js' : [
                         // Include
@@ -31,7 +43,8 @@ module.exports = function(grunt) {
                         'javascripts/vendor/**/*.js',
 
                         // Exclude
-                        '!javascripts/vendor/modernizr.js'
+                        '!javascripts/vendor/modernizr.js',
+                        '!javascripts/vendor/source-map.js'
                     ]
                 }
             }
