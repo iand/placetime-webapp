@@ -17,6 +17,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	mr "math/rand"
 	"net/http"
 	"os"
 	"path"
@@ -39,7 +40,7 @@ var (
 var ()
 
 func main() {
-	// TODO: set random number seed
+	mr.Seed(time.Now().UTC().UnixNano())
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	flag.StringVar(&assetsDir, "assets", "./assets", "filesystem directory in which javascript/css/image assets are found")

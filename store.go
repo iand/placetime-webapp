@@ -381,42 +381,43 @@ func (s *RedisStore) TimelineRange(pid string, status string, ts time.Time, befo
 		key = maybeKey(pid, "ts")
 	}
 
-	// log.Print("ZRANGEBYSCORE", " ", key, " ", score, " ", "+Inf", " ", "WITHSCORES", " ", "LIMIT", " ", 0, " ", after+1)
-	rs := s.db.Command("ZRANGEBYSCORE", key, score, "+Inf", "WITHSCORES", "LIMIT", 0, after+1)
-	if !rs.IsOK() {
-		return nil, rs.Error()
-	}
+	vals := make([]string, 0)
+	itemkeys := make([]string, 0)
 
-	vals := rs.ValuesAsStrings()
-
-	itemkeys := make([]string, len(vals))
-	for i := 0; i < len(vals); i += 2 {
-		itemkeys[len(vals)-i-2] = vals[i]
-		itemkeys[len(vals)-i-1] = vals[i+1]
-
-	}
-
-	if before > 0 {
-
-		// Don't include duplicate item
-		delim := ""
-		if len(vals) > 0 {
-			delim = "("
-		}
-		formattedScore := fmt.Sprintf("%s%f", delim, score)
-
-		// log.Print("ZREVRANGEBYSCORE", " ", key, " ", formattedScore, " ", "-Inf", " ", "WITHSCORES", " ", "LIMIT", " ", 0, " ", before)
-		rs := s.db.Command("ZREVRANGEBYSCORE", key, formattedScore, "-Inf", "WITHSCORES", "LIMIT", 0, before)
+	if after > 0 {
+		// log.Print("ZRANGEBYSCORE", " ", key, " ", score, " ", "+Inf", " ", "WITHSCORES", " ", "LIMIT", " ", 0, " ", after+1)
+		rs := s.db.Command("ZRANGEBYSCORE", key, score, "+Inf", "WITHSCORES", "LIMIT", 0, after)
 		if !rs.IsOK() {
 			return nil, rs.Error()
 		}
 
-		vals := rs.ValuesAsStrings()
-		for i := 0; i < len(vals); i += 2 {
-			itemkeys = append(itemkeys, vals[i])
-			itemkeys = append(itemkeys, vals[i+1])
-		}
+		vals = rs.ValuesAsStrings()
 
+		itemkeys = make([]string, len(vals))
+		for i := 0; i < len(vals); i += 2 {
+			itemkeys[len(vals)-i-2] = vals[i]
+			itemkeys[len(vals)-i-1] = vals[i+1]
+
+		}
+	}
+
+	// Don't include duplicate item
+	delim := ""
+	if len(vals) > 0 {
+		delim = "("
+	}
+	formattedScore := fmt.Sprintf("%s%f", delim, score)
+
+	// log.Print("ZREVRANGEBYSCORE", " ", key, " ", formattedScore, " ", "-Inf", " ", "WITHSCORES", " ", "LIMIT", " ", 0, " ", before)
+	rs := s.db.Command("ZREVRANGEBYSCORE", key, formattedScore, "-Inf", "WITHSCORES", "LIMIT", 0, before+1)
+	if !rs.IsOK() {
+		return nil, rs.Error()
+	}
+
+	vals = rs.ValuesAsStrings()
+	for i := 0; i < len(vals); i += 2 {
+		itemkeys = append(itemkeys, vals[i])
+		itemkeys = append(itemkeys, vals[i+1])
 	}
 
 	items := make([]*FormattedItem, 0)
@@ -450,6 +451,10 @@ func (s *RedisStore) TimelineRange(pid string, status string, ts time.Time, befo
 			}
 
 			item.Ts = int64(f)
+
+			item.Added = item.Added / 1000000000
+			item.Event = item.Event / 1000000000
+
 			// if ordering == ORDERING_ETS {
 			// 	item.Date = item.Ets.Format("Jan 2006")
 			// 	item.Time = item.Ets.Format("Mon _2 15:04")
