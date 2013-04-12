@@ -31,7 +31,7 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
 
         // Today
         else if (Math.abs(time.diff()) < moment().add('day', 1).diff()) {
-            this.update(time, 'Do MMMM YYYY', 'Today at ');
+            this.update(time, ' hh:mm:ss A', 'Today at ');
         }
 
         // Future/Past
