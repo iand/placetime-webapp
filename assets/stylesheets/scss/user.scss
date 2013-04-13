@@ -45,6 +45,8 @@
 
 
 .timelines {
+    margin: 0 auto;
+
     .column {
         float: left;
         width: 50%;
@@ -70,27 +72,28 @@
         border-bottom: 0px solid #000;
         height: 39px;
         position: absolute;
-        top: 5px;
+        top: 0;
         width: calc(100% - 12px);
         z-index: 3;
 
         .title {
             color: #fff;
-            font-size: 17px;
+            font-size: 14px;
             font-weight: normal;
-            margin: 16px 6px 4px 15px;
+            margin: 12px 6px 4px 15px;
             padding: 0;
         }
 
-        .tagline {
-            color: #fff;
-            font-size: 13px;
-            margin: 20px 0 0 0;
+        .search,
+        .add {
+            font-size: 14px;
+            height: 17px;
+            padding: 4px 12px;
+            margin-top: 7px;
+        }
 
-            em {
-                color: #000000;
-                font-style: normal;
-            }
+        .add {
+            margin-left: 18px;
         }
 
 
@@ -132,7 +135,7 @@
 
             &.active {
                 a {
-                    color: #ff6600;
+                    color: #ffffff;
                 }
             }
 
@@ -191,8 +194,7 @@
 
             .username {
                 font-size: 14px;
-                padding: 7px;
-                margin: 0 0 0 7px;
+                margin: 15px 12px;
             }
 
 
@@ -252,8 +254,18 @@
                 color: #000000;
             }
 
+            .icon {
+                img {
+                    border-color: #999;
+                }
+            }
+
             .bio {
                 margin-bottom: 15px;
+
+                .name {
+                    color: #ff6600;
+                }
             }
 
             .statistics {
@@ -272,11 +284,11 @@
             }
 
             .unfollow {
-                padding: 6px 9px 5px 10px;
+                padding: 7px 9px 3px 10px;
             }
 
             .follow {
-                padding: 6px 7px 5px 8px;
+                padding: 6px 9px 3px 9px;
             }
         }
     }
