@@ -96,6 +96,10 @@ func itemKey(itemid string) string {
 	return fmt.Sprintf("item:%s", itemid)
 }
 
+func eventedItemKey(itemid string) string {
+	return fmt.Sprintf("%c%s", EVENTED_ITEM_PREFIX, itemKey(itemid))
+}
+
 func suggestedProfileKey(loc string) string {
 	return fmt.Sprintf("suggestedprofiles:%s", loc)
 }
@@ -498,6 +502,7 @@ func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string
 	}
 
 	itemKey := itemKey(itemid)
+	eventedItemKey := eventedItemKey(itemid)
 
 	if exists, _ := s.ItemExists(itemid); exists {
 		return itemKey, nil
@@ -533,7 +538,7 @@ func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string
 		return itemKey, rs.Error()
 	}
 
-	rs = s.db.Command("ZADD", maybeKey(pid, ORDERING_TS), item.Event, fmt.Sprintf("%c%s", EVENTED_ITEM_PREFIX, itemKey))
+	rs = s.db.Command("ZADD", maybeKey(pid, ORDERING_TS), item.Event, eventedItemKey)
 	if !rs.IsOK() {
 		return itemKey, rs.Error()
 	}
@@ -549,7 +554,7 @@ func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string
 			return itemKey, rs.Error()
 		}
 
-		rs = s.db.Command("ZADD", possiblyKey(followerpid, ORDERING_TS), item.Event, fmt.Sprintf("%c%s", EVENTED_ITEM_PREFIX, itemKey))
+		rs = s.db.Command("ZADD", possiblyKey(followerpid, ORDERING_TS), item.Event, eventedItemKey)
 		if !rs.IsOK() {
 			return itemKey, rs.Error()
 		}
@@ -662,58 +667,85 @@ func (s *RedisStore) Unfollow(pid string, followpid string) error {
 func (s *RedisStore) Promote(pid string, id string) error {
 
 	// TODO: abort if item is not in possibly timeline
-	poss_ts := possiblyKey(pid, ORDERING_TS)
+	poss_key := possiblyKey(pid, ORDERING_TS)
 
 	itemKey := itemKey(id)
 
-	rs := s.db.Command("ZSCORE", poss_ts, itemKey)
+	rs := s.db.Command("ZREM", poss_key, itemKey)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
-	score_ts, _ := rs.Value().Float64()
+	eventedItemKey := eventedItemKey(id)
 
-	s.db.Command("ZREM", poss_ts, itemKey)
+	rs = s.db.Command("ZREM", poss_key, eventedItemKey)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
-	maybe_ts := maybeKey(pid, ORDERING_TS)
+	tsnano := time.Now().UnixNano()
+	maybe_key := maybeKey(pid, ORDERING_TS)
 
-	rs = s.db.Command("ZADD", maybe_ts, score_ts, itemKey)
+	rs = s.db.Command("ZADD", maybe_key, tsnano, itemKey)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
+
+	item, err := s.Item(id)
+	if err != nil {
+		return err
+	}
+
+	rs = s.db.Command("ZADD", maybe_key, item.Event, eventedItemKey)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	// TODO: reflect this in follower timelines
 
 	return nil
+
 }
 
 func (s *RedisStore) Demote(pid string, id string) error {
 
 	// TODO: abort if item is not in possibly timeline
-	maybe_ts := maybeKey(pid, ORDERING_TS)
 	itemKey := itemKey(id)
+	eventedItemKey := eventedItemKey(id)
 
-	rs := s.db.Command("ZSCORE", maybe_ts, itemKey)
+	maybe_key := maybeKey(pid, ORDERING_TS)
+
+	rs := s.db.Command("ZREM", maybe_key, itemKey)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
-	score_ts, _ := rs.Value().Float64()
-
-	s.db.Command("ZREM", maybe_ts, itemKey)
+	rs = s.db.Command("ZREM", maybe_key, eventedItemKey)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
 
 	// TODO: don't add them here if they were manually added by the user
 
-	poss_ts := possiblyKey(pid, ORDERING_TS)
+	tsnano := time.Now().UnixNano()
+	poss_key := possiblyKey(pid, ORDERING_TS)
 
-	rs = s.db.Command("ZADD", poss_ts, score_ts, itemKey)
+	rs = s.db.Command("ZADD", poss_key, tsnano, itemKey)
 	if !rs.IsOK() {
 		return rs.Error()
 	}
+
+	item, err := s.Item(id)
+	if err != nil {
+		return err
+	}
+
+	rs = s.db.Command("ZADD", poss_key, item.Event, eventedItemKey)
+	if !rs.IsOK() {
+		return rs.Error()
+	}
+
+	// TODO: remove from follower timelines
 
 	return nil
 }
