@@ -34,40 +34,41 @@ a {
 
 /* line 9, scss/scaffolding.scss */
 .container-wide {
-  max-width: 1600px;
+  margin: 0 auto;
+  max-width: 1300px;
   width: 100%;
 }
 
-/* line 16, scss/scaffolding.scss */
+/* line 17, scss/scaffolding.scss */
 .navbar {
-  -webkit-box-shadow: 0px 4px 5px #888888;
-  -moz-box-shadow: 0px 4px 5px #888888;
-  box-shadow: 0px 4px 5px #888888;
+  -webkit-box-shadow: 0px 4px 5px #444444;
+  -moz-box-shadow: 0px 4px 5px #444444;
+  box-shadow: 0px 4px 5px #444444;
   background-color: #868681;
   border-bottom: 8px solid #ccc;
   height: 45px;
   width: 100%;
 }
-/* line 23, scss/scaffolding.scss */
+/* line 24, scss/scaffolding.scss */
 .navbar.navbar-fixed {
   position: fixed;
   top: 0;
 }
-/* line 28, scss/scaffolding.scss */
+/* line 29, scss/scaffolding.scss */
 .navbar .navbar-inner {
   overflow: hidden;
 }
-/* line 32, scss/scaffolding.scss */
+/* line 33, scss/scaffolding.scss */
 .navbar .brand {
   color: #ffffff;
   font-size: 23px;
   margin: 8px 0 0 22px;
 }
-/* line 37, scss/scaffolding.scss */
+/* line 38, scss/scaffolding.scss */
 .navbar .brand .icon-ok-circle {
   margin-right: -3px;
 }
-/* line 42, scss/scaffolding.scss */
+/* line 43, scss/scaffolding.scss */
 .navbar .brand .icon-ok-circle,
 .navbar .brand .icon-time {
   color: #555555;
@@ -75,46 +76,46 @@ a {
   float: left;
   margin-top: 0px;
 }
-/* line 49, scss/scaffolding.scss */
+/* line 50, scss/scaffolding.scss */
 .navbar .brand .icon-time {
   margin-right: 10px;
 }
-/* line 54, scss/scaffolding.scss */
+/* line 55, scss/scaffolding.scss */
 .navbar .tagline {
   color: #ededed;
   font-size: 14px;
   margin: 16px 0 0 25px;
 }
-/* line 60, scss/scaffolding.scss */
+/* line 61, scss/scaffolding.scss */
 .navbar .nav {
   margin: 5px 25px 0;
 }
-/* line 64, scss/scaffolding.scss */
+/* line 65, scss/scaffolding.scss */
 .navbar .nav .icon-cog {
   font-size: 33px;
 }
-/* line 71, scss/scaffolding.scss */
+/* line 72, scss/scaffolding.scss */
 .navbar .dropdown .icon-edit,
 .navbar .dropdown .icon-signout {
   font-size: 20px;
 }
 
-/* line 79, scss/scaffolding.scss */
+/* line 80, scss/scaffolding.scss */
 .nav {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 85, scss/scaffolding.scss */
+/* line 86, scss/scaffolding.scss */
 .nav.nav-inline li {
   display: inline-block;
 }
-/* line 90, scss/scaffolding.scss */
+/* line 91, scss/scaffolding.scss */
 .nav a {
   cursor: pointer;
   display: inline-block;
 }
-/* line 96, scss/scaffolding.scss */
+/* line 97, scss/scaffolding.scss */
 .nav li [class^="icon-"],
 .nav li [class*=" icon-"] {
   width: auto;
@@ -144,9 +145,11 @@ input {
   outline: none;
 }
 
-/* line 22, scss/form.scss */
+/* line 24, scss/form.scss */
 input[type=text],
-input[type=password] {
+input[type=password],
+input[type=search],
+input[type=url] {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
@@ -171,7 +174,7 @@ input[type=password] {
   width: 200px;
 }
 
-/* line 42, scss/form.scss */
+/* line 44, scss/form.scss */
 input[type=submit] {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -193,12 +196,12 @@ input[type=submit] {
   margin: 8px 10px 4px 0px;
   padding: 12px;
 }
-/* line 61, scss/form.scss */
+/* line 63, scss/form.scss */
 input[type=submit]:hover {
   background-color: #fff;
   border: 2px solid #666666;
 }
-/* line 66, scss/form.scss */
+/* line 68, scss/form.scss */
 input[type=submit]:active {
   -webkit-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
   -moz-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
@@ -206,7 +209,7 @@ input[type=submit]:active {
   background-color: #cccccc;
   border: 2px solid #ff9900;
 }
-/* line 74, scss/form.scss */
+/* line 76, scss/form.scss */
 input[type=submit].wide {
   width: 100%;
 }
@@ -244,108 +247,113 @@ input[type=submit].wide {
   text-align: left;
 }
 
-/* line 48, scss/user.scss */
+/* line 47, scss/user.scss */
+.timelines {
+  margin: 0 auto;
+}
+/* line 50, scss/user.scss */
 .timelines .column {
   float: left;
   width: 50%;
 }
 
-/* line 56, scss/user.scss */
+/* line 58, scss/user.scss */
 .container-wide .timeline.public {
   padding: 0 4px 0 8px;
 }
-/* line 60, scss/user.scss */
+/* line 62, scss/user.scss */
 .container-wide .timeline.private {
   padding: 0 8px 0 4px;
 }
 
-/* line 65, scss/user.scss */
+/* line 67, scss/user.scss */
 .timeline {
   position: relative;
 }
-/* line 68, scss/user.scss */
+/* line 70, scss/user.scss */
 .timeline .header {
   background-color: rgba(125, 125, 119, 0.8);
   border-bottom: 0px solid #000;
   height: 39px;
   position: absolute;
-  top: 5px;
+  top: 0;
   width: calc(100% - 12px);
   z-index: 3;
 }
-/* line 77, scss/user.scss */
+/* line 79, scss/user.scss */
 .timeline .header .title {
   color: #fff;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: normal;
-  margin: 16px 6px 4px 15px;
+  margin: 12px 6px 4px 15px;
   padding: 0;
 }
-/* line 85, scss/user.scss */
-.timeline .header .tagline {
-  color: #fff;
-  font-size: 13px;
-  margin: 20px 0 0 0;
+/* line 88, scss/user.scss */
+.timeline .header .search,
+.timeline .header .add {
+  font-size: 14px;
+  height: 17px;
+  padding: 4px 12px;
+  margin-top: 7px;
 }
-/* line 90, scss/user.scss */
-.timeline .header .tagline em {
-  color: #000000;
-  font-style: normal;
+/* line 95, scss/user.scss */
+.timeline .header .add {
+  margin-left: 18px;
 }
-/* line 98, scss/user.scss */
+/* line 101, scss/user.scss */
 .timeline .header .now {
   border-bottom: 0;
   font-size: 11px;
   margin: 4px 18px 0 0;
 }
-/* line 104, scss/user.scss */
+/* line 107, scss/user.scss */
 .timeline .header .now:hover .icon-repeat {
   color: #000000;
 }
-/* line 110, scss/user.scss */
+/* line 113, scss/user.scss */
 .timeline .header .now:active .icon-repeat {
   color: #ff6600;
 }
-/* line 115, scss/user.scss */
+/* line 118, scss/user.scss */
 .timeline .header .now .icon-repeat {
   text-shadow: 0.1em 0.1em 0.2em rgba(0, 0, 0, 0.5);
   color: #ffffff;
   font-size: 30px;
 }
-/* line 125, scss/user.scss */
+/* line 128, scss/user.scss */
 .timeline .nav {
   font-size: 14px;
   margin: 8px 12px;
 }
-/* line 130, scss/user.scss */
+/* line 133, scss/user.scss */
 .timeline .nav li {
   margin-right: 15px;
 }
-/* line 134, scss/user.scss */
+/* line 137, scss/user.scss */
 .timeline .nav li.active a {
-  color: #ff6600;
+  color: #ffffff;
 }
-/* line 139, scss/user.scss */
+/* line 142, scss/user.scss */
 .timeline .nav li a {
   border-bottom: 0;
 }
-/* line 146, scss/user.scss */
+/* line 149, scss/user.scss */
 .timeline .scroller {
   position: relative;
   height: 100%;
   width: 100%;
 }
-/* line 152, scss/user.scss */
+/* line 155, scss/user.scss */
 .timeline .children {
   position: relative;
 }
-/* line 158, scss/user.scss */
+/* line 161, scss/user.scss */
 .timeline .items,
 .timeline .followers,
 .timeline .followings {
   padding-top: 5px;
 }
-/* line 167, scss/user.scss */
+/* line 170, scss/user.scss */
 .timeline .items .item .icon,
 .timeline .items .item .username,
 .timeline .items .item .text,
@@ -367,7 +375,7 @@ input[type=submit].wide {
   position: relative;
   z-index: 2;
 }
-/* line 176, scss/user.scss */
+/* line 179, scss/user.scss */
 .timeline .items .item .text,
 .timeline .items .item .bio,
 .timeline .items .item .link,
@@ -385,7 +393,7 @@ input[type=submit].wide {
 .timeline .followings .item .time {
   width: 100%;
 }
-/* line 179, scss/user.scss */
+/* line 182, scss/user.scss */
 .timeline .items .item .text a,
 .timeline .items .item .bio a,
 .timeline .items .item .link a,
@@ -403,7 +411,7 @@ input[type=submit].wide {
 .timeline .followings .item .time a {
   border-bottom: 0;
 }
-/* line 185, scss/user.scss */
+/* line 188, scss/user.scss */
 .timeline .items .item .icon img,
 .timeline .followers .item .icon img,
 .timeline .followings .item .icon img {
@@ -414,15 +422,14 @@ input[type=submit].wide {
   border-radius: 25px;
   border: 3px solid #ffffff;
 }
-/* line 192, scss/user.scss */
+/* line 195, scss/user.scss */
 .timeline .items .item .username,
 .timeline .followers .item .username,
 .timeline .followings .item .username {
   font-size: 14px;
-  padding: 7px;
-  margin: 0 0 0 7px;
+  margin: 15px 12px;
 }
-/* line 200, scss/user.scss */
+/* line 202, scss/user.scss */
 .timeline .items .item .text,
 .timeline .items .item .bio,
 .timeline .followers .item .text,
@@ -432,7 +439,7 @@ input[type=submit].wide {
   font-size: 22px;
   margin: 0;
 }
-/* line 205, scss/user.scss */
+/* line 207, scss/user.scss */
 .timeline .items .item .button,
 .timeline .followers .item .button,
 .timeline .followings .item .button {
@@ -458,19 +465,19 @@ input[type=submit].wide {
   position: absolute;
   right: 10px;
 }
-/* line 225, scss/user.scss */
+/* line 227, scss/user.scss */
 .timeline .items .item .button:hover,
 .timeline .followers .item .button:hover,
 .timeline .followings .item .button:hover {
   color: #ffffff;
 }
-/* line 229, scss/user.scss */
+/* line 231, scss/user.scss */
 .timeline .items .item .button:active,
 .timeline .followers .item .button:active,
 .timeline .followings .item .button:active {
   color: #ff6600;
 }
-/* line 240, scss/user.scss */
+/* line 242, scss/user.scss */
 .timeline .followings .item,
 .timeline .followers .item {
   -webkit-border-radius: 2px;
@@ -487,46 +494,56 @@ input[type=submit].wide {
   padding: 15px;
   position: relative;
 }
-/* line 251, scss/user.scss */
+/* line 253, scss/user.scss */
 .timeline .followings .item .username,
 .timeline .followers .item .username {
   color: #000000;
 }
-/* line 255, scss/user.scss */
+/* line 258, scss/user.scss */
+.timeline .followings .item .icon img,
+.timeline .followers .item .icon img {
+  border-color: #999;
+}
+/* line 263, scss/user.scss */
 .timeline .followings .item .bio,
 .timeline .followers .item .bio {
   margin-bottom: 15px;
 }
-/* line 259, scss/user.scss */
+/* line 266, scss/user.scss */
+.timeline .followings .item .bio .name,
+.timeline .followers .item .bio .name {
+  color: #ff6600;
+}
+/* line 271, scss/user.scss */
 .timeline .followings .item .statistics,
 .timeline .followers .item .statistics {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 265, scss/user.scss */
+/* line 277, scss/user.scss */
 .timeline .followings .item .statistics .followings,
 .timeline .followings .item .statistics .followers,
 .timeline .followers .item .statistics .followings,
 .timeline .followers .item .statistics .followers {
   display: inline;
 }
-/* line 269, scss/user.scss */
+/* line 281, scss/user.scss */
 .timeline .followings .item .statistics .followings,
 .timeline .followers .item .statistics .followings {
   padding-right: 15px;
 }
-/* line 274, scss/user.scss */
+/* line 286, scss/user.scss */
 .timeline .followings .item .unfollow,
 .timeline .followers .item .unfollow {
-  padding: 6px 9px 5px 10px;
+  padding: 7px 9px 3px 10px;
 }
-/* line 278, scss/user.scss */
+/* line 290, scss/user.scss */
 .timeline .followings .item .follow,
 .timeline .followers .item .follow {
-  padding: 6px 7px 5px 8px;
+  padding: 6px 9px 3px 9px;
 }
-/* line 287, scss/user.scss */
+/* line 299, scss/user.scss */
 .timeline .items .item {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -543,19 +560,19 @@ input[type=submit].wide {
   padding: 15px;
   position: relative;
 }
-/* line 299, scss/user.scss */
+/* line 311, scss/user.scss */
 .timeline .items .item:hover {
   -webkit-box-shadow: 0px 0px 0px #aaaaaa;
   -moz-box-shadow: 0px 0px 0px #aaaaaa;
   box-shadow: 0px 0px 0px #aaaaaa;
   background-color: #999;
 }
-/* line 306, scss/user.scss */
+/* line 318, scss/user.scss */
 .timeline .items .item.now {
   background-image: none !important;
   background-color: #ffffff;
 }
-/* line 317, scss/user.scss */
+/* line 329, scss/user.scss */
 .timeline .items .item.now .text a,
 .timeline .items .item.now .username,
 .timeline .items .item.now .time a,
@@ -564,11 +581,11 @@ input[type=submit].wide {
 .timeline .items .item.now .link i {
   color: #000000;
 }
-/* line 321, scss/user.scss */
+/* line 333, scss/user.scss */
 .timeline .items .item.now .icon img {
   border-color: #000000;
 }
-/* line 326, scss/user.scss */
+/* line 338, scss/user.scss */
 .timeline .items .item .overlay {
   background-color: rgba(15, 15, 15, 0.4);
   left: 0;
@@ -578,45 +595,45 @@ input[type=submit].wide {
   width: 100%;
   z-index: 1;
 }
-/* line 336, scss/user.scss */
+/* line 348, scss/user.scss */
 .timeline .items .item .username {
   color: #ddd;
 }
-/* line 341, scss/user.scss */
+/* line 353, scss/user.scss */
 .timeline .items .item .text a {
   color: #fff;
 }
-/* line 346, scss/user.scss */
+/* line 358, scss/user.scss */
 .timeline .items .item .link {
   margin: 8px 0 0;
 }
-/* line 349, scss/user.scss */
+/* line 361, scss/user.scss */
 .timeline .items .item .link a {
   font-size: 25px;
   color: #ddd;
 }
-/* line 355, scss/user.scss */
+/* line 367, scss/user.scss */
 .timeline .items .item .time {
   margin: 0;
 }
-/* line 358, scss/user.scss */
+/* line 370, scss/user.scss */
 .timeline .items .item .time .event {
   color: #ff6600;
 }
-/* line 362, scss/user.scss */
+/* line 374, scss/user.scss */
 .timeline .items .item .time a {
   color: #eee;
   font-size: 13px;
 }
-/* line 368, scss/user.scss */
+/* line 380, scss/user.scss */
 .timeline .items .item .promote {
   padding: 6px 7px 5px 8px;
 }
-/* line 372, scss/user.scss */
+/* line 384, scss/user.scss */
 .timeline .items .item .demote {
   padding: 6px 9px 5px 10px;
 }
-/* line 380, scss/user.scss */
+/* line 392, scss/user.scss */
 .timeline .needle {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
   opacity: 0.75;
@@ -627,7 +644,7 @@ input[type=submit].wide {
   height: 0px;
   width: calc(100% - 12px);
 }
-/* line 390, scss/user.scss */
+/* line 402, scss/user.scss */
 .timeline .needle .date {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -649,19 +666,19 @@ input[type=submit].wide {
   top: -12px;
   width: 200px;
 }
-/* line 409, scss/user.scss */
+/* line 421, scss/user.scss */
 .timeline .needle .now {
   color: #ff6600;
 }
-/* line 413, scss/user.scss */
+/* line 425, scss/user.scss */
 .timeline .needle .future {
   margin-left: 5px;
 }
-/* line 417, scss/user.scss */
+/* line 429, scss/user.scss */
 .timeline .needle .past {
   margin-right: 5px;
 }
-/* line 424, scss/user.scss */
+/* line 436, scss/user.scss */
 .timeline .load-more,
 .timeline .no-results {
   -webkit-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
@@ -677,7 +694,7 @@ input[type=submit].wide {
   text-align: center;
   width: 100%;
 }
-/* line 440, scss/user.scss */
+/* line 452, scss/user.scss */
 .timeline .load-more {
   cursor: pointer;
 }
