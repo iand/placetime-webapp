@@ -22,10 +22,7 @@ Application.Model.Item = Backbone.Model.extend({
         defer.done(done);
         defer.fail(fail);
 
-        this.collection.trigger('item:promoted', this.attributes);
-        this.collection.remove(this);
-
-        this.trigger('promoted', this.attributes);
+        this.trigger('item:promoted', this);
 
         $.ajax({
             url: '/-tpromote',
@@ -52,10 +49,7 @@ Application.Model.Item = Backbone.Model.extend({
         defer.done(done);
         defer.fail(fail);
 
-        this.collection.trigger('item:demoted', this.attributes);
-        this.collection.remove(this);
-
-        this.trigger('demoted', this.attributes);
+        this.trigger('item:demoted', this);
 
         $.ajax({
             url: '/-tdemote',
