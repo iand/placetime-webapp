@@ -81,10 +81,13 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
 
 
 
-    add: function() {
-        this.region.show(
-            this.subviews.findByCustom('itemAdd')
-        );
+    add: function(event) {
+        var $form = $(event.target);
+
+        var view = this.subviews.findByCustom('itemAdd');
+            view.trigger('set:link', $form.find('input').val());
+
+        this.region.show(view);
 
         return false;
     },

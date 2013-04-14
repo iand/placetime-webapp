@@ -24,7 +24,7 @@ Application.Model.Item = Backbone.Model.extend({
                 pid: session.get('pid'),
                 link: this.get('link'),
                 text: this.get('text'),
-                ets: '1 Jan 2006' // TODO: Get Ian to fix
+                ets: this.get('ets')
             }
         });
 

@@ -12,7 +12,23 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
 
 
     initialize: function(options) {
-        this.model = new Application.Model.Item();
+        this.model = new Application.Model.Item({
+            link: '',
+            text: '',
+            ets: '1 Jan 2006' // TODO: Get Ian to fix
+        });
+
+        this.on('set:link', function(value){
+            this.model.set('link', value);
+        });
+
+        this.on('set:text', function(value){
+            this.model.set('text', value);
+        });
+
+        this.on('set:ets', function(value){
+            this.model.set('ets', value);
+        });
     },
 
 
