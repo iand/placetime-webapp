@@ -75,13 +75,14 @@ var matched;
 // Start history
 Application.on('initialize:after', function(options){
     matched = Backbone.history.start({
-        root: '/timeline/'
+        root: '/'
     });
 });
 
 
 // Start session and authorize
 Application.on('initialize:after', function(options){
+
     session.check(function(){
         if (matched === true) {
             return;

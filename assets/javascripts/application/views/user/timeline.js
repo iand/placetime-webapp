@@ -7,112 +7,28 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         'click .header .timeline': 'timeline',
         'click .header .followings': 'followings',
         'click .header .followers': 'followers',
-        'click .header .now': 'now',
-
-        'click .header .nav a': 'change'
+        'click .header .now': 'now'
     },
 
 
     initialize: function (options) {
-        var self = this;
-
-        // Initialize courier
-        Backbone.Courier.add(this);
-
-
-        // Adjust scroller height
-        $(window).resize(function(){
-            var $scroller = self.$el.find('.scroller');
-
-            // - 100 is height space
-            $scroller.height(
-                $(this).height() - 59
-            );
-        });
-
-        // Pass message
-        this.on('item:added', function(event) {
-            self.region.currentView.trigger('item:added', event);
-        });
+        // Initialize subviews
+        this.initSubviews();
+        this.initEvents();
     },
 
 
-    onMessages: {
-        // TODO: Unify item:removed, item:added methods
-        'item:removed': function() {
-            var self = this;
+    initSubviews: function() {
+        // Setup subviews
+        this.subviews = new Backbone.ChildViewContainer();
 
-            clearTimeout(self.scrollerTimeout);
-
-            self.scrollerTimeout = setTimeout(function(){
-                self.refreshScroller();
-            }, jQuery.fx.speeds.slow + 250);
-        },
-
-
-        // Update scroller
-        'item:added': function() {
-            var self = this;
-
-            clearTimeout(self.scrollerTimeout);
-
-            self.scrollerTimeout = setTimeout(function(){
-                self.refreshScroller();
-            }, jQuery.fx.speeds.slow + 250);
-        },
-
-
-        // Bind scroller
-        'collection:rendered': function() {
-            $(window).trigger('resize');
-
-            // Wait until animation is finished
-            var self = this;
-            setTimeout(function(){
-                self.bindScroller();
-            }, jQuery.fx.speeds.slow + 250);
-        },
-
-
-        'infinite:loaded': function() {
-            this.refreshScroller();
-            this.infiniteScrollLoading = false;
-        }
+        this.initTimeline();
+        this.initFollowings();
+        this.initFollowers();
     },
 
 
-    passMessages: {
-        'item:promoted': '.',
-        'item:demoted': '.'
-    },
-
-
-    onRender: function() {
-        var self = this;
-
-        // Create region
-        this.region = new Backbone.Marionette.Region({
-              el: this.$el.find('.collection')
-        });
-
-        // Render timeline
-        this.timeline();
-    },
-
-
-    change: function(event) {
-        var $this = $(event.target).closest('li');
-
-        $this.siblings().removeClass('active');
-        $this.addClass('active');
-    },
-
-
-    // Load timeline
-    timeline: function() {
-        var self = this;
-
-        // Load items
+    initTimeline: function() {
         var collection = new Application.Collection.Items(undefined, {
             status: this.model.get('status')
         });
@@ -127,23 +43,11 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
             model: model
         });
 
-        this.region.show(view);
-
-        // Fetch after rendering so events are fired
-        collection.fetch({
-            data: {
-                pid: this.model.get('pid'),
-                before: 20,
-                after: 20
-            },
-            reset: true
-        });
+        this.subviews.add(view, 'timeline');
     },
 
 
-
-    followings: function() {
-        // Load items
+    initFollowings: function() {
         var collection = new Application.Collection.Followings();
 
         var model = new Backbone.Model({
@@ -157,22 +61,11 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
             model: model
         });
 
-        this.region.show(view);
-
-        // Fetch after rendering so events are fired
-        var promise = collection.fetch({
-            data: {
-                pid: model.get('pid'),
-                count: model.get('count')
-            },
-            reset: true
-        });
+        this.subviews.add(view, 'followings');
     },
 
 
-
-    followers: function() {
-        // Load items
+    initFollowers: function() {
         var collection = new Application.Collection.Followers();
 
         var model = new Backbone.Model({
@@ -186,16 +79,165 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
             model: model
         });
 
-        this.region.show(view);
+        this.subviews.add(view, 'followers');
+    },
 
-        // Fetch after rendering so events are fired
-        var promise = collection.fetch({
-            data: {
-                pid: model.get('pid'),
-                count: model.get('count')
-            },
-            reset: true
+
+
+    initEvents: function() {
+        $(window).on('resize', this.resizeScroller.bind(this));
+
+        // Pass message to current view
+        this.on('item:add', function(event) {
+            this.region.currentView.trigger('item:add', event);
         });
+
+
+        // Bubble promoted/demoted timeline events
+        var timeline = this.subviews.findByCustom('timeline');
+
+        this.listenTo(timeline, 'item:promoted', function(event) {
+            this.trigger('item:promoted', event);
+        });
+
+        this.listenTo(timeline, 'item:demoted', function(event) {
+            this.trigger('item:demoted', event);
+        });
+
+
+        // Subview events
+        this.subviews.each(function(view){
+            // On item added/removed refresh the scroller
+            this.listenTo(view, 'after:item:added', this.refreshScroller);
+            this.listenTo(view, 'item:removed', this.refreshScroller);
+
+
+            // On region show bind the scroller and resize
+            this.listenTo(view, 'show', this.bindScroller);
+            this.listenTo(view, 'show', this.resizeScroller);
+
+            // On first load trigger now
+            this.listenToOnce(view, 'show', function(){
+                var self = this;
+
+                setTimeout(function(){
+                    self.now();
+                }, jQuery.fx.speeds.slow + 500);
+            });
+
+            this.listenTo(view, 'composite:collection:rendered', this.refreshScroller);
+
+            // Handle infinite scroll loaded
+            this.listenTo(view, 'infinite:loaded', function(){
+                this.refreshScroller();
+                this.infiniteScrollLoading = false;
+            });
+
+
+            // Handle scroll to requests
+            this.listenTo(view, 'scroll:to', function(event) {
+                this.iscroll.scrollTo(
+                    event.left,
+                    event.top,
+                    event.duration
+                );
+            });
+        }, this);
+    },
+
+
+    onRender: function() {
+        var self = this;
+
+        // Create region
+        this.region = new Backbone.Marionette.Region({
+              el: this.$el.find('.collection')
+        });
+
+        // Instead of having state in the model and thus rendering
+        // the view we will just add a class
+        this.region.show = function(view) {
+            var $timeline = self.$el.children();
+
+            var viewClass;
+            if (view.id !== undefined) {
+                viewClass = view.id;
+            } else {
+                viewClass = view.className.split(' ')[0];
+            }
+
+            // Add class to timeline
+            $timeline.attr('class', function(index, className){
+                return className.replace(/\s*view-[^\s]+\s*/g, '');
+            });
+            $timeline.addClass('view-' + viewClass);
+
+
+
+            // Add class to navigation
+            var $navigation = self.$el.find('.nav > li');
+
+            $navigation.removeClass('active');
+            $navigation.filter('.' + viewClass).addClass('active');
+
+
+            return Backbone.Marionette.Region.prototype.show.apply(this, arguments);
+        };
+
+
+        // TODO: Controller
+        if (this.model.get('status') === 'p') {
+            switch (Backbone.history.fragment) {
+                case 'timeline':
+                    this.timeline();
+                    break;
+
+                case 'followings':
+                    this.followings();
+                    break;
+
+                case 'followers':
+                    this.followers();
+                    break;
+            }
+        } else {
+            this.timeline();
+        }
+    },
+
+
+    timeline: function() {
+        this.region.show(
+            this.subviews.findByCustom('timeline')
+        );
+
+        Backbone.history.navigate('timeline', false);
+
+        return false;
+    },
+
+
+
+    followings: function() {
+        this.region.show(
+            this.subviews.findByCustom('followings')
+        );
+
+        Backbone.history.navigate('followings', false);
+
+        return false;
+    },
+
+
+
+    followers: function() {
+        this.region.show(
+            this.subviews.findByCustom('followers')
+        );
+
+        Backbone.history.navigate('followers', false);
+
+        return false;
     },
 
 
@@ -223,28 +265,39 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
             onScrollEnd: function(event) {
                 self.infiniteScroll(this);
-                self.region.currentView.trigger('scroll', this);
-            }
-        });
 
-        this.region.currentView.on('scroll:to', function(event){
-            self.iscroll.scrollTo(
-                event.left,
-                event.top,
-                event.duration
-            );
+                // if (self.region.currentView !== undefined) {
+                    self.region.currentView.trigger('scroll', this);
+                // }
+            }
         });
 
         return this;
     },
 
 
+    resizeScroller: function(event) {
+        var $scroller = this.$el.find('.scroller');
+
+        // - 59 is height space
+        $scroller.height(
+            $(window).height() - 59
+        );
+    },
+
+
     refreshScroller: function() {
+        var self = this;
+
         if (this.iscroll === undefined) {
             return;
         }
 
-        this.iscroll.refresh();
+        clearTimeout(self.scrollerTimeout);
+
+        self.scrollerTimeout = setTimeout(function(){
+            self.iscroll.refresh();
+        }, jQuery.fx.speeds.slow + 250);
     },
 
 

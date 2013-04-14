@@ -146,7 +146,9 @@
                 <div class="icon pull-left">
                     <img src="/-assets/images/user.jpg" width="40" height="40">
                 </div>
-                <p class="username pull-left">@<%= pid %></p>
+                <p class="username pull-left">
+                    <a href="#user/<%= pid %>">@<%= pid %></a>
+                </p>
                 <p class="text pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
                         <%= text %>
@@ -180,13 +182,19 @@
             <% } %>
         </script>
 
+        <script type="text/template" id="item-empty-template">
+            <p>Add items to your playlist</p>
+        </script>
+
 
         <script type="text/template" id="following-template">
             <div class="icon pull-left">
                 <img src="/-assets/images/user.jpg" width="40" height="40">
             </div>
 
-            <p class="username pull-left">@<%= pid %></p>
+            <p class="username pull-left">
+                <a href="#user/<%= pid %>">@<%= pid %></a>
+            </p>
 
             <% if (bio) { %>
             <p class="bio pull-left">
@@ -219,7 +227,9 @@
                 <img src="/-assets/images/user.jpg" width="40" height="40">
             </div>
 
-            <p class="username pull-left">@<%= pid %></p>
+            <p class="username pull-left">
+                <a href="#user/<%= pid %>">@<%= pid %></a>
+            </p>
 
             <% if (bio) { %>
             <p class="bio pull-left">
@@ -252,7 +262,7 @@
                 <div class="header">
                     <% if (status === 'p') { %>
                         <ul class="nav nav-inline pull-left">
-                            <li class="timeline <%= (view == 'timeline')? 'active':'' %>">
+                            <li class="items <%= (view == 'timeline')? 'active':'' %>">
                                 <a href="#timeline">Timeline</a>
                             </li>
                             <li class="followings <%= (view == 'followings')? 'active':'' %>">
@@ -285,7 +295,7 @@
         <div class="scroller">
             <div class="children"></div>
         </div>
-        <div data-subview="needle"></div>
+        <div class="needle-view"></div>
         </script>
 
 
@@ -331,8 +341,8 @@
 
 
         <script type="text/template" id="timelines-template">
-            <div data-subview="publicTimeline"></div>
-            <div data-subview="privateTimeline"></div>
+            <div class="timeline-public"></div>
+            <div class="timeline-private"></div>
         </script>
 
 
