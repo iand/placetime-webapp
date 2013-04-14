@@ -70,9 +70,15 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     renderNeedle: function() {
         if (this.collection.length > 0) {
             var needle = this.subviews.findByCustom('needle');
+
+            if (needle.isRendered === false) {
                 needle.render();
 
-            this.$el.find('.needle-view').html(needle.el);
+                this.$el.find('.needle-view').html(needle.el);
+            } else {
+                return;
+            }
+
         } else {
             this.$el.find('.needle-view').empty();
         }
@@ -107,10 +113,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     now: function() {
         var self = this;
 
-        // Do not trigger on mine
-        if (this.model.get('status') === 'm') {
-            return;
-        }
 
         var promise = this.collection.now();
 
@@ -121,13 +123,22 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             var position = $closest.position(),
                 offset   = $needle.position();
 
+            // Unbind scroll event whilst we scroll to now
+            self.off('scroll');
+
             self.trigger('scroll:to', {
                 left: -(position.left),
                 top: -(position.top - offset.top),
                 duration: jQuery.fx.speeds.slow
             });
 
-            self.subviews.findByCustom('needle').now();
+            // Once scroll to finished, rebind it, ideally
+            // this shouldn't be necessary but iScroll sucks
+            setTimeout(function(){
+                self.on('scroll', function(event) {
+                    self.subviews.findByCustom('needle').trigger('scroll', event);
+                });
+            }, jQuery.fx.speeds.slow + 250);
 
             $closest.addClass('now');
         });

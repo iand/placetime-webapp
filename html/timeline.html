@@ -71,7 +71,7 @@
             </p>
 
             <h1>Or login</h1>
-            <form action="#" method="post">
+            <form class="form">
                 <div class="field">
                     <label for="name">User name</label>
                     <input type="text" name="pid" id="pid" value="">
@@ -95,7 +95,7 @@
 
         <script type="text/template" id="register-template">
             <h1>Register</h1>
-            <form action="#" method="post">
+            <form class="form">
                 <div class="field">
                     <label for="name">User name</label>
                     <input type="text" name="pid">
@@ -181,6 +181,26 @@
                 <% } %>
             <% } %>
         </script>
+
+
+        <script type="text/template" id="item-add-template">
+            <form class="form" style="padding-top: 48px">
+                <div class="field">
+                    <label for="link">Link</label>
+                    <input type="text" name="link" value="">
+                </div>
+
+                <div class="field">
+                    <label for="text">Text</label>
+                    <input type="text" name="text" value="">
+                </div>
+
+                <div class="actions">
+                    <input type="submit" value="Add">
+                </script>
+            </form>
+        </script>
+
 
         <script type="text/template" id="item-empty-template">
             <p>Add items to your playlist</p>
@@ -273,11 +293,19 @@
                             </li>
                         </ul>
 
-                        <input class="pull-left search" type="search" placeholder="Search">
+                        <form class="form">
+                            <input class="pull-left search" type="search" placeholder="Search">
+                        </form>
                     <% } else { %>
-                        <h2 class="title pull-left">My Playlist</h2>
+                        <ul class="nav nav-inline pull-left">
+                            <li class="items active">
+                                <a href="#timeline">My Playlist</a>
+                            </li>
+                        </ul>
 
-                        <input class="pull-left add" type="url" placeholder="http://">
+                        <form class="form">
+                            <input class="pull-left add" type="text">
+                        </form>
                     <% } %>
 
                     <a class="now pull-right">

@@ -16,6 +16,25 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
 
+    save: function(done, fail) {
+        var promise = $.ajax({
+            url: '/-tadd',
+            type: 'post',
+            data: {
+                pid: session.get('pid'),
+                link: this.get('link'),
+                text: this.get('text'),
+                ets: '1 Jan 2006' // TODO: Get Ian to fix
+            }
+        });
+
+        promise.done(done);
+        promise.fail(fail);
+
+        return promise;
+    },
+
+
     promote: function(done, fail) {
         var defer = $.Deferred();
 

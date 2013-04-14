@@ -1,87 +1,6 @@
 Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     template: '#timeline-template',
-
     className: 'column',
-
-    events: {
-        'click .header .timeline': 'timeline',
-        'click .header .followings': 'followings',
-        'click .header .followers': 'followers',
-        'click .header .now': 'now'
-    },
-
-
-    initialize: function (options) {
-        // Initialize subviews
-        this.initSubviews();
-        this.initEvents();
-    },
-
-
-    initSubviews: function() {
-        // Setup subviews
-        this.subviews = new Backbone.ChildViewContainer();
-
-        this.initTimeline();
-        this.initFollowings();
-        this.initFollowers();
-    },
-
-
-    initTimeline: function() {
-        var collection = new Application.Collection.Items(undefined, {
-            status: this.model.get('status')
-        });
-
-        var model = new Backbone.Model({
-            pid: this.model.get('pid'),
-            status: this.model.get('status')
-        });
-
-        var view = new Application.View.Items({
-            collection: collection,
-            model: model
-        });
-
-        this.subviews.add(view, 'timeline');
-    },
-
-
-    initFollowings: function() {
-        var collection = new Application.Collection.Followings();
-
-        var model = new Backbone.Model({
-            pid: this.model.get('pid'),
-            count: 20,
-            start: 10
-        });
-
-        var view = new Application.View.Followings({
-            collection: collection,
-            model: model
-        });
-
-        this.subviews.add(view, 'followings');
-    },
-
-
-    initFollowers: function() {
-        var collection = new Application.Collection.Followers();
-
-        var model = new Backbone.Model({
-            pid: this.model.get('pid'),
-            count: 20,
-            start: 10
-        });
-
-        var view = new Application.View.Followers({
-            collection: collection,
-            model: model
-        });
-
-        this.subviews.add(view, 'followers');
-    },
-
 
 
     initEvents: function() {
@@ -93,20 +12,13 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         });
 
 
-        // Bubble promoted/demoted timeline events
-        var timeline = this.subviews.findByCustom('timeline');
-
-        this.listenTo(timeline, 'item:promoted', function(event) {
-            this.trigger('item:promoted', event);
-        });
-
-        this.listenTo(timeline, 'item:demoted', function(event) {
-            this.trigger('item:demoted', event);
-        });
-
-
         // Subview events
         this.subviews.each(function(view){
+            // Allow views not to have a scroller
+            if (view.noScroller === true) {
+                return;
+            }
+
             // On item added/removed refresh the scroller
             this.listenTo(view, 'after:item:added', this.refreshScroller);
             this.listenTo(view, 'item:removed', this.refreshScroller);
@@ -147,104 +59,11 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
 
     onRender: function() {
-        var self = this;
-
         // Create region
         this.region = new Backbone.Marionette.Region({
               el: this.$el.find('.collection')
         });
-
-        // Instead of having state in the model and thus rendering
-        // the view we will just add a class
-        this.region.show = function(view) {
-            var $timeline = self.$el.children();
-
-            var viewClass;
-            if (view.id !== undefined) {
-                viewClass = view.id;
-            } else {
-                viewClass = view.className.split(' ')[0];
-            }
-
-            // Add class to timeline
-            $timeline.attr('class', function(index, className){
-                return className.replace(/\s*view-[^\s]+\s*/g, '');
-            });
-            $timeline.addClass('view-' + viewClass);
-
-
-
-            // Add class to navigation
-            var $navigation = self.$el.find('.nav > li');
-
-            $navigation.removeClass('active');
-            $navigation.filter('.' + viewClass).addClass('active');
-
-
-            return Backbone.Marionette.Region.prototype.show.apply(this, arguments);
-        };
-
-
-        // TODO: Controller
-        if (this.model.get('status') === 'p') {
-            switch (Backbone.history.fragment) {
-                case 'timeline':
-                    this.timeline();
-                    break;
-
-                case 'followings':
-                    this.followings();
-                    break;
-
-                case 'followers':
-                    this.followers();
-                    break;
-            }
-        } else {
-            this.timeline();
-        }
     },
-
-
-    timeline: function() {
-        this.region.show(
-            this.subviews.findByCustom('timeline')
-        );
-
-        Backbone.history.navigate('timeline', false);
-
-        return false;
-    },
-
-
-
-    followings: function() {
-        this.region.show(
-            this.subviews.findByCustom('followings')
-        );
-
-        Backbone.history.navigate('followings', false);
-
-        return false;
-    },
-
-
-
-    followers: function() {
-        this.region.show(
-            this.subviews.findByCustom('followers')
-        );
-
-        Backbone.history.navigate('followers', false);
-
-        return false;
-    },
-
-
-    now: function() {
-        this.region.currentView.trigger('now', this);
-    },
-
 
 
     bindScroller: function () {
@@ -266,9 +85,9 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
             onScrollEnd: function(event) {
                 self.infiniteScroll(this);
 
-                // if (self.region.currentView !== undefined) {
+                if (self.region.currentView !== undefined) {
                     self.region.currentView.trigger('scroll', this);
-                // }
+                }
             }
         });
 
@@ -276,14 +95,15 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     },
 
 
+
     resizeScroller: function(event) {
         var $scroller = this.$el.find('.scroller');
 
-        // - 59 is height space
         $scroller.height(
             $(window).height() - 59
         );
     },
+
 
 
     refreshScroller: function() {

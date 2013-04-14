@@ -2,6 +2,8 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
     template: '#needle-template',
     className: 'needle',
 
+    isRendered: false,
+
     initialize: function (options) {
         this.on('scroll', this.scroll);
     },
@@ -56,5 +58,10 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
             now.render();
 
         this.$el.html(now.el);
+    },
+
+
+    onRender: function() {
+        this.isRendered = true;
     }
 });

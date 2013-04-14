@@ -18,6 +18,7 @@ module.exports = function(grunt) {
                         'javascripts/application/models/*.js',
                         'javascripts/application/collections/*.js',
                         'javascripts/application/views/*.js',
+                        'javascripts/application/views/**/timeline.js',
                         'javascripts/application/views/**/*.js',
                         'javascripts/application/routers/*.js',
 

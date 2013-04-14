@@ -332,8 +332,13 @@
             }
 
             &.now {
-                background-image: none !important;
+                background-image: none !important; // Required for inline styles
                 background-color: #ffffff;
+
+                .overlay {
+                    display: none;
+                }
+
 
                 .text a,
                 .username,

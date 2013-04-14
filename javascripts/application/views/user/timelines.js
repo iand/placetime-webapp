@@ -1,4 +1,4 @@
-Application.View.Timelines = Marionette.ItemView.extend({
+Application.View.Timelines = Backbone.Marionette.ItemView.extend({
     template: '#timelines-template',
     className: 'container-wide timelines',
 
@@ -12,22 +12,26 @@ Application.View.Timelines = Marionette.ItemView.extend({
         this.subviews = new Backbone.ChildViewContainer();
 
 
-        this.subviews.add(new Application.View.Timeline({
+        var publicTimeline = new Application.View.TimelinePublic({
             model: new Backbone.Model({
                 pid: this.options.pid,
                 view: 'timeline',
                 status: 'p'
             })
-        }), 'publicTimeline');
+        });
+
+        this.subviews.add(publicTimeline, 'publicTimeline');
 
 
-        this.subviews.add(new Application.View.Timeline({
+        var privateTimeline = new Application.View.TimelinePrivate({
             model: new Backbone.Model({
                 pid: this.options.pid,
                 view: 'timeline',
                 status: 'm'
             })
-        }), 'privateTimeline');
+        });
+
+        this.subviews.add(privateTimeline, 'privateTimeline');
     },
 
 

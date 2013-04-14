@@ -45,9 +45,7 @@ Application.View.Login = Backbone.Marionette.ItemView.extend({
         session.set('pwd', data.pwd);
 
         session.save(function (data) {
-            console.log('doing navigate');
             Backbone.history.navigate('timeline', true);
-            console.log('stopped navigate');
         }, function () {});
     }
 });
