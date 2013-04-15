@@ -1,13 +1,6 @@
-Application.View.Item = Backbone.Marionette.ItemView.extend({
-    template: '#item-template',
+Application.View.ItemEmpty = Backbone.Marionette.ItemView.extend({
+    template: '#item-empty-template',
     className: 'item',
-
-    attributes: function() {
-        return {
-            'data-id': this.model.id,
-            'style': 'background-image: url(/-img/' + this.model.get('image') + ')'
-        };
-    },
 
 
     onBeforeRender: function() {

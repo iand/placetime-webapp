@@ -3,48 +3,57 @@ Application.View.Timelines = Marionette.ItemView.extend({
     className: 'container-wide timelines',
 
     initialize: function(options) {
-        // Initialize courier
-        Backbone.Courier.add(this);
-
-        // Initialize subviews
-        Backbone.Subviews.add(this);
+        this.initViews();
+        this.initEvents();
     },
 
 
-    subviewCreators : {
-        publicTimeline: function() {
-            var timeline = new Application.View.Timeline({
-                model: new Backbone.Model({
-                    pid: this.options.pid,
-                    view: 'timeline',
-                    status: 'p'
-                })
-            });
+    initViews: function() {
+        this.subviews = new Backbone.ChildViewContainer();
 
-            return timeline;
-        },
 
-        privateTimeline: function() {
-            var timeline = new Application.View.Timeline({
-                model: new Backbone.Model({
-                    pid: this.options.pid,
-                    view: 'timeline',
-                    status: 'm'
-                })
-            });
+        this.subviews.add(new Application.View.Timeline({
+            model: new Backbone.Model({
+                pid: this.options.pid,
+                view: 'timeline',
+                status: 'p'
+            })
+        }), 'publicTimeline');
 
-            return timeline;
-        }
+
+        this.subviews.add(new Application.View.Timeline({
+            model: new Backbone.Model({
+                pid: this.options.pid,
+                view: 'timeline',
+                status: 'm'
+            })
+        }), 'privateTimeline');
     },
 
 
-    onMessages: {
-        'item:promoted' : function(event) {
-            this.subviews.privateTimeline.trigger('item:added', event);
-        },
 
-        'item:demoted': function(event) {
-            this.subviews.publicTimeline.trigger('item:added', event);
-        }
+    initEvents: function() {
+        var publicTimeline = this.subviews.findByCustom('publicTimeline'),
+            privateTimeline = this.subviews.findByCustom('privateTimeline');
+
+        this.listenTo(publicTimeline, 'item:promoted', function(event) {
+            privateTimeline.trigger('item:add', event);
+        });
+
+        this.listenTo(privateTimeline, 'item:demoted', function(event){
+            publicTimeline.trigger('item:add', event);
+        });
+    },
+
+
+    onRender: function() {
+        var publicTimeline = this.subviews.findByCustom('publicTimeline'),
+            privateTimeline = this.subviews.findByCustom('privateTimeline');
+
+        publicTimeline.render();
+        privateTimeline.render();
+
+        this.$el.find('.timeline-public').replaceWith(publicTimeline.el);
+        this.$el.find('.timeline-private').replaceWith(privateTimeline.el);
     }
 });
