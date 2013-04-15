@@ -5,6 +5,15 @@ Application.Collection.Items = Backbone.Collection.extend({
 
     initialize: function(collection, options) {
         this.options = options;
+
+
+        this.on('item:demoted item:promoted', function(event){
+            var models = this.filter(function(model) {
+                return model.get('id') === event.get('id');
+            });
+
+            this.remove(models);
+        });
     },
 
 
@@ -37,7 +46,7 @@ Application.Collection.Items = Backbone.Collection.extend({
                     model.set('now', false);
                 });
 
-                var model = self.get(data[0].id);
+                var model = self.get(data[0].id + '-' + data[0].ts);
                     model.set('now', true);
 
                 defer.resolve(model);

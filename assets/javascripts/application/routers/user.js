@@ -3,7 +3,10 @@ Application.Router.User = Backbone.Router.extend({
         'login': 'login',
         'logout': 'logout',
         'register': 'register',
-        'timeline': 'timeline'
+
+        'timeline': 'timeline',
+        'followings': 'timeline',
+        'followers': 'timeline'
     },
 
 

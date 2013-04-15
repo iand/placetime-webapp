@@ -12,34 +12,18 @@ Application.View.Followers = Backbone.Marionette.CompositeView.extend({
 
 
    initialize: function (options) {
-        // Initialize subviews
-        Backbone.Subviews.add(this);
-
-        // Initialize courier
-        Backbone.Courier.add(this);
-
-
-        // Bubble view events, passMessages didn't work
-        this.on('collection:rendered', function(){
-            this.spawn('collection:rendered');
-        });
-
-        this.on('composite:collection:rendered', function(){
-            this.spawn('collection:rendered');
-        });
-
-        this.on('item:removed', function(){
-            this.spawn('item:removed');
-        });
-
-
-
-        // Custom events
-        this.on('item:added', function(event) {
-            this.collection.add(event.data);
-        });
-
         this.on('infinite:load', this.loadMore);
+    },
+
+
+    onRender: function() {
+        this.collection.fetch({
+            data: {
+                pid: this.model.get('pid'),
+                count: this.model.get('count')
+            },
+            reset: true
+        });
     },
 
 

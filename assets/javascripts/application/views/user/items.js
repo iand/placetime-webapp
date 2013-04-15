@@ -10,70 +10,74 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     itemView: Application.View.Item,
     itemViewContainer: '.children',
 
+    // Bubble collection events
+    collectionEvents: {
+        'item:promoted': 'itemPromoted',
+        'item:demoted': 'itemDemoted'
+    },
+
+    itemDemoted: function(item) {
+        this.trigger('item:demoted', item);
+    },
+
+    itemPromoted: function(item) {
+        this.trigger('item:promoted', item);
+    },
+
 
     initialize: function (options) {
-        // Initialize subviews
-        Backbone.Subviews.add(this);
-
-        // Initialize courier
-        Backbone.Courier.add(this);
-
-
-        // Bubble view events, passMessages didn't work
-        this.on('collection:rendered', function(){
-            this.spawn('collection:rendered');
-        });
-
-        this.on('composite:collection:rendered', function(){
-            this.spawn('collection:rendered');
-        });
-
-        this.on('after:item:added', function(){
-            this.spawn('item:added');
-        });
-
-        this.on('item:removed', function(){
-            this.spawn('item:removed');
-        });
-
-
-        // Bubble certain collection events
-        this.listenTo(this.collection, 'item:promoted', function(event) {
-            this.spawn('item:promoted', event);
-        });
-
-        this.listenTo(this.collection, 'item:demoted', function(event) {
-            this.spawn('item:demoted', event);
-        });
-
+        this.subviews = new Backbone.ChildViewContainer();
+        this.subviews.add(new Application.View.Needle(), 'needle');
 
         // Custom events
-        this.on('item:added', function(event) {
-            this.collection.add(event.data);
+        this.on('item:add', function(event) {
+            this.collection.add(event);
         });
 
+
+        // Pass scroll event to needle subview
         this.on('scroll', function(event) {
-            this.subviews.needle.scroll(event);
+            this.subviews.findByCustom('needle').trigger('scroll', event);
         });
 
+        // Handle infinite scroll
         this.on('infinite:load', this.loadMore);
+
+        // Handle needle displaying
+        this.on('after:item:added', this.renderNeedle);
+        this.on('item:removed', this.renderNeedle);
+
+        // Handle now
         this.on('now', this.now);
     },
 
+    onRender: function() {
+        this.renderNeedle();
+
+        var promise = this.collection.fetch({
+            data: {
+                pid: this.model.get('pid'),
+                before: 20,
+                after: 20
+            },
+            reset: true
+        });
+
+        promise.done(this.renderNeedle.bind(this));
+    },
 
 
-    subviewCreators : {
-        needle: function() {
-            return new Application.View.Needle();
+    renderNeedle: function() {
+        if (this.collection.length > 0) {
+            var needle = this.subviews.findByCustom('needle');
+                needle.render();
+
+            this.$el.find('.needle-view').html(needle.el);
+        } else {
+            this.$el.find('.needle-view').empty();
         }
     },
 
-
-
-
-    addItem: function(item) {
-        this.collection.add(item);
-    },
 
 
     promote: function (event) {
@@ -103,40 +107,31 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     now: function() {
         var self = this;
 
+        // Do not trigger on mine
+        if (this.model.get('status') === 'm') {
+            return;
+        }
+
         var promise = this.collection.now();
 
         promise.done(function(model) {
-            var $closest = self.$el.find('.item[data-id='+model.get('id')+']'),
+            var $closest = self.$el.find('.item[data-id='+model.id+']'),
                 $needle  = self.$el.find('.needle');
-
 
             var position = $closest.position(),
                 offset   = $needle.position();
 
-
             self.trigger('scroll:to', {
                 left: -(position.left),
                 top: -(position.top - offset.top),
-                duration: 0
+                duration: jQuery.fx.speeds.slow
             });
 
-            $closest.addClass('now');
+            self.subviews.findByCustom('needle').now();
 
-            // TODO: Use template
-            $needle.find('.date').html(
-                '<span class="future pull-left">' +
-                  '<i class="icon-arrow-up"></i> Future' +
-                '</span>' +
-                '<span class="now">Now</span>' +
-                '<span class="past pull-right">' +
-                  'Past <i class="icon-arrow-down"></i>' +
-                '</span>'
-            );
+            $closest.addClass('now');
         });
     },
-
-
-
 
 
     loadMore: function(options){
