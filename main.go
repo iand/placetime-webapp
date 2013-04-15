@@ -620,10 +620,12 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 	s := NewRedisStore()
 	defer s.Close()
 
-	etsParsed, err := time.Parse("_2 Jan 2006", ets)
+	etsParsed, err := time.Parse(time.RFC3339, ets)
 	if err != nil {
-		ErrorResponse(w, r, err)
-		return
+		etsParsed, err = time.Parse("2006-01-02", ets)
+		if err != nil {
+			etsParsed = time.Unix(0, 0)
+		}
 	}
 
 	itemid, err := s.AddItem(pid, etsParsed, text, link, image, "")

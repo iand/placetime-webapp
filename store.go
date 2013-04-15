@@ -509,9 +509,15 @@ func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string
 	}
 	tsnano := time.Now().UnixNano()
 
-	// Fake the precision for event time
-	nanos := tsnano - 1000000000*(tsnano/1000000000)
-	etsnano := ets.Unix()*1000000000 + nanos
+	isEvent := false
+	etsnano := ets.UnixNano()
+
+	if etsnano > 0 {
+		// Fake the precision for event time
+		nanos := tsnano - 1000000000*(tsnano/1000000000)
+		etsnano = ets.Unix()*1000000000 + nanos
+		isEvent = true
+	}
 
 	item := &Item{
 
@@ -538,9 +544,11 @@ func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string
 		return itemKey, rs.Error()
 	}
 
-	rs = s.db.Command("ZADD", maybeKey(pid, ORDERING_TS), item.Event, eventedItemKey)
-	if !rs.IsOK() {
-		return itemKey, rs.Error()
+	if isEvent {
+		rs = s.db.Command("ZADD", maybeKey(pid, ORDERING_TS), item.Event, eventedItemKey)
+		if !rs.IsOK() {
+			return itemKey, rs.Error()
+		}
 	}
 
 	rs = s.db.Command("ZRANGE", followersKey(pid), 0, MaxInt)
@@ -554,11 +562,12 @@ func (s *RedisStore) AddItem(pid string, ets time.Time, text string, link string
 			return itemKey, rs.Error()
 		}
 
-		rs = s.db.Command("ZADD", possiblyKey(followerpid, ORDERING_TS), item.Event, eventedItemKey)
-		if !rs.IsOK() {
-			return itemKey, rs.Error()
+		if isEvent {
+			rs = s.db.Command("ZADD", possiblyKey(followerpid, ORDERING_TS), item.Event, eventedItemKey)
+			if !rs.IsOK() {
+				return itemKey, rs.Error()
+			}
 		}
-
 	}
 
 	if item.Link != "" && item.Image == "" {
@@ -673,14 +682,14 @@ func (s *RedisStore) Promote(pid string, id string) error {
 
 	rs := s.db.Command("ZREM", poss_key, itemKey)
 	if !rs.IsOK() {
-		return rs.Error()
+		// Ignore error
 	}
 
 	eventedItemKey := eventedItemKey(id)
 
 	rs = s.db.Command("ZREM", poss_key, eventedItemKey)
 	if !rs.IsOK() {
-		return rs.Error()
+		// Ignore error
 	}
 
 	tsnano := time.Now().UnixNano()
@@ -696,9 +705,11 @@ func (s *RedisStore) Promote(pid string, id string) error {
 		return err
 	}
 
-	rs = s.db.Command("ZADD", maybe_key, item.Event, eventedItemKey)
-	if !rs.IsOK() {
-		return rs.Error()
+	if item.Event > 0 {
+		rs = s.db.Command("ZADD", maybe_key, item.Event, eventedItemKey)
+		if !rs.IsOK() {
+			return rs.Error()
+		}
 	}
 
 	// TODO: reflect this in follower timelines
@@ -740,11 +751,12 @@ func (s *RedisStore) Demote(pid string, id string) error {
 		return err
 	}
 
-	rs = s.db.Command("ZADD", poss_key, item.Event, eventedItemKey)
-	if !rs.IsOK() {
-		return rs.Error()
+	if item.Event > 0 {
+		rs = s.db.Command("ZADD", poss_key, item.Event, eventedItemKey)
+		if !rs.IsOK() {
+			return rs.Error()
+		}
 	}
-
 	// TODO: remove from follower timelines
 
 	return nil
