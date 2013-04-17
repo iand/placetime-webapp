@@ -166,6 +166,8 @@
 
     .children {
         position: relative;
+
+        padding-top: 38px;
     }
 
     .items,
@@ -341,7 +343,7 @@
 
 
                 .text a,
-                .username,
+                .username a,
 
                 .time a,
                 .time i,
@@ -367,7 +369,9 @@
             }
 
             .username {
-                color: #ddd;
+                a {
+                    color: #ddd;
+                }
             }
 
             .text {

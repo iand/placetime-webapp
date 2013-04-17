@@ -51,9 +51,13 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         this.on('now', this.now);
     },
 
-    onRender: function() {
-        this.renderNeedle();
 
+    onShow: function() {
+        this._initialEvents();
+    },
+
+
+    onRender: function() {
         var promise = this.collection.fetch({
             data: {
                 pid: this.model.get('pid'),
@@ -65,6 +69,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
         promise.done(this.renderNeedle.bind(this));
     },
+
 
 
     renderNeedle: function() {

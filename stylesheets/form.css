@@ -22,10 +22,11 @@ input {
   outline: none;
 }
 
-/* line 24, scss/form.scss */
+/* line 25, scss/form.scss */
 input[type=text],
 input[type=password],
 input[type=search],
+input[type=date],
 input[type=url] {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -51,7 +52,7 @@ input[type=url] {
   width: 200px;
 }
 
-/* line 44, scss/form.scss */
+/* line 45, scss/form.scss */
 input[type=submit] {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -73,12 +74,12 @@ input[type=submit] {
   margin: 8px 10px 4px 0px;
   padding: 12px;
 }
-/* line 63, scss/form.scss */
+/* line 64, scss/form.scss */
 input[type=submit]:hover {
   background-color: #fff;
   border: 2px solid #666666;
 }
-/* line 68, scss/form.scss */
+/* line 69, scss/form.scss */
 input[type=submit]:active {
   -webkit-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
   -moz-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
@@ -86,7 +87,7 @@ input[type=submit]:active {
   background-color: #cccccc;
   border: 2px solid #ff9900;
 }
-/* line 76, scss/form.scss */
+/* line 77, scss/form.scss */
 input[type=submit].wide {
   width: 100%;
 }

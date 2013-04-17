@@ -21,6 +21,7 @@ input {
 input[type=text],
 input[type=password],
 input[type=search],
+input[type=date],
 input[type=url] {
     @include border-radius(3px);
     @include single-box-shadow(#666666, 1px, 1px, 3px, 0px, inset);

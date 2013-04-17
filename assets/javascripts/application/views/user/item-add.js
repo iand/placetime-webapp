@@ -15,7 +15,7 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         this.model = new Application.Model.Item({
             link: '',
             text: '',
-            ets: '1 Jan 2006' // TODO: Get Ian to fix
+            ets: ''
         });
 
         this.on('set:link', function(value){
@@ -39,14 +39,17 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
 
 
     submit: function() {
+        var self = this;
+
+
         var promise = this.model.save();
 
         promise.done(function(){
-            console.log('created!');
+            self.trigger('item:created');
         });
 
         promise.fail(function(){
-            console.log('not created!');
+            console.log('TODO: Display errors');
         });
 
         return false;

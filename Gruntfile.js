@@ -95,14 +95,16 @@ module.exports = function(grunt) {
             javascriptApplication: {
                 files: [
                     'javascripts/application/**/**/*.js',
-                    'javascripts/application/**/*.js'
+                    'javascripts/application/**/*.js',
+                    '!javascripts/application/source-map.js'
                 ],
                 tasks: ['uglify:application']
             },
             javascriptVendor: {
                 files: [
                     'javascripts/vendor/**/*.js',
-                    'javascripts/vendor/*.js'
+                    'javascripts/vendor/*.js',
+                    '!javascripts/vendor/source-map.js'
                 ],
                 tasks: ['uglify:vendor']
             },
