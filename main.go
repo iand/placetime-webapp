@@ -12,6 +12,7 @@ import (
 	"github.com/iand/feedparser"
 	"github.com/iand/imgpick"
 	"github.com/iand/salience"
+	"github.com/placetime/datastore"
 	"html/template"
 	"image/png"
 	"io"
@@ -226,7 +227,7 @@ func jsonTimelineHandler(w http.ResponseWriter, r *http.Request) {
 		ts = time.Unix(0, tsVal)
 	}
 
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 	tl, err := s.TimelineRange(pidParam, statusParam, ts, int(before), int(after))
 	if err != nil {
@@ -251,7 +252,7 @@ func jsonItemHandler(w http.ResponseWriter, r *http.Request) {
 
 	id := r.FormValue("id")
 
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	item, err := s.Item(id)
@@ -278,7 +279,7 @@ func jsonSuggestedProfilesHandler(w http.ResponseWriter, r *http.Request) {
 
 	loc := r.FormValue("loc")
 
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	plist, err := s.SuggestedProfiles(loc)
@@ -317,7 +318,7 @@ func jsonFollowersHandler(w http.ResponseWriter, r *http.Request) {
 		start = 0
 	}
 
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	plist, err := s.Followers(pid, int(count), int(start))
@@ -356,7 +357,7 @@ func jsonFollowingHandler(w http.ResponseWriter, r *http.Request) {
 		start = 0
 	}
 
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	plist, err := s.Following(pid, int(count), int(start))
@@ -383,7 +384,7 @@ func jsonProfileHandler(w http.ResponseWriter, r *http.Request) {
 
 	pid := r.FormValue("pid")
 
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	profile, err := s.Profile(pid)
@@ -415,7 +416,7 @@ func followHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	followpid := r.FormValue("followpid")
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	s.Follow(pid, followpid)
@@ -435,7 +436,7 @@ func unfollowHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	followpid := r.FormValue("followpid")
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	s.Unfollow(pid, followpid)
@@ -443,7 +444,7 @@ func unfollowHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func initData() {
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	log.Print("Resetting database")
@@ -479,17 +480,17 @@ func initData() {
 	// }
 
 	log.Print("Adding profile for iand")
-	s.AddProfile("iand", "sunshine", "Ian", "Timefloes.", "", "")
+	s.AddProfile("@iand", "sunshine", "Ian", "Timefloes.", "", "")
 
 	log.Print("Adding profile for daveg")
-	s.AddProfile("daveg", "sunshine", "Dave", "", "", "")
+	s.AddProfile("@daveg", "sunshine", "Dave", "", "", "")
 
 	s.AddSuggestedProfile("iand", "london")
 
 	//s.Follow("iand", "nasa")
 
 	log.Print("Adding profile for nasa")
-	s.AddProfile("nasa", "nasa", "Nasa Missions", "Upcoming NASA mission information.", "", "")
+	s.AddProfile("@nasa", "nasa", "Nasa Missions", "Upcoming NASA mission information.", "", "")
 
 	log.Print("Adding items for nasa")
 	s.AddItem("nasa", parseKnownTime("1 Jan 2015"), "BepiColombo - Launch of ESA and ISAS Orbiter and Lander Missions to Mercury", "", "", "")
@@ -524,16 +525,16 @@ func initData() {
 	// s.AddProfile("indymedia", "sunshine", "Indymedia London | Events | Index", "", "http://london.indymedia.org/events.rss", "")
 
 	log.Print("Adding profile for visitlondon")
-	s.AddProfile("visitlondon", "sunshine", "visitlondon.com", "", "", "")
+	s.AddProfile("@visitlondon", "sunshine", "visitlondon.com", "", "", "")
 
 	log.Print("Adding feed profile for londonsportsguide")
-	s.AddProfile("londonsportsguide", "sunshine", "Football in London - visitlondon.com", "", "http://feeds.visitlondon.com/LondonSportsGuide", "visitlondon")
+	s.AddProfile("londonsportsguide", "sunshine", "Football in London - visitlondon.com", "", "http://feeds.visitlondon.com/LondonSportsGuide", "@visitlondon")
 
 	log.Print("Adding feed profile for londonartsguide")
-	s.AddProfile("londonartsguide", "sunshine", "London Arts Guide - visitlondon.com", "", "http://feeds.visitlondon.com/LondonArtsGuide", "visitlondon")
+	s.AddProfile("londonartsguide", "sunshine", "London Arts Guide - visitlondon.com", "", "http://feeds.visitlondon.com/LondonArtsGuide", "@visitlondon")
 
 	log.Print("Adding feed profile for londondanceguide")
-	s.AddProfile("londondanceguide", "sunshine", "London Dance Guide - visitlondon.com", "", "http://feeds.visitlondon.com/LondonDanceGuide", "visitlondon")
+	s.AddProfile("londondanceguide", "sunshine", "London Dance Guide - visitlondon.com", "", "http://feeds.visitlondon.com/LondonDanceGuide", "@visitlondon")
 
 	log.Print("Adding feed profile for o2shepherdsbushempire")
 	s.AddProfile("o2shepherdsbushempire", "sunshine", "O2 Shepherd's Bush Empire | Concert Dates and Tickets", "", "http://www.o2shepherdsbushempire.co.uk/RSS", "")
@@ -559,20 +560,20 @@ func initData() {
 	// s.AddProfile("architecture", "sunshine", "What's on? - Royal Institute of British Architects", "", "http://www.architecture.com/syndication.riba?feed_type=Events", "")
 
 	log.Print("Adding follows for iand")
-	s.Follow("iand", "londonsportsguide")
-	s.Follow("iand", "londonartsguide")
-	s.Follow("iand", "londondanceguide")
-	s.Follow("iand", "o2shepherdsbushempire")
-	s.Follow("iand", "nasa")
-	s.Follow("iand", "daveg")
+	s.Follow("@iand", "londonsportsguide")
+	s.Follow("@iand", "londonartsguide")
+	s.Follow("@iand", "londondanceguide")
+	s.Follow("@iand", "o2shepherdsbushempire")
+	s.Follow("@iand", "@nasa")
+	s.Follow("@iand", "@daveg")
 
 	log.Print("Adding follows for daveg")
-	s.Follow("daveg", "londonsportsguide")
-	s.Follow("daveg", "londonartsguide")
-	s.Follow("daveg", "londondanceguide")
-	s.Follow("daveg", "o2shepherdsbushempire")
-	s.Follow("daveg", "nasa")
-	s.Follow("daveg", "iand")
+	s.Follow("@daveg", "londonsportsguide")
+	s.Follow("@daveg", "londonartsguide")
+	s.Follow("@daveg", "londondanceguide")
+	s.Follow("@daveg", "o2shepherdsbushempire")
+	s.Follow("@daveg", "@nasa")
+	s.Follow("@daveg", "@iand")
 
 	log.Print(("Fetching feeds\n"))
 	pollFeeds()
@@ -617,7 +618,7 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 	link := r.FormValue("link")
 	ets := r.FormValue("ets")
 	image := r.FormValue("image")
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	etsParsed, err := time.Parse(time.RFC3339, ets)
@@ -649,7 +650,7 @@ func promoteHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	id := r.FormValue("id")
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	err := s.Promote(pid, id)
@@ -673,7 +674,7 @@ func demoteHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	id := r.FormValue("id")
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	err := s.Demote(pid, id)
@@ -693,7 +694,7 @@ func addSuggestHandler(w http.ResponseWriter, r *http.Request) {
 
 	pid := r.FormValue("pid")
 	loc := r.FormValue("loc")
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	err := s.AddSuggestedProfile(pid, loc)
@@ -713,7 +714,7 @@ func remSuggestHandler(w http.ResponseWriter, r *http.Request) {
 
 	pid := r.FormValue("pid")
 	loc := r.FormValue("loc")
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	err := s.RemoveSuggestedProfile(pid, loc)
@@ -728,7 +729,7 @@ func sessionHandler(w http.ResponseWriter, r *http.Request) {
 	pid := r.FormValue("pid")
 	pwd := r.FormValue("pwd")
 
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	validPassword, err := s.VerifyPassword(pid, pwd)
@@ -751,7 +752,7 @@ func checkSession(w http.ResponseWriter, r *http.Request, silent bool) (bool, st
 		if len(parts) == 2 {
 			pid = parts[0]
 			sessionId, err := strconv.ParseInt(parts[1], 10, 64)
-			s := NewRedisStore()
+			s := datastore.NewRedisStore()
 			defer s.Close()
 
 			if err == nil {
@@ -786,7 +787,7 @@ func checkSession(w http.ResponseWriter, r *http.Request, silent bool) (bool, st
 
 }
 func createSession(pid string, w http.ResponseWriter, r *http.Request) {
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	sessionId, err := s.SessionId(pid)
@@ -827,7 +828,7 @@ func addProfileHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	err = s.AddProfile(pid, pwd, name, bio, feedurl, parentpid)
@@ -854,7 +855,7 @@ func updateProfileHandler(w http.ResponseWriter, r *http.Request) {
 	bio := r.FormValue("bio")
 	parentpid := r.FormValue("parentpid")
 
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	err := s.UpdateProfile(pid, name, bio, feedurl, parentpid)
@@ -878,7 +879,7 @@ func removeProfileHandler(w http.ResponseWriter, r *http.Request) {
 
 	pid := r.FormValue("pid")
 
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	err := s.RemoveProfile(pid)
@@ -900,7 +901,7 @@ func flagProfileHandler(w http.ResponseWriter, r *http.Request) {
 		return
 
 	}
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	err := s.FlagProfile(pid)
@@ -946,7 +947,9 @@ func soauthHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	s := NewRedisStore()
+	screenName = fmt.Sprintf("@%s", screenName)
+
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	exists, err := s.ProfileExists(screenName)
@@ -1027,12 +1030,12 @@ func backgroundTasks() {
 
 func pollFeeds() {
 	log.Print("Refreshing feeds")
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	profiles, _ := s.FeedDrivenProfiles()
 
-	jobs := make(chan *Profile, len(profiles))
+	jobs := make(chan *datastore.Profile, len(profiles))
 	results := make(chan *ProfileItemData, len(profiles))
 
 	for w := 0; w < 3; w++ {
@@ -1060,13 +1063,13 @@ func pollFeeds() {
 
 func pollImages() {
 	log.Print("Fetching images")
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	items, _ := s.GrabItemsNeedingImages(30)
 	log.Printf("%d images need to be fetched", len(items))
 	if len(items) > 0 {
-		jobs := make(chan *Item, len(items))
+		jobs := make(chan *datastore.Item, len(items))
 		results := make(chan *ItemImageData, len(items))
 
 		for w := 0; w < 3; w++ {
@@ -1093,17 +1096,17 @@ func pollImages() {
 }
 
 type ProfileItemData struct {
-	Profile *Profile
-	Items   []*Item
+	Profile *datastore.Profile
+	Items   []*datastore.Item
 	Error   error
 }
 
 type ItemImageData struct {
-	Item  *Item
+	Item  *datastore.Item
 	Error error
 }
 
-func feedWorker(id int, jobs <-chan *Profile, results chan<- *ProfileItemData) {
+func feedWorker(id int, jobs <-chan *datastore.Profile, results chan<- *ProfileItemData) {
 	for p := range jobs {
 		log.Printf("Feed worker %d processing feed %s", id, p.FeedUrl)
 
@@ -1122,21 +1125,21 @@ func feedWorker(id int, jobs <-chan *Profile, results chan<- *ProfileItemData) {
 	}
 }
 
-func itemsFromFeed(pid string, feed *feedparser.Feed) []*Item {
+func itemsFromFeed(pid string, feed *feedparser.Feed) []*datastore.Item {
 
-	items := make([]*Item, 0)
+	items := make([]*datastore.Item, 0)
 	if feed != nil {
 		for _, item := range feed.Items {
 			hasher := md5.New()
 			io.WriteString(hasher, item.Id)
 			id := fmt.Sprintf("%x", hasher.Sum(nil))
-			items = append(items, &Item{Id: id, Pid: pid, Event: item.When.Unix(), Text: item.Title, Link: item.Link})
+			items = append(items, &datastore.Item{Id: id, Pid: pid, Event: item.When.Unix(), Text: item.Title, Link: item.Link})
 		}
 	}
 	return items
 }
 
-func imageWorker(id int, jobs <-chan *Item, results chan<- *ItemImageData) {
+func imageWorker(id int, jobs <-chan *datastore.Item, results chan<- *ItemImageData) {
 
 	for item := range jobs {
 		log.Printf("Image worker %d processing item %s", id, item.Id)
@@ -1173,7 +1176,7 @@ func imageWorker(id int, jobs <-chan *Item, results chan<- *ItemImageData) {
 
 func updateProfileItemData(data *ProfileItemData) error {
 	if data.Items != nil {
-		s := NewRedisStore()
+		s := datastore.NewRedisStore()
 		defer s.Close()
 
 		p := data.Profile
@@ -1214,7 +1217,7 @@ func refreshHandler(w http.ResponseWriter, r *http.Request) {
 
 	pid := r.FormValue("pid")
 
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 	profile, err := s.Profile(pid)
 	if err != nil {
@@ -1249,7 +1252,7 @@ func jsonFeedsHandler(w http.ResponseWriter, r *http.Request) {
 
 	pid := r.FormValue("pid")
 
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 
 	flist, err := s.Feeds(pid)
@@ -1322,7 +1325,7 @@ func jsonFlaggedProfilesHandler(w http.ResponseWriter, r *http.Request) {
 		count = 10
 	}
 
-	s := NewRedisStore()
+	s := datastore.NewRedisStore()
 	defer s.Close()
 	profiles, err := s.FlaggedProfiles(int(start), int(count))
 	if err != nil {

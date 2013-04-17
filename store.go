@@ -1,5 +1,6 @@
 package main
 
+/*
 import (
 	"code.google.com/p/go.crypto/bcrypt"
 	"code.google.com/p/tcgl/redis"
@@ -891,3 +892,4 @@ func (s *RedisStore) GrabItemsNeedingImages(max int) ([]*Item, error) {
 
 	return items, nil
 }
+*/

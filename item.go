@@ -1,5 +1,6 @@
 package main
 
+/*
 import (
 	"time"
 )
@@ -36,3 +37,4 @@ type FormattedItem struct {
 	Media string `json:"media"`
 	Image string `json:"image"`
 }
+*/

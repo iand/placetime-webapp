@@ -1,5 +1,6 @@
 package main
 
+/*
 import (
 	"time"
 )
@@ -23,3 +24,4 @@ type ScoredProfile struct {
 	Pid   string  `json:"pid"`
 	Score float64 `json:"score"`
 }
+*/
