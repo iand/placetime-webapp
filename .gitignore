@@ -1,5 +1,7 @@
-node_modules
 .DS_Store
+.npm
+.sass-cache
+node_modules
 timescroll
 timescroll.sublime-project
 timescroll.sublime-workspace

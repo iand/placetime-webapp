@@ -82,6 +82,9 @@
         height: 39px;
         position: absolute;
         top: 0;
+        width: 98%;
+        width: -moz-calc(100% - 12px);
+        width: -webkit-calc(100% - 12px);
         width: calc(100% - 12px);
         z-index: 3;
 
@@ -422,6 +425,9 @@
         position: absolute;
         top: 50%;
         height: 0px;
+        width: 98%;
+        width: -moz-calc(100% - 12px);
+        width: -webkit-calc(100% - 12px);
         width: calc(100% - 12px);
 
         .date {
