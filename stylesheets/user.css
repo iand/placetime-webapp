@@ -658,7 +658,7 @@ input[type=submit].wide {
 /* line 417, scss/user.scss */
 .timeline .items .item .sash {
   border-style: solid;
-  border-width: 0 35px 35px 0;
+  border-width: 0 48px 48px 0;
   color: #ffffff;
   display: none;
   height: 0px;
@@ -671,10 +671,10 @@ input[type=submit].wide {
   z-index: 2;
 }
 /* line 431, scss/user.scss */
-.timeline .items .item .sash .icon-time {
+.timeline .items .item .sash .icon-calendar {
   position: absolute;
-  right: -32px;
-  top: 2px;
+  right: -42px;
+  top: 5px;
 }
 /* line 439, scss/user.scss */
 .timeline .items .item .username a {
@@ -686,7 +686,7 @@ input[type=submit].wide {
 }
 /* line 450, scss/user.scss */
 .timeline .items .item .link {
-  margin: 8px 0 0;
+  margin: 8px 0 6px;
 }
 /* line 453, scss/user.scss */
 .timeline .items .item .link a {
@@ -718,17 +718,22 @@ input[type=submit].wide {
 .timeline .needle {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
   opacity: 0.75;
-  border-bottom: 1px solid #333333;
-  border-top: 1px solid #ffffff;
+  background-color: rgba(15, 15, 15, 0.15);
+  left: 0;
   position: absolute;
   top: 50%;
-  height: 0px;
-  width: 98%;
-  width: -moz-calc(100% - 12px);
-  width: -webkit-calc(100% - 12px);
-  width: calc(100% - 12px);
+  height: 50px;
+  width: 100%;
 }
-/* line 497, scss/user.scss */
+/* line 494, scss/user.scss */
+.timeline .needle .head {
+  border-bottom: 1px solid #333333;
+  border-top: 1px solid #ffffff;
+  height: 0px;
+  margin-top: 25px;
+  width: 100%;
+}
+/* line 502, scss/user.scss */
 .timeline .needle .date {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -747,22 +752,24 @@ input[type=submit].wide {
   position: absolute;
   margin-left: -100px;
   text-align: center;
-  top: -12px;
+  top: 13px;
   width: 200px;
 }
-/* line 516, scss/user.scss */
+/* line 521, scss/user.scss */
 .timeline .needle .now {
   color: #ff6600;
+  font-weight: bold;
+  text-transform: uppercase;
 }
-/* line 520, scss/user.scss */
+/* line 527, scss/user.scss */
 .timeline .needle .future {
-  margin-left: 5px;
-}
-/* line 524, scss/user.scss */
-.timeline .needle .past {
-  margin-right: 5px;
+  margin-left: 10px;
 }
 /* line 531, scss/user.scss */
+.timeline .needle .past {
+  margin-right: 10px;
+}
+/* line 538, scss/user.scss */
 .timeline .load-more,
 .timeline .no-results {
   -webkit-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
@@ -778,19 +785,19 @@ input[type=submit].wide {
   text-align: center;
   width: 100%;
 }
-/* line 547, scss/user.scss */
+/* line 554, scss/user.scss */
 .timeline .load-more {
   cursor: pointer;
 }
 
-/* line 554, scss/user.scss */
+/* line 561, scss/user.scss */
 .scrollbarV,
 .scrollbarH {
   position: absolute;
   z-index: 100;
 }
 
-/* line 559, scss/user.scss */
+/* line 566, scss/user.scss */
 .scrollbarV {
   bottom: 7px;
   top: 2px;
@@ -798,13 +805,13 @@ input[type=submit].wide {
   width: 8px;
 }
 
-/* line 566, scss/user.scss */
+/* line 573, scss/user.scss */
 .scrollbarV > div {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
 }

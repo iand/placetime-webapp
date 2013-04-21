@@ -66,6 +66,12 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         promise.done(this.renderNeedle.bind(this));
     },
 
+
+    onRender: function() {
+        this.renderNeedle();
+    },
+
+
     renderNeedle: function() {
         if (this.collection.length > 0) {
             var needle = this.subviews.findByCustom('needle');

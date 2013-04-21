@@ -137,7 +137,7 @@
             <div class="overlay"></div>
 
             <p class="sash event">
-                <i class="icon-time"></i>
+                <i class="icon-calendar"></i>
             </p>
 
 
@@ -165,7 +165,7 @@
                 <p class="time pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
                         <% if (ts.toString().substr(0, 10) == event) { %>
-                            <i class="icon-time"></i> <span class="event">event:</span>
+                            <i class="icon-calendar"></i> <span class="event">event:</span>
                         <% } else { %>
                             <i class="icon-time"></i> <span class="added">added:</span>
                         <% } %>
@@ -359,15 +359,17 @@
 
 
         <script type="text/template" id="needle-template">
-        <div class="date">
-            <span class="future pull-left">
-                <i class="icon-arrow-up"></i> Future
-            </span>
-            <span class="now">Now</span>
-            <span class="past pull-right">
-               Past <i class="icon-arrow-down"></i>
-            </span>
-        </div>
+            <div class="head">
+                <div class="date">
+                    <span class="future pull-left">
+                        <i class="icon-arrow-up"></i> Future
+                    </span>
+                    <span class="now">Now</span>
+                    <span class="past pull-right">
+                       Past <i class="icon-arrow-down"></i>
+                    </span>
+                </div>
+            </div>
         </script>
 
         <script type="text/template" id="needle-now-template">

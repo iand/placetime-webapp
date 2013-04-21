@@ -416,7 +416,7 @@
 
             .sash {
                 border-style: solid;
-                border-width: 0 35px 35px 0;
+                border-width: 0 48px 48px 0;
                 color: #ffffff;
                 display: none;
                 height: 0px;
@@ -428,10 +428,10 @@
                 width: 0px;
                 z-index: 2;
 
-                .icon-time {
+                .icon-calendar {
                     position: absolute;
-                    right: -32px;
-                    top: 2px;
+                    right: -42px;
+                    top: 5px;
                 }
             }
 
@@ -448,7 +448,7 @@
             }
 
             .link {
-                margin: 8px 0 0;
+                margin: 8px 0 6px;
 
                 a {
                     font-size: 25px;
@@ -484,15 +484,20 @@
     .needle {
         @include opacity(0.75);
 
-        border-bottom: 1px solid #333333;
-        border-top: 1px solid #ffffff;
+        background-color: rgba(15, 15, 15, 0.15);
+        left: 0;
         position: absolute;
         top: 50%;
-        height: 0px;
-        width: 98%;
-        width: -moz-calc(100% - 12px);
-        width: -webkit-calc(100% - 12px);
-        width: calc(100% - 12px);
+        height: 50px;
+        width: 100%;
+
+        .head {
+            border-bottom: 1px solid #333333;
+            border-top: 1px solid #ffffff;
+            height: 0px;
+            margin-top: 25px;
+            width: 100%;
+        }
 
         .date {
             @include border-radius(5px);
@@ -509,20 +514,22 @@
             position: absolute;
             margin-left: -100px;
             text-align: center;
-            top: -12px;
+            top: 13px;
             width: 200px;
         }
 
         .now {
             color: #ff6600;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
         .future {
-            margin-left: 5px;
+            margin-left: 10px;
         }
 
         .past {
-            margin-right: 5px;
+            margin-right: 10px;
         }
     }
 
@@ -564,7 +571,7 @@
 }
 
 .scrollbarV > div {
-    @include border-radius(4px);
+    @include border-radius(2px);
 
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
