@@ -308,7 +308,14 @@ input[type=submit].wide {
 .timeline .header .add {
   margin-left: 18px;
 }
-/* line 113, scss/user.scss */
+/* line 111, scss/user.scss */
+.timeline .header .submit {
+  font-size: 12px;
+  margin-left: 10px;
+  padding: 3px 7px;
+  margin-left: 10px;
+}
+/* line 120, scss/user.scss */
 .timeline .header .now {
   -webkit-transition: opacity 0.5s ease-in-out;
   -moz-transition: opacity 0.5s ease-in-out;
@@ -319,55 +326,55 @@ input[type=submit].wide {
   margin: 4px 18px 0 0;
   opacity: 1;
 }
-/* line 122, scss/user.scss */
+/* line 129, scss/user.scss */
 .timeline .header .now:hover .icon-repeat {
   color: #000000;
 }
-/* line 128, scss/user.scss */
+/* line 135, scss/user.scss */
 .timeline .header .now:active .icon-repeat {
   color: #ff6600;
 }
-/* line 133, scss/user.scss */
+/* line 140, scss/user.scss */
 .timeline .header .now .icon-repeat {
   text-shadow: 0.1em 0.1em 0.2em rgba(0, 0, 0, 0.5);
   color: #ffffff;
   font-size: 30px;
 }
-/* line 143, scss/user.scss */
+/* line 150, scss/user.scss */
 .timeline .nav {
   font-size: 14px;
   margin: 8px 12px;
 }
-/* line 148, scss/user.scss */
+/* line 155, scss/user.scss */
 .timeline .nav li {
   margin-right: 15px;
 }
-/* line 152, scss/user.scss */
+/* line 159, scss/user.scss */
 .timeline .nav li.active a {
   color: #ffffff;
 }
-/* line 157, scss/user.scss */
+/* line 164, scss/user.scss */
 .timeline .nav li a {
   border-bottom: 0;
 }
-/* line 164, scss/user.scss */
+/* line 171, scss/user.scss */
 .timeline .scroller {
   position: relative;
   height: 100%;
   width: 100%;
 }
-/* line 170, scss/user.scss */
+/* line 177, scss/user.scss */
 .timeline .children {
   position: relative;
   padding-top: 38px;
 }
-/* line 178, scss/user.scss */
+/* line 185, scss/user.scss */
 .timeline .items,
 .timeline .followers,
 .timeline .followings {
   padding-top: 5px;
 }
-/* line 187, scss/user.scss */
+/* line 194, scss/user.scss */
 .timeline .items .item .icon,
 .timeline .items .item .username,
 .timeline .items .item .text,
@@ -389,7 +396,7 @@ input[type=submit].wide {
   position: relative;
   z-index: 2;
 }
-/* line 196, scss/user.scss */
+/* line 203, scss/user.scss */
 .timeline .items .item .text,
 .timeline .items .item .bio,
 .timeline .items .item .link,
@@ -407,7 +414,7 @@ input[type=submit].wide {
 .timeline .followings .item .time {
   width: 100%;
 }
-/* line 199, scss/user.scss */
+/* line 206, scss/user.scss */
 .timeline .items .item .text a,
 .timeline .items .item .bio a,
 .timeline .items .item .link a,
@@ -425,7 +432,7 @@ input[type=submit].wide {
 .timeline .followings .item .time a {
   border-bottom: 0;
 }
-/* line 205, scss/user.scss */
+/* line 212, scss/user.scss */
 .timeline .items .item .icon img,
 .timeline .followers .item .icon img,
 .timeline .followings .item .icon img {
@@ -436,20 +443,20 @@ input[type=submit].wide {
   border-radius: 25px;
   border: 3px solid #ffffff;
 }
-/* line 212, scss/user.scss */
+/* line 219, scss/user.scss */
 .timeline .items .item .username,
 .timeline .followers .item .username,
 .timeline .followings .item .username {
   font-size: 14px;
   margin: 15px 12px;
 }
-/* line 216, scss/user.scss */
+/* line 223, scss/user.scss */
 .timeline .items .item .username a,
 .timeline .followers .item .username a,
 .timeline .followings .item .username a {
   border-bottom: 0;
 }
-/* line 223, scss/user.scss */
+/* line 230, scss/user.scss */
 .timeline .items .item .text,
 .timeline .items .item .bio,
 .timeline .followers .item .text,
@@ -459,7 +466,7 @@ input[type=submit].wide {
   font-size: 22px;
   margin: 0;
 }
-/* line 228, scss/user.scss */
+/* line 235, scss/user.scss */
 .timeline .items .item .button,
 .timeline .followers .item .button,
 .timeline .followings .item .button {
@@ -485,19 +492,19 @@ input[type=submit].wide {
   position: absolute;
   right: 10px;
 }
-/* line 248, scss/user.scss */
+/* line 255, scss/user.scss */
 .timeline .items .item .button:hover,
 .timeline .followers .item .button:hover,
 .timeline .followings .item .button:hover {
   color: #ffffff;
 }
-/* line 252, scss/user.scss */
+/* line 259, scss/user.scss */
 .timeline .items .item .button:active,
 .timeline .followers .item .button:active,
 .timeline .followings .item .button:active {
   color: #ff6600;
 }
-/* line 263, scss/user.scss */
+/* line 270, scss/user.scss */
 .timeline .followings .item,
 .timeline .followers .item {
   -webkit-border-radius: 2px;
@@ -514,56 +521,56 @@ input[type=submit].wide {
   padding: 15px;
   position: relative;
 }
-/* line 274, scss/user.scss */
+/* line 281, scss/user.scss */
 .timeline .followings .item .username,
 .timeline .followers .item .username {
   color: #000000;
 }
-/* line 279, scss/user.scss */
+/* line 286, scss/user.scss */
 .timeline .followings .item .icon img,
 .timeline .followers .item .icon img {
   border-color: #999;
 }
-/* line 284, scss/user.scss */
+/* line 291, scss/user.scss */
 .timeline .followings .item .bio,
 .timeline .followers .item .bio {
   margin-bottom: 15px;
 }
-/* line 287, scss/user.scss */
+/* line 294, scss/user.scss */
 .timeline .followings .item .bio .name,
 .timeline .followers .item .bio .name {
   color: #ff6600;
 }
-/* line 292, scss/user.scss */
+/* line 299, scss/user.scss */
 .timeline .followings .item .statistics,
 .timeline .followers .item .statistics {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 298, scss/user.scss */
+/* line 305, scss/user.scss */
 .timeline .followings .item .statistics .followings,
 .timeline .followings .item .statistics .followers,
 .timeline .followers .item .statistics .followings,
 .timeline .followers .item .statistics .followers {
   display: inline;
 }
-/* line 302, scss/user.scss */
+/* line 309, scss/user.scss */
 .timeline .followings .item .statistics .followings,
 .timeline .followers .item .statistics .followings {
   padding-right: 15px;
 }
-/* line 307, scss/user.scss */
+/* line 314, scss/user.scss */
 .timeline .followings .item .unfollow,
 .timeline .followers .item .unfollow {
   padding: 7px 9px 3px 10px;
 }
-/* line 311, scss/user.scss */
+/* line 318, scss/user.scss */
 .timeline .followings .item .follow,
 .timeline .followers .item .follow {
   padding: 6px 9px 3px 9px;
 }
-/* line 320, scss/user.scss */
+/* line 327, scss/user.scss */
 .timeline .items .item {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -580,71 +587,37 @@ input[type=submit].wide {
   padding: 15px;
   position: relative;
 }
-/* line 332, scss/user.scss */
+/* line 339, scss/user.scss */
 .timeline .items .item:hover {
   -webkit-box-shadow: 0px 0px 0px #aaaaaa;
   -moz-box-shadow: 0px 0px 0px #aaaaaa;
   box-shadow: 0px 0px 0px #aaaaaa;
   background-color: #999;
 }
-/* line 340, scss/user.scss */
+/* line 347, scss/user.scss */
 .timeline .items .item.empty p {
   margin: 0;
 }
-/* line 346, scss/user.scss */
+/* line 353, scss/user.scss */
 .timeline .items .item.image .overlay {
   display: block;
 }
-/* line 351, scss/user.scss */
-.timeline .items .item.now {
-  background-image: none !important;
-  background-color: #ffffff;
-}
-/* line 355, scss/user.scss */
-.timeline .items .item.now .overlay {
-  display: none;
-}
-/* line 367, scss/user.scss */
-.timeline .items .item.now .text a,
-.timeline .items .item.now .username a,
-.timeline .items .item.now .time a,
-.timeline .items .item.now .time i,
-.timeline .items .item.now .time .timestamp,
-.timeline .items .item.now .link i {
-  color: #000000;
-}
-/* line 371, scss/user.scss */
-.timeline .items .item.now .icon img {
-  border-color: #000000;
-}
-/* line 377, scss/user.scss */
+/* line 359, scss/user.scss */
 .timeline .items .item.promoted .overlay {
   -webkit-transition: background-color 1s linear;
   -moz-transition: background-color 1s linear;
   -o-transition: background-color 1s linear;
   transition: background-color 1s linear;
-  background-color: rgba(15, 15, 15, 0.9);
+  background-color: rgba(255, 255, 255, 0.65);
   display: block;
+  z-index: 3;
 }
-/* line 391, scss/user.scss */
-.timeline .items .item.promoted .icon,
-.timeline .items .item.promoted .username,
-.timeline .items .item.promoted .text,
-.timeline .items .item.promoted .time,
-.timeline .items .item.promoted .link,
-.timeline .items .item.promoted .button {
-  -webkit-transition: opacity 500ms linear;
-  -moz-transition: opacity 500ms linear;
-  -o-transition: opacity 500ms linear;
-  transition: opacity 500ms linear;
-  opacity: 0.2;
-}
-/* line 400, scss/user.scss */
+/* line 371, scss/user.scss */
 .timeline .items .item.event .event.sash {
   border-color: transparent #ff6600 transparent transparent;
   display: block;
 }
-/* line 406, scss/user.scss */
+/* line 377, scss/user.scss */
 .timeline .items .item .overlay {
   background-color: rgba(15, 15, 15, 0.4);
   display: none;
@@ -655,7 +628,7 @@ input[type=submit].wide {
   width: 100%;
   z-index: 1;
 }
-/* line 417, scss/user.scss */
+/* line 388, scss/user.scss */
 .timeline .items .item .sash {
   border-style: solid;
   border-width: 0 48px 48px 0;
@@ -670,51 +643,51 @@ input[type=submit].wide {
   width: 0px;
   z-index: 2;
 }
-/* line 431, scss/user.scss */
+/* line 402, scss/user.scss */
 .timeline .items .item .sash .icon-calendar {
   position: absolute;
   right: -42px;
   top: 5px;
 }
-/* line 439, scss/user.scss */
+/* line 410, scss/user.scss */
 .timeline .items .item .username a {
   color: #ddd;
 }
-/* line 445, scss/user.scss */
+/* line 416, scss/user.scss */
 .timeline .items .item .text a {
   color: #fff;
 }
-/* line 450, scss/user.scss */
+/* line 421, scss/user.scss */
 .timeline .items .item .link {
   margin: 8px 0 6px;
 }
-/* line 453, scss/user.scss */
+/* line 424, scss/user.scss */
 .timeline .items .item .link a {
   font-size: 25px;
   color: #ddd;
 }
-/* line 459, scss/user.scss */
+/* line 430, scss/user.scss */
 .timeline .items .item .time {
   margin: 0;
 }
-/* line 462, scss/user.scss */
+/* line 433, scss/user.scss */
 .timeline .items .item .time .event {
   color: #ff6600;
 }
-/* line 466, scss/user.scss */
+/* line 437, scss/user.scss */
 .timeline .items .item .time a {
   color: #eee;
   font-size: 13px;
 }
-/* line 472, scss/user.scss */
+/* line 443, scss/user.scss */
 .timeline .items .item .promote {
   padding: 6px 7px 5px 8px;
 }
-/* line 476, scss/user.scss */
+/* line 447, scss/user.scss */
 .timeline .items .item .demote {
   padding: 6px 9px 5px 10px;
 }
-/* line 484, scss/user.scss */
+/* line 455, scss/user.scss */
 .timeline .needle {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
   opacity: 0.75;
@@ -725,7 +698,7 @@ input[type=submit].wide {
   height: 50px;
   width: 100%;
 }
-/* line 494, scss/user.scss */
+/* line 465, scss/user.scss */
 .timeline .needle .head {
   border-bottom: 1px solid #333333;
   border-top: 1px solid #ffffff;
@@ -733,7 +706,7 @@ input[type=submit].wide {
   margin-top: 25px;
   width: 100%;
 }
-/* line 502, scss/user.scss */
+/* line 473, scss/user.scss */
 .timeline .needle .date {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -755,21 +728,21 @@ input[type=submit].wide {
   top: 13px;
   width: 200px;
 }
-/* line 521, scss/user.scss */
+/* line 492, scss/user.scss */
 .timeline .needle .now {
   color: #ff6600;
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 527, scss/user.scss */
+/* line 498, scss/user.scss */
 .timeline .needle .future {
   margin-left: 10px;
 }
-/* line 531, scss/user.scss */
+/* line 502, scss/user.scss */
 .timeline .needle .past {
   margin-right: 10px;
 }
-/* line 538, scss/user.scss */
+/* line 509, scss/user.scss */
 .timeline .load-more,
 .timeline .no-results {
   -webkit-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
@@ -785,19 +758,19 @@ input[type=submit].wide {
   text-align: center;
   width: 100%;
 }
-/* line 554, scss/user.scss */
+/* line 525, scss/user.scss */
 .timeline .load-more {
   cursor: pointer;
 }
 
-/* line 561, scss/user.scss */
+/* line 532, scss/user.scss */
 .scrollbarV,
 .scrollbarH {
   position: absolute;
   z-index: 100;
 }
 
-/* line 566, scss/user.scss */
+/* line 537, scss/user.scss */
 .scrollbarV {
   bottom: 7px;
   top: 2px;
@@ -805,7 +778,7 @@ input[type=submit].wide {
   width: 8px;
 }
 
-/* line 573, scss/user.scss */
+/* line 544, scss/user.scss */
 .scrollbarV > div {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;

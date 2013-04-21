@@ -108,6 +108,12 @@
             margin-left: 18px;
         }
 
+        .submit {
+            font-size: 12px;
+            margin-left: 10px;
+            padding: 3px 7px;
+        }
+
 
         // Now
         .now {
@@ -348,51 +354,15 @@
                 }
             }
 
-            &.now {
-                background-image: none !important; // Required for inline styles
-                background-color: #ffffff;
-
-                .overlay {
-                    display: none;
-                }
-
-
-                .text a,
-                .username a,
-
-                .time a,
-                .time i,
-                .time .timestamp,
-
-                .link i {
-                    color: #000000;
-                }
-
-                .icon img {
-                    border-color: #000000;
-                }
-            }
-
             &.promoted {
                 .overlay {
                     @include single-transition(
                         background-color, 1s, linear
                     );
 
-                    background-color: rgba(15, 15, 15, 0.9);
+                    background-color: rgba(255, 255, 255, 0.65);
                     display: block;
-                }
-
-                .icon,
-                .username,
-                .text,
-                .time,
-                .link,
-                .button {
-                    @include single-transition(
-                        opacity, 500ms, linear
-                    );
-                    opacity: 0.2;
+                    z-index: 3;
                 }
             }
 
