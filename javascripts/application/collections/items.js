@@ -6,9 +6,12 @@ Application.Collection.Items = Backbone.Collection.extend({
     initialize: function(collection, options) {
         this.options = options;
 
-        this.on('item:demoted item:promoted', function(event) {
-            console.log(event);
-            this.remove(event);
+        this.on('item:demoted', function(target) {
+            var models = this.filter(function(item) {
+                return (item.get('id') === target.get('id'));
+            });
+
+            this.remove(models);
         });
     },
 

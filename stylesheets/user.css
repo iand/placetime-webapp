@@ -587,16 +587,24 @@ input[type=submit].wide {
   box-shadow: 0px 0px 0px #aaaaaa;
   background-color: #999;
 }
-/* line 339, scss/user.scss */
+/* line 340, scss/user.scss */
+.timeline .items .item.empty p {
+  margin: 0;
+}
+/* line 346, scss/user.scss */
+.timeline .items .item.image .overlay {
+  display: block;
+}
+/* line 351, scss/user.scss */
 .timeline .items .item.now {
   background-image: none !important;
   background-color: #ffffff;
 }
-/* line 343, scss/user.scss */
+/* line 355, scss/user.scss */
 .timeline .items .item.now .overlay {
   display: none;
 }
-/* line 355, scss/user.scss */
+/* line 367, scss/user.scss */
 .timeline .items .item.now .text a,
 .timeline .items .item.now .username a,
 .timeline .items .item.now .time a,
@@ -605,13 +613,41 @@ input[type=submit].wide {
 .timeline .items .item.now .link i {
   color: #000000;
 }
-/* line 359, scss/user.scss */
+/* line 371, scss/user.scss */
 .timeline .items .item.now .icon img {
   border-color: #000000;
 }
-/* line 364, scss/user.scss */
+/* line 377, scss/user.scss */
+.timeline .items .item.promoted .overlay {
+  -webkit-transition: background-color 1s linear;
+  -moz-transition: background-color 1s linear;
+  -o-transition: background-color 1s linear;
+  transition: background-color 1s linear;
+  background-color: rgba(15, 15, 15, 0.9);
+  display: block;
+}
+/* line 391, scss/user.scss */
+.timeline .items .item.promoted .icon,
+.timeline .items .item.promoted .username,
+.timeline .items .item.promoted .text,
+.timeline .items .item.promoted .time,
+.timeline .items .item.promoted .link,
+.timeline .items .item.promoted .button {
+  -webkit-transition: opacity 500ms linear;
+  -moz-transition: opacity 500ms linear;
+  -o-transition: opacity 500ms linear;
+  transition: opacity 500ms linear;
+  opacity: 0.2;
+}
+/* line 400, scss/user.scss */
+.timeline .items .item.event .event.sash {
+  border-color: transparent #ff6600 transparent transparent;
+  display: block;
+}
+/* line 406, scss/user.scss */
 .timeline .items .item .overlay {
   background-color: rgba(15, 15, 15, 0.4);
+  display: none;
   left: 0;
   position: absolute;
   top: 0;
@@ -619,45 +655,66 @@ input[type=submit].wide {
   width: 100%;
   z-index: 1;
 }
-/* line 375, scss/user.scss */
+/* line 417, scss/user.scss */
+.timeline .items .item .sash {
+  border-style: solid;
+  border-width: 0 35px 35px 0;
+  color: #ffffff;
+  display: none;
+  height: 0px;
+  line-height: 0px;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0px;
+  z-index: 2;
+}
+/* line 431, scss/user.scss */
+.timeline .items .item .sash .icon-time {
+  position: absolute;
+  right: -32px;
+  top: 2px;
+}
+/* line 439, scss/user.scss */
 .timeline .items .item .username a {
   color: #ddd;
 }
-/* line 381, scss/user.scss */
+/* line 445, scss/user.scss */
 .timeline .items .item .text a {
   color: #fff;
 }
-/* line 386, scss/user.scss */
+/* line 450, scss/user.scss */
 .timeline .items .item .link {
   margin: 8px 0 0;
 }
-/* line 389, scss/user.scss */
+/* line 453, scss/user.scss */
 .timeline .items .item .link a {
   font-size: 25px;
   color: #ddd;
 }
-/* line 395, scss/user.scss */
+/* line 459, scss/user.scss */
 .timeline .items .item .time {
   margin: 0;
 }
-/* line 398, scss/user.scss */
+/* line 462, scss/user.scss */
 .timeline .items .item .time .event {
   color: #ff6600;
 }
-/* line 402, scss/user.scss */
+/* line 466, scss/user.scss */
 .timeline .items .item .time a {
   color: #eee;
   font-size: 13px;
 }
-/* line 408, scss/user.scss */
+/* line 472, scss/user.scss */
 .timeline .items .item .promote {
   padding: 6px 7px 5px 8px;
 }
-/* line 412, scss/user.scss */
+/* line 476, scss/user.scss */
 .timeline .items .item .demote {
   padding: 6px 9px 5px 10px;
 }
-/* line 420, scss/user.scss */
+/* line 484, scss/user.scss */
 .timeline .needle {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
   opacity: 0.75;
@@ -671,7 +728,7 @@ input[type=submit].wide {
   width: -webkit-calc(100% - 12px);
   width: calc(100% - 12px);
 }
-/* line 433, scss/user.scss */
+/* line 497, scss/user.scss */
 .timeline .needle .date {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -693,19 +750,19 @@ input[type=submit].wide {
   top: -12px;
   width: 200px;
 }
-/* line 452, scss/user.scss */
+/* line 516, scss/user.scss */
 .timeline .needle .now {
   color: #ff6600;
 }
-/* line 456, scss/user.scss */
+/* line 520, scss/user.scss */
 .timeline .needle .future {
   margin-left: 5px;
 }
-/* line 460, scss/user.scss */
+/* line 524, scss/user.scss */
 .timeline .needle .past {
   margin-right: 5px;
 }
-/* line 467, scss/user.scss */
+/* line 531, scss/user.scss */
 .timeline .load-more,
 .timeline .no-results {
   -webkit-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
@@ -721,7 +778,33 @@ input[type=submit].wide {
   text-align: center;
   width: 100%;
 }
-/* line 483, scss/user.scss */
+/* line 547, scss/user.scss */
 .timeline .load-more {
   cursor: pointer;
+}
+
+/* line 554, scss/user.scss */
+.scrollbarV,
+.scrollbarH {
+  position: absolute;
+  z-index: 100;
+}
+
+/* line 559, scss/user.scss */
+.scrollbarV {
+  bottom: 7px;
+  top: 2px;
+  right: 1px;
+  width: 8px;
+}
+
+/* line 566, scss/user.scss */
+.scrollbarV > div {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
 }

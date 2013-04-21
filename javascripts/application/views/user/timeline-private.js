@@ -67,18 +67,6 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
 
 
 
-    timeline: function() {
-        this.region.show(
-            this.subviews.findByCustom('timeline')
-        );
-
-        Backbone.history.navigate('timeline', false);
-
-        return false;
-    },
-
-
-
     now: function() {
         this.region.currentView.trigger('now', this);
     },
@@ -99,6 +87,13 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
 
     onRender: function() {
         this.constructor.__super__.onRender.call(this, arguments);
-        this.timeline();
+
+
+        // Initial view
+        var view = this.subviews.findByCustom(
+            this.model.get('view')
+        );
+
+        this.region.show(view);
     }
 });

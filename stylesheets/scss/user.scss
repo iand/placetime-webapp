@@ -336,6 +336,18 @@
                 background-color: #999;
             }
 
+            &.empty {
+                p {
+                    margin: 0;
+                }
+            }
+
+            &.image {
+                .overlay {
+                    display: block;
+                }
+            }
+
             &.now {
                 background-image: none !important; // Required for inline styles
                 background-color: #ffffff;
@@ -361,14 +373,66 @@
                 }
             }
 
+            &.promoted {
+                .overlay {
+                    @include single-transition(
+                        background-color, 1s, linear
+                    );
+
+                    background-color: rgba(15, 15, 15, 0.9);
+                    display: block;
+                }
+
+                .icon,
+                .username,
+                .text,
+                .time,
+                .link,
+                .button {
+                    @include single-transition(
+                        opacity, 500ms, linear
+                    );
+                    opacity: 0.2;
+                }
+            }
+
+            &.event {
+                .event.sash {
+                    border-color: transparent #ff6600 transparent transparent;
+                    display: block;
+                }
+            }
+
             .overlay {
                 background-color: rgba(15, 15, 15, 0.4);
+                display: none;
                 left: 0;
                 position: absolute;
                 top: 0;
                 height: 100%;
                 width: 100%;
                 z-index: 1;
+            }
+
+            .sash {
+                border-style: solid;
+                border-width: 0 35px 35px 0;
+                color: #ffffff;
+                display: none;
+                height: 0px;
+                line-height: 0px;
+                margin: 0;
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 0px;
+                z-index: 2;
+
+                .icon-time {
+                    position: absolute;
+                    right: -32px;
+                    top: 2px;
+                }
             }
 
             .username {
@@ -483,4 +547,25 @@
     .load-more {
         cursor: pointer;
     }
+}
+
+
+.scrollbarV,
+.scrollbarH {
+    position: absolute;
+    z-index: 100;
+}
+
+.scrollbarV {
+    bottom: 7px;
+    top: 2px;
+    right: 1px;
+    width: 8px;
+}
+
+.scrollbarV > div {
+    @include border-radius(4px);
+
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
 }

@@ -9,6 +9,8 @@ Application.Model.Item = Backbone.Model.extend({
         this.set('uid', this.get('id') + '-' + this.get('ts'));
     },
 
+
+
     time: function() {
         return moment.unix(
             this.get('ts').toString().substr(0, 10)

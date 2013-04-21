@@ -1,6 +1,6 @@
 Application.View.ItemEmpty = Backbone.Marionette.ItemView.extend({
     template: '#item-empty-template',
-    className: 'item',
+    className: 'item empty',
 
 
     onBeforeRender: function() {

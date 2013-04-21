@@ -77,10 +77,14 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
         this.iscroll = new iScroll($scroller.get(0), {
             momentum: true,
+
             hScrollbar: false,
             hScroll: false,
+
             vScroll: true,
             vScrollbar: true,
+
+            scrollbarClass: 'scrollbar',
 
             onScrollEnd: function(event) {
                 self.infiniteScroll(this);

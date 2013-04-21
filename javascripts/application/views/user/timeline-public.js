@@ -1,8 +1,5 @@
 Application.View.TimelinePublic = Application.View.Timeline.extend({
     events: {
-        'click .header .items': 'timeline',
-        'click .header .followings': 'followings',
-        'click .header .followers': 'followers',
         'click .header .now': 'now',
         'submit .header .form': 'search'
     },
@@ -96,45 +93,11 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
 
 
-    timeline: function() {
-        this.region.show(
-            this.subviews.findByCustom('timeline')
-        );
-
-        Backbone.history.navigate('timeline', false);
-
-        return false;
-    },
-
-
-
-    followings: function() {
-        this.region.show(
-            this.subviews.findByCustom('followings')
-        );
-
-        Backbone.history.navigate('followings', false);
-
-        return false;
-    },
-
-
-
-    followers: function() {
-        this.region.show(
-            this.subviews.findByCustom('followers')
-        );
-
-        Backbone.history.navigate('followers', false);
-
-        return false;
-    },
-
-
 
     now: function() {
         this.region.currentView.trigger('now', this);
     },
+
 
 
     search: function() {
@@ -178,18 +141,11 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         };
 
 
-        switch (Backbone.history.fragment) {
-            case 'timeline':
-                this.timeline();
-                break;
+        // Initial view
+        var view = this.subviews.findByCustom(
+            this.model.get('view')
+        );
 
-            case 'followings':
-                this.followings();
-                break;
-
-            case 'followers':
-                this.followers();
-                break;
-        }
+        this.region.show(view);
     }
 });

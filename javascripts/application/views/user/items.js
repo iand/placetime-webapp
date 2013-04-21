@@ -7,8 +7,10 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         'click .demote': 'demote'
     },
 
-    itemView: Application.View.Item,
     itemViewContainer: '.children',
+
+    itemView: Application.View.Item,
+    emptyView: Application.View.ItemEmpty,
 
     // Bubble collection events
     collectionEvents: {
@@ -194,10 +196,9 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     buildItemView: function(item, ItemViewType, itemViewOptions) {
-        item.set('status', this.model.get('status'));
+        var view = Backbone.Marionette.CompositeView.prototype.buildItemView.apply(this, arguments);
+            view.model.set('status', this.model.get('status'));
 
-        return new Application.View.Item({
-            model: item
-        });
+        return view;
     }
 });

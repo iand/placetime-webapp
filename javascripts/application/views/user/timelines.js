@@ -11,11 +11,10 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
     initViews: function() {
         this.subviews = new Backbone.ChildViewContainer();
 
-
         var publicTimeline = new Application.View.TimelinePublic({
             model: new Backbone.Model({
-                pid: this.options.pid,
-                view: 'timeline',
+                pid: this.options.public.pid,
+                view: this.options.public.view,
                 status: 'p'
             })
         });
@@ -25,8 +24,8 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
 
         var privateTimeline = new Application.View.TimelinePrivate({
             model: new Backbone.Model({
-                pid: this.options.pid,
-                view: 'timeline',
+                pid: this.options.private.pid,
+                view: this.options.private.view,
                 status: 'm'
             })
         });
@@ -42,10 +41,6 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
 
         this.listenTo(publicTimeline, 'item:promoted', function(event) {
             privateTimeline.trigger('item:add', event);
-        });
-
-        this.listenTo(privateTimeline, 'item:demoted', function(event){
-            publicTimeline.trigger('item:add', event);
         });
     },
 

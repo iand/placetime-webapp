@@ -134,9 +134,12 @@
 
 
         <script type="text/template" id="item-template">
-            <% if (image) { %>
-                <div class="overlay"><!-- --></div>
-            <% } %>
+            <div class="overlay"></div>
+
+            <p class="sash event">
+                <i class="icon-time"></i>
+            </p>
+
 
             <% if (media == "video") { %>
             <!-- video specific markup here -->
@@ -154,6 +157,11 @@
                         <%= text %>
                     </a>
                 </p>
+                <p class="link pull-left">
+                    <a href="<%= link %>" class="fancybox fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
+                        <i class="icon-external-link"></i>
+                    </a>
+                </p>
                 <p class="time pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
                         <% if (ts.toString().substr(0, 10) == event) { %>
@@ -164,11 +172,7 @@
                         <span class="timestamp"><%= moment.unix(ts.toString().substr(0, 10)).fromNow() %></span>
                     </a>
                 </p>
-                <p class="link pull-left">
-                    <a href="<%= link %>" class="fancybox fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
-                        <i class="icon-external-link"></i>
-                    </a>
-                </p>
+
 
                 <% if (status === 'm') { %>
                     <a class="button demote">
@@ -218,7 +222,7 @@
             </div>
 
             <p class="username pull-left">
-                <a href="#user/<%= pid %>">@<%= pid %></a>
+                <a href="#user/<%= pid %>"><%= pid %></a>
             </p>
 
             <% if (bio) { %>
@@ -253,7 +257,7 @@
             </div>
 
             <p class="username pull-left">
-                <a href="#user/<%= pid %>">@<%= pid %></a>
+                <a href="#user/<%= pid %>"><%= pid %></a>
             </p>
 
             <% if (bio) { %>
@@ -291,7 +295,7 @@
                                 <a href="#timeline">Timeline</a>
                             </li>
                             <li class="followings <%= (view == 'followings')? 'active':'' %>">
-                                <a>Following</a>
+                                <a href="#followings">Following</a>
                             </li>
                             <li class="followers <%= (view == 'timeline')? 'followers':'' %>">
                                 <a href="#followers">Followers</a>
