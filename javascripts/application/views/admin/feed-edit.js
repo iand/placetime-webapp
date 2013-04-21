@@ -10,11 +10,6 @@ var EditFeedView = Backbone.View.extend({
 
 
     save: function () {
-        console.log("saving feed: " + $('#pname').val());
-        console.log("pid: " + this.model.get('pid'));
-        console.log("pname: " + $('#pname').val());
-        console.log("parentpid: " + $('#parentpid').val());
-        console.log("feedurl: " + $('#feedurl').val());
         var self = this;
         $.ajax({
             url: '/-tupdateprofile',

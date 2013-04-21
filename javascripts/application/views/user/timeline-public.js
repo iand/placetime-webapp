@@ -84,10 +84,27 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         this.constructor.__super__.initEvents.call(this, arguments);
 
         // Bubble promoted/demoted timeline events
-        var timeline = this.subviews.findByCustom('timeline');
+        var timeline = this.subviews.findByCustom('timeline'),
+            followings = this.subviews.findByCustom('followings'),
+            followers = this.subviews.findByCustom('followers');
 
+        // Bubble
         this.listenTo(timeline, 'item:promoted', function(event) {
             this.trigger('item:promoted', event);
+        });
+
+
+        // Handle
+        this.on('view:followings', function(){
+            this.region.show(followings);
+        });
+
+        this.on('view:followers', function(){
+            this.region.show(followers);
+        });
+
+        this.on('view:timeline', function(){
+            this.region.show(timeline);
         });
     },
 
@@ -103,6 +120,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
     search: function() {
         return false;
     },
+
 
 
     onRender: function() {

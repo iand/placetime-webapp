@@ -28,15 +28,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     initialize: function (options) {
-        this.collection.fetch({
-            data: {
-                pid: this.model.get('pid'),
-                before: 20,
-                after: 20
-            },
-            remove: true
-        });
-
         this.subviews = new Backbone.ChildViewContainer();
         this.subviews.add(new Application.View.Needle(), 'needle');
 
@@ -64,15 +55,16 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     onShow: function() {
-        this._initialEvents();
+        var promise = this.collection.fetch({
+            data: {
+                pid: this.model.get('pid'),
+                before: 20,
+                after: 20
+            }
+        });
+
+        promise.done(this.renderNeedle.bind(this));
     },
-
-
-    onRender: function() {
-        this.renderNeedle();
-    },
-
-
 
     renderNeedle: function() {
         if (this.collection.length > 0) {
@@ -124,7 +116,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         var promise = this.collection.now();
 
         promise.done(function(model) {
-            var $closest = self.$el.find('.item[data-id='+model.id+']'),
+            var $closest = self.$el.find('.item[data-id='+model.idSafe()+']'),
                 $needle  = self.$el.find('.needle');
 
             var position = $closest.position(),
@@ -197,7 +189,10 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
     buildItemView: function(item, ItemViewType, itemViewOptions) {
         var view = Backbone.Marionette.CompositeView.prototype.buildItemView.apply(this, arguments);
-            view.model.set('status', this.model.get('status'));
+
+        view.model.set('status', this.model.get('status'), {
+            silent: true
+        });
 
         return view;
     }

@@ -26,7 +26,6 @@ var EditProfileView = Backbone.View.extend({
             }
         });
 
-        console.log("save");
         return false;
     },
 

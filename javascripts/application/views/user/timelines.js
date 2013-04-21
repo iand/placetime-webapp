@@ -42,6 +42,32 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
         this.listenTo(publicTimeline, 'item:promoted', function(event) {
             privateTimeline.trigger('item:add', event);
         });
+
+        this.listenTo(privateTimeline, 'item:created', function(event) {
+            privateTimeline.trigger('item:add', event);
+        });
+
+        // Public timeline
+        this.on('public:followings', function(){
+            publicTimeline.trigger('view:followings');
+        });
+
+        this.on('public:followers', function(){
+            publicTimeline.trigger('view:followers');
+        });
+
+        this.on('public:timeline', function(){
+            publicTimeline.trigger('view:timeline');
+        });
+
+        // Private timeline
+        this.on('private:itemAdd', function(){
+            privateTimeline.trigger('view:itemAdd');
+        });
+
+        this.on('private:timeline', function(){
+            privateTimeline.trigger('view:timeline');
+        });
     },
 
 

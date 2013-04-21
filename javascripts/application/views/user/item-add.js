@@ -41,7 +41,6 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     submit: function() {
         var self = this;
 
-
         var promise = this.model.save();
 
         promise.done(function(){

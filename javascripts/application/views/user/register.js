@@ -49,11 +49,10 @@ Application.View.Register = Backbone.Marionette.ItemView.extend({
                 name: this.model.get('name')
             },
             success: function (data) {
-                console.log('Created profile successfully');
                 Backbone.history.navigate('login', true);
             },
             error: function (model, response, options) {
-                console.log('Error thrown when creating profile: ' + response.responseText);
+                console.log('TODO: Display errors');
             }
         });
     }

@@ -6,9 +6,15 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
     initialize: function() {
-        this.set('uid', this.get('id') + '-' + this.get('ts'));
+        this.set('uid', this.get('id') + '-' + this.get('ts'), {
+            silent: true
+        });
     },
 
+
+    idSafe: function() {
+        return this.id.replace(/@/, '\\@');
+    },
 
 
     time: function() {

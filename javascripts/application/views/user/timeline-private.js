@@ -44,24 +44,36 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
 
 
     initAddItem: function() {
-        var view = new Application.View.ItemAdd();
-
-        this.listenTo(view, 'item:created', function(){
-            this.render();
-        });
-
-        this.subviews.add(view, 'itemAdd');
+        this.subviews.add(new Application.View.ItemAdd(), 'itemAdd');
     },
 
 
     initEvents: function() {
         this.constructor.__super__.initEvents.call(this, arguments);
 
-        // Bubble promoted/demoted timeline events
-        var view = this.subviews.findByCustom('timeline');
+        var timeline = this.subviews.findByCustom('timeline'),
+            itemAdd  = this.subviews.findByCustom('itemAdd');
 
-        this.listenTo(view, 'item:demoted', function(event) {
+
+        // Bubble
+        this.listenTo(timeline, 'item:demoted', function(event) {
             this.trigger('item:demoted', event);
+        });
+
+
+        // Handle
+        this.listenTo(itemAdd, 'item:created', function() {
+            this.region.show(timeline);
+        });
+
+
+        // Handle
+        this.on('view:timeline', function(){
+            this.region.show(timeline);
+        });
+
+        this.on('view:itemAdd', function(){
+            this.region.show(itemAdd);
         });
     },
 
