@@ -49,10 +49,7 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
         var publicTimeline = this.subviews.findByCustom('publicTimeline'),
             privateTimeline = this.subviews.findByCustom('privateTimeline');
 
-        publicTimeline.render();
-        privateTimeline.render();
-
-        this.$el.find('.timeline-public').replaceWith(publicTimeline.el);
-        this.$el.find('.timeline-private').replaceWith(privateTimeline.el);
+        this.$el.find('.timeline-public').replaceWith(publicTimeline.render().el);
+        this.$el.find('.timeline-private').replaceWith(privateTimeline.render().el);
     }
 });

@@ -212,7 +212,13 @@
 
 
         <script type="text/template" id="item-empty-template">
-            <p>Add items to your playlist</p>
+            </p>
+                <% if (status === 'p') { %>
+                    There are no items in your timeline, search for users to follow
+                <% } else { %>
+                    Add a new item or copy one from your timeline
+                <% } %>
+            <p>
         </script>
 
 

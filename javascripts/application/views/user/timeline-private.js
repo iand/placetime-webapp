@@ -47,7 +47,7 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
         var view = new Application.View.ItemAdd();
 
         this.listenTo(view, 'item:created', function(){
-            this.timeline();
+            this.render();
         });
 
         this.subviews.add(view, 'itemAdd');

@@ -28,6 +28,15 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     initialize: function (options) {
+        this.collection.fetch({
+            data: {
+                pid: this.model.get('pid'),
+                before: 20,
+                after: 20
+            },
+            remove: true
+        });
+
         this.subviews = new Backbone.ChildViewContainer();
         this.subviews.add(new Application.View.Needle(), 'needle');
 
@@ -60,16 +69,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     onRender: function() {
-        var promise = this.collection.fetch({
-            data: {
-                pid: this.model.get('pid'),
-                before: 20,
-                after: 20
-            },
-            reset: true
-        });
-
-        promise.done(this.renderNeedle.bind(this));
+        this.renderNeedle();
     },
 
 
