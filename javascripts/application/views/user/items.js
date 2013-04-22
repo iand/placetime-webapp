@@ -33,6 +33,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
         // Custom events
         this.on('item:add', function(event) {
+            console.log(event);
             this.collection.add(event);
         });
 
