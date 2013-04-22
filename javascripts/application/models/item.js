@@ -29,7 +29,7 @@ Application.Model.Item = Backbone.Model.extend({
             url: '/-tadd',
             type: 'post',
             data: {
-                pid: session.get('pid'),
+                pid: Application.session.get('pid'),
                 link: this.get('link'),
                 text: this.get('text'),
                 ets: this.get('ets')
@@ -55,7 +55,7 @@ Application.Model.Item = Backbone.Model.extend({
             url: '/-tpromote',
             type: 'post',
             data: {
-                pid: session.get('pid'),
+                pid: Application.session.get('pid'),
                 id: this.get('id')
             },
             success: function() {
@@ -82,7 +82,7 @@ Application.Model.Item = Backbone.Model.extend({
             url: '/-tdemote',
             type: 'post',
             data: {
-                pid: session.get('pid'),
+                pid: Application.session.get('pid'),
                 id: this.get('id')
             },
             success: function() {

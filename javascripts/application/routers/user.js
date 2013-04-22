@@ -16,7 +16,7 @@ Application.Router.User = Backbone.Router.extend({
         // TODO: Set object name to body class, override Application.content.show
         this.header = new Application.View.Header({
             model: new Backbone.Model({
-                pid: session.get('pid'),
+                pid: Application.session.get('pid'),
                 wide: false
             })
         });
@@ -30,7 +30,7 @@ Application.Router.User = Backbone.Router.extend({
         var self = this;
 
 
-        var check = session.check();
+        var check = Application.session.check();
 
         check.done(function(){
             // Set header to wide and re-render
@@ -40,11 +40,11 @@ Application.Router.User = Backbone.Router.extend({
             // Render timelines
             var timeline = new Application.View.Timelines({
                 public: {
-                    pid: session.get('pid'),
+                    pid: Application.session.get('pid'),
                     view: 'timeline'
                 },
                 private: {
-                    pid: session.get('pid'),
+                    pid: Application.session.get('pid'),
                     view: 'timeline'
                 }
             });
@@ -69,7 +69,7 @@ Application.Router.User = Backbone.Router.extend({
         var self = this;
 
 
-        var check = session.check();
+        var check = Application.session.check();
 
         check.done(function(){
             // Set header to wide and re-render
@@ -79,11 +79,11 @@ Application.Router.User = Backbone.Router.extend({
             // Render timelines
             var timeline = new Application.View.Timelines({
                 public: {
-                    pid: session.get('pid'),
+                    pid: Application.session.get('pid'),
                     view: 'followers'
                 },
                 private: {
-                    pid: session.get('pid'),
+                    pid: Application.session.get('pid'),
                     view: 'timeline'
                 }
             });
@@ -108,7 +108,7 @@ Application.Router.User = Backbone.Router.extend({
         var self = this;
 
 
-        var check = session.check();
+        var check = Application.session.check();
 
         check.done(function(){
             // Set header to wide and re-render
@@ -118,11 +118,11 @@ Application.Router.User = Backbone.Router.extend({
             // Render timelines
             var timeline = new Application.View.Timelines({
                 public: {
-                    pid: session.get('pid'),
+                    pid: Application.session.get('pid'),
                     view: 'followings'
                 },
                 private: {
-                    pid: session.get('pid'),
+                    pid: Application.session.get('pid'),
                     view: 'timeline'
                 }
             });
@@ -168,7 +168,7 @@ Application.Router.User = Backbone.Router.extend({
         var self = this;
 
 
-        var check = session.check();
+        var check = Application.session.check();
 
         check.done(function(){
             // Set header to wide and re-render
@@ -182,7 +182,7 @@ Application.Router.User = Backbone.Router.extend({
                     view: 'timeline'
                 },
                 private: {
-                    pid: session.get('pid'),
+                    pid: Application.session.get('pid'),
                     view: 'timeline'
                 }
             });
@@ -199,7 +199,7 @@ Application.Router.User = Backbone.Router.extend({
 
 
     logout: function () {
-        session.destroy();
+        Application.session.destroy();
 
         Backbone.history.navigate('login', true);
     }

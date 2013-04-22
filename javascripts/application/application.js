@@ -33,26 +33,23 @@ Backbone.Marionette.Region.prototype.is = function(view) {
 };
 
 
-// TODO: Remove global variable
-var session;
 Application.addInitializer(function(options){
-    session = new Application.Model.Session();
+    Application.session = new Application.Model.Session();
 
 
     var cookie = $.cookie('ptsession');
     if (cookie) {
-        session.set('ptsession', cookie);
+        Application.session.set('ptsession', cookie);
     }
 });
 
 
-// TODO: Remove global variable
-var router;
+
 Application.addInitializer(function(options){
     if (options.router === 'admin') {
-        router = new Application.Router.Admin();
+        Application.router = new Application.Router.Admin();
     } else {
-        router = new Application.Router.User();
+        Application.router = new Application.Router.User();
     }
 });
 
@@ -82,11 +79,10 @@ Application.addInitializer(function(){
 });
 
 
-// TODO: Remove global variable
-var matched;
+
 // Start history
 Application.on('initialize:after', function(options){
-    matched = Backbone.history.start({
+    Backbone.history.start({
         root: '/'
     });
 });
@@ -94,19 +90,18 @@ Application.on('initialize:after', function(options){
 
 // Start session and authorize
 Application.on('initialize:after', function(options){
-
-    session.check(function(){
-        if (matched === true) {
+    Application.session.check(function(){
+        // Was route matched?
+        if (Application.router.routes[Backbone.history.fragment] === true) {
             return;
         }
 
-        router.navigate('timeline', {trigger: true});
+        Backbone.history.navigate('timeline', true);
     }, function(){
-        // TODO: Don't redirect if login/register
-        if (matched === true) {
+        if (['login', 'register'].indexOf(Backbone.history.fragment) !== -1) {
             return;
         } else {
-            router.navigate('login', {trigger: true});
+            Backbone.history.navigate('login', true);
         }
     });
 });

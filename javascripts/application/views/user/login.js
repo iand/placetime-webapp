@@ -41,10 +41,10 @@ Application.View.Login = Backbone.Marionette.ItemView.extend({
     login: function (data) {
         var self = this;
 
-        session.set('pid', data.pid);
-        session.set('pwd', data.pwd);
+        Application.session.set('pid', data.pid);
+        Application.session.set('pwd', data.pwd);
 
-        session.save(function (data) {
+        Application.session.save(function (data) {
             Backbone.history.navigate('timeline', true);
         }, function () {});
     }

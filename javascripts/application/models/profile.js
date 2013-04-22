@@ -25,7 +25,7 @@ Application.Model.Profile = Backbone.Model.extend({
             url: '/-tfollow',
             type: 'post',
             data: {
-                pid: session.get('pid'),
+                pid: Application.session.get('pid'),
                 followpid: this.get('pid')
             },
             success: function() {
@@ -57,7 +57,7 @@ Application.Model.Profile = Backbone.Model.extend({
             url: '/-tunfollow',
             type: 'post',
             data: {
-                pid: session.get('pid'),
+                pid: Application.session.get('pid'),
                 followpid: this.get('pid')
             },
             success: function() {

@@ -24,7 +24,7 @@ Application.Router.Admin = Backbone.Router.extend({
     initialize: function () {
         var header = new Application.View.Header({
             model: new Backbone.Model({
-                pid: session.get('pid')
+                pid: Application.session.get('pid')
             })
         });
 
@@ -32,7 +32,7 @@ Application.Router.Admin = Backbone.Router.extend({
 
 
         // var self = this;
-        // session.check(function () {
+        // Application.session.check(function () {
         //     self.changePage(new MainView({}));
         // },
 
@@ -57,12 +57,12 @@ Application.Router.Admin = Backbone.Router.extend({
         var self = this;
 
 
-        var check = session.check();
+        var check = Application.session.check();
 
         check.done(function(){
             var home = new Application.Admin.View.Home({
                 model: new Backbone.Model({
-                    pid: session.get('pid'),
+                    pid: Application.session.get('pid'),
                     message: undefined
                 })
             });
@@ -80,7 +80,7 @@ Application.Router.Admin = Backbone.Router.extend({
         var self = this;
 
 
-        var check = session.check();
+        var check = Application.session.check();
 
         check.done(function () {
             var profile = new Application.Model.Profile({
@@ -138,7 +138,7 @@ Application.Router.Admin = Backbone.Router.extend({
 
     following: function (pid) {
         var self = this;
-        session.check(function () {
+        Application.session.check(function () {
 
             var list = new FollowingList({
                 'pid': pid
@@ -166,7 +166,7 @@ Application.Router.Admin = Backbone.Router.extend({
 
     followers: function (pid) {
         var self = this;
-        session.check(function () {
+        Application.session.check(function () {
 
             var list = new FollowersList({
                 'pid': pid
@@ -194,7 +194,7 @@ Application.Router.Admin = Backbone.Router.extend({
 
     feeds: function (pid) {
         var self = this;
-        session.check(function () {
+        Application.session.check(function () {
 
             var list = new Application.Collection.Feeds({
                 'pid': pid
@@ -222,7 +222,7 @@ Application.Router.Admin = Backbone.Router.extend({
 
     editProfile: function (pid) {
         var self = this;
-        session.check(function () {
+        Application.session.check(function () {
 
             var profile = new Profile({
                 'pid': pid
@@ -258,7 +258,7 @@ Application.Router.Admin = Backbone.Router.extend({
 
     newProfile: function () {
         var self = this;
-        session.check(function () {
+        Application.session.check(function () {
             self.changePage(new AddProfileView({
                 el: $('#content')
             }));
@@ -273,7 +273,7 @@ Application.Router.Admin = Backbone.Router.extend({
 
     addfeed: function (pid) {
         var self = this;
-        session.check(function () {
+        Application.session.check(function () {
 
             var profile = new Profile({
                 'pid': pid
@@ -301,7 +301,7 @@ Application.Router.Admin = Backbone.Router.extend({
 
     invalidSession: function () {
         self.changePage(new StaticView({
-            name: "session"
+            name: "Application.session"
         }));
     }
 });
