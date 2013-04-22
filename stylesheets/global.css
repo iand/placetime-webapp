@@ -1,4 +1,3 @@
-/* line 4, scss/global.scss */
 html,
 body {
   height: 100%;
@@ -6,12 +5,10 @@ body {
   width: 100%;
 }
 
-/* line 10, scss/global.scss */
 body {
   background-color: #deddd8;
 }
 
-/* line 14, scss/global.scss */
 a {
   text-decoration: none;
 }

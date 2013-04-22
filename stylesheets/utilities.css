@@ -1,9 +1,7 @@
-/* line 3, scss/utilities.scss */
 .pull-left {
   float: left;
 }
 
-/* line 7, scss/utilities.scss */
 .pull-right {
   float: right;
 }

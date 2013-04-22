@@ -1,0 +1,735 @@
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+body {
+  background-color: #deddd8;
+}
+
+a {
+  text-decoration: none;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.container {
+  margin: 0 auto;
+  width: 960px;
+}
+
+.container-wide {
+  margin: 0 auto;
+  max-width: 1300px;
+  width: 100%;
+}
+
+.navbar {
+  -webkit-box-shadow: 0px 4px 5px #444444;
+  -moz-box-shadow: 0px 4px 5px #444444;
+  box-shadow: 0px 4px 5px #444444;
+  background-color: #868681;
+  border-bottom: 8px solid #ccc;
+  height: 45px;
+  width: 100%;
+}
+.navbar.navbar-fixed {
+  position: fixed;
+  top: 0;
+}
+.navbar .navbar-inner {
+  overflow: hidden;
+}
+.navbar .brand {
+  color: #ffffff;
+  font-size: 23px;
+  margin: 8px 0 0 22px;
+}
+.navbar .brand .icon-ok-circle {
+  margin-right: -3px;
+}
+.navbar .brand .icon-ok-circle,
+.navbar .brand .icon-time {
+  color: #dddddd;
+  font-size: 30px;
+  float: left;
+  margin-top: 0px;
+  text-shadow: 1px 1px 2px #666666;
+}
+.navbar .brand .icon-time {
+  margin-right: 10px;
+}
+.navbar .tagline {
+  color: #ededed;
+  font-size: 14px;
+  margin: 16px 0 0 25px;
+}
+.navbar .nav {
+  margin: 5px 25px 0;
+}
+.navbar .nav .icon-cog {
+  font-size: 33px;
+}
+.navbar .dropdown .icon-edit,
+.navbar .dropdown .icon-signout {
+  font-size: 20px;
+}
+
+.nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav.nav-inline li {
+  display: inline-block;
+}
+.nav a {
+  cursor: pointer;
+  display: inline-block;
+}
+.nav li [class^="icon-"],
+.nav li [class*=" icon-"] {
+  width: auto;
+}
+
+label {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #eee;
+  border: 0px;
+  display: inline-block;
+  font-size: 13px;
+  height: 18px;
+  padding: 12px 12px;
+  margin: 4px 4px 4px 0px;
+  text-align: center;
+  vertical-align: middle;
+  width: 100px;
+}
+
+input {
+  outline: none;
+}
+
+input[type=text],
+input[type=password],
+input[type=search],
+input[type=date],
+input[type=url] {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 1px 1px 3px 0px #666666;
+  -moz-box-shadow: inset 1px 1px 3px 0px #666666;
+  box-shadow: inset 1px 1px 3px 0px #666666;
+  -webkit-transition: border 0.2s linear, box-shadow 0.2s linear;
+  -moz-transition: border 0.2s linear, box-shadow 0.2s linear;
+  -o-transition: border 0.2s linear, box-shadow 0.2s linear;
+  transition: border 0.2s linear, box-shadow 0.2s linear;
+  background-color: #deddd8;
+  border: 0px;
+  color: #4B4B4B;
+  display: inline-block;
+  font-size: 18px;
+  height: 18px;
+  margin: 4px 0;
+  padding: 12px 12px;
+  vertical-align: middle;
+  width: 200px;
+}
+
+input[type=submit] {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px, #cccccc 0px 0px 1px 0px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px, #cccccc 0px 0px 1px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px, #cccccc 0px 0px 1px 0px inset;
+  text-shadow: rgba(0, 0, 0, 0.2) 0px -1px 0px, rgba(255, 255, 255, 0.3) 0px 1px 0px;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  background-color: #cccccc;
+  border: 2px solid #eeeeee;
+  color: #000000;
+  font-size: 14px;
+  margin: 8px 10px 4px 0px;
+  padding: 12px;
+}
+input[type=submit]:hover {
+  background-color: #fff;
+  border: 2px solid #666666;
+}
+input[type=submit]:active {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
+  background-color: #cccccc;
+  border: 2px solid #ff9900;
+}
+input[type=submit].wide {
+  width: 100%;
+}
+
+.page.header {
+  position: relative;
+  z-index: 100;
+}
+.page.content {
+  padding-top: 54px;
+}
+.page.content a {
+  color: #000000;
+  border-bottom: 2px solid #ff6600;
+  text-decoration: none;
+}
+.page.content h1 {
+  font-size: 16px;
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+
+.login {
+  text-align: center;
+  width: 358px;
+}
+.login .hint {
+  padding-left: 136px;
+  text-align: left;
+}
+
+.timelines {
+  margin: 0 auto;
+}
+.timelines .column {
+  float: left;
+  width: 50%;
+}
+
+.container-wide .timeline.public {
+  padding: 0 4px 0 8px;
+}
+.container-wide .timeline.private {
+  padding: 0 8px 0 4px;
+}
+
+.timeline {
+  position: relative;
+}
+.timeline.view-followings .header .now, .timeline.view-followers .header .now {
+  opacity: 0;
+}
+.timeline .header {
+  background-color: rgba(125, 125, 119, 0.8);
+  border-bottom: 0px solid #000;
+  height: 39px;
+  position: absolute;
+  top: 0;
+  width: 98%;
+  width: -moz-calc(100% - 12px);
+  width: -webkit-calc(100% - 12px);
+  width: calc(100% - 12px);
+  z-index: 3;
+}
+.timeline .header .title {
+  color: #fff;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 12px 6px 4px 15px;
+  padding: 0;
+}
+.timeline .header .search,
+.timeline .header .add {
+  font-size: 14px;
+  height: 17px;
+  padding: 4px 12px;
+  margin-top: 7px;
+}
+.timeline .header .add {
+  margin-left: 18px;
+}
+.timeline .header .submit {
+  font-size: 12px;
+  margin-left: 10px;
+  padding: 3px 7px;
+}
+.timeline .header .now {
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+  border-bottom: 0;
+  font-size: 11px;
+  margin: 4px 18px 0 0;
+  opacity: 1;
+}
+.timeline .header .now:hover .icon-repeat {
+  color: #000000;
+}
+.timeline .header .now:active .icon-repeat {
+  color: #ff6600;
+}
+.timeline .header .now .icon-repeat {
+  text-shadow: 0.1em 0.1em 0.2em rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-size: 30px;
+}
+.timeline .nav {
+  font-size: 14px;
+  margin: 8px 12px;
+}
+.timeline .nav li {
+  margin-right: 15px;
+}
+.timeline .nav li.active a {
+  color: #ffffff;
+}
+.timeline .nav li a {
+  border-bottom: 0;
+}
+.timeline .scroller {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.timeline .children {
+  position: relative;
+  padding-top: 38px;
+}
+.timeline .items,
+.timeline .followers,
+.timeline .followings {
+  padding-top: 5px;
+}
+.timeline .items .item .icon,
+.timeline .items .item .username,
+.timeline .items .item .text,
+.timeline .items .item .time,
+.timeline .items .item .link,
+.timeline .items .item .button,
+.timeline .followers .item .icon,
+.timeline .followers .item .username,
+.timeline .followers .item .text,
+.timeline .followers .item .time,
+.timeline .followers .item .link,
+.timeline .followers .item .button,
+.timeline .followings .item .icon,
+.timeline .followings .item .username,
+.timeline .followings .item .text,
+.timeline .followings .item .time,
+.timeline .followings .item .link,
+.timeline .followings .item .button {
+  position: relative;
+  z-index: 2;
+}
+.timeline .items .item .text,
+.timeline .items .item .bio,
+.timeline .items .item .link,
+.timeline .items .item .statistics,
+.timeline .items .item .time,
+.timeline .followers .item .text,
+.timeline .followers .item .bio,
+.timeline .followers .item .link,
+.timeline .followers .item .statistics,
+.timeline .followers .item .time,
+.timeline .followings .item .text,
+.timeline .followings .item .bio,
+.timeline .followings .item .link,
+.timeline .followings .item .statistics,
+.timeline .followings .item .time {
+  width: 100%;
+}
+.timeline .items .item .text a,
+.timeline .items .item .bio a,
+.timeline .items .item .link a,
+.timeline .items .item .statistics a,
+.timeline .items .item .time a,
+.timeline .followers .item .text a,
+.timeline .followers .item .bio a,
+.timeline .followers .item .link a,
+.timeline .followers .item .statistics a,
+.timeline .followers .item .time a,
+.timeline .followings .item .text a,
+.timeline .followings .item .bio a,
+.timeline .followings .item .link a,
+.timeline .followings .item .statistics a,
+.timeline .followings .item .time a {
+  border-bottom: 0;
+}
+.timeline .items .item .icon img,
+.timeline .followers .item .icon img,
+.timeline .followings .item .icon img {
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  border-radius: 25px;
+  border: 3px solid #ffffff;
+}
+.timeline .items .item .username,
+.timeline .followers .item .username,
+.timeline .followings .item .username {
+  font-size: 14px;
+  margin: 15px 12px;
+}
+.timeline .items .item .username a,
+.timeline .followers .item .username a,
+.timeline .followings .item .username a {
+  border-bottom: 0;
+}
+.timeline .items .item .text,
+.timeline .items .item .bio,
+.timeline .followers .item .text,
+.timeline .followers .item .bio,
+.timeline .followings .item .text,
+.timeline .followings .item .bio {
+  font-size: 22px;
+  margin: 0;
+}
+.timeline .items .item .button,
+.timeline .followers .item .button,
+.timeline .followings .item .button {
+  -webkit-border-radius: 31px;
+  -moz-border-radius: 31px;
+  -ms-border-radius: 31px;
+  -o-border-radius: 31px;
+  border-radius: 31px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px, rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px, rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px, rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset;
+  text-shadow: #aaaaaa 0.1em 0.1em 0.2em;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #deddd8), color-stop(100%, #deddd8));
+  background: -webkit-linear-gradient(top, #deddd8, #deddd8);
+  background: -moz-linear-gradient(top, #deddd8, #deddd8);
+  background: -o-linear-gradient(top, #deddd8, #deddd8);
+  background: linear-gradient(top, #deddd8, #deddd8);
+  color: #000;
+  cursor: pointer;
+  border: 4px solid #fff;
+  bottom: 10px;
+  font-size: 22px;
+  position: absolute;
+  right: 10px;
+}
+.timeline .items .item .button:hover,
+.timeline .followers .item .button:hover,
+.timeline .followings .item .button:hover {
+  color: #ffffff;
+}
+.timeline .items .item .button:active,
+.timeline .followers .item .button:active,
+.timeline .followings .item .button:active {
+  color: #ff6600;
+}
+.timeline .followings .item,
+.timeline .followers .item {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 1px 1px 2px #aaaaaa;
+  -moz-box-shadow: 1px 1px 2px #aaaaaa;
+  box-shadow: 1px 1px 2px #aaaaaa;
+  background-color: #fff;
+  margin: 0 0 7px;
+  overflow: hidden;
+  padding: 15px;
+  position: relative;
+}
+.timeline .followings .item .username,
+.timeline .followers .item .username {
+  color: #000000;
+}
+.timeline .followings .item .icon img,
+.timeline .followers .item .icon img {
+  border-color: #999;
+}
+.timeline .followings .item .bio,
+.timeline .followers .item .bio {
+  margin-bottom: 15px;
+}
+.timeline .followings .item .bio .name,
+.timeline .followers .item .bio .name {
+  color: #ff6600;
+}
+.timeline .followings .item .statistics,
+.timeline .followers .item .statistics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.timeline .followings .item .statistics .followings,
+.timeline .followings .item .statistics .followers,
+.timeline .followers .item .statistics .followings,
+.timeline .followers .item .statistics .followers {
+  display: inline;
+}
+.timeline .followings .item .statistics .followings,
+.timeline .followers .item .statistics .followings {
+  padding-right: 15px;
+}
+.timeline .followings .item .unfollow,
+.timeline .followers .item .unfollow {
+  padding: 7px 9px 3px 10px;
+}
+.timeline .followings .item .follow,
+.timeline .followers .item .follow {
+  padding: 6px 9px 3px 9px;
+}
+.timeline .items .item {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 1px 1px 2px #aaaaaa;
+  -moz-box-shadow: 1px 1px 2px #aaaaaa;
+  box-shadow: 1px 1px 2px #aaaaaa;
+  background-color: #aaaaaa;
+  background-size: cover;
+  margin: 0 0 7px;
+  overflow: hidden;
+  padding: 15px;
+  position: relative;
+}
+.timeline .items .item:hover {
+  -webkit-box-shadow: 0px 0px 0px #aaaaaa;
+  -moz-box-shadow: 0px 0px 0px #aaaaaa;
+  box-shadow: 0px 0px 0px #aaaaaa;
+  background-color: #999;
+}
+.timeline .items .item.empty p {
+  margin: 0;
+}
+.timeline .items .item.image .overlay {
+  display: block;
+}
+.timeline .items .item.promoted .overlay {
+  -webkit-transition: background-color 1s linear;
+  -moz-transition: background-color 1s linear;
+  -o-transition: background-color 1s linear;
+  transition: background-color 1s linear;
+  background-color: rgba(255, 255, 255, 0.65);
+  display: block;
+  z-index: 3;
+}
+.timeline .items .item.promoted .promote {
+  -webkit-transition: opacity 500ms;
+  -moz-transition: opacity 500ms;
+  -o-transition: opacity 500ms;
+  transition: opacity 500ms;
+  opacity: 0;
+}
+.timeline .items .item.promoted .added.sash {
+  -webkit-transition: max-width 1s;
+  -moz-transition: max-width 1s;
+  -o-transition: max-width 1s;
+  transition: max-width 1s;
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+  display: block;
+  opacity: 1;
+}
+.timeline .items .item.event .event.sash {
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+  opacity: 1;
+}
+.timeline .items .item .overlay {
+  background-color: rgba(15, 15, 15, 0.4);
+  display: none;
+  left: 0;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+.timeline .items .item .sash {
+  -webkit-transition: max-width 500ms;
+  -moz-transition: max-width 500ms;
+  -o-transition: max-width 500ms;
+  transition: max-width 500ms;
+  border-style: solid;
+  color: #ffffff;
+  height: 0px;
+  opacity: 0;
+  line-height: 0px;
+  margin: 0;
+  position: absolute;
+  right: 0;
+  width: 0;
+  z-index: 2;
+}
+.timeline .items .item .sash.event {
+  border-color: transparent #ff6600 transparent transparent;
+  border-width: 0 48px 48px 0;
+  font-size: 14px;
+  top: 0;
+  width: 120px;
+}
+.timeline .items .item .sash.added {
+  border-color: transparent transparent #ff6600 transparent;
+  border-width: 0 0 24px 24px;
+  bottom: 0;
+  font-size: 12px;
+  text-align: right;
+  z-index: 3;
+}
+.timeline .items .item .sash.added span {
+  display: inline-block;
+  padding: 6px;
+}
+.timeline .items .item .sash .icon-plus {
+  padding-left: 6px;
+}
+.timeline .items .item .sash .icon-calendar {
+  position: absolute;
+  right: -42px;
+  top: 5px;
+}
+.timeline .items .item .username a {
+  color: #ddd;
+}
+.timeline .items .item .text a {
+  color: #fff;
+}
+.timeline .items .item .link {
+  margin: 8px 0 6px;
+}
+.timeline .items .item .link a {
+  font-size: 25px;
+  color: #ddd;
+}
+.timeline .items .item .time {
+  margin: 0;
+}
+.timeline .items .item .time .event {
+  color: #ff6600;
+}
+.timeline .items .item .time a {
+  color: #eee;
+  font-size: 13px;
+}
+.timeline .items .item .promote {
+  padding: 6px 7px 5px 8px;
+}
+.timeline .items .item .demote {
+  padding: 6px 9px 5px 10px;
+}
+.timeline .needle {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
+  opacity: 0.75;
+  background-color: rgba(15, 15, 15, 0.15);
+  left: 0;
+  position: absolute;
+  top: 50%;
+  height: 50px;
+  width: 100%;
+  -webkit-box-shadow: 0px 0px 2px black;
+  -moz-box-shadow: 0px 0px 2px black;
+  box-shadow: 0px 0px 2px black;
+}
+.timeline .needle .head {
+  border-bottom: 1px solid #333333;
+  border-top: 1px solid #ffffff;
+  height: 0px;
+  margin-top: 25px;
+  width: 100%;
+}
+.timeline .needle .date {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  background-color: #444444;
+  color: #ffffff;
+  font-size: 14px;
+  left: 50%;
+  height: 16px;
+  padding: 4px 0;
+  position: absolute;
+  margin-left: -100px;
+  text-align: center;
+  top: 13px;
+  width: 200px;
+  border: 1px solid #ffffff;
+}
+.timeline .needle .now {
+  color: #ff6600;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.timeline .needle .future {
+  margin-left: 10px;
+}
+.timeline .needle .past {
+  margin-right: 10px;
+}
+.timeline .load-more,
+.timeline .no-results {
+  -webkit-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
+  background-color: #ff6600;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 12px;
+  margin-bottom: 10px;
+  padding-top: 5px;
+  height: 20px;
+  text-align: center;
+  width: 100%;
+}
+.timeline .load-more {
+  cursor: pointer;
+}
+
+.scrollbarV,
+.scrollbarH {
+  position: absolute;
+  z-index: 100;
+}
+
+.scrollbarV {
+  bottom: 7px;
+  top: 2px;
+  right: 1px;
+  width: 8px;
+}
+
+.scrollbarV > div {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+}

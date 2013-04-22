@@ -72,7 +72,7 @@ module.exports = function(grunt) {
                     javascriptsDir: 'javascripts/',
                     outputStyle: 'expanded',
                     relativeAssets: true,
-                    noLineComments: false
+                    noLineComments: true
                 }
             },
 
