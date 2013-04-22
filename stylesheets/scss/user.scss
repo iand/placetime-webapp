@@ -83,7 +83,7 @@
     }
 
     .header {
-        background-color: rgba(125, 125, 119, 0.80);
+        background-color: rgba(255, 255, 255, 0.80);
         border-bottom: 0px solid #000;
         height: 39px;
         position: absolute;
@@ -93,6 +93,9 @@
         width: -webkit-calc(100% - 12px);
         width: calc(100% - 12px);
         z-index: 3;
+        @include box-shadow(
+            0px 2px 3px #666
+         );
 
         .title {
             color: #fff;
@@ -144,9 +147,9 @@
 
             .icon-repeat {
                 @include single-text-shadow(
-                    rgba(0, 0, 0, 0.5), 0.1em, 0.1em, 0.2em
+                    rgba(0, 0, 0, 0.5), 2px, 2px, 4px
                 );
-                color: #ffffff;
+                color: #555555;
                 font-size: 30px;
             }
         }
@@ -162,7 +165,7 @@
 
             &.active {
                 a {
-                    color: #ffffff;
+                    color: #ff6600;
                 }
             }
 
@@ -510,15 +513,17 @@
         position: absolute;
         top: 50%;
         width: calc(100% - 12px);
-
+        opacity: 0.7;
+        @include single-box-shadow(
+                rgba(0, 0, 0, 0.7), 0px, 2px, 3px
+            );
         .date {
             @include border-radius(5px);
             @include single-box-shadow(
-                rgba(0, 0, 0, 0.7), 1px, 1px, 4px
+                rgba(0, 0, 0, 0.7), 1px, 2px, 4px
             );
-
-            background-color: #444444;
-            color: #ffffff;
+            background-color: #ffffff;
+            color: #000000;
             font-size: 14px;
             left: 50%;
             height: 16px;
