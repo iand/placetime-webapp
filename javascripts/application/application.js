@@ -20,6 +20,18 @@ Application.addRegions({
     footer: 'body > .footer'
 });
 
+Backbone.Marionette.Region.prototype.is = function(view) {
+    if (this.currentView === view) {
+        return true;
+    } else if (this.currentView === undefined) {
+        return false;
+    }  else if (this.currentView.name === view) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
 
 // TODO: Remove global variable
 var session;

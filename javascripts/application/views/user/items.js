@@ -33,7 +33,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
         // Custom events
         this.on('item:add', function(event) {
-            console.log(event);
             this.collection.add(event);
         });
 
@@ -51,7 +50,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         this.on('item:removed', this.renderNeedle);
 
         // Handle now
-        this.on('now', this.now);
+        this.on('refresh', this.refresh);
     },
 
 
@@ -63,28 +62,15 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
                 after: 20
             }
         });
-
-        promise.done(this.renderNeedle.bind(this));
     },
 
-
-    onRender: function() {
-        this.renderNeedle();
-    },
 
 
     renderNeedle: function() {
         if (this.collection.length > 0) {
-            var needle = this.subviews.findByCustom('needle');
-
-            if (needle.isRendered === false) {
-                needle.render();
-
-                this.$el.find('.needle-view').html(needle.el);
-            } else {
-                return;
-            }
-
+            this.$el.find('.needle-view').html(
+                this.subviews.findByCustom('needle').render().el
+            );
         } else {
             this.$el.find('.needle-view').empty();
         }
@@ -114,6 +100,22 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
         return false;
     },
+
+
+    refresh: function() {
+        var promise = this.collection.fetch({
+            data: {
+                pid: this.model.get('pid'),
+                before: 20,
+                after: 20
+            },
+            remove: true
+        });
+
+        promise.done(this.renderNeedle.bind(this));
+        promise.done(this.now.bind(this));
+    },
+
 
 
     now: function() {
@@ -149,6 +151,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             $closest.addClass('now');
         });
     },
+
 
 
     loadMore: function(options){

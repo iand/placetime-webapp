@@ -50,8 +50,7 @@ Application.Router.User = Backbone.Router.extend({
             });
 
 
-            if (Application.content.currentView          === timeline &&
-                Application.content.currentView.isClosed === false) {
+            if (Application.content.is('timelines') === true) {
                 Application.content.currentView.trigger('public:timeline');
             } else {
                 Application.content.show(timeline);
@@ -90,8 +89,7 @@ Application.Router.User = Backbone.Router.extend({
             });
 
 
-            if (Application.content.currentView          === timeline &&
-                Application.content.currentView.isClosed === false) {
+            if (Application.content.is('timelines')) {
                 Application.content.currentView.trigger('public:followers');
             } else {
                 Application.content.show(timeline);
@@ -130,8 +128,7 @@ Application.Router.User = Backbone.Router.extend({
             });
 
 
-            if (Application.content.currentView          === timeline &&
-                Application.content.currentView.isClosed === false) {
+            if (Application.content.is('timelines')) {
                 Application.content.currentView.trigger('public:followings');
                 Application.content.currentView.trigger('private:followings');
             } else {

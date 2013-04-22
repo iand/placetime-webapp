@@ -1,4 +1,5 @@
 Application.View.Timelines = Backbone.Marionette.ItemView.extend({
+    name: 'timelines',
     template: '#timelines-template',
     className: 'container-wide timelines',
 

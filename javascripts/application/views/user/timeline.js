@@ -1,4 +1,5 @@
 Application.View.Timeline = Backbone.Marionette.ItemView.extend({
+    name: 'timeline',
     template: '#timeline-template',
     className: 'column',
 
@@ -9,6 +10,13 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         // Pass message to current view
         this.on('item:add', function(event) {
             this.region.currentView.trigger('item:add', event);
+        });
+
+
+        this.on('view:timeline', function(){
+            this.region.show(
+                this.subviews.findByCustom('timeline')
+            );
         });
 
 

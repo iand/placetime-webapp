@@ -4,7 +4,8 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
 
     events: {
         'keyup input': 'change',
-        'submit form': 'submit'
+        'submit form': 'submit',
+        'click .cancel': 'cancel'
     },
 
     // Do not use scroller
@@ -44,12 +45,19 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         var promise = this.model.save();
 
         promise.done(function(){
-            self.trigger('item:created');
+            self.trigger('created');
         });
 
         promise.fail(function(){
             console.log('TODO: Display errors');
         });
+
+        return false;
+    },
+
+
+    cancel: function() {
+        this.trigger('cancelled');
 
         return false;
     }

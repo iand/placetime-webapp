@@ -48,7 +48,14 @@
 
     .column {
         float: left;
-        width: 50%;
+
+        &.public {
+            width: 60%;
+        }
+
+        &.private {
+            width: 40%;
+        }
     }
 }
 
@@ -374,9 +381,6 @@
 
                 .added.sash {
                     @include single-transition(
-                        max-width, 1s
-                    );
-                    @include single-transition(
                         opacity, 1s
                     );
 
@@ -407,10 +411,6 @@
             }
 
             .sash {
-                @include single-transition(
-                    max-width, 500ms
-                );
-
                 border-style: solid;
                 color: #ffffff;
                 height: 0px;
@@ -436,6 +436,7 @@
                     bottom: 0;
                     font-size: 12px;
                     text-align: right;
+                    width: 120px;
                     z-index: 3;
 
                     span {
@@ -502,25 +503,13 @@
 
     // Needle
     .needle {
-        @include opacity(0.75);
-
-        background-color: rgba(15, 15, 15, 0.15);
-        left: 0;
+        border-bottom: 1px solid #333333;
+        border-top: 1px solid #ffffff;
+        height: 0px;
+        left: 8px;
         position: absolute;
         top: 50%;
-        height: 50px;
-        width: 100%;
-	@include single-box-shadow(
-                rgba(0, 0, 0, 1), 0px, 0px, 2px
-            );
-
-        .head {
-            border-bottom: 1px solid #333333;
-            border-top: 1px solid #ffffff;
-            height: 0px;
-            margin-top: 25px;
-            width: 100%;
-        }
+        width: calc(100% - 12px);
 
         .date {
             @include border-radius(5px);
@@ -537,7 +526,7 @@
             position: absolute;
             margin-left: -100px;
             text-align: center;
-            top: 13px;
+            top: -14px;
             width: 200px;
             border: 1px solid #ffffff;
         }

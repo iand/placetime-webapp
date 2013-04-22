@@ -49,7 +49,7 @@ Application.Model.Item = Backbone.Model.extend({
         defer.done(done);
         defer.fail(fail);
 
-        this.trigger('item:promoted', this);
+        this.trigger('item:promoted', this.attributes);
 
         $.ajax({
             url: '/-tpromote',

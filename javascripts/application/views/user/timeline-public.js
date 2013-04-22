@@ -1,4 +1,7 @@
 Application.View.TimelinePublic = Application.View.Timeline.extend({
+    name: 'timeline-public',
+
+    className: 'column public',
     events: {
         'click .header .now': 'now',
         'submit .header .form': 'search'
@@ -102,17 +105,13 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         this.on('view:followers', function(){
             this.region.show(followers);
         });
-
-        this.on('view:timeline', function(){
-            this.region.show(timeline);
-        });
     },
 
 
 
 
     now: function() {
-        this.region.currentView.trigger('now', this);
+        this.region.currentView.trigger('refresh', this);
     },
 
 

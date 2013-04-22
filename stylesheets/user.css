@@ -29,6 +29,7 @@ a {
 .container-wide {
   margin: 0 auto;
   max-width: 1300px;
+  min-width: 1080px;
   width: 100%;
 }
 
@@ -219,7 +220,12 @@ input[type=submit].wide {
 }
 .timelines .column {
   float: left;
-  width: 50%;
+}
+.timelines .column.public {
+  width: 60%;
+}
+.timelines .column.private {
+  width: 40%;
 }
 
 .container-wide .timeline.public {
@@ -538,10 +544,6 @@ input[type=submit].wide {
   opacity: 0;
 }
 .timeline .items .item.promoted .added.sash {
-  -webkit-transition: max-width 1s;
-  -moz-transition: max-width 1s;
-  -o-transition: max-width 1s;
-  transition: max-width 1s;
   -webkit-transition: opacity 1s;
   -moz-transition: opacity 1s;
   -o-transition: opacity 1s;
@@ -568,10 +570,6 @@ input[type=submit].wide {
   z-index: 1;
 }
 .timeline .items .item .sash {
-  -webkit-transition: max-width 500ms;
-  -moz-transition: max-width 500ms;
-  -o-transition: max-width 500ms;
-  transition: max-width 500ms;
   border-style: solid;
   color: #ffffff;
   height: 0px;
@@ -596,6 +594,7 @@ input[type=submit].wide {
   bottom: 0;
   font-size: 12px;
   text-align: right;
+  width: 120px;
   z-index: 3;
 }
 .timeline .items .item .sash.added span {
@@ -640,24 +639,13 @@ input[type=submit].wide {
   padding: 6px 9px 5px 10px;
 }
 .timeline .needle {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
-  opacity: 0.75;
-  background-color: rgba(15, 15, 15, 0.15);
-  left: 0;
-  position: absolute;
-  top: 50%;
-  height: 50px;
-  width: 100%;
-  -webkit-box-shadow: 0px 0px 2px black;
-  -moz-box-shadow: 0px 0px 2px black;
-  box-shadow: 0px 0px 2px black;
-}
-.timeline .needle .head {
   border-bottom: 1px solid #333333;
   border-top: 1px solid #ffffff;
   height: 0px;
-  margin-top: 25px;
-  width: 100%;
+  left: 8px;
+  position: absolute;
+  top: 50%;
+  width: calc(100% - 12px);
 }
 .timeline .needle .date {
   -webkit-border-radius: 5px;
@@ -677,7 +665,7 @@ input[type=submit].wide {
   position: absolute;
   margin-left: -100px;
   text-align: center;
-  top: 13px;
+  top: -14px;
   width: 200px;
   border: 1px solid #ffffff;
 }
