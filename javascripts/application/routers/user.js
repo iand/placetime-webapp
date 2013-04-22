@@ -8,7 +8,9 @@ Application.Router.User = Backbone.Router.extend({
         'followings': 'followings',
         'followers': 'followers',
 
-        'user/:id': 'user'
+        'user/:id': 'timeline',
+        'followers/:id': 'followers',
+        'followings/:id': 'followings'
     },
 
 
@@ -26,7 +28,7 @@ Application.Router.User = Backbone.Router.extend({
 
 
 
-    timeline: function () {
+    timeline: function (pid) {
         var self = this;
 
 
@@ -37,10 +39,15 @@ Application.Router.User = Backbone.Router.extend({
             self.header.model.set('wide', true);
             self.header.render();
 
+
+            if (pid === undefined) {
+                pid = Application.session.get('pid');
+            }
+
             // Render timelines
             var timeline = new Application.View.Timelines({
                 public: {
-                    pid: Application.session.get('pid'),
+                    pid: pid,
                     view: 'timeline'
                 },
                 private: {
@@ -65,7 +72,7 @@ Application.Router.User = Backbone.Router.extend({
 
 
 
-    followers: function() {
+    followers: function(pid) {
         var self = this;
 
 
@@ -76,10 +83,15 @@ Application.Router.User = Backbone.Router.extend({
             self.header.model.set('wide', true);
             self.header.render();
 
+
+            if (pid === undefined) {
+                pid = Application.session.get('pid');
+            }
+
             // Render timelines
             var timeline = new Application.View.Timelines({
                 public: {
-                    pid: Application.session.get('pid'),
+                    pid: pid,
                     view: 'followers'
                 },
                 private: {
@@ -104,7 +116,7 @@ Application.Router.User = Backbone.Router.extend({
 
 
 
-    followings: function() {
+    followings: function(pid) {
         var self = this;
 
 
@@ -115,10 +127,15 @@ Application.Router.User = Backbone.Router.extend({
             self.header.model.set('wide', true);
             self.header.render();
 
+
+            if (pid === undefined) {
+                pid = Application.session.get('pid');
+            }
+
             // Render timelines
             var timeline = new Application.View.Timelines({
                 public: {
-                    pid: Application.session.get('pid'),
+                    pid: pid,
                     view: 'followings'
                 },
                 private: {
@@ -160,40 +177,6 @@ Application.Router.User = Backbone.Router.extend({
         });
 
         Application.content.show(register);
-    },
-
-
-
-    user: function (pid) {
-        var self = this;
-
-
-        var check = Application.session.check();
-
-        check.done(function(){
-            // Set header to wide and re-render
-            self.header.model.set('wide', true);
-            self.header.render();
-
-            // Render timelines
-            var timeline = new Application.View.Timelines({
-                public: {
-                    pid: pid,
-                    view: 'timeline'
-                },
-                private: {
-                    pid: Application.session.get('pid'),
-                    view: 'timeline'
-                }
-            });
-
-            Application.content.show(timeline);
-        });
-
-
-        check.fail(function(){
-            Backbone.history.navigate('login', true);
-        });
     },
 
 

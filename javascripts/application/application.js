@@ -79,24 +79,18 @@ Application.addInitializer(function(){
 });
 
 
-
-// Start history
+// Start history and check session
 Application.on('initialize:after', function(options){
-    Backbone.history.start({
+    var matched = Backbone.history.start({
         root: '/'
     });
-});
 
-
-// Start session and authorize
-Application.on('initialize:after', function(options){
     Application.session.check(function(){
-        // Was route matched?
-        if (Application.router.routes[Backbone.history.fragment] === true) {
+        if (matched) {
             return;
+        } else {
+            Backbone.history.navigate('timeline', true);
         }
-
-        Backbone.history.navigate('timeline', true);
     }, function(){
         if (['login', 'register'].indexOf(Backbone.history.fragment) !== -1) {
             return;
