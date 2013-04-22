@@ -71,51 +71,52 @@ a {
 /* line 43, scss/scaffolding.scss */
 .navbar .brand .icon-ok-circle,
 .navbar .brand .icon-time {
-  color: #555555;
+  color: #dddddd;
   font-size: 30px;
   float: left;
   margin-top: 0px;
+  text-shadow: 1px 1px 2px #666666;
 }
-/* line 50, scss/scaffolding.scss */
+/* line 51, scss/scaffolding.scss */
 .navbar .brand .icon-time {
   margin-right: 10px;
 }
-/* line 55, scss/scaffolding.scss */
+/* line 56, scss/scaffolding.scss */
 .navbar .tagline {
   color: #ededed;
   font-size: 14px;
   margin: 16px 0 0 25px;
 }
-/* line 61, scss/scaffolding.scss */
+/* line 62, scss/scaffolding.scss */
 .navbar .nav {
   margin: 5px 25px 0;
 }
-/* line 65, scss/scaffolding.scss */
+/* line 66, scss/scaffolding.scss */
 .navbar .nav .icon-cog {
   font-size: 33px;
 }
-/* line 72, scss/scaffolding.scss */
+/* line 73, scss/scaffolding.scss */
 .navbar .dropdown .icon-edit,
 .navbar .dropdown .icon-signout {
   font-size: 20px;
 }
 
-/* line 80, scss/scaffolding.scss */
+/* line 81, scss/scaffolding.scss */
 .nav {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 86, scss/scaffolding.scss */
+/* line 87, scss/scaffolding.scss */
 .nav.nav-inline li {
   display: inline-block;
 }
-/* line 91, scss/scaffolding.scss */
+/* line 92, scss/scaffolding.scss */
 .nav a {
   cursor: pointer;
   display: inline-block;
 }
-/* line 97, scss/scaffolding.scss */
+/* line 98, scss/scaffolding.scss */
 .nav li [class^="icon-"],
 .nav li [class*=" icon-"] {
   width: auto;
