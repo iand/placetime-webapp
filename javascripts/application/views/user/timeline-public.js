@@ -3,7 +3,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
     className: 'column public',
     events: {
-        'click .header .now': 'now',
+        'click .header .now': 'refresh',
         'submit .header .form': 'search'
     },
 
@@ -99,19 +99,37 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
         // Handle
         this.on('view:followings', function(){
-            this.region.show(followings);
+            this.followings();
         });
 
         this.on('view:followers', function(){
-            this.region.show(followers);
+            this.followers();
         });
     },
 
 
 
+    timeline: function(pid) {
+        var timeline = this.subviews.findByCustom('timeline');
 
-    now: function() {
-        this.region.currentView.trigger('refresh', this);
+        this.region.show(timeline);
+    },
+
+
+
+    followings: function() {
+        this.region.show(
+            this.subviews.findByCustom('followings')
+        );
+    },
+
+
+
+
+    followers: function() {
+        this.region.show(
+            this.subviews.findByCustom('followers')
+        );
     },
 
 

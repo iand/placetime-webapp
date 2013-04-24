@@ -13,10 +13,8 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         });
 
 
-        this.on('view:timeline', function(){
-            this.region.show(
-                this.subviews.findByCustom('timeline')
-            );
+        this.on('view:timeline', function(pid){
+            this.timeline(pid);
         });
 
 
@@ -63,6 +61,30 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
                 );
             });
         }, this);
+    },
+
+
+
+
+    reload: function() {
+        this.region.currentView.trigger('reload', this);
+    },
+
+
+    now: function() {
+        this.region.currentView.trigger('now', this);
+    },
+
+
+    refresh: function() {
+        this.listenToOnce(this.region.currentView, 'reload:done', function(){
+            var self = this;
+
+            setTimeout(function(){
+                self.now();
+            }, jQuery.fx.speeds.slow + 500);
+        });
+        this.reload();
     },
 
 

@@ -57,8 +57,8 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
             publicTimeline.trigger('view:followers');
         });
 
-        this.on('public:timeline', function(){
-            publicTimeline.trigger('view:timeline');
+        this.on('public:timeline', function(pid) {
+            publicTimeline.trigger('view:timeline', pid);
         });
 
         // Private timeline

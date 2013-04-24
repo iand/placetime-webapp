@@ -4,7 +4,7 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
     className: 'column private',
     events: {
         'click .header .timeline': 'timeline',
-        'click .header .now': 'now',
+        'click .header .now': 'refresh',
         'submit .header .form': 'add'
     },
 
@@ -66,19 +66,20 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
 
         // Handle
         this.listenTo(itemAdd, 'created', function() {
-            this.region.show(timeline);
+            this.timeline();
         });
 
         this.listenTo(itemAdd, 'cancelled', function() {
-            this.region.show(timeline);
+            this.timeline();
         });
 
 
         // Handle
         this.on('view:itemAdd', function(){
-            this.region.show(itemAdd);
+            this.itemAdd();
         });
     },
+
 
 
     timeline: function() {
@@ -88,17 +89,12 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
     },
 
 
+
     itemAdd: function() {
         this.region.show(
             this.subviews.findByCustom('itemAdd')
         );
     },
-
-
-    now: function() {
-        this.region.currentView.trigger('now', this);
-    },
-
 
 
     add: function(event) {

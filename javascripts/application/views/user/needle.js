@@ -27,7 +27,7 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
             time = $item.data('model').time();
 
         // Now
-        if (model.get('now') === true) {
+        if ($item.hasClass('now') === true) {
             this.now();
         }
 

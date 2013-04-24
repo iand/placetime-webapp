@@ -58,7 +58,7 @@ Application.Router.User = Backbone.Router.extend({
 
 
             if (Application.content.is('timelines') === true) {
-                Application.content.currentView.trigger('public:timeline');
+                Application.content.currentView.trigger('public:timeline', pid);
             } else {
                 Application.content.show(timeline);
             }

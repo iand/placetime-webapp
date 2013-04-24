@@ -50,7 +50,8 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         this.on('item:removed', this.renderNeedle);
 
         // Handle now
-        this.on('refresh', this.refresh);
+        this.on('reload', this.reload);
+        this.on('now', this.now);
     },
 
 
@@ -60,6 +61,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         this.collection.fetch({
             data: {
                 pid: this.model.get('pid'),
+                status: this.model.get('status'),
                 before: 20,
                 after: 20
             },
@@ -105,7 +107,9 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    refresh: function() {
+    reload: function() {
+        var self = this;
+
         var promise = this.collection.fetch({
             data: {
                 pid: this.model.get('pid'),
@@ -115,9 +119,15 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             remove: true
         });
 
-        promise.done(this.renderNeedle.bind(this));
-        promise.done(this.now.bind(this));
+        promise.done(function(){
+            self.trigger('reload:done');
+        });
+
+        promise.fail(function(){
+            self.trigger('reload:error');
+        });
     },
+
 
 
 
