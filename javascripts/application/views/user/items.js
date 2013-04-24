@@ -55,12 +55,15 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     onShow: function() {
-        var promise = this.collection.fetch({
+        this.delegateEvents();
+
+        this.collection.fetch({
             data: {
                 pid: this.model.get('pid'),
                 before: 20,
                 after: 20
-            }
+            },
+            remove: true
         });
     },
 
@@ -183,7 +186,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             self.trigger('infinite:failed');
         });
     },
-
 
 
     appendHtml: function(collectionView, itemView, index) {

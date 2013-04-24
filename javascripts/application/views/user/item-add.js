@@ -60,5 +60,10 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         this.trigger('cancelled');
 
         return false;
+    },
+
+
+    onShow: function() {
+        this.delegateEvents();
     }
 });

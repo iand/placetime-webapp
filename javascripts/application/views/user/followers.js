@@ -11,18 +11,20 @@ Application.View.Followers = Backbone.Marionette.CompositeView.extend({
     },
 
 
-   initialize: function (options) {
+    initialize: function (options) {
         this.on('infinite:load', this.loadMore);
     },
 
 
-    onRender: function() {
+    onShow: function() {
+        this.delegateEvents();
+
         this.collection.fetch({
             data: {
                 pid: this.model.get('pid'),
                 count: this.model.get('count')
             },
-            reset: true
+            remove: true
         });
     },
 

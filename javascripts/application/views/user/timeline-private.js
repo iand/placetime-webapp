@@ -22,7 +22,7 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
         this.subviews = new Backbone.ChildViewContainer();
 
         this.initTimeline();
-        this.initAddItem();
+        this.initItemAdd();
     },
 
 
@@ -46,7 +46,7 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
     },
 
 
-    initAddItem: function() {
+    initItemAdd: function() {
         this.subviews.add(new Application.View.ItemAdd(), 'itemAdd');
     },
 
