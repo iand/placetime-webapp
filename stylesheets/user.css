@@ -242,7 +242,7 @@ input[type=submit].wide {
   opacity: 0;
 }
 .timeline .header {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.95);
   border-bottom: 0px solid #000;
   height: 39px;
   position: absolute;
@@ -513,6 +513,7 @@ input[type=submit].wide {
   box-shadow: 1px 1px 2px #aaaaaa;
   background-color: #aaaaaa;
   background-size: cover;
+  background-position-y: 35%;
   margin: 0 0 7px;
   overflow: hidden;
   padding: 15px;

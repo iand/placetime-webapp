@@ -83,7 +83,7 @@
     }
 
     .header {
-        background-color: rgba(255, 255, 255, 0.80);
+        background-color: rgba(255, 255, 255, 0.95);
         border-bottom: 0px solid #000;
         height: 39px;
         position: absolute;
@@ -339,6 +339,7 @@
             );
             background-color: #aaaaaa;
             background-size: cover;
+            background-position-y: 35%;
             margin: 0 0 7px;
             overflow: hidden;
             padding: 15px;
