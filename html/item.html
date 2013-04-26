@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script type="text/javascript" src="http://use.typekit.net/bsa5hge.js"></script>
+        <script type="text/javascript">
+        try {
+            Typekit.load();
+        } catch(e) {}
+        </script>
+
+        <script src="/-assets/javascripts/vendor/modernizr.js"></script>
+
+        <link rel="stylesheet" href="/-assets/stylesheets/vendor.css">
+        <link rel="stylesheet" href="/-assets/stylesheets/user.css">
+
+        <title>PlaceTime - Timeline</title>
+    </head>
+    <body>
+
+
+        <div class="page header"></div>
+        <div class="page content">
+        <ul>
+            <li>Unique identifier: {{.Id}}</li>
+            <li>Added timestamp: {{.Added}}</li>
+            <li>Event timestamp: {{.Event}}</li>
+            <li>pid: {{.Pid}}</li>
+            <li>Text: {{.Text}}</li>
+            <li>Link: {{.Link}}</li>
+            <li>Media: {{.Media}}</li>
+            <li>Image: {{.Image}}</li>
+        </ul>
+
+
+    </body>
+</html>
