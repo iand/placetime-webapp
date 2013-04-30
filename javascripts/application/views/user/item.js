@@ -5,7 +5,6 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
         'item:promoted': 'onPromoted'
     },
 
-
     attributes: function() {
         var attributes = {
             'data-id': this.model.id
@@ -20,7 +19,7 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
 
 
     className: function() {
-        var className = 'item';
+        var className = 'item collapsed';
 
         if (this.model.get('image')) {
             className += ' image';
@@ -33,51 +32,34 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
         return className;
     },
 
-
     onPromoted: function() {
         this.$el.removeClass('now').addClass('promoted');
     },
 
 
-    onBeforeRender: function() {
-        this.$el.css({
-            opacity: 0,
-            maxHeight: 0,
-            paddingTop: 0,
-            paddingBottom: 0,
-            marginBottom: 0
-        });
+    onShow: function() {
+        this.$el.offset();
+        this.$el.removeClass('collapsed');
     },
 
 
     onRender: function() {
         this.$el.data('model', this.model);
-        this.$el.animate({
-            maxHeight: 150,
-            opacity: 1,
-            paddingTop: 15,
-            paddingBottom: 15,
-            marginBottom: 7
-        }, 'slow', function(){
-            $(this).css('max-height', 'auto');
-        });
     },
 
 
     remove: function() {
-        this.$el.animate({
-            opacity: 0,
-            maxHeight: 0,
-            paddingTop: 0,
-            paddingBottom: 0,
-            marginBottom: 0
-        }, 'slow', function () {
-            $(this).remove();
-            $(this).css('max-height', 'auto');
+        var self = this,
+            args = arguments;
+
+        this.$el.transitionEnd(function(event) {
+            // Prevent triggering multiple times
+            if (event.propertyName !== 'max-height') {
+                return;
+            }
+
+            Backbone.Marionette.ItemView.prototype.remove.apply(self, args);
         });
-
-        this.stopListening();
-
-        return this;
+        this.$el.addClass('collapsed');
     }
 });

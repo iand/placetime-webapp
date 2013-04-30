@@ -92,7 +92,7 @@
         width: -moz-calc(100% - 12px);
         width: -webkit-calc(100% - 12px);
         width: calc(100% - 12px);
-        z-index: 3;
+        z-index: 4;
         @include box-shadow(
             0px 2px 3px #666
          );
@@ -178,13 +178,13 @@
 
     .scroller {
         position: relative;
+        overflow: scroll;
         height: 100%;
         width: 100%;
     }
 
     .children {
         position: relative;
-
         padding-top: 38px;
     }
 
@@ -194,6 +194,29 @@
         padding-top: 5px;
 
         .item {
+            @include transition(
+                padding-top 500ms linear 250ms,
+                padding-bottom 500ms linear 250ms,
+                margin-bottom 500ms linear 250ms,
+                max-height 500ms linear 250ms
+            );
+            max-height: 150px;
+
+            &.collapsed {
+                margin-bottom: 0;
+                max-height: 0px;
+                padding-bottom: 0px;
+                padding-top: 0px;
+            }
+
+            &.empty,
+            &.empty.collapsed {
+                @include transition-duration(
+                    350ms, 350ms, 350ms
+                );
+            }
+
+
             .icon,
             .username,
             .text,
@@ -344,6 +367,8 @@
             overflow: hidden;
             padding: 15px;
             position: relative;
+            overflow: hidden;
+
 
             &:hover {
                 @include single-box-shadow(
@@ -573,25 +598,4 @@
     .load-more {
         cursor: pointer;
     }
-}
-
-
-.scrollbarV,
-.scrollbarH {
-    position: absolute;
-    z-index: 100;
-}
-
-.scrollbarV {
-    bottom: 7px;
-    top: 2px;
-    right: 1px;
-    width: 8px;
-}
-
-.scrollbarV > div {
-    @include border-radius(2px);
-
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
 }

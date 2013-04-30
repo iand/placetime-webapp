@@ -31,16 +31,15 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         this.subviews = new Backbone.ChildViewContainer();
         this.subviews.add(new Application.View.Needle(), 'needle');
 
+        this.on('composite:rendered', function(){
+            this.$el.find('.scroller').scroll(_.bind(this.onScroll, this));
+        });
+
         // Custom events
         this.on('item:add', function(event) {
             this.collection.add(event);
         });
 
-
-        // Pass scroll event to needle subview
-        this.on('scroll', function(event) {
-            this.subviews.findByCustom('needle').trigger('scroll', event);
-        });
 
         // Handle infinite scroll
         this.on('infinite:load', this.loadMore);
@@ -55,6 +54,15 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
+    onScroll: function(event) {
+        // Bubble
+        this.trigger('scroll', event);
+
+        // Capture
+        this.subviews.findByCustom('needle').trigger('scroll', event);
+    },
+
+
     onShow: function() {
         this.delegateEvents();
 
@@ -62,8 +70,8 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             data: {
                 pid: this.model.get('pid'),
                 status: this.model.get('status'),
-                before: 20,
-                after: 20
+                before: 25,
+                after: 25
             },
             remove: true
         });
@@ -113,13 +121,13 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         var promise = this.collection.fetch({
             data: {
                 pid: this.model.get('pid'),
-                before: 20,
-                after: 20
+                before: 25,
+                after: 25
             },
             remove: true
         });
 
-        promise.done(function(){
+        promise.done(function(data){
             self.trigger('reload:done');
         });
 
@@ -131,35 +139,23 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
 
-    now: function() {
+    now: function(duration) {
         var self = this;
 
 
         var promise = this.collection.now();
 
         promise.done(function(model) {
-            var $closest = self.$el.find('.item[data-id='+model.idSafe()+']'),
-                $needle  = self.$el.find('.needle');
+            var $closest = self.$el.find('.item[data-id='+model.idSafe()+']');
 
-            var position = $closest.position(),
-                offset   = $needle.position();
+            var position = $closest.position();
 
-            // Unbind scroll event whilst we scroll to now
-            self.off('scroll');
-
-            self.trigger('scroll:to', {
-                left: -(position.left),
-                top: -(position.top - offset.top),
+            // Scroll to
+            self.trigger('scrollTo', {
+                left: (position.left),
+                top: position.top - 38, // Offset padding
                 duration: jQuery.fx.speeds.slow
             });
-
-            // Once scroll to finished, rebind it, ideally
-            // this shouldn't be necessary but iScroll sucks
-            setTimeout(function(){
-                self.on('scroll', function(event) {
-                    self.subviews.findByCustom('needle').trigger('scroll', event);
-                });
-            }, jQuery.fx.speeds.slow + 250);
 
             $closest.addClass('now');
         });
@@ -177,10 +173,10 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
         if (options.before) {
             data.after = 0;
-            data.before = 10;
+            data.before = 40;
             data.ts = self.collection.last().get('ts');
         } else if (options.after) {
-            data.after = 10;
+            data.after = 40;
             data.before = 0;
             data.ts = self.collection.first().get('ts');
         } else {
@@ -188,7 +184,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         }
 
         self.collection.fetch({
-            remove: false,
+            remove: true, // TODO: Change to false when id de-duplicating resolved
             data: data
         }).done(function(){
             self.trigger('infinite:loaded');

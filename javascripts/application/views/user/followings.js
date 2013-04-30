@@ -10,7 +10,6 @@ Application.View.Followings = Backbone.Marionette.CompositeView.extend({
     },
 
 
-
     initialize: function (options) {
         this.on('infinite:load', this.loadMore);
     },
@@ -18,7 +17,6 @@ Application.View.Followings = Backbone.Marionette.CompositeView.extend({
 
     onShow: function() {
         this.delegateEvents();
-
         this.collection.fetch({
             data: {
                 pid: this.model.get('pid'),

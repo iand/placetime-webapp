@@ -1,6 +1,6 @@
 Application.View.Follower = Backbone.Marionette.ItemView.extend({
     template: '#follower-template',
-    className: 'item',
+    className: 'item collapsed',
 
     attributes: function() {
         return {
@@ -9,45 +9,29 @@ Application.View.Follower = Backbone.Marionette.ItemView.extend({
     },
 
 
-    onBeforeRender: function() {
-        this.$el.css({
-            opacity: 0,
-            maxHeight: 0,
-            paddingTop: 0,
-            paddingBottom: 0,
-            marginBottom: 0
-        });
+    onShow: function() {
+        this.$el.offset(); // Trigger repaint
+        this.$el.removeClass('collapsed');
     },
 
 
     onRender: function() {
         this.$el.data('model', this.model);
-        this.$el.animate({
-            maxHeight: 140,
-            opacity: 1,
-            paddingTop: 15,
-            paddingBottom: 15,
-            marginBottom: 7
-        }, 'slow', function(){
-            $(this).css('max-height', 'auto');
-        });
     },
 
 
     remove: function() {
-        this.$el.animate({
-            opacity: 0,
-            maxHeight: 0,
-            paddingTop: 0,
-            paddingBottom: 0,
-            marginBottom: 0
-        }, 'slow', function () {
-            $(this).remove();
-            $(this).css('max-height', 'auto');
+        var self = this,
+            args = arguments;
+
+        this.$el.transitionEnd(function(event) {
+            // Prevent triggering multiple times
+            if (event.propertyName !== 'max-height') {
+                return;
+            }
+
+            Backbone.Marionette.ItemView.prototype.remove.apply(self, args);
         });
-
-        this.stopListening();
-
-        return this;
+        this.$el.addClass('collapsed');
     }
 });

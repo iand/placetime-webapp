@@ -3,67 +3,73 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     template: '#timeline-template',
     className: 'column',
 
+    infiniteScrollReference: null,
+    infiniteScrollLastUpdate: moment().subtract('seconds', 2),
 
     initEvents: function() {
-        $(window).on('resize', this.resizeScroller.bind(this));
+        $(window).on('resize', _.bind(this.resize, this));
 
-        // Pass message to current view
+        // Pass event to current view
         this.on('item:add', function(event) {
             this.region.currentView.trigger('item:add', event);
         });
 
-
+        // Load timeline view
         this.on('view:timeline', function(pid){
             this.timeline(pid);
         });
 
+        this.on('scroll', this.infiniteScroll);
+
+
 
         // Subview events
-        this.subviews.each(function(view){
-            // Allow views not to have a scroller
-            if (view.noScroller === true) {
-                return;
+        this.subviews.each(function(view) {
+            if (view.collection) {
+                this.listenToOnce(view.collection, 'sync', function(event){
+                    view.$el.find('.item').first().transitionEnd(_.bind(function(event){
+                        if (event.propertyName !== 'max-height') {
+                            return;
+                        }
+
+                        this.now();
+                    }, this));
+                });
             }
 
-            // On item added/removed refresh the scroller
-            this.listenTo(view, 'after:item:added', this.refreshScroller);
-            this.listenTo(view, 'item:removed', this.refreshScroller);
+            // On show resize the child
+            this.listenTo(view, 'show', this.resize);
 
-
-            // On region show bind the scroller and resize
-            this.listenTo(view, 'show', this.bindScroller);
-            this.listenTo(view, 'show', this.resizeScroller);
-
-            // On first load trigger now
-            this.listenToOnce(view, 'show', function(){
-                var self = this;
-
-                setTimeout(function(){
-                    self.now();
-                }, jQuery.fx.speeds.slow + 500);
-            });
-
-            this.listenTo(view, 'composite:collection:rendered', this.refreshScroller);
-
-            // Handle infinite scroll loaded
-            this.listenTo(view, 'infinite:loaded', function(){
-                this.refreshScroller();
-                this.infiniteScrollLoading = false;
-            });
-
+            // On scroll trigger infinite scroll
+            this.listenTo(view, 'scroll', this.infiniteScroll);
 
             // Handle scroll to requests
-            this.listenTo(view, 'scroll:to', function(event) {
-                this.iscroll.scrollTo(
-                    event.left,
-                    event.top,
-                    event.duration
-                );
+            this.listenTo(view, 'scrollTo', function(event) {
+                var $scroller = this.$el.find('.scroller');
+
+                // Already there
+                if (event.top === $scroller.scrollTop()) {
+                    return;
+                }
+
+                view.trigger('scrollTo:start');
+
+                $scroller.animate({
+                    scrollTop: event.top,
+                    scrollLeft: event.left
+                }, event.duration, function(){
+                    view.trigger('scrollTo:done');
+                });
             });
         }, this);
     },
 
 
+    resize: function() {
+        this.$el.find('.scroller').height(
+            $(window).height() - 60
+        );
+    },
 
 
     reload: function() {
@@ -78,11 +84,13 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
     refresh: function() {
         this.listenToOnce(this.region.currentView, 'reload:done', function(){
-            var self = this;
+            this.region.currentView.$el.transitionEnd(_.bind(function(){
+                if (event.propertyName !== 'max-height') {
+                    return;
+                }
 
-            setTimeout(function(){
-                self.now();
-            }, jQuery.fx.speeds.slow + 500);
+                this.now();
+            }, this));
         });
         this.reload();
     },
@@ -96,92 +104,51 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     },
 
 
-    bindScroller: function () {
-        var self = this;
+    infiniteScroll: function(event) {
+        var deferred = _.bind(this.infiniteScrollDeferred, this, event);
 
-        if (this.iscroll) {
-            this.iscroll.destroy();
-        }
 
-        var $scroller = this.$el.find('.scroller');
+        clearTimeout(this.infiniteScrollReference);
 
-        this.iscroll = new iScroll($scroller.get(0), {
-            momentum: true,
-
-            hScrollbar: false,
-            hScroll: false,
-
-            vScroll: true,
-            vScrollbar: true,
-
-            scrollbarClass: 'scrollbar',
-
-            onScrollEnd: function(event) {
-                self.infiniteScroll(this);
-
-                if (self.region.currentView !== undefined) {
-                    self.region.currentView.trigger('scroll', this);
-                }
-            }
-        });
-
-        return this;
+        this.infiniteScrollReference = setTimeout(deferred, 150);
     },
 
 
-
-    resizeScroller: function(event) {
-        var $scroller = this.$el.find('.scroller');
-
-        $scroller.height(
-            $(window).height() - 59
-        );
-    },
+    infiniteScrollDeferred: function(event) {
+        var $target = $(event.target);
 
 
+        // Threshold, 10 before end
+        var threshold = (140 * 20);
 
-    refreshScroller: function() {
-        var self = this;
+        // Current scrollTop, maxScrollTop
+        var scrollTop = $target.scrollTop(),
+            maxScrollTop = $target.find('.children').height();
 
-        if (this.iscroll === undefined) {
+        // Loading
+        if (this.infiniteScrollLoading === true) {
             return;
         }
 
-        clearTimeout(self.scrollerTimeout);
+        else if (moment().diff(this.infiniteScrollLastUpdate) < 2000) {
+            return;
+        }
 
-        self.scrollerTimeout = setTimeout(function(){
-            self.iscroll.refresh();
-        }, jQuery.fx.speeds.slow + 250);
-    },
+        // Top infinite scroll
+        else if (Math.abs(scrollTop) < threshold) {
+            this.infiniteScrollLastUpdate = moment();
+            this.region.currentView.trigger('infinite:load', {after: true});
+        }
 
+        // Bottom infinite scroll
+        else if (Math.abs(scrollTop) > Math.abs(maxScrollTop - threshold)) {
+            this.infiniteScrollLastUpdate = moment();
+            this.region.currentView.trigger('infinite:load', {before: true});
+        }
 
-
-    infiniteScroll: function(event) {
-        var self = this;
-
-
-        clearTimeout(self.infiniteScrollReference);
-
-        self.infiniteScrollReference = setTimeout(function(){
-            // Loading
-            if (self.infiniteScrollLoading === true) {
-                return;
-            }
-
-            // Top infinite scroll
-            else if (Math.abs(event.y) < (140 * 5)) {
-                self.region.currentView.trigger('infinite:load', {after: true});
-            }
-
-            // Bottom infinite scroll
-            else if (Math.abs(event.y) > Math.abs(event.maxScrollY + (140 * 5))) {
-                self.region.currentView.trigger('infinite:load', {before: true});
-            }
-
-            // Somewhere inbetween
-            else {
-                return;
-            }
-        }, 150);
+        // Somewhere inbetween
+        else {
+            return;
+        }
     }
 });

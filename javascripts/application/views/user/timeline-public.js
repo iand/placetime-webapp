@@ -179,7 +179,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         // Initial view
         var view = this.subviews.findByCustom(
             this.model.get('view')
-        ).render();
+        );
 
         this.region.show(view);
     }

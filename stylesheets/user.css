@@ -251,7 +251,7 @@ input[type=submit].wide {
   width: -moz-calc(100% - 12px);
   width: -webkit-calc(100% - 12px);
   width: calc(100% - 12px);
-  z-index: 3;
+  z-index: 4;
   -webkit-box-shadow: 0px 2px 3px #666666;
   -moz-box-shadow: 0px 2px 3px #666666;
   box-shadow: 0px 2px 3px #666666;
@@ -314,6 +314,7 @@ input[type=submit].wide {
 }
 .timeline .scroller {
   position: relative;
+  overflow: scroll;
   height: 100%;
   width: 100%;
 }
@@ -325,6 +326,34 @@ input[type=submit].wide {
 .timeline .followers,
 .timeline .followings {
   padding-top: 5px;
+}
+.timeline .items .item,
+.timeline .followers .item,
+.timeline .followings .item {
+  -webkit-transition: padding-top 500ms linear, padding-bottom 500ms linear, margin-bottom 500ms linear, max-height 500ms linear;
+  -webkit-transition-delay: 250ms, 250ms, 250ms, 250ms;
+  -moz-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
+  -o-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
+  transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
+  max-height: 150px;
+}
+.timeline .items .item.collapsed,
+.timeline .followers .item.collapsed,
+.timeline .followings .item.collapsed {
+  margin-bottom: 0;
+  max-height: 0px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+.timeline .items .item.empty, .timeline .items .item.empty.collapsed,
+.timeline .followers .item.empty,
+.timeline .followers .item.empty.collapsed,
+.timeline .followings .item.empty,
+.timeline .followings .item.empty.collapsed {
+  -webkit-transition-duration: 350ms, 350ms, 350ms;
+  -moz-transition-duration: 350ms, 350ms, 350ms;
+  -o-transition-duration: 350ms, 350ms, 350ms;
+  transition-duration: 350ms, 350ms, 350ms;
 }
 .timeline .items .item .icon,
 .timeline .items .item .username,
@@ -518,6 +547,7 @@ input[type=submit].wide {
   overflow: hidden;
   padding: 15px;
   position: relative;
+  overflow: hidden;
 }
 .timeline .items .item:hover {
   -webkit-box-shadow: 0px 0px 0px #aaaaaa;
@@ -705,27 +735,4 @@ input[type=submit].wide {
 }
 .timeline .load-more {
   cursor: pointer;
-}
-
-.scrollbarV,
-.scrollbarH {
-  position: absolute;
-  z-index: 100;
-}
-
-.scrollbarV {
-  bottom: 7px;
-  top: 2px;
-  right: 1px;
-  width: 8px;
-}
-
-.scrollbarV > div {
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
 }
