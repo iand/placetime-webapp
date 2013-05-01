@@ -102,7 +102,19 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
 
 
+
     search: function() {
+        var $form = $(event.target);
+
+        this.region.listenToOnce('search:done', function(data){
+            // Render search result view
+        });
+        this.region.listenToOnce('search:fail', function(data){
+            // Render error
+        });
+
+        this.region.currentView.trigger('search', $form.find('input').val());
+
         return false;
     },
 

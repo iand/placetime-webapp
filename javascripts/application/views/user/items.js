@@ -51,7 +51,8 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         this.on('after:item:added', this.renderNeedle);
         this.on('item:removed', this.renderNeedle);
 
-        // Handle now
+        // Handle
+        this.on('search', this.search);
         this.on('reload', this.reload);
         this.on('now', this.now);
     },
@@ -112,6 +113,25 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         model.demote();
 
         return false;
+    },
+
+
+    search: function(query) {
+        var self = this;
+
+        var promise = this.collection.search({
+            data: {
+                s: query
+            }
+        });
+
+        promise.done(function(data){
+            self.trigger('search:done', data);
+        });
+
+        promise.fail(function(){
+            self.trigger('search:fail');
+        });
     },
 
 
