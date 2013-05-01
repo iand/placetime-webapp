@@ -23,14 +23,23 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
 
 
-    timeline: function() {
+    timeline: function(pid) {
+        var status;
+        if (pid === undefined) {
+            pid    = this.model.get('pid');
+            status = 'p';
+        } else {
+            status = 'm';
+        }
+
         var collection = new Application.Collection.Items(undefined, {
-            status: this.model.get('status')
+            status: status,
+            pid: pid
         });
 
         var model = new Backbone.Model({
-            pid: this.model.get('pid'),
-            status: this.model.get('status')
+            pid: pid,
+            status: status
         });
 
         var view = new Application.View.Items({

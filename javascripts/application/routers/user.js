@@ -40,14 +40,10 @@ Application.Router.User = Backbone.Router.extend({
             self.header.render();
 
 
-            if (pid === undefined) {
-                pid = Application.session.get('pid');
-            }
-
             // Render timelines
             var timeline = new Application.View.Timelines({
                 public: {
-                    pid: pid,
+                    pid: Application.session.get('pid'),
                     view: 'timeline'
                 },
                 private: {
