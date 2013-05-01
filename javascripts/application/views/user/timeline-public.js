@@ -9,23 +9,21 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
 
     initialize: function(options) {
-        this.initSubviews();
         this.initialEvents();
+
+        // Handle
+        this.on('view:followings', function(){
+            this.followings();
+        });
+
+        this.on('view:followers', function(){
+            this.followers();
+        });
     },
 
 
-    initSubviews: function() {
-        // Setup subviews
-        this.subviews = new Backbone.ChildViewContainer();
 
-        this.initTimeline();
-        this.initFollowings();
-        this.initFollowers();
-    },
-
-
-
-    initTimeline: function() {
+    timeline: function() {
         var collection = new Application.Collection.Items(undefined, {
             status: this.model.get('status')
         });
@@ -40,12 +38,20 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
             model: model
         });
 
-        this.subviews.add(view, 'timeline');
+        this.bindEvents(view);
+
+
+        // Bubble
+        this.listenTo(view, 'item:promoted', function(event) {
+            this.trigger('item:promoted', event);
+        });
+
+        this.region.show(view);
     },
 
 
 
-    initFollowings: function() {
+    followings: function() {
         var collection = new Application.Collection.Followings();
 
         var model = new Backbone.Model({
@@ -59,12 +65,14 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
             model: model
         });
 
-        this.subviews.add(view, 'followings');
+        this.bindEvents(view);
+
+        this.region.show(view);
     },
 
 
 
-    initFollowers: function() {
+    followers: function() {
         var collection = new Application.Collection.Followers();
 
         var model = new Backbone.Model({
@@ -78,58 +86,9 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
             model: model
         });
 
-        this.subviews.add(view, 'followers');
-    },
+        this.bindEvents(view);
 
-
-
-    initialEvents: function() {
-        this.constructor.__super__.initialEvents.call(this, arguments);
-
-        // Bubble promoted/demoted timeline events
-        var timeline = this.subviews.findByCustom('timeline'),
-            followings = this.subviews.findByCustom('followings'),
-            followers = this.subviews.findByCustom('followers');
-
-        // Bubble
-        this.listenTo(timeline, 'item:promoted', function(event) {
-            this.trigger('item:promoted', event);
-        });
-
-
-        // Handle
-        this.on('view:followings', function(){
-            this.followings();
-        });
-
-        this.on('view:followers', function(){
-            this.followers();
-        });
-    },
-
-
-
-    timeline: function(pid) {
-        var timeline = this.subviews.findByCustom('timeline');
-
-        this.region.show(timeline);
-    },
-
-
-
-    followings: function() {
-        this.region.show(
-            this.subviews.findByCustom('followings')
-        );
-    },
-
-
-
-
-    followers: function() {
-        this.region.show(
-            this.subviews.findByCustom('followers')
-        );
+        this.region.show(view);
     },
 
 
@@ -176,11 +135,6 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         };
 
 
-        // Initial view
-        var view = this.subviews.findByCustom(
-            this.model.get('view')
-        );
-
-        this.region.show(view);
+        this.timeline();
     }
 });

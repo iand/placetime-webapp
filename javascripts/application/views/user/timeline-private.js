@@ -11,23 +11,17 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
 
 
     initialize: function(options) {
-        this.initSubviews();
         this.initialEvents();
+
+        // Handle
+        this.on('view:itemAdd', function(){
+            this.itemAdd();
+        });
     },
 
 
 
-    initSubviews: function() {
-        // Setup subviews
-        this.subviews = new Backbone.ChildViewContainer();
-
-        this.initTimeline();
-        this.initItemAdd();
-    },
-
-
-
-    initTimeline: function() {
+    timeline: function() {
         var collection = new Application.Collection.Items(undefined, {
             status: this.model.get('status')
         });
@@ -42,69 +36,42 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
             model: model
         });
 
-        this.subviews.add(view, 'timeline');
-    },
+        this.bindEvents(view);
 
-
-    initItemAdd: function() {
-        this.subviews.add(new Application.View.ItemAdd(), 'itemAdd');
-    },
-
-
-    initialEvents: function() {
-        this.constructor.__super__.initialEvents.call(this, arguments);
-
-        var timeline = this.subviews.findByCustom('timeline'),
-            itemAdd  = this.subviews.findByCustom('itemAdd');
-
-
-        // Bubble
-        this.listenTo(timeline, 'item:demoted', function(event) {
+        this.listenTo(view, 'item:demoted', function(event) {
             this.trigger('item:demoted', event);
         });
 
-
-        // Handle
-        this.listenTo(itemAdd, 'created', function() {
-            this.timeline();
-        });
-
-        this.listenTo(itemAdd, 'cancelled', function() {
-            this.timeline();
-        });
-
-
-        // Handle
-        this.on('view:itemAdd', function(){
-            this.itemAdd();
-        });
-    },
-
-
-
-    timeline: function() {
-        this.region.show(
-            this.subviews.findByCustom('timeline')
-        );
+        this.region.show(view);
     },
 
 
 
     itemAdd: function() {
-        this.region.show(
-            this.subviews.findByCustom('itemAdd')
-        );
+        var view = new Application.View.ItemAdd({
+            collection: this.collection,
+            model: this.model
+        });
+
+        this.bindEvents(view);
+
+        this.listenTo(view, 'created', function() {
+            this.timeline();
+        });
+
+        this.listenTo(view, 'cancelled', function() {
+            this.timeline();
+        });
+
+        this.region.show(view);
     },
 
 
     add: function(event) {
         var $form = $(event.target);
 
-        var view = this.subviews.findByCustom('itemAdd');
-            view.trigger('set:link', $form.find('input').val());
-
-        this.region.show(view);
-
+        this.itemAdd();
+        this.region.currentView.trigger('set:link', $form.find('input').val());
 
         return false;
     },
@@ -114,11 +81,6 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
         this.constructor.__super__.onRender.call(this, arguments);
 
 
-        // Initial view
-        var view = this.subviews.findByCustom(
-            this.model.get('view')
-        );
-
-        this.region.show(view);
+        this.timeline();
     }
 });

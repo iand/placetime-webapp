@@ -7,6 +7,10 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         'click .cancel': 'cancel'
     },
 
+    modelEvents: {
+        'change': 'render'
+    },
+
     // Do not use scroller
     noScroller: true,
 

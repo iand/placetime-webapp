@@ -20,48 +20,46 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         });
 
         this.on('scroll', this.infiniteScroll);
+    },
 
 
+    bindEvents: function(view) {
+        if (view.collection) {
+            this.listenToOnce(view.collection, 'sync', function(event){
+                view.$el.find('.item').first().transitionEnd(_.bind(function(event){
+                    if (event.propertyName !== 'max-height') {
+                        return;
+                    }
 
-        // Subview events
-        this.subviews.each(function(view) {
-            if (view.collection) {
-                this.listenToOnce(view.collection, 'sync', function(event){
-                    view.$el.find('.item').first().transitionEnd(_.bind(function(event){
-                        if (event.propertyName !== 'max-height') {
-                            return;
-                        }
+                    this.now();
+                }, this));
+            });
+        }
 
-                        this.now();
-                    }, this));
-                });
+        // On show resize the child
+        this.listenTo(view, 'show', this.resize);
+
+        // On scroll trigger infinite scroll
+        this.listenTo(view, 'scroll', this.infiniteScroll);
+
+        // Handle scroll to requests
+        this.listenTo(view, 'scrollTo', function(event) {
+            var $scroller = this.$el.find('.scroller');
+
+            // Already there
+            if (event.top === $scroller.scrollTop()) {
+                return;
             }
 
-            // On show resize the child
-            this.listenTo(view, 'show', this.resize);
+            view.trigger('scrollTo:start');
 
-            // On scroll trigger infinite scroll
-            this.listenTo(view, 'scroll', this.infiniteScroll);
-
-            // Handle scroll to requests
-            this.listenTo(view, 'scrollTo', function(event) {
-                var $scroller = this.$el.find('.scroller');
-
-                // Already there
-                if (event.top === $scroller.scrollTop()) {
-                    return;
-                }
-
-                view.trigger('scrollTo:start');
-
-                $scroller.animate({
-                    scrollTop: event.top,
-                    scrollLeft: event.left
-                }, event.duration, function(){
-                    view.trigger('scrollTo:done');
-                });
+            $scroller.animate({
+                scrollTop: event.top,
+                scrollLeft: event.left
+            }, event.duration, function(){
+                view.trigger('scrollTo:done');
             });
-        }, this);
+        });
     },
 
 
