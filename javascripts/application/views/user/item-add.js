@@ -3,7 +3,6 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     className: 'item',
 
     events: {
-        'keyup input': 'change',
         'submit form': 'submit',
         'click .cancel': 'cancel'
     },
@@ -33,14 +32,17 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     },
 
 
-    change: function (event) {
-        this.model.set(event.target.name, event.target.value);
-    },
-
-
 
     submit: function() {
         var self = this;
+
+        var data = {};
+        $.each(this.$el.find('form').serializeArray(), function(index, field) {
+            data[field.name] = field.value;
+        });
+
+        this.model.set(data);
+
 
         var promise = this.model.save();
 

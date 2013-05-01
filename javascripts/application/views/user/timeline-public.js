@@ -10,7 +10,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
     initialize: function(options) {
         this.initSubviews();
-        this.initEvents();
+        this.initialEvents();
     },
 
 
@@ -83,8 +83,8 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
 
 
-    initEvents: function() {
-        this.constructor.__super__.initEvents.call(this, arguments);
+    initialEvents: function() {
+        this.constructor.__super__.initialEvents.call(this, arguments);
 
         // Bubble promoted/demoted timeline events
         var timeline = this.subviews.findByCustom('timeline'),

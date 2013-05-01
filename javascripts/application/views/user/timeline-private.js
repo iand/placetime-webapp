@@ -12,7 +12,7 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
 
     initialize: function(options) {
         this.initSubviews();
-        this.initEvents();
+        this.initialEvents();
     },
 
 
@@ -51,8 +51,8 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
     },
 
 
-    initEvents: function() {
-        this.constructor.__super__.initEvents.call(this, arguments);
+    initialEvents: function() {
+        this.constructor.__super__.initialEvents.call(this, arguments);
 
         var timeline = this.subviews.findByCustom('timeline'),
             itemAdd  = this.subviews.findByCustom('itemAdd');

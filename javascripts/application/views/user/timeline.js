@@ -6,7 +6,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     infiniteScrollReference: null,
     infiniteScrollLastUpdate: moment().subtract('seconds', 2),
 
-    initEvents: function() {
+    initialEvents: function() {
         $(window).on('resize', _.bind(this.resize, this));
 
         // Pass event to current view

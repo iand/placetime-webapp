@@ -64,16 +64,13 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     onShow: function() {
-        this.delegateEvents();
-
         this.collection.fetch({
             data: {
                 pid: this.model.get('pid'),
                 status: this.model.get('status'),
                 before: 25,
                 after: 25
-            },
-            remove: true
+            }
         });
     },
 
@@ -163,7 +160,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
 
-    loadMore: function(options){
+    loadMore: function(options) {
         var self = this;
 
         var data = {
@@ -184,7 +181,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         }
 
         self.collection.fetch({
-            remove: true, // TODO: Change to false when id de-duplicating resolved
+            remove: false,
             data: data
         }).done(function(){
             self.trigger('infinite:loaded');
