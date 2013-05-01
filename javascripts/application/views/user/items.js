@@ -202,7 +202,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     loaded: function(options) {
-        // this.loading.remove();
+        this.loading.remove();
     },
 
 
