@@ -676,7 +676,6 @@ input[type=submit].wide {
   border-bottom: 1px solid #333333;
   border-top: 1px solid #ffffff;
   height: 0px;
-  left: 8px;
   position: absolute;
   top: 50%;
   width: calc(100% - 12px);
