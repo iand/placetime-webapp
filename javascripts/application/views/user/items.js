@@ -42,7 +42,10 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
         // Handle infinite scroll
-        this.on('infinite:load', this.loadMore);
+        this.on('infinite:load', this.load);
+        this.on('infinite:load', this.loading);
+        this.on('infinite:loaded', this.loaded);
+        this.on('infinite:failed', this.loaded);
 
         // Handle needle displaying
         this.on('after:item:added', this.renderNeedle);
@@ -135,7 +138,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
 
-
     now: function(duration) {
         var self = this;
 
@@ -160,7 +162,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
 
-    loadMore: function(options) {
+    load: function(options) {
         var self = this;
 
         var data = {
@@ -189,6 +191,20 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             self.trigger('infinite:failed');
         });
     },
+
+
+    loading: function(options) {
+        this.loading = new Application.View.Loading(options);
+        this.loading.render();
+
+        this.$el.append(this.loading.$el);
+    },
+
+
+    loaded: function(options) {
+        // this.loading.remove();
+    },
+
 
 
     appendHtml: function(collectionView, itemView, index) {

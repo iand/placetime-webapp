@@ -11,7 +11,10 @@ Application.View.Followings = Backbone.Marionette.CompositeView.extend({
 
 
     initialize: function (options) {
-        this.on('infinite:load', this.loadMore);
+        this.on('infinite:load', this.load);
+        this.on('infinite:load', this.loading);
+        this.on('infinite:loaded', this.loaded);
+        this.on('infinite:failed', this.loaded);
     },
 
 
@@ -38,7 +41,8 @@ Application.View.Followings = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    loadMore: function(options){
+
+    load: function(options){
         if (options.before) {
             return;
         }
@@ -64,5 +68,18 @@ Application.View.Followings = Backbone.Marionette.CompositeView.extend({
         }).fail(function(){
             self.trigger('infinite:failed');
         });
+    },
+
+
+    loading: function(options) {
+        this.loading = new Application.View.Loading(options);
+        this.loading.render();
+
+        this.$el.append(this.loading.$el);
+    },
+
+
+    loaded: function(options) {
+        this.loading.remove();
     }
 });

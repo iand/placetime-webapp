@@ -718,6 +718,18 @@ input[type=submit].wide {
 .timeline .needle .past {
   margin-right: 10px;
 }
+.timeline .loading {
+  left: 50%;
+  margin-left: -12px;
+  opacity: 0.25;
+  position: absolute;
+}
+.timeline .loading.after {
+  top: 50px;
+}
+.timeline .loading.before {
+  bottom: 20px;
+}
 .timeline .load-more,
 .timeline .no-results {
   -webkit-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
