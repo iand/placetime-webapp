@@ -5,6 +5,25 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
         'item:promoted': 'onPromoted'
     },
 
+    templateHelpers: {
+        isEvent: function(ts, event) {
+            return Application.Model.Item.prototype.isEvent.apply(
+                new Backbone.Model({
+                    ts: ts,
+                    event: event
+                })
+            );
+        },
+
+        time: function(ts) {
+            return Application.Model.Item.prototype.time.apply(
+                new Backbone.Model({
+                    ts: ts
+                })
+            );
+        }
+    },
+
     attributes: function() {
         var attributes = {
             'data-id': this.model.id
