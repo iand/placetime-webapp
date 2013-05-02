@@ -223,10 +223,14 @@
 
         <script type="text/template" id="item-empty-template">
             </p>
-                <% if (status === 'p') { %>
-                    There are no items in your timeline, search for users to follow
+                <% if (Application.session.get('pid') === pid) { %>
+                    <% if (status === 'p') { %>
+                        There are no items in your timeline, search for users to follow
+                    <% } else { %>
+                        Add a new item or copy one from your timeline
+                    <% } %>
                 <% } else { %>
-                    Add a new item or copy one from your timeline
+                    There are no items in <%= pid %> timeline
                 <% } %>
             <p>
         </script>

@@ -241,7 +241,10 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     buildItemView: function(item, ItemViewType, itemViewOptions) {
         var view = Backbone.Marionette.CompositeView.prototype.buildItemView.apply(this, arguments);
 
-        view.model.set('status', this.model.get('status'), {
+        view.model.set({
+           status: this.model.get('status'),
+           pid: this.model.get('pid')
+        }, {
             silent: true
         });
 
