@@ -82,7 +82,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
     refresh: function() {
         this.listenToOnce(this.region.currentView, 'reload:done', function(){
-            this.region.currentView.$el.transitionEnd(_.bind(function(){
+            this.region.currentView.$el.find('.item').first().transitionEnd(_.bind(function(){
                 if (event.propertyName !== 'max-height') {
                     return;
                 }

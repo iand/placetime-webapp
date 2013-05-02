@@ -144,7 +144,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
                 before: 25,
                 after: 25
             },
-            remove: true
+            reset: true
         });
 
         promise.done(function(data){
