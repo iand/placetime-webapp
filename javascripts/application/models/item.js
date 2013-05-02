@@ -63,29 +63,26 @@ Application.Model.Item = Backbone.Model.extend({
 
 
     promote: function(done, fail) {
-        var defer = $.Deferred();
+        var self = this;
 
-        defer.done(done);
-        defer.fail(fail);
 
-        this.trigger('item:promoted', this.attributes);
-
-        $.ajax({
+        var promise = $.ajax({
             url: '/-tpromote',
             type: 'post',
             data: {
                 pid: Application.session.get('pid'),
                 id: this.get('id')
-            },
-            success: function() {
-                defer.resolve();
-            },
-            failure: function() {
-                defer.reject();
             }
         });
 
-        return defer.promise();
+        promise.done(function(data) {
+            self.trigger('item:promoted', data);
+        });
+
+        promise.done(done);
+        promise.fail(fail);
+
+        return promise;
     },
 
 
