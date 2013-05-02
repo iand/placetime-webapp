@@ -154,8 +154,5 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
             return Backbone.Marionette.Region.prototype.show.apply(this, arguments);
         };
-
-
-        this.timeline();
     }
 });

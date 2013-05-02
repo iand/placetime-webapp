@@ -99,6 +99,14 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         this.region = new Backbone.Marionette.Region({
               el: this.$el.find('.collection')
         });
+
+        // Load view
+        var view = this.model.get('view');
+        if (view) {
+            this[view]();
+        } else {
+            this.timeline();
+        }
     },
 
 
