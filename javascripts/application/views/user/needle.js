@@ -26,19 +26,22 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
         var model = $item.data('model'),
             time = $item.data('model').time();
 
+
         // Now
-        if ($item.hasClass('now') === true) {
+        if (model.isNow() === true) {
             this.now();
         }
 
-        // Today
-        else if (Math.abs(time.diff()) < moment().add('day', 1).diff()) {
+        else if (model.isToday() === true) {
             this.update(time, ' hh:mm:ss A', 'Today at ');
         }
 
-        // Future/Past
-        else {
+        else if (model.isEvent() === true) {
             this.update(time, 'Do MMMM YYYY');
+        }
+
+        else {
+            this.update(time, 'Do MMMM YYYY hh:mm:ss A');
         }
     },
 

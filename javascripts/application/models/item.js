@@ -24,6 +24,25 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
 
+    isNow: function() {
+        return this.get('now');
+    },
+
+
+    isToday: function() {
+        return Math.abs(this.time().diff()) < moment().add('day', 1).diff();
+    },
+
+
+    isEvent: function() {
+        return this.get('ts').toString().substr(0, 10) == this.get('event');
+    },
+
+    isAdded: function() {
+        return this.get('ts').toString().substr(0, 10) == this.get('added');
+    },
+
+
     save: function(done, fail) {
         var promise = $.ajax({
             url: '/-tadd',
