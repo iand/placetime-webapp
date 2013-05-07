@@ -682,6 +682,9 @@ input[type=submit].wide {
   padding: 6px 9px 5px 10px;
 }
 .timeline .needle {
+  -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
   border-bottom: 1px solid #333333;
   border-top: 1px solid #ffffff;
   height: 0px;
@@ -690,9 +693,6 @@ input[type=submit].wide {
   opacity: 0.7;
   width: calc(100% - 12px);
   z-index: 4;
-  -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
-  -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
-  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
 }
 .timeline .needle .date {
   -webkit-border-radius: 5px;
@@ -726,6 +726,10 @@ input[type=submit].wide {
 }
 .timeline .needle .past {
   margin-right: 10px;
+  margin-left: 8px;
+}
+.timeline .needle .icon-repeat {
+  display: inline-block;
 }
 .timeline .loading {
   left: 50%;

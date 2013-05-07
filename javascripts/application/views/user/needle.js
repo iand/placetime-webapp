@@ -1,5 +1,5 @@
 Application.View.Needle = Backbone.Marionette.ItemView.extend({
-    template: '#needle-template',
+    template: '#needle-now-template',
     className: 'needle',
 
     isRendered: false,
@@ -9,7 +9,7 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
     },
 
 
-    scroll: function() {
+    scroll: function(event) {
         var offset = this.$el.offset();
 
         // Get element below needle
@@ -43,6 +43,17 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
         else {
             this.update(time, 'Do MMMM YYYY hh:mm:ss A');
         }
+
+        this.rotate(event);
+    },
+
+
+    rotate: function(event) {
+        var $scroller = $(event.target);
+
+        this.$el.find('.icon-repeat').css({
+            '-webkit-transform': 'rotate('+$scroller.scrollTop()+'deg)'
+        });
     },
 
 
@@ -50,17 +61,21 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
         prefix = prefix || '';
         suffix = suffix || '';
 
-        this.$el.find('.date').text(
+        // Re-render as needle-template
+        if (this.template !== '#needle-template') {
+            this.template = '#needle-template';
+            this.render();
+        }
+
+        this.$el.find('.value').text(
             prefix + time.format(format) + suffix
         );
     },
 
 
     now: function() {
-        var now = new Application.View.NeedleNow();
-            now.render();
-
-        this.$el.html(now.el);
+        this.template = '#needle-now-template';
+        this.render();
     },
 
 

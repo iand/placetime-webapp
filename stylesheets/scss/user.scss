@@ -544,6 +544,9 @@
 
     // Needle
     .needle {
+        @include single-box-shadow(
+            rgba(0, 0, 0, 0.7), 0px, 2px, 3px
+        );
         border-bottom: 1px solid #333333;
         border-top: 1px solid #ffffff;
         height: 0px;
@@ -553,9 +556,6 @@
         width: calc(100% - 12px);
         z-index: 4;
 
-        @include single-box-shadow(
-                rgba(0, 0, 0, 0.7), 0px, 2px, 3px
-            );
         .date {
             @include border-radius(5px);
             @include single-box-shadow(
@@ -587,6 +587,11 @@
 
         .past {
             margin-right: 10px;
+            margin-left: 8px;
+        }
+
+        .icon-repeat {
+            display: inline-block;
         }
     }
 
