@@ -44,9 +44,16 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
             className += ' image';
         }
 
-        if (this.model.get('event') == this.model.get('ts').toString().substr(0, 10)) {
+        if (this.model.isEvent()) {
             className += ' event';
+        } else {
+            className += ' added';
         }
+
+        if (this.model.isPast()) {
+            className += ' past';
+        }
+
 
         return className;
     },

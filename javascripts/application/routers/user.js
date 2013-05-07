@@ -98,7 +98,7 @@ Application.Router.User = Backbone.Router.extend({
 
 
             if (Application.content.is('timelines')) {
-                Application.content.currentView.trigger('public:followers');
+                Application.content.currentView.trigger('public:followers', pid);
             } else {
                 Application.content.show(timeline);
             }
@@ -142,8 +142,7 @@ Application.Router.User = Backbone.Router.extend({
 
 
             if (Application.content.is('timelines')) {
-                Application.content.currentView.trigger('public:followings');
-                Application.content.currentView.trigger('private:followings');
+                Application.content.currentView.trigger('public:followings', pid);
             } else {
                 Application.content.show(timeline);
             }

@@ -56,12 +56,12 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
         });
 
         // Public timeline
-        this.on('public:followings', function(){
-            publicTimeline.trigger('view:followings');
+        this.on('public:followings', function(pid) {
+            publicTimeline.trigger('view:followings', pid);
         });
 
-        this.on('public:followers', function(){
-            publicTimeline.trigger('view:followers');
+        this.on('public:followers', function(pid) {
+            publicTimeline.trigger('view:followers', pid);
         });
 
         this.on('public:timeline', function(pid) {

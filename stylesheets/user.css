@@ -592,6 +592,15 @@ input[type=submit].wide {
   transition: opacity 1s;
   opacity: 1;
 }
+.timeline .items .item.event.past .overlay {
+  -webkit-transition: background-color 1s linear;
+  -moz-transition: background-color 1s linear;
+  -o-transition: background-color 1s linear;
+  transition: background-color 1s linear;
+  background-color: rgba(128, 128, 128, 0.65);
+  display: block;
+  z-index: 3;
+}
 .timeline .items .item .overlay {
   background-color: rgba(15, 15, 15, 0.4);
   display: none;

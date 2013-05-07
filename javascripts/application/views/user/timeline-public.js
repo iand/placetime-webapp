@@ -12,12 +12,12 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         this.initialEvents();
 
         // Handle
-        this.on('view:followings', function(){
-            this.followings();
+        this.on('view:followings', function(pid){
+            this.followings(pid);
         });
 
-        this.on('view:followers', function(){
-            this.followers();
+        this.on('view:followers', function(pid){
+            this.followers(pid);
         });
     },
 
@@ -60,11 +60,15 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
 
 
-    followings: function() {
+    followings: function(pid) {
+        if (pid === undefined) {
+            pid = this.model.get('pid');
+        }
+
         var collection = new Application.Collection.Followings();
 
         var model = new Backbone.Model({
-            pid: this.model.get('pid'),
+            pid: pid,
             count: 20,
             start: 10
         });
@@ -81,11 +85,15 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
 
 
-    followers: function() {
+    followers: function(pid) {
+        if (pid === undefined) {
+            pid = this.model.get('pid');
+        }
+
         var collection = new Application.Collection.Followers();
 
         var model = new Backbone.Model({
-            pid: this.model.get('pid'),
+            pid: pid,
             count: 20,
             start: 10
         });

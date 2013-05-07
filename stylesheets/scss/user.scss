@@ -427,6 +427,18 @@
                 }
             }
 
+            &.event.past {
+                .overlay {
+                    @include single-transition(
+                        background-color, 1s, linear
+                    );
+
+                    background-color: rgba(128, 128, 128, 0.65);
+                    display: block;
+                    z-index: 3;
+                }
+            }
+
             .overlay {
                 background-color: rgba(15, 15, 15, 0.4);
                 display: none;

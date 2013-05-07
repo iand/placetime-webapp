@@ -29,6 +29,11 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
 
+    isPast: function() {
+        return this.time().diff() < 0;
+    },
+
+
     isToday: function() {
         return Math.abs(this.time().diff()) < moment().add('day', 1).diff();
     },
