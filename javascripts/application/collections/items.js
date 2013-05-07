@@ -16,6 +16,16 @@ Application.Collection.Items = Backbone.Collection.extend({
     },
 
 
+    search: function(options) {
+        return $.ajax({
+            url: '/-jsearch',
+            type: 'get',
+            dataType: 'json',
+            data: options.data
+        });
+    },
+
+
     fetch: function(options) {
         options.data = _.extend(this.options, options.data);
 

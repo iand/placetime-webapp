@@ -4,6 +4,7 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
 
     isRendered: false,
 
+
     initialize: function (options) {
         this.on('scroll', this.scroll);
     },
@@ -49,12 +50,18 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
 
 
     rotate: function(event) {
-        var $scroller = $(event.target);
+        var scrollTop = $(event.target).scrollTop();
 
         this.$el.find('.icon-repeat').css({
-            '-webkit-transform': 'rotate('+$scroller.scrollTop()+'deg)'
+            '-webkit-transform' : 'rotate('+scrollTop+'deg)',
+            '-moz-transform'    : 'rotate('+scrollTop+'deg)',
+            '-o-transform'      : 'rotate('+scrollTop+'deg)',
+            '-ms-transform'     : 'rotate('+scrollTop+'deg)',
+            'transform'         : 'rotate('+scrollTop+'deg)'
         });
     },
+
+
 
 
     update: function(time, format, prefix, suffix) {
@@ -67,9 +74,11 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
             this.render();
         }
 
-        this.$el.find('.value').text(
-            prefix + time.format(format) + suffix
-        );
+        var $value = this.$el.find('.value');
+
+        if ($value.text() !== prefix + time.format(format) + suffix) {
+            $value.text(prefix + time.format(format) + suffix);
+        }
     },
 
 

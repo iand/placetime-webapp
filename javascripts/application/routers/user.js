@@ -7,6 +7,7 @@ Application.Router.User = Backbone.Router.extend({
         'timeline': 'timeline',
         'followings': 'followings',
         'followers': 'followers',
+        'account': 'account',
 
         'user/:id': 'timeline',
         'followers/:id': 'followers',
@@ -146,6 +147,28 @@ Application.Router.User = Backbone.Router.extend({
             } else {
                 Application.content.show(timeline);
             }
+        });
+
+
+        check.fail(function(){
+            Backbone.history.navigate('login', true);
+        });
+    },
+
+
+
+    account: function () {
+        var self = this;
+
+
+        var check = Application.session.check();
+
+        check.done(function(){
+            var account = new Application.View.Account({
+                model: Application.session
+            });
+
+            Application.content.show(account);
         });
 
 

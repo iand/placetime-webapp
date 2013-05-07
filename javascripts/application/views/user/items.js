@@ -125,8 +125,9 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             }
         });
 
-        promise.done(function(data){
-            self.trigger('search:done', data);
+        promise.done(function(data) {
+            self.collection.reset(data.items);
+            self.trigger('search:done');
         });
 
         promise.fail(function(){
