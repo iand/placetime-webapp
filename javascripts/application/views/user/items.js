@@ -4,7 +4,11 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
     events: {
         'click .promote': 'promote',
-        'click .demote': 'demote'
+        'click .demote': 'demote',
+
+        // Because of how frequent the needle is re-rendered
+        // it's more efficient to use event delegation
+        'click .icon-repeat': 'now'
     },
 
     itemViewContainer: '.children',

@@ -4,7 +4,6 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
 
     isRendered: false,
 
-
     initialize: function (options) {
         this.on('scroll', this.scroll);
     },

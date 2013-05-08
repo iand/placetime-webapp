@@ -729,6 +729,7 @@ input[type=submit].wide {
   margin-left: 8px;
 }
 .timeline .needle .icon-repeat {
+  cursor: pointer;
   display: inline-block;
 }
 .timeline .loading {
