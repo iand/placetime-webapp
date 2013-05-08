@@ -1,9 +1,8 @@
 Application.Model.Item = Backbone.Model.extend({
     idAttribute: 'uid',
 
-    defaults: {
-        now: false
-    },
+    // Non-attributes
+    now: false,
 
     initialize: function() {
         this.set('uid', this.get('id') + '-' + this.get('ts'), {
@@ -25,7 +24,7 @@ Application.Model.Item = Backbone.Model.extend({
 
 
     isNow: function() {
-        return this.get('now');
+        return this.now;
     },
 
 

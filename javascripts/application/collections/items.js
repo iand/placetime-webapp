@@ -16,16 +16,6 @@ Application.Collection.Items = Backbone.Collection.extend({
     },
 
 
-    search: function(options) {
-        return $.ajax({
-            url: '/-jsearch',
-            type: 'get',
-            dataType: 'json',
-            data: options.data
-        });
-    },
-
-
     fetch: function(options) {
         options.data = _.extend(this.options, options.data);
 
@@ -52,11 +42,11 @@ Application.Collection.Items = Backbone.Collection.extend({
                 defer.reject();
             } else {
                 self.each(function(model){
-                    model.set('now', false);
+                    model.now = false;
                 });
 
                 var model = self.get(data[0].id + '-' + data[0].ts);
-                    model.set('now', true);
+                    model.now = true;
 
                 defer.resolve(model);
             }

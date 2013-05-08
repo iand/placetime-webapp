@@ -2,10 +2,15 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
     template: '#searches-template',
     className: 'searches',
 
+    events: {
+        'click .promote': 'promote',
+        'click .demote': 'demote'
+    },
+
     itemViewContainer: '.children',
 
-    itemView: Application.View.Item,
-    emptyView: Application.View.ItemEmpty,
+    itemView: Application.View.Search,
+    emptyView: Application.View.SearchEmpty,
 
     // Bubble collection events
     collectionEvents: {
@@ -22,86 +27,41 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    initialize: function (options) {
-        this.subviews = new Backbone.ChildViewContainer();
-        this.subviews.add(new Application.View.Needle(), 'needle');
-
-        this.on('composite:rendered', function(){
-            this.$el.find('.scroller').scroll(_.bind(this.onScroll, this));
-        });
-
-        // Custom events
-        this.on('item:add', function(event) {
-            this.collection.add(event);
-        });
+    initialize: function (options) {},
 
 
-        // Handle infinite scroll
-        this.on('infinite:load', this.load);
-        this.on('infinite:load', this.loading);
-        this.on('infinite:loaded', this.loaded);
-        this.on('infinite:failed', this.loaded);
-
-        // Handle needle displaying
-        this.on('after:item:added', this.renderNeedle);
-        this.on('item:removed', this.renderNeedle);
-    },
-
-
-
-    renderNeedle: function() {
-        if (this.collection.length > 0) {
-            this.$el.find('.needle-view').html(
-                this.subviews.findByCustom('needle').render().el
-            );
-        } else {
-            this.$el.find('.needle-view').empty();
-        }
-    },
-
-
-
-    load: function(options) {
-        var self = this;
-
-        var data = {
-            pid: self.model.get('pid'),
-            status: self.model.get('status')
-        };
-
-        if (options.before) {
-            data.after = 0;
-            data.before = 40;
-            data.ts = self.collection.last().get('ts');
-        } else if (options.after) {
-            data.after = 40;
-            data.before = 0;
-            data.ts = self.collection.first().get('ts');
-        } else {
-            throw new Error('Invalid options provided');
-        }
-
-        self.collection.fetch({
-            remove: false,
-            data: data
-        }).done(function(){
-            self.trigger('infinite:loaded');
-        }).fail(function(){
-            self.trigger('infinite:failed');
+    onShow: function() {
+        this.collection.fetch({
+            data: {
+                s: this.model.get('query')
+            }
         });
     },
 
 
-    loading: function(options) {
-        this.loading = new Application.View.Loading(options);
-        this.loading.render();
 
-        this.$el.append(this.loading.$el);
+    promote: function (event) {
+        var $item = $(event.currentTarget).closest('[data-id]');
+
+        var model = this.collection.get(
+            $item.data('id')
+        );
+        model.promote();
+
+        return false;
     },
 
 
-    loaded: function(options) {
-        this.loading.remove();
+
+    demote: function (event) {
+        var $item = $(event.currentTarget).closest('[data-id]');
+
+        var model = this.collection.get(
+            $item.data('id')
+        );
+        model.demote();
+
+        return false;
     },
 
 

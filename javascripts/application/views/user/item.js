@@ -2,7 +2,7 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
     template: '#item-template',
 
     modelEvents: {
-        'item:promoted': 'onPromoted'
+        'item:promoted' : 'onPromoted'
     },
 
     templateHelpers: {
@@ -57,6 +57,7 @@ Application.View.Item = Backbone.Marionette.ItemView.extend({
 
         return className;
     },
+
 
     onPromoted: function() {
         this.$el.removeClass('now').addClass('promoted');

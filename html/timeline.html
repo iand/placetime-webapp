@@ -228,7 +228,7 @@
 
 
         <script type="text/template" id="item-empty-template">
-            </p>
+            <p>
                 <% if (Application.session.get('pid') === pid) { %>
                     <% if (status === 'p') { %>
                         There are no items in your timeline, search for users to follow
@@ -238,7 +238,15 @@
                 <% } else { %>
                     There are no items in <%= pid %> timeline
                 <% } %>
+            </p>
+        </script>
+
+
+
+        <script type="text/template" id="search-empty-template">
             <p>
+                No search results
+            </p>
         </script>
 
 
@@ -377,6 +385,12 @@
         </div>
         </script>
 
+
+        <script type="text/template" id="searches-template">
+        <div class="scroller">
+            <div class="children"></div>
+        </div>
+        </script>
 
 
         <script type="text/template" id="needle-template">

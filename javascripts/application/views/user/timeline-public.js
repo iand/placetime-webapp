@@ -112,16 +112,23 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
 
     search: function() {
-        var $form = $(event.target);
+        var query = $(this).find('[type=search]').val();
 
-        this.listenToOnce(this.region.currentView, 'search:done', function(data){
-            // Render search result view
-        });
-        this.listenToOnce(this.region.currentView, 'search:fail', function(data){
-            // Render error
+
+        var collection = new Application.Collection.Searches();
+
+        var model = new Backbone.Model({
+            s: query
         });
 
-        this.region.currentView.trigger('search', $form.find('input').val());
+        var view = new Application.View.Searches({
+            collection: collection,
+            model: model
+        });
+
+        this.bindEvents(view);
+
+        this.region.show(view);
 
         return false;
     },
