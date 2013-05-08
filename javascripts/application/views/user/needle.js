@@ -51,11 +51,11 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
         var scrollTop = $(event.target).scrollTop();
 
         this.$el.find('.icon-repeat').css({
-            '-webkit-transform' : 'rotate('+scrollTop+'deg)',
-            '-moz-transform'    : 'rotate('+scrollTop+'deg)',
-            '-o-transform'      : 'rotate('+scrollTop+'deg)',
-            '-ms-transform'     : 'rotate('+scrollTop+'deg)',
-            'transform'         : 'rotate('+scrollTop+'deg)'
+            '-webkit-transform' : 'rotate(-'+scrollTop+'deg)',
+            '-moz-transform'    : 'rotate(-'+scrollTop+'deg)',
+            '-o-transform'      : 'rotate(-'+scrollTop+'deg)',
+            '-ms-transform'     : 'rotate(-'+scrollTop+'deg)',
+            'transform'         : 'rotate(-'+scrollTop+'deg)'
         });
     },
 
