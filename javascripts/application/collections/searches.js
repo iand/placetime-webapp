@@ -1,6 +1,6 @@
 Application.Collection.Searches = Backbone.Collection.extend({
     model: Application.Model.Search,
-    url: '/-assets/-jsearch.json',
+    url: '/-jsearch',
 
 
     initialize: function(collection, options) {
