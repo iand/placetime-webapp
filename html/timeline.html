@@ -405,6 +405,12 @@
                     <i class="icon-plus"></i>
                 </span>
             </p>
+            <p class="sash video">
+                <i class="icon-facetime-video"></i>
+            </p>
+            <p class="sash audio">
+                <i class="icon-headphones"></i>
+            </p>
 
             <div class="icon pull-left">
                 <img src="/-assets/images/user.jpg" width="40" height="40">
@@ -412,24 +418,29 @@
             <p class="username pull-left">
                 <a href="#user/<%= pid %>"><%= pid %></a>
             </p>
-            <p class="text pull-left">
-                <a class="fancybox fancybox.iframe" href="<%= link %>">
-                    <%= text %>
-                </a>
-            </p>
 
 
 
 
             <% if (media == "video") { %>
+                <p class="text pull-left">
+                    <a class="fancybox fancybox.iframe" href="<%= getIframeUrl(link) %>">
+                        <%= text %>
+                    </a>
+                </p>
                 <p class="link pull-left">
                     <a href="<%= getIframeUrl(link) %>" class="fancybox fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
-                        <i class="icon-external-link"></i>
+                        <i class="icon-play-circle"></i>
                     </a>
                 </p>
             <% } else if (media == "audio") { %>
             <!-- audio specific markup here -->
             <% } else { %>
+                <p class="text pull-left">
+                    <a class="fancybox fancybox.iframe" href="<%= link %>">
+                        <%= text %>
+                    </a>
+                </p>
                 <p class="link pull-left">
                     <a href="<%= link %>" class="fancybox fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
                         <i class="icon-external-link"></i>

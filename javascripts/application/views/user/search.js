@@ -35,16 +35,23 @@ Application.View.Search = Backbone.Marionette.ItemView.extend({
             className += ' image';
         }
 
+        // Type
         if (this.model.isEvent()) {
             className += ' event';
-        } else {
+        } else if (this.model.isVideo()) {
+            className += ' video';
+        } else if (this.model.isAudio()) {
+            className += ' audio';
+        }
+
+        if (this.model.isAdded()) {
             className += ' added';
         }
 
+        // Time
         if (this.model.isPast()) {
             className += ' past';
         }
-
 
         return className;
     },

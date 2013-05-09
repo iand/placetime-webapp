@@ -1,6 +1,7 @@
 Application.Model.Profile = Backbone.Model.extend({
     defaults: {
-        bio: false
+        bio: false,
+        pname: ''
     },
 
     idAttribute: 'pid',

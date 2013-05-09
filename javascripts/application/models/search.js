@@ -36,6 +36,16 @@ Application.Model.Search = Backbone.Model.extend({
     },
 
 
+    isVideo: function() {
+        return this.get('media') === 'video';
+    },
+
+
+    isAudio: function() {
+        return this.get('media') === 'audio';
+    },
+
+
     isAdded: function() {
         return this.get('added') !== 0;
     },

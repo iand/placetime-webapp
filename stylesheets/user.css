@@ -244,7 +244,7 @@ input[type=submit].wide {
 .timeline .header {
   background-color: rgba(255, 255, 255, 0.95);
   border-bottom: 0px solid #000;
-  height: 39px;
+  height: 46px;
   position: absolute;
   top: 0;
   width: 98%;
@@ -265,18 +265,31 @@ input[type=submit].wide {
 }
 .timeline .header .search,
 .timeline .header .add {
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+  border-radius: 16px;
   font-size: 14px;
-  height: 17px;
+  height: 25px;
   padding: 4px 12px;
-  margin-top: 7px;
+  margin-top: 8px;
 }
 .timeline .header .add {
   margin-left: 18px;
+  max-width: 200px;
+  min-width: 100px;
 }
 .timeline .header .submit {
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  border-radius: 15px;
   font-size: 12px;
-  margin-left: 10px;
-  padding: 3px 7px;
+  margin-left: -53px;
+  margin-top: 11px;
+  padding: 4px 11px;
 }
 .timeline .header .now {
   -webkit-transition: opacity 0.5s ease-in-out;
@@ -284,7 +297,8 @@ input[type=submit].wide {
   -o-transition: opacity 0.5s ease-in-out;
   transition: opacity 0.5s ease-in-out;
   border-bottom: 0;
-  font-size: 11px;
+  cursor: pointer;
+  font-size: 12px;
   margin: 4px 18px 0 0;
   opacity: 1;
 }
@@ -295,13 +309,13 @@ input[type=submit].wide {
   color: #ff6600;
 }
 .timeline .header .now .icon-repeat {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   color: #555555;
-  font-size: 30px;
+  font-size: 32px;
+  margin-top: 4px;
 }
 .timeline .nav {
   font-size: 14px;
-  margin: 8px 12px;
+  margin: 11px 12px;
 }
 .timeline .nav li {
   margin-right: 15px;
@@ -320,7 +334,7 @@ input[type=submit].wide {
 }
 .timeline .children {
   position: relative;
-  padding-top: 38px;
+  padding-top: 46px;
 }
 .timeline .items,
 .timeline .searches,
@@ -337,7 +351,7 @@ input[type=submit].wide {
   -moz-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
   -o-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
   transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
-  max-height: 150px;
+  max-height: 180px;
 }
 .timeline .items .item.collapsed,
 .timeline .searches .item.collapsed,
@@ -621,6 +635,22 @@ input[type=submit].wide {
   display: block;
   opacity: 1;
 }
+.timeline .items .item.video .video.sash,
+.timeline .searches .item.video .video.sash {
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+  opacity: 1;
+}
+.timeline .items .item.audio .audio.sash,
+.timeline .searches .item.audio .audio.sash {
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+  opacity: 1;
+}
 .timeline .items .item.event .event.sash,
 .timeline .searches .item.event .event.sash {
   -webkit-transition: opacity 1s;
@@ -672,6 +702,22 @@ input[type=submit].wide {
   top: 0;
   width: 120px;
 }
+.timeline .items .item .sash.video,
+.timeline .searches .item .sash.video {
+  border-color: transparent #5f39bb transparent transparent;
+  border-width: 0 48px 48px 0;
+  font-size: 14px;
+  top: 0;
+  width: 120px;
+}
+.timeline .items .item .sash.audio,
+.timeline .searches .item .sash.audio {
+  border-color: transparent #bc1c48 transparent transparent;
+  border-width: 0 48px 48px 0;
+  font-size: 14px;
+  top: 0;
+  width: 120px;
+}
 .timeline .items .item .sash.added,
 .timeline .searches .item .sash.added {
   border-color: transparent transparent #ff6600 transparent;
@@ -692,10 +738,21 @@ input[type=submit].wide {
   padding-left: 6px;
 }
 .timeline .items .item .sash .icon-calendar,
-.timeline .searches .item .sash .icon-calendar {
+.timeline .items .item .sash .icon-facetime-video,
+.timeline .searches .item .sash .icon-calendar,
+.timeline .searches .item .sash .icon-facetime-video {
   position: absolute;
   right: -42px;
   top: 5px;
+}
+.timeline .items .item .sash .icon-facetime-video,
+.timeline .searches .item .sash .icon-facetime-video {
+  top: 7px;
+}
+.timeline .items .item .sash .icon-headphones,
+.timeline .searches .item .sash .icon-headphones {
+  font-size: 16px;
+  top: 7px;
 }
 .timeline .items .item .username a,
 .timeline .searches .item .username a {
@@ -713,6 +770,11 @@ input[type=submit].wide {
 .timeline .searches .item .link a {
   font-size: 25px;
   color: #ddd;
+}
+.timeline .items .item .link .icon-play-circle,
+.timeline .searches .item .link .icon-play-circle {
+  font-weight: normal;
+  font-size: 32px;
 }
 .timeline .items .item .time,
 .timeline .searches .item .time {
@@ -749,11 +811,11 @@ input[type=submit].wide {
   z-index: 4;
 }
 .timeline .needle .date {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  border-radius: 15px;
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
@@ -767,7 +829,7 @@ input[type=submit].wide {
   margin-left: -100px;
   text-align: center;
   top: -14px;
-  width: 200px;
+  width: 215px;
   border: 1px solid #ffffff;
 }
 .timeline .needle .now {
