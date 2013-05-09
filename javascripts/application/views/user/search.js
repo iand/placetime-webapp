@@ -6,12 +6,12 @@ Application.View.Search = Backbone.Marionette.ItemView.extend({
     },
 
     templateHelpers: {
-        time: function(ts) {
-            return Application.Model.Item.prototype.time.apply(
-                new Backbone.Model({
-                    ts: ts
-                })
-            );
+        getIframeUrl: function(url) {
+            if (/youtube/.test(url) === true) {
+                return 'http://www.youtube.com/embed/' + url.replace(
+                    'https://gdata.youtube.com/feeds/api/videos/', ''
+                );
+            }
         }
     },
 
@@ -21,7 +21,7 @@ Application.View.Search = Backbone.Marionette.ItemView.extend({
         };
 
         if (this.model.get('image')) {
-            attributes.style = 'background-image: url(/-img/' + this.model.get('image') + ')';
+            attributes.style = 'background-image: url(' + this.model.get('image') + ')';
         }
 
         return attributes;
@@ -34,6 +34,17 @@ Application.View.Search = Backbone.Marionette.ItemView.extend({
         if (this.model.get('image')) {
             className += ' image';
         }
+
+        if (this.model.isEvent()) {
+            className += ' event';
+        } else {
+            className += ' added';
+        }
+
+        if (this.model.isPast()) {
+            className += ' past';
+        }
+
 
         return className;
     },

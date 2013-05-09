@@ -1,10 +1,10 @@
 Application.Collection.Searches = Backbone.Collection.extend({
     model: Application.Model.Search,
-    url: '/-jsearch',
+    url: '/-assets/-jsearch.json',
 
 
     initialize: function(collection, options) {
-        this.options = options;
+        this.options = options || {};
 
         this.on('item:demoted', function(target) {
             var models = this.filter(function(item) {
@@ -16,10 +16,28 @@ Application.Collection.Searches = Backbone.Collection.extend({
     },
 
 
-    fetch: function(options) {
-        options.data = _.extend(this.options, options.data);
+    search: function(options) {
+        var self = this;
 
-        return Backbone.Collection.prototype.fetch.call(this, options);
+
+        var promise = $.ajax({
+            url: this.url,
+            type: 'get',
+            dataType: 'json',
+            data: options.data
+        });
+
+
+        promise.done(function(data){
+            self.set(data.items);
+        });
+
+        promise.fail(function(){
+            // TODO
+        });
+
+
+        return promise;
     },
 
 

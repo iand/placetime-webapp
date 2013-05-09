@@ -4,7 +4,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
     className: 'column public',
     events: {
         'click .header .now': 'refresh',
-        'submit .header .form': 'search'
+        'submit .header .form': 'submit'
     },
 
 
@@ -109,12 +109,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
     },
 
 
-
-
-    search: function() {
-        var query = $(this).find('[type=search]').val();
-
-
+    search: function(query) {
         var collection = new Application.Collection.Searches();
 
         var model = new Backbone.Model({
@@ -129,6 +124,14 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         this.bindEvents(view);
 
         this.region.show(view);
+    },
+
+
+
+    submit: function(event) {
+        var query = $(event.target).find('[type=search]').val();
+
+        this.search(query);
 
         return false;
     },

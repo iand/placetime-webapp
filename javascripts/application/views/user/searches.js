@@ -31,7 +31,7 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
 
 
     onShow: function() {
-        this.collection.fetch({
+        this.collection.search({
             data: {
                 s: this.model.get('query')
             }

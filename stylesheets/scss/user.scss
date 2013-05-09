@@ -189,6 +189,7 @@
     }
 
     .items,
+    .searches,
     .followers,
     .followings {
         padding-top: 5px;
@@ -354,7 +355,8 @@
 
 
     // Items view
-    .items {
+    .items,
+    .searches {
         .item {
             @include border-radius(2px);
             @include single-box-shadow(
