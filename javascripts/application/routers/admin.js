@@ -6,9 +6,9 @@ Application.Router.Admin = Backbone.Router.extend({
         'login': 'login',
         'logout': 'logout',
 
-        'profile/new' : 'newProfile',
-        'profile/:pid/edit': 'editProfile',
-        'profile/:pid': 'viewProfile',
+        'profile/new' : 'profileNew',
+        'profile/:pid/edit': 'profileEdit',
+        'profile/:pid': 'profileView',
 
         'profile/:pid/following': 'following',
         'profile/:pid/followers': 'followers',
@@ -76,7 +76,7 @@ Application.Router.Admin = Backbone.Router.extend({
     },
 
 
-    viewProfile: function (pid) {
+    profileView: function (pid) {
         var self = this;
 
 
@@ -220,7 +220,7 @@ Application.Router.Admin = Backbone.Router.extend({
 
 
 
-    editProfile: function (pid) {
+    profileEdit: function (pid) {
         var self = this;
         Application.session.check(function () {
 
@@ -256,16 +256,21 @@ Application.Router.Admin = Backbone.Router.extend({
 
 
 
-    newProfile: function () {
+    profileNew: function () {
         var self = this;
-        Application.session.check(function () {
-            self.changePage(new AddProfileView({
-                el: $('#content')
-            }));
-        },
 
-        function () {
-            self.invalidSession();
+
+        var check = Application.session.check();
+
+        check.done(function(){
+            Application.content.show(
+                new Application.Admin.View.ProfileNew()
+            );
+        });
+
+
+        check.fail(function(){
+            Backbone.history.navigate('login', true);
         });
     },
 

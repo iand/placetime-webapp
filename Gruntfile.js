@@ -94,6 +94,7 @@ module.exports = function(grunt) {
         watch: {
             javascriptApplication: {
                 files: [
+                    'javascripts/application/**/**/**/*.js',
                     'javascripts/application/**/**/*.js',
                     'javascripts/application/**/*.js',
                     '!javascripts/application/source-map.js'
