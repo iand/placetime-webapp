@@ -21,6 +21,11 @@ Application.Model.Search = Backbone.Model.extend({
     },
 
 
+    isNow: function() {
+        return this.now;
+    },
+
+
     isPast: function() {
         return this.time().diff() < 0;
     },

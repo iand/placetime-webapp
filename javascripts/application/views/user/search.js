@@ -1,6 +1,9 @@
 Application.View.Search = Backbone.Marionette.ItemView.extend({
     template: '#search-template',
 
+    // Non-attributes
+    now: false,
+
     modelEvents: {
         'item:promoted': 'onPromoted'
     },

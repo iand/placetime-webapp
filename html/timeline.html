@@ -188,7 +188,6 @@
                     </a>
                 </p>
 
-
                 <% if (status === 'm') { %>
                     <a class="button demote">
                         <i class="icon-remove"></i>
@@ -229,14 +228,14 @@
 
         <script type="text/template" id="item-empty-template">
             <p>
-                <% if (Application.session.get('pid') === pid) { %>
+                <% if (Application.session.get('pid') === user) { %>
                     <% if (status === 'p') { %>
                         There are no items in your timeline, search for users to follow
                     <% } else { %>
                         Add a new item or copy one from your timeline
                     <% } %>
                 <% } else { %>
-                    There are no items in <%= pid %> timeline
+                    There are no items in <%= user %> timeline
                 <% } %>
             </p>
         </script>
@@ -244,9 +243,8 @@
 
 
         <script type="text/template" id="search-empty-template">
-            <p>
-                No search results
-            </p>
+            <span>Loading search results</span>
+            <img alt="Loading" class="loading" src="/-assets/images/vendor/jquery/fancybox/fancybox_loading.gif" height="24" width="24" />
         </script>
 
 
@@ -390,6 +388,7 @@
         <div class="scroller">
             <div class="children"></div>
         </div>
+        <div class="needle-view"></div>
         </script>
 
 
@@ -458,6 +457,10 @@
                     </a>
                 </p>
             <% } %>
+
+            <a class="button promote">
+                <i class="icon-ok"></i>
+            </a>
         </script>
 
 
