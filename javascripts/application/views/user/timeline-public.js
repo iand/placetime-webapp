@@ -19,6 +19,10 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         this.on('view:followers', function(pid){
             this.followers(pid);
         });
+
+        this.on('view:search', function(query){
+            this.search(query);
+        });
     },
 
 
@@ -129,9 +133,9 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
 
     submit: function(event) {
-        var query = $(event.target).find('[type=search]').val();
+        var url = 'search/' + $(event.target).find('[type=search]').val();
 
-        this.search(query);
+        Backbone.history.navigate(url, true);
 
         return false;
     },

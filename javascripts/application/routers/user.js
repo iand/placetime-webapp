@@ -11,7 +11,8 @@ Application.Router.User = Backbone.Router.extend({
 
         'user/:id': 'timeline',
         'followers/:id': 'followers',
-        'followings/:id': 'followings'
+        'followings/:id': 'followings',
+        'search/:query': 'search'
     },
 
 
@@ -67,6 +68,44 @@ Application.Router.User = Backbone.Router.extend({
         });
     },
 
+
+    search: function (query) {
+        var self = this;
+
+
+        var check = Application.session.check();
+
+        check.done(function(){
+            // Set header to wide and re-render
+            self.header.model.set('wide', true);
+            self.header.render();
+
+
+            // Render timelines
+            var timeline = new Application.View.Timelines({
+                public: {
+                    pid: Application.session.get('pid'),
+                    view: 'search'
+                },
+                private: {
+                    pid: Application.session.get('pid'),
+                    view: 'timeline'
+                }
+            });
+
+
+            if (Application.content.is('timelines') === true) {
+                Application.content.currentView.trigger('public:search', query);
+            } else {
+                Application.content.show(timeline);
+            }
+        });
+
+
+        check.fail(function(){
+            Backbone.history.navigate('login', true);
+        });
+    },
 
 
     followers: function(pid) {
