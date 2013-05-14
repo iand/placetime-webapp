@@ -52,9 +52,9 @@
                 <div class="dropdown dropdown-tip dropdown-anchor-right">
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="main-hiddenlink" href="#account">
+                            <a class="main-hiddenlink" href="#profile">
                                 <i class="icon-user"></i>
-                                Account
+                                Profile
                             </a>
                         </li>
                         <li>
@@ -121,6 +121,33 @@
                 </div>
 
                 <input type="submit" value="Register">
+            </form>
+        </script>
+
+
+        <script type="text/template" id="profile-template">
+            <h1>Edit Profile</h1>
+
+            <form class="form">
+                <div class="field">
+                    <label for="pname">Name</label>
+                    <input type="text" name="pname" id="name" value="<%= name %>">
+                </div>
+
+                <div class="field">
+                    <label for="bio">Bio</label>
+                    <input type="text" name="bio" id="bio" value="<%= bio %>">
+                </div>
+
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" value="<%= email %>">
+                </div>
+
+                <div class="field">
+                    <input type="submit" value="Save">
+                    <input type="submit" value="Cancel" class="cancel">
+                </div>
             </form>
         </script>
 
@@ -388,7 +415,6 @@
         <div class="scroller">
             <div class="children"></div>
         </div>
-        <div class="needle-view"></div>
         </script>
 
 

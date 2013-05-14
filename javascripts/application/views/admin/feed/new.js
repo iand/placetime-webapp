@@ -17,7 +17,7 @@ Application.Admin.FeedNew = Backbone.Marionette.ItemView.extend({
             type: 'post',
             data: {
                 pid: this.model.get('pid') + '~' + $('#feedpid').val(),
-                pname: $('#pname').val(),
+                name: $('#name').val(),
                 parentpid: this.model.get('pid'),
                 feedurl: $('#feedurl').val()
             }

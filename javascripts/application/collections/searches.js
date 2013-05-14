@@ -29,7 +29,7 @@ Application.Collection.Searches = Backbone.Collection.extend({
 
 
         promise.done(function(data){
-            self.set(data.items);
+            self.set(data.results);
         });
 
         promise.fail(function(){
