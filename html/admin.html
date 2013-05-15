@@ -1,342 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="/-assets/stylesheets/vendor.css">
-    <link rel="stylesheet" href="/-assets/stylesheets/admin.css">
+        <script type="text/javascript" src="http://use.typekit.net/bsa5hge.js"></script>
+        <script type="text/javascript">
+        try {
+            Typekit.load();
+        } catch(e) {}
+        </script>
 
-    <!-- Typekit font loader -->
-    <script type="text/javascript" src="http://use.typekit.net/bsa5hge.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-    <script src="/-assets/javascripts/vendor/modernizr.js"></script>
+        <script src="/-assets/javascripts/vendor/modernizr.js"></script>
 
-    <title>Placetime - Admin</title>
-  </head>
-  <body>
+        <link rel="stylesheet" href="/-assets/stylesheets/vendor.css">
+        <link rel="stylesheet" href="/-assets/stylesheets/admin.css">
 
-
-    <div class="page header"></div>
-    <div class="page content"></div>
-
-
+        <title>PlaceTime - Admin</title>
+    </head>
+    <body>
 
 
+        <div class="page header"></div>
+        <div class="page content"></div>
 
-    <script type="text/template" id="header-template">
-        <div class="navbar-inner container">
-            <a class="brand pull-left" href="/">
-                <i class="icon-ok-circle"></i>
-                <i class="icon-time"></i>
-                placetime
-            </a>
 
-            <a class="tagline pull-left" href="/">a playlist for your life</a>
 
-            <% if (pid !== undefined) { %>
-            <ul class="nav pull-right">
-                <li>
-                    <a data-dropdown=".navbar .dropdown">
-                        <i class="icon-cog"></i>
-                    </a>
-                </li>
-            </ul>
-            <% } %>
+        <script type="text/template" id="header-template">
+            <div class="navbar-inner container">
+                <a class="brand pull-left" href="/">
+                    <i class="icon-ok-circle"></i>
+                    <i class="icon-time"></i>
+                    placetime
+                </a>
 
-            <div class="dropdown dropdown-tip dropdown-anchor-right">
-                <ul class="dropdown-menu">
+                <a class="tagline pull-left" href="/">a playlist for your life</a>
+
+                <% if (pid !== undefined) { %>
+                <ul class="nav pull-right">
                     <li>
-                        <a class="main-hiddenlink" href="#new">
-                            <i class="icon-edit"></i>
-                            new
-                        </a>
-                    </li>
-                    <li>
-                        <a class="main-hiddenlink" href="#profile">
-                            <i class="icon-user"></i>
-                            @<%= pid %>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="main-hiddenlink" href="#logout">
-                            <i class="icon-signout"></i>
-                            logout
+                        <a data-dropdown=".navbar .dropdown">
+                            <i class="icon-cog"></i>
                         </a>
                     </li>
                 </ul>
+                <% } %>
+
+                <div class="dropdown dropdown-tip dropdown-anchor-right">
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="main-hiddenlink" href="#new">
+                                <i class="icon-edit"></i>
+                                new
+                            </a>
+                        </li>
+                        <li>
+                            <a class="main-hiddenlink" href="#profile">
+                                <i class="icon-user"></i>
+                                @<%= pid %>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="main-hiddenlink" href="#logout">
+                                <i class="icon-signout"></i>
+                                logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </script>
+        </script>
 
 
-    <script type="text/template" id="login-template">
-        <p>
-            <a href="/-twitter" data-role="button" rel="external">
-                <img alt="Sign in with Twitter" src="/-assets/images/sign-in-with-twitter-link.png" />
-            </a>
-        </p>
+        <script type="text/template" id="login-template">
+            <h1>login</h1>
+            <form action="#" method="post">
+                <div class="field">
+                    <label for="name">User name</label>
+                    <input type="text" name="pid" id="pid" value="">
+                    <div class="hint"></div>
+                </div>
 
-        <h1>Or login</h1>
-        <form action="#" method="post">
-            <div class="field">
-                <label for="name">User name</label>
-                <input type="text" name="pid" id="pid" value="">
-                <div class="hint"></div>
-            </div>
+                <div class="field">
+                    <label for="name">Password</label>
+                    <input type="password" name="pwd" id="pwd" value="">
+                    <div class="hint"></div>
+                </div>
 
-            <div class="field">
-                <label for="name">Password</label>
-                <input type="password" name="pwd" id="pwd" value="">
-                <div class="hint"></div>
-            </div>
-
-            <input type="submit" value="Login">
-        </form>
-
-        <p>
-            Dont have an account? <a href="#register">Sign Up</a>
-        </p>
-    </script>
+                <input type="submit" value="Login">
+            </form>
+        </script>
 
 
-    <script type="text/template" id="home-template">
-        <h1>Placetime Admin</h1>
-        <% if (message) { %>
-            <div class="message"><%= message %></div>
-        <% } %>
-        <form action="#profile" method="post">
-            <label for="pid">User profile</label>
+        <script type="text/template" id="home-template">
+            <h1>Placetime Admin</h1>
+            <% if (message) { %>
+                <div class="message"><%= message %></div>
+            <% } %>
+            <form action="#profile" method="post">
+                <label for="pid">User profile</label>
 
-            <input type="text" name="pid" size="20" value="">
-            <input type="submit" value="Manage Profile">
-        </form>
+                <input type="text" name="pid" size="20" value="">
+                <input type="submit" value="Manage Profile">
+            </form>
 
-        <div><a href="#profile/new">New profile</a></div>
-   </script>
-
-
-    <script type="text/template" id="session-tmpl">
-        <h1>Session Expired</h1>
-        <div><a href="/timeline">Login again</a></div>
+            <div><a href="#profile/new">New profile</a></div>
        </script>
 
-    <script type="text/template" id="profile-tmpl">
-        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-        <h1>Manage Profile</h1>
-        <div>Profile: <%= data.pid %></div>
-        <div>Name: <%= data.pname %></div>
-        <div>Bio: <%= data.bio %></div>
-        <div>Date joined: <%= data.joined %></div>
-        <div>Followed items: <%= data.pcount %></div>
-        <div>Bookmarked items: <%= data.mcount %></div>
 
-        <div>Following: <a href="#following/<%= data.pid %>"><%= data.followingcount %></a></div>
-        <div>Followers: <a href="#followers/<%= data.pid %>"><%= data.followercount %></a></div>
+        <script type="text/template" id="session-tmpl">
+            <h1>Session Expired</h1>
+            <div><a href="/timeline">Login again</a></div>
+           </script>
 
-        <% if(data.parentpid) { %>
+        <script type="text/template" id="profile-tmpl">
+            <div>
+                <i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i>
+                <a href="/-admin">Back to admin page</a>
+            </div>
+
+            <h1>Manage Profile</h1>
+            <div>Profile: <%= model.get('pid') %></div>
+            <div>Name: <%= model.get('name') %></div>
+            <div>Bio: <%= model.get('bio') %></div>
+            <div>Date joined: <%= model.get('joined') %></div>
+            <div>Followed items: <%= model.get('pcount') %></div>
+            <div>Bookmarked items: <%= model.get('mcount') %></div>
+
+            <div>Following: <a href="#following/<%= model.get('pid') %>"><%= model.get('followingcount') %></a></div>
+            <div>Followers: <a href="#followers/<%= model.get('pid') %>"><%= model.get('followercount') %></a></div>
+
+            <% if (model.parentpid) { %>
+                <div>Parent profile: <a href="#profile/<%= model.get('parentpid') %>"><%= model.get('parentpid') %></a></div>
+                <div>Feed URL: <%= model.feedurl %></div>
+            <% } else { %>
+                <div>Feeds: <a href="#feeds/<%= model.get('pid') %>"><%= model.feedcount %></a></div>
+            <% } %>
+
+
+            <button class="editBtn">Edit Profile</button>
+            <button class="feedBtn">Add Feed</button>
+
+
+            <div class="items">
+                <h1>Items</h1>
+            </div>
+        </script>
+
+
+        <script type="text/template" id="feed-tmpl">
+            <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+            <h1>Manage Feed</h1>
+            <div>Profile: <%= data.pid %></div>
+            <div>Name: <%= data.name %></div>
+            <div>Items in feed: <%= data.mcount %></div>
+            <div>Followers: <a href="#followers/<%= data.pid %>"><%= data.followercount %></a></div>
+
             <div>Parent profile: <a href="#profile/<%= data.parentpid %>"><%= data.parentpid %></a></div>
             <div>Feed URL: <%= data.feedurl %></div>
-        <% } else { %>
-            <div>Feeds: <a href="#feeds/<%= data.pid %>"><%= data.feedcount %></a></div>
-
-        <% } %>
 
 
-        <button class="editBtn">Edit Profile</button>
-        <button class="feedBtn">Add Feed</button>
+            <button class="editBtn">Edit Feed</button>
+            <button class="deleteBtn">Delete Feed</button>
+            <button class="refreshBtn">Refresh Feed</button>
 
 
-        <div class="items">
-            <h1>Items</h1>
-        </div>
-    </script>
-
-
-    <script type="text/template" id="feed-tmpl">
-        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-        <h1>Manage Feed</h1>
-        <div>Profile: <%= data.pid %></div>
-        <div>Name: <%= data.pname %></div>
-        <div>Items in feed: <%= data.mcount %></div>
-        <div>Followers: <a href="#followers/<%= data.pid %>"><%= data.followercount %></a></div>
-
-        <div>Parent profile: <a href="#profile/<%= data.parentpid %>"><%= data.parentpid %></a></div>
-        <div>Feed URL: <%= data.feedurl %></div>
-
-
-        <button class="editBtn">Edit Feed</button>
-        <button class="deleteBtn">Delete Feed</button>
-        <button class="refreshBtn">Refresh Feed</button>
-
-
-        <div class="msg">
-            <!-- this is where any error messages go -->
-        </div>
-
-        <div class="items">
-            <h1>Items</h1>
-        </div>
-
-       </script>
-
-    <script type="text/template" id="editprofile-tmpl">
-        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-        <h1>Edit Profile</h1>
-        <form action="" method="post">
-
-            <div>
-                <label for="pname">Name </label>
-                <input type="text" name="pname" id="pname" value="<%= data.pname %>">
+            <div class="msg">
+                <!-- this is where any error messages go -->
             </div>
 
-            <div>
-                <label for="bio">Bio </label>
-                <input type="text" name="bio" id="bio" value="<%= data.bio %>">
+            <div class="items">
+                <h1>Items</h1>
             </div>
+        </script>
 
+        <script type="text/template" id="editprofile-tmpl">
+            <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+            <h1>Edit Profile</h1>
+            <form action="" method="post">
+
+                <div>
+                    <label for="name">Name </label>
+                    <input type="text" name="name" id="name" value="<%= data.name %>">
+                </div>
+
+                <div>
+                    <label for="bio">Bio </label>
+                    <input type="text" name="bio" id="bio" value="<%= data.bio %>">
+                </div>
+
+                <div>
+                    <input type="submit" value="Save" class="saveBtn">
+                    <a href="#profile/<%= data.pid %>">cancel</a>
+                </div>
+            </form>
+        </script>
+        <script type="text/template" id="editfeed-tmpl">
+            <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+            <h1>Edit Feed</h1>
+            <form action="" method="post">
+
+                <div>
+                    <label for="name">Name </label>
+                    <input type="text" name="name" id="name" value="<%= data.name %>">
+                </div>
+
+                <div>
+                    <label for="parentpid">Parent profile id </label>
+                    <input type="text" name="parentpid" id="parentpid" value="<%= data.parentpid %>">
+                </div>
+
+                <div>
+                    <label for="feedurl">Feed URL </label>
+                    <input type="text" name="feedurl" id="feedurl" value="<%= data.feedurl %>">
+                </div>
+
+                <div>
+                    <input type="submit" value="Save" class="saveBtn">
+                    <a href="#profile/<%= data.pid %>">cancel</a>
+                </div>
+            </form>
+           </script>
+
+        <script type="text/template" id="addfeed-tmpl">
+            <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+            <h1>Add Feed</h1>
+            <form action="" method="post">
+
+                <div>
+                    <label for="feedpid">Feed ID*</label>
+                    <input type="text" name="feedpid" id="feedpid" value="">
+                </div>
+
+                <div>
+                    <label for="name">Name </label>
+                    <input type="text" name="name" id="name" value="">
+                </div>
+
+                <div>
+                    <label for="feedurl">Feed URL </label>
+                    <input type="text" name="feedurl" id="feedurl" value="">
+                </div>
+
+                <div>
+                    <input type="submit" value="Save" class="saveBtn">
+                    <a href="#profile/<%= data.pid %>">cancel</a>
+                </div>
+
+                <div class="main-notabene">* Feed ID will be prefixed by "<%= data.pid %>~"</div>
+            </form>
+           </script>
+
+        <script type="text/template" id="addprofile-tmpl">
+            <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+            <h1>Add Profile</h1>
+            <form action="" method="post">
+
+                <div>
+                    <label for="pid">Profile ID </label>
+                    <input type="text" name="pid" id="pid" value="">
+                </div>
+
+                <div>
+                    <label for="name">Name </label>
+                    <input type="text" name="name" id="name" value="">
+                </div>
+
+                <div>
+                    <label for="pwd">Password </label>
+                    <input type="text" name="pwd" id="pwd" value="">
+                </div>
+
+                <div>
+                    <label for="bio">Bio </label>
+                    <input type="text" name="bio" id="bio" value="">
+                </div>
+
+                <div>
+                    <input type="submit" value="Save" class="saveBtn">
+                    <a href="#home">cancel</a>
+                </div>
+            </form>
+           </script>
+
+        <script type="text/template" id="briefprofile-tmpl">
             <div>
-                <input type="submit" value="Save" class="saveBtn">
-                <a href="#profile/<%= data.pid %>">cancel</a>
+                <a href="#/profile/<%= data.pid %>">
+                    <%= data.name %> (@<%= data.pid %>)
+                </a>
             </div>
-        </form>
-       </script>
-    <script type="text/template" id="editfeed-tmpl">
-        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-        <h1>Edit Feed</h1>
-        <form action="" method="post">
+        </script>
 
-            <div>
-                <label for="pname">Name </label>
-                <input type="text" name="pname" id="pname" value="<%= data.pname %>">
+        <script type="text/template" id="briefitem-tmpl">
+            <div class="feed-item">
+                <div>Title: <%= text %></div>
+                <div>Link: <%= link %></div>
+                <div>When: <%= ets %></div>
             </div>
+        </script>
 
-            <div>
-                <label for="parentpid">Parent profile id </label>
-                <input type="text" name="parentpid" id="parentpid" value="<%= data.parentpid %>">
-            </div>
+        <script type="text/template" id="following-tmpl">
+            <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+            <h1>Profiles Followed by <%= data.pid %></h1>
+           </script>
 
-            <div>
-                <label for="feedurl">Feed URL </label>
-                <input type="text" name="feedurl" id="feedurl" value="<%= data.feedurl %>">
-            </div>
-
-            <div>
-                <input type="submit" value="Save" class="saveBtn">
-                <a href="#profile/<%= data.pid %>">cancel</a>
-            </div>
-        </form>
-       </script>
-
-    <script type="text/template" id="addfeed-tmpl">
-        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-        <h1>Add Feed</h1>
-        <form action="" method="post">
-
-            <div>
-                <label for="feedpid">Feed ID*</label>
-                <input type="text" name="feedpid" id="feedpid" value="">
-            </div>
-
-            <div>
-                <label for="pname">Name </label>
-                <input type="text" name="pname" id="pname" value="">
-            </div>
-
-            <div>
-                <label for="feedurl">Feed URL </label>
-                <input type="text" name="feedurl" id="feedurl" value="">
-            </div>
-
-            <div>
-                <input type="submit" value="Save" class="saveBtn">
-                <a href="#profile/<%= data.pid %>">cancel</a>
-            </div>
-
-            <div class="main-notabene">* Feed ID will be prefixed by "<%= data.pid %>~"</div>
-        </form>
-       </script>
-
-    <script type="text/template" id="addprofile-tmpl">
-        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-        <h1>Add Profile</h1>
-        <form action="" method="post">
-
-            <div>
-                <label for="pid">Profile ID </label>
-                <input type="text" name="pid" id="pid" value="">
-            </div>
-
-            <div>
-                <label for="pname">Name </label>
-                <input type="text" name="pname" id="pname" value="">
-            </div>
-
-            <div>
-                <label for="pwd">Password </label>
-                <input type="text" name="pwd" id="pwd" value="">
-            </div>
-
-            <div>
-                <label for="bio">Bio </label>
-                <input type="text" name="bio" id="bio" value="">
-            </div>
-
-            <div>
-                <input type="submit" value="Save" class="saveBtn">
-                <a href="#home">cancel</a>
-            </div>
-        </form>
-       </script>
-
-    <script type="text/template" id="briefprofile-tmpl">
-        <div>
-            <a href="#/profile/<%= data.pid %>">
-                <%= data.pname %> (@<%= data.pid %>)
-            </a>
-        </div>
-    </script>
-
-    <script type="text/template" id="briefitem-tmpl">
-        <div class="feed-item">
-            <div>Title: <%= data.text %></div>
-            <div>Link: <%= data.link %></div>
-            <div>When: <%= data.ets %></div>
-
-        </div>
-    </script>
-
-    <script type="text/template" id="following-tmpl">
-        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-        <h1>Profiles Followed by <%= data.pid %></h1>
-       </script>
-
-    <script type="text/template" id="followers-tmpl">
-        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-        <h1>Profiles Following <%= data.pid %></h1>
-       </script>
+        <script type="text/template" id="followers-tmpl">
+            <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+            <h1>Profiles Following <%= data.pid %></h1>
+           </script>
 
 
-    <script type="text/template" id="feeds-tmpl">
-        <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
-        <h1>Feeds for <%= data.pid %></h1>
-       </script>
+        <script type="text/template" id="feeds-tmpl">
+            <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
+            <h1>Feeds for <%= data.pid %></h1>
+           </script>
 
-    <script type="text/template" id="brieffeed-tmpl">
-        <div><a href="#/profile/<%= data.pid %>"><%= data.pname %> (@<%= data.pid %>)</a>: <%= data.feedurl %></div>
-    </script>
+        <script type="text/template" id="brieffeed-tmpl">
+            <div><a href="#/profile/<%= data.pid %>"><%= data.name %> (@<%= data.pid %>)</a>: <%= data.feedurl %></div>
+        </script>
 
 
 
 
-    <script src="/-tmpl"></script>
-    <script src="/-assets/javascripts/vendor.js"></script>
-    <script src="/-assets/javascripts/application.js"></script>
-
-    <script type="text/javascript">
-    Application.start({
-        router: 'admin'
-    });
-    </script>
-  </body>
+        <script src="/-tmpl"></script>
+        <script src="/-assets/javascripts/vendor.js"></script>
+        <script src="/-assets/javascripts/application.js"></script>
+        <script type="text/javascript">
+        Application.start({
+            router: 'admin'
+        });
+        </script>
+    </body>
 </html>

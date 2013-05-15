@@ -85,7 +85,7 @@
     .header {
         background-color: rgba(255, 255, 255, 0.95);
         border-bottom: 0px solid #000;
-        height: 39px;
+        height: 46px;
         position: absolute;
         top: 0;
         width: 98%;
@@ -107,20 +107,25 @@
 
         .search,
         .add {
+            @include border-radius(16px);
             font-size: 14px;
-            height: 17px;
+            height: 25px;
             padding: 4px 12px;
-            margin-top: 7px;
+            margin-top: 8px;
         }
 
         .add {
             margin-left: 18px;
+            max-width: 200px;
+            min-width: 100px;
         }
 
         .submit {
+            @include border-radius(15px);
             font-size: 12px;
-            margin-left: 10px;
-            padding: 3px 7px;
+            margin-left: -53px;
+            margin-top: 11px;
+            padding: 4px 11px;
         }
 
 
@@ -129,7 +134,8 @@
             @include single-transition(opacity, 0.5s, ease-in-out);
 
             border-bottom: 0;
-            font-size: 11px;
+            cursor: pointer;
+            font-size: 12px;
             margin: 4px 18px 0 0;
             opacity: 1;
 
@@ -146,18 +152,16 @@
             }
 
             .icon-repeat {
-                @include single-text-shadow(
-                    rgba(0, 0, 0, 0.5), 2px, 2px, 4px
-                );
                 color: #555555;
-                font-size: 30px;
+                font-size: 32px;
+                margin-top: 4px;
             }
         }
     }
 
     .nav {
         font-size: 14px;
-        margin: 8px 12px;
+        margin: 11px 12px;
 
 
         li {
@@ -185,10 +189,11 @@
 
     .children {
         position: relative;
-        padding-top: 38px;
+        padding-top: 46px;
     }
 
     .items,
+    .searches,
     .followers,
     .followings {
         padding-top: 5px;
@@ -200,7 +205,7 @@
                 margin-bottom 500ms linear 250ms,
                 max-height 500ms linear 250ms
             );
-            max-height: 150px;
+            max-height: 180px;
 
             &.collapsed {
                 margin-bottom: 0;
@@ -297,7 +302,8 @@
 
     // Following and followers view
     .followings,
-    .followers {
+    .followers,
+    .searches.profiles {
         .item {
             @include border-radius(2px);
             @include single-box-shadow(
@@ -354,7 +360,8 @@
 
 
     // Items view
-    .items {
+    .items,
+    .searches.items {
         .item {
             @include border-radius(2px);
             @include single-box-shadow(
@@ -418,6 +425,24 @@
                 }
             }
 
+            &.video {
+                .video.sash {
+                    @include single-transition(
+                        opacity, 1s
+                    );
+                    opacity: 1;
+                }
+            }
+
+            &.audio {
+                .audio.sash {
+                    @include single-transition(
+                        opacity, 1s
+                    );
+                    opacity: 1;
+                }
+            }
+
             &.event {
                 .event.sash {
                     @include single-transition(
@@ -471,6 +496,22 @@
                     width: 120px;
                 }
 
+                &.video {
+                    border-color: transparent #5f39bb transparent transparent;
+                    border-width: 0 48px 48px 0;
+                    font-size: 14px;
+                    top: 0;
+                    width: 120px;
+                }
+
+                &.audio {
+                    border-color: transparent #bc1c48 transparent transparent;
+                    border-width: 0 48px 48px 0;
+                    font-size: 14px;
+                    top: 0;
+                    width: 120px;
+                }
+
                 &.added {
                     border-color: transparent transparent #ff6600 transparent;
                     border-width: 0 0 24px 24px;
@@ -490,10 +531,20 @@
                     padding-left: 6px;
                 }
 
-                .icon-calendar {
+                .icon-calendar,
+                .icon-facetime-video {
                     position: absolute;
                     right: -42px;
                     top: 5px;
+                }
+
+                .icon-facetime-video {
+                    top: 7px;
+                }
+
+                .icon-headphones {
+                    font-size: 16px;
+                    top: 7px;
                 }
             }
 
@@ -515,6 +566,11 @@
                 a {
                     font-size: 25px;
                     color: #ddd;
+                }
+
+                .icon-play-circle {
+                    font-weight: normal;
+                    font-size: 32px;
                 }
             }
 
@@ -557,7 +613,7 @@
         z-index: 4;
 
         .date {
-            @include border-radius(5px);
+            @include border-radius(15px);
             @include single-box-shadow(
                 rgba(0, 0, 0, 0.7), 1px, 2px, 4px
             );
@@ -571,7 +627,7 @@
             margin-left: -100px;
             text-align: center;
             top: -14px;
-            width: 200px;
+            width: 215px;
             border: 1px solid #ffffff;
         }
 

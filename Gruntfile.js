@@ -19,6 +19,8 @@ module.exports = function(grunt) {
                         'javascripts/application/collections/*.js',
                         'javascripts/application/views/*.js',
                         'javascripts/application/views/**/timeline.js',
+                        'javascripts/application/views/**/timeline-item.js',
+                        'javascripts/application/views/**/timeline-profile.js',
                         'javascripts/application/views/**/*.js',
                         'javascripts/application/routers/*.js',
 
@@ -94,6 +96,7 @@ module.exports = function(grunt) {
         watch: {
             javascriptApplication: {
                 files: [
+                    'javascripts/application/**/**/**/*.js',
                     'javascripts/application/**/**/*.js',
                     'javascripts/application/**/*.js',
                     '!javascripts/application/source-map.js'

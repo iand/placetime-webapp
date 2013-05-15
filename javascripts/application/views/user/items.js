@@ -56,7 +56,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         this.on('item:removed', this.renderNeedle);
 
         // Handle
-        this.on('search', this.search);
         this.on('reload', this.reload);
         this.on('now', this.now);
     },
@@ -120,26 +119,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    search: function(query) {
-        var self = this;
-
-        var promise = this.collection.search({
-            data: {
-                s: query
-            }
-        });
-
-        promise.done(function(data) {
-            self.collection.reset(data.items);
-            self.trigger('search:done');
-        });
-
-        promise.fail(function(){
-            self.trigger('search:fail');
-        });
-    },
-
-
     reload: function() {
         var self = this;
 
@@ -170,14 +149,25 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         var promise = this.collection.now();
 
         promise.done(function(model) {
-            var $closest = self.$el.find('.item[data-id='+model.idSafe()+']');
+            var $closest = self.$el.find('.item[data-id='+model.idSafe()+']'),
+                $needle = self.$el.find('.needle');
 
-            var position = $closest.position();
+            if ($closest.length === 0) {
+                return;
+            }
+
+            var itemPosition = $closest.position(),
+                needlePosition = $needle.position();
+
+            // If it's the first item, no need to include padding
+            if (itemPosition.top === 46) {
+                itemPosition.top = 0;
+            }
 
             // Scroll to
             self.trigger('scrollTo', {
-                left: (position.left),
-                top: position.top - 38, // Offset padding
+                left: itemPosition.left,
+                top: itemPosition.top - (needlePosition.top), // Offset padding
                 duration: jQuery.fx.speeds.slow
             });
 
@@ -248,7 +238,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
         view.model.set({
            status: this.model.get('status'),
-           pid: this.model.get('pid')
+           user: this.model.get('pid')
         }, {
             silent: true
         });

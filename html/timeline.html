@@ -52,9 +52,9 @@
                 <div class="dropdown dropdown-tip dropdown-anchor-right">
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="main-hiddenlink" href="#account">
+                            <a class="main-hiddenlink" href="#profile">
                                 <i class="icon-user"></i>
-                                Account
+                                Profile
                             </a>
                         </li>
                         <li>
@@ -125,6 +125,33 @@
         </script>
 
 
+        <script type="text/template" id="profile-template">
+            <h1>Edit Profile</h1>
+
+            <form class="form">
+                <div class="field">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" value="<%= name %>">
+                </div>
+
+                <div class="field">
+                    <label for="bio">Bio</label>
+                    <input type="text" name="bio" id="bio" value="<%= bio %>">
+                </div>
+
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" value="<%= email %>">
+                </div>
+
+                <div class="field">
+                    <input type="submit" value="Save">
+                    <input type="submit" value="Cancel" class="cancel">
+                </div>
+            </form>
+        </script>
+
+
         <script type="text/template" id="load-more-template">
             Load more
         </script>
@@ -188,7 +215,6 @@
                     </a>
                 </p>
 
-
                 <% if (status === 'm') { %>
                     <a class="button demote">
                         <i class="icon-remove"></i>
@@ -229,14 +255,14 @@
 
         <script type="text/template" id="item-empty-template">
             <p>
-                <% if (Application.session.get('pid') === pid) { %>
+                <% if (Application.session.get('pid') === user) { %>
                     <% if (status === 'p') { %>
                         There are no items in your timeline, search for users to follow
                     <% } else { %>
                         Add a new item or copy one from your timeline
                     <% } %>
                 <% } else { %>
-                    There are no items in <%= pid %> timeline
+                    There are no items in <%= user %> timeline
                 <% } %>
             </p>
         </script>
@@ -244,9 +270,8 @@
 
 
         <script type="text/template" id="search-empty-template">
-            <p>
-                No search results
-            </p>
+            <span>Loading search results</span>
+            <img alt="Loading" class="loading" src="/-assets/images/vendor/jquery/fancybox/fancybox_loading.gif" height="24" width="24" />
         </script>
 
 
@@ -261,8 +286,8 @@
 
             <% if (bio) { %>
             <p class="bio pull-left">
-                <% if (pname) { %>
-                    <span class="name"><%= pname %></span>:
+                <% if (name) { %>
+                    <span class="name"><%= name %></span>:
                 <% } %>
 
                 <%= bio %>
@@ -336,8 +361,13 @@
                             </li>
                         </ul>
 
+
                         <form class="form">
-                            <input class="pull-left search" type="search" placeholder="Search">
+                            <% if (view === 'timeline') { %>
+                                <input class="pull-left search" type="search" placeholder="Search items">
+                            <% } else { %>
+                                <input class="pull-left search" type="search" placeholder="Search profiles">
+                            <% } %>
                         </form>
                     <% } else { %>
                         <ul class="nav nav-inline pull-left">
@@ -391,6 +421,79 @@
             <div class="children"></div>
         </div>
         </script>
+
+
+        <script type="text/template" id="search-template">
+            <div class="overlay"></div>
+
+            <p class="sash event">
+                <i class="icon-calendar"></i>
+            </p>
+            <p class="sash added">
+                <span>
+                    Added to playlist
+                    <i class="icon-plus"></i>
+                </span>
+            </p>
+            <p class="sash video">
+                <i class="icon-facetime-video"></i>
+            </p>
+            <p class="sash audio">
+                <i class="icon-headphones"></i>
+            </p>
+
+            <div class="icon pull-left">
+                <img src="/-assets/images/user.jpg" width="40" height="40">
+            </div>
+            <p class="username pull-left">
+                <a href="#user/<%= pid %>"><%= pid %></a>
+            </p>
+
+
+
+
+            <% if (media == "video") { %>
+                <p class="text pull-left">
+                    <a class="fancybox fancybox.iframe" href="<%= getIframeUrl(link) %>">
+                        <%= text %>
+                    </a>
+                </p>
+                <p class="link pull-left">
+                    <a href="<%= getIframeUrl(link) %>" class="fancybox fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
+                        <i class="icon-play-circle"></i>
+                    </a>
+                </p>
+            <% } else if (media == "audio") { %>
+            <!-- audio specific markup here -->
+            <% } else { %>
+                <p class="text pull-left">
+                    <a class="fancybox fancybox.iframe" href="<%= link %>">
+                        <%= text %>
+                    </a>
+                </p>
+                <p class="link pull-left">
+                    <a href="<%= link %>" class="fancybox fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
+                        <i class="icon-external-link"></i>
+                    </a>
+                </p>
+
+                <p class="time pull-left">
+                    <a class="fancybox fancybox.iframe" href="<%= link %>">
+                        <% if (isEvent(ts, event)) { %>
+                            <i class="icon-calendar"></i> <span class="event">event:</span>
+                        <% } else { %>
+                            <i class="icon-time"></i> <span class="added">added:</span>
+                        <% } %>
+                        <span class="timestamp"><%= time(ts).fromNow() %></span>
+                    </a>
+                </p>
+            <% } %>
+
+            <a class="button promote">
+                <i class="icon-ok"></i>
+            </a>
+        </script>
+
 
 
         <script type="text/template" id="needle-template">

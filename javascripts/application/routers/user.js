@@ -7,11 +7,12 @@ Application.Router.User = Backbone.Router.extend({
         'timeline': 'timeline',
         'followings': 'followings',
         'followers': 'followers',
-        'account': 'account',
+        'profile': 'profile',
 
         'user/:id': 'timeline',
         'followers/:id': 'followers',
-        'followings/:id': 'followings'
+        'followings/:id': 'followings',
+        'search/:query': 'search'
     },
 
 
@@ -40,6 +41,9 @@ Application.Router.User = Backbone.Router.extend({
             self.header.model.set('wide', true);
             self.header.render();
 
+            if (pid === Application.session.get('pid')) {
+                pid = undefined;
+            }
 
             // Render timelines
             var timeline = new Application.View.Timelines({
@@ -67,6 +71,44 @@ Application.Router.User = Backbone.Router.extend({
         });
     },
 
+
+    search: function (query) {
+        var self = this;
+
+
+        var check = Application.session.check();
+
+        check.done(function(){
+            // Set header to wide and re-render
+            self.header.model.set('wide', true);
+            self.header.render();
+
+
+            // Render timelines
+            var timeline = new Application.View.Timelines({
+                public: {
+                    pid: Application.session.get('pid'),
+                    view: 'search'
+                },
+                private: {
+                    pid: Application.session.get('pid'),
+                    view: 'timeline'
+                }
+            });
+
+
+            if (Application.content.is('timelines') === true) {
+                Application.content.currentView.trigger('public:search', query);
+            } else {
+                Application.content.show(timeline);
+            }
+        });
+
+
+        check.fail(function(){
+            Backbone.history.navigate('login', true);
+        });
+    },
 
 
     followers: function(pid) {
@@ -157,18 +199,20 @@ Application.Router.User = Backbone.Router.extend({
 
 
 
-    account: function () {
+    profile: function () {
         var self = this;
 
 
         var check = Application.session.check();
 
         check.done(function(){
-            var account = new Application.View.Account({
-                model: Application.session
+            var profile = new Application.View.Profile({
+                model: new Application.Model.Profile({
+                    pid: Application.session.get('pid')
+                })
             });
 
-            Application.content.show(account);
+            Application.content.show(profile);
         });
 
 

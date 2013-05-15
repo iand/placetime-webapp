@@ -1,8 +1,5 @@
-Application.Model.Item = Backbone.Model.extend({
+Application.Model.Search = Backbone.Model.extend({
     idAttribute: 'uid',
-
-    // Non-attributes
-    now: false,
 
     initialize: function() {
         this.set('uid', this.get('id') + '-' + this.get('ts'), {
@@ -11,15 +8,16 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
 
-    idSafe: function() {
-        return this.id.replace(/@/, '\\@');
-    },
-
-
     time: function() {
-        return moment.unix(
-            this.get('ts').toString().substr(0, 10)
-        );
+        if (this.isEvent() === true) {
+            return moment.unix(
+                this.get('event')
+            );
+        } else {
+            return moment.unix(
+                this.get('added')
+            );
+        }
     },
 
 
@@ -39,7 +37,7 @@ Application.Model.Item = Backbone.Model.extend({
 
 
     isEvent: function() {
-        return this.get('ts').toString().substr(0, 10) == this.get('event');
+        return this.get('event') !== 0;
     },
 
 
@@ -54,26 +52,7 @@ Application.Model.Item = Backbone.Model.extend({
 
 
     isAdded: function() {
-        return this.get('ts').toString().substr(0, 10) == this.get('added');
-    },
-
-
-    save: function(done, fail) {
-        var promise = $.ajax({
-            url: '/-tadd',
-            type: 'post',
-            data: {
-                pid: Application.session.get('pid'),
-                link: this.get('link'),
-                text: this.get('text'),
-                ets: this.get('ets')
-            }
-        });
-
-        promise.done(done);
-        promise.fail(fail);
-
-        return promise;
+        return this.get('added') !== 0;
     },
 
 

@@ -16,7 +16,7 @@ var EditFeedView = Backbone.View.extend({
             type: 'post',
             data: {
                 pid: this.model.get('pid'),
-                pname: $('#pname').val(),
+                name: $('#name').val(),
                 parentpid: $('#parentpid').val(),
                 feedurl: $('#feedurl').val()
             },

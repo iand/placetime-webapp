@@ -1,22 +1,13 @@
-Application.View.Item = Application.View.TimelineItem.extend({
-    template: '#item-template',
+Application.View.SearchItem = Application.View.TimelineItem.extend({
+    template: '#search-template',
 
     templateHelpers: {
-        isEvent: function(ts, event) {
-            return Application.Model.Item.prototype.isEvent.apply(
-                new Backbone.Model({
-                    ts: ts,
-                    event: event
-                })
-            );
-        },
-
-        time: function(ts) {
-            return Application.Model.Item.prototype.time.apply(
-                new Backbone.Model({
-                    ts: ts
-                })
-            );
+        getIframeUrl: function(url) {
+            if (/youtube/.test(url) === true) {
+                return 'http://www.youtube.com/embed/' + url.replace(
+                    'https://gdata.youtube.com/feeds/api/videos/', ''
+                );
+            }
         }
     },
 

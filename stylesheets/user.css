@@ -244,7 +244,7 @@ input[type=submit].wide {
 .timeline .header {
   background-color: rgba(255, 255, 255, 0.95);
   border-bottom: 0px solid #000;
-  height: 39px;
+  height: 46px;
   position: absolute;
   top: 0;
   width: 98%;
@@ -265,18 +265,31 @@ input[type=submit].wide {
 }
 .timeline .header .search,
 .timeline .header .add {
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+  border-radius: 16px;
   font-size: 14px;
-  height: 17px;
+  height: 25px;
   padding: 4px 12px;
-  margin-top: 7px;
+  margin-top: 8px;
 }
 .timeline .header .add {
   margin-left: 18px;
+  max-width: 200px;
+  min-width: 100px;
 }
 .timeline .header .submit {
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  border-radius: 15px;
   font-size: 12px;
-  margin-left: 10px;
-  padding: 3px 7px;
+  margin-left: -53px;
+  margin-top: 11px;
+  padding: 4px 11px;
 }
 .timeline .header .now {
   -webkit-transition: opacity 0.5s ease-in-out;
@@ -284,7 +297,8 @@ input[type=submit].wide {
   -o-transition: opacity 0.5s ease-in-out;
   transition: opacity 0.5s ease-in-out;
   border-bottom: 0;
-  font-size: 11px;
+  cursor: pointer;
+  font-size: 12px;
   margin: 4px 18px 0 0;
   opacity: 1;
 }
@@ -295,13 +309,13 @@ input[type=submit].wide {
   color: #ff6600;
 }
 .timeline .header .now .icon-repeat {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   color: #555555;
-  font-size: 30px;
+  font-size: 32px;
+  margin-top: 4px;
 }
 .timeline .nav {
   font-size: 14px;
-  margin: 8px 12px;
+  margin: 11px 12px;
 }
 .timeline .nav li {
   margin-right: 15px;
@@ -320,14 +334,16 @@ input[type=submit].wide {
 }
 .timeline .children {
   position: relative;
-  padding-top: 38px;
+  padding-top: 46px;
 }
 .timeline .items,
+.timeline .searches,
 .timeline .followers,
 .timeline .followings {
   padding-top: 5px;
 }
 .timeline .items .item,
+.timeline .searches .item,
 .timeline .followers .item,
 .timeline .followings .item {
   -webkit-transition: padding-top 500ms linear, padding-bottom 500ms linear, margin-bottom 500ms linear, max-height 500ms linear;
@@ -335,9 +351,10 @@ input[type=submit].wide {
   -moz-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
   -o-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
   transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
-  max-height: 150px;
+  max-height: 180px;
 }
 .timeline .items .item.collapsed,
+.timeline .searches .item.collapsed,
 .timeline .followers .item.collapsed,
 .timeline .followings .item.collapsed {
   margin-bottom: 0;
@@ -346,6 +363,8 @@ input[type=submit].wide {
   padding-top: 0px;
 }
 .timeline .items .item.empty, .timeline .items .item.empty.collapsed,
+.timeline .searches .item.empty,
+.timeline .searches .item.empty.collapsed,
 .timeline .followers .item.empty,
 .timeline .followers .item.empty.collapsed,
 .timeline .followings .item.empty,
@@ -361,6 +380,12 @@ input[type=submit].wide {
 .timeline .items .item .time,
 .timeline .items .item .link,
 .timeline .items .item .button,
+.timeline .searches .item .icon,
+.timeline .searches .item .username,
+.timeline .searches .item .text,
+.timeline .searches .item .time,
+.timeline .searches .item .link,
+.timeline .searches .item .button,
 .timeline .followers .item .icon,
 .timeline .followers .item .username,
 .timeline .followers .item .text,
@@ -381,6 +406,11 @@ input[type=submit].wide {
 .timeline .items .item .link,
 .timeline .items .item .statistics,
 .timeline .items .item .time,
+.timeline .searches .item .text,
+.timeline .searches .item .bio,
+.timeline .searches .item .link,
+.timeline .searches .item .statistics,
+.timeline .searches .item .time,
 .timeline .followers .item .text,
 .timeline .followers .item .bio,
 .timeline .followers .item .link,
@@ -398,6 +428,11 @@ input[type=submit].wide {
 .timeline .items .item .link a,
 .timeline .items .item .statistics a,
 .timeline .items .item .time a,
+.timeline .searches .item .text a,
+.timeline .searches .item .bio a,
+.timeline .searches .item .link a,
+.timeline .searches .item .statistics a,
+.timeline .searches .item .time a,
 .timeline .followers .item .text a,
 .timeline .followers .item .bio a,
 .timeline .followers .item .link a,
@@ -411,6 +446,7 @@ input[type=submit].wide {
   border-bottom: 0;
 }
 .timeline .items .item .icon img,
+.timeline .searches .item .icon img,
 .timeline .followers .item .icon img,
 .timeline .followings .item .icon img {
   -webkit-border-radius: 25px;
@@ -421,18 +457,22 @@ input[type=submit].wide {
   border: 3px solid #ffffff;
 }
 .timeline .items .item .username,
+.timeline .searches .item .username,
 .timeline .followers .item .username,
 .timeline .followings .item .username {
   font-size: 14px;
   margin: 15px 12px;
 }
 .timeline .items .item .username a,
+.timeline .searches .item .username a,
 .timeline .followers .item .username a,
 .timeline .followings .item .username a {
   border-bottom: 0;
 }
 .timeline .items .item .text,
 .timeline .items .item .bio,
+.timeline .searches .item .text,
+.timeline .searches .item .bio,
 .timeline .followers .item .text,
 .timeline .followers .item .bio,
 .timeline .followings .item .text,
@@ -441,6 +481,7 @@ input[type=submit].wide {
   margin: 0;
 }
 .timeline .items .item .button,
+.timeline .searches .item .button,
 .timeline .followers .item .button,
 .timeline .followings .item .button {
   -webkit-border-radius: 31px;
@@ -466,17 +507,20 @@ input[type=submit].wide {
   right: 10px;
 }
 .timeline .items .item .button:hover,
+.timeline .searches .item .button:hover,
 .timeline .followers .item .button:hover,
 .timeline .followings .item .button:hover {
   color: #ffffff;
 }
 .timeline .items .item .button:active,
+.timeline .searches .item .button:active,
 .timeline .followers .item .button:active,
 .timeline .followings .item .button:active {
   color: #ff6600;
 }
 .timeline .followings .item,
-.timeline .followers .item {
+.timeline .followers .item,
+.timeline .searches.profiles .item {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
@@ -492,23 +536,28 @@ input[type=submit].wide {
   position: relative;
 }
 .timeline .followings .item .username,
-.timeline .followers .item .username {
+.timeline .followers .item .username,
+.timeline .searches.profiles .item .username {
   color: #000000;
 }
 .timeline .followings .item .icon img,
-.timeline .followers .item .icon img {
+.timeline .followers .item .icon img,
+.timeline .searches.profiles .item .icon img {
   border-color: #999;
 }
 .timeline .followings .item .bio,
-.timeline .followers .item .bio {
+.timeline .followers .item .bio,
+.timeline .searches.profiles .item .bio {
   margin-bottom: 15px;
 }
 .timeline .followings .item .bio .name,
-.timeline .followers .item .bio .name {
+.timeline .followers .item .bio .name,
+.timeline .searches.profiles .item .bio .name {
   color: #ff6600;
 }
 .timeline .followings .item .statistics,
-.timeline .followers .item .statistics {
+.timeline .followers .item .statistics,
+.timeline .searches.profiles .item .statistics {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -516,22 +565,28 @@ input[type=submit].wide {
 .timeline .followings .item .statistics .followings,
 .timeline .followings .item .statistics .followers,
 .timeline .followers .item .statistics .followings,
-.timeline .followers .item .statistics .followers {
+.timeline .followers .item .statistics .followers,
+.timeline .searches.profiles .item .statistics .followings,
+.timeline .searches.profiles .item .statistics .followers {
   display: inline;
 }
 .timeline .followings .item .statistics .followings,
-.timeline .followers .item .statistics .followings {
+.timeline .followers .item .statistics .followings,
+.timeline .searches.profiles .item .statistics .followings {
   padding-right: 15px;
 }
 .timeline .followings .item .unfollow,
-.timeline .followers .item .unfollow {
+.timeline .followers .item .unfollow,
+.timeline .searches.profiles .item .unfollow {
   padding: 7px 9px 3px 10px;
 }
 .timeline .followings .item .follow,
-.timeline .followers .item .follow {
+.timeline .followers .item .follow,
+.timeline .searches.profiles .item .follow {
   padding: 6px 9px 3px 9px;
 }
-.timeline .items .item {
+.timeline .items .item,
+.timeline .searches.items .item {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
@@ -549,19 +604,23 @@ input[type=submit].wide {
   position: relative;
   overflow: hidden;
 }
-.timeline .items .item:hover {
+.timeline .items .item:hover,
+.timeline .searches.items .item:hover {
   -webkit-box-shadow: 0px 0px 0px #aaaaaa;
   -moz-box-shadow: 0px 0px 0px #aaaaaa;
   box-shadow: 0px 0px 0px #aaaaaa;
   background-color: #999;
 }
-.timeline .items .item.empty p {
+.timeline .items .item.empty p,
+.timeline .searches.items .item.empty p {
   margin: 0;
 }
-.timeline .items .item.image .overlay {
+.timeline .items .item.image .overlay,
+.timeline .searches.items .item.image .overlay {
   display: block;
 }
-.timeline .items .item.promoted .overlay {
+.timeline .items .item.promoted .overlay,
+.timeline .searches.items .item.promoted .overlay {
   -webkit-transition: background-color 1s linear;
   -moz-transition: background-color 1s linear;
   -o-transition: background-color 1s linear;
@@ -570,14 +629,16 @@ input[type=submit].wide {
   display: block;
   z-index: 3;
 }
-.timeline .items .item.promoted .promote {
+.timeline .items .item.promoted .promote,
+.timeline .searches.items .item.promoted .promote {
   -webkit-transition: opacity 500ms;
   -moz-transition: opacity 500ms;
   -o-transition: opacity 500ms;
   transition: opacity 500ms;
   opacity: 0;
 }
-.timeline .items .item.promoted .added.sash {
+.timeline .items .item.promoted .added.sash,
+.timeline .searches.items .item.promoted .added.sash {
   -webkit-transition: opacity 1s;
   -moz-transition: opacity 1s;
   -o-transition: opacity 1s;
@@ -585,14 +646,32 @@ input[type=submit].wide {
   display: block;
   opacity: 1;
 }
-.timeline .items .item.event .event.sash {
+.timeline .items .item.video .video.sash,
+.timeline .searches.items .item.video .video.sash {
   -webkit-transition: opacity 1s;
   -moz-transition: opacity 1s;
   -o-transition: opacity 1s;
   transition: opacity 1s;
   opacity: 1;
 }
-.timeline .items .item.event.past .overlay {
+.timeline .items .item.audio .audio.sash,
+.timeline .searches.items .item.audio .audio.sash {
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+  opacity: 1;
+}
+.timeline .items .item.event .event.sash,
+.timeline .searches.items .item.event .event.sash {
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+  opacity: 1;
+}
+.timeline .items .item.event.past .overlay,
+.timeline .searches.items .item.event.past .overlay {
   -webkit-transition: background-color 1s linear;
   -moz-transition: background-color 1s linear;
   -o-transition: background-color 1s linear;
@@ -601,7 +680,8 @@ input[type=submit].wide {
   display: block;
   z-index: 3;
 }
-.timeline .items .item .overlay {
+.timeline .items .item .overlay,
+.timeline .searches.items .item .overlay {
   background-color: rgba(15, 15, 15, 0.4);
   display: none;
   left: 0;
@@ -612,7 +692,8 @@ input[type=submit].wide {
   width: 100%;
   z-index: 1;
 }
-.timeline .items .item .sash {
+.timeline .items .item .sash,
+.timeline .searches.items .item .sash {
   border-style: solid;
   color: #ffffff;
   height: 0px;
@@ -624,14 +705,32 @@ input[type=submit].wide {
   width: 0;
   z-index: 2;
 }
-.timeline .items .item .sash.event {
+.timeline .items .item .sash.event,
+.timeline .searches.items .item .sash.event {
   border-color: transparent #ff6600 transparent transparent;
   border-width: 0 48px 48px 0;
   font-size: 14px;
   top: 0;
   width: 120px;
 }
-.timeline .items .item .sash.added {
+.timeline .items .item .sash.video,
+.timeline .searches.items .item .sash.video {
+  border-color: transparent #5f39bb transparent transparent;
+  border-width: 0 48px 48px 0;
+  font-size: 14px;
+  top: 0;
+  width: 120px;
+}
+.timeline .items .item .sash.audio,
+.timeline .searches.items .item .sash.audio {
+  border-color: transparent #bc1c48 transparent transparent;
+  border-width: 0 48px 48px 0;
+  font-size: 14px;
+  top: 0;
+  width: 120px;
+}
+.timeline .items .item .sash.added,
+.timeline .searches.items .item .sash.added {
   border-color: transparent transparent #ff6600 transparent;
   border-width: 0 0 24px 24px;
   bottom: 0;
@@ -640,45 +739,73 @@ input[type=submit].wide {
   width: 120px;
   z-index: 3;
 }
-.timeline .items .item .sash.added span {
+.timeline .items .item .sash.added span,
+.timeline .searches.items .item .sash.added span {
   display: inline-block;
   padding: 6px;
 }
-.timeline .items .item .sash .icon-plus {
+.timeline .items .item .sash .icon-plus,
+.timeline .searches.items .item .sash .icon-plus {
   padding-left: 6px;
 }
-.timeline .items .item .sash .icon-calendar {
+.timeline .items .item .sash .icon-calendar,
+.timeline .items .item .sash .icon-facetime-video,
+.timeline .searches.items .item .sash .icon-calendar,
+.timeline .searches.items .item .sash .icon-facetime-video {
   position: absolute;
   right: -42px;
   top: 5px;
 }
-.timeline .items .item .username a {
+.timeline .items .item .sash .icon-facetime-video,
+.timeline .searches.items .item .sash .icon-facetime-video {
+  top: 7px;
+}
+.timeline .items .item .sash .icon-headphones,
+.timeline .searches.items .item .sash .icon-headphones {
+  font-size: 16px;
+  top: 7px;
+}
+.timeline .items .item .username a,
+.timeline .searches.items .item .username a {
   color: #ddd;
 }
-.timeline .items .item .text a {
+.timeline .items .item .text a,
+.timeline .searches.items .item .text a {
   color: #fff;
 }
-.timeline .items .item .link {
+.timeline .items .item .link,
+.timeline .searches.items .item .link {
   margin: 8px 0 6px;
 }
-.timeline .items .item .link a {
+.timeline .items .item .link a,
+.timeline .searches.items .item .link a {
   font-size: 25px;
   color: #ddd;
 }
-.timeline .items .item .time {
+.timeline .items .item .link .icon-play-circle,
+.timeline .searches.items .item .link .icon-play-circle {
+  font-weight: normal;
+  font-size: 32px;
+}
+.timeline .items .item .time,
+.timeline .searches.items .item .time {
   margin: 0;
 }
-.timeline .items .item .time .event {
+.timeline .items .item .time .event,
+.timeline .searches.items .item .time .event {
   color: #ff6600;
 }
-.timeline .items .item .time a {
+.timeline .items .item .time a,
+.timeline .searches.items .item .time a {
   color: #eee;
   font-size: 13px;
 }
-.timeline .items .item .promote {
+.timeline .items .item .promote,
+.timeline .searches.items .item .promote {
   padding: 6px 7px 5px 8px;
 }
-.timeline .items .item .demote {
+.timeline .items .item .demote,
+.timeline .searches.items .item .demote {
   padding: 6px 9px 5px 10px;
 }
 .timeline .needle {
@@ -695,11 +822,11 @@ input[type=submit].wide {
   z-index: 4;
 }
 .timeline .needle .date {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  border-radius: 15px;
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
@@ -713,7 +840,7 @@ input[type=submit].wide {
   margin-left: -100px;
   text-align: center;
   top: -14px;
-  width: 200px;
+  width: 215px;
   border: 1px solid #ffffff;
 }
 .timeline .needle .now {

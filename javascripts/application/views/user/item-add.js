@@ -11,10 +11,6 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         'change': 'render'
     },
 
-    // Do not use scroller
-    noScroller: true,
-
-
     initialize: function(options) {
         this.model = new Application.Model.Item({
             link: '',
@@ -37,18 +33,11 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
 
 
 
-    submit: function() {
-        var self = this;
-
-        var data = {};
-        $.each(this.$el.find('form').serializeArray(), function(index, field) {
-            data[field.name] = field.value;
-        });
-
-        this.model.set(data);
+    submit: function(event) {
+        var data = $(event.target).serializeObject();
 
 
-        var promise = this.model.save();
+        var promise = this.model.set(data).save();
 
         promise.done(function(){
             self.trigger('created');
