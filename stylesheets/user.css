@@ -519,7 +519,8 @@ input[type=submit].wide {
   color: #ff6600;
 }
 .timeline .followings .item,
-.timeline .followers .item {
+.timeline .followers .item,
+.timeline .searches.profiles .item {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
@@ -535,23 +536,28 @@ input[type=submit].wide {
   position: relative;
 }
 .timeline .followings .item .username,
-.timeline .followers .item .username {
+.timeline .followers .item .username,
+.timeline .searches.profiles .item .username {
   color: #000000;
 }
 .timeline .followings .item .icon img,
-.timeline .followers .item .icon img {
+.timeline .followers .item .icon img,
+.timeline .searches.profiles .item .icon img {
   border-color: #999;
 }
 .timeline .followings .item .bio,
-.timeline .followers .item .bio {
+.timeline .followers .item .bio,
+.timeline .searches.profiles .item .bio {
   margin-bottom: 15px;
 }
 .timeline .followings .item .bio .name,
-.timeline .followers .item .bio .name {
+.timeline .followers .item .bio .name,
+.timeline .searches.profiles .item .bio .name {
   color: #ff6600;
 }
 .timeline .followings .item .statistics,
-.timeline .followers .item .statistics {
+.timeline .followers .item .statistics,
+.timeline .searches.profiles .item .statistics {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -559,23 +565,28 @@ input[type=submit].wide {
 .timeline .followings .item .statistics .followings,
 .timeline .followings .item .statistics .followers,
 .timeline .followers .item .statistics .followings,
-.timeline .followers .item .statistics .followers {
+.timeline .followers .item .statistics .followers,
+.timeline .searches.profiles .item .statistics .followings,
+.timeline .searches.profiles .item .statistics .followers {
   display: inline;
 }
 .timeline .followings .item .statistics .followings,
-.timeline .followers .item .statistics .followings {
+.timeline .followers .item .statistics .followings,
+.timeline .searches.profiles .item .statistics .followings {
   padding-right: 15px;
 }
 .timeline .followings .item .unfollow,
-.timeline .followers .item .unfollow {
+.timeline .followers .item .unfollow,
+.timeline .searches.profiles .item .unfollow {
   padding: 7px 9px 3px 10px;
 }
 .timeline .followings .item .follow,
-.timeline .followers .item .follow {
+.timeline .followers .item .follow,
+.timeline .searches.profiles .item .follow {
   padding: 6px 9px 3px 9px;
 }
 .timeline .items .item,
-.timeline .searches .item {
+.timeline .searches.items .item {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
@@ -594,22 +605,22 @@ input[type=submit].wide {
   overflow: hidden;
 }
 .timeline .items .item:hover,
-.timeline .searches .item:hover {
+.timeline .searches.items .item:hover {
   -webkit-box-shadow: 0px 0px 0px #aaaaaa;
   -moz-box-shadow: 0px 0px 0px #aaaaaa;
   box-shadow: 0px 0px 0px #aaaaaa;
   background-color: #999;
 }
 .timeline .items .item.empty p,
-.timeline .searches .item.empty p {
+.timeline .searches.items .item.empty p {
   margin: 0;
 }
 .timeline .items .item.image .overlay,
-.timeline .searches .item.image .overlay {
+.timeline .searches.items .item.image .overlay {
   display: block;
 }
 .timeline .items .item.promoted .overlay,
-.timeline .searches .item.promoted .overlay {
+.timeline .searches.items .item.promoted .overlay {
   -webkit-transition: background-color 1s linear;
   -moz-transition: background-color 1s linear;
   -o-transition: background-color 1s linear;
@@ -619,7 +630,7 @@ input[type=submit].wide {
   z-index: 3;
 }
 .timeline .items .item.promoted .promote,
-.timeline .searches .item.promoted .promote {
+.timeline .searches.items .item.promoted .promote {
   -webkit-transition: opacity 500ms;
   -moz-transition: opacity 500ms;
   -o-transition: opacity 500ms;
@@ -627,7 +638,7 @@ input[type=submit].wide {
   opacity: 0;
 }
 .timeline .items .item.promoted .added.sash,
-.timeline .searches .item.promoted .added.sash {
+.timeline .searches.items .item.promoted .added.sash {
   -webkit-transition: opacity 1s;
   -moz-transition: opacity 1s;
   -o-transition: opacity 1s;
@@ -636,7 +647,7 @@ input[type=submit].wide {
   opacity: 1;
 }
 .timeline .items .item.video .video.sash,
-.timeline .searches .item.video .video.sash {
+.timeline .searches.items .item.video .video.sash {
   -webkit-transition: opacity 1s;
   -moz-transition: opacity 1s;
   -o-transition: opacity 1s;
@@ -644,7 +655,7 @@ input[type=submit].wide {
   opacity: 1;
 }
 .timeline .items .item.audio .audio.sash,
-.timeline .searches .item.audio .audio.sash {
+.timeline .searches.items .item.audio .audio.sash {
   -webkit-transition: opacity 1s;
   -moz-transition: opacity 1s;
   -o-transition: opacity 1s;
@@ -652,7 +663,7 @@ input[type=submit].wide {
   opacity: 1;
 }
 .timeline .items .item.event .event.sash,
-.timeline .searches .item.event .event.sash {
+.timeline .searches.items .item.event .event.sash {
   -webkit-transition: opacity 1s;
   -moz-transition: opacity 1s;
   -o-transition: opacity 1s;
@@ -660,7 +671,7 @@ input[type=submit].wide {
   opacity: 1;
 }
 .timeline .items .item.event.past .overlay,
-.timeline .searches .item.event.past .overlay {
+.timeline .searches.items .item.event.past .overlay {
   -webkit-transition: background-color 1s linear;
   -moz-transition: background-color 1s linear;
   -o-transition: background-color 1s linear;
@@ -670,7 +681,7 @@ input[type=submit].wide {
   z-index: 3;
 }
 .timeline .items .item .overlay,
-.timeline .searches .item .overlay {
+.timeline .searches.items .item .overlay {
   background-color: rgba(15, 15, 15, 0.4);
   display: none;
   left: 0;
@@ -682,7 +693,7 @@ input[type=submit].wide {
   z-index: 1;
 }
 .timeline .items .item .sash,
-.timeline .searches .item .sash {
+.timeline .searches.items .item .sash {
   border-style: solid;
   color: #ffffff;
   height: 0px;
@@ -695,7 +706,7 @@ input[type=submit].wide {
   z-index: 2;
 }
 .timeline .items .item .sash.event,
-.timeline .searches .item .sash.event {
+.timeline .searches.items .item .sash.event {
   border-color: transparent #ff6600 transparent transparent;
   border-width: 0 48px 48px 0;
   font-size: 14px;
@@ -703,7 +714,7 @@ input[type=submit].wide {
   width: 120px;
 }
 .timeline .items .item .sash.video,
-.timeline .searches .item .sash.video {
+.timeline .searches.items .item .sash.video {
   border-color: transparent #5f39bb transparent transparent;
   border-width: 0 48px 48px 0;
   font-size: 14px;
@@ -711,7 +722,7 @@ input[type=submit].wide {
   width: 120px;
 }
 .timeline .items .item .sash.audio,
-.timeline .searches .item .sash.audio {
+.timeline .searches.items .item .sash.audio {
   border-color: transparent #bc1c48 transparent transparent;
   border-width: 0 48px 48px 0;
   font-size: 14px;
@@ -719,7 +730,7 @@ input[type=submit].wide {
   width: 120px;
 }
 .timeline .items .item .sash.added,
-.timeline .searches .item .sash.added {
+.timeline .searches.items .item .sash.added {
   border-color: transparent transparent #ff6600 transparent;
   border-width: 0 0 24px 24px;
   bottom: 0;
@@ -729,72 +740,72 @@ input[type=submit].wide {
   z-index: 3;
 }
 .timeline .items .item .sash.added span,
-.timeline .searches .item .sash.added span {
+.timeline .searches.items .item .sash.added span {
   display: inline-block;
   padding: 6px;
 }
 .timeline .items .item .sash .icon-plus,
-.timeline .searches .item .sash .icon-plus {
+.timeline .searches.items .item .sash .icon-plus {
   padding-left: 6px;
 }
 .timeline .items .item .sash .icon-calendar,
 .timeline .items .item .sash .icon-facetime-video,
-.timeline .searches .item .sash .icon-calendar,
-.timeline .searches .item .sash .icon-facetime-video {
+.timeline .searches.items .item .sash .icon-calendar,
+.timeline .searches.items .item .sash .icon-facetime-video {
   position: absolute;
   right: -42px;
   top: 5px;
 }
 .timeline .items .item .sash .icon-facetime-video,
-.timeline .searches .item .sash .icon-facetime-video {
+.timeline .searches.items .item .sash .icon-facetime-video {
   top: 7px;
 }
 .timeline .items .item .sash .icon-headphones,
-.timeline .searches .item .sash .icon-headphones {
+.timeline .searches.items .item .sash .icon-headphones {
   font-size: 16px;
   top: 7px;
 }
 .timeline .items .item .username a,
-.timeline .searches .item .username a {
+.timeline .searches.items .item .username a {
   color: #ddd;
 }
 .timeline .items .item .text a,
-.timeline .searches .item .text a {
+.timeline .searches.items .item .text a {
   color: #fff;
 }
 .timeline .items .item .link,
-.timeline .searches .item .link {
+.timeline .searches.items .item .link {
   margin: 8px 0 6px;
 }
 .timeline .items .item .link a,
-.timeline .searches .item .link a {
+.timeline .searches.items .item .link a {
   font-size: 25px;
   color: #ddd;
 }
 .timeline .items .item .link .icon-play-circle,
-.timeline .searches .item .link .icon-play-circle {
+.timeline .searches.items .item .link .icon-play-circle {
   font-weight: normal;
   font-size: 32px;
 }
 .timeline .items .item .time,
-.timeline .searches .item .time {
+.timeline .searches.items .item .time {
   margin: 0;
 }
 .timeline .items .item .time .event,
-.timeline .searches .item .time .event {
+.timeline .searches.items .item .time .event {
   color: #ff6600;
 }
 .timeline .items .item .time a,
-.timeline .searches .item .time a {
+.timeline .searches.items .item .time a {
   color: #eee;
   font-size: 13px;
 }
 .timeline .items .item .promote,
-.timeline .searches .item .promote {
+.timeline .searches.items .item .promote {
   padding: 6px 7px 5px 8px;
 }
 .timeline .items .item .demote,
-.timeline .searches .item .demote {
+.timeline .searches.items .item .demote {
   padding: 6px 9px 5px 10px;
 }
 .timeline .needle {

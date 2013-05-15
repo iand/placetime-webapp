@@ -130,8 +130,8 @@
 
             <form class="form">
                 <div class="field">
-                    <label for="pname">Name</label>
-                    <input type="text" name="pname" id="name" value="<%= name %>">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" value="<%= name %>">
                 </div>
 
                 <div class="field">
@@ -286,8 +286,8 @@
 
             <% if (bio) { %>
             <p class="bio pull-left">
-                <% if (pname) { %>
-                    <span class="name"><%= pname %></span>:
+                <% if (name) { %>
+                    <span class="name"><%= name %></span>:
                 <% } %>
 
                 <%= bio %>
@@ -361,8 +361,13 @@
                             </li>
                         </ul>
 
+
                         <form class="form">
-                            <input class="pull-left search" type="search" placeholder="Search">
+                            <% if (view === 'timeline') { %>
+                                <input class="pull-left search" type="search" placeholder="Search items">
+                            <% } else { %>
+                                <input class="pull-left search" type="search" placeholder="Search profiles">
+                            <% } %>
                         </form>
                     <% } else { %>
                         <ul class="nav nav-inline pull-left">

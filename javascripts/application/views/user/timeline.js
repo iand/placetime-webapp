@@ -19,6 +19,17 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
             this.timeline(pid);
         });
 
+        // On view change update model
+        this.on('all', function(event) {
+            var match = event.match(/view:(.*)/);
+
+            if (match === null) {
+                return;
+            }
+
+            this.model.set('view', match[1]);
+        });
+
         this.on('scroll', this.infiniteScroll);
     },
 
@@ -101,12 +112,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         });
 
         // Load view
-        var view = this.model.get('view');
-        if (view) {
-            this[view]();
-        } else {
-            this.timeline();
-        }
+        this.trigger('view:' + this.model.get('view'));
     },
 
 

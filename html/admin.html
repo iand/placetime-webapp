@@ -121,7 +121,7 @@
 
             <h1>Manage Profile</h1>
             <div>Profile: <%= model.get('pid') %></div>
-            <div>Name: <%= model.get('pname') %></div>
+            <div>Name: <%= model.get('name') %></div>
             <div>Bio: <%= model.get('bio') %></div>
             <div>Date joined: <%= model.get('joined') %></div>
             <div>Followed items: <%= model.get('pcount') %></div>
@@ -152,7 +152,7 @@
             <div><i class="icon-arrow-left" style="font-size:20px; color:#555; position: relative; top:3px;"></i> <a href="/-admin">Back to admin page</a></div>
             <h1>Manage Feed</h1>
             <div>Profile: <%= data.pid %></div>
-            <div>Name: <%= data.pname %></div>
+            <div>Name: <%= data.name %></div>
             <div>Items in feed: <%= data.mcount %></div>
             <div>Followers: <a href="#followers/<%= data.pid %>"><%= data.followercount %></a></div>
 
@@ -180,8 +180,8 @@
             <form action="" method="post">
 
                 <div>
-                    <label for="pname">Name </label>
-                    <input type="text" name="pname" id="pname" value="<%= data.pname %>">
+                    <label for="name">Name </label>
+                    <input type="text" name="name" id="name" value="<%= data.name %>">
                 </div>
 
                 <div>
@@ -201,8 +201,8 @@
             <form action="" method="post">
 
                 <div>
-                    <label for="pname">Name </label>
-                    <input type="text" name="pname" id="pname" value="<%= data.pname %>">
+                    <label for="name">Name </label>
+                    <input type="text" name="name" id="name" value="<%= data.name %>">
                 </div>
 
                 <div>
@@ -233,8 +233,8 @@
                 </div>
 
                 <div>
-                    <label for="pname">Name </label>
-                    <input type="text" name="pname" id="pname" value="">
+                    <label for="name">Name </label>
+                    <input type="text" name="name" id="name" value="">
                 </div>
 
                 <div>
@@ -262,8 +262,8 @@
                 </div>
 
                 <div>
-                    <label for="pname">Name </label>
-                    <input type="text" name="pname" id="pname" value="">
+                    <label for="name">Name </label>
+                    <input type="text" name="name" id="name" value="">
                 </div>
 
                 <div>
@@ -286,7 +286,7 @@
         <script type="text/template" id="briefprofile-tmpl">
             <div>
                 <a href="#/profile/<%= data.pid %>">
-                    <%= data.pname %> (@<%= data.pid %>)
+                    <%= data.name %> (@<%= data.pid %>)
                 </a>
             </div>
         </script>
@@ -316,7 +316,7 @@
            </script>
 
         <script type="text/template" id="brieffeed-tmpl">
-            <div><a href="#/profile/<%= data.pid %>"><%= data.pname %> (@<%= data.pid %>)</a>: <%= data.feedurl %></div>
+            <div><a href="#/profile/<%= data.pid %>"><%= data.name %> (@<%= data.pid %>)</a>: <%= data.feedurl %></div>
         </script>
 
 

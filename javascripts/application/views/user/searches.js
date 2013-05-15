@@ -1,6 +1,5 @@
 Application.View.Searches = Backbone.Marionette.CompositeView.extend({
     template: '#searches-template',
-    className: 'searches',
 
     events: {
         'click .promote': 'promote'
@@ -8,8 +7,20 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
 
     itemViewContainer: '.children',
 
-    itemView: Application.View.Search,
+    itemView: Application.View.SearchItem,
     emptyView: Application.View.SearchEmpty,
+
+    className: function() {
+        var className = 'searches';
+
+        if (this.model.get('t') === 'i') {
+            className += ' items';
+        } else {
+            className += ' profiles';
+        }
+
+        return className;
+    },
 
     // Bubble collection events
     collectionEvents: {
@@ -41,16 +52,22 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
     onShow: function() {
         var self = this;
 
+        if (this.model.get('t') === 'i') {
+            this.itemView = Application.View.SearchItem;
+        } else {
+            this.itemView = Application.View.SearchProfile;
+        }
+
         var promise = this.collection.search({
             data: {
-                t: 'p',
-                s: this.model.get('query')
+                t: this.model.get('t'),
+                s: this.model.get('s')
             }
         });
 
         // TODO: Ideally move to template and use model state
         promise.done(function(data){
-            if (data.length === 0) {
+            if (data.results.length === 0) {
                 self.$el.find('span').text('No results');
                 self.$el.find('img').remove();
             }

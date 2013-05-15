@@ -302,7 +302,8 @@
 
     // Following and followers view
     .followings,
-    .followers {
+    .followers,
+    .searches.profiles {
         .item {
             @include border-radius(2px);
             @include single-box-shadow(
@@ -360,7 +361,7 @@
 
     // Items view
     .items,
-    .searches {
+    .searches.items {
         .item {
             @include border-radius(2px);
             @include single-box-shadow(

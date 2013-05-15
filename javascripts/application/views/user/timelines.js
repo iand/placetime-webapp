@@ -72,7 +72,6 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
             publicTimeline.trigger('view:search', query);
         });
 
-
         // Private timeline
         this.on('private:itemAdd', function(){
             privateTimeline.trigger('view:itemAdd');

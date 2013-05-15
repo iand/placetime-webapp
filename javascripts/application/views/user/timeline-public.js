@@ -7,6 +7,11 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         'submit .header .form': 'submit'
     },
 
+    // TOOD: Abstract header to prevent entire recompile
+    modelEvents: {
+        'change': 'render'
+    },
+
 
     initialize: function(options) {
         this.initialEvents();
@@ -116,8 +121,16 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
     search: function(query) {
         var collection = new Application.Collection.Searches();
 
+        var type;
+        if (this.model.get('view') === 'timeline') {
+            type = 'i';
+        } else {
+            type = 'p';
+        }
+
         var model = new Backbone.Model({
-            s: query
+            s: query,
+            t: type
         });
 
         var view = new Application.View.Searches({
@@ -156,7 +169,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
             if (view.id !== undefined) {
                 viewClass = view.id;
             } else {
-                viewClass = view.className.split(' ')[0];
+                viewClass = _.result(view, 'className').split(' ')[0];
             }
 
             // Add class to timeline
