@@ -20,7 +20,7 @@ Application.View.Profile = Backbone.Marionette.ItemView.extend({
         });
 
         promise.fail(function(){
-            console.log('TODO: Display errors');
+            // TODO: Display errors
         });
 
         return false;

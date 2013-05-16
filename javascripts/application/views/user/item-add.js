@@ -1,6 +1,6 @@
 Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     template: '#item-add-template',
-    className: 'item',
+    className: 'item add',
 
     events: {
         'submit form': 'submit',
@@ -44,7 +44,7 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         });
 
         promise.fail(function(){
-            console.log('TODO: Display errors');
+           // TODO: Display errors
         });
 
         return false;

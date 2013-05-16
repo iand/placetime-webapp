@@ -1,16 +1,7 @@
 Application.View.TimelinePublic = Application.View.Timeline.extend({
     name: 'timeline-public',
-
     className: 'column public',
-    events: {
-        'click .header .now': 'refresh',
-        'submit .header .form': 'submit'
-    },
 
-    // TOOD: Abstract header to prevent entire recompile
-    modelEvents: {
-        'change': 'render'
-    },
 
 
     initialize: function(options) {
@@ -64,7 +55,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
             this.trigger('item:promoted', event);
         });
 
-        this.region.show(view);
+        this.regionManager.get('collection').show(view);
     },
 
 
@@ -89,7 +80,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
         this.bindEvents(view);
 
-        this.region.show(view);
+        this.regionManager.get('collection').show(view);
     },
 
 
@@ -114,8 +105,9 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
         this.bindEvents(view);
 
-        this.region.show(view);
+        this.regionManager.get('collection').show(view);
     },
+
 
 
     search: function(query) {
@@ -140,17 +132,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
         this.bindEvents(view);
 
-        this.region.show(view);
-    },
-
-
-
-    submit: function(event) {
-        var url = 'search/' + $(event.target).find('[type=search]').val();
-
-        Backbone.history.navigate(url, true);
-
-        return false;
+        this.regionManager.get('collection').show(view);
     },
 
 
@@ -158,36 +140,15 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
     onRender: function() {
         this.constructor.__super__.onRender.call(this, arguments);
 
-        var self = this;
+        // Create header
+        var header = new Application.View.PublicTimelineHeader({
+            model: this.model
+        });
 
-        // Instead of having state in the model and thus rendering
-        // the view we will just add a class
-        this.region.show = function(view) {
-            var $timeline = self.$el.children();
-
-            var viewClass;
-            if (view.id !== undefined) {
-                viewClass = view.id;
-            } else {
-                viewClass = _.result(view, 'className').split(' ')[0];
-            }
-
-            // Add class to timeline
-            $timeline.attr('class', function(index, className){
-                return className.replace(/\s*view-[^\s]+\s*/g, '');
-            });
-            $timeline.addClass('view-' + viewClass);
+        this.listenTo(header, 'refresh', this.refresh);
 
 
-
-            // Add class to navigation
-            var $navigation = self.$el.find('.nav > li');
-
-            $navigation.removeClass('active');
-            $navigation.filter('.' + viewClass).addClass('active');
-
-
-            return Backbone.Marionette.Region.prototype.show.apply(this, arguments);
-        };
+        // Show header
+        this.regionManager.get('header').show(header);
     }
 });

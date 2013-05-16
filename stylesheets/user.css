@@ -238,9 +238,6 @@ input[type=submit].wide {
 .timeline {
   position: relative;
 }
-.timeline.view-followings .header .now, .timeline.view-followers .header .now {
-  opacity: 0;
-}
 .timeline .header {
   background-color: rgba(255, 255, 255, 0.95);
   border-bottom: 0px solid #000;
@@ -335,6 +332,9 @@ input[type=submit].wide {
 .timeline .children {
   position: relative;
   padding-top: 46px;
+}
+.timeline .item.add {
+  padding-top: 48px;
 }
 .timeline .items,
 .timeline .searches,

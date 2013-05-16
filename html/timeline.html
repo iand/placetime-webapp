@@ -229,7 +229,7 @@
 
 
         <script type="text/template" id="item-add-template">
-            <form class="form" style="padding-top: 48px">
+            <form class="form">
                 <div class="field">
                     <label for="link">Link</label>
                     <input type="text" name="link" value="<%= link %>">
@@ -242,7 +242,7 @@
 
                 <div class="field">
                     <label for="text">Event Date</label>
-                    <input type="date" min="1900-00-00" name="ets">
+                    <input type="date" min="1900-00-00" name="ets" value="<%= ets %>">
                 </div>
 
                 <div class="actions">
@@ -341,53 +341,64 @@
         </script>
 
 
+        <script type="template/text" id="timeline-public-header-template">
+            <ul class="nav nav-inline pull-left">
+                <li class="items <%= (view == 'timeline')? 'active':'' %>">
+                    <a href="#timeline">Timeline</a>
+                </li>
+                <li class="followings <%= (view == 'followings')? 'active':'' %>">
+                    <a href="#followings">Following</a>
+                </li>
+                <li class="followers <%= (view == 'followers')? 'active':'' %>">
+                    <a href="#followers">Followers</a>
+                </li>
+            </ul>
+
+
+            <form class="form">
+                <% if (view === 'timeline') { %>
+                    <input class="pull-left search" type="search" placeholder="Search items">
+                <% } else { %>
+                    <input class="pull-left search" type="search" placeholder="Search profiles">
+                <% } %>
+            </form>
+
+
+            <% if (view === 'timeline') { %>
+            <a class="now pull-right">
+                now <i class="icon-repeat"></i>
+            </a>
+            <% } %>
+        </script>
+
+
+        <script type="template/text" id="timeline-private-header-template">
+            <ul class="nav nav-inline pull-left">
+                <li class="items active">
+                    <a href="#timeline" class="playlist">My Playlist</a>
+                </li>
+            </ul>
+
+            <form class="form">
+                <input class="pull-left add" type="text" placeholder="domain.com">
+                <input class="pull-left submit" type="submit" value="Add">
+            </form>
+
+            <% if (view === 'timeline') { %>
+            <a class="now pull-right">
+                now <i class="icon-repeat"></i>
+            </a>
+            <% } %>
+        </script>
+
+
         <script type="template/text" id="timeline-template">
             <% if (status === 'p') { %>
             <div class="timeline public">
             <% } else { %>
             <div class="timeline private">
             <% } %>
-                <div class="header">
-                    <% if (status === 'p') { %>
-                        <ul class="nav nav-inline pull-left">
-                            <li class="items <%= (view == 'timeline')? 'active':'' %>">
-                                <a href="#timeline">Timeline</a>
-                            </li>
-                            <li class="followings <%= (view == 'followings')? 'active':'' %>">
-                                <a href="#followings">Following</a>
-                            </li>
-                            <li class="followers <%= (view == 'followers')? 'active':'' %>">
-                                <a href="#followers">Followers</a>
-                            </li>
-                        </ul>
-
-
-                        <form class="form">
-                            <% if (view === 'timeline') { %>
-                                <input class="pull-left search" type="search" placeholder="Search items">
-                            <% } else { %>
-                                <input class="pull-left search" type="search" placeholder="Search profiles">
-                            <% } %>
-                        </form>
-                    <% } else { %>
-                        <ul class="nav nav-inline pull-left">
-                            <li class="items active">
-                                <a href="#timeline" class="timeline">My Playlist</a>
-                            </li>
-                        </ul>
-
-                        <form class="form">
-                            <input class="pull-left add" type="text" placeholder="domain.com">
-                            <input class="pull-left submit" type="submit" value="Add">
-                        </form>
-                    <% } %>
-
-                    <a class="now pull-right">
-                        now <i class="icon-repeat"></i>
-                    </a>
-                </div>
-
-
+                <div class="header"></div>
                 <div class="collection"></div>
             </div>
         </script>

@@ -52,7 +52,7 @@ Application.View.Register = Backbone.Marionette.ItemView.extend({
                 Backbone.history.navigate('login', true);
             },
             error: function (model, response, options) {
-                console.log('TODO: Display errors');
+                // TODO: Display errors
             }
         });
     }

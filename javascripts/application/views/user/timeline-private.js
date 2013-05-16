@@ -1,12 +1,6 @@
 Application.View.TimelinePrivate = Application.View.Timeline.extend({
     name: 'timeline-private',
-
     className: 'column private',
-    events: {
-        'click .header .timeline': 'timeline',
-        'click .header .now': 'refresh',
-        'submit .header .form': 'add'
-    },
 
 
 
@@ -42,16 +36,18 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
             this.trigger('item:demoted', event);
         });
 
-        this.region.show(view);
+        this.regionManager.get('collection').show(view);
     },
 
 
 
-    itemAdd: function() {
+    itemAdd: function(data) {
         var view = new Application.View.ItemAdd({
-            collection: this.collection,
-            model: this.model
+            collection : this.collection
         });
+
+        view.model.set(data);
+
 
         this.bindEvents(view);
 
@@ -63,24 +59,24 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
             this.timeline();
         });
 
-        this.region.show(view);
+        this.regionManager.get('collection').show(view);
     },
 
-
-    add: function(event) {
-        var $form = $(event.target);
-
-        this.itemAdd();
-        this.region.currentView.trigger('set:link', $form.find('input').val());
-
-        return false;
-    },
 
 
     onRender: function() {
         this.constructor.__super__.onRender.call(this, arguments);
 
+        // Create header
+        var header = new Application.View.PrivateTimelineHeader({
+            model: this.model
+        });
 
-        this.timeline();
+        this.listenTo(header, 'refresh', this.refresh);
+        this.listenTo(header, 'view:itemAdd', this.itemAdd);
+        this.listenTo(header, 'view:playlist', this.timeline);
+
+        // Show header
+        this.regionManager.get('header').show(header);
     }
 });

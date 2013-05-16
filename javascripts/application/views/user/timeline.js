@@ -11,7 +11,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
         // Pass event to current view
         this.on('item:add', function(event) {
-            this.region.currentView.trigger('item:add', event);
+            this.regionManager.get('collection').currentView.trigger('item:add', event);
         });
 
         // Load timeline view
@@ -82,18 +82,18 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
 
     reload: function() {
-        this.region.currentView.trigger('reload', this);
+        this.regionManager.get('collection').currentView.trigger('reload', this);
     },
 
 
     now: function() {
-        this.region.currentView.trigger('now', this);
+        this.regionManager.get('collection').currentView.trigger('now', this);
     },
 
 
     refresh: function() {
-        this.listenToOnce(this.region.currentView, 'reload:done', function(){
-            this.region.currentView.$el.find('.item').first().transitionEnd(_.bind(function(){
+        this.listenToOnce(this.regionManager.get('collection').currentView, 'reload:done', function(){
+            this.regionManager.get('collection').currentView.$el.find('.item').first().transitionEnd(_.bind(function(){
                 if (event.propertyName !== 'max-height') {
                     return;
                 }
@@ -106,9 +106,16 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
 
     onRender: function() {
-        // Create region
-        this.region = new Backbone.Marionette.Region({
-              el: this.$el.find('.collection')
+        this.regionManager = new Marionette.RegionManager();
+        this.regionManager.addRegions({
+            'header': {
+                parentEl: this.$el,
+                selector: '.header'
+            },
+            'collection': {
+                parentEl: this.$el,
+                selector: '.collection'
+            }
         });
 
         // Load view
@@ -149,13 +156,13 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         // Top infinite scroll
         else if (Math.abs(scrollTop) < threshold) {
             this.infiniteScrollLastUpdate = moment();
-            this.region.currentView.trigger('infinite:load', {after: true});
+            this.regionManager.get('collection').currentView.trigger('infinite:load', {after: true});
         }
 
         // Bottom infinite scroll
         else if (Math.abs(scrollTop) > Math.abs(maxScrollTop - threshold)) {
             this.infiniteScrollLastUpdate = moment();
-            this.region.currentView.trigger('infinite:load', {before: true});
+            this.regionManager.get('collection').currentView.trigger('infinite:load', {before: true});
         }
 
         // Somewhere inbetween

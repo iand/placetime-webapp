@@ -1,5 +1,4 @@
 Application.Collection.Searches = Backbone.Collection.extend({
-    model: Application.Model.Search,
     url: '/-jsearch',
 
 
@@ -27,13 +26,20 @@ Application.Collection.Searches = Backbone.Collection.extend({
             data: options.data
         });
 
+        // Set model based on request type
+        if (options.data.t === 'i') {
+            this.model = Application.Model.Item;
+        } else {
+            this.model = Application.Model.Profile;
+        }
+
 
         promise.done(function(data){
             self.set(data.results);
         });
 
         promise.fail(function(){
-            // TODO
+            // TODO: Display errors
         });
 
 
