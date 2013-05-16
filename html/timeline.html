@@ -39,7 +39,7 @@
 
                 <a class="tagline pull-left" href="/">a playlist for your life</a>
 
-                <% if (pid !== undefined) { %>
+                <% if (pid !== 'null') { %>
                 <ul class="nav pull-right">
                     <li>
                         <a data-dropdown=".navbar .dropdown">
@@ -70,13 +70,17 @@
 
 
         <script type="text/template" id="login-template">
-            <p>
+            <p class="twitter">
                 <a href="/-twitter" data-role="button" rel="external">
-                    <img alt="Sign in with Twitter" src="/-assets/images/sign-in-with-twitter-link.png" />
+                    <i class="icon-twitter"></i>
+                    Sign in with Twitter
                 </a>
             </p>
 
-            <h1>Or login</h1>
+            <p class="login">
+                <a href="#login">Or login / Sign up</a>
+            </p>
+
             <form class="form">
                 <div class="field">
                     <label for="name">User name</label>
@@ -91,11 +95,11 @@
                 </div>
 
                 <input type="submit" value="Login" class="wide">
-            </form>
 
-            <p>
-                Dont have an account? <a href="#register">Sign Up</a>
-            </p>
+                <p class="register">
+                    <a href="#register">Dont have an account? Sign Up</a>
+                </p>
+            </form>
         </script>
 
 
@@ -196,14 +200,17 @@
                 </p>
                 <p class="text pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
+                        <i class="icon-external-link"></i>
                         <%= text %>
                     </a>
                 </p>
-                <p class="link pull-left">
-                    <a href="<%= link %>" class="fancybox fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
-                        <i class="icon-external-link"></i>
-                    </a>
+
+                <% if (pid === source) { %>
+                <p class="source pull-left">
+                    <a href="#user/<%= source %>">copied by <%= source %></a>
                 </p>
+                <% } %>
+
                 <p class="time pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
                         <% if (isEvent(ts, event)) { %>
@@ -225,6 +232,8 @@
                     </a>
                 <% } %>
             <% } %>
+
+            <hr class="separator" />
         </script>
 
 
@@ -466,27 +475,31 @@
             <% if (media == "video") { %>
                 <p class="text pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= getIframeUrl(link) %>">
+                        <i class="icon-play-circle"></i>
                         <%= text %>
                     </a>
                 </p>
-                <p class="link pull-left">
-                    <a href="<%= getIframeUrl(link) %>" class="fancybox fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
-                        <i class="icon-play-circle"></i>
-                    </a>
+
+                <% if (pid === source) { %>
+                <p class="source pull-left">
+                    <a href="#user/<%= source %>">copied by <%= source %></a>
                 </p>
+                <% } %>
             <% } else if (media == "audio") { %>
             <!-- audio specific markup here -->
             <% } else { %>
                 <p class="text pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
+                        <i class="icon-external-link"></i>
                         <%= text %>
                     </a>
                 </p>
-                <p class="link pull-left">
-                    <a href="<%= link %>" class="fancybox fancybox.iframe" data-role="button" rel="external" data-iconpos="notext" data-icon="info" target="_blank">
-                        <i class="icon-external-link"></i>
-                    </a>
+
+                <% if (pid === source) { %>
+                <p class="source pull-left">
+                    <a href="#user/<%= source %>">copied by <%= source %></a>
                 </p>
+                <% } %>
 
                 <p class="time pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">

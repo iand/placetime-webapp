@@ -34,6 +34,9 @@ Application.Router.User = Backbone.Router.extend({
         var self = this;
 
 
+        // TODO: Remove eventually
+        $('body').removeClass('login');
+
         var check = Application.session.check();
 
         check.done(function(){
@@ -227,6 +230,9 @@ Application.Router.User = Backbone.Router.extend({
         var login = new Application.View.Login({
             model: new Application.Model.Credentials()
         });
+
+        // TODO: Remove and replace with backbone region show override
+        $('body').addClass('login');
 
         Application.content.show(login);
     },

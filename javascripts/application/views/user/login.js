@@ -4,7 +4,15 @@ Application.View.Login = Backbone.Marionette.ItemView.extend({
 
     events: {
         'keyup input': 'change',
+        'click .login': 'login',
         'submit form': 'submit'
+    },
+
+
+    login: function() {
+        this.$el.find('.form').show();
+
+        return;
     },
 
 
@@ -31,14 +39,14 @@ Application.View.Login = Backbone.Marionette.ItemView.extend({
         if (check.isValid === false) {
             displayValidationErrors(check.messages);
         } else {
-            this.login(this.model.attributes);
+            this.authenticate(this.model.attributes);
         }
 
         return false;
     },
 
 
-    login: function (data) {
+    authenticate: function (data) {
         var self = this;
 
         Application.session.set('pid', data.pid);

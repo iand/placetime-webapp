@@ -10,6 +10,10 @@ Application.Model.Item = Backbone.Model.extend({
         });
     },
 
+    defaults: {
+        source: undefined
+    },
+
 
     idSafe: function() {
         return this.id.replace(/@/, '\\@');
