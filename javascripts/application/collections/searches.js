@@ -28,9 +28,9 @@ Application.Collection.Searches = Backbone.Collection.extend({
 
         // Set model based on request type
         if (options.data.t === 'i') {
-            this.model = Application.Model.Item;
+            this.model = Application.Model.SearchItem;
         } else {
-            this.model = Application.Model.Profile;
+            this.model = Application.Model.SearchProfile;
         }
 
 
