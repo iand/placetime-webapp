@@ -3,20 +3,20 @@ Application.View.Item = Application.View.TimelineItem.extend({
 
     templateHelpers: {
         isEvent: function(ts, event) {
-            return Application.Model.Item.prototype.isEvent.apply(
-                new Backbone.Model({
-                    ts: ts,
-                    event: event
-                })
-            );
+            var model = new Application.Model.Item({
+                ts: ts,
+                event: event
+            });
+
+            return model.isEvent();
         },
 
         time: function(ts) {
-            return Application.Model.Item.prototype.time.apply(
-                new Backbone.Model({
-                    ts: ts
-                })
-            );
+            var model = new Application.Model.Item({
+                ts: ts
+            });
+
+            return model.time();
         }
     },
 

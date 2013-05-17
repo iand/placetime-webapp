@@ -2,6 +2,23 @@ Application.View.SearchItem = Application.View.TimelineItem.extend({
     template: '#search-template',
 
     templateHelpers: {
+        isEvent: function(event) {
+            var model = new Application.Model.SearchItem({
+                event: event
+            });
+
+            return model.isEvent();
+        },
+
+        time: function(event, added) {
+            var model = new Application.Model.SearchItem({
+                event: event,
+                added: added
+            });
+
+            return model.time();
+        },
+
         getIframeUrl: function(url) {
             if (/youtube/.test(url) === true) {
                 return 'http://www.youtube.com/embed/' + url.replace(

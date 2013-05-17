@@ -117,7 +117,9 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         var collection = new Application.Collection.Searches();
 
         var type;
-        if (this.model.get('view') === 'timeline') {
+        if (this.model.get('view') === 'search') {
+            type = this.regionManager.get('collection').currentView.model.get('t');
+        } else if (this.model.get('view') === 'timeline') {
             type = 'i';
         } else {
             type = 'p';
