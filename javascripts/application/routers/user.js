@@ -20,8 +20,7 @@ Application.Router.User = Backbone.Router.extend({
         // TODO: Set object name to body class, override Application.content.show
         this.header = new Application.View.Header({
             model: new Backbone.Model({
-                pid: Application.session.get('pid'),
-                wide: false
+                pid: Application.session.get('pid')
             })
         });
 
@@ -40,30 +39,26 @@ Application.Router.User = Backbone.Router.extend({
         var check = Application.session.check();
 
         check.done(function(){
-            // Set header to wide and re-render
-            self.header.model.set('wide', true);
-            self.header.render();
-
             if (pid === Application.session.get('pid')) {
                 pid = undefined;
             }
-
-            // Render timelines
-            var timeline = new Application.View.Timelines({
-                public: {
-                    pid: Application.session.get('pid'),
-                    view: 'timeline'
-                },
-                private: {
-                    pid: Application.session.get('pid'),
-                    view: 'timeline'
-                }
-            });
 
 
             if (Application.content.is('timelines') === true) {
                 Application.content.currentView.trigger('public:timeline', pid);
             } else {
+                // Render timelines
+                var timeline = new Application.View.Timelines({
+                    public: {
+                        pid: Application.session.get('pid'),
+                        view: 'timeline'
+                    },
+                    private: {
+                        pid: Application.session.get('pid'),
+                        view: 'timeline'
+                    }
+                });
+
                 Application.content.show(timeline);
             }
         });
@@ -82,27 +77,21 @@ Application.Router.User = Backbone.Router.extend({
         var check = Application.session.check();
 
         check.done(function(){
-            // Set header to wide and re-render
-            self.header.model.set('wide', true);
-            self.header.render();
-
-
-            // Render timelines
-            var timeline = new Application.View.Timelines({
-                public: {
-                    pid: Application.session.get('pid'),
-                    view: 'search'
-                },
-                private: {
-                    pid: Application.session.get('pid'),
-                    view: 'timeline'
-                }
-            });
-
-
             if (Application.content.is('timelines') === true) {
                 Application.content.currentView.trigger('public:search', query);
             } else {
+                // Render timelines
+                var timeline = new Application.View.Timelines({
+                    public: {
+                        pid: Application.session.get('pid'),
+                        view: 'search'
+                    },
+                    private: {
+                        pid: Application.session.get('pid'),
+                        view: 'timeline'
+                    }
+                });
+
                 Application.content.show(timeline);
             }
         });
@@ -121,31 +110,26 @@ Application.Router.User = Backbone.Router.extend({
         var check = Application.session.check();
 
         check.done(function(){
-            // Set header to wide and re-render
-            self.header.model.set('wide', true);
-            self.header.render();
-
-
             if (pid === undefined) {
                 pid = Application.session.get('pid');
             }
-
-            // Render timelines
-            var timeline = new Application.View.Timelines({
-                public: {
-                    pid: pid,
-                    view: 'followers'
-                },
-                private: {
-                    pid: Application.session.get('pid'),
-                    view: 'timeline'
-                }
-            });
 
 
             if (Application.content.is('timelines')) {
                 Application.content.currentView.trigger('public:followers', pid);
             } else {
+                // Render timelines
+                var timeline = new Application.View.Timelines({
+                    public: {
+                        pid: pid,
+                        view: 'followers'
+                    },
+                    private: {
+                        pid: Application.session.get('pid'),
+                        view: 'timeline'
+                    }
+                });
+
                 Application.content.show(timeline);
             }
         });
@@ -165,31 +149,26 @@ Application.Router.User = Backbone.Router.extend({
         var check = Application.session.check();
 
         check.done(function(){
-            // Set header to wide and re-render
-            self.header.model.set('wide', true);
-            self.header.render();
-
-
             if (pid === undefined) {
                 pid = Application.session.get('pid');
             }
-
-            // Render timelines
-            var timeline = new Application.View.Timelines({
-                public: {
-                    pid: pid,
-                    view: 'followings'
-                },
-                private: {
-                    pid: Application.session.get('pid'),
-                    view: 'timeline'
-                }
-            });
 
 
             if (Application.content.is('timelines')) {
                 Application.content.currentView.trigger('public:followings', pid);
             } else {
+                // Render timelines
+                var timeline = new Application.View.Timelines({
+                    public: {
+                        pid: pid,
+                        view: 'followings'
+                    },
+                    private: {
+                        pid: Application.session.get('pid'),
+                        view: 'timeline'
+                    }
+                });
+
                 Application.content.show(timeline);
             }
         });
