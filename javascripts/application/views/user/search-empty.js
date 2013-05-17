@@ -3,6 +3,10 @@ Application.View.SearchEmpty = Backbone.Marionette.ItemView.extend({
     className: 'item empty collapsed',
 
 
+    modelEvents: {
+        'change:loading': 'render'
+    },
+
 
     onShow: function() {
         this.$el.offset();

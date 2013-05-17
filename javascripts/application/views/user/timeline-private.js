@@ -21,6 +21,7 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
         });
 
         var model = new Backbone.Model({
+            loading: true,
             pid: this.model.get('pid'),
             status: this.model.get('status')
         });

@@ -50,14 +50,13 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
 
 
     onShow: function() {
-        var self = this;
-
         if (this.model.get('t') === 'i') {
             this.itemView = Application.View.SearchItem;
         } else {
             this.itemView = Application.View.SearchProfile;
         }
 
+        var self    = this;
         var promise = this.collection.search({
             data: {
                 t: this.model.get('t'),
@@ -65,17 +64,8 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
             }
         });
 
-        // TODO: Ideally move to template and use model state
-        promise.done(function(data){
-            if (data.results.length === 0) {
-                self.$el.find('span').text('No results');
-                self.$el.find('img').remove();
-            }
-        });
-
-        promise.fail(function(){
-            self.$el.find('span').text('Error searching for results');
-            self.$el.find('img').remove();
+        promise.always(function(){
+            self.model.set('loading', false);
         });
     },
 
@@ -92,6 +82,15 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
         return false;
     },
 
+
+    showEmptyView: function(){
+        var EmptyView = Marionette.getOption(this, 'emptyView');
+
+        if (EmptyView && !this._showingEmptyView){
+            this._showingEmptyView = true;
+            this.addItemView(this.model, EmptyView, 0);
+        }
+    },
 
 
     appendHtml: function(collectionView, itemView, index) {

@@ -264,14 +264,19 @@
 
         <script type="text/template" id="item-empty-template">
             <p>
-                <% if (Application.session.get('pid') === user) { %>
-                    <% if (status === 'p') { %>
-                        There are no items in your timeline, search for users to follow
-                    <% } else { %>
-                        Add a new item or copy one from your timeline
-                    <% } %>
+                <% if (loading === true) { %>
+                    <span>Loading results</span>
+                    <img alt="Loading" class="loading" src="/-assets/images/vendor/jquery/fancybox/fancybox_loading.gif" height="24" width="24" />
                 <% } else { %>
-                    There are no items in <%= user %> timeline
+                    <% if (Application.session.get('pid') === user) { %>
+                        <% if (status === 'p') { %>
+                            There are no items in your timeline, search for users to follow
+                        <% } else { %>
+                            Add a new item or copy one from your timeline
+                        <% } %>
+                    <% } else { %>
+                        There are no items in <%= user %> timeline
+                    <% } %>
                 <% } %>
             </p>
         </script>
@@ -279,8 +284,12 @@
 
 
         <script type="text/template" id="search-empty-template">
+            <% if (loading === true) { %>
             <span>Loading search results</span>
             <img alt="Loading" class="loading" src="/-assets/images/vendor/jquery/fancybox/fancybox_loading.gif" height="24" width="24" />
+            <% } else { %>
+            <span>No results</span>
+            <% } %>
         </script>
 
 

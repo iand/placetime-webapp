@@ -20,7 +20,7 @@ Application.Admin.View.ProfileNew = Backbone.Marionette.ItemView.extend({
         });
 
         promise.fail(function(){
-            // TODO: Implement
+            // TODO: Display errors
         });
 
 

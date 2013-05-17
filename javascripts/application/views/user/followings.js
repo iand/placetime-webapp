@@ -19,13 +19,17 @@ Application.View.Followings = Backbone.Marionette.CompositeView.extend({
 
 
     onShow: function() {
-        this.delegateEvents();
-        this.collection.fetch({
+        var self    = this;
+        var promise = this.collection.fetch({
             data: {
                 pid: this.model.get('pid'),
                 count: this.model.get('count')
             },
             remove: true
+        });
+
+        promise.always(function(){
+            self.model.set('loading', false);
         });
     },
 
@@ -81,5 +85,15 @@ Application.View.Followings = Backbone.Marionette.CompositeView.extend({
 
     loaded: function(options) {
         this.loading.remove();
-    }
+    },
+
+
+    showEmptyView: function(){
+        var EmptyView = Marionette.getOption(this, 'emptyView');
+
+        if (EmptyView && !this._showingEmptyView){
+            this._showingEmptyView = true;
+            this.addItemView(this.model, EmptyView, 0);
+        }
+    },
 });

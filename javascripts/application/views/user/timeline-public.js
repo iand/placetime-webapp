@@ -38,6 +38,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         });
 
         var model = new Backbone.Model({
+            loading: true,
             pid: pid,
             status: status
         });
@@ -68,6 +69,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         var collection = new Application.Collection.Followings();
 
         var model = new Backbone.Model({
+            loading: true,
             pid: pid,
             count: 20,
             start: 10
@@ -93,6 +95,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         var collection = new Application.Collection.Followers();
 
         var model = new Backbone.Model({
+            loading: true,
             pid: pid,
             count: 20,
             start: 10
@@ -121,6 +124,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
         }
 
         var model = new Backbone.Model({
+            loading: true,
             s: query,
             t: type
         });

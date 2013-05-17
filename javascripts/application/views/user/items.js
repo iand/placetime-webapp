@@ -71,13 +71,18 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     onShow: function() {
-        this.collection.fetch({
+        var self    = this;
+        var promise = this.collection.fetch({
             data: {
                 pid: this.model.get('pid'),
                 status: this.model.get('status'),
                 before: 25,
                 after: 25
             }
+        });
+
+        promise.always(function(){
+            self.model.set('loading', false);
         });
     },
 
@@ -220,6 +225,15 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         this.loading.remove();
     },
 
+
+    showEmptyView: function(){
+        var EmptyView = Marionette.getOption(this, 'emptyView');
+
+        if (EmptyView && !this._showingEmptyView){
+            this._showingEmptyView = true;
+            this.addItemView(this.model, EmptyView, 0);
+        }
+    },
 
 
     appendHtml: function(collectionView, itemView, index) {

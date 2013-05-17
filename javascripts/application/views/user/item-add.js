@@ -36,7 +36,7 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     submit: function(event) {
         var data = $(event.target).serializeObject();
 
-
+        var self    = this;
         var promise = this.model.set(data).save();
 
         promise.done(function(){
@@ -55,10 +55,5 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         this.trigger('cancelled');
 
         return false;
-    },
-
-
-    onShow: function() {
-        this.delegateEvents();
     }
 });
