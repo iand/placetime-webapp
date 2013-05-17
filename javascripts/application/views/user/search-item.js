@@ -28,18 +28,6 @@ Application.View.SearchItem = Application.View.TimelineItem.extend({
         }
     },
 
-    attributes: function() {
-        var attributes = {
-            'data-id': this.model.id
-        };
-
-        if (this.model.get('image')) {
-            attributes.style = 'background-image: url(' + this.model.get('image') + ')';
-        }
-
-        return attributes;
-    },
-
 
     className: function() {
         var className = 'item collapsed';
