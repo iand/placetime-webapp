@@ -241,7 +241,7 @@ Application.Router.User = Backbone.Router.extend({
 
     register: function () {
         var register = new Application.View.Register({
-            model: new Application.Model.RegistrationInfo()
+            model: new Application.Model.Register()
         });
 
         Application.content.show(register);

@@ -12,8 +12,6 @@ Application.Model.Profile = Backbone.Model.extend({
     },
 
 
-
-
     follow: function(done, fail) {
         var defer = $.Deferred();
 

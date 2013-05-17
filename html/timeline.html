@@ -104,11 +104,20 @@
 
 
         <script type="text/template" id="register-template">
-            <h1>Register</h1>
+            <p class="register">
+                <span>Register</span>
+            </p>
+
             <form class="form">
                 <div class="field">
                     <label for="name">User name</label>
                     <input type="text" name="pid">
+                    <div class="hint"></div>
+                </div>
+
+                <div class="field">
+                    <label for="email">Email address</label>
+                    <input type="text" name="email">
                     <div class="hint"></div>
                 </div>
 
@@ -124,7 +133,7 @@
                     <div class="hint"></div>
                 </div>
 
-                <input type="submit" value="Register">
+                <input class="wide" type="submit" value="Register">
             </form>
         </script>
 

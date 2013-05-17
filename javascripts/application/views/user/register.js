@@ -1,6 +1,6 @@
 Application.View.Register = Backbone.Marionette.ItemView.extend({
     template: '#register-template',
-    className: 'container',
+    className: 'register container',
 
     events: {
         'keyup input': 'change',
@@ -39,21 +39,14 @@ Application.View.Register = Backbone.Marionette.ItemView.extend({
 
 
     register: function () {
-        // TODO: Use model
-        $.ajax({
-            url: '/-taddprofile',
-            type: 'post',
-            data: {
-                pid: this.model.get('pid'),
-                pwd: this.model.get('pwd'),
-                name: this.model.get('name')
-            },
-            success: function (data) {
-                Backbone.history.navigate('login', true);
-            },
-            error: function (model, response, options) {
-                // TODO: Display errors
-            }
+        var promise = this.model.save();
+
+        promise.done(function(){
+            Backbone.history.navigate('login', true);
+        });
+
+        promise.fail(function(){
+            // TODO: Display errors
         });
     }
 });

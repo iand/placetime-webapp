@@ -1,12 +1,13 @@
-Application.Model.RegistrationInfo = Backbone.Model.extend({
+Application.Model.Register = Backbone.Model.extend({
     defaults: {
         pid: null,
         pwd: null,
-        name: null
+        name: null,
+        email: null
     },
 
 
-    url: "/-session",
+    url: '/-taddprofile',
 
 
     initialize: function () {
@@ -35,6 +36,14 @@ Application.Model.RegistrationInfo = Backbone.Model.extend({
                 message: "Please enter your full name."
             };
         };
+        this.validators.email = function (value) {
+            return (value !== null && value.length !== 0) ? {
+                isValid: true
+            } : {
+                isValid: false,
+                message: "Please enter your email address."
+            };
+        };
     },
 
 
@@ -61,5 +70,21 @@ Application.Model.RegistrationInfo = Backbone.Model.extend({
         } : {
             isValid: true
         };
-    }
+    },
+
+
+    save: function() {
+        var promise = $.ajax({
+            url: this.url,
+            type: 'post',
+            data: {
+                pid: this.get('pid'),
+                pwd: this.get('pwd'),
+                name: this.get('name'),
+                email: this.get('email')
+            }
+        });
+
+        return promise;
+    },
 });

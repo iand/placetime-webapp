@@ -43,27 +43,30 @@ body.login {
     text-align: center;
     width: 358px;
 
-    .twitter a {
-        @include border-radius(7px);
-        background-color: #ff6600;
-        color: #fff;
-        display: inline-block;
-        padding: 12px 15px 12px;
-        text-decoration: none;
-
-        .icon-twitter {
-            color: #1ab7ea;
-            font-size: 20px;
+    .twitter {
+        a {
+            @include border-radius(7px);
+            background-color: #ff6600;
+            color: #fff;
+            display: inline-block;
+            padding: 12px 15px 12px;
             text-decoration: none;
+
+            .icon-twitter {
+                color: #1ab7ea;
+                font-size: 20px;
+                text-decoration: none;
+            }
         }
     }
 
+    .register,
     .login {
+        text-align: center;
+
         a {
             background-color: rgba(170, 170, 170, 0.8);
-            display: inline-block;
             padding: 3px 4px;
-            text-decoration: none;
         }
     }
 
@@ -75,14 +78,28 @@ body.login {
     .form {
         display: none;
     }
-
-    .register {
-        background-color: rgba(170, 170, 170, 0.8);
-        display: inline-block;
-        padding: 3px 4px;
-    }
 }
 
+
+.container.register {
+    height: 275px;
+    left: 50%;
+    margin-left: -179px;
+    margin-top: -137px;
+    position: absolute;
+    top: 50%;
+    width: 358px;
+
+    .register {
+        text-align: center;
+
+        span {
+            background-color: rgba(170, 170, 170, 0.8);
+            padding: 3px 4px;
+            margin: 0 auto;
+        }
+    }
+}
 
 
 .timelines {

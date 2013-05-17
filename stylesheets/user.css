@@ -234,11 +234,14 @@ body.login {
   font-size: 20px;
   text-decoration: none;
 }
+.container.login .register,
+.container.login .login {
+  text-align: center;
+}
+.container.login .register a,
 .container.login .login a {
   background-color: rgba(170, 170, 170, 0.8);
-  display: inline-block;
   padding: 3px 4px;
-  text-decoration: none;
 }
 .container.login .hint {
   padding-left: 136px;
@@ -247,10 +250,23 @@ body.login {
 .container.login .form {
   display: none;
 }
-.container.login .register {
+
+.container.register {
+  height: 275px;
+  left: 50%;
+  margin-left: -179px;
+  margin-top: -137px;
+  position: absolute;
+  top: 50%;
+  width: 358px;
+}
+.container.register .register {
+  text-align: center;
+}
+.container.register .register span {
   background-color: rgba(170, 170, 170, 0.8);
-  display: inline-block;
   padding: 3px 4px;
+  margin: 0 auto;
 }
 
 .timelines {
