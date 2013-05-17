@@ -7,6 +7,17 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
     },
 
 
+    modelEvents: {
+        'change': function(model) {
+            if (model.get('view') === 'search') {
+                return;
+            }
+
+            this.render();
+        }
+    },
+
+
     refresh: function() {
         this.trigger('refresh');
 
