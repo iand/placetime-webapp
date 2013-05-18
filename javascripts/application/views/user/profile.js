@@ -8,15 +8,21 @@ Application.View.Profile = Backbone.Marionette.ItemView.extend({
     },
 
 
+    modelEvents: {
+        'change': 'render'
+    },
+
+
 
     submit: function() {
         var data = $(event.target).serializeObject();
 
 
-        var promise = this.model.set(data).save();
+        var self    = this,
+            promise = this.model.set(data).save();
 
         promise.done(function(){
-            self.trigger('created');
+            Backbone.history.navigate('timeline', true);
         });
 
         promise.fail(function(){
@@ -28,7 +34,7 @@ Application.View.Profile = Backbone.Marionette.ItemView.extend({
 
 
     cancel: function() {
-        this.trigger('cancelled');
+        Backbone.history.navigate('timeline', true);
 
         return false;
     },

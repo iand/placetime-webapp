@@ -123,6 +123,7 @@ input {
 }
 
 input[type=text],
+input[type=email],
 input[type=password],
 input[type=search],
 input[type=date],
@@ -888,13 +889,13 @@ body.login {
   font-size: 14px;
   left: 50%;
   height: 16px;
-  padding: 6px 0;
+  padding: 4px 0;
   position: absolute;
   margin-left: -100px;
   text-align: center;
-  top: -17px;
+  top: -14px;
   width: 215px;
-  border: 2px solid #999999;
+  border: 1px solid #ffffff;
 }
 .timeline .needle .now {
   color: #ff6600;

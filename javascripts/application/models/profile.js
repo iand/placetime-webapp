@@ -12,62 +12,63 @@ Application.Model.Profile = Backbone.Model.extend({
     },
 
 
-    follow: function(done, fail) {
-        var defer = $.Deferred();
+    save: function(done, fail) {
+        this.trigger('updated', this.attributes);
 
-        defer.done(done);
-        defer.fail(fail);
+        var promise = $.ajax({
+            url: '/-tupdateprofile',
+            type: 'post',
+            data: {
+                pid: Application.session.get('pid'),
+                name: this.get('name'),
+                feedurl: this.get('feedurl'),
+                bio: this.get('bio'),
+                email: this.get('email')
+            }
+        });
 
+
+        promise.done(done);
+        promise.fail(fail);
+
+        return promise;
+    },
+
+
+    follow: function() {
         this.collection.trigger('profile:follow', this.attributes);
         this.trigger('follow', this.attributes);
 
-        $.ajax({
+        var promise = $.ajax({
             url: '/-tfollow',
             type: 'post',
             data: {
                 pid: Application.session.get('pid'),
                 followpid: this.get('pid')
-            },
-            success: function() {
-                defer.resolve();
-            },
-            failure: function() {
-                defer.reject();
             }
         });
 
-        return defer.promise();
+        return promise;
     },
 
 
 
 
-    unfollow: function(done, fail) {
-        var defer = $.Deferred();
-
-        defer.done(done);
-        defer.fail(fail);
-
+    unfollow: function() {
         this.collection.trigger('profile:unfollow', this.attributes);
         this.collection.remove(this);
 
         this.trigger('unfollow', this.attributes);
 
-        $.ajax({
+        var promise = $.ajax({
             url: '/-tunfollow',
             type: 'post',
             data: {
                 pid: Application.session.get('pid'),
                 followpid: this.get('pid')
-            },
-            success: function() {
-                defer.resolve();
-            },
-            failure: function() {
-                defer.reject();
             }
         });
 
-        return defer.promise();
+        return promise;
     }
 });

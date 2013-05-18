@@ -7,6 +7,12 @@ Application.Model.Session = Backbone.Model.extend({
         }
     },
 
+    events: {
+        'change': function() {
+            console.log('tets');
+        }
+    },
+
 
     check: function (done, fail) {
         var self = this;
@@ -23,10 +29,14 @@ Application.Model.Session = Backbone.Model.extend({
                 url: '/-chksession'
             })
             .done(function () {
-                var cookie = $.cookie('ptsession');
+                var ptsession = $.cookie('ptsession');
 
-                if (cookie !== undefined) {
-                    self.set('pid', cookie.split('|')[0]);
+                if (ptsession !== undefined) {
+                    self.set('pid', ptsession.split('|')[0]);
+                }
+
+                if ($.cookie('ptnewuser') === undefined) {
+                    self.set('id', ptsession.split('|')[0]);
                 }
 
                 defer.resolve();

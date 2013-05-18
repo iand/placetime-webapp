@@ -92,10 +92,14 @@ Application.on('initialize:after', function(options){
     });
 
     Application.session.check(function(){
-        if (matched) {
-            return;
+        // New user, display email
+        if (Application.session.isNew() === false) {
+            Backbone.history.navigate('profile/email', true);
         } else {
-            Backbone.history.navigate('timeline', true);
+            // No route matched
+            if (matched === false) {
+                Backbone.history.navigate('timeline', true);
+            }
         }
     }, function(){
         if (['login', 'register'].indexOf(Backbone.history.fragment) !== -1) {

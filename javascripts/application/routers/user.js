@@ -7,7 +7,9 @@ Application.Router.User = Backbone.Router.extend({
         'timeline': 'timeline',
         'followings': 'followings',
         'followers': 'followers',
+
         'profile': 'profile',
+        'profile/email': 'profileEmail',
 
         'user/:id': 'timeline',
         'followers/:id': 'followers',
@@ -189,6 +191,30 @@ Application.Router.User = Backbone.Router.extend({
 
         check.done(function(){
             var profile = new Application.View.Profile({
+                model: new Application.Model.Profile({
+                    pid: Application.session.get('pid')
+                })
+            });
+
+            Application.content.show(profile);
+        });
+
+
+        check.fail(function(){
+            Backbone.history.navigate('login', true);
+        });
+    },
+
+
+
+    profileEmail: function () {
+        var self = this;
+
+
+        var check = Application.session.check();
+
+        check.done(function(){
+            var profile = new Application.View.ProfileEmail({
                 model: new Application.Model.Profile({
                     pid: Application.session.get('pid')
                 })

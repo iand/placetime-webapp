@@ -5,9 +5,9 @@ module.exports = function(grunt) {
                 options: {
                     mangle: false,
                     compress: false,
-                    sourceMap: 'javascripts/application/source-map.js',
+                    sourceMap: 'javascripts/application.map',
                     sourceMapRoot: '/-assets/',
-                    sourceMappingURL: '/-assets/javascripts/application/source-map.js'
+                    sourceMappingURL: '/-assets/javascripts/application.map'
                 },
                 files: {
                     'javascripts/application.js' : [
@@ -21,11 +21,9 @@ module.exports = function(grunt) {
                         'javascripts/application/views/**/timeline.js',
                         'javascripts/application/views/**/timeline-item.js',
                         'javascripts/application/views/**/timeline-profile.js',
+                        'javascripts/application/views/**/profile.js',
                         'javascripts/application/views/**/*.js',
-                        'javascripts/application/routers/*.js',
-
-                        // Exclude
-                        '!javascripts/application/source-map.js'
+                        'javascripts/application/routers/*.js'
                     ]
                 }
             },
@@ -33,9 +31,9 @@ module.exports = function(grunt) {
                 options: {
                     mangle: false,
                     compress: false,
-                    sourceMap: 'javascripts/vendor/source-map.js',
+                    sourceMap: 'javascripts/vendor.map',
                     sourceMapRoot: '/-assets/',
-                    sourceMappingURL: '/-assets/javascripts/vendor/source-map.js'
+                    sourceMappingURL: '/-assets/javascripts/vendor.map'
                 },
                 files: {
                     'javascripts/vendor.js' : [
@@ -47,7 +45,6 @@ module.exports = function(grunt) {
 
                         // Exclude
                         '!javascripts/vendor/modernizr.js',
-                        '!javascripts/vendor/source-map.js'
                     ]
                 }
             }
@@ -98,16 +95,14 @@ module.exports = function(grunt) {
                 files: [
                     'javascripts/application/**/**/**/*.js',
                     'javascripts/application/**/**/*.js',
-                    'javascripts/application/**/*.js',
-                    '!javascripts/application/source-map.js'
+                    'javascripts/application/**/*.js'
                 ],
                 tasks: ['uglify:application']
             },
             javascriptVendor: {
                 files: [
                     'javascripts/vendor/**/*.js',
-                    'javascripts/vendor/*.js',
-                    '!javascripts/vendor/source-map.js'
+                    'javascripts/vendor/*.js'
                 ],
                 tasks: ['uglify:vendor']
             },
@@ -124,7 +119,7 @@ module.exports = function(grunt) {
     });
 
 
-    grunt.registerTask('default', 'concat compass min');
+    grunt.registerTask('default', ['uglify', 'concat', 'compass:dev']);
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
