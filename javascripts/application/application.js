@@ -93,7 +93,7 @@ Application.on('initialize:after', function(options){
 
     Application.session.check(function(){
         // New user, display email
-        if (Application.session.isNew() === false) {
+        if (Application.session.isNew() == true) {
             Backbone.history.navigate('profile/email', true);
         } else {
             // No route matched
