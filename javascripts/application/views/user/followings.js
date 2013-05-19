@@ -1,5 +1,5 @@
 Application.View.Followings = Backbone.Marionette.CompositeView.extend({
-    template: '#followers-template',
+    template: '#followings-template',
     className: 'followings',
 
     itemView: Application.View.Following,
