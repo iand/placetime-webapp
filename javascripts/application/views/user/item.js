@@ -17,6 +17,14 @@ Application.View.Item = Application.View.TimelineItem.extend({
             });
 
             return model.time();
+        },
+
+        getIframeUrl: function(url) {
+            if (/youtube/.test(url) === true) {
+                return 'http://www.youtube.com/embed/' + url.replace(
+                    'https://gdata.youtube.com/feeds/api/videos/', ''
+                );
+            }
         }
     },
 

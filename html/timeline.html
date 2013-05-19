@@ -209,7 +209,18 @@
 
 
             <% if (media == "video") { %>
-            <!-- video specific markup here -->
+                <p class="text pull-left">
+                    <a class="fancybox fancybox.iframe" href="<%= getIframeUrl(link) %>">
+                        <i class="icon-play-circle"></i>
+                        <%= text %>
+                    </a>
+                </p>
+
+                <% if (pid !== source) { %>
+                <p class="source pull-left">
+                    <a href="#user/<%= source %>">copied by <%= source %></a>
+                </p>
+                <% } %>
             <% } else if (media == "audio") { %>
             <!-- audio specific markup here -->
             <% } else { %>
