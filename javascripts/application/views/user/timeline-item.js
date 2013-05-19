@@ -12,7 +12,7 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
 
         if (this.model.get('image')) {
             if (/^https?/.test(this.model.get('image')) === true) {
-                attributes.style = 'background-image: url' + this.model.get('image') + ')';
+                attributes.style = 'background-image: url(' + this.model.get('image') + ')';
             } else {
                 attributes.style = 'background-image: url(/-img/' + this.model.get('image') + ')';
             }
