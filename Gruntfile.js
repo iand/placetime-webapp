@@ -97,14 +97,20 @@ module.exports = function(grunt) {
                     'javascripts/application/**/**/*.js',
                     'javascripts/application/**/*.js'
                 ],
-                tasks: ['uglify:application']
+                tasks: ['uglify:application'],
+                options: {
+                    livereload: true
+                }
             },
             javascriptVendor: {
                 files: [
                     'javascripts/vendor/**/*.js',
                     'javascripts/vendor/*.js'
                 ],
-                tasks: ['uglify:vendor']
+                tasks: ['uglify:vendor'],
+                options: {
+                    livereload: true
+                }
             },
             stylesheets: {
                 files: [
@@ -113,7 +119,10 @@ module.exports = function(grunt) {
                     'stylesheets/vendor/*.css',
                     'stylesheets/vendor/**/*.css'
                 ],
-                tasks: ['compass:dev', 'concat']
+                tasks: ['compass:dev', 'concat'],
+                options: {
+                    livereload: true
+                }
             }
         }
     });
