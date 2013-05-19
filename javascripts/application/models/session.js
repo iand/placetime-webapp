@@ -35,7 +35,7 @@ Application.Model.Session = Backbone.Model.extend({
                     self.set('pid', ptsession.split('|')[0]);
                 }
 
-                if ($.cookie('ptnewuser') != false) {
+                if ($.cookie('ptnewuser') === undefined || $.cookie('ptnewuser') === "null") {
                     self.set('id', ptsession.split('|')[0]);
                 }
 
