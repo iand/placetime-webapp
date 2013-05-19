@@ -9,6 +9,10 @@ Application.View.Followings = Backbone.Marionette.CompositeView.extend({
         'click .unfollow': 'unfollow'
     },
 
+    modelEvents: {
+        'change:loading': 'render'
+    },
+
 
     initialize: function (options) {
         this.on('infinite:load', this.load);

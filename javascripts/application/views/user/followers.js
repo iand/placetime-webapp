@@ -10,6 +10,10 @@ Application.View.Followers = Backbone.Marionette.CompositeView.extend({
         'click .follow': 'follow'
     },
 
+    modelEvents: {
+        'change:loading': 'render'
+    },
+
 
     initialize: function (options) {
         this.on('infinite:load', this.load);

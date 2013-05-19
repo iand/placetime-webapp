@@ -11,6 +11,11 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         'click .icon-repeat': 'now'
     },
 
+    modelEvents: {
+        'change:loading': 'render'
+    },
+
+
     itemViewContainer: '.children',
 
     itemView: Application.View.Item,

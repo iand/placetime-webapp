@@ -5,6 +5,10 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
         'click .promote': 'promote'
     },
 
+    modelEvents: {
+        'change:loading': 'render'
+    },
+
     itemViewContainer: '.children',
 
     itemView: Application.View.SearchItem,
