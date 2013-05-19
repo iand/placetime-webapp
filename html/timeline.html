@@ -197,6 +197,7 @@
         <script type="text/template" id="item-template">
             <div class="overlay"></div>
 
+
             <p class="sash event">
                 <i class="icon-calendar"></i>
             </p>
@@ -206,6 +207,12 @@
                     <i class="icon-plus"></i>
                 </span>
             </p>
+            <p class="sash video">
+                <i class="icon-facetime-video"></i>
+            </p>
+            <p class="sash audio">
+                <i class="icon-headphones"></i>
+            </p>
 
 
             <div class="icon pull-left">
@@ -214,6 +221,7 @@
             <p class="username pull-left">
                 <a href="#user/<%= pid %>"><%= pid %></a>
             </p>
+
 
             <% if (media == "video") { %>
                 <p class="text pull-left">
@@ -481,6 +489,7 @@
         <script type="text/template" id="search-template">
             <div class="overlay"></div>
 
+
             <p class="sash event">
                 <i class="icon-calendar"></i>
             </p>
@@ -497,14 +506,13 @@
                 <i class="icon-headphones"></i>
             </p>
 
+
             <div class="icon pull-left">
                 <img src="/-assets/images/user.jpg" width="40" height="40">
             </div>
             <p class="username pull-left">
                 <a href="#user/<%= pid %>"><%= pid %></a>
             </p>
-
-
 
 
             <% if (media == "video") { %>
