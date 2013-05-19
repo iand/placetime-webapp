@@ -93,7 +93,5 @@ Application.Model.Session = Backbone.Model.extend({
     destroy: function () {
         // TODO: Replace with XHR call
         $.cookie('ptsession', null);
-
-        Backbone.Model.prototype.destroy.apply(this);
     }
 });
