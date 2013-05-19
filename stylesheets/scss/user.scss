@@ -510,6 +510,15 @@ body.login {
                 }
             }
 
+            &.event.added {
+                .event-added.sash {
+                    @include single-transition(
+                        opacity, 1s
+                    );
+                    opacity: 1;
+                }
+            }
+
             &.event.past {
                 .overlay {
                     @include single-transition(
@@ -547,6 +556,14 @@ body.login {
                 z-index: 2;
 
                 &.event {
+                    border-color: transparent #ff6600 transparent transparent;
+                    border-width: 0 48px 48px 0;
+                    font-size: 14px;
+                    top: 0;
+                    width: 120px;
+                }
+
+                &.event-added {
                     border-color: transparent #0093a7 transparent transparent;
                     border-width: 0 48px 48px 0;
                     font-size: 14px;
@@ -691,13 +708,13 @@ body.login {
             font-size: 14px;
             left: 50%;
             height: 16px;
-            padding: 4px 0;
+            padding: 6px 0;
             position: absolute;
             margin-left: -100px;
             text-align: center;
-            top: -14px;
+            top: -18px;
             width: 215px;
-            border: 1px solid #ffffff;
+            border: 2px solid #999999;
         }
 
         .now {

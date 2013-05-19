@@ -713,6 +713,14 @@ body.login {
   transition: opacity 1s;
   opacity: 1;
 }
+.timeline .items .item.event.added .event-added.sash,
+.timeline .searches.items .item.event.added .event-added.sash {
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+  opacity: 1;
+}
 .timeline .items .item.event.past .overlay,
 .timeline .searches.items .item.event.past .overlay {
   -webkit-transition: background-color 1s linear;
@@ -750,6 +758,14 @@ body.login {
 }
 .timeline .items .item .sash.event,
 .timeline .searches.items .item .sash.event {
+  border-color: transparent #ff6600 transparent transparent;
+  border-width: 0 48px 48px 0;
+  font-size: 14px;
+  top: 0;
+  width: 120px;
+}
+.timeline .items .item .sash.event-added,
+.timeline .searches.items .item .sash.event-added {
   border-color: transparent #0093a7 transparent transparent;
   border-width: 0 48px 48px 0;
   font-size: 14px;
@@ -889,13 +905,13 @@ body.login {
   font-size: 14px;
   left: 50%;
   height: 16px;
-  padding: 4px 0;
+  padding: 6px 0;
   position: absolute;
   margin-left: -100px;
   text-align: center;
-  top: -14px;
+  top: -18px;
   width: 215px;
-  border: 1px solid #ffffff;
+  border: 2px solid #999999;
 }
 .timeline .needle .now {
   color: #ff6600;
