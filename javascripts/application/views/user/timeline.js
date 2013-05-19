@@ -50,6 +50,9 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         // On show resize the child
         this.listenTo(view, 'show', this.resize);
 
+        // On render resize the child
+        this.listenTo(view, 'render', this.resize);
+
         // On scroll trigger infinite scroll
         this.listenTo(view, 'scroll', this.infiniteScroll);
 
