@@ -243,7 +243,7 @@
                 </p>
             <% } %>
 
-            <% if (pid !== source) { %>
+            <% if (pid !== source && source !== "") { %>
             <p class="source pull-left">
                 <a href="#user/<%= source %>">copied by <%= source %></a>
             </p>
@@ -535,7 +535,7 @@
                     </a>
                 </p>
 
-                <% if (pid !== source) { %>
+                <% if (pid !== source && source !== "") { %>
                 <p class="source pull-left">
                     <a href="#user/<%= source %>">copied by <%= source %></a>
                 </p>
@@ -549,13 +549,15 @@
                         <%= text %>
                     </a>
                 </p>
+            <% } %>
 
-                <% if (pid !== source) { %>
+            <% if (pid !== source && source !== "") { %>
                 <p class="source pull-left">
                     <a href="#user/<%= source %>">copied by <%= source %></a>
                 </p>
-                <% } %>
+            <% } %>
 
+            <% if (media !== "video" && media !== "audio") { %>
                 <p class="time pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
                         <% if (isEvent(event)) { %>
