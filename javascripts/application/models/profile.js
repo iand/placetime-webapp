@@ -37,7 +37,7 @@ Application.Model.Profile = Backbone.Model.extend({
 
     follow: function() {
         this.collection.trigger('profile:follow', this.attributes);
-        this.trigger('follow', this.attributes);
+        this.trigger('followed', this.attributes);
 
         var promise = $.ajax({
             url: '/-tfollow',
@@ -58,7 +58,7 @@ Application.Model.Profile = Backbone.Model.extend({
         this.collection.trigger('profile:unfollow', this.attributes);
         this.collection.remove(this);
 
-        this.trigger('unfollow', this.attributes);
+        this.trigger('unfollowed', this.attributes);
 
         var promise = $.ajax({
             url: '/-tunfollow',

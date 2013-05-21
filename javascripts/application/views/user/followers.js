@@ -5,11 +5,6 @@ Application.View.Followers = Backbone.Marionette.CompositeView.extend({
     itemView: Application.View.Follower,
     itemViewContainer: '.children',
 
-    events: {
-        'click .unfollow': 'unfollow',
-        'click .follow': 'follow'
-    },
-
     modelEvents: {
         'change:loading': 'render'
     },
@@ -39,25 +34,13 @@ Application.View.Followers = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    follow: function(event) {
-        var $profile = $(event.currentTarget).closest('[data-pid]');
-
-        var model = this.collection.get(
-            $profile.data('pid')
-        );
-
-        model.follow();
+    onFollowed: function() {
+        this.$el.addClass('followed');
     },
 
 
-    unfollow: function(event) {
-        var $profile = $(event.currentTarget).closest('[data-pid]');
+    onUnfollowed: function() {
 
-        var model = this.collection.get(
-            $profile.data('pid')
-        );
-
-        model.unfollow();
     },
 
 

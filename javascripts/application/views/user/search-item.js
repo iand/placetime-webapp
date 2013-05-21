@@ -1,5 +1,5 @@
 Application.View.SearchItem = Application.View.TimelineItem.extend({
-    template: '#search-template',
+    template: '#search-item-template',
 
     templateHelpers: {
         isEvent: function(event) {

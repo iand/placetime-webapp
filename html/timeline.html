@@ -365,6 +365,13 @@
 
 
         <script type="text/template" id="follower-template">
+            <p class="sash followed">
+                <span>
+                    Followed
+                    <i class="icon-plus"></i>
+                </span>
+            </p>
+
             <div class="icon pull-left">
                 <img src="/-assets/images/user.jpg" width="40" height="40">
             </div>
@@ -489,7 +496,7 @@
         </script>
 
 
-        <script type="text/template" id="search-template">
+        <script type="text/template" id="search-item-template">
             <div class="overlay"></div>
 
             <p class="sash event">
@@ -564,6 +571,44 @@
 
             <a class="button promote">
                 <i class="icon-ok"></i>
+            </a>
+        </script>
+
+
+
+        <script type="text/template" id="search-profile-template">
+            <p class="sash followed">
+                <span>
+                    Followed
+                    <i class="icon-plus"></i>
+                </span>
+            </p>
+
+            <div class="icon pull-left">
+                <img src="/-assets/images/user.jpg" width="40" height="40">
+            </div>
+
+            <p class="username pull-left">
+                <a href="#user/<%= pid %>"><%= pid %></a>
+            </p>
+
+            <% if (bio) { %>
+            <p class="bio pull-left">
+                <%= bio %>
+            </p>
+            <% } %>
+
+            <ul class="statistics pull-left">
+                <li class="followings">
+                    <a href="#followings/<%= pid %>"><%= followingcount %> following</a>
+                </li>
+                <li class='followers'>
+                    <a href="#followers/<%= pid %>"><%= followercount %> followers</a>
+                </li>
+            </ul>
+
+            <a class="button follow">
+                <i class="icon-plus"></i>
             </a>
         </script>
 

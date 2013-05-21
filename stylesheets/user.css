@@ -662,75 +662,6 @@ body.login {
 .timeline .searches.items .item.image .overlay {
   display: block;
 }
-.timeline .items .item.promoted .overlay,
-.timeline .searches.items .item.promoted .overlay {
-  -webkit-transition: background-color 1s linear;
-  -moz-transition: background-color 1s linear;
-  -o-transition: background-color 1s linear;
-  transition: background-color 1s linear;
-  background-color: rgba(255, 255, 255, 0.65);
-  display: block;
-  z-index: 3;
-}
-.timeline .items .item.promoted .promote,
-.timeline .searches.items .item.promoted .promote {
-  -webkit-transition: opacity 500ms;
-  -moz-transition: opacity 500ms;
-  -o-transition: opacity 500ms;
-  transition: opacity 500ms;
-  opacity: 0;
-}
-.timeline .items .item.promoted .added.sash,
-.timeline .searches.items .item.promoted .added.sash {
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  transition: opacity 1s;
-  display: block;
-  opacity: 1;
-}
-.timeline .items .item.video .video.sash,
-.timeline .searches.items .item.video .video.sash {
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  transition: opacity 1s;
-  opacity: 1;
-}
-.timeline .items .item.audio .audio.sash,
-.timeline .searches.items .item.audio .audio.sash {
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  transition: opacity 1s;
-  opacity: 1;
-}
-.timeline .items .item.event .event.sash,
-.timeline .searches.items .item.event .event.sash {
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  transition: opacity 1s;
-  opacity: 1;
-}
-.timeline .items .item.event.added .event-added.sash,
-.timeline .searches.items .item.event.added .event-added.sash {
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  transition: opacity 1s;
-  opacity: 1;
-}
-.timeline .items .item.event.past .overlay,
-.timeline .searches.items .item.event.past .overlay {
-  -webkit-transition: background-color 1s linear;
-  -moz-transition: background-color 1s linear;
-  -o-transition: background-color 1s linear;
-  transition: background-color 1s linear;
-  background-color: rgba(128, 128, 128, 0.65);
-  display: block;
-  z-index: 3;
-}
 .timeline .items .item .overlay,
 .timeline .searches.items .item .overlay {
   background-color: rgba(15, 15, 15, 0.4);
@@ -742,87 +673,6 @@ body.login {
   height: 100%;
   width: 100%;
   z-index: 1;
-}
-.timeline .items .item .sash,
-.timeline .searches.items .item .sash {
-  border-style: solid;
-  color: #ffffff;
-  height: 0px;
-  opacity: 0;
-  line-height: 0px;
-  margin: 0;
-  position: absolute;
-  right: 0;
-  width: 0;
-  z-index: 2;
-}
-.timeline .items .item .sash.event,
-.timeline .searches.items .item .sash.event {
-  border-color: transparent #ff6600 transparent transparent;
-  border-width: 0 48px 48px 0;
-  font-size: 14px;
-  top: 0;
-  width: 120px;
-}
-.timeline .items .item .sash.event-added,
-.timeline .searches.items .item .sash.event-added {
-  border-color: transparent #0093a7 transparent transparent;
-  border-width: 0 48px 48px 0;
-  font-size: 14px;
-  top: 0;
-  width: 120px;
-}
-.timeline .items .item .sash.video,
-.timeline .searches.items .item .sash.video {
-  border-color: transparent #5f39bb transparent transparent;
-  border-width: 0 48px 48px 0;
-  font-size: 14px;
-  top: 0;
-  width: 120px;
-}
-.timeline .items .item .sash.audio,
-.timeline .searches.items .item .sash.audio {
-  border-color: transparent #bc1c48 transparent transparent;
-  border-width: 0 48px 48px 0;
-  font-size: 14px;
-  top: 0;
-  width: 120px;
-}
-.timeline .items .item .sash.added,
-.timeline .searches.items .item .sash.added {
-  border-color: transparent transparent #ff6600 transparent;
-  border-width: 0 0 24px 24px;
-  bottom: 0;
-  font-size: 12px;
-  text-align: right;
-  width: 120px;
-  z-index: 3;
-}
-.timeline .items .item .sash.added span,
-.timeline .searches.items .item .sash.added span {
-  display: inline-block;
-  padding: 6px;
-}
-.timeline .items .item .sash .icon-plus,
-.timeline .searches.items .item .sash .icon-plus {
-  padding-left: 6px;
-}
-.timeline .items .item .sash .icon-calendar,
-.timeline .items .item .sash .icon-facetime-video,
-.timeline .searches.items .item .sash .icon-calendar,
-.timeline .searches.items .item .sash .icon-facetime-video {
-  position: absolute;
-  right: -42px;
-  top: 5px;
-}
-.timeline .items .item .sash .icon-facetime-video,
-.timeline .searches.items .item .sash .icon-facetime-video {
-  top: 7px;
-}
-.timeline .items .item .sash .icon-headphones,
-.timeline .searches.items .item .sash .icon-headphones {
-  font-size: 16px;
-  top: 7px;
 }
 .timeline .items .item .username a,
 .timeline .searches.items .item .username a {
@@ -958,4 +808,155 @@ body.login {
 }
 .timeline .load-more {
   cursor: pointer;
+}
+
+.sash {
+  border-style: solid;
+  color: #ffffff;
+  height: 0px;
+  opacity: 0;
+  line-height: 0px;
+  margin: 0;
+  position: absolute;
+  right: 0;
+  width: 0;
+  z-index: 2;
+}
+.sash.event {
+  border-color: transparent #ff6600 transparent transparent;
+  border-width: 0 48px 48px 0;
+  font-size: 14px;
+  top: 0;
+  width: 120px;
+}
+.sash.event-added {
+  border-color: transparent #0093a7 transparent transparent;
+  border-width: 0 48px 48px 0;
+  font-size: 14px;
+  top: 0;
+  width: 120px;
+}
+.sash.video {
+  border-color: transparent #5f39bb transparent transparent;
+  border-width: 0 48px 48px 0;
+  font-size: 14px;
+  top: 0;
+  width: 120px;
+}
+.sash.audio {
+  border-color: transparent #bc1c48 transparent transparent;
+  border-width: 0 48px 48px 0;
+  font-size: 14px;
+  top: 0;
+  width: 120px;
+}
+.sash.added, .sash.followed {
+  border-color: transparent transparent #ff6600 transparent;
+  border-width: 0 0 24px 24px;
+  bottom: 0;
+  font-size: 12px;
+  text-align: right;
+  z-index: 3;
+}
+.sash.added span, .sash.followed span {
+  display: inline-block;
+  padding: 12px 6px 6px;
+}
+.sash.added {
+  width: 120px;
+}
+.sash.followed {
+  width: 82px;
+}
+.sash .icon-plus,
+.sash .icon-calendar,
+.sash .icon-headphones,
+.sash .icon-facetime-video {
+  position: absolute;
+  right: -42px;
+}
+.sash .icon-calendar,
+.sash .icon-facetime-video {
+  top: 5px;
+}
+.sash .icon-plus {
+  padding-left: 6px;
+}
+.sash .icon-facetime-video {
+  top: 7px;
+}
+.sash .icon-headphones {
+  font-size: 16px;
+  top: 7px;
+}
+
+div.event .event.sash,
+div.audio .audio.sash,
+div.video .video.sash,
+div.event.added .event-added.sash {
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+  opacity: 1;
+}
+
+.past .overlay {
+  -webkit-transition: background-color 1s linear;
+  -moz-transition: background-color 1s linear;
+  -o-transition: background-color 1s linear;
+  transition: background-color 1s linear;
+  background-color: rgba(128, 128, 128, 0.65);
+  display: block;
+  z-index: 3;
+}
+
+.promoted .overlay,
+.demoted .overlay,
+.unfollowed .overlay,
+.followed .overlay {
+  -webkit-transition: background-color 1s linear;
+  -moz-transition: background-color 1s linear;
+  -o-transition: background-color 1s linear;
+  transition: background-color 1s linear;
+  background-color: rgba(255, 255, 255, 0.65);
+  display: block;
+  z-index: 3;
+}
+.promoted .promote,
+.promoted .demote,
+.promoted .follow,
+.promoted .unfollow,
+.demoted .promote,
+.demoted .demote,
+.demoted .follow,
+.demoted .unfollow,
+.unfollowed .promote,
+.unfollowed .demote,
+.unfollowed .follow,
+.unfollowed .unfollow,
+.followed .promote,
+.followed .demote,
+.followed .follow,
+.followed .unfollow {
+  -webkit-transition: opacity 500ms;
+  -moz-transition: opacity 500ms;
+  -o-transition: opacity 500ms;
+  transition: opacity 500ms;
+  opacity: 0;
+}
+.promoted .added.sash,
+.promoted .followed.sash,
+.demoted .added.sash,
+.demoted .followed.sash,
+.unfollowed .added.sash,
+.unfollowed .followed.sash,
+.followed .added.sash,
+.followed .followed.sash {
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+  display: block;
+  opacity: 1;
 }

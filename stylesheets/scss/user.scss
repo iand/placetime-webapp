@@ -454,82 +454,7 @@ body.login {
                 }
             }
 
-            &.promoted {
-                .overlay {
-                    @include single-transition(
-                        background-color, 1s, linear
-                    );
 
-                    background-color: rgba(255, 255, 255, 0.65);
-                    display: block;
-                    z-index: 3;
-                }
-
-                .promote {
-                    @include single-transition(
-                        opacity, 500ms
-                    );
-
-                    opacity: 0;
-                }
-
-                .added.sash {
-                    @include single-transition(
-                        opacity, 1s
-                    );
-
-                    display: block;
-                    opacity: 1;
-                }
-            }
-
-            &.video {
-                .video.sash {
-                    @include single-transition(
-                        opacity, 1s
-                    );
-                    opacity: 1;
-                }
-            }
-
-            &.audio {
-                .audio.sash {
-                    @include single-transition(
-                        opacity, 1s
-                    );
-                    opacity: 1;
-                }
-            }
-
-            &.event {
-                .event.sash {
-                    @include single-transition(
-                        opacity, 1s
-                    );
-                    opacity: 1;
-                }
-            }
-
-            &.event.added {
-                .event-added.sash {
-                    @include single-transition(
-                        opacity, 1s
-                    );
-                    opacity: 1;
-                }
-            }
-
-            &.event.past {
-                .overlay {
-                    @include single-transition(
-                        background-color, 1s, linear
-                    );
-
-                    background-color: rgba(128, 128, 128, 0.65);
-                    display: block;
-                    z-index: 3;
-                }
-            }
 
             .overlay {
                 background-color: rgba(15, 15, 15, 0.4);
@@ -541,86 +466,6 @@ body.login {
                 height: 100%;
                 width: 100%;
                 z-index: 1;
-            }
-
-            .sash {
-                border-style: solid;
-                color: #ffffff;
-                height: 0px;
-                opacity: 0;
-                line-height: 0px;
-                margin: 0;
-                position: absolute;
-                right: 0;
-                width: 0;
-                z-index: 2;
-
-                &.event {
-                    border-color: transparent #ff6600 transparent transparent;
-                    border-width: 0 48px 48px 0;
-                    font-size: 14px;
-                    top: 0;
-                    width: 120px;
-                }
-
-                &.event-added {
-                    border-color: transparent #0093a7 transparent transparent;
-                    border-width: 0 48px 48px 0;
-                    font-size: 14px;
-                    top: 0;
-                    width: 120px;
-                }
-
-                &.video {
-                    border-color: transparent #5f39bb transparent transparent;
-                    border-width: 0 48px 48px 0;
-                    font-size: 14px;
-                    top: 0;
-                    width: 120px;
-                }
-
-                &.audio {
-                    border-color: transparent #bc1c48 transparent transparent;
-                    border-width: 0 48px 48px 0;
-                    font-size: 14px;
-                    top: 0;
-                    width: 120px;
-                }
-
-                &.added {
-                    border-color: transparent transparent #ff6600 transparent;
-                    border-width: 0 0 24px 24px;
-                    bottom: 0;
-                    font-size: 12px;
-                    text-align: right;
-                    width: 120px;
-                    z-index: 3;
-
-                    span {
-                        display: inline-block;
-                        padding: 6px;
-                    }
-                }
-
-                .icon-plus {
-                    padding-left: 6px;
-                }
-
-                .icon-calendar,
-                .icon-facetime-video {
-                    position: absolute;
-                    right: -42px;
-                    top: 5px;
-                }
-
-                .icon-facetime-video {
-                    top: 7px;
-                }
-
-                .icon-headphones {
-                    font-size: 16px;
-                    top: 7px;
-                }
             }
 
             .username {
@@ -773,5 +618,166 @@ body.login {
 
     .load-more {
         cursor: pointer;
+    }
+}
+
+
+
+
+
+
+
+
+.sash {
+    border-style: solid;
+    color: #ffffff;
+    height: 0px;
+    opacity: 0;
+    line-height: 0px;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    width: 0;
+    z-index: 2;
+
+    &.event {
+        border-color: transparent #ff6600 transparent transparent;
+        border-width: 0 48px 48px 0;
+        font-size: 14px;
+        top: 0;
+        width: 120px;
+    }
+
+    &.event-added {
+        border-color: transparent #0093a7 transparent transparent;
+        border-width: 0 48px 48px 0;
+        font-size: 14px;
+        top: 0;
+        width: 120px;
+    }
+
+    &.video {
+        border-color: transparent #5f39bb transparent transparent;
+        border-width: 0 48px 48px 0;
+        font-size: 14px;
+        top: 0;
+        width: 120px;
+    }
+
+    &.audio {
+        border-color: transparent #bc1c48 transparent transparent;
+        border-width: 0 48px 48px 0;
+        font-size: 14px;
+        top: 0;
+        width: 120px;
+    }
+
+
+    &.added,
+    &.followed {
+        border-color: transparent transparent #ff6600 transparent;
+        border-width: 0 0 24px 24px;
+        bottom: 0;
+        font-size: 12px;
+        text-align: right;
+        z-index: 3;
+
+        span {
+            display: inline-block;
+            padding: 12px 6px 6px;
+        }
+    }
+
+    &.added {
+        width: 120px;
+    }
+
+    &.followed {
+        width: 82px;
+    }
+
+    .icon-plus,
+    .icon-calendar,
+    .icon-headphones,
+    .icon-facetime-video {
+        position: absolute;
+        right: -42px;
+    }
+
+    .icon-calendar,
+    .icon-facetime-video {
+        top: 5px;
+    }
+
+    .icon-plus {
+        padding-left: 6px;
+    }
+
+    .icon-facetime-video {
+        top: 7px;
+    }
+
+    .icon-headphones {
+        font-size: 16px;
+        top: 7px;
+    }
+}
+
+
+// TODO: Remove element selector
+div.event .event.sash,
+div.audio .audio.sash,
+div.video .video.sash,
+div.event.added .event-added.sash {
+    @include single-transition(
+        opacity, 1s
+    );
+    opacity: 1;
+}
+
+.past .overlay {
+    @include single-transition(
+        background-color, 1s, linear
+    );
+
+    background-color: rgba(128, 128, 128, 0.65);
+    display: block;
+    z-index: 3;
+}
+
+
+.promoted,
+.demoted,
+.unfollowed,
+.followed {
+    .overlay {
+        @include single-transition(
+            background-color, 1s, linear
+        );
+
+        background-color: rgba(255, 255, 255, 0.65);
+        display: block;
+        z-index: 3;
+    }
+
+    .promote,
+    .demote,
+    .follow,
+    .unfollow {
+        @include single-transition(
+            opacity, 500ms
+        );
+
+        opacity: 0;
+    }
+
+    .added.sash,
+    .followed.sash {
+        @include single-transition(
+            opacity, 1s
+        );
+
+        display: block;
+        opacity: 1;
     }
 }

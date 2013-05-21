@@ -5,10 +5,6 @@ Application.View.Followings = Backbone.Marionette.CompositeView.extend({
     itemView: Application.View.Following,
     itemViewContainer: '.children',
 
-    events: {
-        'click .unfollow': 'unfollow'
-    },
-
     modelEvents: {
         'change:loading': 'render'
     },
@@ -36,18 +32,6 @@ Application.View.Followings = Backbone.Marionette.CompositeView.extend({
             self.model.set('loading', false);
         });
     },
-
-
-    unfollow: function(event) {
-        var $profile = $(event.currentTarget).closest('[data-pid]');
-
-        var model = this.collection.get(
-            $profile.data('pid')
-        );
-
-        model.unfollow();
-    },
-
 
 
     load: function(options){

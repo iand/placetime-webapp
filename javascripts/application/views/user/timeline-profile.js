@@ -8,6 +8,18 @@ Application.View.TimelineProfile = Backbone.Marionette.ItemView.extend({
     },
 
 
+    events: {
+        'click .unfollow': 'unfollow',
+        'click .follow': 'follow'
+    },
+
+
+    modelEvents: {
+        'followed': 'onFollowed',
+        'unfollowed': 'onUnfollowed'
+    },
+
+
     onShow: function() {
         this.$el.offset(); // Trigger repaint
         this.$el.removeClass('collapsed');
@@ -16,6 +28,25 @@ Application.View.TimelineProfile = Backbone.Marionette.ItemView.extend({
 
     onRender: function() {
         this.$el.data('model', this.model);
+    },
+
+
+    onFollowed: function() {
+        this.$el.addClass('followed');
+    },
+
+
+    onUnfollowed: function() {},
+
+
+
+    follow: function(event) {
+        this.model.follow();
+    },
+
+
+    unfollow: function(event) {
+        this.model.unfollow();
     },
 
 
