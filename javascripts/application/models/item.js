@@ -88,6 +88,7 @@ Application.Model.Item = Backbone.Model.extend({
         var promise = $.ajax({
             url: '/-tpromote',
             type: 'post',
+            dataType: 'json',
             data: {
                 pid: Application.session.get('pid'),
                 id: this.get('id')

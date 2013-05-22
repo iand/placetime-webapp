@@ -43,11 +43,6 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
             privateTimeline = this.subviews.findByCustom('privateTimeline');
 
         this.listenTo(publicTimeline, 'item:promoted', function(items) {
-            // TODO: Remove when move to returning arrays only
-            if (_.isArray(items) === false) {
-                items = [items];
-            }
-
             _.each(items, function(item) {
                 privateTimeline.trigger('item:add', item);
             });
