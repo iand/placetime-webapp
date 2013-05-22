@@ -188,6 +188,10 @@ input[type=submit].wide {
   width: 100%;
 }
 
+.ui-datepicker {
+  margin-top: 104px;
+}
+
 .page.header {
   position: relative;
   z-index: 100;

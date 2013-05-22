@@ -55,5 +55,16 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         this.trigger('cancelled');
 
         return false;
+    },
+
+
+    onShow: function(){
+        if (Modernizr.inputtypes.date === false) {
+            $('input[type=date]').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'mm/dd/yy'
+            });
+        }
     }
 });
