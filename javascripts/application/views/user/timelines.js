@@ -16,6 +16,7 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
             model: new Backbone.Model({
                 pid: this.options.public.pid,
                 view: this.options.public.view,
+                options: this.options.public.options,
                 status: 'p'
             })
         });
@@ -27,6 +28,7 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
             model: new Backbone.Model({
                 pid: this.options.private.pid,
                 view: this.options.private.view,
+                options: this.options.private.options,
                 status: 'm'
             })
         });
@@ -68,8 +70,8 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
             publicTimeline.trigger('view:timeline', pid);
         });
 
-        this.on('public:search', function(query) {
-            publicTimeline.trigger('view:search', query);
+        this.on('public:search', function(type, query) {
+            publicTimeline.trigger('view:search', type, query);
         });
 
         // Private timeline

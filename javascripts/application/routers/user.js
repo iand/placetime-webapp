@@ -14,7 +14,7 @@ Application.Router.User = Backbone.Router.extend({
         'user/:id': 'timeline',
         'followers/:id': 'followers',
         'followings/:id': 'followings',
-        'search/:query': 'search'
+        'search/:type/:query': 'search'
     },
 
 
@@ -72,7 +72,7 @@ Application.Router.User = Backbone.Router.extend({
     },
 
 
-    search: function (query) {
+    search: function (type, query) {
         var self = this;
 
 
@@ -80,13 +80,20 @@ Application.Router.User = Backbone.Router.extend({
 
         check.done(function(){
             if (Application.content.is('timelines') === true) {
-                Application.content.currentView.trigger('public:search', query);
+                Application.content.currentView.trigger('public:search', {
+                    type: type,
+                    query: query
+                });
             } else {
                 // Render timelines
                 var timeline = new Application.View.Timelines({
                     public: {
                         pid: Application.session.get('pid'),
-                        view: 'search'
+                        view: 'search',
+                        options: {
+                            type: type,
+                            query: query
+                        }
                     },
                     private: {
                         pid: Application.session.get('pid'),

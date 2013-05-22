@@ -16,8 +16,8 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
             this.followers(pid);
         });
 
-        this.on('view:search', function(query){
-            this.search(query);
+        this.on('view:search', function(options){
+            this.search(options);
         });
     },
 
@@ -112,17 +112,17 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
     },
 
 
-
-    search: function(query) {
+    // TODO: Migrate all to passing options object
+    search: function(options) {
         var collection = new Application.Collection.Searches();
 
-        var type;
-        if (this.model.get('view') === 'search') {
-            type = this.regionManager.get('collection').currentView.model.get('t');
-        } else if (this.model.get('view') === 'timeline') {
+        var query = options.query;
+        if (options.type === 'items') {
             type = 'i';
-        } else {
+        } else if (options.type === 'profiles') {
             type = 'p';
+        } else {
+            throw new Error("Invalid type");
         }
 
         var model = new Backbone.Model({

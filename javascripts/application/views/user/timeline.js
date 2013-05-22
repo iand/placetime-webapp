@@ -122,7 +122,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         });
 
         // Load view
-        this.trigger('view:' + this.model.get('view'));
+        this.trigger('view:' + this.model.get('view'), this.model.get('options'));
     },
 
 
