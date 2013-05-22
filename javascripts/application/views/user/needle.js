@@ -5,11 +5,12 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
     isRendered: false,
 
     initialize: function (options) {
-        this.on('scroll', this.scroll);
+        this.on('scroll', this.rotate);
+        this.on('scroll', this.update);
     },
 
 
-    scroll: function(event) {
+    update: function() {
         var offset = this.$el.offset();
 
         // Get element below needle
@@ -32,18 +33,16 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
         }
 
         else if (model.isToday() === true) {
-            this.update(time, ' hh:mm:ss A', 'Today at ');
+            this.updateText(time, ' hh:mm:ss A', 'Today at ');
         }
 
         else if (model.isEvent() === true) {
-            this.update(time, 'Do MMMM YYYY');
+            this.updateText(time, 'Do MMMM YYYY');
         }
 
         else {
-            this.update(time, 'Do MMMM YYYY hh:mm:ss A');
+            this.updateText(time, 'Do MMMM YYYY hh:mm:ss A');
         }
-
-        this.rotate(event);
     },
 
 
@@ -62,7 +61,7 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
 
 
 
-    update: function(time, format, prefix, suffix) {
+    updateText: function(time, format, prefix, suffix) {
         prefix = prefix || '';
         suffix = suffix || '';
 
@@ -87,6 +86,7 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
 
 
     onRender: function() {
+        this.update();
         this.isRendered = true;
     }
 });
