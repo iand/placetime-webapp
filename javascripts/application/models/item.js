@@ -11,7 +11,8 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
     defaults: {
-        source: undefined
+        source: undefined,
+        profileimageurl: undefined
     },
 
 
