@@ -19,7 +19,6 @@ Application.Router.User = Backbone.Router.extend({
 
 
     initialize: function () {
-        // TODO: Set object name to body class, override Application.content.show
         this.header = new Application.View.Header({
             model: new Backbone.Model({
                 pid: Application.session.get('pid')
@@ -34,9 +33,6 @@ Application.Router.User = Backbone.Router.extend({
     timeline: function (pid) {
         var self = this;
 
-
-        // TODO: Remove eventually
-        $('body').removeClass('login');
 
         var check = Application.session.check();
 
@@ -242,9 +238,6 @@ Application.Router.User = Backbone.Router.extend({
         var login = new Application.View.Login({
             model: new Application.Model.Credentials()
         });
-
-        // TODO: Remove and replace with backbone region show override
-        $('body').addClass('login');
 
         Application.content.show(login);
     },

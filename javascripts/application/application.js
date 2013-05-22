@@ -33,12 +33,6 @@ Backbone.Marionette.Region.prototype.is = function(view) {
 };
 
 
-// Backbone.Marionette.Region.prototype.show = function(view,b,c) {
-//     this.ensureEl();
-//     this.$el.replaceWith(view.el);
-// };
-
-
 Application.addInitializer(function(options){
     Application.session = new Application.Model.Session();
 
@@ -57,6 +51,10 @@ Application.addInitializer(function(options){
     } else {
         Application.router = new Application.Router.User();
     }
+
+    Application.router.on('route', function(route){
+        $('body').removeAttr('class').addClass(route);
+    });
 });
 
 
