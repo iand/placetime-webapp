@@ -1,5 +1,5 @@
-Application.View.ProfileEmail = Application.View.Profile.extend({
-    template: '#profile-email-template',
+Application.View.UserEmail = Application.View.User.extend({
+    template: '#user-email-template',
 
 
 

@@ -9,62 +9,41 @@ Application.Model.Session = Backbone.Model.extend({
 
     events: {
         'change': function() {
-            console.log('tets');
+
         }
     },
 
 
-    check: function (done, fail) {
+    check: function () {
         var self = this;
 
+        var promise = $.ajax({
+            url: '/-chksession'
+        })
+        .done(function () {
+            var ptsession = $.cookie('ptsession');
 
-        var defer = $.Deferred();
+            if (ptsession !== undefined) {
+                self.set('pid', ptsession.split('|')[0]);
+            }
 
-        defer.done(done);
-        defer.fail(fail);
+            if ($.cookie('ptnewuser') === undefined || $.cookie('ptnewuser') === "null") {
+                self.set('id', ptsession.split('|')[0]);
+            }
+        })
+        .fail(function () {
+            self.set('pid', null);
+        });
 
-
-        if (this.get('ptsession')) {
-            $.ajax({
-                url: '/-chksession'
-            })
-            .done(function () {
-                var ptsession = $.cookie('ptsession');
-
-                if (ptsession !== undefined) {
-                    self.set('pid', ptsession.split('|')[0]);
-                }
-
-                if ($.cookie('ptnewuser') === undefined || $.cookie('ptnewuser') === "null") {
-                    self.set('id', ptsession.split('|')[0]);
-                }
-
-                defer.resolve();
-            })
-            .fail(function () {
-                self.set('pid', null);
-                defer.reject();
-            });
-        } else {
-            defer.reject();
-        }
-
-
-        return defer.promise();
+        return promise;
     },
 
 
 
-    save: function (done, fail) {
+    save: function () {
         var self = this;
 
-
-        var defer = $.Deferred();
-
-        defer.done(done);
-        defer.fail(fail);
-
-        $.ajax({
+        var promise = $.ajax({
             url: '/-session',
             type: 'post',
             data: {
@@ -75,17 +54,13 @@ Application.Model.Session = Backbone.Model.extend({
         .done(function (data) {
             self.set('pwd', null);
             self.set('ptsession', $.cookie('ptsession'));
-
-            defer.resolve(data);
         })
         .fail(function (data) {
             self.set('pwd', null);
-
-            defer.fail(data);
         });
 
 
-        return defer.promise();
+        return promise;
     },
 
 

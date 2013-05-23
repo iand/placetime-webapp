@@ -24,8 +24,6 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
 
     timeline: function(options) {
-        console.log(options);
-        console.trace();
         var status, pid;
         if (options.pid === undefined) {
             pid    = this.model.get('pid');

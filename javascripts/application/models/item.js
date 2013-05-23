@@ -63,7 +63,7 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
 
-    save: function(done, fail) {
+    save: function() {
         var promise = $.ajax({
             url: '/-tadd',
             type: 'post',
@@ -74,9 +74,6 @@ Application.Model.Item = Backbone.Model.extend({
                 ets: this.get('ets')
             }
         });
-
-        promise.done(done);
-        promise.fail(fail);
 
         return promise;
     },

@@ -21,7 +21,7 @@ module.exports = function(grunt) {
                         'javascripts/application/views/**/timeline.js',
                         'javascripts/application/views/**/timeline-item.js',
                         'javascripts/application/views/**/timeline-profile.js',
-                        'javascripts/application/views/**/profile.js',
+                        'javascripts/application/views/**/user.js',
                         'javascripts/application/views/**/*.js',
                         'javascripts/application/routers/*.js'
                     ]

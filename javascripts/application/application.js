@@ -89,17 +89,21 @@ Application.on('initialize:after', function(options){
         root: '/'
     });
 
-    Application.session.check(function(){
+    var session = Application.session.check()
+
+    session.done(function(){
         // New user, display email
         if (Application.session.isNew() == true) {
-            Backbone.history.navigate('profile/email', true);
+            Backbone.history.navigate('user/email', true);
         } else {
             // No route matched
             if (matched === false) {
                 Backbone.history.navigate('timeline', true);
             }
         }
-    }, function(){
+    });
+
+    session.fail(function(){
         if (['login', 'register'].indexOf(Backbone.history.fragment) !== -1) {
             return;
         } else {

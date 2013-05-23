@@ -8,8 +8,8 @@ Application.Router.User = Backbone.Router.extend({
         'followings': 'followings',
         'followers': 'followers',
 
-        'profile': 'profile',
-        'profile/email': 'profileEmail',
+        'user': 'user',
+        'user/email': 'userEmail',
 
         'user/:id': 'timeline',
         'followers/:id': 'followers',
@@ -51,7 +51,10 @@ Application.Router.User = Backbone.Router.extend({
                 var timeline = new Application.View.Timelines({
                     public: {
                         pid: Application.session.get('pid'),
-                        view: 'timeline'
+                        view: 'timeline',
+                        options: {
+                            pid: pid
+                        }
                     },
                     private: {
                         pid: Application.session.get('pid'),
@@ -131,7 +134,10 @@ Application.Router.User = Backbone.Router.extend({
                 var timeline = new Application.View.Timelines({
                     public: {
                         pid: pid,
-                        view: 'followers'
+                        view: 'followers',
+                        options: {
+                            pid: pid
+                        }
                     },
                     private: {
                         pid: Application.session.get('pid'),
@@ -172,7 +178,10 @@ Application.Router.User = Backbone.Router.extend({
                 var timeline = new Application.View.Timelines({
                     public: {
                         pid: pid,
-                        view: 'followings'
+                        view: 'followings',
+                        options: {
+                            pid: pid
+                        }
                     },
                     private: {
                         pid: Application.session.get('pid'),
@@ -192,14 +201,14 @@ Application.Router.User = Backbone.Router.extend({
 
 
 
-    profile: function () {
+    user: function () {
         var self = this;
 
 
         var check = Application.session.check();
 
         check.done(function(){
-            var profile = new Application.View.Profile({
+            var profile = new Application.View.User({
                 model: new Application.Model.Profile({
                     pid: Application.session.get('pid')
                 })
@@ -216,14 +225,14 @@ Application.Router.User = Backbone.Router.extend({
 
 
 
-    profileEmail: function () {
+    userEmail: function () {
         var self = this;
 
 
         var check = Application.session.check();
 
         check.done(function(){
-            var profile = new Application.View.ProfileEmail({
+            var profile = new Application.View.UserEmail({
                 model: new Application.Model.Profile({
                     pid: Application.session.get('pid')
                 })

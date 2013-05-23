@@ -13,7 +13,7 @@ Application.Model.Profile = Backbone.Model.extend({
     },
 
 
-    save: function(done, fail) {
+    save: function() {
         this.trigger('updated', this.attributes);
 
         var promise = $.ajax({
@@ -28,9 +28,20 @@ Application.Model.Profile = Backbone.Model.extend({
             }
         });
 
+        return promise;
+    },
 
-        promise.done(done);
-        promise.fail(fail);
+
+    destroy: function() {
+        this.trigger('updated', this.attributes);
+
+        var promise = $.ajax({
+            url: '/-tremoveprofile',
+            type: 'post',
+            data: {
+                pid: Application.session.get('pid')
+            }
+        });
 
         return promise;
     },
