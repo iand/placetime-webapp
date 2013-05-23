@@ -312,6 +312,22 @@ body.login {
                 a {
                     border-bottom: 0;
                 }
+
+                i {
+                    @include single-transition(
+                        opacity, 500ms, ease
+                    );
+                    color: #bf3000;
+                    display: inline-block;
+                    margin-left: 5px;
+                    opacity: 0;
+                }
+
+                &:hover {
+                    i {
+                        opacity: 1;
+                    }
+                }
             }
 
 
@@ -675,7 +691,8 @@ body.login {
 
 
     &.added,
-    &.followed {
+    &.followed,
+    &.flagged {
         border-color: transparent transparent #ff6600 transparent;
         border-width: 0 0 24px 24px;
         bottom: 0;
@@ -685,7 +702,7 @@ body.login {
 
         span {
             display: inline-block;
-            padding: 12px 6px 6px;
+            padding: 7px 6px 6px;
         }
     }
 
@@ -697,7 +714,10 @@ body.login {
         width: 82px;
     }
 
-    .icon-plus,
+    &.flagged {
+        width: 82px;
+    }
+
     .icon-calendar,
     .icon-headphones,
     .icon-facetime-video {
@@ -750,12 +770,9 @@ div.event.added .event-added.sash {
 .promoted,
 .demoted,
 .unfollowed,
-.followed {
+.followed,
+.flagged {
     .overlay {
-        @include single-transition(
-            background-color, 1s, linear
-        );
-
         background-color: rgba(255, 255, 255, 0.65);
         display: block;
         z-index: 3;
@@ -768,17 +785,40 @@ div.event.added .event-added.sash {
         @include single-transition(
             opacity, 500ms
         );
-
         opacity: 0;
     }
 
     .added.sash,
-    .followed.sash {
+    .followed.sash,
+    .flagged.sash {
         @include single-transition(
             opacity, 1s
         );
+    }
+}
 
-        display: block;
+
+
+.promoted {
+    .added.sash {
+        opacity: 1;
+    }
+}
+
+.followed {
+    .followed.sash {
+        opacity: 1;
+    }
+}
+
+.unfollowed {
+    .unfollowed.sash {
+        opacity: 1;
+    }
+}
+
+.flagged {
+    .flagged.sash {
         opacity: 1;
     }
 }

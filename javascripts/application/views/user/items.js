@@ -3,9 +3,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     className: 'items',
 
     events: {
-        'click .promote': 'promote',
-        'click .demote': 'demote',
-
         // Because of how frequent the needle is re-rendered
         // it's more efficient to use event delegation
         'click .icon-repeat': 'now'
@@ -101,31 +98,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         } else {
             this.$el.find('.needle-view').empty();
         }
-    },
-
-
-
-    promote: function (event) {
-        var $item = $(event.currentTarget).closest('[data-id]');
-
-        var model = this.collection.get(
-            $item.data('id')
-        );
-        model.promote();
-
-        return false;
-    },
-
-
-    demote: function (event) {
-        var $item = $(event.currentTarget).closest('[data-id]');
-
-        var model = this.collection.get(
-            $item.data('id')
-        );
-        model.demote();
-
-        return false;
     },
 
 

@@ -1,6 +1,21 @@
 Application.View.TimelineProfile = Backbone.Marionette.ItemView.extend({
     className: 'item collapsed',
 
+
+    events: {
+        'click .flag': 'flag',
+        'click .unfollow': 'unfollow',
+        'click .follow': 'follow'
+    },
+
+
+    modelEvents: {
+        'flagged': 'onFlagged',
+        'followed': 'onFollowed',
+        'unfollowed': 'onUnfollowed'
+    },
+
+
     attributes: function() {
         return {
             'data-pid': this.model.get('pid')
@@ -8,45 +23,24 @@ Application.View.TimelineProfile = Backbone.Marionette.ItemView.extend({
     },
 
 
-    events: {
-        'click .unfollow': 'unfollow',
-        'click .follow': 'follow'
+    flag: function(event) {
+        this.model.flag();
+
+        return false;
     },
-
-
-    modelEvents: {
-        'followed': 'onFollowed',
-        'unfollowed': 'onUnfollowed'
-    },
-
-
-    onShow: function() {
-        this.$el.offset(); // Trigger repaint
-        this.$el.removeClass('collapsed');
-    },
-
-
-    onRender: function() {
-        this.$el.data('model', this.model);
-    },
-
-
-    onFollowed: function() {
-        this.$el.addClass('followed');
-    },
-
-
-    onUnfollowed: function() {},
-
 
 
     follow: function(event) {
         this.model.follow();
+
+        return false;
     },
 
 
     unfollow: function(event) {
         this.model.unfollow();
+
+        return false;
     },
 
 
@@ -63,5 +57,30 @@ Application.View.TimelineProfile = Backbone.Marionette.ItemView.extend({
             Backbone.Marionette.ItemView.prototype.remove.apply(self, args);
         });
         this.$el.addClass('collapsed');
-    }
+    },
+
+
+
+    onShow: function() {
+        this.$el.offset(); // Trigger repaint
+        this.$el.removeClass('collapsed');
+    },
+
+
+    onRender: function() {
+        this.$el.data('model', this.model);
+    },
+
+
+    onFlagged: function() {
+        this.$el.addClass('flagged');
+    },
+
+
+    onFollowed: function() {
+        this.$el.addClass('followed');
+    },
+
+
+    onUnfollowed: function() {}
 });

@@ -516,6 +516,25 @@ body.login {
 .timeline .followings .item .username a {
   border-bottom: 0;
 }
+.timeline .items .item .username i,
+.timeline .searches .item .username i,
+.timeline .followers .item .username i,
+.timeline .followings .item .username i {
+  -webkit-transition: opacity 500ms ease;
+  -moz-transition: opacity 500ms ease;
+  -o-transition: opacity 500ms ease;
+  transition: opacity 500ms ease;
+  color: #bf3000;
+  display: inline-block;
+  margin-left: 5px;
+  opacity: 0;
+}
+.timeline .items .item .username:hover i,
+.timeline .searches .item .username:hover i,
+.timeline .followers .item .username:hover i,
+.timeline .followings .item .username:hover i {
+  opacity: 1;
+}
 .timeline .items .item .text,
 .timeline .items .item .bio,
 .timeline .searches .item .text,
@@ -854,7 +873,7 @@ body.login {
   top: 0;
   width: 120px;
 }
-.sash.added, .sash.followed {
+.sash.added, .sash.followed, .sash.flagged {
   border-color: transparent transparent #ff6600 transparent;
   border-width: 0 0 24px 24px;
   bottom: 0;
@@ -862,9 +881,9 @@ body.login {
   text-align: right;
   z-index: 3;
 }
-.sash.added span, .sash.followed span {
+.sash.added span, .sash.followed span, .sash.flagged span {
   display: inline-block;
-  padding: 12px 6px 6px;
+  padding: 7px 6px 6px;
 }
 .sash.added {
   width: 120px;
@@ -872,7 +891,9 @@ body.login {
 .sash.followed {
   width: 82px;
 }
-.sash .icon-plus,
+.sash.flagged {
+  width: 82px;
+}
 .sash .icon-calendar,
 .sash .icon-headphones,
 .sash .icon-facetime-video {
@@ -918,11 +939,8 @@ div.event.added .event-added.sash {
 .promoted .overlay,
 .demoted .overlay,
 .unfollowed .overlay,
-.followed .overlay {
-  -webkit-transition: background-color 1s linear;
-  -moz-transition: background-color 1s linear;
-  -o-transition: background-color 1s linear;
-  transition: background-color 1s linear;
+.followed .overlay,
+.flagged .overlay {
   background-color: rgba(255, 255, 255, 0.65);
   display: block;
   z-index: 3;
@@ -942,7 +960,11 @@ div.event.added .event-added.sash {
 .followed .promote,
 .followed .demote,
 .followed .follow,
-.followed .unfollow {
+.followed .unfollow,
+.flagged .promote,
+.flagged .demote,
+.flagged .follow,
+.flagged .unfollow {
   -webkit-transition: opacity 500ms;
   -moz-transition: opacity 500ms;
   -o-transition: opacity 500ms;
@@ -951,16 +973,37 @@ div.event.added .event-added.sash {
 }
 .promoted .added.sash,
 .promoted .followed.sash,
+.promoted .flagged.sash,
 .demoted .added.sash,
 .demoted .followed.sash,
+.demoted .flagged.sash,
 .unfollowed .added.sash,
 .unfollowed .followed.sash,
+.unfollowed .flagged.sash,
 .followed .added.sash,
-.followed .followed.sash {
+.followed .followed.sash,
+.followed .flagged.sash,
+.flagged .added.sash,
+.flagged .followed.sash,
+.flagged .flagged.sash {
   -webkit-transition: opacity 1s;
   -moz-transition: opacity 1s;
   -o-transition: opacity 1s;
   transition: opacity 1s;
-  display: block;
+}
+
+.promoted .added.sash {
+  opacity: 1;
+}
+
+.followed .followed.sash {
+  opacity: 1;
+}
+
+.unfollowed .unfollowed.sash {
+  opacity: 1;
+}
+
+.flagged .flagged.sash {
   opacity: 1;
 }

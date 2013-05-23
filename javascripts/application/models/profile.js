@@ -36,6 +36,21 @@ Application.Model.Profile = Backbone.Model.extend({
     },
 
 
+    flag: function() {
+        this.trigger('flagged', this.attributes);
+
+        var promise = $.ajax({
+            url: '/-tflagprofile',
+            type: 'post',
+            data: {
+                pid: this.get('pid')
+            }
+        });
+
+        return promise;
+    },
+
+
     follow: function() {
         this.collection.trigger('profile:follow', this.attributes);
         this.trigger('followed', this.attributes);

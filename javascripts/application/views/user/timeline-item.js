@@ -1,5 +1,12 @@
 Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
+    events: {
+        'click .flag': 'flag',
+        'click .promote': 'promote',
+        'click .demote': 'demote'
+    },
+
     modelEvents: {
+        'flagged'       : 'onFlagged',
         'item:promoted' : 'onPromoted',
         'item:demoted'  : 'onDemoted'
     },
@@ -35,6 +42,32 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
             Backbone.Marionette.ItemView.prototype.remove.apply(self, args);
         });
         this.$el.addClass('collapsed');
+    },
+
+
+    flag: function(event) {
+        this.model.flag();
+
+        return false;
+    },
+
+
+    promote: function () {
+        this.model.promote();
+
+        return false;
+    },
+
+
+    demote: function () {
+        this.model.demote();
+
+        return false;
+    },
+
+
+    onFlagged: function() {
+        this.$el.addClass('flagged');
     },
 
 

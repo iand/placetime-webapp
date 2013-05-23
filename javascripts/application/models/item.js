@@ -82,9 +82,25 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
 
-    promote: function(done, fail) {
-        var self = this;
 
+    flag: function() {
+        this.trigger('flagged', this.attributes);
+
+        var promise = $.ajax({
+            url: '/-tflagprofile',
+            type: 'post',
+            data: {
+                pid: this.get('pid')
+            }
+        });
+
+        return promise;
+    },
+
+
+
+    promote: function() {
+        var self = this;
 
         var promise = $.ajax({
             url: '/-tpromote',
@@ -96,40 +112,32 @@ Application.Model.Item = Backbone.Model.extend({
             }
         });
 
-        promise.done(function(data) {
+        promise.done(function(data){
             self.trigger('item:promoted', data);
         });
-
-        promise.done(done);
-        promise.fail(fail);
 
         return promise;
     },
 
 
-    demote: function(done, fail) {
-        var defer = $.Deferred();
 
-        defer.done(done);
-        defer.fail(fail);
+    demote: function() {
+        var self = this;
 
-        this.trigger('item:demoted', this);
-
-        $.ajax({
+        var promise = $.ajax({
             url: '/-tdemote',
             type: 'post',
             data: {
                 pid: Application.session.get('pid'),
                 id: this.get('id')
-            },
-            success: function() {
-                defer.resolve();
-            },
-            failure: function() {
-                defer.reject();
             }
         });
 
-        return defer.promise();
+        promise.done(function(data){
+            // TODO: Eventually use response to remove it
+            self.trigger('item:demoted', self);
+        });
+
+        return promise;
     }
 });
