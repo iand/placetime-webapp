@@ -7,6 +7,12 @@
 @import 'form';
 @import 'vendor';
 
+
+
+.route-login {
+    background-image: url('/-assets/images/numbers.jpg');
+}
+
 // Page level elements
 .page {
     &.header {
@@ -27,11 +33,6 @@
             margin-bottom: 5px;
         }
     }
-}
-
-
-body.login {
-    background-image: url('/-assets/images/numbers.jpg');
 }
 
 .container.login {

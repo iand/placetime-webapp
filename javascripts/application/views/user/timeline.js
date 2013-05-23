@@ -15,8 +15,8 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         });
 
         // Load timeline view
-        this.on('view:timeline', function(pid){
-            this.timeline(pid);
+        this.on('view:timeline', function(options){
+            this.timeline(options);
         });
 
         // On view change update model

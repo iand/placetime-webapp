@@ -16,7 +16,7 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
             model: new Backbone.Model({
                 pid: this.options.public.pid,
                 view: this.options.public.view,
-                options: this.options.public.options,
+                options: this.options.public.options || {},
                 status: 'p'
             })
         });
@@ -28,7 +28,7 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
             model: new Backbone.Model({
                 pid: this.options.private.pid,
                 view: this.options.private.view,
-                options: this.options.private.options,
+                options: this.options.private.options || {},
                 status: 'm'
             })
         });
@@ -53,29 +53,29 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
         });
 
         // Public timeline
-        this.on('public:followings', function(pid) {
-            publicTimeline.trigger('view:followings', pid);
+        this.on('public:followings', function(options) {
+            publicTimeline.trigger('view:followings', options);
         });
 
-        this.on('public:followers', function(pid) {
-            publicTimeline.trigger('view:followers', pid);
+        this.on('public:followers', function(options) {
+            publicTimeline.trigger('view:followers', options);
         });
 
-        this.on('public:timeline', function(pid) {
-            publicTimeline.trigger('view:timeline', pid);
+        this.on('public:timeline', function(options) {
+            publicTimeline.trigger('view:timeline', options);
         });
 
-        this.on('public:search', function(type, query) {
-            publicTimeline.trigger('view:search', type, query);
+        this.on('public:search', function(options) {
+            publicTimeline.trigger('view:search', options);
         });
 
         // Private timeline
-        this.on('private:itemAdd', function(){
-            privateTimeline.trigger('view:itemAdd');
+        this.on('private:itemAdd', function(options) {
+            privateTimeline.trigger('view:itemAdd', options);
         });
 
-        this.on('private:timeline', function(){
-            privateTimeline.trigger('view:timeline');
+        this.on('private:timeline', function(options) {
+            privateTimeline.trigger('view:timeline', options);
         });
     },
 

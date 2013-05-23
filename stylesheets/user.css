@@ -192,6 +192,10 @@ input[type=submit].wide {
   margin-top: 104px;
 }
 
+.route-login {
+  background-image: url("/-assets/images/numbers.jpg");
+}
+
 .page.header {
   position: relative;
   z-index: 100;
@@ -206,10 +210,6 @@ input[type=submit].wide {
   font-size: 16px;
   font-weight: normal;
   margin-bottom: 5px;
-}
-
-body.login {
-  background-image: url("/-assets/images/numbers.jpg");
 }
 
 .container.login {

@@ -15,7 +15,7 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
 
 
 
-    timeline: function() {
+    timeline: function(options) {
         var collection = new Application.Collection.Items(undefined, {
             status: this.model.get('status')
         });
@@ -42,12 +42,12 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
 
 
 
-    itemAdd: function(data) {
+    itemAdd: function(options) {
         var view = new Application.View.ItemAdd({
             collection : this.collection
         });
 
-        view.model.set(data);
+        view.model.set(options);
 
 
         this.bindEvents(view);

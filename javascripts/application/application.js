@@ -53,7 +53,7 @@ Application.addInitializer(function(options){
     }
 
     Application.router.on('route', function(route){
-        $('body').removeAttr('class').addClass(route);
+        $('body').removeAttr('class').addClass('route-' + route);
     });
 });
 

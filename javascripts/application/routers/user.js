@@ -43,7 +43,9 @@ Application.Router.User = Backbone.Router.extend({
 
 
             if (Application.content.is('timelines') === true) {
-                Application.content.currentView.trigger('public:timeline', pid);
+                Application.content.currentView.trigger('public:timeline', {
+                    pid: pid
+                });
             } else {
                 // Render timelines
                 var timeline = new Application.View.Timelines({
@@ -121,7 +123,9 @@ Application.Router.User = Backbone.Router.extend({
 
 
             if (Application.content.is('timelines')) {
-                Application.content.currentView.trigger('public:followers', pid);
+                Application.content.currentView.trigger('public:followers', {
+                    pid: pid
+                });
             } else {
                 // Render timelines
                 var timeline = new Application.View.Timelines({
@@ -160,7 +164,9 @@ Application.Router.User = Backbone.Router.extend({
 
 
             if (Application.content.is('timelines')) {
-                Application.content.currentView.trigger('public:followings', pid);
+                Application.content.currentView.trigger('public:followings', {
+                    pid: pid
+                });
             } else {
                 // Render timelines
                 var timeline = new Application.View.Timelines({

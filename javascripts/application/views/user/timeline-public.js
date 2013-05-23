@@ -23,12 +23,15 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
 
 
-    timeline: function(pid) {
-        var status;
-        if (pid === undefined) {
+    timeline: function(options) {
+        console.log(options);
+        console.trace();
+        var status, pid;
+        if (options.pid === undefined) {
             pid    = this.model.get('pid');
             status = 'p';
         } else {
+            pid    = options.pid;
             status = 'm';
         }
 
@@ -61,9 +64,12 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
 
 
-    followings: function(pid) {
-        if (pid === undefined) {
+    followings: function(options) {
+        var pid;
+        if (options.pid === undefined) {
             pid = this.model.get('pid');
+        } else {
+            pid = options.pid;
         }
 
         var collection = new Application.Collection.Followings();
@@ -87,16 +93,19 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
 
 
-    followers: function(pid) {
-        if (pid === undefined) {
+    followers: function(options) {
+        var pid;
+        if (options.pid === undefined) {
             pid = this.model.get('pid');
+        } else {
+            pid = options.pid;
         }
 
         var collection = new Application.Collection.Followers();
 
         var model = new Backbone.Model({
             loading: true,
-            pid: pid,
+            pid: options.pid,
             count: 20,
             start: 10
         });
@@ -112,7 +121,7 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
     },
 
 
-    // TODO: Migrate all to passing options object
+
     search: function(options) {
         var collection = new Application.Collection.Searches();
 
