@@ -520,20 +520,9 @@ input[type=submit].wide {
 .timeline .searches .item .username i,
 .timeline .followers .item .username i,
 .timeline .followings .item .username i {
-  -webkit-transition: opacity 500ms ease;
-  -moz-transition: opacity 500ms ease;
-  -o-transition: opacity 500ms ease;
-  transition: opacity 500ms ease;
   color: #bf3000;
   display: inline-block;
   margin-left: 5px;
-  opacity: 0;
-}
-.timeline .items .item .username:hover i,
-.timeline .searches .item .username:hover i,
-.timeline .followers .item .username:hover i,
-.timeline .followings .item .username:hover i {
-  opacity: 1;
 }
 .timeline .items .item .text,
 .timeline .items .item .bio,

@@ -315,19 +315,9 @@
                 }
 
                 i {
-                    @include single-transition(
-                        opacity, 500ms, ease
-                    );
                     color: #bf3000;
                     display: inline-block;
                     margin-left: 5px;
-                    opacity: 0;
-                }
-
-                &:hover {
-                    i {
-                        opacity: 1;
-                    }
                 }
             }
 
