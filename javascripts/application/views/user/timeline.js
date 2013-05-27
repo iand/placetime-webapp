@@ -106,7 +106,6 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
                     return;
                 }
 
-
                 this.now();
             }, this));
         });
@@ -139,7 +138,15 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
 
     scrollToAfter: function() {
-        this.scrollToScrolling = false;
+        // Defer scroll to after
+        var deferred = _.bind(function(){
+            this.scrollToScrolling = false;
+        }, this, event);
+
+        clearTimeout(this.scrollToReference);
+
+
+        this.scrollToReference = setTimeout(deferred, 150);
     },
 
 
