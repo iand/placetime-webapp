@@ -36,7 +36,7 @@ Application.Model.Profile = Backbone.Model.extend({
         this.trigger('updated', this.attributes);
 
         var promise = $.ajax({
-            url: '/-tremoveprofile',
+            url: '/-tremprofile',
             type: 'post',
             data: {
                 pid: Application.session.get('pid')
