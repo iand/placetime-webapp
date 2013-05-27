@@ -19,6 +19,9 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
             this.timeline(options);
         });
 
+        this.on('scrollTo:before', this.scrollToBefore);
+        this.on('scrollTo:after', this.scrollToAfter);
+
         // On view change update model
         this.on('all', function(event) {
             var match = event.match(/view:(.*)/);
@@ -35,6 +38,8 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
 
     bindEvents: function(view) {
+        var self = this;
+
         if (view.collection) {
             this.listenToOnce(view.collection, 'sync', function(event){
                 view.$el.find('.item').first().transitionEnd(_.bind(function(event){
@@ -65,13 +70,13 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
                 return;
             }
 
-            view.trigger('scrollTo:start');
+            self.trigger('scrollTo:before');
 
             $scroller.animate({
                 scrollTop: event.top,
                 scrollLeft: event.left
             }, event.duration, function(){
-                view.trigger('scrollTo:done');
+                self.trigger('scrollTo:after');
             });
         });
     },
@@ -96,10 +101,11 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
     refresh: function() {
         this.listenToOnce(this.regionManager.get('collection').currentView, 'reload:done', function(){
-            this.regionManager.get('collection').currentView.$el.find('.item').first().transitionEnd(_.bind(function(){
+            this.regionManager.get('collection').currentView.$el.find('.item:first').afterTransition(_.bind(function(event){
                 if (event.propertyName !== 'max-height') {
                     return;
                 }
+
 
                 this.now();
             }, this));
@@ -126,13 +132,29 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     },
 
 
+
+    scrollToBefore: function() {
+        this.scrollToScrolling = true;
+    },
+
+
+    scrollToAfter: function() {
+        this.scrollToScrolling = false;
+    },
+
+
     infiniteScroll: function(event) {
         var deferred = _.bind(this.infiniteScrollDeferred, this, event);
 
 
         clearTimeout(this.infiniteScrollReference);
 
-        this.infiniteScrollReference = setTimeout(deferred, 150);
+        // Scrolling
+        if (this.scrollToScrolling === true) {
+            return;
+        } else {
+            this.infiniteScrollReference = setTimeout(deferred, 150);
+        }
     },
 
 
