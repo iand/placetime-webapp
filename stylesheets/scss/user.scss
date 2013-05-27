@@ -745,15 +745,30 @@
 }
 
 
-// TODO: Remove element selector
-div.event .event.sash,
-div.audio .audio.sash,
-div.video .video.sash,
-div.event.added .event-added.sash {
+.item.event .event.sash,
+.item.audio .audio.sash,
+.item.video .video.sash,
+.item.event.added .event-added.sash {
     @include single-transition(
         opacity, 1s
     );
     opacity: 1;
+}
+
+// Item Focused
+.item.focused .url {
+    @include single-transition(
+        opacity, 1s, ease
+    );
+    opacity: 1;
+}
+
+.item .url {
+    @include single-transition(
+        opacity, 1s, ease
+    );
+    opacity: 0;
+    padding-left: 12px;
 }
 
 .past .overlay {

@@ -269,6 +269,7 @@
                         <i class="icon-time"></i> <span class="added">added:</span>
                     <% } %>
                     <span class="timestamp"><%= time(ts).fromNow() %></span>
+                    <a class="url" href="<%= url(id) %>">link</span>
                 </a>
             </p>
 
@@ -620,6 +621,7 @@
                             <i class="icon-time"></i> <span class="added">added:</span>
                             <span class="timestamp"><%= time(event, added).fromNow() %></span>
                         <% } %>
+                        <a class="url" href="<%= url(id) %>">link</span>
                     </a>
                 </p>
             <% } %>

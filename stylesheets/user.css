@@ -917,15 +917,32 @@ input[type=submit].wide {
   top: 7px;
 }
 
-div.event .event.sash,
-div.audio .audio.sash,
-div.video .video.sash,
-div.event.added .event-added.sash {
+.item.event .event.sash,
+.item.audio .audio.sash,
+.item.video .video.sash,
+.item.event.added .event-added.sash {
   -webkit-transition: opacity 1s;
   -moz-transition: opacity 1s;
   -o-transition: opacity 1s;
   transition: opacity 1s;
   opacity: 1;
+}
+
+.item.focused .url {
+  -webkit-transition: opacity 1s ease;
+  -moz-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
+  transition: opacity 1s ease;
+  opacity: 1;
+}
+
+.item .url {
+  -webkit-transition: opacity 1s ease;
+  -moz-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
+  transition: opacity 1s ease;
+  opacity: 0;
+  padding-left: 12px;
 }
 
 .past .overlay {

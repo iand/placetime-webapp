@@ -19,6 +19,10 @@ Application.View.SearchItem = Application.View.TimelineItem.extend({
             return model.time();
         },
 
+        url: function(id) {
+            return window.location.origin + '/item/' + id;
+        },
+
         getIframeUrl: function(url) {
             if (/youtube/.test(url) === true) {
                 return 'http://www.youtube.com/embed/' + url.replace(
