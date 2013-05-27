@@ -256,7 +256,7 @@
                 </p>
             <% } %>
 
-            <% if (pid !== source && source !== "") { %>
+            <% if (source !== undefined && pid !== source && source !== '') { %>
             <p class="source pull-left">
                 <a href="#user/<%= source %>">copied by <%= source %></a>
             </p>
@@ -594,12 +594,6 @@
                         <%= text %>
                     </a>
                 </p>
-
-                <% if (pid !== source && source !== "") { %>
-                <p class="source pull-left">
-                    <a href="#user/<%= source %>">copied by <%= source %></a>
-                </p>
-                <% } %>
             <% } else if (media == "audio") { %>
             <!-- audio specific markup here -->
             <% } else { %>
@@ -611,7 +605,7 @@
                 </p>
             <% } %>
 
-            <% if (pid !== source && source !== "") { %>
+            <% if (source !== undefined && pid !== source && source !== '') { %>
                 <p class="source pull-left">
                     <a href="#user/<%= source %>">copied by <%= source %></a>
                 </p>
