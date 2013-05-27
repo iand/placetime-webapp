@@ -35,7 +35,7 @@
 
                 <a class="tagline pull-left" href="/">a playlist for your life</a>
 
-                <% if (pid !== 'null') { %>
+                <% if (pid !== null) { %>
                 <ul class="nav pull-right">
                     <li>
                         <a data-dropdown=".navbar .dropdown">
@@ -43,7 +43,6 @@
                         </a>
                     </li>
                 </ul>
-                <% } %>
 
                 <div class="dropdown dropdown-tip dropdown-anchor-right">
                     <ul class="dropdown-menu">
@@ -61,6 +60,7 @@
                         </li>
                     </ul>
                 </div>
+                <% } %>
             </div>
         </script>
 

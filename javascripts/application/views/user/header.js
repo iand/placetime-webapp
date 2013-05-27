@@ -6,6 +6,9 @@ Application.View.Header = Backbone.Marionette.ItemView.extend({
         'click .brand': 'reload'
     },
 
+    modelEvents: {
+        'change:pid': 'render'
+    },
 
     reload: function() {
         window.location.href = window.location.href.replace(window.location.hash, '');

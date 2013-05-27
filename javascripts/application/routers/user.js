@@ -20,9 +20,7 @@ Application.Router.User = Backbone.Router.extend({
 
     initialize: function () {
         this.header = new Application.View.Header({
-            model: new Backbone.Model({
-                pid: Application.session.get('pid')
-            })
+            model: Application.session
         });
 
         Application.header.show(this.header);
