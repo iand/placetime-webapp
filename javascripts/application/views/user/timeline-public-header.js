@@ -37,7 +37,9 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
             url += 'profiles/';
         }
 
-        url += $(event.target).find('[type=search]').val();
+        url += encodeURIComponent(
+            $(event.target).find('[type=search]').val()
+        );
 
 
         Backbone.history.navigate(url, true);
