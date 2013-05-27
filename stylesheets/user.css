@@ -532,8 +532,19 @@ input[type=submit].wide {
 .timeline .followers .item .bio,
 .timeline .followings .item .text,
 .timeline .followings .item .bio {
-  font-size: 17px;
   margin: 0;
+}
+.timeline .items .item .text,
+.timeline .searches .item .text,
+.timeline .followers .item .text,
+.timeline .followings .item .text {
+  font-size: 22px;
+}
+.timeline .items .item .bio,
+.timeline .searches .item .bio,
+.timeline .followers .item .bio,
+.timeline .followings .item .bio {
+  font-size: 17px;
 }
 .timeline .items .item .button,
 .timeline .searches .item .button,

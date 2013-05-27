@@ -324,8 +324,15 @@
 
             .text,
             .bio {
-                font-size: 17px;
                 margin: 0;
+            }
+
+            .text {
+                font-size: 22px;
+            }
+
+            .bio {
+                font-size: 17px;
             }
 
             .button {
