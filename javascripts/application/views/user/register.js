@@ -3,43 +3,17 @@ Application.View.Register = Backbone.Marionette.ItemView.extend({
     className: 'register container',
 
     events: {
-        'keyup input': 'change',
         'submit form': 'submit'
     },
 
 
-    change: function (event) {
-        var target = event.target;
+
+    submit: function() {
+        var data = $(event.target).serializeObject();
 
 
-        this.model.set(target.name, target.value);
-
-
-        var check = this.model.validateItem(target.id);
-
-        if (check.isValid === false) {
-            addValidationError(target.id, check.message);
-        } else {
-            removeValidationError(target.id);
-        }
-    },
-
-
-    submit: function () {
-        var check = this.model.validateAll();
-
-        if (check.isValid === false) {
-            displayValidationErrors(check.messages);
-        } else {
-            this.register();
-        }
-
-        return false;
-    },
-
-
-    register: function () {
-        var promise = this.model.save();
+        var self    = this,
+            promise = this.model.set(data).save();
 
         promise.done(function(){
             Backbone.history.navigate('login', true);
@@ -48,5 +22,7 @@ Application.View.Register = Backbone.Marionette.ItemView.extend({
         promise.fail(function(){
             // TODO: Display errors
         });
+
+        return false;
     }
 });
