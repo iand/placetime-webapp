@@ -1,15 +1,20 @@
 Application.Model.Session = Backbone.Model.extend({
-    initialize: function () {
-        var cookie = $.cookie('ptsession');
-
-        if (cookie !== undefined) {
-            this.set('pid', cookie.split('|')[0]);
-        }
+    defaults: {
+        pid: null
     },
 
     events: {
         'change': function() {
 
+        }
+    },
+
+
+    initialize: function () {
+        var cookie = $.cookie('ptsession');
+
+        if (cookie !== undefined) {
+            this.set('pid', cookie.split('|')[0]);
         }
     },
 
