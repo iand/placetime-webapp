@@ -532,7 +532,7 @@ input[type=submit].wide {
 .timeline .followers .item .bio,
 .timeline .followings .item .text,
 .timeline .followings .item .bio {
-  font-size: 22px;
+  font-size: 17px;
   margin: 0;
 }
 .timeline .items .item .button,
@@ -604,6 +604,7 @@ input[type=submit].wide {
 .timeline .followers .item .bio,
 .timeline .searches.profiles .item .bio {
   margin-bottom: 15px;
+  margin-top: 12px;
 }
 .timeline .followings .item .bio .name,
 .timeline .followers .item .bio .name,

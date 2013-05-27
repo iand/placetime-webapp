@@ -145,6 +145,11 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
 
         this.bindEvents(view);
 
+        // Bubble
+        this.listenTo(view, 'item:promoted', function(event) {
+            this.trigger('item:promoted', event);
+        });
+
         this.regionManager.get('collection').show(view);
     },
 
