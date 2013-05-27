@@ -10,6 +10,7 @@ Application.View.Header = Backbone.Marionette.ItemView.extend({
         'change:pid': 'render'
     },
 
+
     reload: function() {
         window.location.href = window.location.href.replace(window.location.hash, '');
 
