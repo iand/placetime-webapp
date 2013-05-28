@@ -42,12 +42,13 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
         if (view.collection) {
             this.listenToOnce(view.collection, 'sync', function(event){
-                view.$el.find('.item').first().transitionEnd(_.bind(function(event){
-                    if (event.propertyName !== 'max-height') {
-                        return;
-                    }
+                var currentEventCount = 0,
+                    maxEventCount     = 4;
 
-                    this.now();
+                view.$el.find('.item:first').afterTransition(_.bind(function(event){
+                    if (++currentEventCount === maxEventCount) {
+                        this.now();
+                    }
                 }, this));
             });
         }
@@ -101,12 +102,13 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
     refresh: function() {
         this.listenToOnce(this.regionManager.get('collection').currentView, 'reload:done', function(){
-            this.regionManager.get('collection').currentView.$el.find('.item:first').afterTransition(_.bind(function(event){
-                if (event.propertyName !== 'max-height') {
-                    return;
-                }
+            var currentEventCount = 0,
+                maxEventCount     = 4;
 
-                this.now();
+            this.regionManager.get('collection').currentView.$el.find('.item:first').afterTransition(_.bind(function(event){
+                if (++currentEventCount === maxEventCount) {
+                    this.now();
+                }
             }, this));
         });
         this.reload();
