@@ -16,7 +16,7 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
         // Get element below needle
         var $item = $(document.elementFromPoint(
             offset.left,
-            offset.top + 4
+            offset.top + 6
         )).closest('.item');
 
         if ($item.length === 0) {
@@ -85,7 +85,7 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
     },
 
 
-    onRender: function() {
+    onShow: function() {
         this.update();
         this.isRendered = true;
     }
