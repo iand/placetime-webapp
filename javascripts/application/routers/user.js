@@ -7,6 +7,7 @@ Application.Router.User = Backbone.Router.extend({
         'timeline': 'timeline',
         'followings': 'followings',
         'followers': 'followers',
+        'suggestions': 'suggestions',
 
         'user': 'user',
         'user/email': 'userEmail',
@@ -237,6 +238,31 @@ Application.Router.User = Backbone.Router.extend({
             });
 
             Application.content.show(profile);
+        });
+
+
+        check.fail(function(){
+            Backbone.history.navigate('login', true);
+        });
+    },
+
+
+
+    suggestions: function () {
+        var self = this;
+
+
+        var check = Application.session.check();
+
+        check.done(function(){
+            var suggestions = new Application.View.Suggestions({
+                collection : new Application.Collection.Suggestions(),
+                model      : new Backbone.Model({
+                    loading: false
+                })
+            });
+
+            Application.content.show(suggestions);
         });
 
 

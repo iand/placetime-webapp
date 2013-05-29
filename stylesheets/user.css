@@ -396,414 +396,6 @@ input[type=submit].wide {
 .timeline .item.add {
   padding-top: 48px;
 }
-.timeline .items,
-.timeline .searches,
-.timeline .followers,
-.timeline .followings {
-  padding-top: 5px;
-}
-.timeline .items .item,
-.timeline .searches .item,
-.timeline .followers .item,
-.timeline .followings .item {
-  -webkit-transition: padding-top 500ms linear, padding-bottom 500ms linear, margin-bottom 500ms linear, max-height 500ms linear;
-  -webkit-transition-delay: 250ms, 250ms, 250ms, 250ms;
-  -moz-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
-  -o-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
-  transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
-  max-height: 180px;
-}
-.timeline .items .item.collapsed,
-.timeline .searches .item.collapsed,
-.timeline .followers .item.collapsed,
-.timeline .followings .item.collapsed {
-  margin-bottom: 0;
-  max-height: 0px;
-  padding-bottom: 0px;
-  padding-top: 0px;
-}
-.timeline .items .item.empty, .timeline .items .item.empty.collapsed,
-.timeline .searches .item.empty,
-.timeline .searches .item.empty.collapsed,
-.timeline .followers .item.empty,
-.timeline .followers .item.empty.collapsed,
-.timeline .followings .item.empty,
-.timeline .followings .item.empty.collapsed {
-  -webkit-transition-duration: 350ms, 350ms, 350ms;
-  -moz-transition-duration: 350ms, 350ms, 350ms;
-  -o-transition-duration: 350ms, 350ms, 350ms;
-  transition-duration: 350ms, 350ms, 350ms;
-}
-.timeline .items .item .icon,
-.timeline .items .item .username,
-.timeline .items .item .text,
-.timeline .items .item .time,
-.timeline .items .item .button,
-.timeline .searches .item .icon,
-.timeline .searches .item .username,
-.timeline .searches .item .text,
-.timeline .searches .item .time,
-.timeline .searches .item .button,
-.timeline .followers .item .icon,
-.timeline .followers .item .username,
-.timeline .followers .item .text,
-.timeline .followers .item .time,
-.timeline .followers .item .button,
-.timeline .followings .item .icon,
-.timeline .followings .item .username,
-.timeline .followings .item .text,
-.timeline .followings .item .time,
-.timeline .followings .item .button {
-  position: relative;
-  z-index: 2;
-}
-.timeline .items .item .text,
-.timeline .items .item .bio,
-.timeline .items .item .statistics,
-.timeline .items .item .time,
-.timeline .searches .item .text,
-.timeline .searches .item .bio,
-.timeline .searches .item .statistics,
-.timeline .searches .item .time,
-.timeline .followers .item .text,
-.timeline .followers .item .bio,
-.timeline .followers .item .statistics,
-.timeline .followers .item .time,
-.timeline .followings .item .text,
-.timeline .followings .item .bio,
-.timeline .followings .item .statistics,
-.timeline .followings .item .time {
-  width: 100%;
-}
-.timeline .items .item .text a,
-.timeline .items .item .bio a,
-.timeline .items .item .statistics a,
-.timeline .items .item .time a,
-.timeline .searches .item .text a,
-.timeline .searches .item .bio a,
-.timeline .searches .item .statistics a,
-.timeline .searches .item .time a,
-.timeline .followers .item .text a,
-.timeline .followers .item .bio a,
-.timeline .followers .item .statistics a,
-.timeline .followers .item .time a,
-.timeline .followings .item .text a,
-.timeline .followings .item .bio a,
-.timeline .followings .item .statistics a,
-.timeline .followings .item .time a {
-  border-bottom: 0;
-}
-.timeline .items .item .icon img,
-.timeline .searches .item .icon img,
-.timeline .followers .item .icon img,
-.timeline .followings .item .icon img {
-  -webkit-border-radius: 25px;
-  -moz-border-radius: 25px;
-  -ms-border-radius: 25px;
-  -o-border-radius: 25px;
-  border-radius: 25px;
-  border: 3px solid #ffffff;
-}
-.timeline .items .item .username,
-.timeline .searches .item .username,
-.timeline .followers .item .username,
-.timeline .followings .item .username {
-  font-size: 14px;
-  margin: 15px 12px;
-}
-.timeline .items .item .username a,
-.timeline .searches .item .username a,
-.timeline .followers .item .username a,
-.timeline .followings .item .username a {
-  border-bottom: 0;
-}
-.timeline .items .item .username i,
-.timeline .searches .item .username i,
-.timeline .followers .item .username i,
-.timeline .followings .item .username i {
-  color: #bf3000;
-  display: inline-block;
-  margin-left: 5px;
-}
-.timeline .items .item .text,
-.timeline .items .item .bio,
-.timeline .searches .item .text,
-.timeline .searches .item .bio,
-.timeline .followers .item .text,
-.timeline .followers .item .bio,
-.timeline .followings .item .text,
-.timeline .followings .item .bio {
-  margin: 0;
-}
-.timeline .items .item .text,
-.timeline .searches .item .text,
-.timeline .followers .item .text,
-.timeline .followings .item .text {
-  font-size: 22px;
-}
-.timeline .items .item .bio,
-.timeline .searches .item .bio,
-.timeline .followers .item .bio,
-.timeline .followings .item .bio {
-  font-size: 17px;
-}
-.timeline .items .item .button,
-.timeline .searches .item .button,
-.timeline .followers .item .button,
-.timeline .followings .item .button {
-  -webkit-border-radius: 31px;
-  -moz-border-radius: 31px;
-  -ms-border-radius: 31px;
-  -o-border-radius: 31px;
-  border-radius: 31px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px, rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset;
-  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px, rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset;
-  box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px, rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset;
-  text-shadow: #aaaaaa 0.1em 0.1em 0.2em;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #deddd8), color-stop(100%, #deddd8));
-  background: -webkit-linear-gradient(top, #deddd8, #deddd8);
-  background: -moz-linear-gradient(top, #deddd8, #deddd8);
-  background: -o-linear-gradient(top, #deddd8, #deddd8);
-  background: linear-gradient(top, #deddd8, #deddd8);
-  color: #000;
-  cursor: pointer;
-  border: 4px solid #fff;
-  bottom: 10px;
-  font-size: 22px;
-  position: absolute;
-  right: 10px;
-}
-.timeline .items .item .button:hover,
-.timeline .searches .item .button:hover,
-.timeline .followers .item .button:hover,
-.timeline .followings .item .button:hover {
-  color: #ffffff;
-}
-.timeline .items .item .button:active,
-.timeline .searches .item .button:active,
-.timeline .followers .item .button:active,
-.timeline .followings .item .button:active {
-  color: #ff6600;
-}
-.timeline .followings .item,
-.timeline .followers .item,
-.timeline .searches.profiles .item {
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  -webkit-box-shadow: 1px 1px 2px #aaaaaa;
-  -moz-box-shadow: 1px 1px 2px #aaaaaa;
-  box-shadow: 1px 1px 2px #aaaaaa;
-  background-color: #fff;
-  margin: 0 0 7px;
-  overflow: hidden;
-  padding: 15px;
-  position: relative;
-}
-.timeline .followings .item .username,
-.timeline .followers .item .username,
-.timeline .searches.profiles .item .username {
-  color: #000000;
-}
-.timeline .followings .item .icon img,
-.timeline .followers .item .icon img,
-.timeline .searches.profiles .item .icon img {
-  border-color: #999;
-}
-.timeline .followings .item .bio,
-.timeline .followers .item .bio,
-.timeline .searches.profiles .item .bio {
-  margin-bottom: 15px;
-  margin-top: 12px;
-}
-.timeline .followings .item .bio .name,
-.timeline .followers .item .bio .name,
-.timeline .searches.profiles .item .bio .name {
-  color: #ff6600;
-}
-.timeline .followings .item .statistics,
-.timeline .followers .item .statistics,
-.timeline .searches.profiles .item .statistics {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.timeline .followings .item .statistics .followings,
-.timeline .followings .item .statistics .followers,
-.timeline .followers .item .statistics .followings,
-.timeline .followers .item .statistics .followers,
-.timeline .searches.profiles .item .statistics .followings,
-.timeline .searches.profiles .item .statistics .followers {
-  display: inline;
-}
-.timeline .followings .item .statistics .followings,
-.timeline .followers .item .statistics .followings,
-.timeline .searches.profiles .item .statistics .followings {
-  padding-right: 15px;
-}
-.timeline .followings .item .unfollow,
-.timeline .followers .item .unfollow,
-.timeline .searches.profiles .item .unfollow {
-  padding: 7px 9px 3px 10px;
-}
-.timeline .followings .item .follow,
-.timeline .followers .item .follow,
-.timeline .searches.profiles .item .follow {
-  padding: 6px 9px 3px 9px;
-}
-.timeline .items .item,
-.timeline .searches.items .item {
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  -webkit-box-shadow: 1px 1px 2px #aaaaaa;
-  -moz-box-shadow: 1px 1px 2px #aaaaaa;
-  box-shadow: 1px 1px 2px #aaaaaa;
-  background-color: #aaaaaa;
-  background-size: cover;
-  background-position-y: 35%;
-  margin: 0 0 7px;
-  overflow: hidden;
-  padding: 15px;
-  position: relative;
-  overflow: hidden;
-}
-.timeline .items .item:hover,
-.timeline .searches.items .item:hover {
-  -webkit-box-shadow: 0px 0px 0px #aaaaaa;
-  -moz-box-shadow: 0px 0px 0px #aaaaaa;
-  box-shadow: 0px 0px 0px #aaaaaa;
-  background-color: #999;
-}
-.timeline .items .item.empty p,
-.timeline .searches.items .item.empty p {
-  margin: 0;
-}
-.timeline .items .item.image .overlay,
-.timeline .searches.items .item.image .overlay {
-  display: block;
-}
-.timeline .items .item .overlay,
-.timeline .searches.items .item .overlay {
-  background-color: rgba(15, 15, 15, 0.4);
-  display: none;
-  left: 0;
-  opacity: 1;
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-}
-.timeline .items .item .username a,
-.timeline .searches.items .item .username a {
-  color: #ddd;
-}
-.timeline .items .item .text a,
-.timeline .searches.items .item .text a {
-  color: #fff;
-}
-.timeline .items .item .text,
-.timeline .searches.items .item .text {
-  margin: 18px 0 14px;
-}
-.timeline .items .item .text .icon-play-circle,
-.timeline .searches.items .item .text .icon-play-circle {
-  font-weight: normal;
-  font-size: 26px;
-  line-height: 1;
-}
-.timeline .items .item .source,
-.timeline .searches.items .item .source {
-  margin: 0 0 5px;
-}
-.timeline .items .item .source a,
-.timeline .searches.items .item .source a {
-  border-bottom: 0;
-  color: #ddd;
-  font-size: 14px;
-}
-.timeline .items .item .time,
-.timeline .searches.items .item .time {
-  margin: 0;
-}
-.timeline .items .item .time .event,
-.timeline .searches.items .item .time .event {
-  color: #ff6600;
-}
-.timeline .items .item .time a,
-.timeline .searches.items .item .time a {
-  color: #eee;
-  font-size: 13px;
-}
-.timeline .items .item .promote,
-.timeline .searches.items .item .promote {
-  padding: 6px 7px 5px 8px;
-}
-.timeline .items .item .demote,
-.timeline .searches.items .item .demote {
-  padding: 6px 9px 5px 10px;
-}
-.timeline .items .item .separator,
-.timeline .searches.items .item .separator {
-  display: none;
-  margin: 18px 0;
-}
-.timeline .needle {
-  -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
-  -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
-  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
-  border-bottom: 1px solid #333333;
-  border-top: 1px solid #ffffff;
-  height: 0px;
-  position: absolute;
-  top: 50%;
-  opacity: 0.7;
-  width: calc(100% - 12px);
-  z-index: 4;
-}
-.timeline .needle .date {
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  -ms-border-radius: 15px;
-  -o-border-radius: 15px;
-  border-radius: 15px;
-  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
-  -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
-  background-color: #ffffff;
-  color: #000000;
-  font-size: 14px;
-  left: 50%;
-  height: 16px;
-  padding: 6px 0;
-  position: absolute;
-  margin-left: -100px;
-  text-align: center;
-  top: -18px;
-  width: 215px;
-  border: 2px solid #999999;
-}
-.timeline .needle .now {
-  color: #ff6600;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-.timeline .needle .future {
-  margin-left: 10px;
-}
-.timeline .needle .past {
-  margin-right: 10px;
-  margin-left: 8px;
-}
-.timeline .needle .icon-repeat {
-  cursor: pointer;
-  display: inline-block;
-}
 .timeline .loading {
   left: 50%;
   margin-left: -12px;
@@ -833,6 +425,463 @@ input[type=submit].wide {
 }
 .timeline .load-more {
   cursor: pointer;
+}
+
+.needle {
+  -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid #333333;
+  border-top: 1px solid #ffffff;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  opacity: 0.7;
+  width: calc(100% - 12px);
+  z-index: 4;
+}
+
+.needle-date {
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  border-radius: 15px;
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 14px;
+  left: 50%;
+  height: 16px;
+  padding: 6px 0;
+  position: absolute;
+  margin-left: -100px;
+  text-align: center;
+  top: -18px;
+  width: 215px;
+  border: 2px solid #999999;
+}
+
+.needle-now {
+  color: #ff6600;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.needle-future {
+  margin-left: 10px;
+}
+
+.needle-past {
+  margin-right: 10px;
+  margin-left: 8px;
+}
+
+.needle-icon-repeat {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.items,
+.searches,
+.followers,
+.followings,
+.suggestions {
+  padding-top: 5px;
+}
+.items .item,
+.searches .item,
+.followers .item,
+.followings .item,
+.suggestions .item {
+  -webkit-transition: padding-top 500ms linear, padding-bottom 500ms linear, margin-bottom 500ms linear, max-height 500ms linear;
+  -webkit-transition-delay: 250ms, 250ms, 250ms, 250ms;
+  -moz-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
+  -o-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
+  transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
+  max-height: 180px;
+}
+.items .item.collapsed,
+.searches .item.collapsed,
+.followers .item.collapsed,
+.followings .item.collapsed,
+.suggestions .item.collapsed {
+  margin-bottom: 0;
+  max-height: 0px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+.items .item.empty, .items .item.empty.collapsed,
+.searches .item.empty,
+.searches .item.empty.collapsed,
+.followers .item.empty,
+.followers .item.empty.collapsed,
+.followings .item.empty,
+.followings .item.empty.collapsed,
+.suggestions .item.empty,
+.suggestions .item.empty.collapsed {
+  -webkit-transition-duration: 350ms, 350ms, 350ms;
+  -moz-transition-duration: 350ms, 350ms, 350ms;
+  -o-transition-duration: 350ms, 350ms, 350ms;
+  transition-duration: 350ms, 350ms, 350ms;
+}
+.items .item .icon,
+.items .item .username,
+.items .item .text,
+.items .item .time,
+.items .item .button,
+.searches .item .icon,
+.searches .item .username,
+.searches .item .text,
+.searches .item .time,
+.searches .item .button,
+.followers .item .icon,
+.followers .item .username,
+.followers .item .text,
+.followers .item .time,
+.followers .item .button,
+.followings .item .icon,
+.followings .item .username,
+.followings .item .text,
+.followings .item .time,
+.followings .item .button,
+.suggestions .item .icon,
+.suggestions .item .username,
+.suggestions .item .text,
+.suggestions .item .time,
+.suggestions .item .button {
+  position: relative;
+  z-index: 2;
+}
+.items .item .text,
+.items .item .bio,
+.items .item .statistics,
+.items .item .time,
+.searches .item .text,
+.searches .item .bio,
+.searches .item .statistics,
+.searches .item .time,
+.followers .item .text,
+.followers .item .bio,
+.followers .item .statistics,
+.followers .item .time,
+.followings .item .text,
+.followings .item .bio,
+.followings .item .statistics,
+.followings .item .time,
+.suggestions .item .text,
+.suggestions .item .bio,
+.suggestions .item .statistics,
+.suggestions .item .time {
+  width: 100%;
+}
+.items .item .text a,
+.items .item .bio a,
+.items .item .statistics a,
+.items .item .time a,
+.searches .item .text a,
+.searches .item .bio a,
+.searches .item .statistics a,
+.searches .item .time a,
+.followers .item .text a,
+.followers .item .bio a,
+.followers .item .statistics a,
+.followers .item .time a,
+.followings .item .text a,
+.followings .item .bio a,
+.followings .item .statistics a,
+.followings .item .time a,
+.suggestions .item .text a,
+.suggestions .item .bio a,
+.suggestions .item .statistics a,
+.suggestions .item .time a {
+  border-bottom: 0;
+}
+.items .item .icon img,
+.searches .item .icon img,
+.followers .item .icon img,
+.followings .item .icon img,
+.suggestions .item .icon img {
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  border-radius: 25px;
+  border: 3px solid #ffffff;
+}
+.items .item .username,
+.searches .item .username,
+.followers .item .username,
+.followings .item .username,
+.suggestions .item .username {
+  font-size: 14px;
+  margin: 15px 12px;
+}
+.items .item .username a,
+.searches .item .username a,
+.followers .item .username a,
+.followings .item .username a,
+.suggestions .item .username a {
+  border-bottom: 0;
+}
+.items .item .username i,
+.searches .item .username i,
+.followers .item .username i,
+.followings .item .username i,
+.suggestions .item .username i {
+  color: #bf3000;
+  display: inline-block;
+  margin-left: 5px;
+}
+.items .item .text,
+.items .item .bio,
+.searches .item .text,
+.searches .item .bio,
+.followers .item .text,
+.followers .item .bio,
+.followings .item .text,
+.followings .item .bio,
+.suggestions .item .text,
+.suggestions .item .bio {
+  margin: 0;
+}
+.items .item .text,
+.searches .item .text,
+.followers .item .text,
+.followings .item .text,
+.suggestions .item .text {
+  font-size: 22px;
+}
+.items .item .bio,
+.searches .item .bio,
+.followers .item .bio,
+.followings .item .bio,
+.suggestions .item .bio {
+  font-size: 17px;
+}
+.items .item .button,
+.searches .item .button,
+.followers .item .button,
+.followings .item .button,
+.suggestions .item .button {
+  -webkit-border-radius: 31px;
+  -moz-border-radius: 31px;
+  -ms-border-radius: 31px;
+  -o-border-radius: 31px;
+  border-radius: 31px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px, rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px, rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px, rgba(51, 51, 51, 0.6) 1px 1px 5px 0px inset;
+  text-shadow: #aaaaaa 0.1em 0.1em 0.2em;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #deddd8), color-stop(100%, #deddd8));
+  background: -webkit-linear-gradient(top, #deddd8, #deddd8);
+  background: -moz-linear-gradient(top, #deddd8, #deddd8);
+  background: -o-linear-gradient(top, #deddd8, #deddd8);
+  background: linear-gradient(top, #deddd8, #deddd8);
+  color: #000;
+  cursor: pointer;
+  border: 4px solid #fff;
+  bottom: 10px;
+  font-size: 22px;
+  position: absolute;
+  right: 10px;
+}
+.items .item .button:hover,
+.searches .item .button:hover,
+.followers .item .button:hover,
+.followings .item .button:hover,
+.suggestions .item .button:hover {
+  color: #ffffff;
+}
+.items .item .button:active,
+.searches .item .button:active,
+.followers .item .button:active,
+.followings .item .button:active,
+.suggestions .item .button:active {
+  color: #ff6600;
+}
+
+.followings .item,
+.followers .item,
+.suggestions .item,
+.searches.profiles .item {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 1px 1px 2px #aaaaaa;
+  -moz-box-shadow: 1px 1px 2px #aaaaaa;
+  box-shadow: 1px 1px 2px #aaaaaa;
+  background-color: #fff;
+  margin: 0 0 7px;
+  overflow: hidden;
+  padding: 15px;
+  position: relative;
+}
+.followings .item .username,
+.followers .item .username,
+.suggestions .item .username,
+.searches.profiles .item .username {
+  color: #000000;
+}
+.followings .item .icon img,
+.followers .item .icon img,
+.suggestions .item .icon img,
+.searches.profiles .item .icon img {
+  border-color: #999;
+}
+.followings .item .bio,
+.followers .item .bio,
+.suggestions .item .bio,
+.searches.profiles .item .bio {
+  margin-bottom: 15px;
+  margin-top: 12px;
+}
+.followings .item .bio .name,
+.followers .item .bio .name,
+.suggestions .item .bio .name,
+.searches.profiles .item .bio .name {
+  color: #ff6600;
+}
+.followings .item .statistics,
+.followers .item .statistics,
+.suggestions .item .statistics,
+.searches.profiles .item .statistics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.followings .item .statistics .followings,
+.followings .item .statistics .followers,
+.followers .item .statistics .followings,
+.followers .item .statistics .followers,
+.suggestions .item .statistics .followings,
+.suggestions .item .statistics .followers,
+.searches.profiles .item .statistics .followings,
+.searches.profiles .item .statistics .followers {
+  display: inline;
+}
+.followings .item .statistics .followings,
+.followers .item .statistics .followings,
+.suggestions .item .statistics .followings,
+.searches.profiles .item .statistics .followings {
+  padding-right: 15px;
+}
+.followings .item .unfollow,
+.followers .item .unfollow,
+.suggestions .item .unfollow,
+.searches.profiles .item .unfollow {
+  padding: 7px 9px 3px 10px;
+}
+.followings .item .follow,
+.followers .item .follow,
+.suggestions .item .follow,
+.searches.profiles .item .follow {
+  padding: 6px 9px 3px 9px;
+}
+
+.items .item,
+.searches.items .item {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 1px 1px 2px #aaaaaa;
+  -moz-box-shadow: 1px 1px 2px #aaaaaa;
+  box-shadow: 1px 1px 2px #aaaaaa;
+  background-color: #aaaaaa;
+  background-size: cover;
+  background-position-y: 35%;
+  margin: 0 0 7px;
+  overflow: hidden;
+  padding: 15px;
+  position: relative;
+  overflow: hidden;
+}
+.items .item:hover,
+.searches.items .item:hover {
+  -webkit-box-shadow: 0px 0px 0px #aaaaaa;
+  -moz-box-shadow: 0px 0px 0px #aaaaaa;
+  box-shadow: 0px 0px 0px #aaaaaa;
+  background-color: #999;
+}
+.items .item.empty p,
+.searches.items .item.empty p {
+  margin: 0;
+}
+.items .item.image .overlay,
+.searches.items .item.image .overlay {
+  display: block;
+}
+.items .item .overlay,
+.searches.items .item .overlay {
+  background-color: rgba(15, 15, 15, 0.4);
+  display: none;
+  left: 0;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+.items .item .username a,
+.searches.items .item .username a {
+  color: #ddd;
+}
+.items .item .text a,
+.searches.items .item .text a {
+  color: #fff;
+}
+.items .item .text,
+.searches.items .item .text {
+  margin: 18px 0 14px;
+}
+.items .item .text .icon-play-circle,
+.searches.items .item .text .icon-play-circle {
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 1;
+}
+.items .item .source,
+.searches.items .item .source {
+  margin: 0 0 5px;
+}
+.items .item .source a,
+.searches.items .item .source a {
+  border-bottom: 0;
+  color: #ddd;
+  font-size: 14px;
+}
+.items .item .time,
+.searches.items .item .time {
+  margin: 0;
+}
+.items .item .time .event,
+.searches.items .item .time .event {
+  color: #ff6600;
+}
+.items .item .time a,
+.searches.items .item .time a {
+  color: #eee;
+  font-size: 13px;
+}
+.items .item .promote,
+.searches.items .item .promote {
+  padding: 6px 7px 5px 8px;
+}
+.items .item .demote,
+.searches.items .item .demote {
+  padding: 6px 9px 5px 10px;
+}
+.items .item .separator,
+.searches.items .item .separator {
+  display: none;
+  margin: 18px 0;
 }
 
 .sash {

@@ -178,6 +178,13 @@
         </script>
 
 
+        <script type="text/template" id="suggestions-template">
+        <div class="scroller">
+            <div class="children"></div>
+        </div>
+        </script>
+
+
         <script type="text/template" id="load-more-template">
             Load more
         </script>
@@ -334,12 +341,24 @@
 
         <script type="text/template" id="search-empty-template">
             <% if (loading === true) { %>
-            <span>Loading search results</span>
-            <img alt="Loading" class="loading" src="/-assets/images/vendor/jquery/fancybox/fancybox_loading.gif" height="24" width="24" />
+                <span>Loading search results</span>
+                <img alt="Loading" class="loading" src="/-assets/images/vendor/jquery/fancybox/fancybox_loading.gif" height="24" width="24" />
             <% } else { %>
-            <span>No results</span>
+                <span>No results</span>
             <% } %>
         </script>
+
+
+
+        <script type="text/template" id="suggestion-empty-template">
+            <% if (loading === true) { %>
+                <span>Loading search results</span>
+                <img alt="Loading" class="loading" src="/-assets/images/vendor/jquery/fancybox/fancybox_loading.gif" height="24" width="24" />
+            <% } else { %>
+                <span>No results</span>
+            <% } %>
+        </script>
+
 
 
         <script type="text/template" id="following-template">
@@ -686,23 +705,77 @@
 
 
 
+        <script type="text/template" id="suggestion-template">
+            <p class="sash followed">
+                <span>
+                    Followed
+                    <i class="icon-plus"></i>
+                </span>
+            </p>
+            <p class="sash flagged">
+                <span>
+                    Flagged
+                    <i class="icon-flag"></i>
+                </span>
+            </p>
+
+            <div class="icon pull-left">
+                <% if (profileimageurl) { %>
+                    <img src="<%= profileimageurl %>" width="40" height="40">
+                <% } else { %>
+                    <img src="/-assets/images/user.jpg" width="40" height="40">
+                <% } %>
+            </div>
+
+            <p class="username pull-left">
+                <a href="#user/<%= pid %>">
+                    <%= pid %>
+                </a>
+            </p>
+
+            <% if (bio) { %>
+            <p class="bio pull-left">
+                <% if (name) { %>
+                    <span class="name"><%= name %></span>:
+                <% } %>
+
+                <%= bio %>
+            </p>
+            <% } %>
+
+            <ul class="statistics pull-left">
+                <li class="followings">
+                    <a href="#followings/<%= pid %>"><%= followingcount %> following</a>
+                </li>
+                <li class='followers'>
+                    <a href="#followers/<%= pid %>"><%= followercount %> followers</a>
+                </li>
+            </ul>
+
+            <a class="button follow">
+                <i class="icon-plus"></i>
+            </a>
+        </script>
+
+
+
         <script type="text/template" id="needle-template">
-            <div class="date">
-                <span class="value"></span>
-                <i class="icon-repeat"></i>
+            <div class="needle-date">
+                <span class="needle-value"></span>
+                <i class="needle-icon-repeat icon-repeat"></i>
             </div>
         </script>
 
         <script type="text/template" id="needle-now-template">
-        <div class="date">
-            <span class="future pull-left">
+        <div class="needle-date">
+            <span class="needle-future pull-left">
                 <i class="icon-arrow-up"></i> Future
             </span>
-            <span class="now">
+            <span class="needle-now">
                 Now
-                <i class="icon-repeat"></i>
+                <i class="needle-icon-repeat icon-repeat"></i>
             </span>
-            <span class="past pull-right">
+            <span class="needle-past pull-right">
                Past <i class="icon-arrow-down"></i>
             </span>
         </div>
