@@ -1,0 +1,122 @@
+.sash {
+    border-style: solid;
+    color: #ffffff;
+    height: 0px;
+    opacity: 0;
+    line-height: 0px;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    width: 0;
+    z-index: 2;
+
+    &.event {
+        border-color: transparent #ff6600 transparent transparent;
+        border-width: 0 48px 48px 0;
+        font-size: 14px;
+        top: 0;
+        width: 120px;
+    }
+
+    &.event-added {
+        border-color: transparent #0093a7 transparent transparent;
+        border-width: 0 48px 48px 0;
+        font-size: 14px;
+        top: 0;
+        width: 120px;
+    }
+
+    &.video {
+        border-color: transparent #5f39bb transparent transparent;
+        border-width: 0 48px 48px 0;
+        font-size: 14px;
+        top: 0;
+        width: 120px;
+    }
+
+    &.audio {
+        border-color: transparent #bc1c48 transparent transparent;
+        border-width: 0 48px 48px 0;
+        font-size: 14px;
+        top: 0;
+        width: 120px;
+    }
+
+
+    &.added,
+    &.followed,
+    &.flagged {
+        border-color: transparent transparent #ff6600 transparent;
+        border-width: 0 0 24px 24px;
+        bottom: 0;
+        font-size: 12px;
+        text-align: right;
+        z-index: 3;
+
+        span {
+            display: inline-block;
+            padding: 7px 6px 6px;
+        }
+    }
+
+    &.added {
+        width: 120px;
+    }
+
+    &.followed {
+        width: 82px;
+    }
+
+    &.flagged {
+        width: 82px;
+    }
+
+    .icon-calendar,
+    .icon-headphones,
+    .icon-facetime-video {
+        position: absolute;
+        right: -42px;
+    }
+
+    .icon-calendar,
+    .icon-facetime-video {
+        top: 5px;
+    }
+
+    .icon-plus {
+        padding-left: 6px;
+    }
+
+    .icon-facetime-video {
+        top: 7px;
+    }
+
+    .icon-headphones {
+        font-size: 16px;
+        top: 7px;
+    }
+}
+
+.promoted {
+    .added.sash {
+        opacity: 1;
+    }
+}
+
+.followed {
+    .followed.sash {
+        opacity: 1;
+    }
+}
+
+.unfollowed {
+    .unfollowed.sash {
+        opacity: 1;
+    }
+}
+
+.flagged {
+    .flagged.sash {
+        opacity: 1;
+    }
+}

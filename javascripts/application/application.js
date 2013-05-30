@@ -15,9 +15,8 @@ Application.Router = {};
 
 // Regions
 Application.addRegions({
-    header: 'body > .header',
-    content: 'body > .content',
-    footer: 'body > .footer'
+    header: '.layout-header',
+    content: '.layout-content'
 });
 
 Backbone.Marionette.Region.prototype.is = function(view) {

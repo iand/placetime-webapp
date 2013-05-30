@@ -1,0 +1,79 @@
+.followings .item,
+.followers .item,
+.suggestions .item,
+.searches.profiles .item {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 1px 1px 2px #aaaaaa;
+  -moz-box-shadow: 1px 1px 2px #aaaaaa;
+  box-shadow: 1px 1px 2px #aaaaaa;
+  background-color: #fff;
+  margin: 0 0 7px;
+  overflow: hidden;
+  padding: 15px;
+  position: relative;
+}
+.followings .item .username,
+.followers .item .username,
+.suggestions .item .username,
+.searches.profiles .item .username {
+  color: #000000;
+}
+.followings .item .icon img,
+.followers .item .icon img,
+.suggestions .item .icon img,
+.searches.profiles .item .icon img {
+  border-color: #999;
+}
+.followings .item .bio,
+.followers .item .bio,
+.suggestions .item .bio,
+.searches.profiles .item .bio {
+  margin-bottom: 15px;
+  margin-top: 12px;
+}
+.followings .item .bio .name,
+.followers .item .bio .name,
+.suggestions .item .bio .name,
+.searches.profiles .item .bio .name {
+  color: #ff6600;
+}
+.followings .item .statistics,
+.followers .item .statistics,
+.suggestions .item .statistics,
+.searches.profiles .item .statistics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.followings .item .statistics .followings,
+.followings .item .statistics .followers,
+.followers .item .statistics .followings,
+.followers .item .statistics .followers,
+.suggestions .item .statistics .followings,
+.suggestions .item .statistics .followers,
+.searches.profiles .item .statistics .followings,
+.searches.profiles .item .statistics .followers {
+  display: inline;
+}
+.followings .item .statistics .followings,
+.followers .item .statistics .followings,
+.suggestions .item .statistics .followings,
+.searches.profiles .item .statistics .followings {
+  padding-right: 15px;
+}
+.followings .item .unfollow,
+.followers .item .unfollow,
+.suggestions .item .unfollow,
+.searches.profiles .item .unfollow {
+  padding: 7px 9px 3px 10px;
+}
+.followings .item .follow,
+.followers .item .follow,
+.suggestions .item .follow,
+.searches.profiles .item .follow {
+  padding: 6px 9px 3px 9px;
+}

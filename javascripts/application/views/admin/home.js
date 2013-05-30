@@ -1,6 +1,6 @@
 Application.Admin.View.Home = Backbone.Marionette.ItemView.extend({
     template: '#home-template',
-    className: 'container',
+    className: 'layout-container',
 
     events: {
         'submit form': 'profile'

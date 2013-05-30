@@ -1,7 +1,14 @@
 @import 'compass';
 
-@import 'extensions';
-@import 'global';
+@import 'bases/base';
+@import 'bases/form';
+@import 'bases/typography';
+
+@import 'layouts/header';
+@import 'layouts/content';
+@import 'layouts/container';
+
+@import 'modules/navigation';
+
 @import 'utilities';
-@import 'scaffolding';
-@import 'form';
+@import 'vendor';

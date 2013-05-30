@@ -1,6 +1,6 @@
 Application.View.TimelinePublic = Application.View.Timeline.extend({
     name: 'timeline-public',
-    className: 'column public',
+    className: 'layout-column public',
 
 
 

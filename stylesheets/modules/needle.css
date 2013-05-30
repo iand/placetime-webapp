@@ -1,63 +1,56 @@
-/*
-Syntax error: Undefined mixin 'single-box-shadow'.
-        on line 5 of /Users/iszak/Sites/personal/placetime/webapp/stylesheets/scss/modules/needle.scss, in `single-box-shadow'
-        from line 5 of /Users/iszak/Sites/personal/placetime/webapp/stylesheets/scss/modules/needle.scss
+.needle {
+  -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid #333333;
+  border-top: 1px solid #ffffff;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  opacity: 0.7;
+  width: calc(100% - 12px);
+  z-index: 4;
+}
 
-1: /Users/iszak/Sites/personal/placetime/webapp/stylesheets/scss/modules/needle.scss
+.needle-date {
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  border-radius: 15px;
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 14px;
+  left: 50%;
+  height: 16px;
+  padding: 6px 0;
+  position: absolute;
+  margin-left: -100px;
+  text-align: center;
+  top: -18px;
+  width: 215px;
+  border: 2px solid #999999;
+}
 
-Backtrace:
-/Users/iszak/Sites/personal/placetime/webapp/stylesheets/scss/modules/needle.scss:5:in `single-box-shadow'
-/Users/iszak/Sites/personal/placetime/webapp/stylesheets/scss/modules/needle.scss:5
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/perform.rb:253:in `visit_mixin'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/base.rb:37:in `visit'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/perform.rb:100:in `visit'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/base.rb:53:in `map'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/base.rb:53:in `visit_children'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/base.rb:37:in `block in visit'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/perform.rb:320:in `visit_rule'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/base.rb:37:in `visit'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/perform.rb:100:in `visit'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/base.rb:53:in `map'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/base.rb:53:in `visit_children'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/base.rb:37:in `block in visit'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/perform.rb:128:in `visit_root'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/base.rb:37:in `visit'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/perform.rb:100:in `visit'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/visitors/perform.rb:7:in `visit'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/tree/root_node.rb:20:in `render'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/engine.rb:315:in `_render'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/sass-3.2.7/lib/sass/engine.rb:262:in `render'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/compiler.rb:140:in `block (2 levels) in compile'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/compiler.rb:126:in `timed'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/compiler.rb:139:in `block in compile'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/logger.rb:45:in `red'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/compiler.rb:138:in `compile'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/compiler.rb:118:in `compile_if_required'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/compiler.rb:103:in `block (2 levels) in run'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/compiler.rb:101:in `each'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/compiler.rb:101:in `block in run'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/compiler.rb:126:in `timed'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/compiler.rb:100:in `run'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/commands/update_project.rb:45:in `perform'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/commands/base.rb:18:in `execute'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/commands/project_base.rb:19:in `execute'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/exec/sub_command_ui.rb:43:in `perform!'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/lib/compass/exec/sub_command_ui.rb:15:in `run!'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/bin/compass:30:in `block in <top (required)>'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/bin/compass:44:in `call'
-/opt/local/lib/ruby1.9/gems/1.9.1/gems/compass-0.12.2/bin/compass:44:in `<top (required)>'
-/opt/local/bin/compass:23:in `load'
-/opt/local/bin/compass:23:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Syntax error: Undefined mixin 'single-box-shadow'.\A         on line 5 of /Users/iszak/Sites/personal/placetime/webapp/stylesheets/scss/modules/needle.scss, in `single-box-shadow'\A         from line 5 of /Users/iszak/Sites/personal/placetime/webapp/stylesheets/scss/modules/needle.scss\A \A 1: /Users/iszak/Sites/personal/placetime/webapp/stylesheets/scss/modules/needle.scss"; }
+.needle-now {
+  color: #ff6600;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.needle-future {
+  margin-left: 10px;
+}
+
+.needle-past {
+  margin-right: 10px;
+  margin-left: 8px;
+}
+
+.needle-icon-repeat {
+  cursor: pointer;
+  display: inline-block;
+}

@@ -1,20 +1,5 @@
 @import 'compass';
 
-// Container
-.container {
-    margin: 0 auto;
-    width: 960px;
-}
-
-.container-wide {
-    margin: 0 auto;
-    max-width: 1300px;
-    min-width: 1080px;
-    width: 100%;
-}
-
-
-// Navigation
 .navbar {
     @include single-box-shadow(#222222, 0px, 2px, 5px);
     background-color: #ffffff;
@@ -75,7 +60,6 @@
         }
     }
 }
-
 
 
 .nav {

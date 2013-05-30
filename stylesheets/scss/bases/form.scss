@@ -18,6 +18,7 @@ input {
     outline: none;
 }
 
+
 input[type=text],
 input[type=email],
 input[type=password],
@@ -75,6 +76,7 @@ input[type=submit] {
         border: 2px solid #ff9900;
     }
 
+    // TODO: Change to state?;
     &.wide {
         width: 100%;
     }

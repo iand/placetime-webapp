@@ -1,7 +1,7 @@
 Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     name: 'timeline',
     template: '#timeline-template',
-    className: 'column',
+    className: 'layout-column',
 
     infiniteScrollReference: null,
     infiniteScrollLastUpdate: moment().subtract('seconds', 2),

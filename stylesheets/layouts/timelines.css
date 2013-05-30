@@ -1,0 +1,13 @@
+.layout-timelines {
+  margin: 0 auto;
+}
+
+.layout-column {
+  float: left;
+}
+.layout-column.public {
+  width: 60%;
+}
+.layout-column.private {
+  width: 40%;
+}

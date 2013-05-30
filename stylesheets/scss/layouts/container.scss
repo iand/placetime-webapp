@@ -1,0 +1,24 @@
+@import 'compass';
+
+.layout-container {
+    margin: 0 auto;
+    width: 960px;
+}
+
+.layout-container-wide {
+    margin: 0 auto;
+    max-width: 1300px;
+    min-width: 1080px;
+    width: 100%;
+}
+
+// Timeline
+.layout-container-wide {
+    .timeline.public {
+        padding: 0 4px 0 8px;
+    }
+
+    .timeline.private {
+        padding: 0 8px 0 4px;
+    }
+}

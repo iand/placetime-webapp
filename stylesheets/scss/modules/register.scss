@@ -1,0 +1,21 @@
+@import 'compass';
+
+.container.register {
+    height: 275px;
+    left: 50%;
+    margin-left: -179px;
+    margin-top: -137px;
+    position: absolute;
+    top: 50%;
+    width: 358px;
+
+    .register {
+        text-align: center;
+
+        span {
+            background-color: rgba(170, 170, 170, 0.8);
+            padding: 3px 4px;
+            margin: 0 auto;
+        }
+    }
+}

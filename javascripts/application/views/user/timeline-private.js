@@ -1,6 +1,6 @@
 Application.View.TimelinePrivate = Application.View.Timeline.extend({
     name: 'timeline-private',
-    className: 'column private',
+    className: 'layout-column private',
 
 
 

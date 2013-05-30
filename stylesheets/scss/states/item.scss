@@ -1,0 +1,47 @@
+.promoted,
+.demoted,
+.unfollowed,
+.followed,
+.flagged {
+    .overlay {
+        background-color: rgba(255, 255, 255, 0.65);
+        display: block;
+        z-index: 3;
+    }
+
+    .promote,
+    .demote,
+    .follow,
+    .unfollow {
+        @include single-transition(
+            opacity, 500ms
+        );
+        opacity: 0;
+    }
+
+    .added.sash,
+    .followed.sash,
+    .flagged.sash {
+        @include single-transition(
+            opacity, 1s
+        );
+    }
+}
+
+// Item Focused
+.item.focused .url {
+    @include single-transition(
+        opacity, 1s, ease
+    );
+    opacity: 1;
+}
+
+.past .overlay {
+    @include single-transition(
+        background-color, 1s, linear
+    );
+
+    background-color: rgba(128, 128, 128, 0.65);
+    display: block;
+    z-index: 3;
+}

@@ -1,6 +1,6 @@
 Application.View.User = Backbone.Marionette.ItemView.extend({
     template: '#user-template',
-    className: 'user container',
+    className: 'user layout-container',
 
     events: {
         'submit form': 'submit',
