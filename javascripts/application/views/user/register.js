@@ -3,7 +3,7 @@ Application.View.Register = Backbone.Marionette.ItemView.extend({
     className: 'register container',
 
     events: {
-        'submit form': 'submit'
+        'submit .register-form': 'submit'
     },
 
 

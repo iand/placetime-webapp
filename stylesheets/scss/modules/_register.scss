@@ -1,6 +1,6 @@
 @import 'compass';
 
-.container.register {
+.register {
     height: 275px;
     left: 50%;
     margin-left: -179px;
@@ -8,14 +8,17 @@
     position: absolute;
     top: 50%;
     width: 358px;
+}
 
-    .register {
-        text-align: center;
+.register-heading {
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 1em;
+    text-align: center;
 
-        span {
-            background-color: rgba(170, 170, 170, 0.8);
-            padding: 3px 4px;
-            margin: 0 auto;
-        }
+    span {
+        background-color: rgba(170, 170, 170, 0.8);
+        padding: 3px 4px;
+        margin: 0 auto;
     }
 }

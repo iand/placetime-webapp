@@ -1,0 +1,5 @@
+// TODO: Remove when supposed in compass;
+@mixin calc($property, $calc) {
+    #{$property}: -webkit-calc(#{$calc});
+    #{$property}: calc(#{$calc});
+}

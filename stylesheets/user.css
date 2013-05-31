@@ -490,7 +490,7 @@ h1 {
   padding-left: 12px;
 }
 
-.container.login {
+.login {
   height: 110px;
   left: 50%;
   margin-left: -179px;
@@ -500,7 +500,8 @@ h1 {
   text-align: center;
   width: 358px;
 }
-.container.login .twitter a {
+
+.login-twitter a {
   -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
   -ms-border-radius: 7px;
@@ -512,25 +513,23 @@ h1 {
   padding: 12px 15px 12px;
   text-decoration: none;
 }
-.container.login .twitter a .icon-twitter {
+.login-twitter .icon {
   color: #1ab7ea;
   font-size: 20px;
   text-decoration: none;
 }
-.container.login .register,
-.container.login .login {
+
+.login-register,
+.login-login {
   text-align: center;
 }
-.container.login .register a,
-.container.login .login a {
+.login-register a,
+.login-login a {
   background-color: rgba(170, 170, 170, 0.8);
   padding: 3px 4px;
 }
-.container.login .hint {
-  padding-left: 136px;
-  text-align: left;
-}
-.container.login .form {
+
+.login-form {
   display: none;
 }
 
@@ -611,7 +610,9 @@ h1 {
   position: absolute;
   top: 50%;
   opacity: 0.7;
+  width: -webkit-calc(100% - 12px);
   width: calc(100% - 12px);
+  width: 98%;
   z-index: 4;
 }
 
@@ -738,7 +739,7 @@ h1 {
   padding: 6px 9px 3px 9px;
 }
 
-.container.register {
+.register {
   height: 275px;
   left: 50%;
   margin-left: -179px;
@@ -747,10 +748,14 @@ h1 {
   top: 50%;
   width: 358px;
 }
-.container.register .register {
+
+.register-heading {
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0 0 1em;
   text-align: center;
 }
-.container.register .register span {
+.register-heading span {
   background-color: rgba(170, 170, 170, 0.8);
   padding: 3px 4px;
   margin: 0 auto;
@@ -858,19 +863,18 @@ h1 {
   position: relative;
 }
 .timeline .header {
+  -webkit-box-shadow: 0px 2px 3px #666666;
+  -moz-box-shadow: 0px 2px 3px #666666;
+  box-shadow: 0px 2px 3px #666666;
   background-color: rgba(255, 255, 255, 0.95);
   border-bottom: 0px solid #000;
   height: 46px;
   position: absolute;
   top: 0;
   width: 98%;
-  width: -moz-calc(100% - 12px);
   width: -webkit-calc(100% - 12px);
   width: calc(100% - 12px);
   z-index: 4;
-  -webkit-box-shadow: 0px 2px 3px #666666;
-  -moz-box-shadow: 0px 2px 3px #666666;
-  box-shadow: 0px 2px 3px #666666;
 }
 .timeline .header .title {
   color: #fff;
@@ -986,78 +990,31 @@ h1 {
   cursor: pointer;
 }
 
-.promoted .overlay,
-.demoted .overlay,
-.unfollowed .overlay,
-.followed .overlay,
-.flagged .overlay {
+.item.promoted .overlay, .item.demoted .overlay, .item.unfollowed .overlay, .item.followed .overlay, .item.flagged .overlay, .item.past .overlay {
   background-color: rgba(255, 255, 255, 0.65);
   display: block;
   z-index: 3;
 }
-.promoted .promote,
-.promoted .demote,
-.promoted .follow,
-.promoted .unfollow,
-.demoted .promote,
-.demoted .demote,
-.demoted .follow,
-.demoted .unfollow,
-.unfollowed .promote,
-.unfollowed .demote,
-.unfollowed .follow,
-.unfollowed .unfollow,
-.followed .promote,
-.followed .demote,
-.followed .follow,
-.followed .unfollow,
-.flagged .promote,
-.flagged .demote,
-.flagged .follow,
-.flagged .unfollow {
+.item.promoted .promote, .item.demoted .demote, .item.unfollowed .unfollow, .item.followed .follow, .item.flagged .flag {
   -webkit-transition: opacity 500ms;
   -moz-transition: opacity 500ms;
   -o-transition: opacity 500ms;
   transition: opacity 500ms;
   opacity: 0;
 }
-.promoted .added.sash,
-.promoted .followed.sash,
-.promoted .flagged.sash,
-.demoted .added.sash,
-.demoted .followed.sash,
-.demoted .flagged.sash,
-.unfollowed .added.sash,
-.unfollowed .followed.sash,
-.unfollowed .flagged.sash,
-.followed .added.sash,
-.followed .followed.sash,
-.followed .flagged.sash,
-.flagged .added.sash,
-.flagged .followed.sash,
-.flagged .flagged.sash {
+.item.promoted .sash.added, .item.followed .sash.followed, .item.flagged .sash.flagged {
   -webkit-transition: opacity 1s;
   -moz-transition: opacity 1s;
   -o-transition: opacity 1s;
   transition: opacity 1s;
+  opacity: 1;
 }
-
 .item.focused .url {
   -webkit-transition: opacity 1s ease;
   -moz-transition: opacity 1s ease;
   -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
   opacity: 1;
-}
-
-.past .overlay {
-  -webkit-transition: background-color 1s linear;
-  -moz-transition: background-color 1s linear;
-  -o-transition: background-color 1s linear;
-  transition: background-color 1s linear;
-  background-color: rgba(128, 128, 128, 0.65);
-  display: block;
-  z-index: 3;
 }
 
 .pull-left {

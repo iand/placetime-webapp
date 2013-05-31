@@ -3,13 +3,13 @@ Application.View.Login = Backbone.Marionette.ItemView.extend({
     className: 'login container',
 
     events: {
-        'click .login': 'login',
-        'submit form': 'submit'
+        'click .login-login': 'login',
+        'submit .login-form': 'submit'
     },
 
 
     login: function() {
-        this.$el.find('.form').show();
+        this.$el.find('.login-form').show();
 
         return;
     },

@@ -115,6 +115,7 @@ module.exports = function(grunt) {
             stylesheets: {
                 files: [
                     'stylesheets/scss/*.scss',
+                    'stylesheets/scss/**/*.scss',
 
                     'stylesheets/vendor/*.css',
                     'stylesheets/vendor/**/*.css'

@@ -1,6 +1,6 @@
 @import 'compass';
 
-.container.login {
+.login {
     height: 110px;
     left: 50%;
     margin-left: -179px;
@@ -9,40 +9,36 @@
     top: 50%;
     text-align: center;
     width: 358px;
+}
 
-    .twitter {
-        a {
-            @include border-radius(7px);
-            background-color: #ff6600;
-            color: #fff;
-            display: inline-block;
-            padding: 12px 15px 12px;
-            text-decoration: none;
-
-            .icon-twitter {
-                color: #1ab7ea;
-                font-size: 20px;
-                text-decoration: none;
-            }
-        }
+.login-twitter {
+    a {
+        @include border-radius(7px);
+        background-color: #ff6600;
+        color: #fff;
+        display: inline-block;
+        padding: 12px 15px 12px;
+        text-decoration: none;
     }
 
-    .register,
-    .login {
-        text-align: center;
-
-        a {
-            background-color: rgba(170, 170, 170, 0.8);
-            padding: 3px 4px;
-        }
+    .icon {
+        color: #1ab7ea;
+        font-size: 20px;
+        text-decoration: none;
     }
+}
 
-    .hint {
-        padding-left: 136px;
-        text-align: left;
-    }
+.login-register,
+.login-login {
+    text-align: center;
 
-    .form {
-        display: none;
+    a {
+        background-color: rgba(170, 170, 170, 0.8);
+        padding: 3px 4px;
     }
+}
+
+
+.login-form {
+    display: none;
 }
