@@ -883,6 +883,7 @@ h1 {
   margin: 12px 6px 4px 15px;
   padding: 0;
 }
+.timeline .header .type,
 .timeline .header .search,
 .timeline .header .add {
   -webkit-border-radius: 16px;
@@ -894,6 +895,15 @@ h1 {
   height: 25px;
   padding: 4px 12px;
   margin-top: 8px;
+}
+.timeline .header .type {
+  font-size: 14px;
+  height: 25px;
+  padding: 4px 12px;
+  margin: 12px 0 0 15px;
+}
+.timeline .header .search {
+  margin-left: 15px;
 }
 .timeline .header .add {
   margin-left: 18px;
@@ -994,6 +1004,9 @@ h1 {
   background-color: rgba(255, 255, 255, 0.65);
   display: block;
   z-index: 2;
+}
+.item.past .overlay {
+  background-color: rgba(15, 15, 15, 0.4);
 }
 .item.promoted .promote, .item.demoted .demote, .item.unfollowed .unfollow, .item.followed .follow, .item.flagged .flag {
   -webkit-transition: opacity 500ms;

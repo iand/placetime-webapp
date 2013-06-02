@@ -488,14 +488,20 @@
 
 
             <form class="form">
-                <% if (view === 'timeline') { %>
-                    <input class="pull-left search" type="search" placeholder="Search items">
+                <select class="pull-left type" name="t">
+                    <option value="i">All</option>
+                    <option value="a">Audio</option>
+                    <option value="e">Events</option>
+                <% if (view === 'followings' || view === 'followers') { %>
+                    <option value="p" selected="selected">Profiles</option>
                 <% } else { %>
-                    <input class="pull-left search" type="search" placeholder="Search profiles">
+                    <option value="p">Profiles</option>
                 <% } %>
+                    <option value="v">Videos</option>
+                </select>
+
+                <input class="pull-left search" name="s" type="search" placeholder="Search for...">
             </form>
-
-
             <% if (view === 'timeline') { %>
             <a class="now pull-right">
                 now <i class="icon-repeat"></i>

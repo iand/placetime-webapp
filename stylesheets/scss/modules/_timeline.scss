@@ -25,6 +25,7 @@
             padding: 0;
         }
 
+        .type,
         .search,
         .add {
             @include border-radius(16px);
@@ -32,6 +33,17 @@
             height: 25px;
             padding: 4px 12px;
             margin-top: 8px;
+        }
+
+        .type {
+            font-size: 14px;
+            height: 25px;
+            padding: 4px 12px;
+            margin: 12px 0 0 15px;
+        }
+
+        .search {
+            margin-left: 15px;
         }
 
         .add {

@@ -123,18 +123,12 @@ Application.View.TimelinePublic = Application.View.Timeline.extend({
     search: function(options) {
         var collection = new Application.Collection.Searches();
 
-        var query = options.query;
-        if (options.type === 'items') {
-            type = 'i';
-        } else if (options.type === 'profiles') {
-            type = 'p';
-        } else {
-            throw new Error("Invalid type");
-        }
+        var search = options.search,
+            type   = options.type;
 
         var model = new Backbone.Model({
             loading: true,
-            s: query,
+            s: search,
             t: type
         });
 

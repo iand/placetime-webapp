@@ -28,22 +28,21 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
     submit: function(event) {
         var url = 'search/';
 
-        var view = this.model.get('view');
-        if (view === 'search') {
-            url += Backbone.history.fragment.match(/search\/([^/]+\/)/, '')[1];
-        } else if (view === 'timeline') {
-            url += 'items/';
-        } else {
-            url += 'profiles/';
-        }
-
+        // Type
         url += encodeURIComponent(
-            $(event.target).find('[type=search]').val()
+            $(event.target).find('[name=t]').val()
+        );
+
+        url += '/';
+
+        // Search
+        url += encodeURIComponent(
+            $(event.target).find('[name=s]').val()
         );
 
 
         Backbone.history.navigate(url, true);
 
         return false;
-    },
+    }
 });

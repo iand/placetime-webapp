@@ -17,10 +17,10 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
     className: function() {
         var className = 'searches';
 
-        if (this.model.get('t') === 'i') {
-            className += ' items';
-        } else {
+        if (this.model.get('t') === 'p') {
             className += ' profiles';
+        } else {
+            className += ' items';
         }
 
         return className;
@@ -54,10 +54,10 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
 
 
     onShow: function() {
-        if (this.model.get('t') === 'i') {
-            this.itemView = Application.View.SearchItem;
-        } else {
+        if (this.model.get('t') === 'p') {
             this.itemView = Application.View.SearchProfile;
+        } else {
+            this.itemView = Application.View.SearchItem;
         }
 
         var self    = this;
