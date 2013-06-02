@@ -79,7 +79,6 @@ Application.Router.User = Backbone.Router.extend({
         var check = Application.session.check();
 
         check.done(function(){
-            console.log(Application.content.is('timelines'));
             if (Application.content.is('timelines') === true) {
                 Application.content.currentView.trigger('public:search', {
                     type: type,
