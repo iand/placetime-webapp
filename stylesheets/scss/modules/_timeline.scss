@@ -120,6 +120,7 @@
     }
 
     .children {
+        @include translateZ(0);
         position: relative;
         padding-top: 46px;
     }
