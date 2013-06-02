@@ -489,15 +489,14 @@
 
             <form class="form">
                 <select class="pull-left type" name="t">
-                    <option value="i">All</option>
-                    <option value="a">Audio</option>
-                    <option value="e">Events</option>
+                    <option value="v">Watch</option>
+                    <option value="a">Listen</option>
+                    <option value="e">Do</option>
                 <% if (view === 'followings' || view === 'followers') { %>
-                    <option value="p" selected="selected">Profiles</option>
+                    <option value="p" selected="selected">People</option>
                 <% } else { %>
-                    <option value="p">Profiles</option>
+                    <option value="p">People</option>
                 <% } %>
-                    <option value="v">Videos</option>
                 </select>
 
                 <input class="pull-left search" name="s" type="search" placeholder="Search for...">
