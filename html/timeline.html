@@ -489,17 +489,34 @@
 
             <form class="form">
                 <select class="pull-left type" name="t">
-                    <option value="v">Watch</option>
-                    <option value="a">Listen</option>
-                    <option value="e">Do</option>
-                <% if (view === 'followings' || view === 'followers') { %>
-                    <option value="p" selected="selected">People</option>
-                <% } else { %>
-                    <option value="p">People</option>
-                <% } %>
+                    <% if (type === 'v') { %>
+                        <option value="v" selected="selected">Watch</option>
+                    <% } else { %>
+                        <option value="v">Watch</option>
+                    <% } %>
+
+                    <% if (type === 'a') { %>
+                        <option value="a" selected="selected">Listen</option>
+                    <% } else { %>
+                        <option value="a">Listen</option>
+                    <% } %>
+
+                    <% if (type === 'e') { %>
+                        <option value="e" selected="selected">Do</option>
+                    <% } else { %>
+                        <option value="e">Do</option>
+                    <% } %>
+
+                    <% if (view === 'followings' || view === 'followers') { %>
+                        <option value="p" selected="selected">People</option>
+                    <% } else if (type === 'p') { %>
+                        <option value="p" selected="selected">People</option>
+                    <% } else { %>
+                        <option value="p">People</option>
+                    <% } %>
                 </select>
 
-                <input class="pull-left search" name="s" type="search" placeholder="Search for...">
+                <input class="pull-left search" name="s" type="search" placeholder="<%= placeholders[type] %>" value="<%= search %>">
             </form>
             <% if (view === 'timeline') { %>
             <a class="now pull-right">

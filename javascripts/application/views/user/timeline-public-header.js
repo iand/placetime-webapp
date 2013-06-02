@@ -3,18 +3,37 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
 
     events: {
         'click .now': 'refresh',
+        'change .type': 'change',
         'submit .form': 'submit'
     },
 
 
     modelEvents: {
-        'change': function(model) {
-            if (model.get('view') === 'search') {
-                return;
-            }
+        'change': 'render'
+    },
 
-            this.render();
+
+    initialize: function() {
+        var options = this.model.get('options');
+
+        if (options.type !== undefined && options.search !== undefined) {
+            this.model.set({
+                type: options.type,
+                search: options.search
+            });
+        } else {
+            this.model.set({
+                type: 'v',
+                search: ''
+            });
         }
+
+        this.model.set('placeholders', {
+            a: 'Search for music',
+            e: 'Search for events',
+            v: 'Search for video',
+            p: 'Search profiles'
+        });
     },
 
 
@@ -25,19 +44,41 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
     },
 
 
+    change: function(event) {
+        var $form = $(event.target).closest('form');
+
+        this.model.set({
+            type: $form.find('[name=t]').val(),
+            search: $form.find('[name=s]').val()
+        });
+
+        // Trigger filter
+        if (this.model.get('view') === 'search') {
+            this.submit(event);
+        }
+    },
+
+
     submit: function(event) {
+        var $form = $(event.target).closest('form');
+
+        if ($form.find('[name=s]').val() === '') {
+            return;
+        }
+
+
         var url = 'search/';
 
         // Type
         url += encodeURIComponent(
-            $(event.target).find('[name=t]').val()
+            $form.find('[name=t]').val()
         );
 
         url += '/';
 
         // Search
         url += encodeURIComponent(
-            $(event.target).find('[name=s]').val()
+            $form.find('[name=s]').val()
         );
 
 
