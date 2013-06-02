@@ -44,28 +44,31 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
     },
 
 
-    change: function(event) {
+    update: function() {
         var $form = $(event.target).closest('form');
 
         this.model.set({
             type: $form.find('[name=t]').val(),
             search: $form.find('[name=s]').val()
         });
+    },
 
+
+    change: function(event) {
         // Trigger filter
         if (this.model.get('view') === 'search') {
             this.submit(event);
+        } else {
+            this.update();
         }
     },
 
 
     submit: function(event) {
+        this.update();
+
+
         var $form = $(event.target).closest('form');
-
-        if ($form.find('[name=s]').val() === '') {
-            return;
-        }
-
 
         var url = 'search/';
 
@@ -80,7 +83,6 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
         url += encodeURIComponent(
             $form.find('[name=s]').val()
         );
-
 
         Backbone.history.navigate(url, true);
 
