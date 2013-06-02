@@ -615,9 +615,7 @@ h1 {
   position: absolute;
   top: 50%;
   opacity: 0.7;
-  width: 98%;
-  width: -webkit-calc(100% - 12px);
-  width: calc(100% - 12px);
+  width: 100%;
   z-index: 4;
 }
 
