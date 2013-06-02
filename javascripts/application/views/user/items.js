@@ -109,7 +109,8 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             data: {
                 pid: this.model.get('pid'),
                 before: 25,
-                after: 25
+                after: 25,
+                ts: undefined
             },
             reset: true
         });
