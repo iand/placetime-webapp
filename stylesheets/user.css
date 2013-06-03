@@ -909,19 +909,20 @@ h1 {
   margin-left: 15px;
 }
 .timeline .header .add {
-  margin-left: 18px;
-  max-width: 200px;
-  min-width: 100px;
+  margin: 16px 0 0 0;
+  padding: 0;
+  width: 80px;
 }
-.timeline .header .submit {
+.timeline .header .watch,
+.timeline .header .listen,
+.timeline .header .do {
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   -ms-border-radius: 15px;
   -o-border-radius: 15px;
   border-radius: 15px;
   font-size: 12px;
-  margin-left: -53px;
-  margin-top: 11px;
+  margin-top: 10px;
   padding: 4px 11px;
 }
 .timeline .header .now {

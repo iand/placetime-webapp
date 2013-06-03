@@ -8,8 +8,8 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
         this.initialEvents();
 
         // Handle
-        this.on('view:itemAdd', function(){
-            this.itemAdd();
+        this.on('view:itemAdd', function(options) {
+            this.itemAdd(options);
         });
     },
 
@@ -43,11 +43,13 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
 
 
     itemAdd: function(options) {
+        var model = new Backbone.Model();
+            model.set(options);
+
         var view = new Application.View.ItemAdd({
-            collection : this.collection
+            model: model
         });
 
-        view.model.set(options);
 
 
         this.bindEvents(view);

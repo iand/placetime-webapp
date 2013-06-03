@@ -4,7 +4,10 @@ Application.View.PrivateTimelineHeader = Application.View.TimelineHeader.extend(
     events: {
         'click .playlist': 'playlist',
         'click .now': 'refresh',
-        'submit .form': 'add'
+
+        'click .watch'  : 'itemAdd',
+        'click .listen' : 'itemAdd',
+        'click .do'     : 'itemAdd'
     },
 
 
@@ -27,13 +30,13 @@ Application.View.PrivateTimelineHeader = Application.View.TimelineHeader.extend(
     },
 
 
-    add: function(event) {
-        var $form = $(event.target);
+    itemAdd: function(event) {
+        var $input = $(event.target);
 
         this.trigger('view:itemAdd', {
-            link: $form.find('input').val()
+            type: $input.val().toLowerCase()
         });
 
         return false;
-    },
+    }
 });
