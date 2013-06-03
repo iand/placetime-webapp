@@ -1026,7 +1026,7 @@ h1 {
   -ms-border-radius: 0 0 8px 8px;
   -o-border-radius: 0 0 8px 8px;
   border-radius: 0 0 8px 8px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .now-separator-present {
@@ -1035,6 +1035,7 @@ h1 {
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
   border-radius: 8px;
+  background-color: transparent;
   color: #ff6600;
 }
 
@@ -1044,7 +1045,7 @@ h1 {
   -ms-border-radius: 8px 8px 0 0;
   -o-border-radius: 8px 8px 0 0;
   border-radius: 8px 8px 0 0;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .item.promoted .overlay, .item.demoted .overlay, .item.unfollowed .overlay, .item.followed .overlay, .item.flagged .overlay, .item.past .overlay {

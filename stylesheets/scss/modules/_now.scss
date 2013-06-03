@@ -13,15 +13,16 @@
 
 .now-separator-future {
     @include border-radius(0 0 8px 8px);
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .now-separator-present {
     @include border-radius(8px);
+    background-color: transparent;
     color: #ff6600;
 }
 
 .now-separator-past {
     @include border-radius(8px 8px 0 0);
-    margin-top: 10px;
+    margin-top: 5px;
 }
