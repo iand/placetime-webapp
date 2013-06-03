@@ -1,0 +1,27 @@
+.now-separator {
+    margin-top: -6px;
+}
+
+
+.now-separator-future,
+.now-separator-present,
+.now-separator-past {
+    background-color: #fff;
+    font-size: 14px;
+    padding: 8px 15px;
+}
+
+.now-separator-future {
+    @include border-radius(0 0 8px 8px);
+    margin-bottom: 10px;
+}
+
+.now-separator-present {
+    @include border-radius(8px);
+    color: #ff6600;
+}
+
+.now-separator-past {
+    @include border-radius(8px 8px 0 0);
+    margin-top: 10px;
+}

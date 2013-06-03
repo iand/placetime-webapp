@@ -1008,6 +1008,45 @@ h1 {
   cursor: pointer;
 }
 
+.now-separator {
+  margin-top: -6px;
+}
+
+.now-separator-future,
+.now-separator-present,
+.now-separator-past {
+  background-color: #fff;
+  font-size: 14px;
+  padding: 8px 15px;
+}
+
+.now-separator-future {
+  -webkit-border-radius: 0 0 8px 8px;
+  -moz-border-radius: 0 0 8px 8px;
+  -ms-border-radius: 0 0 8px 8px;
+  -o-border-radius: 0 0 8px 8px;
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 10px;
+}
+
+.now-separator-present {
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
+  color: #ff6600;
+}
+
+.now-separator-past {
+  -webkit-border-radius: 8px 8px 0 0;
+  -moz-border-radius: 8px 8px 0 0;
+  -ms-border-radius: 8px 8px 0 0;
+  -o-border-radius: 8px 8px 0 0;
+  border-radius: 8px 8px 0 0;
+  margin-top: 10px;
+}
+
 .item.promoted .overlay, .item.demoted .overlay, .item.unfollowed .overlay, .item.followed .overlay, .item.flagged .overlay, .item.past .overlay {
   background-color: rgba(255, 255, 255, 0.65);
   display: block;

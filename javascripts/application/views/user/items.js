@@ -61,6 +61,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         // Handle
         this.on('reload', this.reload);
         this.on('now', this.now);
+        this.on('now:done', this.separator);
     },
 
 
@@ -148,7 +149,8 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             }
 
             var itemPosition = $closest.position(),
-                needlePosition = $needle.position();
+                needlePosition = $needle.position(),
+                separatorHeight = 116;
 
             // If it's the first item, no need to include padding
             if (itemPosition.top === 46) {
@@ -158,12 +160,34 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             // Scroll to
             self.trigger('scrollTo', {
                 left: itemPosition.left,
-                top: itemPosition.top - (needlePosition.top), // Offset padding
+                top: itemPosition.top - (needlePosition.top) + separatorHeight,
                 duration: jQuery.fx.speeds.slow
             });
 
             $closest.addClass('now');
         });
+
+
+        promise.done(function(data){
+            self.trigger('now:done');
+        });
+
+        promise.fail(function(){
+            self.trigger('now:error');
+        });
+
+
+        return promise;
+    },
+
+
+
+    separator: function() {
+        var view = new Application.View.Now();
+
+        this.$el.find('.item.now').before(
+            view.render().el
+        );
     },
 
 
