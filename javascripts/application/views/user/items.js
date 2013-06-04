@@ -168,7 +168,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
             var itemPosition = $closest.position(),
                 needlePosition = $needle.position(),
-                separatorHeight = 35;
+                separatorHeight = 28;
 
             // If it's the first item, no need to include padding
             if (itemPosition.top === 46) {
