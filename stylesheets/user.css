@@ -1014,11 +1014,10 @@ h1 {
 }
 
 .now-separator-future,
-.now-separator-present,
 .now-separator-past {
   background-color: #fff;
   font-size: 14px;
-  padding: 8px 15px;
+  padding: 6px 12px;
 }
 
 .now-separator-future {
@@ -1027,17 +1026,7 @@ h1 {
   -ms-border-radius: 0 0 8px 8px;
   -o-border-radius: 0 0 8px 8px;
   border-radius: 0 0 8px 8px;
-  margin-bottom: 5px;
-}
-
-.now-separator-present {
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
-  border-radius: 8px;
-  background-color: transparent;
-  color: #ff6600;
+  margin-bottom: 20px;
 }
 
 .now-separator-past {
@@ -1046,7 +1035,7 @@ h1 {
   -ms-border-radius: 8px 8px 0 0;
   -o-border-radius: 8px 8px 0 0;
   border-radius: 8px 8px 0 0;
-  margin-top: 5px;
+  margin-top: 20px;
 }
 
 .item.promoted .overlay, .item.demoted .overlay, .item.unfollowed .overlay, .item.followed .overlay, .item.flagged .overlay, .item.past .overlay {
