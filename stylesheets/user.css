@@ -155,11 +155,6 @@ h1 {
 .followers,
 .followings,
 .suggestions {
-  -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  -o-transform: translateZ(0);
-  transform: translateZ(0);
   padding-top: 5px;
 }
 .items .item,
@@ -167,6 +162,11 @@ h1 {
 .followers .item,
 .followings .item,
 .suggestions .item {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
   -webkit-transition: padding-top 500ms linear, padding-bottom 500ms linear, margin-bottom 500ms linear, max-height 500ms linear;
   -webkit-transition-delay: 250ms, 250ms, 250ms, 250ms;
   -moz-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
@@ -484,6 +484,10 @@ h1 {
   -o-transition: opacity 1s;
   transition: opacity 1s;
   opacity: 1;
+}
+
+.item.add {
+  padding-top: 48px;
 }
 
 .item .url {
@@ -960,38 +964,21 @@ h1 {
 .timeline .nav li a {
   border-bottom: 0;
 }
-.timeline .scroller {
-  position: relative;
-  overflow: scroll;
-  height: 100%;
-  width: 100%;
-}
-.timeline .children {
-  -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  -o-transform: translateZ(0);
-  transform: translateZ(0);
-  position: relative;
-  padding-top: 46px;
-}
-.timeline .item.add {
-  padding-top: 48px;
-}
-.timeline .loading {
+
+.loading {
   left: 50%;
   margin-left: -12px;
   opacity: 0.25;
   position: absolute;
 }
-.timeline .loading.after {
+.loading.after {
   top: 50px;
 }
-.timeline .loading.before {
+.loading.before {
   bottom: 20px;
 }
-.timeline .load-more,
-.timeline .no-results {
+
+.no-results {
   -webkit-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
@@ -1005,8 +992,27 @@ h1 {
   text-align: center;
   width: 100%;
 }
-.timeline .load-more {
-  cursor: pointer;
+
+.scroller {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  position: relative;
+  overflow: scroll;
+  height: 100%;
+  width: 100%;
+}
+
+.children {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  position: relative;
+  padding-top: 46px;
 }
 
 .now-separator {
