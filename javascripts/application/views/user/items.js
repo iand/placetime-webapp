@@ -45,6 +45,24 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         // Custom events
         this.on('item:add', function(event) {
             this.collection.add(event);
+
+
+            var item = this.collection.findWhere({
+                id: event.id
+            });
+
+            var itemPosition = this.$el.find('.item[data-id='+item.idSafe()+']').position();
+
+            // If it's the first item, no need to include padding
+            if (itemPosition.top === 46) {
+                itemPosition.top = 0;
+            }
+
+            this.trigger('scrollTo', {
+                left: itemPosition.left,
+                top: itemPosition.top,
+                duration: jQuery.fx.speeds.slow
+            });
         });
 
 

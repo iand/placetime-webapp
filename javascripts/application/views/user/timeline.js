@@ -9,20 +9,8 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     initialEvents: function() {
         $(window).on('resize', _.bind(this.resize, this));
 
-        // Pass event to current view
-        this.on('item:add', function(event) {
-            this.regionManager.get('collection').currentView.trigger('item:add', event);
-        });
-
-        // Load timeline view
-        this.on('view:timeline', function(options){
-            this.timeline(options);
-        });
-
-        this.on('scrollTo:before', this.scrollToBefore);
-        this.on('scrollTo:after', this.scrollToAfter);
-
         // On view change update model
+        // TODO: Find better way
         this.on('all', function(event) {
             var match = event.match(/view:(.*)/);
 
@@ -33,6 +21,22 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
             this.model.set('view', match[1]);
         });
 
+        // Pass event to current view
+        this.on('item:add', function(event) {
+            this.regionManager.get('collection').currentView.trigger('item:add', event);
+        });
+
+        // Load timeline view
+        this.on('view:timeline', function(options){
+            this.timeline(options);
+        });
+
+        // Scroll to
+        this.on('scrollTo', this.scrollTo);
+        this.on('scrollTo:before', this.scrollToBefore);
+        this.on('scrollTo:after', this.scrollToAfter);
+
+        // Infinite scroll
         this.on('scroll', this.infiniteScroll);
     },
 
@@ -63,23 +67,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         this.listenTo(view, 'scroll', this.infiniteScroll);
 
         // Handle scroll to requests
-        this.listenTo(view, 'scrollTo', function(event) {
-            var $scroller = this.$el.find('.scroller');
-
-            // Already there
-            if (event.top === $scroller.scrollTop()) {
-                return;
-            }
-
-            self.trigger('scrollTo:before');
-
-            $scroller.animate({
-                scrollTop: event.top,
-                scrollLeft: event.left
-            }, event.duration, function(){
-                self.trigger('scrollTo:after');
-            });
-        });
+        this.listenTo(view, 'scrollTo', this.scrollTo);
     },
 
 
@@ -134,6 +122,29 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
 
 
+    scrollTo: function(event) {
+        var self = this;
+
+
+        var $scroller = this.$el.find('.scroller');
+
+        // Already there
+        if (event.top === $scroller.scrollTop()) {
+            return;
+        }
+
+        self.trigger('scrollTo:before');
+
+        $scroller.animate({
+            scrollTop: event.top,
+            scrollLeft: event.left
+        }, event.duration, function(){
+            self.trigger('scrollTo:after');
+        });
+    },
+
+
+
     scrollToBefore: function() {
         this.scrollToScrolling = true;
     },
@@ -150,6 +161,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
         this.scrollToReference = setTimeout(deferred, 150);
     },
+
 
 
     infiniteScroll: function(event) {
