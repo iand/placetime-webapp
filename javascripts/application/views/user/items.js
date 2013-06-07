@@ -37,6 +37,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     initialize: function (options) {
         this.subviews = new Backbone.ChildViewContainer();
         this.subviews.add(new Application.View.Needle(), 'needle');
+        this.subviews.add(new Application.View.Now(), 'separator');
 
         this.on('composite:rendered', function(){
             this.$el.find('.scroller').scroll(_.bind(this.onScroll, this));
@@ -79,7 +80,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         // Handle
         this.on('reload', this.reload);
         this.on('now', this.now);
-        this.on('now:done', this.separator);
+        this.on('now:done', this.renderSeparator);
     },
 
 
@@ -199,12 +200,9 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-
-    separator: function() {
-        var view = new Application.View.Now();
-
+    renderSeparator: function() {
         this.$el.find('.item.now').before(
-            view.render().el
+            this.subviews.findByCustom('separator').render().el
         );
     },
 
