@@ -44,6 +44,8 @@ input[type=url] {
     width: 200px;
 }
 
+button,
+input[type=button],
 input[type=submit] {
     @include border-radius(3px);
     @include box-shadow(

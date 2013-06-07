@@ -7,7 +7,7 @@ var FeedView = Backbone.View.extend({
 
 
     initialize: function (options) {
-        this.template = _.template($("#feed-tmpl").html());
+        this.template = _.template($("#feed-template").html());
         this.msg = "";
         this.initItemViews(options.items);
     },

@@ -53,6 +53,14 @@ Application.Router.Admin = Backbone.Router.extend({
 
 
 
+    logout: function () {
+        Application.session.destroy();
+
+        Backbone.history.navigate('login', true);
+    },
+
+
+
     home: function () {
         var self = this;
 

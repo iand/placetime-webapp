@@ -61,6 +61,8 @@ input[type=url] {
   width: 200px;
 }
 
+button,
+input[type=button],
 input[type=submit] {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -82,10 +84,14 @@ input[type=submit] {
   margin: 8px 10px 4px 0px;
   padding: 12px;
 }
+button:hover,
+input[type=button]:hover,
 input[type=submit]:hover {
   background-color: #fff;
   border: 2px solid #666666;
 }
+button:active,
+input[type=button]:active,
 input[type=submit]:active {
   -webkit-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
   -moz-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 4px 0px inset;
@@ -93,6 +99,8 @@ input[type=submit]:active {
   background-color: #cccccc;
   border: 2px solid #ff9900;
 }
+button.wide,
+input[type=button].wide,
 input[type=submit].wide {
   width: 100%;
 }
@@ -106,15 +114,6 @@ h1 {
   font-size: 16px;
   font-weight: normal;
   margin-bottom: 5px;
-}
-
-.layout-header {
-  position: relative;
-  z-index: 100;
-}
-
-.layout-content {
-  padding-top: 54px;
 }
 
 .layout-container {
@@ -134,6 +133,22 @@ h1 {
 }
 .layout-container-wide .timeline.private {
   padding: 0 8px 0 4px;
+}
+
+.layout-content {
+  padding-top: 54px;
+}
+
+.layout-header {
+  position: relative;
+  z-index: 100;
+}
+
+.back-icon {
+  color: #555;
+  font-size: 20px;
+  position: relative;
+  top: 3px;
 }
 
 .navbar {

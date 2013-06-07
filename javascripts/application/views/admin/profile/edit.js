@@ -1,12 +1,22 @@
 Application.Admin.View.ProfileEdit = Backbone.Marionette.ItemView.extend({
-    template: '#editprofile-tmpl',
+    template: '#profile-edit-template',
+    className: 'layout-container',
 
     events: {
-        'click .saveBtn': 'save'
+        'submit form': 'submit'
     },
 
 
-    save: function (event) {
+    // TODO: Insert dynamically to all pages
+    onShow: function() {
+        var view = new Application.Admin.View.Back();
+            view.render();
+
+        this.$el.prepend(view.el);
+    },
+
+
+    submit: function (event) {
         var self = this;
 
 

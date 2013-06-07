@@ -1,5 +1,6 @@
 Application.Admin.View.ProfileNew = Backbone.Marionette.ItemView.extend({
-    template: '#addprofile-tmpl',
+    template: '#profile-new-template',
+    className: 'layout-container',
 
     events: {
         'submit form': 'submit'

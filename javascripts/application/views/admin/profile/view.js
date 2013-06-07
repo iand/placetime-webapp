@@ -1,9 +1,10 @@
 Application.Admin.View.ProfileView = Backbone.Marionette.ItemView.extend({
-    template: '#profile-tmpl',
+    template: '#profile-view-template',
+    className: 'layout-container',
 
     events: {
-        'click .editBtn': 'edit',
-        'click .feedBtn': 'addfeed'
+        'click .profile-edit': 'edit',
+        'click .profile-add': 'add'
     },
 
 
@@ -14,10 +15,20 @@ Application.Admin.View.ProfileView = Backbone.Marionette.ItemView.extend({
     },
 
 
-    addfeed: function () {
+    add: function () {
         Backbone.history.navigate('profile/' + this.model.get('pid') + '/feed/new', true);
 
         return false;
+    },
+
+
+
+    // TODO: Insert dynamically to all pages
+    onShow: function() {
+        var view = new Application.Admin.View.Back();
+            view.render();
+
+        this.$el.prepend(view.el);
     },
 
 
@@ -27,6 +38,6 @@ Application.Admin.View.ProfileView = Backbone.Marionette.ItemView.extend({
             collection: this.model.get('items')
         });
 
-        this.$el.find('.items').append(view.el);
+        this.$el.find('.profile-items').append(view.el);
     }
 });
