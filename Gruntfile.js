@@ -71,7 +71,8 @@ module.exports = function(grunt) {
                     javascriptsDir: 'javascripts/',
                     outputStyle: 'expanded',
                     relativeAssets: true,
-                    noLineComments: true
+                    noLineComments: true,
+                    bundleExec: true
                 }
             },
 
@@ -84,7 +85,8 @@ module.exports = function(grunt) {
                     sassDir: 'stylesheets/scss',
                     javascriptsDir: 'javascripts/',
                     outputStyle: 'compressed',
-                    noLineComments: true
+                    noLineComments: true,
+                    bundleExec: true
                 }
             }
         },
