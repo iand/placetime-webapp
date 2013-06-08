@@ -9,11 +9,11 @@ Application.Model.SearchItem = Application.Model.Item.extend({
     time: function() {
         if (this.isEvent() === true) {
             return moment.unix(
-                this.get('event')
+                this.get('event').toString().substr(0, 10)
             );
         } else {
             return moment.unix(
-                this.get('added')
+                this.get('added').toString().substr(0, 10)
             );
         }
     },
