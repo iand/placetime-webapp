@@ -16,7 +16,7 @@ Application.View.Register = Backbone.Marionette.ItemView.extend({
             promise = this.model.set(data).save();
 
         promise.done(function(){
-            Backbone.history.navigate('login', true);
+            Backbone.history.navigate('timeline', true);
         });
 
         promise.fail(function(){
