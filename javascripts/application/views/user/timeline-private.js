@@ -43,7 +43,7 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
 
 
     itemAdd: function(options) {
-        var model = new Backbone.Model();
+        var model = new Application.Model.Item();
             model.set(options);
 
         var view = new Application.View.ItemAdd({

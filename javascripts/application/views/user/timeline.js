@@ -4,6 +4,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     className: 'layout-column',
 
     infiniteScrollReference: null,
+    infiniteScrollScrollTop: 0,
     infiniteScrollLastUpdate: moment().subtract('seconds', 2),
 
     initialEvents: function() {
@@ -201,8 +202,16 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
         // Top infinite scroll
         else if (Math.abs(scrollTop) < threshold) {
+            this.infiniteScrollScrollTop  = scrollTop;
             this.infiniteScrollLastUpdate = moment();
-            this.regionManager.get('collection').currentView.trigger('infinite:load', {after: true});
+
+            var collection = this.regionManager.get('collection').currentView;
+                collection.trigger('infinite:load', {after: true});
+
+            this.listenToOnce(collection, 'infinite:done', function(data) {
+                console.log(data);
+                this.$el.find('.scroller').scrollTop(this.infiniteScrollScrollTop);
+            });
         }
 
         // Bottom infinite scroll

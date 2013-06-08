@@ -13,7 +13,7 @@ Application.View.Followers = Backbone.Marionette.CompositeView.extend({
     initialize: function (options) {
         this.on('infinite:load', this.load);
         this.on('infinite:load', this.loading);
-        this.on('infinite:loaded', this.loaded);
+        this.on('infinite:done', this.loaded);
         this.on('infinite:failed', this.loaded);
     },
 
@@ -66,7 +66,7 @@ Application.View.Followers = Backbone.Marionette.CompositeView.extend({
                 self.model.set('start', data.start + 10);
             }
 
-            self.trigger('infinite:loaded');
+            self.trigger('infinite:done', data);
         }).fail(function(){
             self.trigger('infinite:failed');
         });

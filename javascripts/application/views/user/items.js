@@ -70,7 +70,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         // Handle infinite scroll
         this.on('infinite:load', this.load);
         this.on('infinite:load', this.loading);
-        this.on('infinite:loaded', this.loaded);
+        this.on('infinite:done', this.loaded);
         this.on('infinite:failed', this.loaded);
 
         // Handle needle displaying
@@ -231,8 +231,8 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         self.collection.fetch({
             remove: false,
             data: data
-        }).done(function(){
-            self.trigger('infinite:loaded');
+        }).done(function(data){
+            self.trigger('infinite:done', data);
         }).fail(function(){
             self.trigger('infinite:failed');
         });

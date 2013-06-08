@@ -280,8 +280,7 @@
                 </a>
             </p>
 
-
-            <% if (status === 'm') { %>
+            <% if (status === 'm' && user !== pid) { %>
                 <a class="button demote">
                     <i class="icon-remove"></i>
                 </a>
