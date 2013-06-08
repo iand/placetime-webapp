@@ -7,6 +7,7 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
     initialize: function (options) {
         this.on('scroll', this.rotate);
         this.on('scroll', this.update);
+        this.on('update', this.update);
     },
 
 

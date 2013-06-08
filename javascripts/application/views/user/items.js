@@ -112,12 +112,18 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     renderNeedle: function() {
+        var $view = this.$el.find('.needle-view');
+
         if (this.collection.length > 0) {
-            this.$el.find('.needle-view').html(
-                this.subviews.findByCustom('needle').render().el
-            );
+            if ($view.is(':empty') === true) {
+                this.$el.find('.needle-view').html(
+                    this.subviews.findByCustom('needle').render().el
+                );
+            } else {
+                this.subviews.findByCustom('needle').trigger('update');
+            }
         } else {
-            this.$el.find('.needle-view').empty();
+            $view.empty();
         }
     },
 
