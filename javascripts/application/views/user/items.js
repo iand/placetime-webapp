@@ -44,6 +44,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         });
 
         // Custom events
+        this.on('item:add', this.now);
         this.on('item:add', function(event) {
             this.collection.add(event);
 
@@ -189,6 +190,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
                 duration: jQuery.fx.speeds.slow
             });
 
+            $closest.siblings().removeClass('now');
             $closest.addClass('now');
         });
 
@@ -207,7 +209,15 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     renderSeparator: function() {
-        this.$el.find('.item.now').before(
+        var $now = this.$el.find('.item.now');
+
+        if ($now.prev().is('.now-separator') === true) {
+            return;
+        }
+
+        this.$el.find('.now-separator').remove();
+
+        $now.before(
             this.subviews.findByCustom('separator').render().el
         );
     },

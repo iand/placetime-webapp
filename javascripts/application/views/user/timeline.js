@@ -209,7 +209,6 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
                 collection.trigger('infinite:load', {after: true});
 
             this.listenToOnce(collection, 'infinite:done', function(data) {
-                console.log(data);
                 this.$el.find('.scroller').scrollTop(this.infiniteScrollScrollTop);
             });
         }
