@@ -173,7 +173,7 @@ h1 {
   -moz-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
   -o-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
   transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
-  max-height: 180px;
+  max-height: 225px;
 }
 .items .item.collapsed,
 .searches .item.collapsed,
@@ -337,6 +337,13 @@ h1 {
 .followings .item .bio,
 .suggestions .item .bio {
   font-size: 17px;
+}
+.items .item .listen,
+.searches .item .listen,
+.followers .item .listen,
+.followings .item .listen,
+.suggestions .item .listen {
+  margin-top: 10px;
 }
 .items .item .button,
 .searches .item .button,
@@ -588,6 +595,8 @@ h1 {
   margin: 16px 0 0 25px;
 }
 .navbar .nav {
+  padding: 0;
+  list-style: none;
   margin: 5px 25px 0;
 }
 .navbar .nav .icon-cog {

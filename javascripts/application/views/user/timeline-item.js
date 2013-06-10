@@ -2,7 +2,8 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
     events: {
         'click .flag': 'flag',
         'click .promote': 'promote',
-        'click .demote': 'demote'
+        'click .demote': 'demote',
+        'click .audio': 'load'
     },
 
     modelEvents: {
@@ -26,6 +27,31 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
         }
 
         return attributes;
+    },
+
+
+    load: function() {
+        var $iframe = $('<iframe />');
+            $iframe.addClass('pull-left listen');
+            $iframe.attr({
+                src: this.templateHelpers.getSpotifyUrl(this.model.get('link')),
+                height: 80,
+                frameborder: 0,
+                allowtransparency: true,
+                width: 680
+            });
+
+        // TODO: Add pid === user when pid is equal to promoting user
+        if (this.model.get('status') === 'm') {
+            $iframe.attr('width', 420);
+        } else {
+            $iframe.attr('width', 680);
+        }
+
+
+        $iframe.appendTo(this.$el);
+
+        return false;
     },
 
 

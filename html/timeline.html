@@ -252,7 +252,12 @@
                     </a>
                 </p>
             <% } else if (media == 'audio') { %>
-            <!-- audio specific markup here -->
+                <p class="text pull-left">
+                    <a class="audio" href="<%= getIframeUrl(link) %>">
+                        <i class="icon-play-circle"></i>
+                        <%= text %>
+                    </a>
+                </p>
             <% } else { %>
                 <p class="text pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
@@ -280,7 +285,7 @@
                 </a>
             </p>
 
-            <% if (status === 'm' && user !== pid) { %>
+            <% if (status === 'm' && user === pid) { %>
                 <a class="button demote">
                     <i class="icon-remove"></i>
                 </a>
@@ -666,21 +671,20 @@
             </p>
 
 
-            <% if (media == "video") { %>
+            <% if (media == 'video') { %>
                 <p class="text pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= getIframeUrl(link) %>">
                         <i class="icon-play-circle"></i>
                         <%= text %>
                     </a>
                 </p>
-            <% } else if (media == "audio") { %>
+            <% } else if (media == 'audio') { %>
                 <p class="text pull-left">
-                    <a class="fancybox fancybox.iframe" href="<%= getIframeUrl(link) %>">
+                    <a class="audio" href="<%= getIframeUrl(link) %>">
                         <i class="icon-play-circle"></i>
                         <%= text %>
                     </a>
                 </p>
-                <iframe class="pull-left listen" src="<%= getSpotifyUrl(link) %>" width="680" height="80" frameborder="0" allowtransparency="true"></iframe>
             <% } else { %>
                 <p class="text pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">

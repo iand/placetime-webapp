@@ -15,7 +15,7 @@
             margin-bottom 500ms linear 250ms,
             max-height 500ms linear 250ms
         );
-        max-height: 180px;
+        max-height: 225px;
 
         &.collapsed {
             margin-bottom: 0;
@@ -88,6 +88,10 @@
 
         .bio {
             font-size: 17px;
+        }
+
+        .listen {
+            margin-top: 10px;
         }
 
         .button {
