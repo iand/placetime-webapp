@@ -29,6 +29,10 @@ Application.View.Item = Application.View.TimelineItem.extend({
                     'https://gdata.youtube.com/feeds/api/videos/', ''
                 );
             }
+        },
+
+        getSpotifyUrl: function(url) {
+            return 'https://embed.spotify.com/?uri=' + url;
         }
     },
 

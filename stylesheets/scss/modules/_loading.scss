@@ -1,0 +1,14 @@
+.loading {
+    left: 50%;
+    margin-left: -12px;
+    opacity: 0.25;
+    position: absolute;
+
+    &.after {
+        top: 50px;
+    }
+
+    &.before {
+        bottom: 20px;
+    }
+}

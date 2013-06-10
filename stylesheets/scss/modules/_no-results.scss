@@ -1,0 +1,15 @@
+.no-results {
+    @include single-box-shadow(
+        rgba(0, 0, 0, 0.25), 0px 2px 2px
+    );
+
+    background-color: #ff6600;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    height: 20px;
+    text-align: center;
+    width: 100%;
+}
