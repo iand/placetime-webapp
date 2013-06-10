@@ -292,21 +292,56 @@
         </script>
 
 
-        <script type="text/template" id="item-add-template">
+        <script type="text/template" id="item-add-do-template">
             <form class="form">
                 <div class="field">
-                    <label for="link">Link</label>
-                    <input type="text" name="link" value="<%= link %>">
-                </div>
-
-                <div class="field">
-                    <label for="text">Text</label>
+                    <label for="text">Title</label>
                     <input type="text" name="text" value="<%= text %>">
                 </div>
 
                 <div class="field">
                     <label for="text">Event Date</label>
                     <input type="date" placeholder="dd/mm/yyyy" min="1900-00-00" name="ets" value="<%= ets %>">
+                </div>
+
+                <div class="actions">
+                    <input type="submit" value="Add" class="add">
+                    <input type="submit" value="Cancel" class="cancel">
+                </script>
+            </form>
+        </script>
+
+
+
+        <script type="text/template" id="item-add-watch-template">
+            <form class="form">
+                <div class="field preview">
+                    Watch Preview
+                </div>
+
+                <div class="field">
+                    <label for="text">Title</label>
+                    <input type="text" name="text" value="<%= text %>">
+                </div>
+
+                <div class="actions">
+                    <input type="submit" value="Add" class="add">
+                    <input type="submit" value="Cancel" class="cancel">
+                </script>
+            </form>
+        </script>
+
+
+
+        <script type="text/template" id="item-add-listen-template">
+            <form class="form">
+                <div class="field preview">
+                    Listen Preview
+                </div>
+
+                <div class="field">
+                    <label for="text">Title</label>
+                    <input type="text" name="text" value="<%= text %>">
                 </div>
 
                 <div class="actions">
@@ -473,14 +508,14 @@
 
 
         <script type="template/text" id="timeline-public-header-template">
-            <ul class="nav nav-inline pull-left">
-                <li class="items <%= (view == 'timeline')? 'active':'' %>">
+            <ul class="timeline-nav pull-left">
+                <li class="items first <%= (view == 'timeline')? 'active':'' %>">
                     <a href="#timeline">Timeline</a>
                 </li>
                 <li class="followings <%= (view == 'followings')? 'active':'' %>">
                     <a href="#followings">Following</a>
                 </li>
-                <li class="followers <%= (view == 'followers')? 'active':'' %>">
+                <li class="followers last <%= (view == 'followers')? 'active':'' %>">
                     <a href="#followers">Followers</a>
                 </li>
             </ul>
@@ -526,17 +561,20 @@
 
 
         <script type="template/text" id="timeline-private-header-template">
-            <ul class="nav nav-inline pull-left">
-                <li class="items active">
+            <ul class="timeline-nav pull-left">
+                <li class="items active first last">
                     <a href="#timeline" class="playlist">My Playlist</a>
                 </li>
             </ul>
 
             <form class="form">
-                <p class="pull-left add">Add link to:</p>
-                <input class="pull-left watch" type="submit" value="Watch">
-                <input class="pull-left listen" type="submit" value="Listen">
-                <input class="pull-left do" type="submit" value="Do">
+                <select class="pull-left type" name="type">
+                    <option value="watch">Watch</option>
+                    <option value="listen">Listen</option>
+                    <option value="do">Do</option>
+                </select>
+
+                <input class="pull-left url" name="url" type="url" placeholder="http://www.domain.com/">
             </form>
 
             <% if (view === 'timeline') { %>
@@ -549,12 +587,12 @@
 
         <script type="template/text" id="timeline-template">
             <% if (status === 'p') { %>
-            <div class="timeline public">
+            <div class="timeline timeline-public">
             <% } else { %>
-            <div class="timeline private">
+            <div class="timeline timeline-private">
             <% } %>
-                <div class="header"></div>
-                <div class="collection"></div>
+                <div class="timeline-header"></div>
+                <div class="timeline-collection"></div>
             </div>
         </script>
 

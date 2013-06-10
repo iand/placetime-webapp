@@ -12,6 +12,10 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     },
 
     initialize: function(options) {
+        if (['watch', 'listen', 'do'].indexOf(this.model.get('type')) !== -1) {
+            this.template = '#item-add-' + this.model.get('type') + '-template';
+        }
+
         this.model.set({
             link: '',
             text: '',

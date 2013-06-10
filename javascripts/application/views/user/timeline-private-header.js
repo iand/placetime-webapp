@@ -1,13 +1,11 @@
 Application.View.PrivateTimelineHeader = Application.View.TimelineHeader.extend({
     template: '#timeline-private-header-template',
+    className: 'timeline-header-private',
 
     events: {
         'click .playlist': 'playlist',
         'click .now': 'refresh',
-
-        'click .watch'  : 'itemAdd',
-        'click .listen' : 'itemAdd',
-        'click .do'     : 'itemAdd'
+        'submit .form': 'submit'
     },
 
 
@@ -30,12 +28,8 @@ Application.View.PrivateTimelineHeader = Application.View.TimelineHeader.extend(
     },
 
 
-    itemAdd: function(event) {
-        var $input = $(event.target);
-
-        this.trigger('view:itemAdd', {
-            type: $input.val().toLowerCase()
-        });
+    submit: function(event) {
+        this.trigger('view:itemAdd', $(event.target).serializeObject());
 
         return false;
     }

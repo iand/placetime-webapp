@@ -109,11 +109,11 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
         this.regionManager.addRegions({
             'header': {
                 parentEl: this.$el,
-                selector: '.header'
+                selector: '.timeline-header'
             },
             'collection': {
                 parentEl: this.$el,
-                selector: '.collection'
+                selector: '.timeline-collection'
             }
         });
 

@@ -1,5 +1,6 @@
 Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
     template: '#timeline-public-header-template',
+    className: 'timeline-header-public',
 
     events: {
         'click .now': 'refresh',
