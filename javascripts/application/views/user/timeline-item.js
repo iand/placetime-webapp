@@ -35,7 +35,8 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
         this.$el.off('click.delegateEvents' + this.cid, '.audio');
 
         var $text = this.$el.find('.text'),
-            $time = this.$el.find('.time');
+            $time = this.$el.find('.time'),
+            $duration = this.$el.find('.duration');
 
         var $iframe = $('<iframe />');
             $iframe.addClass('pull-left listen collapsed');
@@ -57,6 +58,7 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
         $iframe.insertBefore($time);
 
         $text.addClass('collapsed');
+        $duration.addClass('collapsed');
         $iframe.removeClass('collapsed');
 
         return false;

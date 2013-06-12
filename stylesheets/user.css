@@ -348,13 +348,15 @@ h1 {
 .item .text,
 .item .bio,
 .item .statistics,
-.item .time {
+.item .time,
+.item .duration {
   width: 100%;
 }
 .item .text a,
 .item .bio a,
 .item .statistics a,
-.item .time a {
+.item .time a,
+.item .duration a {
   border-bottom: 0;
 }
 .item .icon img {
@@ -417,7 +419,8 @@ h1 {
   overflow: hidden;
   max-height: 60px;
 }
-.item .text.collapsed {
+.item .text.collapsed,
+.item .duration.collapsed {
   -webkit-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
   -moz-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
   -o-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;

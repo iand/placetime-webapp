@@ -189,7 +189,8 @@
     .text,
     .bio,
     .statistics,
-    .time {
+    .time,
+    .duration {
         width: 100%;
 
         a {
@@ -272,7 +273,10 @@
         opacity: 1;
         overflow: hidden;
         max-height: 60px;
+    }
 
+    .text,
+    .duration {
         &.collapsed {
             @include transition(
                 opacity 1s ease,
