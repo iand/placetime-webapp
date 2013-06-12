@@ -258,25 +258,6 @@
                         <%= text %>
                     </a>
                 </p>
-
-                <% duration = getDuration(duration) %>
-                <ul class="duration pull-left">
-                    <% if (duration.days !== 0) { %>
-                    <li class="days"><%= duration.days %></li>
-                    <% } %>
-
-                    <% if (duration.hours !== 0) { %>
-                    <li class="hours"><%= duration.hours %></li>
-                    <% } %>
-
-                    <% if (duration.minutes !== 0) { %>
-                    <li class="minutes"><%= duration.minutes %></li>
-                    <% } %>
-
-                    <% if (duration.seconds !== 0) { %>
-                    <li class="seconds"><%= duration.seconds %></li>
-                    <% } %>
-                </ul>
             <% } else { %>
                 <p class="text pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
@@ -284,6 +265,30 @@
                         <%= text %>
                     </a>
                 </p>
+            <% } %>
+
+            <% if (media === 'video' || media === 'audio') { %>
+                <% duration = getDuration(duration) %>
+                <ul class="duration pull-left">
+                    <% if (duration.days !== 0) { %>
+                    <li class="days"><%= duration.days %></li>
+                    <li>:</li>
+                    <% } %>
+
+                    <% if (duration.hours !== 0) { %>
+                    <li class="hours"><%= duration.hours %></li>
+                    <li>:</li>
+                    <% } %>
+
+                    <% if (duration.minutes !== 0) { %>
+                    <li class="minutes"><%= duration.minutes %></li>
+                    <li>:</li>
+                    <% } %>
+
+                    <% if (duration.seconds !== 0) { %>
+                    <li class="seconds"><%= duration.seconds %></li>
+                    <% } %>
+                </ul>
             <% } %>
 
             <% if (source !== undefined && pid !== source && source !== '') { %>
@@ -711,6 +716,30 @@
                         <%= text %>
                     </a>
                 </p>
+            <% } %>
+
+            <% if (media === 'video' || media === 'audio') { %>
+                <% duration = getDuration(duration) %>
+                <ul class="duration pull-left">
+                    <% if (duration.days !== 0) { %>
+                    <li class="days"><%= duration.days %></li>
+                    <li>:</li>
+                    <% } %>
+
+                    <% if (duration.hours !== 0) { %>
+                    <li class="hours"><%= duration.hours %></li>
+                    <li>:</li>
+                    <% } %>
+
+                    <% if (duration.minutes !== 0) { %>
+                    <li class="minutes"><%= duration.minutes %></li>
+                    <li>:</li>
+                    <% } %>
+
+                    <% if (duration.seconds !== 0) { %>
+                    <li class="seconds"><%= duration.seconds %></li>
+                    <% } %>
+                </ul>
             <% } %>
 
             <% if (source !== undefined && pid !== source && source !== '') { %>

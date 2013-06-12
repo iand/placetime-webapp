@@ -226,13 +226,16 @@
         margin: -5px 0 8px;
         padding: 0;
 
+        li {
+            color: #fff;
+            display: inline-block;
+        }
+
         .days,
         .hours,
         .minutes,
         .seconds {
             @include border-radius(20px);
-            color: #fff;
-            display: inline-block;
             font-size: 12px;
             height: 17px;
             padding-top: 3px;
@@ -249,11 +252,11 @@
         }
 
         .minutes {
-            background-color: #ff5b00;
+            background-color: #f50000;
         }
 
         .seconds {
-            background-color: #f50000;
+            background-color: #ff5b00;
         }
     }
 

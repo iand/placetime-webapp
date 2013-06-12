@@ -382,6 +382,10 @@ h1 {
   margin: -5px 0 8px;
   padding: 0;
 }
+.item .duration li {
+  color: #fff;
+  display: inline-block;
+}
 .item .duration .days,
 .item .duration .hours,
 .item .duration .minutes,
@@ -391,8 +395,6 @@ h1 {
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
   border-radius: 20px;
-  color: #fff;
-  display: inline-block;
   font-size: 12px;
   height: 17px;
   padding-top: 3px;
@@ -400,10 +402,10 @@ h1 {
   width: 22px;
 }
 .item .duration .minutes {
-  background-color: #ff5b00;
+  background-color: #f50000;
 }
 .item .duration .seconds {
-  background-color: #f50000;
+  background-color: #ff5b00;
 }
 .item .text,
 .item .bio {

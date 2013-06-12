@@ -23,6 +23,25 @@ Application.View.SearchItem = Application.View.TimelineItem.extend({
             return window.location.origin + '/item/' + id;
         },
 
+        getDuration: function(secs) {
+            var current = moment(),
+                duration = moment();
+
+            duration.add('seconds', secs);
+
+            var days    = duration.diff(current, 'days'),
+                hours   = duration.diff(current, 'hours') - (days * 24),
+                minutes = duration.diff(current, 'minutes') - (hours * 60),
+                seconds = duration.diff(current, 'seconds') - (minutes * 60);
+
+            return {
+                days: days,
+                hours: hours,
+                minutes: minutes,
+                seconds: seconds
+            };
+        },
+
         getIframeUrl: function(url) {
             if (/youtube/.test(url) === true) {
                 return 'http://www.youtube.com/embed/' + url.replace(
