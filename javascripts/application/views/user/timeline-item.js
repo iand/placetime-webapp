@@ -31,8 +31,14 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
 
 
     load: function() {
+        // Unbind to prevent double click
+        this.$el.off('click.delegateEvents' + this.cid, '.audio');
+
+        var $text = this.$el.find('.text'),
+            $time = this.$el.find('.time');
+
         var $iframe = $('<iframe />');
-            $iframe.addClass('pull-left listen');
+            $iframe.addClass('pull-left listen collapsed');
             $iframe.attr({
                 src: this.templateHelpers.getSpotifyUrl(this.model.get('link')),
                 height: 80,
@@ -48,8 +54,10 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
             $iframe.attr('width', 680);
         }
 
+        $iframe.insertBefore($time);
 
-        $iframe.appendTo(this.$el);
+        $text.addClass('collapsed');
+        $iframe.removeClass('collapsed');
 
         return false;
     },

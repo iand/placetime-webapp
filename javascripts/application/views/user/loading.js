@@ -4,9 +4,9 @@ Application.View.Loading = Backbone.Marionette.ItemView.extend({
         var className = 'loading';
 
         if (this.options.before) {
-            className += ' before';
+            className += ' loading-before';
         } else if (this.options.after) {
-            className += ' after';
+            className += ' loading-after';
         } else {
             throw new Error('Invalid options provided');
         }
