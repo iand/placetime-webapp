@@ -55,7 +55,7 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
             $iframe.attr('width', 680);
         }
 
-        $iframe.insertBefore($time);
+        $iframe.insertAfter($text);
 
         $text.addClass('collapsed');
         $duration.addClass('collapsed');
