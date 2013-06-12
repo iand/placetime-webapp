@@ -118,8 +118,7 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
 
 
     onShow: function() {
-        this.$el.offset();
-        this.$el.removeClass('collapsed');
+
     },
 
 

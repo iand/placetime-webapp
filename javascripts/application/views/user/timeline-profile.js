@@ -1,5 +1,5 @@
 Application.View.TimelineProfile = Backbone.Marionette.ItemView.extend({
-    className: 'item collapsed',
+    className: 'item',
 
 
     events: {

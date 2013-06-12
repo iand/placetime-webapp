@@ -57,7 +57,7 @@ Application.View.Item = Application.View.TimelineItem.extend({
 
 
     className: function() {
-        var className = 'item collapsed';
+        var className = 'item';
 
         if (this.model.get('image')) {
             className += ' image';
