@@ -196,11 +196,15 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
         promise.done(function(data){
-            self.trigger('now:done');
+            self.trigger('now:load');
         });
 
         promise.fail(function(){
             self.trigger('now:error');
+        });
+
+        this.once('scrollTo:after', function(){
+            self.trigger('now:done');
         });
 
 
@@ -209,17 +213,17 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     renderSeparator: function() {
-        var $now = this.$el.find('.item.now');
+        var separator = this.subviews.findByCustom('separator');
 
-        if ($now.prev().is('.now-separator') === true) {
-            return;
-        }
+        separator.remove();
+        separator.render();
 
-        this.$el.find('.now-separator').remove();
-
-        $now.before(
-            this.subviews.findByCustom('separator').render().el
+        separator.$el.insertBefore(
+            this.$el.find('.item.now')
         );
+        separator.$el.offset();
+
+        separator.triggerMethod('show');
     },
 
 

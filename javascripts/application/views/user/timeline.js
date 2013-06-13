@@ -3,6 +3,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     template: '#timeline-template',
     className: 'layout-column',
 
+    refreshLastUpdate: moment().subtract('seconds', 2),
     infiniteScrollReference: null,
     infiniteScrollScrollTop: 0,
     infiniteScrollLastUpdate: moment().subtract('seconds', 2),
@@ -27,6 +28,15 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
             this.regionManager.get('collection').currentView.trigger('item:add', event);
         });
 
+        this.on('scrollTo:before', function(event) {
+            this.regionManager.get('collection').currentView.trigger('scrollTo:before', event);
+        });
+
+        this.on('scrollTo:after', function(event) {
+            this.regionManager.get('collection').currentView.trigger('scrollTo:after', event);
+        });
+
+
         // Load timeline view
         this.on('view:timeline', function(options){
             this.timeline(options);
@@ -47,14 +57,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
         if (view.collection) {
             this.listenToOnce(view.collection, 'sync', function(event){
-                var currentEventCount = 0,
-                    maxEventCount     = 4;
-
-                view.$el.find('.item:first').afterTransition(_.bind(function(event){
-                    if (++currentEventCount === maxEventCount) {
-                        this.now();
-                    }
-                }, this));
+                this.now();
             });
         }
 
@@ -90,16 +93,18 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
 
     refresh: function() {
-        this.listenToOnce(this.regionManager.get('collection').currentView, 'reload:done', function(){
-            var currentEventCount = 0,
-                maxEventCount     = 4;
+        if (moment().diff(this.refreshLastUpdate) < 1000) {
+            return;
+        }
 
-            this.regionManager.get('collection').currentView.$el.find('.item:first').afterTransition(_.bind(function(event){
-                if (++currentEventCount === maxEventCount) {
-                    this.now();
-                }
-            }, this));
+        this.refreshLastUpdate = moment();
+        this.listenToOnce(this.regionManager.get('collection').currentView, 'reload:done', function(){
+            this.now();
         });
+        this.listenToOnce(this.regionManager.get('collection').currentView, 'now:done', function(){
+            this.refreshLastUpdate = moment();
+        });
+
         this.reload();
     },
 

@@ -915,7 +915,26 @@ h1 {
 }
 
 .now-separator {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition: padding-top 500ms linear, padding-bottom 500ms linear, margin-bottom 500ms linear, max-height 500ms linear;
+  -webkit-transition-delay: 250ms, 250ms, 250ms, 250ms;
+  -moz-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
+  -o-transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
+  transition: padding-top 500ms linear 250ms, padding-bottom 500ms linear 250ms, margin-bottom 500ms linear 250ms, max-height 500ms linear 250ms;
   margin-top: -6px;
+  max-height: 80px;
+  overflow: hidden;
+}
+
+.now-separator.is-collapsed {
+  margin-bottom: 0;
+  max-height: 0px;
+  padding-bottom: 0px;
+  padding-top: 0px;
 }
 
 .now-separator-future,
