@@ -418,7 +418,7 @@ h1 {
   font-size: 22px;
   opacity: 1;
   overflow: hidden;
-  max-height: 60px;
+  max-height: 80px;
 }
 .item .text.collapsed,
 .item .duration.collapsed {
