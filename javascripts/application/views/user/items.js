@@ -44,27 +44,31 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         });
 
         // Custom events
-        this.on('item:add', this.now);
         this.on('item:add', function(event) {
+            this.once('after:item:added', this.now);
+
+            // TODO: Fix
+            this.once('separator:rendered', function() {
+                var item = this.collection.findWhere({
+                    id: event.id
+                });
+
+                var itemPosition = this.$el.find('.item[data-id='+item.idSafe()+']').position();
+
+                // If it's the first item, no need to include padding
+                if (itemPosition.top === 46) {
+                    itemPosition.top = 0;
+                }
+
+                this.trigger('scrollTo', {
+                    left: itemPosition.left,
+                    top: itemPosition.top,
+                    duration: jQuery.fx.speeds.slow
+                });
+            });
+
+
             this.collection.add(event);
-
-
-            var item = this.collection.findWhere({
-                id: event.id
-            });
-
-            var itemPosition = this.$el.find('.item[data-id='+item.idSafe()+']').position();
-
-            // If it's the first item, no need to include padding
-            if (itemPosition.top === 46) {
-                itemPosition.top = 0;
-            }
-
-            this.trigger('scrollTo', {
-                left: itemPosition.left,
-                top: itemPosition.top,
-                duration: jQuery.fx.speeds.slow
-            });
         });
 
 
@@ -221,7 +225,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         separator.$el.insertBefore(
             this.$el.find('.item.now')
         );
-        separator.$el.offset();
 
         separator.triggerMethod('show');
     },
@@ -297,8 +300,13 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         var view = Backbone.Marionette.CompositeView.prototype.buildItemView.apply(this, arguments);
 
         view.model.set({
-           status: this.model.get('status'),
-           user: this.model.get('pid')
+            status: this.model.get('status'),
+            user: this.model.get('pid'),
+
+            // TODO: Ideally remove as hack
+            isUser: (
+                this.model.get('pid') === Application.session.get('pid')
+            )
         }, {
             silent: true
         });

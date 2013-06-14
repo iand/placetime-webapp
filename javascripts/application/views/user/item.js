@@ -81,6 +81,18 @@ Application.View.Item = Application.View.TimelineItem.extend({
             className += ' past';
         }
 
+        if (this.model.get('promoted') === true) {
+            className += ' collapsed';
+        }
+
         return className;
+    },
+
+
+    onShow: function() {
+        if (this.model.get('promoted') === true) {
+            this.$el.offset();
+            this.$el.removeClass('collapsed');
+        }
     }
 });

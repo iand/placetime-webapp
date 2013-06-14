@@ -110,6 +110,10 @@ Application.Model.Item = Backbone.Model.extend({
         });
 
         promise.done(function(data){
+            _.each(data, function(item){
+                item.promoted = true;
+            });
+
             self.trigger('item:promoted', data);
         });
 
@@ -131,7 +135,10 @@ Application.Model.Item = Backbone.Model.extend({
         });
 
         promise.done(function(data){
-            // TODO: Eventually use response to remove it
+            _.each(data, function(item){
+                item.demoted = true;
+            });
+
             self.trigger('item:demoted', self);
         });
 

@@ -117,11 +117,6 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
     },
 
 
-    onShow: function() {
-
-    },
-
-
     onRender: function() {
         this.$el.data('model', this.model);
     }

@@ -238,9 +238,15 @@
                 <% } %>
             </div>
             <p class="username pull-left">
-                <a href="#user/<%= encodeURI(pid) %>">
-                    <%= pid %>
-                </a>
+                <% if (source !== undefined && pid !== source && source !== '') { %>
+                    <a href="#user/<%= encodeURI(source) %>">
+                        <%= source %>
+                    </a>
+                <% } else { %>
+                    <a href="#user/<%= encodeURI(pid) %>">
+                        <%= pid %>
+                    </a>
+                <% } %>
             </p>
 
 
@@ -267,7 +273,7 @@
                 </p>
             <% } %>
 
-            <% if (media === 'video' || media === 'audio') { %>
+            <% if (duration !== undefined && duration !== 0) { %>
                 <% duration = getDuration(duration) %>
                 <ul class="duration pull-left">
                     <% if (duration.days !== 0) { %>
@@ -292,9 +298,11 @@
             <% } %>
 
             <% if (source !== undefined && pid !== source && source !== '') { %>
-            <p class="source pull-left">
-                <a href="#user/<%= source %>">copied by <%= source %></a>
-            </p>
+                <p class="source pull-left">
+                    <a href="#user/<%= source %>">
+                        copied by <%= pid %>
+                    </a>
+                </p>
             <% } %>
 
             <p class="time pull-left">
@@ -309,7 +317,7 @@
                 </a>
             </p>
 
-            <% if (status === 'm' && user === pid) { %>
+            <% if (isUser === true && status !== 'p') { %>
                 <a class="button demote">
                     <i class="icon-remove"></i>
                 </a>
@@ -387,7 +395,7 @@
                     <span>Loading results</span>
                     <img alt="Loading" class="loading" src="/-assets/images/vendor/jquery/fancybox/fancybox_loading.gif" height="24" width="24" />
                 <% } else { %>
-                    <% if (Application.session.get('pid') === user) { %>
+                    <% if (isUser === true) { %>
                         <% if (status === 'p') { %>
                             There are no items in your timeline, search for users to follow
                         <% } else { %>
@@ -689,9 +697,15 @@
                 <img src="/-assets/images/user.jpg" width="40" height="40" />
             </div>
             <p class="username pull-left">
-                <a href="#user/<%= encodeURI(pid) %>">
-                    <%= pid %>
-                </a>
+                <% if (source !== undefined && pid !== source && source !== '') { %>
+                    <a href="#user/<%= encodeURI(source) %>">
+                        <%= source %>
+                    </a>
+                <% } else { %>
+                    <a href="#user/<%= encodeURI(pid) %>">
+                        <%= pid %>
+                    </a>
+                <% } %>
             </p>
 
 
@@ -718,7 +732,7 @@
                 </p>
             <% } %>
 
-            <% if (media === 'video' || media === 'audio') { %>
+            <% if (duration !== undefined && duration !== 0) { %>
                 <% duration = getDuration(duration) %>
                 <ul class="duration pull-left">
                     <% if (duration.days !== 0) { %>
@@ -744,7 +758,9 @@
 
             <% if (source !== undefined && pid !== source && source !== '') { %>
                 <p class="source pull-left">
-                    <a href="#user/<%= source %>">copied by <%= source %></a>
+                    <a href="#user/<%= source %>">
+                        copied by <%= source %>
+                    </a>
                 </p>
             <% } %>
 
