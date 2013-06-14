@@ -30,15 +30,15 @@ Application.View.Item = Application.View.TimelineItem.extend({
             duration.add('seconds', secs);
 
             var days    = duration.diff(current, 'days'),
-                hours   = duration.diff(current, 'hours') - (days * 24),
-                minutes = duration.diff(current, 'minutes') - (hours * 60),
-                seconds = duration.diff(current, 'seconds') - (minutes * 60);
+                hours   = duration.diff(current, 'hours'),
+                minutes = duration.diff(current, 'minutes'),
+                seconds = duration.diff(current, 'seconds');
 
             return {
                 days: days,
-                hours: hours,
-                minutes: minutes,
-                seconds: seconds
+                hours: (hours  - (days * 24)),
+                minutes: (minutes - (hours * 60)),
+                seconds: (seconds - (minutes * 60))
             };
         },
 
