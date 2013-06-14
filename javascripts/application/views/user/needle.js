@@ -25,8 +25,13 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
         }
 
 
-        var model = $item.data('model'),
-            time = $item.data('model').time();
+        var model = $item.data('model');
+
+        if (model === undefined) {
+            return;
+        }
+
+        var time = $item.data('model').time();
 
         // Now
         if (model.isNow() === true) {
