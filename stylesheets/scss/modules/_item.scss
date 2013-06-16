@@ -237,20 +237,18 @@
         .hours,
         .minutes,
         .seconds {
-            @include border-radius(20px);
+            @include border-radius(3px);
             font-size: 12px;
-            height: 17px;
-            padding-top: 3px;
+            padding: 2px 4px;
             text-align: center;
-            width: 22px;
         }
 
         .days {
-
+            background-color: #06a65c;
         }
 
         .hours {
-
+            background-color: #5f39bb;
         }
 
         .minutes {
