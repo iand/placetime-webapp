@@ -1,3 +1,4 @@
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/bases\/_base\.scss}line{font-family:\000034}}
 html,
 body {
   height: 100%;
@@ -5,10 +6,13 @@ body {
   width: 100%;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/bases\/_base\.scss}line{font-family:\0000310}}
 body {
   background-color: #deddd8;
+  font-family: 'proxima-nova-1', Helvetica, sans-serif;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/bases\/_form\.scss}line{font-family:\000033}}
 label {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -27,10 +31,12 @@ label {
   width: 100px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/bases\/_form\.scss}line{font-family:\0000317}}
 input {
   outline: none;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/bases\/_form\.scss}line{font-family:\0000327}}
 input[type=text],
 input[type=email],
 input[type=password],
@@ -61,6 +67,7 @@ input[type=url] {
   width: 200px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/bases\/_form\.scss}line{font-family:\0000349}}
 button,
 input[type=button],
 input[type=submit] {
@@ -84,12 +91,14 @@ input[type=submit] {
   margin: 8px 10px 4px 0px;
   padding: 12px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/bases\/_form\.scss}line{font-family:\0000368}}
 button:hover,
 input[type=button]:hover,
 input[type=submit]:hover {
   background-color: #fff;
   border: 2px solid #666666;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/bases\/_form\.scss}line{font-family:\0000373}}
 button:active,
 input[type=button]:active,
 input[type=submit]:active {
@@ -99,28 +108,33 @@ input[type=submit]:active {
   background-color: #cccccc;
   border: 2px solid #ff9900;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/bases\/_form\.scss}line{font-family:\0000382}}
 button.wide,
 input[type=button].wide,
 input[type=submit].wide {
   width: 100%;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/bases\/_typography\.scss}line{font-family:\000033}}
 a {
   color: #000000;
   text-decoration: none;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/bases\/_typography\.scss}line{font-family:\000038}}
 h1 {
   font-size: 16px;
   font-weight: normal;
   margin-bottom: 5px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/layouts\/_container\.scss}line{font-family:\000033}}
 .layout-container {
   margin: 0 auto;
   width: 960px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/layouts\/_container\.scss}line{font-family:\000038}}
 .layout-container-wide {
   margin: 0 auto;
   max-width: 1300px;
@@ -128,29 +142,36 @@ h1 {
   width: 100%;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/layouts\/_content\.scss}line{font-family:\000033}}
 .layout-content {
   padding-top: 54px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/layouts\/_header\.scss}line{font-family:\000033}}
 .layout-header {
   position: relative;
   z-index: 100;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/layouts\/_timelines\.scss}line{font-family:\000031}}
 .layout-timelines {
   margin: 0 auto;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/layouts\/_timelines\.scss}line{font-family:\000035}}
 .layout-column {
   float: left;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/layouts\/_timelines\.scss}line{font-family:\000038}}
 .layout-column.public {
   width: 60%;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/layouts\/_timelines\.scss}line{font-family:\0000312}}
 .layout-column.private {
   width: 40%;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\000037}}
 .items,
 .searches,
 .followers,
@@ -159,12 +180,14 @@ h1 {
   padding-top: 5px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000314}}
 .items .item,
 .searches.items .item {
   background-color: #aaaaaa;
   background-size: cover;
   background-position-y: 35%;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000319}}
 .items .item:hover,
 .searches.items .item:hover {
   -webkit-box-shadow: 0px 0px 0px #aaaaaa;
@@ -172,14 +195,17 @@ h1 {
   box-shadow: 0px 0px 0px #aaaaaa;
   background-color: #999;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000327}}
 .items .item.empty p,
 .searches.items .item.empty p {
   margin: 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000333}}
 .items .item.image .overlay,
 .searches.items .item.image .overlay {
   display: block;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000339}}
 .items .item .overlay,
 .searches.items .item .overlay {
   background-color: rgba(15, 15, 15, 0.4);
@@ -192,74 +218,89 @@ h1 {
   width: 100%;
   z-index: 1;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000352}}
 .items .item .username a,
 .searches.items .item .username a {
   color: #ddd;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000357}}
 .items .item .text,
 .searches.items .item .text {
   margin: 18px 0 14px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000360}}
 .items .item .text a,
 .searches.items .item .text a {
   color: #fff;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000364}}
 .items .item .text .icon-play-circle,
 .searches.items .item .text .icon-play-circle {
   font-weight: normal;
   font-size: 26px;
   line-height: 1;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000371}}
 .items .item .source,
 .searches.items .item .source {
   margin: 0 0 5px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000374}}
 .items .item .source a,
 .searches.items .item .source a {
   border-bottom: 0;
   color: #ddd;
   font-size: 14px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000381}}
 .items .item .time,
 .searches.items .item .time {
   margin: 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000384}}
 .items .item .time .event,
 .searches.items .item .time .event {
   color: #ff6600;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000388}}
 .items .item .time a,
 .searches.items .item .time a {
   color: #eee;
   font-size: 13px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000394}}
 .items .item .promote,
 .searches.items .item .promote {
   padding: 6px 7px 5px 8px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\0000398}}
 .items .item .demote,
 .searches.items .item .demote {
   padding: 6px 9px 5px 10px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003109}}
 .followings .item,
 .followers .item,
 .suggestions .item,
 .searches.profiles .item {
   background-color: #fff;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003112}}
 .followings .item .username,
 .followers .item .username,
 .suggestions .item .username,
 .searches.profiles .item .username {
   color: #000000;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003117}}
 .followings .item .icon img,
 .followers .item .icon img,
 .suggestions .item .icon img,
 .searches.profiles .item .icon img {
   border-color: #999;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003122}}
 .followings .item .bio,
 .followers .item .bio,
 .suggestions .item .bio,
@@ -267,12 +308,14 @@ h1 {
   margin-bottom: 15px;
   margin-top: 12px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003126}}
 .followings .item .bio .name,
 .followers .item .bio .name,
 .suggestions .item .bio .name,
 .searches.profiles .item .bio .name {
   color: #ff6600;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003131}}
 .followings .item .statistics,
 .followers .item .statistics,
 .suggestions .item .statistics,
@@ -281,6 +324,7 @@ h1 {
   margin: 0;
   padding: 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003137}}
 .followings .item .statistics .followings,
 .followings .item .statistics .followers,
 .followers .item .statistics .followings,
@@ -291,18 +335,21 @@ h1 {
 .searches.profiles .item .statistics .followers {
   display: inline;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003141}}
 .followings .item .statistics .followings,
 .followers .item .statistics .followings,
 .suggestions .item .statistics .followings,
 .searches.profiles .item .statistics .followings {
   padding-right: 15px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003146}}
 .followings .item .unfollow,
 .followers .item .unfollow,
 .suggestions .item .unfollow,
 .searches.profiles .item .unfollow {
   padding: 7px 9px 3px 10px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003150}}
 .followings .item .follow,
 .followers .item .follow,
 .suggestions .item .follow,
@@ -310,6 +357,7 @@ h1 {
   padding: 6px 9px 3px 9px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003158}}
 .item {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -335,6 +383,7 @@ h1 {
   overflow: hidden;
   position: relative;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003184}}
 .item .icon,
 .item .username,
 .item .text,
@@ -346,6 +395,7 @@ h1 {
   position: relative;
   z-index: 2;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003194}}
 .item .text,
 .item .bio,
 .item .statistics,
@@ -353,6 +403,7 @@ h1 {
 .item .duration {
   width: 100%;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003197}}
 .item .text a,
 .item .bio a,
 .item .statistics a,
@@ -360,6 +411,7 @@ h1 {
 .item .duration a {
   border-bottom: 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003204}}
 .item .icon img {
   -webkit-border-radius: 25px;
   -moz-border-radius: 25px;
@@ -368,27 +420,33 @@ h1 {
   border-radius: 25px;
   border: 3px solid #ffffff;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003211}}
 .item .username {
   font-size: 14px;
   margin: 15px 12px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003215}}
 .item .username a {
   border-bottom: 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003219}}
 .item .username i {
   color: #bf3000;
   display: inline-block;
   margin-left: 5px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003226}}
 .item .duration {
   list-style: none;
   margin: -5px 0 8px;
   padding: 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003231}}
 .item .duration li {
   color: #fff;
   display: inline-block;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003239}}
 .item .duration .days,
 .item .duration .hours,
 .item .duration .minutes,
@@ -404,22 +462,27 @@ h1 {
   text-align: center;
   width: 22px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003256}}
 .item .duration .minutes {
   background-color: #f50000;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003260}}
 .item .duration .seconds {
   background-color: #ff5b00;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003267}}
 .item .text,
 .item .bio {
   margin: 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003272}}
 .item .text {
   font-size: 22px;
   opacity: 1;
   overflow: hidden;
   max-height: 80px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003281}}
 .item .text.collapsed,
 .item .duration.collapsed {
   -webkit-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
@@ -430,9 +493,11 @@ h1 {
   opacity: 0;
   margin: 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003294}}
 .item .bio {
   font-size: 17px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003299}}
 .item .url {
   -webkit-transition: opacity 1s ease;
   -moz-transition: opacity 1s ease;
@@ -441,10 +506,12 @@ h1 {
   opacity: 0;
   padding-left: 12px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003308}}
 .item .listen {
   margin: 10px 0 10px;
   opacity: 1;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003314}}
 .item .button {
   -webkit-border-radius: 31px;
   -moz-border-radius: 31px;
@@ -468,13 +535,16 @@ h1 {
   position: absolute;
   right: 10px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003334}}
 .item .button:hover {
   color: #ffffff;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003338}}
 .item .button:active {
   color: #ff6600;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003348}}
 .item.event .event.sash,
 .item.audio .audio.sash,
 .item.video .video.sash,
@@ -486,10 +556,12 @@ h1 {
   opacity: 1;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003355}}
 .item.add {
   padding-top: 48px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003361}}
 .item.empty,
 .item.empty.collapsed {
   -webkit-transition-duration: 350ms, 350ms, 350ms;
@@ -498,6 +570,7 @@ h1 {
   transition-duration: 350ms, 350ms, 350ms;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_item\.scss}line{font-family:\00003368}}
 .item.collapsed {
   margin-bottom: 0;
   max-height: 0px;
@@ -505,6 +578,7 @@ h1 {
   padding-top: 0px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_login\.scss}line{font-family:\000033}}
 .login {
   height: 110px;
   left: 50%;
@@ -516,6 +590,7 @@ h1 {
   width: 358px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_login\.scss}line{font-family:\0000315}}
 .login-twitter a {
   -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
@@ -528,26 +603,31 @@ h1 {
   padding: 12px 15px 12px;
   text-decoration: none;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_login\.scss}line{font-family:\0000324}}
 .login-twitter .icon {
   color: #1ab7ea;
   font-size: 20px;
   text-decoration: none;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_login\.scss}line{font-family:\0000332}}
 .login-register,
 .login-login {
   text-align: center;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_login\.scss}line{font-family:\0000335}}
 .login-register a,
 .login-login a {
   background-color: rgba(170, 170, 170, 0.8);
   padding: 3px 4px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_login\.scss}line{font-family:\0000342}}
 .login-form {
   display: none;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_navigation\.scss}line{font-family:\000033}}
 .navbar {
   -webkit-box-shadow: 0px 2px 5px #222222;
   -moz-box-shadow: 0px 2px 5px #222222;
@@ -560,27 +640,33 @@ h1 {
   width: 100%;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_navigation\.scss}line{font-family:\0000313}}
 .navbar-inner {
   overflow: hidden;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_navigation\.scss}line{font-family:\0000317}}
 .navbar-nav {
   padding: 0;
   list-style: none;
   margin: 5px 25px 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_navigation\.scss}line{font-family:\0000323}}
 .navbar-nav .icon-cog {
   font-size: 33px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_navigation\.scss}line{font-family:\0000329}}
 .navbar-brand {
   color: #ff6600;
   font-size: 23px;
   margin: 8px 0 0 22px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_navigation\.scss}line{font-family:\0000334}}
 .navbar-brand .icon-ok-circle {
   margin-right: -3px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_navigation\.scss}line{font-family:\0000339}}
 .navbar-brand .icon-ok-circle,
 .navbar-brand .icon-time {
   color: #aaaaaa;
@@ -588,21 +674,25 @@ h1 {
   float: left;
   margin-top: 0px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_navigation\.scss}line{font-family:\0000346}}
 .navbar-brand .icon-time {
   margin-right: 10px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_navigation\.scss}line{font-family:\0000352}}
 .navbar-tagline {
   color: #555555;
   font-size: 14px;
   margin: 16px 0 0 25px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_navigation\.scss}line{font-family:\0000361}}
 .navbar-dropdown .icon-edit,
 .navbar-dropdown .icon-signout {
   font-size: 20px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_needle\.scss}line{font-family:\000034}}
 .needle {
   -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
@@ -619,6 +709,7 @@ h1 {
   z-index: 4;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_needle\.scss}line{font-family:\0000319}}
 .needle-date {
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
@@ -642,26 +733,31 @@ h1 {
   border: 2px solid #999999;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_needle\.scss}line{font-family:\0000338}}
 .needle-now {
   color: #ff6600;
   font-weight: bold;
   text-transform: uppercase;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_needle\.scss}line{font-family:\0000344}}
 .needle-future {
   margin-left: 10px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_needle\.scss}line{font-family:\0000348}}
 .needle-past {
   margin-right: 10px;
   margin-left: 8px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_needle\.scss}line{font-family:\0000353}}
 .needle-icon-repeat {
   cursor: pointer;
   display: inline-block;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_register\.scss}line{font-family:\000033}}
 .register {
   height: 275px;
   left: 50%;
@@ -672,18 +768,21 @@ h1 {
   width: 358px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_register\.scss}line{font-family:\0000313}}
 .register-heading {
   font-size: 16px;
   font-weight: normal;
   margin: 0 0 1em;
   text-align: center;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_register\.scss}line{font-family:\0000319}}
 .register-heading span {
   background-color: rgba(170, 170, 170, 0.8);
   padding: 3px 4px;
   margin: 0 auto;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\000031}}
 .sash {
   border-style: solid;
   color: #ffffff;
@@ -696,6 +795,7 @@ h1 {
   width: 0;
   z-index: 2;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000313}}
 .sash.event {
   border-color: transparent #ff6600 transparent transparent;
   border-width: 0 48px 48px 0;
@@ -703,6 +803,7 @@ h1 {
   top: 0;
   width: 120px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000321}}
 .sash.event-added {
   border-color: transparent #0093a7 transparent transparent;
   border-width: 0 48px 48px 0;
@@ -710,6 +811,7 @@ h1 {
   top: 0;
   width: 120px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000329}}
 .sash.video {
   border-color: transparent #5f39bb transparent transparent;
   border-width: 0 48px 48px 0;
@@ -717,6 +819,7 @@ h1 {
   top: 0;
   width: 120px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000337}}
 .sash.audio {
   border-color: transparent #bc1c48 transparent transparent;
   border-width: 0 48px 48px 0;
@@ -724,6 +827,7 @@ h1 {
   top: 0;
   width: 120px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000348}}
 .sash.added, .sash.followed, .sash.flagged {
   border-color: transparent transparent #ff6600 transparent;
   border-width: 0 0 24px 24px;
@@ -732,68 +836,85 @@ h1 {
   text-align: right;
   z-index: 3;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000356}}
 .sash.added span, .sash.followed span, .sash.flagged span {
   display: inline-block;
   padding: 7px 6px 6px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000362}}
 .sash.added {
   width: 120px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000366}}
 .sash.followed {
   width: 82px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000370}}
 .sash.flagged {
   width: 82px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000376}}
 .sash .icon-calendar,
 .sash .icon-headphones,
 .sash .icon-facetime-video {
   position: absolute;
   right: -42px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000382}}
 .sash .icon-calendar,
 .sash .icon-facetime-video {
   top: 5px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000386}}
 .sash .icon-plus {
   padding-left: 6px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000390}}
 .sash .icon-facetime-video {
   top: 7px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\0000394}}
 .sash .icon-headphones {
   font-size: 16px;
   top: 7px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\00003101}}
 .promoted .added.sash {
   opacity: 1;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\00003107}}
 .followed .followed.sash {
   opacity: 1;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\00003113}}
 .unfollowed .unfollowed.sash {
   opacity: 1;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_sash\.scss}line{font-family:\00003119}}
 .flagged .flagged.sash {
   opacity: 1;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\000034}}
 .timeline {
   position: relative;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\000038}}
 .timeline-public {
   padding: 0 4px 0 8px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\0000312}}
 .timeline-private {
   padding: 0 8px 0 4px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\0000317}}
 .timeline-header {
   -webkit-box-shadow: 0px 2px 3px #666666;
   -moz-box-shadow: 0px 2px 3px #666666;
@@ -808,6 +929,7 @@ h1 {
   width: calc(100% - 12px);
   z-index: 4;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\0000330}}
 .timeline-header .title {
   color: #fff;
   font-size: 14px;
@@ -815,6 +937,7 @@ h1 {
   margin: 12px 6px 4px 15px;
   padding: 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\0000341}}
 .timeline-header .type,
 .timeline-header .search,
 .timeline-header .url,
@@ -829,22 +952,26 @@ h1 {
   padding: 4px 12px;
   margin-top: 8px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\0000349}}
 .timeline-header .type {
   font-size: 14px;
   height: 25px;
   padding: 4px 12px;
   margin: 12px 0 0 15px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\0000357}}
 .timeline-header .search,
 .timeline-header .url {
   margin-left: 15px;
   width: 185px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\0000362}}
 .timeline-header .add {
   margin: 16px 0 0 0;
   padding: 0;
   width: 80px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\0000370}}
 .timeline-header .now {
   -webkit-transition: opacity 0.5s ease-in-out;
   -moz-transition: opacity 0.5s ease-in-out;
@@ -856,43 +983,53 @@ h1 {
   margin: 8px 18px 0 0;
   opacity: 1;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\0000380}}
 .timeline-header .now:hover .icon-repeat {
   color: #000000;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\0000386}}
 .timeline-header .now:active .icon-repeat {
   color: #ff6600;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\0000391}}
 .timeline-header .now .icon-repeat {
   color: #555555;
   font-size: 32px;
   margin-top: 4px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\00003100}}
 .timeline-header-public .type {
   margin: 12px 0 0 15px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\00003110}}
 .timeline-nav {
   font-size: 14px;
   list-style: none;
   margin: 11px 12px;
   padding: 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\00003117}}
 .timeline-nav li {
   display: inline-block;
   margin-right: 15px;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\00003122}}
 .timeline-nav li.active a {
   color: #ff6600;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\00003127}}
 .timeline-nav li.last {
   margin-right: 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\00003132}}
 .timeline-nav li a {
   cursor: pointer;
   display: inline-block;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\00003140}}
 .scroller {
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
@@ -905,6 +1042,7 @@ h1 {
   width: 100%;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_timeline\.scss}line{font-family:\00003148}}
 .children {
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
@@ -915,6 +1053,7 @@ h1 {
   padding-top: 46px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_now\.scss}line{font-family:\000031}}
 .now-separator {
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
@@ -931,6 +1070,7 @@ h1 {
   overflow: hidden;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_now\.scss}line{font-family:\0000315}}
 .now-separator.is-collapsed {
   margin-bottom: 0;
   max-height: 0px;
@@ -938,6 +1078,7 @@ h1 {
   padding-top: 0px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_now\.scss}line{font-family:\0000324}}
 .now-separator-future,
 .now-separator-past {
   background-color: #fff;
@@ -945,6 +1086,7 @@ h1 {
   padding: 5px 12px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_now\.scss}line{font-family:\0000330}}
 .now-separator-future {
   -webkit-border-radius: 0 0 8px 8px;
   -moz-border-radius: 0 0 8px 8px;
@@ -953,6 +1095,7 @@ h1 {
   border-radius: 0 0 8px 8px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_now\.scss}line{font-family:\0000334}}
 .now-separator-past {
   -webkit-border-radius: 8px 8px 0 0;
   -moz-border-radius: 8px 8px 0 0;
@@ -962,6 +1105,7 @@ h1 {
   margin-top: 15px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_loading\.scss}line{font-family:\000031}}
 .loading {
   left: 50%;
   margin-left: -12px;
@@ -969,14 +1113,17 @@ h1 {
   position: absolute;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_loading\.scss}line{font-family:\000038}}
 .loading-after {
   top: 50px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_loading\.scss}line{font-family:\0000312}}
 .loading-before {
   bottom: 20px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/modules\/_no-results\.scss}line{font-family:\000031}}
 .no-results {
   -webkit-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 2px 2px 0px 5px rgba(0, 0, 0, 0.25);
@@ -992,14 +1139,17 @@ h1 {
   width: 100%;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/states\/_item\.scss}line{font-family:\0000310}}
 .item.promoted .overlay, .item.demoted .overlay, .item.unfollowed .overlay, .item.followed .overlay, .item.flagged .overlay, .item.past .overlay {
   background-color: rgba(255, 255, 255, 0.65);
   display: block;
   z-index: 2;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/states\/_item\.scss}line{font-family:\0000318}}
 .item.past .overlay {
   background-color: rgba(15, 15, 15, 0.4);
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/states\/_item\.scss}line{font-family:\0000327}}
 .item.promoted .promote, .item.demoted .demote, .item.unfollowed .unfollow, .item.followed .follow, .item.flagged .flag {
   -webkit-transition: opacity 500ms;
   -moz-transition: opacity 500ms;
@@ -1007,6 +1157,7 @@ h1 {
   transition: opacity 500ms;
   opacity: 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/states\/_item\.scss}line{font-family:\0000336}}
 .item.promoted .sash.added, .item.followed .sash.followed, .item.flagged .sash.flagged {
   -webkit-transition: opacity 1s;
   -moz-transition: opacity 1s;
@@ -1014,6 +1165,7 @@ h1 {
   transition: opacity 1s;
   opacity: 1;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/states\/_item\.scss}line{font-family:\0000343}}
 .item.focused .url {
   -webkit-transition: opacity 1s ease;
   -moz-transition: opacity 1s ease;
@@ -1022,18 +1174,22 @@ h1 {
   opacity: 1;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/utilities\.scss}line{font-family:\000033}}
 .pull-left {
   float: left;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/utilities\.scss}line{font-family:\000037}}
 .pull-right {
   float: right;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/vendor\.scss}line{font-family:\000032}}
 .ui-datepicker {
   margin-top: 104px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/davidgalbraith1\/placetime\/webapp\/stylesheets\/scss\/user\.scss}line{font-family:\0000334}}
 .route-login,
 .route-logout,
 .route-register {

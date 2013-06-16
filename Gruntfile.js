@@ -71,6 +71,7 @@ module.exports = function(grunt) {
                     javascriptsDir: 'javascripts/',
                     outputStyle: 'expanded',
                     relativeAssets: true,
+                    debugInfo: true,
                     noLineComments: true,
                     bundleExec: true
                 }
