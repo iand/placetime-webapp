@@ -394,16 +394,20 @@ h1 {
 .item .duration .hours,
 .item .duration .minutes,
 .item .duration .seconds {
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
-  border-radius: 20px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
   font-size: 12px;
-  height: 17px;
-  padding-top: 3px;
+  padding: 2px 4px;
   text-align: center;
-  width: 22px;
+}
+.item .duration .days {
+  background-color: #06a65c;
+}
+.item .duration .hours {
+  background-color: #5f39bb;
 }
 .item .duration .minutes {
   background-color: #f50000;
