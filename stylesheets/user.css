@@ -227,7 +227,14 @@ h1 {
 }
 .items .item .time .event,
 .searches.items .item .time .event {
-  color: #ff6600;
+  color: #ffffff;
+  background-color: #ff6600;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  padding: 2px 4px;
 }
 .items .item .time a,
 .searches.items .item .time a {

@@ -82,7 +82,10 @@
             margin: 0;
 
             .event {
-                color: #ff6600;
+                color: #ffffff;
+                background-color: #ff6600;
+                @include border-radius(3px);
+                padding: 2px 4px;
             }
 
             a {
