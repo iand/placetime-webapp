@@ -211,12 +211,12 @@ h1 {
   font-size: 26px;
   line-height: 1;
 }
-.items .item .source,
-.searches.items .item .source {
+.items .item .via,
+.searches.items .item .via {
   margin: 0 0 5px;
 }
-.items .item .source a,
-.searches.items .item .source a {
+.items .item .via a,
+.searches.items .item .via a {
   border-bottom: 0;
   color: #ddd;
   font-size: 14px;
@@ -347,7 +347,7 @@ h1 {
 .item .username,
 .item .text,
 .item .time,
-.item .source,
+.item .via,
 .item .button,
 .item .listen,
 .item .duration {
