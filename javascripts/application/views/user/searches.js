@@ -105,5 +105,18 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
         } else {
             itemViewContainer.children().eq(index).before(itemView.el);
         }
+    },
+
+
+    buildItemView: function(item, ItemViewType, itemViewOptions) {
+        var view = Backbone.Marionette.CompositeView.prototype.buildItemView.apply(this, arguments);
+
+        view.model.set({
+            user: this.model.get('pid')
+        }, {
+            silent: true
+        });
+
+        return view;
     }
 });
