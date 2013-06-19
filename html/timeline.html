@@ -272,16 +272,25 @@
                 <ul class="duration pull-left">
                     <% if (duration.days !== 0) { %>
                     <li class="days"><%= duration.days %>d</li>
+                    <% } %>
+
+                    <% if (duration.days !== 0 && duration.hours !== 0) { %>
                     <li class="durationcolon">:</li>
                     <% } %>
 
                     <% if (duration.hours !== 0) { %>
                     <li class="hours"><%= duration.hours %>h</li>
+                    <% } %>
+
+                    <% if (duration.hours !== 0 && duration.minutes !== 0) { %>
                     <li class="durationcolon">:</li>
                     <% } %>
 
                     <% if (duration.minutes !== 0) { %>
                     <li class="minutes"><%= duration.minutes %>m</li>
+                    <% } %>
+
+                    <% if (duration.minutes !== 0 && duration.seconds !== 0) { %>
                     <li class="durationcolon">:</li>
                     <% } %>
 
@@ -730,28 +739,37 @@
                 <% duration = getDuration(duration) %>
                 <ul class="duration pull-left">
                     <% if (duration.days !== 0) { %>
-                    <li class="days"><%= duration.days %></li>
-                    <li>:</li>
+                    <li class="days"><%= duration.days %>d</li>
+                    <% } %>
+
+                    <% if (duration.days !== 0 && duration.hours !== 0) { %>
+                    <li class="durationcolon">:</li>
                     <% } %>
 
                     <% if (duration.hours !== 0) { %>
-                    <li class="hours"><%= duration.hours %></li>
-                    <li>:</li>
+                    <li class="hours"><%= duration.hours %>h</li>
+                    <% } %>
+
+                    <% if (duration.hours !== 0 && duration.minutes !== 0) { %>
+                    <li class="durationcolon">:</li>
                     <% } %>
 
                     <% if (duration.minutes !== 0) { %>
-                    <li class="minutes"><%= duration.minutes %></li>
-                    <li>:</li>
+                    <li class="minutes"><%= duration.minutes %>m</li>
+                    <% } %>
+
+                    <% if (duration.minutes !== 0 && duration.seconds !== 0) { %>
+                    <li class="durationcolon">:</li>
                     <% } %>
 
                     <% if (duration.seconds !== 0) { %>
-                    <li class="seconds"><%= duration.seconds %></li>
+                    <li class="seconds"><%= duration.seconds %>s</li>
                     <% } %>
                 </ul>
             <% } %>
 
 
-            <% if (Application.session.get('pid') !== user && pid !== source && source != false) { %>
+            <% if (pid !== source && source != undefined && source != '') { %>
                 <p class="source pull-left">
                     <a href="#user/<%= source %>">
                         copied by <%= source %>
