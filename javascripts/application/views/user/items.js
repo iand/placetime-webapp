@@ -82,6 +82,9 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         this.on('after:item:added', this.renderNeedle);
         this.on('item:removed', this.renderNeedle);
 
+        this.on('after:item:added', this.renderSeparator);
+        this.on('item:removed', this.renderSeparator);
+
         // Handle
         this.on('reload', this.reload);
         this.on('now', this.now);
@@ -218,15 +221,17 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
     renderSeparator: function() {
         var separator = this.subviews.findByCustom('separator');
+            separator.remove();
 
-        separator.remove();
-        separator.render();
+        if (this.collection.length > 0) {
+            separator.render();
 
-        separator.$el.insertBefore(
-            this.$el.find('.item.now')
-        );
+            separator.$el.insertBefore(
+                this.$el.find('.item.now')
+            );
 
-        separator.triggerMethod('show');
+            separator.triggerMethod('show');
+        }
     },
 
 
@@ -301,12 +306,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
         view.model.set({
             status: this.model.get('status'),
-            user: this.model.get('pid'),
-
-            // TODO: Ideally remove as hack
-            isUser: (
-                this.model.get('pid') === Application.session.get('pid')
-            )
+            user: this.model.get('pid')
         }, {
             silent: true
         });

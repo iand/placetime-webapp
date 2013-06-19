@@ -51,6 +51,20 @@
         height: 25px;
         padding: 4px 12px;
         margin: 12px 0 0 15px;
+        width: 100px;
+    }
+
+    .selector {
+        float: left;
+    }
+
+    .selector {
+        margin: 10px 0 0 15px;
+    }
+
+    .selector .type {
+        margin: 1px 0 0 0;
+        height: auto
     }
 
     .search,
@@ -67,7 +81,8 @@
 
 
     // Now
-    .now {
+    .now,
+    .back {
         @include single-transition(opacity, 0.5s, ease-in-out);
 
         border-bottom: 0;
@@ -88,10 +103,20 @@
             }
         }
 
-        .icon-repeat {
+        .icon-now,
+        .icon-back {
             color: #555555;
+            display: inline-block;
+        }
+
+        .icon-now {
             font-size: 32px;
-            margin-top: 4px;
+        }
+
+
+        .icon-back {
+            font-size: 30px;
+            margin-top: 1px;
         }
     }
 }

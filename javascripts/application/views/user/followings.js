@@ -84,4 +84,16 @@ Application.View.Followings = Backbone.Marionette.CompositeView.extend({
             this.addItemView(this.model, EmptyView, 0);
         }
     },
+
+    buildItemView: function(item, ItemViewType, itemViewOptions) {
+        var view = Backbone.Marionette.CompositeView.prototype.buildItemView.apply(this, arguments);
+
+        view.model.set({
+            user: this.model.get('pid')
+        }, {
+            silent: true
+        });
+
+        return view;
+    }
 });

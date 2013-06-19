@@ -15,7 +15,7 @@ Application.View.Login = Backbone.Marionette.ItemView.extend({
     },
 
 
-    submit: function() {
+    submit: function(event) {
         var data = $(event.target).serializeObject();
 
 

@@ -846,6 +846,17 @@ h1 {
   height: 25px;
   padding: 4px 12px;
   margin: 12px 0 0 15px;
+  width: 100px;
+}
+.timeline-header .selector {
+  float: left;
+}
+.timeline-header .selector {
+  margin: 10px 0 0 15px;
+}
+.timeline-header .selector .type {
+  margin: 1px 0 0 0;
+  height: auto;
 }
 .timeline-header .search,
 .timeline-header .url {
@@ -857,7 +868,8 @@ h1 {
   padding: 0;
   width: 80px;
 }
-.timeline-header .now {
+.timeline-header .now,
+.timeline-header .back {
   -webkit-transition: opacity 0.5s ease-in-out;
   -moz-transition: opacity 0.5s ease-in-out;
   -o-transition: opacity 0.5s ease-in-out;
@@ -868,16 +880,29 @@ h1 {
   margin: 8px 18px 0 0;
   opacity: 1;
 }
-.timeline-header .now:hover .icon-repeat {
+.timeline-header .now:hover .icon-repeat,
+.timeline-header .back:hover .icon-repeat {
   color: #000000;
 }
-.timeline-header .now:active .icon-repeat {
+.timeline-header .now:active .icon-repeat,
+.timeline-header .back:active .icon-repeat {
   color: #ff6600;
 }
-.timeline-header .now .icon-repeat {
+.timeline-header .now .icon-now,
+.timeline-header .now .icon-back,
+.timeline-header .back .icon-now,
+.timeline-header .back .icon-back {
   color: #555555;
+  display: inline-block;
+}
+.timeline-header .now .icon-now,
+.timeline-header .back .icon-now {
   font-size: 32px;
-  margin-top: 4px;
+}
+.timeline-header .now .icon-back,
+.timeline-header .back .icon-back {
+  font-size: 30px;
+  margin-top: 1px;
 }
 
 .timeline-header-public .type {

@@ -238,15 +238,9 @@
                 <% } %>
             </div>
             <p class="username pull-left">
-                <% if (source !== undefined && pid !== source && source !== '') { %>
-                    <a href="#user/<%= encodeURI(source) %>">
-                        <%= source %>
-                    </a>
-                <% } else { %>
-                    <a href="#user/<%= encodeURI(pid) %>">
-                        <%= pid %>
-                    </a>
-                <% } %>
+                <a href="#user/<%= encodeURI(pid) %>">
+                    <%= pid %>
+                </a>
             </p>
 
 
@@ -297,7 +291,7 @@
                 </ul>
             <% } %>
 
-            <% if (source !== undefined && pid !== source && source !== '') { %>
+            <% if (Application.session.get('pid') !== pid && pid !== source && source != false) { %>
                 <p class="source pull-left">
                     <a href="#user/<%= source %>">
                         copied by <%= pid %>
@@ -317,7 +311,7 @@
                 </a>
             </p>
 
-            <% if (isUser === true && status !== 'p') { %>
+            <% if (Application.session.get('pid') === user && status !== 'p') { %>
                 <a class="button demote">
                     <i class="icon-remove"></i>
                 </a>
@@ -395,7 +389,7 @@
                     <span>Loading results</span>
                     <img alt="Loading" class="loading" src="/-assets/images/vendor/jquery/fancybox/fancybox_loading.gif" height="24" width="24" />
                 <% } else { %>
-                    <% if (isUser === true) { %>
+                    <% if (Application.session.get('pid') === user) { %>
                         <% if (status === 'p') { %>
                             There are no items in your timeline, search for users to follow
                         <% } else { %>
@@ -481,9 +475,11 @@
                 </li>
             </ul>
 
-            <a class="button unfollow">
-                <i class="icon-minus"></i>
-            </a>
+            <% if (Application.session.get('pid') === user) { %>
+                <a class="button unfollow">
+                    <i class="icon-minus"></i>
+                </a>
+            <% } %>
         </script>
 
 
@@ -591,7 +587,11 @@
             </form>
             <% if (view === 'timeline') { %>
             <a class="now pull-right">
-                now <i class="icon-repeat"></i>
+                now <i class="icon-now icon-repeat"></i>
+            </a>
+            <% } else if (view === 'search') { %>
+            <a class="back pull-right" href="#timeline">
+                back <i class="icon-back icon-arrow-left"></i>
             </a>
             <% } %>
         </script>
@@ -697,15 +697,9 @@
                 <img src="/-assets/images/user.jpg" width="40" height="40" />
             </div>
             <p class="username pull-left">
-                <% if (source !== undefined && pid !== source && source !== '') { %>
-                    <a href="#user/<%= encodeURI(source) %>">
-                        <%= source %>
-                    </a>
-                <% } else { %>
-                    <a href="#user/<%= encodeURI(pid) %>">
-                        <%= pid %>
-                    </a>
-                <% } %>
+                <a href="#user/<%= encodeURI(pid) %>">
+                    <%= pid %>
+                </a>
             </p>
 
 
@@ -756,7 +750,8 @@
                 </ul>
             <% } %>
 
-            <% if (source !== undefined && pid !== source && source !== '') { %>
+
+            <% if (Application.session.get('pid') !== user && pid !== source && source != false) { %>
                 <p class="source pull-left">
                     <a href="#user/<%= source %>">
                         copied by <%= source %>

@@ -156,7 +156,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     },
 
 
-    scrollToAfter: function() {
+    scrollToAfter: function(event) {
         // Defer scroll to after
         var deferred = _.bind(function(){
             this.scrollToScrolling = false;

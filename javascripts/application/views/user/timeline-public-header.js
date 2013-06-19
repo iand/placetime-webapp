@@ -45,7 +45,7 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
     },
 
 
-    update: function() {
+    update: function(event) {
         var $form = $(event.target).closest('form');
 
         this.model.set({
@@ -60,13 +60,13 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
         if (this.model.get('view') === 'search') {
             this.submit(event);
         } else {
-            this.update();
+            this.update(event);
         }
     },
 
 
     submit: function(event) {
-        this.update();
+        this.update(event);
 
 
         var $form = $(event.target).closest('form');
