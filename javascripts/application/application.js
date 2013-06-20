@@ -88,7 +88,7 @@ Application.on('initialize:after', function(options){
         root: '/'
     });
 
-    var session = Application.session.check()
+    var session = Application.session.check();
 
     session.done(function(){
         // New user, display email
