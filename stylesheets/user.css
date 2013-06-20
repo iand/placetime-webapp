@@ -946,6 +946,7 @@ h1 {
   -ms-transform: translateZ(0);
   -o-transform: translateZ(0);
   transform: translateZ(0);
+  -webkit-overflow-scrolling: touch;
   position: relative;
   overflow: scroll;
   height: 100%;

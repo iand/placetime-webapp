@@ -164,6 +164,7 @@
 
 .scroller {
     @include translateZ(0);
+    -webkit-overflow-scrolling: touch;
     position: relative;
     overflow: scroll;
     height: 100%;
