@@ -5,6 +5,7 @@ Application.View.User = Backbone.Marionette.ItemView.extend({
     events: {
         'submit form': 'submit',
         'click .destroy': 'destroy',
+        'click .service': 'optOut',
         'click .cancel': 'cancel'
     },
 
@@ -15,7 +16,19 @@ Application.View.User = Backbone.Marionette.ItemView.extend({
 
 
 
-    submit: function() {
+    optOut: function(event) {
+        var $target = $(event.target);
+
+        var checked = $target.prop('checked');
+        if (checked === true) {
+            // TODO
+        } else {
+            // TODO
+        }
+    },
+
+
+    submit: function(event) {
         var data = $(event.target).serializeObject();
 
 

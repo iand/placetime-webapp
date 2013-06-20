@@ -135,7 +135,7 @@
 
 
         <script type="text/template" id="user-template">
-            <h1>Edit Profile</h1>
+            <h2>Edit Profile</h2>
 
             <form class="form">
                 <div class="field">
@@ -154,6 +154,18 @@
                 </div>
 
                 <div class="field">
+                    <h3>Services</h3>
+                    <p>
+                        Opt out of seeing services that you aren't registered for in your timeline
+                    </p>
+
+                    <label for="services[spotify]">
+                        Spotify
+                        <input type="checkbox" name="services[spotify]" class="service" checked="checked">
+                    </label>
+                </div>
+
+                <div class="field">
                     <input type="submit" value="Save" class="save">
                     <input type="submit" value="Destroy" class="destroy">
                     <input type="submit" value="Cancel" class="cancel">
@@ -163,7 +175,7 @@
 
 
         <script type="text/template" id="user-email-template">
-            <h1>Email Address</h1>
+            <h2>Email Address</h2>
 
             <form class="form">
                 <div class="field">
