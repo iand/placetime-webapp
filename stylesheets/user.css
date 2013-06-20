@@ -152,6 +152,16 @@ h1 {
   width: 40%;
 }
 
+.form-hint {
+  padding-left: 136px;
+  text-align: left;
+}
+
+.form-error {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #ff0000;
+}
+
 .items,
 .searches,
 .followers,

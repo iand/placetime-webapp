@@ -80,15 +80,17 @@
             <form class="form login-form">
                 <div class="form-field">
                     <label for="name">User name</label>
-                    <input type="text" name="pid" id="pid" value="">
+                    <input type="text" name="pid" id="pid" value="" required="required">
                     <div class="form-hint"></div>
                 </div>
 
                 <div class="form-field">
                     <label for="name">Password</label>
-                    <input type="password" name="pwd" id="pwd" value="">
+                    <input type="password" name="pwd" id="pwd" value="" required="required">
                     <div class="form-hint"></div>
                 </div>
+
+                <div class="form-error"></div>
 
                 <input type="submit" value="Login" class="wide">
 
