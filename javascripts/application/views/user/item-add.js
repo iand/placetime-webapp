@@ -20,7 +20,6 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     },
 
     initialize: function(options) {
-        console.log(this.options);
         this.model.set({
             link: '',
             text: '',
@@ -75,7 +74,7 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
                 changeMonth: true,
                 changeYear: true,
                 dateFormat: 'mm/dd/yy',
-                timeFormat: 'mm/dd/yy hh:mm'
+                timeFormat: 'hh:mm'
             });
         }
     }
