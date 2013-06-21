@@ -1,6 +1,6 @@
 Application.View.ItemEmpty = Backbone.Marionette.ItemView.extend({
     template: '#item-empty-template',
-    className: 'item empty collapsed',
+    className: 'item item-empty collapsed',
 
 
 

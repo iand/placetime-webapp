@@ -37,6 +37,8 @@ input[type=email],
 input[type=password],
 input[type=search],
 input[type=date],
+input[type=datetime],
+input[type=time],
 input[type=url] {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -182,10 +184,6 @@ h1 {
   -moz-box-shadow: 0px 0px 0px #aaaaaa;
   box-shadow: 0px 0px 0px #aaaaaa;
   background-color: #999;
-}
-.items .item.empty p,
-.searches.items .item.empty p {
-  margin: 0;
 }
 .items .item.image .overlay,
 .searches.items .item.image .overlay {
@@ -510,16 +508,60 @@ h1 {
   opacity: 1;
 }
 
-.item.add {
-  padding-top: 48px;
+.item-add {
+  max-height: none;
+  padding-top: 60px;
 }
 
-.item.empty,
-.item.empty.collapsed {
+.item-add-type {
+  margin-bottom: 15px;
+}
+
+.item-add-type label {
+  width: 87px;
+}
+
+.item-add-event label {
+  width: auto;
+}
+
+.item-add-image label {
+  vertical-align: top;
+}
+
+.item-add-image i {
+  font-size: 100px;
+  margin-top: 30px;
+}
+
+.item-add-image-placeholder {
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #eeeeee;
+  border: 1px solid #666666;
+  display: inline-block;
+  height: 175px;
+  margin: 4px 0 10px 0;
+  padding: 4px;
+  text-align: center;
+  width: 325px;
+}
+
+.item-add-ets {
+  display: none;
+}
+
+.item-empty,
+.item-empty.collapsed {
   -webkit-transition-duration: 350ms, 350ms, 350ms;
   -moz-transition-duration: 350ms, 350ms, 350ms;
   -o-transition-duration: 350ms, 350ms, 350ms;
   transition-duration: 350ms, 350ms, 350ms;
+}
+
+.item-empty p {
+  margin: 0;
 }
 
 .item.collapsed {
@@ -1078,10 +1120,6 @@ h1 {
 
 .pull-right {
   float: right;
-}
-
-.ui-datepicker {
-  margin-top: 104px;
 }
 
 .route-login,

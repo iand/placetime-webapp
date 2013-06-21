@@ -346,56 +346,70 @@
         </script>
 
 
-        <script type="text/template" id="item-add-do-template">
-            <form class="form">
-                <div class="field">
+        <script type="text/template" id="item-add-template">
+            <form class="form item-add-form">
+                <div class="field item-add-type">
+                    <label for="watch">
+                        <% if (type === 'watch') { %>
+                            <input type="radio" name="type" value="video" id="watch" checked="checked">
+                        <% } else { %>
+                            <input type="radio" name="type" value="video" id="watch">
+                        <% } %>
+                        Watch
+                    </label>
+                    <label for="listen">
+                        <% if (type === 'listen') { %>
+                            <input type="radio" name="type" value="audio" id="listen" checked="checked">
+                        <% } else { %>
+                            <input type="radio" name="type" value="audio" id="listen">
+                        <% } %>
+                        Listen
+                    </label>
+                    <label for="do">
+                        <% if (type === 'do') { %>
+                            <input type="radio" name="type" value="event" id="do" checked="checked">
+                        <% } else { %>
+                            <input type="radio" name="type" value="event" id="do">
+                        <% } %>
+                        Do
+                    </label>
+                    <label for="read">
+                        <% if (type === 'read') { %>
+                            <input type="radio" name="type" value="text" id="read" checked="checked">
+                        <% } else { %>
+                            <input type="radio" name="type" value="text" id="read">
+                        <% } %>
+                        Read
+                    </label>
+                </div>
+
+                <div class="field item-add-title">
                     <label for="text">Title</label>
                     <input type="text" name="text" value="<%= text %>">
                 </div>
 
-                <div class="field">
-                    <label for="text">Event Date</label>
+                <div class="field item-add-image">
+                    <label for="image">Image</label>
+                    <div class="item-add-image-placeholder">
+                        <i class="icon-spin icon-spinner"> </i>
+                    </div>
+                </div>
+
+                <div class="field item-add-duration">
+                    <label for="duration">Duration</label>
+                    <input type="datetime" placeholder="mm/dd/yy hh:mm" name="duration" value="<%= duration %>">
+                </div>
+
+                <div class="field item-add-event">
+                    <label for="event">
+                        Add event or schedule date:
+                        <input type="checkbox" name="event" id="event">
+                    </label>
+                </div>
+
+                <div class="field item-add-ets">
+                    <label for="ets">Event Date</label>
                     <input type="date" placeholder="dd/mm/yyyy" min="1900-00-00" name="ets" value="<%= ets %>">
-                </div>
-
-                <div class="actions">
-                    <input type="submit" value="Add" class="add">
-                    <input type="submit" value="Cancel" class="cancel">
-                </div>
-            </form>
-        </script>
-
-
-
-        <script type="text/template" id="item-add-watch-template">
-            <form class="form">
-                <div class="field preview">
-                    Watch Preview
-                </div>
-
-                <div class="field">
-                    <label for="text">Title</label>
-                    <input type="text" name="text" value="<%= text %>">
-                </div>
-
-                <div class="actions">
-                    <input type="submit" value="Add" class="add">
-                    <input type="submit" value="Cancel" class="cancel">
-                </div>
-            </form>
-        </script>
-
-
-
-        <script type="text/template" id="item-add-listen-template">
-            <form class="form">
-                <div class="field preview">
-                    Listen Preview
-                </div>
-
-                <div class="field">
-                    <label for="text">Title</label>
-                    <input type="text" name="text" value="<%= text %>">
                 </div>
 
                 <div class="actions">
@@ -632,9 +646,10 @@
                     <option value="watch">Watch</option>
                     <option value="listen">Listen</option>
                     <option value="do">Do</option>
+                    <option value="read">Read</option>
                 </select>
 
-                <input class="pull-left url" name="url" type="url" placeholder="http://www.domain.com/">
+                <input class="pull-left url" name="url" type="url" placeholder="http://www.domain.com/" required="required">
             </form>
 
             <% if (view === 'timeline') { %>

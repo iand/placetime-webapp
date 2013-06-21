@@ -41,6 +41,7 @@ module.exports = function(grunt) {
                         'javascripts/vendor/underscore.js',
                         'javascripts/vendor/jquery.js',
                         'javascripts/vendor/*.js',
+                        'javascripts/vendor/jquery/ui.js',
                         'javascripts/vendor/**/*.js',
 
                         // Exclude

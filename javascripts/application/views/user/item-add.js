@@ -1,9 +1,10 @@
 Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     template: '#item-add-template',
-    className: 'item add',
+    className: 'item item-add',
 
     events: {
-        'submit form': 'submit',
+        'submit item-add-form': 'submit',
+        'click .item-add-event input': 'toggle',
         'click .cancel': 'cancel'
     },
 
@@ -11,11 +12,15 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         'change': 'render'
     },
 
-    initialize: function(options) {
-        if (['watch', 'listen', 'do'].indexOf(this.model.get('type')) !== -1) {
-            this.template = '#item-add-' + this.model.get('type') + '-template';
-        }
+    ui: {
+        form: '.item-add-form',
+        event: '.item-add-event',
+        ets: '.item-add-ets',
+        error: '.form-error'
+    },
 
+    initialize: function(options) {
+        console.log(this.options);
         this.model.set({
             link: '',
             text: '',
@@ -24,9 +29,15 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     },
 
 
+    toggle: function(event) {
+        this.ui.ets.toggle();
+        this.ui.ets.find('input').val(null);
+    },
+
+
 
     submit: function(event) {
-        var data = $(event.target).serializeObject();
+        var data = this.ui.form.serializeObject();
 
         var self    = this;
         var promise = this.model.set(data).save();
@@ -56,6 +67,15 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
                 changeMonth: true,
                 changeYear: true,
                 dateFormat: 'mm/dd/yy'
+            });
+        }
+
+        if (Modernizr.inputtypes.datetime === false) {
+            $('input[type=datetime]').datetimepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'mm/dd/yy',
+                timeFormat: 'mm/dd/yy hh:mm'
             });
         }
     }
