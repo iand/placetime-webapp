@@ -28,11 +28,11 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
 
     // Bubble collection events
     collectionEvents: {
-        'item:promoted': 'itemPromoted'
+        'item:added': 'itemAdded'
     },
 
-    itemPromoted: function(item) {
-        this.trigger('item:promoted', item);
+    itemAdded: function(item) {
+        this.trigger('item:added', item);
     },
 
 

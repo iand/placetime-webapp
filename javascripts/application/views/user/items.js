@@ -22,7 +22,8 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     // Bubble collection events
     collectionEvents: {
         'item:promoted': 'itemPromoted',
-        'item:demoted': 'itemDemoted'
+        'item:demoted': 'itemDemoted',
+        'item:added': 'itemAdded'
     },
 
     itemDemoted: function(item) {
@@ -31,6 +32,10 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
     itemPromoted: function(item) {
         this.trigger('item:promoted', item);
+    },
+
+    itemAdded: function(item) {
+        this.trigger('item:added', item);
     },
 
 

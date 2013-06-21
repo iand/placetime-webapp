@@ -51,5 +51,26 @@ Application.Model.SearchItem = Application.Model.Item.extend({
 
     isAdded: function() {
         return this.get('added') !== 0;
+    },
+
+
+    add: function() {
+        var promise = $.ajax({
+            url: '/-tadd',
+            type: 'post',
+            data: {
+                pid: Application.session.get('pid'),
+                link: this.get('link'),
+                text: this.get('text'),
+                image: this.get('image'),
+                media: this.get('media'),
+                ets: this.get('ets'),
+                duration: this.get('duration')
+            }
+        });
+
+        this.trigger('item:added', this.attributes);
+
+        return promise;
     }
 });

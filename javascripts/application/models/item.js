@@ -11,7 +11,10 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
     defaults: {
-        via: undefined
+        via: undefined,
+        image: undefined,
+        media: undefined,
+        duration: undefined
     },
 
 
@@ -70,7 +73,10 @@ Application.Model.Item = Backbone.Model.extend({
                 pid: Application.session.get('pid'),
                 link: this.get('link'),
                 text: this.get('text'),
-                ets: this.get('ets')
+                image: this.get('image'),
+                media: this.get('media'),
+                ets: this.get('ets'),
+                duration: this.get('duration')
             }
         });
 

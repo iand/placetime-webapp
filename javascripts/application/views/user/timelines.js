@@ -46,6 +46,10 @@ Application.View.Timelines = Backbone.Marionette.ItemView.extend({
             privateTimeline.trigger('item:add', items[0]);
         });
 
+        this.listenTo(publicTimeline, 'item:added', function(item) {
+            privateTimeline.trigger('item:add', item);
+        });
+
         this.listenTo(privateTimeline, 'item:created', function(event) {
             privateTimeline.trigger('item:add', event);
         });

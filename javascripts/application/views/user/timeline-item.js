@@ -1,6 +1,7 @@
 Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
     events: {
         'click .flag': 'flag',
+        'click .add': 'add',
         'click .promote': 'promote',
         'click .demote': 'demote',
         'click .audio': 'load'
@@ -83,6 +84,13 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
 
     flag: function(event) {
         this.model.flag();
+
+        return false;
+    },
+
+
+    add: function() {
+        this.model.add();
 
         return false;
     },
