@@ -73,8 +73,11 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
             $('input[type=datetime]').datetimepicker({
                 changeMonth: true,
                 changeYear: true,
+                showSecond: true,
+                showMinute: true,
+                showHour: true,
                 dateFormat: 'mm/dd/yy',
-                timeFormat: 'hh:mm'
+                timeFormat: 'hh:mm:ss'
             });
         }
     }
