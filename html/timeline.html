@@ -350,35 +350,19 @@
             <form class="form item-add-form">
                 <div class="field item-add-type">
                     <label for="watch">
-                        <% if (type === 'watch') { %>
-                            <input type="radio" name="type" value="video" id="watch" checked="checked">
-                        <% } else { %>
-                            <input type="radio" name="type" value="video" id="watch">
-                        <% } %>
+                        <input type="radio" name="type" value="video" id="watch" checked="checked">
                         Watch
                     </label>
                     <label for="listen">
-                        <% if (type === 'listen') { %>
-                            <input type="radio" name="type" value="audio" id="listen" checked="checked">
-                        <% } else { %>
-                            <input type="radio" name="type" value="audio" id="listen">
-                        <% } %>
+                        <input type="radio" name="type" value="audio" id="listen">
                         Listen
                     </label>
                     <label for="do">
-                        <% if (type === 'do') { %>
-                            <input type="radio" name="type" value="event" id="do" checked="checked">
-                        <% } else { %>
-                            <input type="radio" name="type" value="event" id="do">
-                        <% } %>
+                        <input type="radio" name="type" value="event" id="do">
                         Do
                     </label>
                     <label for="read">
-                        <% if (type === 'read') { %>
-                            <input type="radio" name="type" value="text" id="read" checked="checked">
-                        <% } else { %>
-                            <input type="radio" name="type" value="text" id="read">
-                        <% } %>
+                        <input type="radio" name="type" value="text" id="read">
                         Read
                     </label>
                 </div>
@@ -642,14 +626,8 @@
             </ul>
 
             <form class="form">
-                <select class="pull-left type" name="type">
-                    <option value="watch">Watch</option>
-                    <option value="listen">Listen</option>
-                    <option value="do">Do</option>
-                    <option value="read">Read</option>
-                </select>
-
                 <input class="pull-left url" name="url" type="url" placeholder="http://www.domain.com/" required="required">
+                <input class="pull-left add" name="submit" type="submit" value="Add">
             </form>
 
             <% if (view === 'timeline') { %>

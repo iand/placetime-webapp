@@ -14,6 +14,7 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
 
     ui: {
         form: '.item-add-form',
+        title: '.item-add-title',
         event: '.item-add-event',
         ets: '.item-add-ets',
         error: '.form-error'
@@ -80,5 +81,7 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
                 timeFormat: 'hh:mm:ss'
             });
         }
+
+        this.ui.title.find('input').focus();
     }
 });

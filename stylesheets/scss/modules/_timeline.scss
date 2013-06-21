@@ -35,7 +35,6 @@
         padding: 0;
     }
 
-    .type,
     .search,
     .url,
     .add {
@@ -44,14 +43,6 @@
         height: 25px;
         padding: 4px 12px;
         margin-top: 8px;
-    }
-
-    .type {
-        font-size: 14px;
-        height: 25px;
-        padding: 4px 12px;
-        margin: 12px 0 0 15px;
-        width: 100px;
     }
 
     .selector {
@@ -67,16 +58,21 @@
         height: auto
     }
 
-    .search,
-    .url {
+    .search {
         margin-left: 15px;
         width: 185px;
     }
 
+    .url {
+        margin-left: 15px;
+        width: 275px;
+    }
+
     .add {
-        margin: 16px 0 0 0;
+        margin: 11px 0 0 -55px;
         padding: 0;
-        width: 80px;
+        width: 50px;
+        height: 25px;
     }
 
 

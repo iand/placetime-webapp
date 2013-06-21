@@ -881,7 +881,6 @@ h1 {
   margin: 12px 6px 4px 15px;
   padding: 0;
 }
-.timeline-header .type,
 .timeline-header .search,
 .timeline-header .url,
 .timeline-header .add {
@@ -895,13 +894,6 @@ h1 {
   padding: 4px 12px;
   margin-top: 8px;
 }
-.timeline-header .type {
-  font-size: 14px;
-  height: 25px;
-  padding: 4px 12px;
-  margin: 12px 0 0 15px;
-  width: 100px;
-}
 .timeline-header .selector {
   float: left;
 }
@@ -912,15 +904,19 @@ h1 {
   margin: 1px 0 0 0;
   height: auto;
 }
-.timeline-header .search,
-.timeline-header .url {
+.timeline-header .search {
   margin-left: 15px;
   width: 185px;
 }
+.timeline-header .url {
+  margin-left: 15px;
+  width: 275px;
+}
 .timeline-header .add {
-  margin: 16px 0 0 0;
+  margin: 11px 0 0 -55px;
   padding: 0;
-  width: 80px;
+  width: 50px;
+  height: 25px;
 }
 .timeline-header .now,
 .timeline-header .back {
