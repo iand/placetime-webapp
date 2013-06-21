@@ -4,7 +4,8 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
 
     events: {
         'submit item-add-form': 'submit',
-        'click .item-add-event input': 'toggle',
+        'click .item-add-event input': 'event',
+        'click .item-add-type input': 'toggle',
         'click .cancel': 'cancel'
     },
 
@@ -15,8 +16,10 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     ui: {
         form: '.item-add-form',
         title: '.item-add-title',
+        type: '.item-add-type',
         event: '.item-add-event',
         ets: '.item-add-ets',
+        duration: '.item-add-duration',
         error: '.form-error'
     },
 
@@ -29,11 +32,27 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     },
 
 
-    toggle: function(event) {
+    event: function() {
         this.ui.ets.toggle();
         this.ui.ets.find('input').val(null);
     },
 
+
+    toggle: function(event) {
+        var value = $(event.target).val();
+
+        if (value === 'text') {
+            this.ui.duration.hide();
+        } else {
+            this.ui.duration.show();
+        }
+
+        if (value === 'event') {
+            this.ui.ets.show();
+        } else {
+            this.ui.ets.hide();
+        }
+    },
 
 
     submit: function(event) {

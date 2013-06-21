@@ -258,19 +258,33 @@
             </p>
 
 
-            <% if (media == 'video') { %>
+            <% if (media === 'video') { %>
                 <p class="text pull-left">
-                    <a class="fancybox fancybox.iframe" href="<%= getIframeUrl(link) %>">
-                        <i class="icon-play-circle"></i>
-                        <%= text %>
-                    </a>
+                    <% if (isYoutube(link) === true) { %>
+                        <a class="fancybox fancybox.iframe" href="<%= getYoutubeUrl(link) %>">
+                            <i class="icon-play-circle"></i>
+                            <%= text %>
+                        </a>
+                    <% } else { %>
+                        <a class="fancybox fancybox.iframe" href="<%= link %>">
+                            <i class="icon-play-circle"></i>
+                            <%= text %>
+                        </a>
+                    <% } %>
                 </p>
-            <% } else if (media == 'audio') { %>
+            <% } else if (media === 'audio') { %>
                 <p class="text pull-left">
-                    <a class="audio" href="<%= getIframeUrl(link) %>">
-                        <i class="icon-play-circle"></i>
-                        <%= text %>
-                    </a>
+                    <% if (isSpotify(link) === true) { %>
+                        <a class="fancybox fancybox.iframe" href="<%= getSpotifyUrl(link) %>">
+                            <i class="icon-play-circle"></i>
+                            <%= text %>
+                        </a>
+                    <% } else { %>
+                        <a class="fancybox fancybox.iframe" href="<%= link %>">
+                            <i class="icon-play-circle"></i>
+                            <%= text %>
+                        </a>
+                    <% } %>
                 </p>
             <% } else { %>
                 <p class="text pull-left">
@@ -723,19 +737,33 @@
             </p>
 
 
-            <% if (media == 'video') { %>
+            <% if (media === 'video') { %>
                 <p class="text pull-left">
-                    <a class="fancybox fancybox.iframe" href="<%= getIframeUrl(link) %>">
-                        <i class="icon-play-circle"></i>
-                        <%= text %>
-                    </a>
+                    <% if (isYoutube(link) === true) { %>
+                        <a class="fancybox fancybox.iframe" href="<%= getYoutubeUrl(link) %>">
+                            <i class="icon-play-circle"></i>
+                            <%= text %>
+                        </a>
+                    <% } else { %>
+                        <a class="fancybox fancybox.iframe" href="<%= link %>">
+                            <i class="icon-play-circle"></i>
+                            <%= text %>
+                        </a>
+                    <% } %>
                 </p>
-            <% } else if (media == 'audio') { %>
+            <% } else if (media === 'audio') { %>
                 <p class="text pull-left">
-                    <a class="audio" href="<%= getIframeUrl(link) %>">
-                        <i class="icon-play-circle"></i>
-                        <%= text %>
-                    </a>
+                    <% if (isSpotify(link) === true) { %>
+                        <a class="fancybox fancybox.iframe" href="<%= getSpotifyUrl(link) %>">
+                            <i class="icon-play-circle"></i>
+                            <%= text %>
+                        </a>
+                    <% } else { %>
+                        <a class="fancybox fancybox.iframe" href="<%= link %>">
+                            <i class="icon-play-circle"></i>
+                            <%= text %>
+                        </a>
+                    <% } %>
                 </p>
             <% } else { %>
                 <p class="text pull-left">

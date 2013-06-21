@@ -42,16 +42,23 @@ Application.View.Item = Application.View.TimelineItem.extend({
             };
         },
 
-        getIframeUrl: function(url) {
-            if (/youtube/.test(url) === true) {
-                return 'http://www.youtube.com/embed/' + url.replace(
-                    'https://gdata.youtube.com/feeds/api/videos/', ''
-                );
-            }
+        // TODO: Abstract
+        getYoutubeUrl: function(url) {
+            return 'http://www.youtube.com/embed/' + url.replace(
+                'https://gdata.youtube.com/feeds/api/videos/', ''
+            );
         },
 
         getSpotifyUrl: function(url) {
             return 'https://embed.spotify.com/?uri=' + url;
+        },
+
+        isYoutube: function(url) {
+            return (/youtube\./).test(url);
+        },
+
+        isSpotify: function(url) {
+            return (/spotify\./).test(url);
         }
     },
 
