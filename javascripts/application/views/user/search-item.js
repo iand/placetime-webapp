@@ -32,10 +32,6 @@ Application.View.SearchItem = Application.View.TimelineItem.extend({
             className += ' audio';
         }
 
-        if (this.model.isAdded()) {
-            className += ' added';
-        }
-
         // Time
         if (this.model.isPast()) {
             className += ' past';
