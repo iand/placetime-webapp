@@ -102,5 +102,9 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         }
 
         this.ui.title.find('input').focus();
+
+        this.$el.find('select, input[type=radio], input[type=checkbox]').uniform({
+            useID: false
+        });
     }
 });
