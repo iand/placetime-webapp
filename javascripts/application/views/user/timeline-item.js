@@ -42,7 +42,7 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
         var $iframe = $('<iframe />');
             $iframe.addClass('pull-left listen collapsed');
             $iframe.attr({
-                src: this.templateHelpers.getSpotifyUrl(this.model.get('link')),
+                src: Application.Helpers.getSpotifyUrl(this.model.get('link')),
                 height: 80,
                 frameborder: 0,
                 allowtransparency: true,

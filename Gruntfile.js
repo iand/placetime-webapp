@@ -14,8 +14,8 @@ module.exports = function(grunt) {
 
                         // Include
                         'javascripts/application/application.js',
-                        'javascripts/application/helpers/*.js',
                         'javascripts/application/models/*.js',
+                        'javascripts/application/helpers/*.js',
                         'javascripts/application/collections/*.js',
                         'javascripts/application/views/*.js',
                         'javascripts/application/views/**/timeline.js',

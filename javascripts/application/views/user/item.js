@@ -2,64 +2,17 @@ Application.View.Item = Application.View.TimelineItem.extend({
     template: '#item-template',
 
     templateHelpers: {
-        isEvent: function(ts, event) {
-            var model = new Application.Model.Item({
-                ts: ts,
-                event: event
-            });
+        time: Application.Helpers.time,
+        url: Application.Helpers.url,
+        isEvent: Application.Helpers.isEvent,
 
-            return model.isEvent();
-        },
+        getDuration: Application.Helpers.getDuration,
 
-        time: function(ts) {
-            var model = new Application.Model.Item({
-                ts: ts
-            });
+        getYoutubeUrl: Application.Helpers.getYoutubeUrl,
+        getSpotifyUrl: Application.Helpers.getSpotifyUrl,
 
-            return model.time();
-        },
-
-        url: function(id) {
-            return window.location.origin + '/item/' + id;
-        },
-
-        // TODO: Abstract
-        getDuration: function(secs) {
-            var current = moment(),
-                duration = moment();
-
-            duration.add('seconds', secs);
-
-            var days    = duration.diff(current, 'days'),
-                hours   = duration.diff(current, 'hours'),
-                minutes = duration.diff(current, 'minutes'),
-                seconds = duration.diff(current, 'seconds');
-
-            return {
-                days: days,
-                hours: (hours  - (days * 24)),
-                minutes: (minutes - (hours * 60)),
-                seconds: (seconds - (minutes * 60))
-            };
-        },
-
-        getYoutubeUrl: function(url) {
-            return 'http://www.youtube.com/embed/' + url.replace(
-                'https://gdata.youtube.com/feeds/api/videos/', ''
-            );
-        },
-
-        getSpotifyUrl: function(url) {
-            return 'https://embed.spotify.com/?uri=' + url;
-        },
-
-        isYoutube: function(url) {
-            return (/youtube\./).test(url);
-        },
-
-        isSpotify: function(url) {
-            return (/spotify\./).test(url);
-        }
+        isYoutube: Application.Helpers.isYoutube,
+        isSpotify: Application.Helpers.isSpotify
     },
 
 

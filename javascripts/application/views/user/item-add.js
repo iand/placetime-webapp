@@ -25,25 +25,7 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
 
 
     templateHelpers: {
-        // TODO: Abstract
-        getDuration: function(secs) {
-            var current = moment(),
-                duration = moment();
-
-            duration.add('seconds', secs);
-
-            var days    = duration.diff(current, 'days'),
-                hours   = duration.diff(current, 'hours'),
-                minutes = duration.diff(current, 'minutes'),
-                seconds = duration.diff(current, 'seconds');
-
-            return {
-                days: days,
-                hours: (hours  - (days * 24)),
-                minutes: (minutes - (hours * 60)),
-                seconds: (seconds - (minutes * 60))
-            };
-        }
+        getDuration: Application.Helpers.getDuration
     },
 
 
