@@ -210,7 +210,7 @@
 
 
         <script type="text/template" id="loading-template">
-            <img alt="Loading" src="/-assets/images/vendor/jquery/fancybox/fancybox_loading.gif" height="24" width="24" />
+            <img alt="Loading" src="/-assets/images/loading-items.gif" height="16" width="16" />
         </script>
 
 
@@ -297,7 +297,7 @@
 
             <% if (duration !== undefined && duration !== 0) { %>
                 <% duration = getDuration(duration) %>
-                <ul class="duration pull-left">
+                <ul class="item-duration duration pull-left">
                     <% if (duration.days !== 0) { %>
                     <li class="days"><%= duration.days %>d</li>
                     <% } %>
@@ -382,19 +382,46 @@
                 </div>
 
                 <div class="field item-add-title">
-                    <label for="text">Title</label>
-                    <input type="text" name="text" value="<%= text %>">
+                    <input type="text" name="text" placeholder="Title" value="<%= text %>">
                 </div>
 
                 <div class="field item-add-image">
                     <div class="item-add-image-placeholder">
-                        <i class="icon-spin icon-spinner"> </i>
-                    </div>
-                </div>
+                        <img src="/-assets/images/loading-image.gif" height="16" width="16" />
 
-                <div class="field item-add-duration">
-                    <label for="duration">Duration</label>
-                    <input type="datetime" placeholder="mm/dd/yy hh:mm:ss" name="duration" value="<%= duration %>">
+                        <% if (duration !== undefined && duration !== 0) { %>
+                            <% duration = getDuration(duration) %>
+                            <ul class="item-add-duration duration">
+                                <% if (duration.days !== 0) { %>
+                                <li class="days"><%= duration.days %>d</li>
+                                <% } %>
+
+                                <% if (duration.days !== 0 && duration.hours !== 0) { %>
+                                <li class="durationcolon">:</li>
+                                <% } %>
+
+                                <% if (duration.hours !== 0) { %>
+                                <li class="hours"><%= duration.hours %>h</li>
+                                <% } %>
+
+                                <% if (duration.hours !== 0 && duration.minutes !== 0) { %>
+                                <li class="durationcolon">:</li>
+                                <% } %>
+
+                                <% if (duration.minutes !== 0) { %>
+                                <li class="minutes"><%= duration.minutes %>m</li>
+                                <% } %>
+
+                                <% if (duration.minutes !== 0 && duration.seconds !== 0) { %>
+                                <li class="durationcolon">:</li>
+                                <% } %>
+
+                                <% if (duration.seconds !== 0) { %>
+                                <li class="seconds"><%= duration.seconds %>s</li>
+                                <% } %>
+                            </ul>
+                        <% } %>
+                    </div>
                 </div>
 
                 <div class="field item-add-event">
@@ -410,6 +437,8 @@
                 </div>
 
                 <div class="actions">
+                    <input type="hidden" name="duration" value="<%= duration %>">
+
                     <input type="submit" value="Add" class="item-add-btn-add">
                     <input type="submit" value="Cancel" class="item-add-btn-cancel">
                 </div>
@@ -775,7 +804,7 @@
 
             <% if (duration !== undefined && duration !== 0) { %>
                 <% duration = getDuration(duration) %>
-                <ul class="duration pull-left">
+                <ul class="search-item-duration duration pull-left">
                     <% if (duration.days !== 0) { %>
                     <li class="days"><%= duration.days %>d</li>
                     <% } %>

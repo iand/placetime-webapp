@@ -23,6 +23,7 @@ Application.View.Item = Application.View.TimelineItem.extend({
             return window.location.origin + '/item/' + id;
         },
 
+        // TODO: Abstract
         getDuration: function(secs) {
             var current = moment(),
                 duration = moment();
@@ -42,7 +43,6 @@ Application.View.Item = Application.View.TimelineItem.extend({
             };
         },
 
-        // TODO: Abstract
         getYoutubeUrl: function(url) {
             return 'http://www.youtube.com/embed/' + url.replace(
                 'https://gdata.youtube.com/feeds/api/videos/', ''

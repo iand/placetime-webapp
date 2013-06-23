@@ -1,0 +1,37 @@
+.duration {
+    list-style: none;
+    margin: -5px 0 8px;
+    padding: 0;
+
+    li {
+        color: #fff;
+        display: inline-block;
+    }
+
+
+    .days,
+    .hours,
+    .minutes,
+    .seconds {
+        @include border-radius(3px);
+        font-size: 12px;
+        padding: 2px 4px;
+        text-align: center;
+    }
+
+    .days {
+        background-color: #06a65c;
+    }
+
+    .hours {
+        background-color: #5f39bb;
+    }
+
+    .minutes {
+        background-color: #f50000;
+    }
+
+    .seconds {
+        background-color: #ff5b00;
+    }
+}

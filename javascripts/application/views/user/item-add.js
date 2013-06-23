@@ -23,6 +23,30 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         error: '.form-error'
     },
 
+
+    templateHelpers: {
+        // TODO: Abstract
+        getDuration: function(secs) {
+            var current = moment(),
+                duration = moment();
+
+            duration.add('seconds', secs);
+
+            var days    = duration.diff(current, 'days'),
+                hours   = duration.diff(current, 'hours'),
+                minutes = duration.diff(current, 'minutes'),
+                seconds = duration.diff(current, 'seconds');
+
+            return {
+                days: days,
+                hours: (hours  - (days * 24)),
+                minutes: (minutes - (hours * 60)),
+                seconds: (seconds - (minutes * 60))
+            };
+        }
+    },
+
+
     initialize: function(options) {
         this.model.set({
             link: '',
@@ -86,18 +110,6 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
                 changeMonth: true,
                 changeYear: true,
                 dateFormat: 'mm/dd/yy'
-            });
-        }
-
-        if (Modernizr.inputtypes.datetime === false) {
-            $('input[type=datetime]').datetimepicker({
-                changeMonth: true,
-                changeYear: true,
-                showSecond: true,
-                showMinute: true,
-                showHour: true,
-                dateFormat: 'mm/dd/yy',
-                timeFormat: 'hh:mm:ss'
             });
         }
 

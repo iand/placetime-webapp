@@ -182,8 +182,7 @@
     .time,
     .via,
     .button,
-    .listen,
-    .duration {
+    .listen {
         position: relative;
         z-index: 2;
     }
@@ -192,8 +191,7 @@
     .text,
     .bio,
     .statistics,
-    .time,
-    .duration {
+    .time {
         width: 100%;
 
         a {
@@ -225,44 +223,6 @@
         }
     }
 
-    .duration {
-        list-style: none;
-        margin: -5px 0 8px;
-        padding: 0;
-
-        li {
-            color: #fff;
-            display: inline-block;
-        }
-
-
-        .days,
-        .hours,
-        .minutes,
-        .seconds {
-            @include border-radius(3px);
-            font-size: 12px;
-            padding: 2px 4px;
-            text-align: center;
-        }
-
-        .days {
-            background-color: #06a65c;
-        }
-
-        .hours {
-            background-color: #5f39bb;
-        }
-
-        .minutes {
-            background-color: #f50000;
-        }
-
-        .seconds {
-            background-color: #ff5b00;
-        }
-    }
-
 
     .text,
     .bio {
@@ -278,8 +238,7 @@
         max-height: 80px;
     }
 
-    .text,
-    .duration {
+    .text {
         &.collapsed {
             @include transition(
                 opacity 1s ease,
@@ -291,6 +250,8 @@
             margin: 0;
         }
     }
+
+
 
 
     .bio {
@@ -343,6 +304,24 @@
     }
 }
 
+.item-duration,
+.search-item-duration {
+    position: relative;
+    width: 100%;
+    z-index: 2;
+
+    &.collapsed {
+        @include transition(
+            opacity 1s ease,
+            max-height 1s ease,
+            margin 1s ease
+        );
+        max-height: 0;
+        opacity: 0;
+        margin: 0;
+    }
+}
+
 
 .item.event .event.sash,
 .item.audio .audio.sash,
@@ -370,6 +349,10 @@
     margin-bottom: 15px;
 }
 
+.item-add-title input {
+    width: 332px;
+}
+
 .item-add-type label {
     width: 87px
 }
@@ -382,9 +365,8 @@
     vertical-align: top;
 }
 
-.item-add-image i {
-    font-size: 100px;
-    margin-top: 30px;
+.item-add-image img {
+    margin-top: 80px;
 }
 
 .item-add-image-placeholder {
@@ -396,8 +378,15 @@
     height: 175px;
     margin: 4px 0 10px 0 ;
     padding: 4px;
+    position: relative;
     text-align: center;
     width: 347px;
+}
+
+.item-add-duration {
+    bottom: 0;
+    left: 7px;
+    position: absolute;
 }
 
 .item-add-ets {
