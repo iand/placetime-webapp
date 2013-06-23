@@ -55,6 +55,10 @@
                 color: #fff;
             }
 
+            .icon-external-link {
+                font-weight: bold;
+            }
+
             .icon-play-circle {
                 font-weight: normal;
                 font-size: 26px;
@@ -215,7 +219,7 @@
         }
 
         i {
-            color: #bf3000;
+            color: #ff6600;
             display: inline-block;
             margin-left: 5px;
         }
@@ -268,6 +272,7 @@
 
     .text {
         font-size: 22px;
+        font-weight: lighter;.
         opacity: 1;
         overflow: hidden;
         max-height: 80px;
@@ -341,8 +346,7 @@
 
 .item.event .event.sash,
 .item.audio .audio.sash,
-.item.video .video.sash,
-.item.event.added .event-added.sash {
+.item.video .video.sash {
     @include single-transition(
         opacity, 1s
     );
@@ -352,6 +356,14 @@
 .item-add {
     max-height: none;
     padding-top: 60px;
+}
+
+.item-add-btn-add {
+    width: 120px;
+}
+
+.item-add-btn-cancel {
+    width: 80px;
 }
 
 .item-add-type {
@@ -380,19 +392,27 @@
         rgba(0, 0, 0, 0.2), 1px, 2px, 4px
     );
     background-color: #eeeeee;
-    border: 1px solid #666666;
     display: inline-block;
     height: 175px;
     margin: 4px 0 10px 0 ;
     padding: 4px;
     text-align: center;
-    width: 325px;
+    width: 347px;
 }
 
 .item-add-ets {
     display: none;
 }
 
+
+// TODO: Remove .items prefix
+.items .item-empty,
+.items .item-empty:hover {
+    @include single-box-shadow(
+        #aaaaaa, 1px, 1px, 2px
+    );
+    background-color: #ffffff;
+}
 
 .item-empty,
 .item-empty.collapsed {

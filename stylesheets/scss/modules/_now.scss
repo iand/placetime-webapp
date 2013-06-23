@@ -28,11 +28,11 @@
 }
 
 .now-separator-future {
-    @include border-radius(0 0 8px 8px);
+    @include border-radius(0 0 4px 4px);
 }
 
 .now-separator-past {
-    @include border-radius(8px 8px 0 0);
+    @include border-radius(4px 4px 0 0);
     margin-top: 15px;
 }
 

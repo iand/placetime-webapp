@@ -46,12 +46,7 @@ Application.Model.Item = Backbone.Model.extend({
 
 
     isEvent: function() {
-        return this.get('ts').toString().substr(0, 10) == this.get('event');
-    },
-
-
-    isAdded: function() {
-        return this.get('ts').toString().substr(0, 10) == this.get('added');
+        return this.get('media') === 'event';
     },
 
 
