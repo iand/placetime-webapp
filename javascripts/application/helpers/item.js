@@ -1,6 +1,6 @@
 Application.Helpers = {
     isEvent: function(media) {
-        var model = new Application.Model.SearchItem({
+        var model = new Application.Model.Item({
             media: media
         });
 
@@ -10,7 +10,7 @@ Application.Helpers = {
 
 
     time: function(ts, event, added) {
-        var model = new Application.Model.SearchItem({
+        var model = new Application.Model.Item({
             ts: ts,
             event: event,
             added: added

@@ -35,7 +35,7 @@ Application.Model.SearchItem = Application.Model.Item.extend({
 
 
     isEvent: function() {
-        return this.get('event') !== 0;
+        return this.get('media') === 'event';
     },
 
 
@@ -46,11 +46,6 @@ Application.Model.SearchItem = Application.Model.Item.extend({
 
     isAudio: function() {
         return this.get('media') === 'audio';
-    },
-
-
-    isAdded: function() {
-        return this.get('added') !== 0;
     },
 
 
