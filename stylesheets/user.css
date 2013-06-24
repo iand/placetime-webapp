@@ -200,16 +200,16 @@ h1 {
   text-align: center;
 }
 .duration .days {
-  background-color: #06a65c;
+  background-color: #333333;
 }
 .duration .hours {
-  background-color: #5f39bb;
+  background-color: #444444;
 }
 .duration .minutes {
-  background-color: #f50000;
+  background-color: #666666;
 }
 .duration .seconds {
-  background-color: #ff5b00;
+  background-color: #888888;
 }
 
 .collection {
@@ -654,7 +654,7 @@ h1 {
 }
 
 .navbar-brand {
-  color: #ff6600;
+  color: #555555;
   font-size: 23px;
   margin: 8px 0 0 22px;
 }
@@ -663,7 +663,7 @@ h1 {
 }
 .navbar-brand .icon-ok-circle,
 .navbar-brand .icon-time {
-  color: #aaaaaa;
+  color: #ff6600;
   font-size: 30px;
   float: left;
   margin-top: 0px;
@@ -924,6 +924,7 @@ h1 {
   padding: 0;
   width: 50px;
   height: 25px;
+  color: #ffffff;
 }
 .timeline-header .now,
 .timeline-header .back {
