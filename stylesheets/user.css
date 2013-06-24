@@ -831,7 +831,7 @@ h3 {
 }
 .sash.added span, .sash.followed span, .sash.flagged span {
   display: inline-block;
-  padding: 7px 6px 6px;
+  padding: 6px 4px 6px;
 }
 .sash.added {
   width: 120px;
