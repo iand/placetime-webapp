@@ -27,7 +27,7 @@ Application.View.Register = Backbone.Marionette.ItemView.extend({
 
         promise.fail(function(){
             if (status === 'error') {
-                // TODO: Implement
+                self.ui.error.text('The pid is already taken');
             } else if (status === 'timeout') {
                 self.ui.error.text('The server is experiencing heavy load');
             }
