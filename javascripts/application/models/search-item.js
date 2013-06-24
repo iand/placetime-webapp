@@ -50,9 +50,12 @@ Application.Model.SearchItem = Application.Model.Item.extend({
 
 
     add: function() {
+        var self = this;
+
         var promise = $.ajax({
             url: '/-tadd',
             type: 'post',
+            dataType: 'json',
             data: {
                 pid: Application.session.get('pid'),
                 link: this.get('link'),
@@ -64,7 +67,9 @@ Application.Model.SearchItem = Application.Model.Item.extend({
             }
         });
 
-        this.trigger('item:added', this.attributes);
+        promise.done(function(data) {
+            self.trigger('item:added', data[0]);
+        });
 
         return promise;
     }
