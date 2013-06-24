@@ -1,0 +1,19 @@
+// TODO: Remove .items prefix
+.items .item-empty,
+.items .item-empty:hover {
+    @include single-box-shadow(
+        #aaaaaa, 1px, 1px, 2px
+    );
+    background-color: #ffffff;
+}
+
+.item-empty,
+.item-empty.collapsed {
+    @include transition-duration(
+        350ms, 350ms, 350ms
+    );
+}
+
+.item-empty p {
+    margin: 0
+}

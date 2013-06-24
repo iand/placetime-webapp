@@ -154,6 +154,29 @@ h1 {
   width: 40%;
 }
 
+.username {
+  font-size: 14px;
+  margin: 15px 12px;
+  position: relative;
+  z-index: 2;
+}
+.username a {
+  border-bottom: 0;
+}
+.username i {
+  color: #ff6600;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.username-item a {
+  color: #ddd;
+}
+
+.username-profile {
+  color: #000000;
+}
+
 .duration {
   list-style: none;
   margin: -5px 0 8px;
@@ -236,10 +259,6 @@ h1 {
   width: 100%;
   z-index: 1;
 }
-.items .item .username a,
-.searches.items .item .username a {
-  color: #ddd;
-}
 .items .item .text,
 .searches.items .item .text {
   margin: 18px 0 14px;
@@ -304,12 +323,6 @@ h1 {
 .suggestions .item,
 .searches.profiles .item {
   background-color: #fff;
-}
-.followings .item .username,
-.followers .item .username,
-.suggestions .item .username,
-.searches.profiles .item .username {
-  color: #000000;
 }
 .followings .item .icon img,
 .followers .item .icon img,
@@ -392,27 +405,21 @@ h1 {
   overflow: hidden;
   position: relative;
 }
-.item .icon,
-.item .username,
-.item .text,
-.item .time,
-.item .via,
-.item .button,
-.item .listen {
+.item .via {
   position: relative;
   z-index: 2;
 }
-.item .text,
-.item .bio,
-.item .statistics,
 .item .time {
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+.item .statistics {
   width: 100%;
 }
-.item .text a,
-.item .bio a,
-.item .statistics a,
-.item .time a {
-  border-bottom: 0;
+.item .icon {
+  position: relative;
+  z-index: 2;
 }
 .item .icon img {
   -webkit-border-radius: 25px;
@@ -422,29 +429,17 @@ h1 {
   border-radius: 25px;
   border: 3px solid #ffffff;
 }
-.item .username {
-  font-size: 14px;
-  margin: 15px 12px;
-}
-.item .username a {
-  border-bottom: 0;
-}
-.item .username i {
-  color: #ff6600;
-  display: inline-block;
-  margin-left: 5px;
-}
-.item .text,
-.item .bio {
-  margin: 0;
-}
 .item .text {
   font-size: 22px;
   font-weight: lighter;
   .
         opacity: 1;
   overflow: hidden;
+  margin: 0;
   max-height: 80px;
+  position: relative;
+  width: 100%;
+  z-index: 2;
 }
 .item .text.collapsed {
   -webkit-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
@@ -457,18 +452,8 @@ h1 {
 }
 .item .bio {
   font-size: 17px;
-}
-.item .url {
-  -webkit-transition: opacity 1s ease;
-  -moz-transition: opacity 1s ease;
-  -o-transition: opacity 1s ease;
-  transition: opacity 1s ease;
-  opacity: 0;
-  padding-left: 12px;
-}
-.item .listen {
-  margin: 10px 0 10px;
-  opacity: 1;
+  margin: 0;
+  width: 100%;
 }
 .item .button {
   -webkit-border-radius: 31px;
@@ -492,6 +477,7 @@ h1 {
   font-size: 22px;
   position: absolute;
   right: 10px;
+  z-index: 2;
 }
 .item .button:hover {
   color: #ffffff;
@@ -500,14 +486,19 @@ h1 {
   color: #ff6600;
 }
 
-.item-duration,
-.search-item-duration {
+.listen {
+  margin: 10px 0 10px;
+  position: relative;
+  opacity: 1;
+  z-index: 2;
+}
+
+.item-duration {
   position: relative;
   width: 100%;
   z-index: 2;
 }
-.item-duration.collapsed,
-.search-item-duration.collapsed {
+.item-duration.collapsed {
   -webkit-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
   -moz-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
   -o-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
@@ -515,6 +506,15 @@ h1 {
   max-height: 0;
   opacity: 0;
   margin: 0;
+}
+
+.item-url {
+  -webkit-transition: opacity 1s ease;
+  -moz-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
+  transition: opacity 1s ease;
+  opacity: 0;
+  padding-left: 12px;
 }
 
 .item.event .event.sash,
@@ -527,29 +527,28 @@ h1 {
   opacity: 1;
 }
 
+.item.collapsed {
+  margin-bottom: 0;
+  max-height: 0px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
 .item-add {
   max-height: none;
   padding-top: 60px;
-}
-
-.item-add-btn-add {
-  width: 120px;
-}
-
-.item-add-btn-cancel {
-  width: 80px;
 }
 
 .item-add-type {
   margin-bottom: 15px;
 }
 
-.item-add-title input {
-  width: 332px;
-}
-
 .item-add-type label {
   width: 87px;
+}
+
+.item-add-title input {
+  width: 332px;
 }
 
 .item-add-event label {
@@ -588,6 +587,14 @@ h1 {
   display: none;
 }
 
+.item-add-btn-add {
+  width: 120px;
+}
+
+.item-add-btn-cancel {
+  width: 80px;
+}
+
 .items .item-empty,
 .items .item-empty:hover {
   -webkit-box-shadow: 1px 1px 2px #aaaaaa;
@@ -606,13 +613,6 @@ h1 {
 
 .item-empty p {
   margin: 0;
-}
-
-.item.collapsed {
-  margin-bottom: 0;
-  max-height: 0px;
-  padding-bottom: 0px;
-  padding-top: 0px;
 }
 
 .login {

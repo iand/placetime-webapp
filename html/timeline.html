@@ -247,7 +247,7 @@
                     <img src="/-assets/images/user.png" width="40" height="40" />
                 <% } %>
             </div>
-            <p class="username pull-left">
+            <p class="username username-item pull-left">
                 <a href="#user/<%= encodeURI(author.pid) %>">
                     <%= author.pid %>
                 </a>
@@ -340,7 +340,7 @@
                         <i class="icon-time"></i> <span class="added">added:</span>
                     <% } %>
                     <span class="timestamp"><%= time(ts, event, added).fromNow() %></span>
-                    <a class="url" href="<%= url(id) %>">link</span>
+                    <a class="item-url" href="<%= url(id) %>">link</span>
                 </a>
             </p>
 
@@ -508,7 +508,7 @@
                 <% } %>
             </div>
 
-            <p class="username pull-left">
+            <p class="username username-profile pull-left">
                 <a href="#user/<%= encodeURI(pid) %>">
                     <%= pid %>
                     <i class="icon-flag flag" title="Flag profile for spam"></i>
@@ -565,7 +565,7 @@
                 <% } %>
             </div>
 
-            <p class="username pull-left">
+            <p class="username username-profile pull-left">
                 <a href="#user/<%= encodeURI(pid) %>">
                     <%= pid %>
                     <i class="icon-flag flag" title="Flag profile for spam"></i>
@@ -664,7 +664,7 @@
             </ul>
 
             <form class="form">
-                <input class="pull-left url" name="url" type="url" placeholder="http://www.domain.com/" required="required">
+                <input class="pull-left item-url" name="item-url" type="item-url" placeholder="http://www.domain.com/" required="required">
                 <input class="pull-left add" name="submit" type="submit" value="Add">
             </form>
 
@@ -754,7 +754,7 @@
                     <img src="/-assets/images/user.png" width="40" height="40" />
                 <% } %>
             </div>
-            <p class="username pull-left">
+            <p class="username username-item pull-left">
                 <a href="#user/<%= encodeURI(author.pid) %>">
                     <%= author.pid %>
                 </a>
@@ -800,7 +800,7 @@
 
             <% if (duration !== undefined && duration !== 0) { %>
                 <% duration = getDuration(duration) %>
-                <ul class="search-item-duration duration pull-left">
+                <ul class="item-duration duration pull-left">
                     <% if (duration.days !== 0) { %>
                     <li class="days"><%= duration.days %>d</li>
                     <% } %>
@@ -850,7 +850,7 @@
                             <i class="icon-time"></i> <span class="added">added:</span>
                             <span class="timestamp"><%= time(ts, event, added).fromNow() %></span>
                         <% } %>
-                        <a class="url" href="<%= url(id) %>">link</span>
+                        <a class="item-url" href="<%= url(id) %>">link</span>
                     </a>
                 </p>
             <% } %>
@@ -884,7 +884,7 @@
                 <% } %>
             </div>
 
-            <p class="username pull-left">
+            <p class="username username-profile pull-left">
                 <a href="#user/<%= encodeURI(pid) %>">
                     <%= pid %>
                 </a>
@@ -938,7 +938,7 @@
                 <% } %>
             </div>
 
-            <p class="username pull-left">
+            <p class="username username-profile pull-left">
                 <a href="#user/<%= encodeURI(pid) %>">
                     <%= pid %>
                 </a>

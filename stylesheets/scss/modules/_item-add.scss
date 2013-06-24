@@ -1,0 +1,65 @@
+.item-add {
+    max-height: none;
+    padding-top: 60px;
+}
+
+
+.item-add-type {
+    margin-bottom: 15px;
+}
+
+.item-add-type label {
+    width: 87px
+}
+
+
+.item-add-title input {
+    width: 332px;
+}
+
+.item-add-event label {
+    width: auto
+}
+
+
+.item-add-image label {
+    vertical-align: top;
+}
+
+.item-add-image img {
+    margin-top: 80px;
+}
+
+.item-add-image-placeholder {
+    @include single-box-shadow(
+        rgba(0, 0, 0, 0.2), 1px, 2px, 4px
+    );
+    background-color: #eeeeee;
+    display: inline-block;
+    height: 175px;
+    margin: 4px 0 10px 0 ;
+    padding: 4px;
+    position: relative;
+    text-align: center;
+    width: 347px;
+}
+
+
+.item-add-duration {
+    bottom: 0;
+    left: 7px;
+    position: absolute;
+}
+
+
+.item-add-ets {
+    display: none;
+}
+
+.item-add-btn-add {
+    width: 120px;
+}
+
+.item-add-btn-cancel {
+    width: 80px;
+}

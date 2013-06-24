@@ -1,0 +1,26 @@
+.username {
+    font-size: 14px;
+    margin: 15px 12px;
+    position: relative;
+    z-index: 2;
+
+    a {
+        border-bottom: 0;
+    }
+
+    i {
+        color: #ff6600;
+        display: inline-block;
+        margin-left: 5px;
+    }
+}
+
+.username-item {
+    a {
+        color: #ddd;
+    }
+}
+
+.username-profile {
+    color: #000000;
+}
