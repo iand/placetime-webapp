@@ -119,6 +119,16 @@ h1 {
   margin-bottom: 5px;
 }
 
+h2 {
+  font-size: 15px;
+  font-weight: normal;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: normal;
+}
+
 .layout-container {
   margin: 0 auto;
   width: 960px;
@@ -313,6 +323,18 @@ h1 {
 .form-error {
   background-color: rgba(255, 255, 255, 0.8);
   color: #ff0000;
+}
+
+.save {
+  width: 120px;
+}
+
+.destroy {
+  width: 80px;
+}
+
+.cancel {
+  width: 80px;
 }
 
 .item {
