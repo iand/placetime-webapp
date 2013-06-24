@@ -4,8 +4,8 @@
     @include single-box-shadow(
         #aaaaaa, 1px, 1px, 2px
     );
-    background-color: #ffffff;
-}
+    background-color: #ffffff !important;
+ }
 
 .item-empty,
 .item-empty.collapsed {
