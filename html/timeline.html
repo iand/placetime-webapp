@@ -334,7 +334,7 @@
 
             <p class="time pull-left">
                 <a class="fancybox fancybox.iframe" href="<%= link %>">
-                    <% if (isEvent(media)) { %>
+                    <% if (isEvent(media) === true && isAdded(ts, added) === false) { %>
                         <i class="icon-calendar"></i> <span class="event">event:</span>
                     <% } else { %>
                         <i class="icon-time"></i> <span class="added">added:</span>
@@ -843,7 +843,7 @@
             <% if (media !== 'video' && media !== 'audio') { %>
                 <p class="time pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
-                        <% if (isEvent(media)) { %>
+                        <% if (isEvent(media) === true && isAdded(ts, added) === false) { %>
                             <i class="icon-calendar"></i> <span class="event">event:</span>
                             <span class="timestamp"><%= time(ts, event, added).fromNow() %></span>
                         <% } else { %>

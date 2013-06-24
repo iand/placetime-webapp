@@ -60,6 +60,11 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
 
+    isAdded: function() {
+        return this.get('ts').toString().substr(0, 10) === this.get('added').toString();
+    },
+
+
     save: function() {
         var promise = $.ajax({
             url: '/-tadd',

@@ -4,7 +4,9 @@ Application.View.Item = Application.View.TimelineItem.extend({
     templateHelpers: {
         time: Application.Helpers.time,
         url: Application.Helpers.url,
+
         isEvent: Application.Helpers.isEvent,
+        isAdded: Application.Helpers.isAdded,
 
         getDuration: Application.Helpers.getDuration,
 

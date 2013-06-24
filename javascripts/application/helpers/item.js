@@ -8,6 +8,15 @@ Application.Helpers = {
     },
 
 
+    isAdded: function(ts, added) {
+        var model = new Application.Model.Item({
+            ts: ts,
+            added: added
+        });
+
+        return model.isAdded();
+    },
+
 
     time: function(ts, event, added) {
         var model = new Application.Model.Item({
