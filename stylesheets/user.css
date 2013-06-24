@@ -1111,11 +1111,12 @@ h1 {
   transition: opacity 1s;
   opacity: 1;
 }
-.item.focused .url {
+.item.focused .item-url {
   -webkit-transition: opacity 1s ease;
   -moz-transition: opacity 1s ease;
   -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
+  font-weight: bold;
   opacity: 1;
 }
 
