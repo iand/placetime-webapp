@@ -1040,6 +1040,10 @@ h1 {
   padding-top: 46px;
 }
 
+.suggestions .children {
+  padding-top: 0;
+}
+
 .now-separator {
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
