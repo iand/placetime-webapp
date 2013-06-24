@@ -109,26 +109,22 @@
             <form class="form register-form">
                 <div class="form-field">
                     <label for="name">User name</label>
-                    <input type="text" name="pid">
-                    <div class="form-hint"></div>
+                    <input type="text" name="pid" required="required" pattern="[a-zA-Z0-9_]{1,15}" maxlength="15">
                 </div>
 
                 <div class="form-field">
                     <label for="email">Email address</label>
-                    <input type="text" name="email">
-                    <div class="form-hint"></div>
+                    <input type="email" name="email" required="required">
                 </div>
 
                 <div class="form-field">
                     <label for="name">Full name</label>
-                    <input type="text" name="name">
-                    <div class="form-hint"></div>
+                    <input type="text" name="name" required="required">
                 </div>
 
                 <div class="field">
                     <label for="name">Password</label>
-                    <input type="password" name="pwd">
-                    <div class="form-hint"></div>
+                    <input type="password" name="pwd" required="required">
                 </div>
 
                 <input class="wide" type="submit" value="Register">
