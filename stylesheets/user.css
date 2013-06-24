@@ -257,7 +257,7 @@ h1 {
 }
 .collection-items .item .text,
 .collection-searches.items .item .text {
-  margin: 18px 0 14px;
+  margin: 13px 0 13px;
 }
 .collection-items .item .text a,
 .collection-searches.items .item .text a {
@@ -297,6 +297,7 @@ h1 {
   -o-border-radius: 3px;
   border-radius: 3px;
   padding: 2px 4px;
+  margin: 0px 4px;
 }
 .collection-items .item .time a,
 .collection-searches.items .item .time a {
@@ -651,6 +652,7 @@ h1 {
 }
 .navbar-nav .icon-cog {
   font-size: 33px;
+  color: #555555;
 }
 
 .navbar-brand {
@@ -926,6 +928,12 @@ h1 {
   height: 25px;
   color: #ffffff;
 }
+.timeline-header .add:hover {
+  color: #000000;
+}
+.timeline-header .add:active {
+  color: #ff6600;
+}
 .timeline-header .now,
 .timeline-header .back {
   -webkit-transition: opacity 0.5s ease-in-out;
@@ -970,7 +978,7 @@ h1 {
 .timeline-nav {
   font-size: 14px;
   list-style: none;
-  margin: 11px 12px;
+  margin: 15px 12px;
   padding: 0;
 }
 .timeline-nav li {

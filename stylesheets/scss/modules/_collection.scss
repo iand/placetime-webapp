@@ -45,7 +45,7 @@
 
 
         .text {
-            margin: 18px 0 14px;
+            margin: 13px 0 13px;
 
             a {
                 color: #fff;
@@ -80,6 +80,7 @@
                 background-color: #ff6600;
                 @include border-radius(3px);
                 padding: 2px 4px;
+                margin: 0px 4px;
             }
 
             a {
