@@ -194,7 +194,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
         // Current scrollTop, maxScrollTop
         var scrollTop = $target.scrollTop(),
-            maxScrollTop = $target.find('.children').height();
+            maxScrollTop = $target.find('.collection-children').height();
 
         // Loading
         if (this.infiniteScrollLoading === true) {

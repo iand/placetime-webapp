@@ -212,43 +212,39 @@ h1 {
   background-color: #ff5b00;
 }
 
-.form-hint {
-  padding-left: 136px;
-  text-align: left;
-}
-
-.form-error {
-  background-color: rgba(255, 255, 255, 0.8);
-  color: #ff0000;
-}
-
-.items,
-.searches,
-.followers,
-.followings,
-.suggestions {
+.collection {
   padding-top: 5px;
 }
 
-.items .item,
-.searches.items .item {
+.collection-children {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  position: relative;
+  padding-top: 46px;
+}
+
+.collection-items .item,
+.collection-searches.items .item {
   background-color: #aaaaaa;
   background-size: cover;
   background-position-y: 35%;
 }
-.items .item:hover,
-.searches.items .item:hover {
+.collection-items .item:hover,
+.collection-searches.items .item:hover {
   -webkit-box-shadow: 0px 0px 0px #aaaaaa;
   -moz-box-shadow: 0px 0px 0px #aaaaaa;
   box-shadow: 0px 0px 0px #aaaaaa;
   background-color: #999;
 }
-.items .item.image .overlay,
-.searches.items .item.image .overlay {
+.collection-items .item.image .overlay,
+.collection-searches.items .item.image .overlay {
   display: block;
 }
-.items .item .overlay,
-.searches.items .item .overlay {
+.collection-items .item .overlay,
+.collection-searches.items .item .overlay {
   background-color: rgba(15, 15, 15, 0.4);
   display: none;
   left: 0;
@@ -259,40 +255,40 @@ h1 {
   width: 100%;
   z-index: 1;
 }
-.items .item .text,
-.searches.items .item .text {
+.collection-items .item .text,
+.collection-searches.items .item .text {
   margin: 18px 0 14px;
 }
-.items .item .text a,
-.searches.items .item .text a {
+.collection-items .item .text a,
+.collection-searches.items .item .text a {
   color: #fff;
 }
-.items .item .text .icon-external-link,
-.searches.items .item .text .icon-external-link {
+.collection-items .item .text .icon-external-link,
+.collection-searches.items .item .text .icon-external-link {
   font-weight: bold;
 }
-.items .item .text .icon-play-circle,
-.searches.items .item .text .icon-play-circle {
+.collection-items .item .text .icon-play-circle,
+.collection-searches.items .item .text .icon-play-circle {
   font-weight: normal;
   font-size: 26px;
   line-height: 1;
 }
-.items .item .via,
-.searches.items .item .via {
+.collection-items .item .via,
+.collection-searches.items .item .via {
   margin: 0 0 5px;
 }
-.items .item .via a,
-.searches.items .item .via a {
+.collection-items .item .via a,
+.collection-searches.items .item .via a {
   border-bottom: 0;
   color: #ddd;
   font-size: 14px;
 }
-.items .item .time,
-.searches.items .item .time {
+.collection-items .item .time,
+.collection-searches.items .item .time {
   margin: 0;
 }
-.items .item .time .event,
-.searches.items .item .time .event {
+.collection-items .item .time .event,
+.collection-searches.items .item .time .event {
   color: #ffffff;
   background-color: #ff6600;
   -webkit-border-radius: 3px;
@@ -302,82 +298,20 @@ h1 {
   border-radius: 3px;
   padding: 2px 4px;
 }
-.items .item .time a,
-.searches.items .item .time a {
+.collection-items .item .time a,
+.collection-searches.items .item .time a {
   color: #eee;
   font-size: 13px;
 }
-.items .item .add,
-.items .item .promote,
-.searches.items .item .add,
-.searches.items .item .promote {
-  padding: 6px 7px 5px 8px;
-}
-.items .item .demote,
-.searches.items .item .demote {
-  padding: 6px 9px 5px 10px;
+
+.form-hint {
+  padding-left: 136px;
+  text-align: left;
 }
 
-.followings .item,
-.followers .item,
-.suggestions .item,
-.searches.profiles .item {
-  background-color: #fff;
-}
-.followings .item .icon img,
-.followers .item .icon img,
-.suggestions .item .icon img,
-.searches.profiles .item .icon img {
-  border-color: #999;
-}
-.followings .item .bio,
-.followers .item .bio,
-.suggestions .item .bio,
-.searches.profiles .item .bio {
-  margin-bottom: 15px;
-  margin-top: 12px;
-}
-.followings .item .bio .name,
-.followers .item .bio .name,
-.suggestions .item .bio .name,
-.searches.profiles .item .bio .name {
-  color: #ff6600;
-}
-.followings .item .statistics,
-.followers .item .statistics,
-.suggestions .item .statistics,
-.searches.profiles .item .statistics {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.followings .item .statistics .followings,
-.followings .item .statistics .followers,
-.followers .item .statistics .followings,
-.followers .item .statistics .followers,
-.suggestions .item .statistics .followings,
-.suggestions .item .statistics .followers,
-.searches.profiles .item .statistics .followings,
-.searches.profiles .item .statistics .followers {
-  display: inline;
-}
-.followings .item .statistics .followings,
-.followers .item .statistics .followings,
-.suggestions .item .statistics .followings,
-.searches.profiles .item .statistics .followings {
-  padding-right: 15px;
-}
-.followings .item .unfollow,
-.followers .item .unfollow,
-.suggestions .item .unfollow,
-.searches.profiles .item .unfollow {
-  padding: 7px 9px 3px 10px;
-}
-.followings .item .follow,
-.followers .item .follow,
-.suggestions .item .follow,
-.searches.profiles .item .follow {
-  padding: 6px 9px 3px 9px;
+.form-error {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #ff0000;
 }
 
 .item {
@@ -415,7 +349,17 @@ h1 {
   z-index: 2;
 }
 .item .statistics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   width: 100%;
+}
+.item .statistics .followers {
+  display: inline;
+}
+.item .statistics .followings {
+  display: inline;
+  padding-right: 15px;
 }
 .item .icon {
   position: relative;
@@ -428,6 +372,9 @@ h1 {
   -o-border-radius: 25px;
   border-radius: 25px;
   border: 3px solid #ffffff;
+}
+.item .icon-profile img {
+  border-color: #999;
 }
 .item .text {
   font-size: 22px;
@@ -452,8 +399,11 @@ h1 {
 }
 .item .bio {
   font-size: 17px;
-  margin: 0;
+  margin: 12px 0 15px 0;
   width: 100%;
+}
+.item .bio .name {
+  color: #ff6600;
 }
 .item .button {
   -webkit-border-radius: 31px;
@@ -485,8 +435,28 @@ h1 {
 .item .button:active {
   color: #ff6600;
 }
+.item .button-add {
+  padding: 6px 7px 5px 8px;
+}
+.item .button-promote {
+  padding: 6px 7px 5px 8px;
+}
+.item .button-demote {
+  padding: 6px 9px 5px 10px;
+}
+.item .button-unfollow {
+  padding: 7px 9px 3px 10px;
+}
+.item .button-follow {
+  padding: 6px 9px 3px 9px;
+}
 
-.listen {
+.item-profile {
+  background-color: #fff;
+}
+
+.item-listen {
+  float: left;
   margin: 10px 0 10px;
   position: relative;
   opacity: 1;
@@ -1028,16 +998,6 @@ h1 {
   overflow: scroll;
   height: 100%;
   width: 100%;
-}
-
-.children {
-  -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  -o-transform: translateZ(0);
-  transform: translateZ(0);
-  position: relative;
-  padding-top: 46px;
 }
 
 .suggestions .children {

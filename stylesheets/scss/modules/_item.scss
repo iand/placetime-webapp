@@ -1,153 +1,5 @@
 @import 'compass';
 
-.items,
-.searches,
-.followers,
-.followings,
-.suggestions {
-    padding-top: 5px;
-}
-
-
-.items,
-.searches.items {
-    .item {
-        background-color: #aaaaaa;
-        background-size: cover;
-        background-position-y: 35%;
-
-        &:hover {
-            @include single-box-shadow(
-                #aaaaaa, 0px, 0px, 0px
-            );
-            background-color: #999;
-        }
-
-        &.image {
-            .overlay {
-                display: block;
-            }
-        }
-
-
-        .overlay {
-            background-color: rgba(15, 15, 15, 0.4);
-            display: none;
-            left: 0;
-            opacity: 1;
-            position: absolute;
-            top: 0;
-            height: 100%;
-            width: 100%;
-            z-index: 1;
-        }
-
-
-
-        .text {
-            margin: 18px 0 14px;
-
-            a {
-                color: #fff;
-            }
-
-            .icon-external-link {
-                font-weight: bold;
-            }
-
-            .icon-play-circle {
-                font-weight: normal;
-                font-size: 26px;
-                line-height: 1;
-            }
-        }
-
-        .via {
-            margin: 0 0 5px;
-
-             a {
-                border-bottom: 0;
-                color: #ddd;
-                font-size: 14px;
-            }
-        }
-
-        .time {
-            margin: 0;
-
-            .event {
-                color: #ffffff;
-                background-color: #ff6600;
-                @include border-radius(3px);
-                padding: 2px 4px;
-            }
-
-            a {
-                color: #eee;
-                font-size: 13px;
-            }
-        }
-
-        .add,
-        .promote {
-            padding: 6px 7px 5px 8px;
-        }
-
-        .demote {
-            padding: 6px 9px 5px 10px;
-        }
-    }
-}
-
-
-.followings,
-.followers,
-.suggestions,
-.searches.profiles {
-    .item {
-        background-color: #fff;
-
-        .icon {
-            img {
-                border-color: #999;
-            }
-        }
-
-        .bio {
-            margin-bottom: 15px;
-            margin-top: 12px;
-
-            .name {
-                color: #ff6600;
-            }
-        }
-
-        .statistics {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-
-            .followings,
-            .followers {
-                display: inline;
-            }
-
-            .followings {
-                padding-right: 15px;
-            }
-        }
-
-        .unfollow {
-            padding: 7px 9px 3px 10px;
-        }
-
-        .follow {
-            padding: 6px 9px 3px 9px;
-        }
-    }
-}
-
-
 
 .item {
     @include border-radius(2px);
@@ -180,9 +32,20 @@
     }
 
     .statistics {
+        list-style: none;
+        margin: 0;
+        padding: 0;
         width: 100%;
-    }
 
+        .followers {
+            display: inline;
+        }
+
+        .followings {
+            display: inline;
+            padding-right: 15px;
+        }
+    }
 
     .icon {
         position: relative;
@@ -191,6 +54,12 @@
         img {
             @include border-radius(25px);
             border: 3px solid #ffffff;
+        }
+    }
+
+    .icon-profile {
+        img {
+            border-color: #999;
         }
     }
 
@@ -221,8 +90,12 @@
 
     .bio {
         font-size: 17px;
-        margin: 0;
+        margin: 12px 0 15px 0;
         width: 100%;
+
+        .name {
+            color: #ff6600;
+        }
     }
 
 
@@ -255,11 +128,37 @@
             color: #ff6600;
         }
     }
+
+    .button-add {
+        padding: 6px 7px 5px 8px;
+    }
+
+    .button-promote {
+        padding: 6px 7px 5px 8px;
+    }
+
+    .button-demote {
+        padding: 6px 9px 5px 10px;
+    }
+
+    .button-unfollow {
+        padding: 7px 9px 3px 10px;
+    }
+
+    .button-follow {
+        padding: 6px 9px 3px 9px;
+    }
+}
+
+
+.item-profile {
+    background-color: #fff;
 }
 
 
 
-.listen {
+.item-listen {
+    float: left;
     margin: 10px 0 10px;
     position: relative;
     opacity: 1;

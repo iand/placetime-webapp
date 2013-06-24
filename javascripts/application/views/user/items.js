@@ -1,6 +1,6 @@
 Application.View.Items = Backbone.Marionette.CompositeView.extend({
     template: '#items-template',
-    className: 'items',
+    className: 'collection collection-items',
 
     events: {
         // Because of how frequent the needle is re-rendered
@@ -14,7 +14,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     },
 
 
-    itemViewContainer: '.children',
+    itemViewContainer: '.collection-children',
 
     itemView: Application.View.Item,
     emptyView: Application.View.ItemEmpty,

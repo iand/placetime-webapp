@@ -1,11 +1,11 @@
 Application.View.TimelineProfile = Backbone.Marionette.ItemView.extend({
-    className: 'item',
+    className: 'item item-profile',
 
 
     events: {
         'click .flag': 'flag',
-        'click .unfollow': 'unfollow',
-        'click .follow': 'follow'
+        'click .button-unfollow': 'unfollow',
+        'click .button-follow': 'follow'
     },
 
 

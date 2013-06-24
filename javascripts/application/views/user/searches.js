@@ -9,13 +9,13 @@ Application.View.Searches = Backbone.Marionette.CompositeView.extend({
         'change:loading': 'render'
     },
 
-    itemViewContainer: '.children',
+    itemViewContainer: '.collection-children',
 
     itemView: Application.View.SearchItem,
     emptyView: Application.View.SearchEmpty,
 
     className: function() {
-        var className = 'searches';
+        var className = 'collection collection-searches';
 
         if (this.model.get('t') === 'p') {
             className += ' profiles';

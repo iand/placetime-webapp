@@ -1,9 +1,9 @@
 Application.View.Followers = Backbone.Marionette.CompositeView.extend({
     template: '#followers-template',
-    className: 'followers',
+    className: 'collection collection-followers',
 
     itemView: Application.View.Follower,
-    itemViewContainer: '.children',
+    itemViewContainer: '.collection-children',
 
     modelEvents: {
         'change:loading': 'render'

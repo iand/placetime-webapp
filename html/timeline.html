@@ -190,7 +190,7 @@
 
         <script type="text/template" id="suggestions-template">
         <div class="scroller">
-            <div class="children"></div>
+            <div class="collection-children"></div>
         </div>
         </script>
 
@@ -345,11 +345,11 @@
             </p>
 
             <% if (Application.session.get('pid') === user && status !== 'p') { %>
-                <a class="button demote">
+                <a class="button button-demote">
                     <i class="icon-remove"></i>
                 </a>
             <% } else { %>
-                <a class="button promote">
+                <a class="button button-promote">
                     <i class="icon-ok"></i>
                 </a>
             <% } %>
@@ -500,7 +500,7 @@
             </p>
 
 
-            <div class="icon pull-left">
+            <div class="icon icon-profile pull-left">
                 <% if (profileimageurl) { %>
                     <img src="<%= profileimageurl %>" width="40" height="40" />
                 <% } else { %>
@@ -535,7 +535,7 @@
             </ul>
 
             <% if (Application.session.get('pid') === user) { %>
-                <a class="button unfollow">
+                <a class="button button-unfollow">
                     <i class="icon-minus"></i>
                 </a>
             <% } %>
@@ -557,7 +557,7 @@
                 </span>
             </p>
 
-            <div class="icon pull-left">
+            <div class="icon icon-profile pull-left">
                 <% if (profileimageurl) { %>
                     <img src="<%= profileimageurl %>" width="40" height="40" />
                 <% } else { %>
@@ -592,7 +592,7 @@
             </ul>
 
             <% if (reciprocal === false) { %>
-            <a class="button follow">
+            <a class="button button-follow">
                 <i class="icon-plus"></i>
             </a>
             <% } %>
@@ -690,7 +690,7 @@
 
         <script type="text/template" id="items-template">
         <div class="scroller">
-            <div class="children"></div>
+            <div class="collection-children"></div>
         </div>
         <div class="needle-view"></div>
         </script>
@@ -698,7 +698,7 @@
 
         <script type="text/template" id="followings-template">
         <div class="scroller">
-            <div class="children"></div>
+            <div class="collection-children"></div>
         </div>
         </script>
 
@@ -706,14 +706,14 @@
 
         <script type="text/template" id="followers-template">
         <div class="scroller">
-            <div class="children"></div>
+            <div class="collection-children"></div>
         </div>
         </script>
 
 
         <script type="text/template" id="searches-template">
         <div class="scroller">
-            <div class="children"></div>
+            <div class="collection-children"></div>
         </div>
         </script>
 
@@ -855,7 +855,7 @@
                 </p>
             <% } %>
 
-            <a class="button add">
+            <a class="button button-add">
                 <i class="icon-ok"></i>
             </a>
         </script>
@@ -876,7 +876,7 @@
                 </span>
             </p>
 
-            <div class="icon pull-left">
+            <div class="icon icon-profile pull-left">
                 <% if (profileimageurl) { %>
                     <img src="<%= profileimageurl %>" width="40" height="40" />
                 <% } else { %>
@@ -909,7 +909,7 @@
                 </li>
             </ul>
 
-            <a class="button follow">
+            <a class="button button-follow">
                 <i class="icon-plus"></i>
             </a>
         </script>
@@ -930,7 +930,7 @@
                 </span>
             </p>
 
-            <div class="icon pull-left">
+            <div class="icon icon-profile pull-left">
                 <% if (profileimageurl) { %>
                     <img src="<%= profileimageurl %>" width="40" height="40" />
                 <% } else { %>
@@ -963,7 +963,7 @@
                 </li>
             </ul>
 
-            <a class="button follow">
+            <a class="button button-follow">
                 <i class="icon-plus"></i>
             </a>
         </script>

@@ -1,8 +1,8 @@
 Application.View.Suggestions = Backbone.Marionette.CompositeView.extend({
     template: '#suggestions-template',
-    className: 'suggestions',
+    className: 'collection collection-suggestions',
 
-    itemViewContainer: '.children',
+    itemViewContainer: '.collection-children',
 
     itemView: Application.View.Suggestion,
     emptyView: Application.View.SuggestionEmpty,

@@ -1,9 +1,9 @@
 Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
     events: {
         'click .flag': 'flag',
-        'click .add': 'add',
-        'click .promote': 'promote',
-        'click .demote': 'demote',
+        'click .button-add': 'add',
+        'click .button-promote': 'promote',
+        'click .button-demote': 'demote',
         'click .audio': 'load'
     },
 
@@ -40,7 +40,7 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
             $duration = this.$el.find('.duration');
 
         var $iframe = $('<iframe />');
-            $iframe.addClass('pull-left listen collapsed');
+            $iframe.addClass('item-listen collapsed');
             $iframe.attr({
                 src: Application.Helpers.getSpotifyUrl(this.model.get('link')),
                 height: 80,
