@@ -265,20 +265,20 @@ h3 {
   width: 100%;
   z-index: 1;
 }
-.collection-items .item .text,
-.collection-searches.items .item .text {
+.collection-items .item .item-text,
+.collection-searches.items .item .item-text {
   margin: 13px 0 13px;
 }
-.collection-items .item .text a,
-.collection-searches.items .item .text a {
+.collection-items .item .item-text a,
+.collection-searches.items .item .item-text a {
   color: #fff;
 }
-.collection-items .item .text .icon-external-link,
-.collection-searches.items .item .text .icon-external-link {
+.collection-items .item .item-text .icon-external-link,
+.collection-searches.items .item .item-text .icon-external-link {
   font-weight: bold;
 }
-.collection-items .item .text .icon-play-circle,
-.collection-searches.items .item .text .icon-play-circle {
+.collection-items .item .item-text .icon-play-circle,
+.collection-searches.items .item .item-text .icon-play-circle {
   font-weight: normal;
   font-size: 26px;
   line-height: 1;
@@ -399,27 +399,6 @@ h3 {
 .item .icon-profile img {
   border-color: #999;
 }
-.item .text {
-  font-size: 22px;
-  font-weight: lighter;
-  .
-        opacity: 1;
-  overflow: hidden;
-  margin: 0;
-  max-height: 80px;
-  position: relative;
-  width: 100%;
-  z-index: 2;
-}
-.item .text.collapsed {
-  -webkit-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
-  -moz-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
-  -o-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
-  transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
-  max-height: 0;
-  opacity: 0;
-  margin: 0;
-}
 .item .bio {
   font-size: 17px;
   margin: 12px 0 15px 0;
@@ -474,6 +453,28 @@ h3 {
   padding: 6px 9px 3px 9px;
 }
 
+.item-text {
+  font-size: 22px;
+  font-weight: lighter;
+  .
+    opacity: 1;
+  overflow: hidden;
+  margin: 0;
+  max-height: 80px;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+.item-text.collapsed {
+  -webkit-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
+  -moz-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
+  -o-transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
+  transition: opacity 1s ease, max-height 1s ease, margin 1s ease;
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+}
+
 .item-profile {
   background-color: #fff;
 }
@@ -512,7 +513,8 @@ h3 {
 
 .item.event .event.sash,
 .item.audio .audio.sash,
-.item.video .video.sash {
+.item.video .video.sash,
+.item.text .text.sash {
   -webkit-transition: opacity 1s;
   -moz-transition: opacity 1s;
   -o-transition: opacity 1s;
@@ -532,11 +534,11 @@ h3 {
   padding-top: 60px;
 }
 
-.item-add-type {
+.item-add-media {
   margin-bottom: 15px;
 }
 
-.item-add-type label {
+.item-add-media label {
   width: 87px;
 }
 
@@ -821,6 +823,13 @@ h3 {
   top: 0;
   width: 120px;
 }
+.sash.text {
+  border-color: transparent #24a8ce transparent transparent;
+  border-width: 0 48px 48px 0;
+  font-size: 14px;
+  top: 0;
+  width: 120px;
+}
 .sash.added, .sash.followed, .sash.flagged {
   border-color: transparent transparent #ff6600 transparent;
   border-width: 0 0 24px 24px;
@@ -843,6 +852,7 @@ h3 {
   width: 82px;
 }
 .sash .icon-calendar,
+.sash .icon-file-alt,
 .sash .icon-headphones,
 .sash .icon-facetime-video {
   position: absolute;
@@ -857,6 +867,10 @@ h3 {
 }
 .sash .icon-facetime-video {
   top: 7px;
+}
+.sash .icon-file-alt {
+  font-size: 16px;
+  top: 6px;
 }
 .sash .icon-headphones {
   font-size: 16px;

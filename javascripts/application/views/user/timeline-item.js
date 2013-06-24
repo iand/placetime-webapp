@@ -35,7 +35,7 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
         // Unbind to prevent double click
         this.$el.off('click.delegateEvents' + this.cid, '.audio');
 
-        var $text = this.$el.find('.text'),
+        var $text = this.$el.find('.item-text'),
             $time = this.$el.find('.time'),
             $duration = this.$el.find('.duration');
 

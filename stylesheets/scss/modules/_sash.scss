@@ -34,6 +34,14 @@
         width: 120px;
     }
 
+    &.text {
+        border-color: transparent #24a8ce transparent transparent;
+        border-width: 0 48px 48px 0;
+        font-size: 14px;
+        top: 0;
+        width: 120px;
+    }
+
 
     &.added,
     &.followed,
@@ -64,6 +72,7 @@
     }
 
     .icon-calendar,
+    .icon-file-alt,
     .icon-headphones,
     .icon-facetime-video {
         position: absolute;
@@ -81,6 +90,12 @@
 
     .icon-facetime-video {
         top: 7px;
+    }
+
+
+    .icon-file-alt {
+        font-size: 16px;
+        top: 6px;
     }
 
     .icon-headphones {

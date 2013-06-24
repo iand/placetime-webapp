@@ -60,6 +60,11 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
 
+    isText: function() {
+        return this.get('media') === 'text';
+    },
+
+
     isAdded: function() {
         return this.get('ts').toString().substr(0, 10) === this.get('added').toString();
     },

@@ -227,6 +227,9 @@
             <p class="sash audio">
                 <i class="icon-headphones"></i>
             </p>
+            <p class="sash text">
+                <i class="icon-file-alt"></i>
+            </p>
             <p class="sash added">
                 <span>
                     Added to playlist
@@ -255,7 +258,7 @@
 
 
             <% if (media === 'video') { %>
-                <p class="text pull-left">
+                <p class="item-text pull-left">
                     <% if (isYoutube(link) === true) { %>
                         <a class="fancybox fancybox.iframe" href="<%= getYoutubeUrl(link) %>">
                             <i class="icon-play-circle"></i>
@@ -269,7 +272,7 @@
                     <% } %>
                 </p>
             <% } else if (media === 'audio') { %>
-                <p class="text pull-left">
+                <p class="item-text pull-left">
                     <% if (isSpotify(link) === true) { %>
                         <a class="audio" href="<%= getSpotifyUrl(link) %>">
                             <i class="icon-play-circle"></i>
@@ -283,7 +286,7 @@
                     <% } %>
                 </p>
             <% } else { %>
-                <p class="text pull-left">
+                <p class="item-text pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
                         <i class="icon-external-link"></i>
                         <%= text %>
@@ -358,21 +361,21 @@
 
         <script type="text/template" id="item-add-template">
             <form class="form item-add-form">
-                <div class="field item-add-type">
+                <div class="field item-add-media">
                     <label for="watch">
-                        <input type="radio" name="type" value="video" id="watch" checked="checked">
+                        <input type="radio" name="media" value="video" id="watch" checked="checked">
                         Watch
                     </label>
                     <label for="listen">
-                        <input type="radio" name="type" value="audio" id="listen">
+                        <input type="radio" name="media" value="audio" id="listen">
                         Listen
                     </label>
                     <label for="do">
-                        <input type="radio" name="type" value="event" id="do">
+                        <input type="radio" name="media" value="event" id="do">
                         Do
                     </label>
                     <label for="read">
-                        <input type="radio" name="type" value="text" id="read">
+                        <input type="radio" name="media" value="text" id="read">
                         Read
                     </label>
                 </div>
@@ -733,6 +736,9 @@
             <p class="sash audio">
                 <i class="icon-headphones"></i>
             </p>
+            <p class="sash text">
+                <i class="icon-file-alt"></i>
+            </p>
             <p class="sash added">
                 <span>
                     Added to playlist
@@ -762,7 +768,7 @@
 
 
             <% if (media === 'video') { %>
-                <p class="text pull-left">
+                <p class="item-text pull-left">
                     <% if (isYoutube(link) === true) { %>
                         <a class="fancybox fancybox.iframe" href="<%= getYoutubeUrl(link) %>">
                             <i class="icon-play-circle"></i>
@@ -776,7 +782,7 @@
                     <% } %>
                 </p>
             <% } else if (media === 'audio') { %>
-                <p class="text pull-left">
+                <p class="item-text pull-left">
                     <% if (isSpotify(link) === true) { %>
                         <a class="audio" href="<%= getSpotifyUrl(link) %>">
                             <i class="icon-play-circle"></i>
@@ -790,7 +796,7 @@
                     <% } %>
                 </p>
             <% } else { %>
-                <p class="text pull-left">
+                <p class="item-text pull-left">
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
                         <i class="icon-external-link"></i>
                         <%= text %>

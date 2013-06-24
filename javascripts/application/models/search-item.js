@@ -49,6 +49,11 @@ Application.Model.SearchItem = Application.Model.Item.extend({
     },
 
 
+    isText: function() {
+        return this.get('media') === 'text';
+    },
+
+
     add: function() {
         var self = this;
 

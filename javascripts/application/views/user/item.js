@@ -32,6 +32,8 @@ Application.View.Item = Application.View.TimelineItem.extend({
             className += ' video';
         } else if (this.model.isAudio()) {
             className += ' audio';
+        } else if (this.model.isText()) {
+            className += ' text';
         }
 
         // Time
