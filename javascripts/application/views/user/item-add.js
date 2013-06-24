@@ -3,7 +3,7 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     className: 'item item-add',
 
     events: {
-        'submit item-add-form': 'submit',
+        'submit .item-add-form': 'submit',
         'click .item-add-event input': 'event',
         'click .item-add-type input': 'toggle',
         'click .cancel': 'cancel'
@@ -100,5 +100,13 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         this.$el.find('select, input[type=radio], input[type=checkbox]').uniform({
             useID: false
         });
+    },
+
+    onClose: function() {
+        $('input[type=date]').datepicker('destroy');
+
+        $.uniform.restore('select');
+        $.uniform.restore('input[type=radio]');
+        $.uniform.restore('input[type=checkbox]');
     }
 });

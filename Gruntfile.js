@@ -38,10 +38,14 @@ module.exports = function(grunt) {
                 files: {
                     'javascripts/vendor.js' : [
                         // Include
-                        'javascripts/vendor/underscore.js',
                         'javascripts/vendor/jquery.js',
+                        'javascripts/vendor/underscore.js',
+                        'javascripts/vendor/backbone.js',
+                        'javascripts/vendor/handlebars.js',
                         'javascripts/vendor/*.js',
                         'javascripts/vendor/jquery/ui.js',
+                        'javascripts/vendor/backbone/marionette.js',
+                        'javascripts/vendor/backbone/marionette.handlebars.js',
                         'javascripts/vendor/**/*.js',
 
                         // Exclude
