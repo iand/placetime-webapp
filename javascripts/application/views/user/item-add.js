@@ -100,5 +100,13 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         this.$el.find('select, input[type=radio], input[type=checkbox]').uniform({
             useID: false
         });
+    },
+
+    onClose: function() {
+        $('input[type=date]').datepicker('destroy');
+
+        $.uniform.restore('select');
+        $.uniform.restore('input[type=radio]');
+        $.uniform.restore('input[type=checkbox]');
     }
 });
