@@ -1,6 +1,9 @@
 Application.View.Timelines = Backbone.Marionette.ItemView.extend({
     name: 'timelines',
-    template: '#timelines-template',
+    template: {
+        type: 'handlebars',
+        template: JST['timelines']
+    },
     className: 'layout-container-wide timelines',
 
     initialize: function(options) {

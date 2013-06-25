@@ -1,6 +1,9 @@
+// TODO: Don't extend Application.View.User
 Application.View.UserEmail = Application.View.User.extend({
-    template: '#user-email-template',
-
+    template: {
+        type: 'handlebars',
+        template: JST['user-email']
+    },
 
 
     submit: function() {

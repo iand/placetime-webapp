@@ -1,5 +1,8 @@
 Application.View.Followers = Backbone.Marionette.CompositeView.extend({
-    template: '#followers-template',
+    template: {
+        type: 'handlebars',
+        template: JST['followers']
+    },
     className: 'collection collection-followers',
 
     itemView: Application.View.Follower,

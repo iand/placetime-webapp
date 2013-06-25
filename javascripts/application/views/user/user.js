@@ -1,5 +1,8 @@
 Application.View.User = Backbone.Marionette.ItemView.extend({
-    template: '#user-template',
+    template: {
+        type: 'handlebars',
+        template: JST['user']
+    },
     className: 'user layout-container',
 
     events: {

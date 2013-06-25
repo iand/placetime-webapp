@@ -1,5 +1,8 @@
 Application.View.Register = Backbone.Marionette.ItemView.extend({
-    template: '#register-template',
+    template: {
+        type: 'handlebars',
+        template: JST['register']
+    },
     className: 'register container',
 
     events: {

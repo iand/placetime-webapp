@@ -1,0 +1,16 @@
+<ul class="timeline-nav pull-left">
+    <li class="items active first last">
+        <a href="#timeline" class="playlist">My Playlist</a>
+    </li>
+</ul>
+
+<form class="form">
+    <input class="pull-left url" name="url" type="url" placeholder="http://www.domain.com/" required="required">
+    <input class="pull-left add" name="submit" type="submit" value="Add">
+</form>
+
+{{#is view 'timeline'}}
+<a class="now pull-right">
+    now <i class="icon-now icon-repeat"></i>
+</a>
+{{/is}}

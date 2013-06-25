@@ -1,5 +1,8 @@
 Application.View.Searches = Backbone.Marionette.CompositeView.extend({
-    template: '#searches-template',
+    template: {
+        type: 'handlebars',
+        template: JST['searches']
+    },
 
     events: {
         'click .promote': 'promote'

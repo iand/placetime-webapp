@@ -1,5 +1,8 @@
 Application.View.Login = Backbone.Marionette.ItemView.extend({
-    template: '#login-template',
+    template: {
+        type: 'handlebars',
+        template: JST['login']
+    },
     className: 'login container',
 
     events: {

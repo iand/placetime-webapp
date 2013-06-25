@@ -1,6 +1,9 @@
 Application.View.Timeline = Backbone.Marionette.ItemView.extend({
     name: 'timeline',
-    template: '#timeline-template',
+    template: {
+        type: 'handlebars',
+        template: JST['timeline']
+    },
     className: 'layout-column',
 
     refreshLastUpdate: moment().subtract('seconds', 2),

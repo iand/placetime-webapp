@@ -67,7 +67,7 @@ module.exports = function(grunt) {
 
 
         compass: {
-            dev: {
+            application: {
                 options: {
                     fontsDir: 'fonts/',
                     imagesDir: 'images/',
@@ -79,19 +79,20 @@ module.exports = function(grunt) {
                     noLineComments: true,
                     bundleExec: true
                 }
-            },
+            }
+        },
 
-            dist: {
+
+        handlebars: {
+            compile: {
                 options: {
-                    compass: true,
-                    fontsDir: 'fonts/',
-                    imagesDir: 'images/',
-                    cssDir: 'stylesheets/',
-                    sassDir: 'stylesheets/scss',
-                    javascriptsDir: 'javascripts/',
-                    outputStyle: 'compressed',
-                    noLineComments: true,
-                    bundleExec: true
+                    namespace: 'JST',
+                    processName: function(filename) {
+                        return filename.replace(/^templates\/user\/(.*)\.hbs$/, '$1').toLowerCase();
+                    }
+                },
+                files: {
+                    'javascripts/templates.js': 'templates/**/*.hbs'
                 }
             }
         },
@@ -119,15 +120,32 @@ module.exports = function(grunt) {
                     livereload: true
                 }
             },
-            stylesheets: {
+            stylesheetApplication: {
                 files: [
                     'stylesheets/scss/*.scss',
-                    'stylesheets/scss/**/*.scss',
-
+                    'stylesheets/scss/**/*.scss'
+                ],
+                tasks: ['compass:application'],
+                options: {
+                    livereload: true
+                }
+            },
+            stylesheetVendor: {
+                files: [
                     'stylesheets/vendor/*.css',
                     'stylesheets/vendor/**/*.css'
                 ],
-                tasks: ['compass:dev', 'concat'],
+                tasks: ['concat'],
+                options: {
+                    livereload: true
+                }
+            },
+            templates: {
+                files: [
+                    'templates/*.hbs',
+                    'templates/**/*.hbs'
+                ],
+                tasks: ['handlebars'],
                 options: {
                     livereload: true
                 }
@@ -136,11 +154,12 @@ module.exports = function(grunt) {
     });
 
 
-    grunt.registerTask('default', ['uglify', 'concat', 'compass:dev']);
+    grunt.registerTask('default', ['uglify', 'concat', 'compass:application', 'handlebars']);
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-contrib-handlebars');
 };

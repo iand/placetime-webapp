@@ -1,0 +1,36 @@
+<div class="navbar-inner layout-container-wide">
+    <a class="navbar-brand pull-left" href="/">
+        <i class="icon-ok-circle"></i>
+        <i class="icon-time"></i>
+        placetime
+    </a>
+
+    <a class="navbar-tagline pull-left" href="/">a playlist for your life</a>
+
+    {{#if pid }}
+    <ul class="navbar-nav pull-right">
+        <li>
+            <a data-dropdown=".navbar-dropdown">
+                <i class="icon-cog"></i>
+            </a>
+        </li>
+    </ul>
+
+    <div class="navbar-dropdown dropdown dropdown-tip dropdown-anchor-right">
+        <ul class="dropdown-menu">
+            <li>
+                <a href="#user">
+                    <i class="icon-user"></i>
+                    {{ pid }}
+                </a>
+            </li>
+            <li>
+                <a href="#logout">
+                    <i class="icon-signout"></i>
+                    Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+    {{/if}}
+</div>

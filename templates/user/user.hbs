@@ -1,0 +1,36 @@
+<h2>Edit Profile</h2>
+
+<form class="form">
+    <div class="field">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" value="{{ name }}">
+    </div>
+
+    <div class="field">
+        <label for="bio">Bio</label>
+        <input type="text" name="bio" id="bio" value="{{ bio }}">
+    </div>
+
+    <div class="field">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="{{ email }}" required="required">
+    </div>
+
+    <div class="field">
+        <h3>Services</h3>
+        <p>
+            Uncheck to opt out of seeing services in your timeline that you aren't registered for:
+        </p>
+
+        <label for="services[spotify]">
+            Spotify
+            <input type="checkbox" name="services[spotify]" class="service" checked="checked">
+        </label>
+    </div>
+
+    <div class="field">
+        <input type="submit" value="Save" class="save">
+        <input type="submit" value="Cancel" class="cancel">
+        <input type="submit" value="Delete My Account" class="destroy">
+    </div>
+</form>

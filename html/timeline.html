@@ -65,129 +65,6 @@
         </script>
 
 
-        <script type="text/template" id="login-template">
-            <p class="login-twitter">
-                <a href="/-twitter" data-role="button" rel="external">
-                    <i class="icon icon-twitter"></i>
-                    Sign in with Twitter
-                </a>
-            </p>
-
-            <p class="login-login">
-                <a href="#login">Or login / Sign up</a>
-            </p>
-
-            <form class="form login-form">
-                <div class="form-field">
-                    <label for="name">User name</label>
-                    <input type="text" name="pid" id="pid" value="" required="required">
-                    <div class="form-hint"></div>
-                </div>
-
-                <div class="form-field">
-                    <label for="name">Password</label>
-                    <input type="password" name="pwd" id="pwd" value="" required="required">
-                    <div class="form-hint"></div>
-                </div>
-
-                <div class="form-error"></div>
-
-                <input type="submit" value="Login" class="wide">
-
-                <p class="login-register">
-                    <a href="#register">Dont have an account? Sign Up</a>
-                </p>
-            </form>
-        </script>
-
-
-        <script type="text/template" id="register-template">
-            <h2 class="register-heading">
-                <span>Register</span>
-            </h2>
-
-            <form class="form register-form">
-                <div class="form-field">
-                    <label for="name">User name</label>
-                    <input type="text" name="pid" required="required" pattern="[a-zA-Z0-9_]{1,15}" maxlength="15">
-                </div>
-
-                <div class="form-field">
-                    <label for="email">Email address</label>
-                    <input type="email" name="email" required="required">
-                </div>
-
-                <div class="form-field">
-                    <label for="name">Full name</label>
-                    <input type="text" name="name" required="required">
-                </div>
-
-                <div class="field">
-                    <label for="name">Password</label>
-                    <input type="password" name="pwd" required="required">
-                </div>
-
-                <input class="wide" type="submit" value="Register">
-            </form>
-        </script>
-
-
-        <script type="text/template" id="user-template">
-            <h2>Edit Profile</h2>
-
-            <form class="form">
-                <div class="field">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" value="<%= name %>">
-                </div>
-
-                <div class="field">
-                    <label for="bio">Bio</label>
-                    <input type="text" name="bio" id="bio" value="<%= bio %>">
-                </div>
-
-                <div class="field">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" value="<%= email %>" required="required">
-                </div>
-
-                <div class="field">
-                    <h3>Services</h3>
-                    <p>
-                        Uncheck to opt out of seeing services in your timeline that you aren't registered for:
-                    </p>
-
-                    <label for="services[spotify]">
-                        Spotify
-                        <input type="checkbox" name="services[spotify]" class="service" checked="checked">
-                    </label>
-                </div>
-
-                <div class="field">
-                    <input type="submit" value="Save" class="save">
-                    <input type="submit" value="Cancel" class="cancel">
-                    <input type="submit" value="Delete My Account" class="destroy">
-                </div>
-            </form>
-        </script>
-
-
-        <script type="text/template" id="user-email-template">
-            <h2>Email Address</h2>
-
-            <form class="form">
-                <div class="field">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" value="<%= email %>" required="required">
-                </div>
-
-                <div class="field">
-                    <input type="submit" value="Save">
-                </div>
-            </form>
-        </script>
-
-
         <script type="text/template" id="suggestions-template">
         <div class="scroller">
             <div class="collection-children"></div>
@@ -679,48 +556,6 @@
         </script>
 
 
-        <script type="template/text" id="timeline-template">
-            <% if (status === 'p') { %>
-            <div class="timeline timeline-public">
-            <% } else { %>
-            <div class="timeline timeline-private">
-            <% } %>
-                <div class="timeline-header"></div>
-                <div class="timeline-collection"></div>
-            </div>
-        </script>
-
-
-        <script type="text/template" id="items-template">
-        <div class="scroller">
-            <div class="collection-children"></div>
-        </div>
-        <div class="needle-view"></div>
-        </script>
-
-
-        <script type="text/template" id="followings-template">
-        <div class="scroller">
-            <div class="collection-children"></div>
-        </div>
-        </script>
-
-
-
-        <script type="text/template" id="followers-template">
-        <div class="scroller">
-            <div class="collection-children"></div>
-        </div>
-        </script>
-
-
-        <script type="text/template" id="searches-template">
-        <div class="scroller">
-            <div class="collection-children"></div>
-        </div>
-        </script>
-
-
         <script type="text/template" id="search-item-template">
             <div class="overlay"></div>
 
@@ -1007,14 +842,8 @@
         </div>
         </script>
 
-
-        <script type="text/template" id="timelines-template">
-            <div class="timeline-public"></div>
-            <div class="timeline-private"></div>
-        </script>
-
-
         <script src="/-assets/javascripts/vendor.js"></script>
+        <script src="/-assets/javascripts/templates.js"></script>
         <script src="/-assets/javascripts/application.js"></script>
 
         <script type="text/javascript">

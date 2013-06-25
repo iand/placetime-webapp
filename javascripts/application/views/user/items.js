@@ -1,5 +1,8 @@
 Application.View.Items = Backbone.Marionette.CompositeView.extend({
-    template: '#items-template',
+    template: {
+        type: 'handlebars',
+        template: JST['items']
+    },
     className: 'collection collection-items',
 
     events: {
