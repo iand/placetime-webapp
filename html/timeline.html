@@ -216,10 +216,11 @@
                 <a class="fancybox fancybox.iframe" href="<%= link %>">
                     <% if (isEvent(media) === true && isAdded(ts, added) === false) { %>
                         <i class="icon-calendar"></i> <span class="event">event:</span>
+                        <span class="timestamp"><%= moment.unix(event).fromNow() %></span>
                     <% } else { %>
                         <i class="icon-time"></i> <span class="added">added:</span>
+                        <span class="timestamp"><%= time(ts, event, added).fromNow() %></span>
                     <% } %>
-                    <span class="timestamp"><%= time(ts, event, added).fromNow() %></span>
                     <a class="item-url" href="<%= url(id) %>">link</span>
                 </a>
             </p>
@@ -686,7 +687,7 @@
                     <a class="fancybox fancybox.iframe" href="<%= link %>">
                         <% if (isEvent(media) === true && isAdded(ts, added) === false) { %>
                             <i class="icon-calendar"></i> <span class="event">event:</span>
-                            <span class="timestamp"><%= time(ts, event, added).fromNow() %></span>
+                            <span class="timestamp"><%= moment.unix(event).fromNow() %></span>
                         <% } else { %>
                             <i class="icon-time"></i> <span class="added">added:</span>
                             <span class="timestamp"><%= time(ts, event, added).fromNow() %></span>
