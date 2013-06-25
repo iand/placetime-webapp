@@ -1,6 +1,6 @@
 Application.View.SearchEmpty = Backbone.Marionette.ItemView.extend({
     template: '#search-empty-template',
-    className: 'item empty collapsed',
+    className: 'item item-empty collapsed',
 
 
     modelEvents: {

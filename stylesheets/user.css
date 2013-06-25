@@ -590,12 +590,14 @@ h3 {
   width: 80px;
 }
 
-.items .item-empty,
-.items .item-empty:hover {
+.collection-searches .item-empty,
+.collection-searches .item-empty:hover,
+.collection-items .item-empty,
+.collection-items .item-empty:hover {
   -webkit-box-shadow: 1px 1px 2px #aaaaaa;
   -moz-box-shadow: 1px 1px 2px #aaaaaa;
   box-shadow: 1px 1px 2px #aaaaaa;
-  background-color: #ffffff !important;
+  background-color: #ffffff;
 }
 
 .item-empty,
