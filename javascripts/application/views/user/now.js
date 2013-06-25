@@ -1,5 +1,8 @@
 Application.View.Now = Backbone.Marionette.ItemView.extend({
-    template: '#now-template',
+    template: {
+        type: 'handlebars',
+        template: JST['now']
+    },
     className: 'now-separator is-collapsed',
 
 

@@ -43,9 +43,16 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
 
     initialize: function (options) {
+        var needle = new Application.View.Needle();
+
+        var now = new Application.View.Now({
+            model: this.model
+        });
+
         this.subviews = new Backbone.ChildViewContainer();
-        this.subviews.add(new Application.View.Needle(), 'needle');
-        this.subviews.add(new Application.View.Now(), 'separator');
+        this.subviews.add(needle, 'needle');
+        this.subviews.add(now, 'separator');
+
 
         this.on('composite:rendered', function(){
             this.$el.find('.scroller').scroll(_.bind(this.onScroll, this));

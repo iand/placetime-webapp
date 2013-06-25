@@ -107,10 +107,42 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 this["JST"]["now"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, stack2, options, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
   
+  
+  return "\n        My upcoming\n    ";
+  }
 
+function program3(depth0,data) {
+  
+  
+  return "\n        Upcoming items\n    ";
+  }
 
-  return "<div class=\"now-separator-future\">\n    Upcoming items\n</div>\n\n<div class=\"now-separator-past\">\n    Latest items\n</div>";
+function program5(depth0,data) {
+  
+  
+  return "\n        My latest\n    ";
+  }
+
+function program7(depth0,data) {
+  
+  
+  return "\n        Latest items\n    ";
+  }
+
+  buffer += "<div class=\"now-separator-future\">\n    ";
+  options = {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data};
+  stack2 = ((stack1 = helpers.is || depth0.is),stack1 ? stack1.call(depth0, depth0.status, "m", options) : helperMissing.call(depth0, "is", depth0.status, "m", options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n</div>\n\n<div class=\"now-separator-past\">\n    ";
+  options = {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data};
+  stack2 = ((stack1 = helpers.is || depth0.is),stack1 ? stack1.call(depth0, depth0.status, "m", options) : helperMissing.call(depth0, "is", depth0.status, "m", options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n</div>";
+  return buffer;
   });
 
 this["JST"]["register"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {

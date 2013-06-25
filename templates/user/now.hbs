@@ -1,7 +1,15 @@
 <div class="now-separator-future">
-    Upcoming items
+    {{#is status 'm'}}
+        My upcoming
+    {{else}}
+        Upcoming items
+    {{/is}}
 </div>
 
 <div class="now-separator-past">
-    Latest items
+    {{#is status 'm'}}
+        My latest
+    {{else}}
+        Latest items
+    {{/is}}
 </div>
