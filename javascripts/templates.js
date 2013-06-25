@@ -118,7 +118,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  return "\n        Upcoming items\n    ";
+  return "\n        Upcoming\n    ";
   }
 
 function program5(depth0,data) {
@@ -130,7 +130,7 @@ function program5(depth0,data) {
 function program7(depth0,data) {
   
   
-  return "\n        Latest items\n    ";
+  return "\n        Latest\n    ";
   }
 
   buffer += "<div class=\"now-separator-future\">\n    ";
