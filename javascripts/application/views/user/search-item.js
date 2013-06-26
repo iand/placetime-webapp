@@ -5,6 +5,7 @@ Application.View.SearchItem = Application.View.TimelineItem.extend({
         time: Application.Helpers.time,
         url: Application.Helpers.url,
 
+        hasEvent: Application.Helpers.hasEvent,
         isEvent: Application.Helpers.isEvent,
         isAdded: Application.Helpers.isAdded,
 

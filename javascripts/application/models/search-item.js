@@ -1,4 +1,7 @@
 Application.Model.SearchItem = Application.Model.Item.extend({
+    // Non-attributes
+    now: false,
+
     time: function() {
         if (this.isEvent() === true) {
             return moment.unix(

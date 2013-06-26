@@ -1,4 +1,12 @@
 Application.Helpers = {
+    hasEvent: function(event) {
+        var model = new Application.Model.Item({
+            event: event
+        });
+
+        return model.hasEvent();
+    },
+
     isEvent: function(media) {
         var model = new Application.Model.Item({
             media: media

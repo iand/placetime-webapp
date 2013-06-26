@@ -37,6 +37,11 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
 
+    hasEvent: function() {
+        return this.get('event') !== 0;
+    },
+
+
     isEvent: function() {
         return this.get('media') === 'event';
     },

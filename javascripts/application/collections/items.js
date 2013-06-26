@@ -45,7 +45,7 @@ Application.Collection.Items = Backbone.Collection.extend({
                     model.now = false;
                 });
 
-                var model = self.get(data[0].id + '-' + data[0].ts);
+                var model = self.get(data[0].id);
                     model.now = true;
 
                 defer.resolve(model);

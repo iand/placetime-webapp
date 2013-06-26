@@ -192,7 +192,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
             var $closest = self.$el.find('.item[data-id='+model.idSafe()+']'),
                 $needle = self.$el.find('.needle');
 
-            if ($closest.length === 0) {
+            if ($closest.length === 0 || $needle.length === 0) {
                 return;
             }
 
