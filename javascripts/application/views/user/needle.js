@@ -1,8 +1,11 @@
 Application.View.Needle = Backbone.Marionette.ItemView.extend({
-    template: '#needle-now-template',
-    className: 'needle',
+    template: {
+        type: 'handlebars',
+        template: JST['needle-now']
+    },
+    templateCurrent: 'needle-now',
 
-    isRendered: false,
+    className: 'needle',
 
     initialize: function (options) {
         this.on('scroll', this.rotate);
@@ -72,8 +75,9 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
         suffix = suffix || '';
 
         // Re-render as needle-template
-        if (this.template !== '#needle-template') {
-            this.template = '#needle-template';
+        if (this.templateCurrent !== 'needle') {
+            this.templateCurrent   = 'needle';
+            this.template.template = JST['needle'];
             this.render();
         }
 
@@ -86,13 +90,13 @@ Application.View.Needle = Backbone.Marionette.ItemView.extend({
 
 
     now: function() {
-        this.template = '#needle-now-template';
+        this.templateCurrent   = 'needle-now';
+        this.template.template = JST['needle-now'];
         this.render();
     },
 
 
     onShow: function() {
         this.update();
-        this.isRendered = true;
     }
 });

@@ -1,5 +1,8 @@
 Application.View.Suggestions = Backbone.Marionette.CompositeView.extend({
-    template: '#suggestions-template',
+    template: {
+        type: 'handlebars',
+        template: JST['suggestions']
+    },
     className: 'collection collection-suggestions',
 
     itemViewContainer: '.collection-children',

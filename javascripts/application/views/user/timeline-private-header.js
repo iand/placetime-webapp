@@ -1,5 +1,8 @@
 Application.View.PrivateTimelineHeader = Application.View.TimelineHeader.extend({
-    template: '#timeline-private-header-template',
+    template: {
+        type: 'handlebars',
+        template: JST['timeline-private-header']
+    },
     className: 'timeline-header-private',
 
     events: {

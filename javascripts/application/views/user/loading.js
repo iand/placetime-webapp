@@ -1,5 +1,8 @@
 Application.View.Loading = Backbone.Marionette.ItemView.extend({
-    template: '#loading-template',
+    template: {
+        type: 'handlebars',
+        template: JST['loading']
+    },
     className: function(options) {
         var className = 'loading';
 

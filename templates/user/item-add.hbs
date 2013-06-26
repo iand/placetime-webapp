@@ -1,0 +1,82 @@
+<form class="form item-add-form">
+    <div class="field item-add-media">
+        <label for="watch">
+            <input type="radio" name="media" value="video" id="watch" checked="checked">
+            Watch
+        </label>
+        <label for="listen">
+            <input type="radio" name="media" value="audio" id="listen">
+            Listen
+        </label>
+        <label for="do">
+            <input type="radio" name="media" value="event" id="do">
+            Do
+        </label>
+        <label for="read">
+            <input type="radio" name="media" value="text" id="read">
+            Read
+        </label>
+    </div>
+
+    <div class="field item-add-title">
+        <input type="text" name="text" placeholder="Title" value="{{ text }}">
+    </div>
+
+    <div class="field item-add-image">
+        <div class="item-add-image-placeholder">
+            <img src="/-assets/images/loading-image.gif" height="16" width="16" />
+
+            {{#if duration }}
+                <% duration = getDuration(duration) %>
+                <ul class="item-add-duration duration">
+                    {{#isnt duration.days 0 }}
+                    <li class="days">{{ duration.days }}d</li>
+                    {{/isnt}}
+
+                    <% if (duration.days !== 0 && duration.hours !== 0) { %>
+                    <li class="durationcolon">:</li>
+                    <% } %>
+
+                    {{#isnt duration.hours 0 }}
+                    <li class="hours">{{ duration.hours }}h</li>
+                    {{/isnt}}
+
+                    <% if (duration.hours !== 0 && duration.minutes !== 0) { %>
+                    <li class="durationcolon">:</li>
+                    <% } %>
+
+                    {{#isnt duration.minutes 0 }}
+                    <li class="minutes">{{ duration.minutes }}m</li>
+                    {{/isnt}}
+
+                    <% if (duration.minutes !== 0 && duration.seconds !== 0) { %>
+                    <li class="durationcolon">:</li>
+                    <% } %>
+
+                    {{#isnt duration.seconds 0 }}
+                    <li class="seconds">{{ duration.seconds }}s</li>
+                    {{/isnt}}
+                </ul>
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="field item-add-event">
+        <label for="event">
+            Add event or schedule date:
+            <input type="checkbox" name="event" id="event">
+        </label>
+    </div>
+
+    <div class="field item-add-ets">
+        <label for="ets">Event Date</label>
+        <input type="date" placeholder="dd/mm/yyyy" min="1900-00-00" name="ets" value="{{ ets }}">
+    </div>
+
+    <div class="actions">
+        <input type="hidden" name="duration" value="{{ duration }}">
+
+        <input type="submit" value="Add" class="item-add-btn-add">
+        <input type="submit" value="Cancel" class="item-add-btn-cancel">
+    </div>
+</form>

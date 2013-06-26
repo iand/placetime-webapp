@@ -1,5 +1,8 @@
 Application.View.Header = Backbone.Marionette.ItemView.extend({
-    template: '#header-template',
+    template: {
+        type: 'handlebars',
+        template: JST['header']
+    },
     className: 'navbar',
 
     events: {

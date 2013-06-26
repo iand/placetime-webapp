@@ -1,7 +1,7 @@
-<p class="sash followed">
+<p class="sash unfollowed">
     <span>
-        Followed
-        <i class="icon-plus"></i>
+        Unfollowed
+        <i class="icon-minus"></i>
     </span>
 </p>
 <p class="sash flagged">
@@ -10,6 +10,7 @@
         <i class="icon-flag"></i>
     </span>
 </p>
+
 
 <div class="icon icon-profile pull-left">
     {{#if profileimageurl }}
@@ -22,10 +23,11 @@
 <p class="username username-profile pull-left">
     <a href="#user/{{ pid }}">
         {{ pid }}
+        <i class="icon-flag flag" title="Flag profile for spam"></i>
     </a>
 </p>
 
-{{#if bio}}
+{{#if bio }}
 <p class="bio pull-left">
     {{#if name }}
         <span class="name">{{ name }}</span>:
@@ -44,6 +46,8 @@
     </li>
 </ul>
 
-<a class="button button-follow">
-    <i class="icon-plus"></i>
+{{#is session.pid user }}
+<a class="button button-unfollow">
+    <i class="icon-minus"></i>
 </a>
+{{/is}}

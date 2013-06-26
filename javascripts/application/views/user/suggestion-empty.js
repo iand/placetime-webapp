@@ -1,5 +1,8 @@
 Application.View.SuggestionEmpty = Backbone.Marionette.ItemView.extend({
-    template: '#suggestion-empty-template',
+    template: {
+        type: 'handlebars',
+        template: JST['suggestion-empty']
+    },
     className: 'item empty collapsed',
 
 

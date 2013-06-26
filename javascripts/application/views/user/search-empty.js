@@ -1,5 +1,8 @@
 Application.View.SearchEmpty = Backbone.Marionette.ItemView.extend({
-    template: '#search-empty-template',
+    template: {
+        type: 'handlebars',
+        template: JST['search-empty']
+    },
     className: 'item item-empty collapsed',
 
 

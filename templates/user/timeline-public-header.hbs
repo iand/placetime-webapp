@@ -1,0 +1,70 @@
+<ul class="timeline-nav pull-left">
+    {{#if view 'timeline'}}
+        <li class="timeline first active">
+    {{else}}
+        <li class="timeline first">
+    {{/if}}
+        <a href="#timeline">Timeline</a>
+    </li>
+
+    {{#if view 'followings'}}
+        <li class="followings active">
+    {{else}}
+        <li class="followings">
+    {{/if}}
+        <a href="#followings">Following</a>
+    </li>
+
+    {{#if view 'followers'}}
+        <li class="followers last active">
+    {{else}}
+        <li class="followers last">
+    {{/if}}
+        <a href="#followers">Followers</a>
+    </li>
+</ul>
+
+
+<form class="form">
+    <select class="pull-left type" name="t">
+        {{#if type 'v'}}
+            <option value="v" selected="selected">Watch</option>
+        {{else}}
+            <option value="v">Watch</option>
+        {{/if}}
+
+        {{#if type 'a'}}
+            <option value="a" selected="selected">Listen</option>
+        {{else}}
+            <option value="a">Listen</option>
+        {{/if}}
+
+        {{#if type 'e'}}
+            <option value="e" selected="selected">Do</option>
+        {{else}}
+            <option value="e">Do</option>
+        {{/if}}
+
+
+        <% if (view === 'followings' || view === 'followers') { %>
+            <option value="p" selected="selected">People</option>
+        <% } else if (type === 'p') { %>
+            <option value="p" selected="selected">People</option>
+        <% } else { %>
+            <option value="p">People</option>
+        <% } %>
+    </select>
+
+    <input class="pull-left search" name="s" type="search" placeholder="{{ placeholders.type }}" value="{{ search }}" required="required">
+</form>
+
+{{#if view 'timeline'}}
+<a class="now pull-right">
+    now <i class="icon-now icon-repeat"></i>
+</a>
+{{/if}}
+{{#if view 'search'}}
+<a class="back pull-right" href="#timeline">
+    back <i class="icon-back icon-arrow-left"></i>
+</a>
+{{/if}}

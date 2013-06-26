@@ -22,10 +22,11 @@
 <p class="username username-profile pull-left">
     <a href="#user/{{ pid }}">
         {{ pid }}
+        <i class="icon-flag flag" title="Flag profile for spam"></i>
     </a>
 </p>
 
-{{#if bio}}
+{{#if bio }}
 <p class="bio pull-left">
     {{#if name }}
         <span class="name">{{ name }}</span>:
@@ -44,6 +45,8 @@
     </li>
 </ul>
 
+{{#is reciprocal false }}
 <a class="button button-follow">
     <i class="icon-plus"></i>
 </a>
+{{/is}}
