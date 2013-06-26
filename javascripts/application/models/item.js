@@ -1,14 +1,6 @@
 Application.Model.Item = Backbone.Model.extend({
-    idAttribute: 'uid',
-
     // Non-attributes
     now: false,
-
-    initialize: function() {
-        this.set('uid', this.get('id') + '-' + this.get('ts'), {
-            silent: true
-        });
-    },
 
     defaults: {
         via: undefined,

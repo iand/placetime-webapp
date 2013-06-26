@@ -1,11 +1,4 @@
 Application.Model.SearchItem = Application.Model.Item.extend({
-    initialize: function() {
-        this.set('uid', this.get('id') + '-' + this.get('ts'), {
-            silent: true
-        });
-    },
-
-
     time: function() {
         if (this.isEvent() === true) {
             return moment.unix(
