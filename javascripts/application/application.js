@@ -66,6 +66,7 @@ Application.addInitializer(function(){
     $('.fancybox').fancybox({
         maxWidth    : 970,
         maxHeight   : 800,
+        padding     : 5,
         fitToView   : false,
         width       : '70%',
         height      : '90%',

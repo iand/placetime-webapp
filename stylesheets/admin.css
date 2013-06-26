@@ -220,3 +220,21 @@ h3 {
 .pull-right {
   float: right;
 }
+
+.fancybox-skin {
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+}
+
+.fancybox-close {
+  background-color: #f9f9f9;
+  border-radius: 1px;
+  color: #dddddd;
+  font-size: 28px;
+  right: -38px;
+}
+
+.fancybox-error {
+  padding: 5px;
+}
