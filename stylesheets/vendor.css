@@ -1879,15 +1879,15 @@ table {
 
 .fancybox-close {
     background-image: none;
-    //background-color: #f9f9f9;
-    border-radius: 1px;
-    color: #dddddd;
-    font-size: 28px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    color: #333333;
+    font-size: 32px;
     font-weight: normal;
     padding: 4px 8px;
     position: absolute;
     top: 0px;
-    right: -38px;
+    right: 0;
     cursor: pointer;
     z-index: 8040;
     line-height: 1;
