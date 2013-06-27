@@ -3,18 +3,72 @@ Application.View.Suggestions = Backbone.Marionette.CompositeView.extend({
         type: 'handlebars',
         template: JST['suggestions']
     },
-    className: 'collection collection-suggestions',
+    className: 'layout-container',
 
     itemViewContainer: '.collection-children',
 
     itemView: Application.View.Suggestion,
     emptyView: Application.View.SuggestionEmpty,
 
-    onShow: function() {
+    ui: {
+        'form': '.suggestions-form',
+        'location': '.suggestions-location'
+    },
+
+    events: {
+        'click .update': 'update'
+    },
+
+    modelEvents: {
+        'change:location': 'load'
+    },
+
+
+    initialize: function() {
+        $(window).on('resize', _.bind(this.resize, this));
+
+
+        var self = this;
+
+        var location = Application.session.location();
+
+        location.done(function(data){
+            var location  = data.countryname + ' ';
+                location += data.region + ' ';
+                location += data.city;
+
+            location = location.replace(/^\s+|\s+$/g, '');
+
+            if (location !== '') {
+                self.model.set({
+                    location: location
+                });
+            }
+        });
+    },
+
+
+    resize: function() {
+        // TODO: Determine calculcate
+        this.$el.find('.scroller').height(
+            $(window).height()
+        );
+    },
+
+
+    update: function() {
+        this.model.set('location', this.ui.location.val());
+
+        return false;
+    },
+
+
+    load: function() {
+        console.log('load');
         var self    = this;
         var promise = this.collection.fetch({
             data: {
-                loc: 'london'
+                loc: self.model.get('location')
             }
         });
 

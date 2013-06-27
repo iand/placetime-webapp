@@ -258,7 +258,8 @@ Application.Router.User = Backbone.Router.extend({
             var suggestions = new Application.View.Suggestions({
                 collection : new Application.Collection.Suggestions(),
                 model      : new Backbone.Model({
-                    loading: false
+                    loading: false,
+                    location: undefined
                 })
             });
 

@@ -79,6 +79,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
 
     resize: function() {
+        // TODO: Make -60 dynamic
         this.$el.find('.scroller').height(
             $(window).height() - 60
         );

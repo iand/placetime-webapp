@@ -24,8 +24,9 @@ Application.Model.Session = Backbone.Model.extend({
 
         var promise = $.ajax({
             url: '/-chksession'
-        })
-        .done(function () {
+        });
+
+        promise.done(function () {
             var ptsession = $.cookie('ptsession');
 
             if (ptsession !== undefined) {
@@ -35,8 +36,9 @@ Application.Model.Session = Backbone.Model.extend({
             if ($.cookie('ptnewuser') === undefined || $.cookie('ptnewuser') === "null") {
                 self.set('id', ptsession.split('|')[0]);
             }
-        })
-        .fail(function () {
+        });
+
+        promise.fail(function () {
             self.set('pid', null);
         });
 
@@ -55,12 +57,14 @@ Application.Model.Session = Backbone.Model.extend({
                 pid: self.get('pid'),
                 pwd: self.get('pwd')
             }
-        })
-        .done(function (data) {
+        });
+
+        promise.done(function (data) {
             self.set('pwd', null);
             self.set('ptsession', $.cookie('ptsession'));
-        })
-        .fail(function (data) {
+        });
+
+        proise.fail(function (data) {
             self.set('pwd', null);
         });
 
@@ -73,5 +77,16 @@ Application.Model.Session = Backbone.Model.extend({
     destroy: function () {
         // TODO: Replace with XHR call
         $.cookie('ptsession', null);
+    },
+
+
+
+    location: function () {
+        var promise = $.ajax({
+            url: '/-jgeo',
+            dataType: 'json'
+        });
+
+        return promise;
     }
 });

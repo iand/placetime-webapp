@@ -630,10 +630,15 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 this["JST"]["suggestions"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  return "<div class=\"scroller\">\n    <div class=\"collection-children\"></div>\n</div>";
+  buffer += "<form class=\"form suggestions-form\">\n    <h2>Suggestions</h2>\n    <p>\n        Find suggested users based on location.\n    </p>\n\n    <div class=\"field\">\n        <label for=\"location\">Location</label>\n        <input class=\"suggestions-location\" type=\"text\" name=\"location\" id=\"location\" value=\"";
+  if (stack1 = helpers.location) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.location; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n    </div>\n\n    <div class=\"field\">\n        <input type=\"submit\" value=\"Update\" class=\"update\">\n        <input type=\"submit\" value=\"Done\" class=\"done\">\n    </div>\n</form>\n\n<div class=\"collection collection-suggestions\">\n    <div class=\"scroller\">\n        <div class=\"collection-children collection-suggestions-children\"></div>\n    </div>\n</div>";
+  return buffer;
   });
 
 this["JST"]["timeline-private-header"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {

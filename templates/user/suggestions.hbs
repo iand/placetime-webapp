@@ -1,3 +1,22 @@
-<div class="scroller">
-    <div class="collection-children"></div>
+<form class="form suggestions-form">
+    <h2>Suggestions</h2>
+    <p>
+        Find suggested users based on location.
+    </p>
+
+    <div class="field">
+        <label for="location">Location</label>
+        <input class="suggestions-location" type="text" name="location" id="location" value="{{ location }}">
+    </div>
+
+    <div class="field">
+        <input type="submit" value="Update" class="update">
+        <input type="submit" value="Done" class="done">
+    </div>
+</form>
+
+<div class="collection collection-suggestions">
+    <div class="scroller">
+        <div class="collection-children collection-suggestions-children"></div>
+    </div>
 </div>

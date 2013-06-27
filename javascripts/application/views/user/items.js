@@ -6,8 +6,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     className: 'collection collection-items',
 
     events: {
-        // Because of how frequent the needle is re-rendered
-        // it's more efficient to use event delegation
         'click .needle .icon-repeat': 'now'
     },
 
