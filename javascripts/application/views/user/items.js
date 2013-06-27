@@ -310,7 +310,8 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
 
         view.model.set({
             status: this.model.get('status'),
-            user: this.model.get('pid')
+            user: this.model.get('pid'),
+            session: Application.session.get('pid')
         }, {
             silent: true
         });

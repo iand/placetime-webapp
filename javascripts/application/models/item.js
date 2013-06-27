@@ -6,12 +6,42 @@ Application.Model.Item = Backbone.Model.extend({
         via: undefined,
         image: undefined,
         media: undefined,
-        duration: undefined
+        duration: {
+            days: undefined,
+            hours: undefined,
+            minutes: undefined,
+            seconds: undefined
+        }
+    },
+
+
+    initialize: function(data) {
+        this.set('duration', this.duration(data.duration));
     },
 
 
     idSafe: function() {
         return this.id.replace(/@/, '\\@');
+    },
+
+
+    duration: function(secs) {
+        var current = moment(),
+            duration = moment();
+
+        duration.add('seconds', secs);
+
+        var days    = duration.diff(current, 'days'),
+            hours   = duration.diff(current, 'hours'),
+            minutes = duration.diff(current, 'minutes'),
+            seconds = duration.diff(current, 'seconds');
+
+        return {
+            days: days,
+            hours: (hours  - (days * 24)),
+            minutes: (minutes - (hours * 60)),
+            seconds: (seconds - (minutes * 60))
+        };
     },
 
 

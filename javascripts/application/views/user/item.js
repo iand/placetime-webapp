@@ -1,5 +1,8 @@
 Application.View.Item = Application.View.TimelineItem.extend({
-    template: '#item-template',
+    template: {
+        type: 'handlebars',
+        template: JST['item']
+    },
 
     templateHelpers: {
         time: Application.Helpers.time,
