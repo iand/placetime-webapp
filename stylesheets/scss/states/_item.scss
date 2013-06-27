@@ -39,12 +39,4 @@
         );
         opacity: 1;
     }
-
-    &.focused .item-url {
-        @include single-transition(
-            opacity, 1s, ease
-        );
-        font-weight: bold;
-        opacity: 1;
-    }
 }

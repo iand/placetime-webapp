@@ -182,10 +182,6 @@
 }
 
 .item-url {
-    @include single-transition(
-        opacity, 1s, ease
-    );
-    opacity: 0;
     padding-left: 12px;
 }
 

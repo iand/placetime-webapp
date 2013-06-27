@@ -8,8 +8,7 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
     events: {
         // Because of how frequent the needle is re-rendered
         // it's more efficient to use event delegation
-        'click .needle .icon-repeat': 'now',
-        'click .item': 'focus'
+        'click .needle .icon-repeat': 'now'
     },
 
     modelEvents: {
@@ -171,14 +170,6 @@ Application.View.Items = Backbone.Marionette.CompositeView.extend({
         promise.fail(function(){
             self.trigger('reload:error');
         });
-    },
-
-
-    focus: function(event) {
-        var $target = $(event.target);
-
-        $target.toggleClass('focused');
-        $target.siblings().removeClass('focused');
     },
 
 
