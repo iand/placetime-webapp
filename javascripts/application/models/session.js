@@ -64,7 +64,7 @@ Application.Model.Session = Backbone.Model.extend({
             self.set('ptsession', $.cookie('ptsession'));
         });
 
-        proise.fail(function (data) {
+        promise.fail(function (data) {
             self.set('pwd', null);
         });
 
