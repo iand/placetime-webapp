@@ -1,0 +1,16 @@
+<p>
+{{#if loading }}
+    <span>Loading results</span>
+    <img alt="Loading" class="loading" src="/-assets/images/vendor/jquery/fancybox/fancybox_loading.gif" height="24" width="24" />
+{{else}}
+    {{#is session user}}
+        {{#is status 'p' }}
+            There are no items in your timeline, search for users to follow
+        {{else}}
+            Add a new item or copy one from your timeline
+        {{/is}}
+    {{else}}
+        There are no items in {{ user }} timeline
+    {{/is}}
+{{/if}}
+</p>

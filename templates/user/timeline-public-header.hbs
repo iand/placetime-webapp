@@ -1,25 +1,25 @@
 <ul class="timeline-nav pull-left">
-    {{#if view 'timeline'}}
-        <li class="timeline first active">
+    {{#is view 'timeline'}}
+    <li class="timeline first active">
     {{else}}
-        <li class="timeline first">
-    {{/if}}
+    <li class="timeline first">
+    {{/is}}
         <a href="#timeline">Timeline</a>
     </li>
 
-    {{#if view 'followings'}}
-        <li class="followings active">
+    {{#is view 'followings'}}
+    <li class="followings active">
     {{else}}
-        <li class="followings">
-    {{/if}}
+    <li class="followings">
+    {{/is}}
         <a href="#followings">Following</a>
     </li>
 
-    {{#if view 'followers'}}
-        <li class="followers last active">
+    {{#is view 'followers'}}
+    <li class="followers last active">
     {{else}}
-        <li class="followers last">
-    {{/if}}
+    <li class="followers last">
+    {{/is}}
         <a href="#followers">Followers</a>
     </li>
 </ul>
@@ -27,44 +27,55 @@
 
 <form class="form">
     <select class="pull-left type" name="t">
-        {{#if type 'v'}}
+        {{#is view 'timeline'}}
             <option value="v" selected="selected">Watch</option>
         {{else}}
-            <option value="v">Watch</option>
-        {{/if}}
+            {{#is type 'v'}}
+                <option value="v" selected="selected">Watch</option>
+            {{else}}
+                <option value="v">Watch</option>
+            {{/is}}
+        {{/is}}
 
-        {{#if type 'a'}}
+        {{#is type 'a'}}
             <option value="a" selected="selected">Listen</option>
         {{else}}
             <option value="a">Listen</option>
-        {{/if}}
+        {{/is}}
 
-        {{#if type 'e'}}
+        {{#is type 'e'}}
             <option value="e" selected="selected">Do</option>
         {{else}}
             <option value="e">Do</option>
-        {{/if}}
+        {{/is}}
 
 
-        <% if (view === 'followings' || view === 'followers') { %>
+        {{#is view 'followings'}}
             <option value="p" selected="selected">People</option>
-        <% } else if (type === 'p') { %>
-            <option value="p" selected="selected">People</option>
-        <% } else { %>
-            <option value="p">People</option>
-        <% } %>
+        {{else}}
+            {{#is view 'followers'}}
+                <option value="p" selected="selected">People</option>
+            {{else}}
+                {{#is type 'p'}}
+                    <option value="p" selected="selected">People</option>
+                {{else}}
+                    <option value="p">People</option>
+                {{/is}}
+            {{/is}}
+        {{/is}}
     </select>
 
-    <input class="pull-left search" name="s" type="search" placeholder="{{ placeholders.type }}" value="{{ search }}" required="required">
+    <input class="pull-left search" name="s" type="search" placeholder="{{ placeholder }}" value="{{ search }}" required="required">
 </form>
 
-{{#if view 'timeline'}}
+{{#is view 'timeline'}}
 <a class="now pull-right">
     now <i class="icon-now icon-repeat"></i>
 </a>
-{{/if}}
-{{#if view 'search'}}
+{{/is}}
+
+{{#is view 'search'}}
 <a class="back pull-right" href="#timeline">
     back <i class="icon-back icon-arrow-left"></i>
 </a>
-{{/if}}
+{{/is}}

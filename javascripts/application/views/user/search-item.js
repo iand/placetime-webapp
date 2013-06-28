@@ -1,5 +1,8 @@
 Application.View.SearchItem = Application.View.TimelineItem.extend({
-    template: '#search-item-template',
+    template: {
+        type: 'handlebars',
+        template: JST['search-item']
+    },
 
     templateHelpers: {
         time: Application.Helpers.time,

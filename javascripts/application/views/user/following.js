@@ -1,3 +1,6 @@
 Application.View.Following = Application.View.TimelineProfile.extend({
-    template: '#following-template'
+    template: {
+        type: 'handlebars',
+        template: JST['following']
+    }
 });

@@ -26,36 +26,36 @@
         <div class="item-add-image-placeholder">
             <img src="/-assets/images/loading-image.gif" height="16" width="16" />
 
-            {{#if duration }}
-                <% duration = getDuration(duration) %>
-                <ul class="item-add-duration duration">
-                    {{#isnt duration.days 0 }}
+            {{#if duration}}
+                <ul class="item-add-duration duration pull-left">
+                    {{#if duration.days}}
                     <li class="days">{{ duration.days }}d</li>
-                    {{/isnt}}
+                    {{/if}}
 
-                    <% if (duration.days !== 0 && duration.hours !== 0) { %>
+                    {{#and duration.days duration.hours }}
                     <li class="durationcolon">:</li>
-                    <% } %>
+                    {{/and}}
 
-                    {{#isnt duration.hours 0 }}
+                    {{#if duration.hours }}
                     <li class="hours">{{ duration.hours }}h</li>
-                    {{/isnt}}
+                    {{/if}}
 
-                    <% if (duration.hours !== 0 && duration.minutes !== 0) { %>
+                    {{#and duration.hours duration.minutes }}
                     <li class="durationcolon">:</li>
-                    <% } %>
+                    {{/and}}
 
-                    {{#isnt duration.minutes 0 }}
+                    {{#if duration.minutes }}
                     <li class="minutes">{{ duration.minutes }}m</li>
-                    {{/isnt}}
+                    {{/if}}
 
-                    <% if (duration.minutes !== 0 && duration.seconds !== 0) { %>
+                    {{#and duration.minutes duration.seconds }}
                     <li class="durationcolon">:</li>
-                    <% } %>
+                    {{/and}}
 
-                    {{#isnt duration.seconds 0 }}
+                    {{#if duration.seconds }}
                     <li class="seconds">{{ duration.seconds }}s</li>
-                    {{/isnt}}
+
+                    {{/if}}
                 </ul>
             {{/if}}
         </div>

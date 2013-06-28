@@ -1,5 +1,8 @@
 Application.View.ItemEmpty = Backbone.Marionette.ItemView.extend({
-    template: '#item-empty-template',
+    template: {
+        type: 'handlebars',
+        template: JST['item-empty']
+    },
     className: 'item item-empty collapsed',
 
 

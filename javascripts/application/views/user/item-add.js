@@ -1,5 +1,8 @@
 Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
-    template: '#item-add-template',
+    template: {
+        type: 'handlebars',
+        template: JST['item-add']
+    },
     className: 'item item-add',
 
     events: {

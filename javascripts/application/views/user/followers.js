@@ -103,7 +103,8 @@ Application.View.Followers = Backbone.Marionette.CompositeView.extend({
         var view = Backbone.Marionette.CompositeView.prototype.buildItemView.apply(this, arguments);
 
         view.model.set({
-            user: this.model.get('pid')
+            user: this.model.get('pid'),
+            session: Application.session.get('pid')
         }, {
             silent: true
         });

@@ -16,7 +16,9 @@ Application.Model.Item = Backbone.Model.extend({
 
 
     initialize: function(data) {
-        this.set('duration', this.duration(data.duration));
+        if (data && data.duration) {
+            this.set('duration', this.duration(data.duration));
+        }
     },
 
 

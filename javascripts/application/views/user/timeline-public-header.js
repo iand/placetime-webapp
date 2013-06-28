@@ -1,5 +1,8 @@
 Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
-    template: '#timeline-public-header-template',
+    template: {
+        type: 'handlebars',
+        template: JST['timeline-public-header']
+    },
     className: 'timeline-header-public',
 
     events: {
@@ -8,9 +11,30 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
         'submit .form': 'submit'
     },
 
-
     modelEvents: {
-        'change': 'render'
+        'change:view': 'updateType',
+        'change:type': 'updateUI'
+    },
+
+    placeholders: {
+        a: 'Search for music',
+        e: 'Search for events',
+        v: 'Search for video',
+        p: 'Search profiles'
+    },
+
+    views: {
+        timeline: 'v',
+        followings: 'p',
+        followers: 'p'
+    },
+
+    ui: {
+        nav: '.timeline-nav',
+        form: '.form',
+        type: '.type',
+        types: '.type option',
+        search: '.search'
     },
 
 
@@ -20,21 +44,16 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
         if (options.type !== undefined && options.search !== undefined) {
             this.model.set({
                 type: options.type,
-                search: options.search
+                search: options.search,
+                placeholder: this.placeholders[options.type]
             });
         } else {
             this.model.set({
                 type: 'v',
-                search: ''
+                search: '',
+                placeholder: this.placeholders['v']
             });
         }
-
-        this.model.set('placeholders', {
-            a: 'Search for music',
-            e: 'Search for events',
-            v: 'Search for video',
-            p: 'Search profiles'
-        });
     },
 
 
@@ -45,13 +64,31 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
     },
 
 
-    update: function(event) {
-        var $form = $(event.target).closest('form');
+    updateUI: function(event) {
+        var view = this.model.get('view'),
+            type = this.model.get('type');
 
-        this.model.set({
-            type: $form.find('[name=t]').val(),
-            search: $form.find('[name=s]').val()
-        });
+
+        // Update navigation
+        var $nav = this.ui.nav.find('.' + view);
+
+        $nav.siblings().removeClass('active');
+        $nav.addClass('active');
+
+
+        // Update select
+        var $option = this.ui.types.filter('[value='+type+']');
+
+        $option.siblings().removeAttr('selected');
+        $option.attr('selected', 'selected');
+
+        // Update placeholder
+        this.ui.search.attr('placeholder', this.placeholders[type]);
+    },
+
+
+    updateType: function() {
+        this.model.set('type', this.views[this.model.get('view')]);
     },
 
 
@@ -59,16 +96,11 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
         // Trigger filter
         if (this.model.get('view') === 'search') {
             this.submit(event);
-        } else {
-            this.update(event);
         }
     },
 
 
     submit: function(event) {
-        this.update(event);
-
-
         var $form = $(event.target).closest('form');
 
         var url = 'search/';
