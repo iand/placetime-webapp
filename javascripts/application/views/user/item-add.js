@@ -27,11 +27,6 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     },
 
 
-    templateHelpers: {
-        getDuration: Application.Helpers.getDuration
-    },
-
-
     initialize: function(options) {
         this.model.set({
             link: '',

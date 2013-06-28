@@ -307,10 +307,8 @@ function program10(depth0,data) {
   if (stack1 = helpers.ets) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.ets; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">\n    </div>\n\n    <div class=\"actions\">\n        <input type=\"hidden\" name=\"duration\" value=\"";
-  if (stack1 = helpers.duration) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.duration; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+    + "\">\n    </div>\n\n    <div class=\"actions\">\n        <input type=\"hidden\" name=\"duration\" value=\""
+    + escapeExpression(((stack1 = ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.original)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\">\n\n        <input type=\"submit\" value=\"Add\" class=\"item-add-btn-add\">\n        <input type=\"submit\" value=\"Cancel\" class=\"item-add-btn-cancel\">\n    </div>\n</form>";
   return buffer;
   });

@@ -10,7 +10,8 @@ Application.Model.Item = Backbone.Model.extend({
             days: undefined,
             hours: undefined,
             minutes: undefined,
-            seconds: undefined
+            seconds: undefined,
+            original: undefined
         }
     },
 
@@ -42,7 +43,8 @@ Application.Model.Item = Backbone.Model.extend({
             days: days,
             hours: (hours  - (days * 24)),
             minutes: (minutes - (hours * 60)),
-            seconds: (seconds - (minutes * 60))
+            seconds: (seconds - (minutes * 60)),
+            original: secs
         };
     },
 
