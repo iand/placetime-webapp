@@ -1,0 +1,62 @@
+<h3>Manage Profile</h3>
+<dl>
+    <dt>Profile:</dt>
+    <dd>{{ pid }}</dd>
+
+    <dt>Name:</dt>
+    <dd>{{ name }}</dd>
+
+    <dt>Bio:</dt>
+    <dd>{{ bio }}</dd>
+
+    <dt>Date joined:</dt>
+    <dd>{{ joined }}</dd>
+
+    <dt>Followed items:</dt>
+    <dd>{{ pcount }}</dd>
+
+    <dt>Bookmarked items:</dt>
+    <dd>{{ mcount }}</dd>
+
+    <dt>Following:</dt>
+    <dd>
+        <a href="#following/{{ pid }}">
+            {{ followingcount }}
+        </a>
+    </dd>
+
+    <dt>Followers:</dt>
+    <dd>
+    <a href="#followers/{{ pid }}">
+        {{ followercount }}
+    </a>
+    </dd>
+</dl>
+
+{{#if parentpid }}
+    <div>
+        Parent profile:
+        <a href="#profile/{{ parentpid }}">
+            {{ parentpid }}
+        </a>
+    </div>
+    <div>
+        Feed URL: {{ feedurl }}
+    </div>
+{{else}}
+    <div>
+        Feeds:
+        <a href="#feeds/{{ pid }}">
+            {{ feedcount }}
+        </a>
+    </div>
+{{/if}}
+
+
+<div class="profile-items">
+    <h3>Items</h3>
+</div>
+
+
+<button class="profile-edit">Edit Profile</button>
+<button class="profile-add">Add Feed</button>

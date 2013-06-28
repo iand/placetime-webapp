@@ -1,5 +1,8 @@
 Application.Admin.View.Home = Backbone.Marionette.ItemView.extend({
-    template: '#home-template',
+    template: {
+        type: 'handlebars',
+        template: JST['home']
+    },
     className: 'layout-container',
 
     events: {

@@ -1,5 +1,8 @@
 Application.Admin.FeedNew = Backbone.Marionette.ItemView.extend({
-    template: '#addfeed-tmpl',
+    template: {
+        type: 'handlebars',
+        template: JST['feed-new']
+    },
 
     events: {
         'click .saveBtn': 'save'

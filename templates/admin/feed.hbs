@@ -1,0 +1,39 @@
+<h3>Manage Feed</h3>
+
+<dl>
+    <dt>Profile:</dt>
+    <dd>{{ pid }}</dd>
+
+    <dt>Name:</dt>
+    <dd>{{ name }}</dd>
+
+    <dt>Items in feed:</dt>
+    <dd>{{ mcount }}</dd>
+
+    <dt>Followers:</dt>
+    <dd>
+        <a href="#followers/{{ pid }}">
+            {{ followercount }}
+        </a>
+    </dd>
+
+    <dt>Parent profile:</dt>
+    <dd>
+        <a href="#profile/{{ parentpid }}">
+            {{ parentpid }}
+        </a>
+    </dd>
+
+    <dt>Feed URL:</dt>
+    <dd>{{ feedurl }}</dd>
+</dl>
+
+
+<div class="items">
+    <h3>Items</h3>
+</div>
+
+
+<button class="editBtn">Edit Feed</button>
+<button class="deleteBtn">Delete Feed</button>
+<button class="refreshBtn">Refresh Feed</button>

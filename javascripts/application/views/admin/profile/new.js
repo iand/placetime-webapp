@@ -1,5 +1,8 @@
 Application.Admin.View.ProfileNew = Backbone.Marionette.ItemView.extend({
-    template: '#profile-new-template',
+    template: {
+        type: 'handlebars',
+        template: JST['profile-new']
+    },
     className: 'layout-container',
 
     events: {

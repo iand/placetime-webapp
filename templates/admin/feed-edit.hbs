@@ -1,0 +1,22 @@
+<h3>Edit Feed</h3>
+<form action="" method="post">
+    <div>
+        <label for="name">Name </label>
+        <input type="text" name="name" id="name" value="{{ name }}">
+    </div>
+
+    <div>
+        <label for="parentpid">Parent profile id </label>
+        <input type="text" name="parentpid" id="parentpid" value="{{ parentpid }}">
+    </div>
+
+    <div>
+        <label for="feedurl">Feed URL </label>
+        <input type="text" name="feedurl" id="feedurl" value="{{ feedurl }}">
+    </div>
+
+    <div>
+        <input type="submit" value="Save" class="saveBtn">
+        <a href="#profile/{{ pid }}">cancel</a>
+    </div>
+</form>

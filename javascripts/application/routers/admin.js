@@ -10,7 +10,7 @@ Application.Router.Admin = Backbone.Router.extend({
         'profile/:pid/edit': 'profileEdit',
         'profile/:pid': 'profileView',
 
-        'profile/:pid/following': 'following',
+        'profile/:pid/followings': 'followings',
         'profile/:pid/followers': 'followers',
 
         'profile/:pid/feeds': 'feeds',
@@ -29,16 +29,6 @@ Application.Router.Admin = Backbone.Router.extend({
         });
 
         Application.header.show(header);
-
-
-        // var self = this;
-        // Application.session.check(function () {
-        //     self.changePage(new MainView({}));
-        // },
-
-        // function () {
-        //     self.invalidSession();
-        // });
     },
 
 
@@ -144,11 +134,11 @@ Application.Router.Admin = Backbone.Router.extend({
 
 
 
-    following: function (pid) {
+    followings: function (pid) {
         var self = this;
         Application.session.check(function () {
 
-            var list = new FollowingList({
+            var list = new Application.Admin.View.Followings({
                 'pid': pid
             });
             list.fetch({
@@ -176,7 +166,7 @@ Application.Router.Admin = Backbone.Router.extend({
         var self = this;
         Application.session.check(function () {
 
-            var list = new FollowersList({
+            var list = new Application.Admin.View.Followers({
                 'pid': pid
             });
             list.fetch({

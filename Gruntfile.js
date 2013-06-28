@@ -88,11 +88,12 @@ module.exports = function(grunt) {
                 options: {
                     namespace: 'JST',
                     processName: function(filename) {
-                        return filename.replace(/^templates\/user\/(.*)\.hbs$/, '$1').toLowerCase();
+                        return filename.replace(/^templates\/(?:user|admin)\/(.*)\.hbs$/, '$1').toLowerCase();
                     }
                 },
                 files: {
-                    'javascripts/templates.js': 'templates/**/*.hbs'
+                    'templates/user.js': 'templates/user/*.hbs',
+                    'templates/admin.js': 'templates/admin/*.hbs'
                 }
             }
         },

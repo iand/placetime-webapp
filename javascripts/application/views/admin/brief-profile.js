@@ -1,3 +1,6 @@
 Application.View.ProfileBrief = Backbone.Marionette.ItemView.extend({
-    template: '#briefprofile-tmpl'
+    template: {
+        type: 'handlebars',
+        template: JST['profile-brief']
+    }
 });
