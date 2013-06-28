@@ -606,8 +606,8 @@ function program35(depth0,data) {
   
   var buffer = "", stack1, stack2, options;
   buffer += "\n    ";
-  options = {hash:{},inverse:self.noop,fn:self.program(36, program36, data),data:data};
-  stack2 = ((stack1 = helpers.isnt || depth0.isnt),stack1 ? stack1.call(depth0, depth0.status, "p", options) : helperMissing.call(depth0, "isnt", depth0.status, "p", options));
+  options = {hash:{},inverse:self.program(38, program38, data),fn:self.program(36, program36, data),data:data};
+  stack2 = ((stack1 = helpers.is || depth0.is),stack1 ? stack1.call(depth0, depth0.status, "p", options) : helperMissing.call(depth0, "is", depth0.status, "p", options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n";
   return buffer;
@@ -615,10 +615,16 @@ function program35(depth0,data) {
 function program36(depth0,data) {
   
   
-  return "\n        <a class=\"button button-demote\">\n            <i class=\"icon-remove\"></i>\n        </a>\n    ";
+  return "\n        <a class=\"button button-promote\">\n            <i class=\"icon-ok\"></i>\n        </a>\n    ";
   }
 
 function program38(depth0,data) {
+  
+  
+  return "\n        <a class=\"button button-demote\">\n            <i class=\"icon-remove\"></i>\n        </a>\n    ";
+  }
+
+function program40(depth0,data) {
   
   
   return "\n    <a class=\"button button-promote\">\n        <i class=\"icon-ok\"></i>\n    </a>\n";
@@ -653,7 +659,7 @@ function program38(depth0,data) {
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.urlItem || depth0.urlItem),stack1 ? stack1.call(depth0, depth0.id, options) : helperMissing.call(depth0, "urlItem", depth0.id, options)))
     + "\">link</span>\n    </a>\n</p>\n\n\n";
-  options = {hash:{},inverse:self.program(38, program38, data),fn:self.program(35, program35, data),data:data};
+  options = {hash:{},inverse:self.program(40, program40, data),fn:self.program(35, program35, data),data:data};
   stack2 = ((stack1 = helpers.is || depth0.is),stack1 ? stack1.call(depth0, depth0.session, depth0.user, options) : helperMissing.call(depth0, "is", depth0.session, depth0.user, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   return buffer;

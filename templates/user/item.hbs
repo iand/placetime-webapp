@@ -140,11 +140,15 @@
 
 
 {{#is session user }}
-    {{#isnt status 'p' }}
+    {{#is status 'p' }}
+        <a class="button button-promote">
+            <i class="icon-ok"></i>
+        </a>
+    {{else}}
         <a class="button button-demote">
             <i class="icon-remove"></i>
         </a>
-    {{/isnt}}
+    {{/is}}
 {{else}}
     <a class="button button-promote">
         <i class="icon-ok"></i>
