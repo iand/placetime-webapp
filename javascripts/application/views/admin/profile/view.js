@@ -36,9 +36,10 @@ Application.Admin.View.ProfileView = Backbone.Marionette.ItemView.extend({
 
 
     onRender: function() {
-        // TODO: Fix
-        var view = new Application.Admin.View.BriefItemView({
-            collection: this.model.get('items')
+        var view = new Application.Admin.View.ItemListBrief({
+            collection: new Application.Collection.ItemsProfile({
+                pid: this.model.get('pid')
+            })
         });
 
         this.$el.find('.profile-items').append(view.el);

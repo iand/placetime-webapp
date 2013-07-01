@@ -1,4 +1,4 @@
-var ProfileItems = Backbone.Collection.extend({
+Application.Collection.ItemsProfile = Backbone.Collection.extend({
     model: Application.Model.Item,
 
     initialize: function (options) {
@@ -6,6 +6,6 @@ var ProfileItems = Backbone.Collection.extend({
     },
 
     url: function () {
-        return '/-jtl?status=m&count=30&pid=' + this.pid;
+        return '/-jtl?status=m&before=100&after=100&pid=' + this.pid;
     }
 });

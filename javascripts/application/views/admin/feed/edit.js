@@ -1,4 +1,4 @@
-Application.Admin.FeedEdit = Backbone.Marionette.ItemView.extend({
+Application.Admin.View.FeedEdit = Backbone.Marionette.ItemView.extend({
     template: {
         type: 'handlebars',
         template: JST['feed-edit']

@@ -1,5 +1,7 @@
-<div class="feed-item">
-    <div>Title: {{ text }}</div>
-    <div>Link: {{ link }}</div>
-    <div>When: {{ ets }}</div>
-</div>
+<a href="{{ link }}">
+    {{ text }}
+
+    {{#if ets }}
+        {{ ets }}
+    {{/if}}
+</a>

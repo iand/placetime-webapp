@@ -15,11 +15,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<div>\n    <a href=\"#/profile/";
+  buffer += "<a href=\"#/profile/";
   if (stack1 = helpers.pid) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.pid; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">";
+    + "\">\n    ";
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -27,11 +27,10 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (stack1 = helpers.pid) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.pid; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + ")</a>: ";
+    + ")\n</a>\n: ";
   if (stack1 = helpers.feedurl) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.feedurl; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\n</div>\n";
+  buffer += escapeExpression(stack1);
   return buffer;
   });
 
@@ -193,32 +192,32 @@ function program1(depth0,data) {
 this["JST"]["item-brief"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
-
-  buffer += "<div class=\"feed-item\">\n    <div>Title: ";
-  if (stack1 = helpers.text) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.text; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</div>\n    <div>Link: ";
-  if (stack1 = helpers.link) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.link; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</div>\n    <div>When: ";
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n        ";
   if (stack1 = helpers.ets) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.ets; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</div>\n</div>";
+    + "\n    ";
   return buffer;
-  });
+  }
 
-this["JST"]["login"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
-
-
-  return "<h1>login</h1>\n<form action=\"#\" method=\"post\">\n    <div class=\"field\">\n        <label for=\"name\">User name</label>\n        <input type=\"text\" name=\"pid\" id=\"pid\" value=\"\">\n        <div class=\"hint\"></div>\n    </div>\n\n    <div class=\"field\">\n        <label for=\"name\">Password</label>\n        <input type=\"password\" name=\"pwd\" id=\"pwd\" value=\"\">\n        <div class=\"hint\"></div>\n    </div>\n\n    <input type=\"submit\" value=\"Login\">\n</form>";
+  buffer += "<a href=\"";
+  if (stack1 = helpers.link) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.link; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n    ";
+  if (stack1 = helpers.text) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.text; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\n\n    ";
+  stack1 = helpers['if'].call(depth0, depth0.ets, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</a>";
+  return buffer;
   });
 
 this["JST"]["profile-brief"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {

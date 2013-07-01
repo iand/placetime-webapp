@@ -81,49 +81,47 @@ Application.Router.Admin = Backbone.Router.extend({
         var check = Application.session.check();
 
         check.done(function () {
-            var profile = new Application.Model.Profile({
-                'pid': pid
-            });
-
-
-            profile.fetch().done(function(){
-                var items = new ProfileItems({
+            var view = new Application.Admin.View.ProfileView({
+                model: new Application.Model.Profile({
                     'pid': pid
-                });
-
-                items.fetch().done(function(){
-                    if (profile.get('parentpid')) {
-                        self.changePage(new FeedView({
-                            model: profile,
-                            items: items
-                        }));
-                    } else {
-                        var view = new Application.Admin.View.ProfileView({
-                            model: new Backbone.Model({
-                                model: profile,
-                                items: items
-                            })
-                        });
-                        Application.content.show(view);
-                    }
-                }).fail(function () {
-                    var view = new Application.Admin.View.Home({
-                        model: new Backbone.Model({
-                            message: "Problem retrieving profile items for '" + pid + "'"
-                        })
-                    });
-                    Application.content.show(view);
-                });
-            })
-
-            .fail(function(){
-                var view = new Application.Admin.View.Home({
-                    model: new Backbone.Model({
-                        message: "Problem retrieving profile '" + pid + "'"
-                    })
-                });
-                Application.content.show(view);
+                })
             });
+
+            Application.content.show(view);
+
+
+            // profile.fetch().done(function(){
+            //     var items = new ProfileItems({
+            //         'pid': pid
+            //     });
+
+            //     items.fetch().done(function(){
+            //         if (profile.get('parentpid')) {
+            //             self.changePage(new FeedView({
+            //                 model: profile,
+            //                 items: items
+            //             }));
+            //         } else {
+
+            //         }
+            //     }).fail(function () {
+            //         var view = new Application.Admin.View.Home({
+            //             model: new Backbone.Model({
+            //                 message: "Problem retrieving profile items for '" + pid + "'"
+            //             })
+            //         });
+            //         Application.content.show(view);
+            //     });
+            // })
+
+            // .fail(function(){
+            //     var view = new Application.Admin.View.Home({
+            //         model: new Backbone.Model({
+            //             message: "Problem retrieving profile '" + pid + "'"
+            //         })
+            //     });
+            //     Application.content.show(view);
+            // });
         });
 
 
