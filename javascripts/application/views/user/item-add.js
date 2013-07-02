@@ -9,7 +9,7 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         'submit .item-add-form': 'submit',
         'click .item-add-event input': 'event',
         'click .item-add-type input': 'toggle',
-        'click .cancel': 'cancel'
+        'click .item-add-btn-cancel': 'cancel'
     },
 
     modelEvents: {
