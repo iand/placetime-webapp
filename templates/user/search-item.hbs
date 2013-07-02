@@ -125,20 +125,6 @@
 {{/if}}
 
 
-<p class="time pull-left">
-    <a class="fancybox fancybox.iframe" href="{{ link }}">
-        {{#ifHasEvent event}}
-            <i class="icon-calendar"></i> <span class="event">event:</span>
-            <span class="timestamp">{{ fromNow event }}</span>
-        {{else}}
-            <i class="icon-time"></i> <span class="added">added:</span>
-            <span class="timestamp">{{ fromNow ts }}</span>
-        {{/ifHasEvent}}
-        <a class="item-url" href="{{ urlItem id }}">link</span>
-    </a>
-</p>
-
-
 <a class="button button-add">
     <i class="icon-ok"></i>
 </a>
