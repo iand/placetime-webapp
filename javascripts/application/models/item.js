@@ -120,6 +120,18 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
 
+    detect: function() {
+        var promise = $.ajax({
+            url: '/-jdetect',
+            dataType: 'json',
+            data: {
+                url: this.get('url')
+            }
+        });
+
+        return promise;
+    },
+
 
     flag: function() {
         this.trigger('flagged', this.attributes);

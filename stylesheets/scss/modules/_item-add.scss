@@ -22,12 +22,9 @@
 }
 
 
-.item-add-image label {
-    vertical-align: top;
-}
-
 .item-add-image img {
-    margin-top: 80px;
+    max-height: 175px;
+    max-width: 347px;
 }
 
 .item-add-image-placeholder {
@@ -43,6 +40,42 @@
     text-align: center;
     width: 347px;
 }
+
+
+// Image list
+.item-add-image-list {
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+
+.item-add-image-list-item {
+    display: none;
+}
+
+.item-add-image-list-current {
+    display: block;
+}
+
+
+// Controls
+.item-add-image-controls {
+    bottom: 2px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 347px;
+}
+
+.item-add-image-controls-next {
+    float: right;
+}
+
+.item-add-image-controls-prev {
+    float: left;
+}
+
 
 
 .item-add-duration {

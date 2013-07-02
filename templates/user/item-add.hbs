@@ -22,9 +22,35 @@
         <input type="text" name="text" placeholder="Title" value="{{ text }}">
     </div>
 
+
     <div class="field item-add-image">
         <div class="item-add-image-placeholder">
-            <img src="/-assets/images/loading-image.gif" height="16" width="16" />
+            {{#if loading}}
+                <img src="/-assets/images/loading-image.gif" height="16" width="16" />
+            {{else}}
+                <ul class="item-add-image-list">
+                    {{#each images}}
+                        {{#is @index 0}}
+                            <li class="item-add-image-list-item item-add-image-list-current">
+                        {{else}}
+                            <li class="item-add-image-list-item">
+                        {{/is}}
+                                <img src="{{this}}">
+                            </li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+
+            {{#unless loading}}
+                <ul class="item-add-image-controls">
+                    <li class="item-add-image-controls-next">
+                        <i class="icon-circle-arrow-right"></i>
+                    </li>
+                    <li class="item-add-image-controls-prev">
+                        <i class="icon-circle-arrow-left"></i>
+                    </li>
+                </ul>
+            {{/unless}}
 
             {{#if duration}}
                 <ul class="item-add-duration duration pull-left">

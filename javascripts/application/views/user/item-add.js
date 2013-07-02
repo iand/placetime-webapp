@@ -9,7 +9,10 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         'submit .item-add-form': 'submit',
         'click .item-add-event input': 'event',
         'click .item-add-type input': 'toggle',
-        'click .item-add-btn-cancel': 'cancel'
+        'click .item-add-btn-cancel': 'cancel',
+
+        'click .item-add-image-controls-next': 'next',
+        'click .item-add-image-controls-prev': 'prev'
     },
 
     modelEvents: {
@@ -23,15 +26,33 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         event: '.item-add-event',
         ets: '.item-add-ets',
         duration: '.item-add-duration',
-        error: '.form-error'
+        error: '.form-error',
+
+        list: '.item-add-image-list',
+        controls: '.item-add-controls'
     },
 
 
     initialize: function(options) {
+        var self = this;
+
+
         this.model.set({
+            loading: true,
             link: '',
             text: '',
             ets: ''
+        });
+
+
+        var promise = this.model.detect();
+
+        promise.done(function(data) {
+            self.model.set('images', data.images);
+        });
+
+        promise.always(function(){
+            self.model.set('loading', false);
         });
     },
 
@@ -79,6 +100,41 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
 
     cancel: function() {
         this.trigger('cancelled');
+
+        return false;
+    },
+
+
+    next: function() {
+        var $current = this.ui.list.find('.item-add-image-list-current');
+
+
+        var $next = $current.next();
+
+        if ($next.length === 0) {
+            $next = this.ui.list.find('.item-add-image-list-item').first();
+        }
+
+        $next.addClass('item-add-image-list-current');
+        $current.removeClass('item-add-image-list-current');
+
+        return false;
+    },
+
+
+    prev: function() {
+        var $current = this.ui.list.find('.item-add-image-list-current');
+
+
+        var $prev = $current.prev();
+
+        if ($prev.length === 0) {
+            $prev = this.ui.list.find('.item-add-image-list-item').last();
+        }
+
+
+        $prev.addClass('item-add-image-list-current');
+        $current.removeClass('item-add-image-list-current');
 
         return false;
     },
