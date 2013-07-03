@@ -550,23 +550,17 @@ h3 {
   width: auto;
 }
 
-.item-add-image img {
-  max-height: 175px;
-  max-width: 347px;
-}
-
 .item-add-image-placeholder {
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
-  background-color: #eeeeee;
+  background-color: #aaaaaa;
   display: inline-block;
   height: 175px;
   margin: 4px 0 10px 0;
-  padding: 4px;
   position: relative;
   text-align: center;
-  width: 347px;
+  width: 470px;
 }
 
 .item-add-image-list {
@@ -576,7 +570,11 @@ h3 {
 }
 
 .item-add-image-list-item {
+  background-size: cover;
+  background-position-y: 35%;
   display: none;
+  height: 175px;
+  width: 470px;
 }
 
 .item-add-image-list-current {
@@ -589,15 +587,17 @@ h3 {
   margin: 0;
   padding: 0;
   position: absolute;
-  width: 347px;
+  width: 470px;
 }
 
 .item-add-image-controls-next {
   float: right;
+  margin-right: 5px;
 }
 
 .item-add-image-controls-prev {
   float: left;
+  margin-left: 5px;
 }
 
 .item-add-duration {

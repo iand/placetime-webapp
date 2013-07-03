@@ -31,11 +31,10 @@
                 <ul class="item-add-image-list">
                     {{#each images}}
                         {{#is @index 0}}
-                            <li class="item-add-image-list-item item-add-image-list-current">
+                            <li class="item-add-image-list-item item-add-image-list-current" style="background-image: url({{this}});">
                         {{else}}
-                            <li class="item-add-image-list-item">
+                            <li class="item-add-image-list-item" style="background-image: url({{this}});">
                         {{/is}}
-                                <img src="{{this}}">
                             </li>
                     {{/each}}
                 </ul>

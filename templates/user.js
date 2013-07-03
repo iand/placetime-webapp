@@ -222,7 +222,7 @@ function program1(depth0,data) {
 this["JST"]["item-add"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, self=this, helperMissing=helpers.helperMissing, functionType="function", escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -246,21 +246,25 @@ function program4(depth0,data) {
   options = {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data};
   stack2 = ((stack1 = helpers.is || depth0.is),stack1 ? stack1.call(depth0, ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index), 0, options) : helperMissing.call(depth0, "is", ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index), 0, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n                                <img src=\""
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + "\">\n                            </li>\n                    ";
+  buffer += "\n                            </li>\n                    ";
   return buffer;
   }
 function program5(depth0,data) {
   
-  
-  return "\n                            <li class=\"item-add-image-list-item item-add-image-list-current\">\n                        ";
+  var buffer = "";
+  buffer += "\n                            <li class=\"item-add-image-list-item item-add-image-list-current\" style=\"background-image: url("
+    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+    + ");\">\n                        ";
+  return buffer;
   }
 
 function program7(depth0,data) {
   
-  
-  return "\n                            <li class=\"item-add-image-list-item\">\n                        ";
+  var buffer = "";
+  buffer += "\n                            <li class=\"item-add-image-list-item\" style=\"background-image: url("
+    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+    + ");\">\n                        ";
+  return buffer;
   }
 
 function program9(depth0,data) {
@@ -1046,6 +1050,16 @@ function program29(depth0,data) {
   return buffer;
   }
 
+function program31(depth0,data) {
+  
+  var buffer = "", stack1, options;
+  buffer += "\n            <i class=\"icon-calendar\"></i> <span class=\"event\">event:</span>\n            <span class=\"timestamp\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.fromNow || depth0.fromNow),stack1 ? stack1.call(depth0, depth0.event, options) : helperMissing.call(depth0, "fromNow", depth0.event, options)))
+    + "</span>\n        ";
+  return buffer;
+  }
+
   buffer += "<div class=\"overlay\"></div>\n\n<p class=\"sash event\">\n    <i class=\"icon-calendar\"></i>\n</p>\n<p class=\"sash event-added\">\n    <i class=\"icon-calendar\"></i>\n</p>\n<p class=\"sash video\">\n    <i class=\"icon-facetime-video\"></i>\n</p>\n<p class=\"sash audio\">\n    <i class=\"icon-headphones\"></i>\n</p>\n<p class=\"sash text\">\n    <i class=\"icon-file-alt\"></i>\n</p>\n<p class=\"sash added\">\n    <span>\n        Added to playlist\n        <i class=\"icon-plus\"></i>\n    </span>\n</p>\n<p class=\"sash flagged\">\n    <span>\n        Flagged\n        <i class=\"icon-flag\"></i>\n    </span>\n</p>\n\n\n<div class=\"icon pull-left\">\n    ";
   stack2 = helpers['if'].call(depth0, ((stack1 = depth0.author),stack1 == null || stack1 === false ? stack1 : stack1.profileimageurlhttps), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
@@ -1063,7 +1077,18 @@ function program29(depth0,data) {
   buffer += "\n\n\n";
   stack2 = helpers['if'].call(depth0, depth0.via, {hash:{},inverse:self.noop,fn:self.program(29, program29, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n\n\n<a class=\"button button-add\">\n    <i class=\"icon-ok\"></i>\n</a>";
+  buffer += "\n\n<p class=\"time pull-left\">\n    <a class=\"fancybox fancybox.iframe\" href=\"";
+  if (stack2 = helpers.link) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.link; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\">\n        ";
+  options = {hash:{},inverse:self.noop,fn:self.program(31, program31, data),data:data};
+  stack2 = ((stack1 = helpers.ifHasEvent || depth0.ifHasEvent),stack1 ? stack1.call(depth0, depth0.event, options) : helperMissing.call(depth0, "ifHasEvent", depth0.event, options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n        <a class=\"item-url\" href=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.urlItem || depth0.urlItem),stack1 ? stack1.call(depth0, depth0.id, options) : helperMissing.call(depth0, "urlItem", depth0.id, options)))
+    + "\">link</span>\n    </a>\n</p>\n\n\n<a class=\"button button-add\">\n    <i class=\"icon-ok\"></i>\n</a>";
   return buffer;
   });
 
