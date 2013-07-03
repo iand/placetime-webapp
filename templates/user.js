@@ -246,7 +246,7 @@ function program4(depth0,data) {
   options = {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data};
   stack2 = ((stack1 = helpers.is || depth0.is),stack1 ? stack1.call(depth0, ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index), 0, options) : helperMissing.call(depth0, "is", ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index), 0, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n                            </li>\n                    ";
+  buffer += "\n                        </li>\n                    ";
   return buffer;
   }
 function program5(depth0,data) {

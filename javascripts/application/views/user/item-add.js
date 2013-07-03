@@ -122,8 +122,10 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         $current.removeClass('item-add-image-list-current');
 
         this.model.set(
-            'image',
-            $next.css('background-image')
+            'image', $next.css('background-image'),
+            {
+                silent: true
+            }
         );
 
         return false;
@@ -145,8 +147,10 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         $current.removeClass('item-add-image-list-current');
 
         this.model.set(
-            'image',
-            $prev.css('background-image')
+            'image', $prev.css('background-image'),
+            {
+                silent: true
+            }
         );
 
         return false;
