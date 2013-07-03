@@ -1317,7 +1317,7 @@ function program1(depth0,data) {
   return "\n<a class=\"now pull-right\">\n    now <i class=\"icon-now icon-repeat\"></i>\n</a>\n";
   }
 
-  buffer += "<ul class=\"timeline-nav pull-left\">\n    <li class=\"items active first last\">\n        <a href=\"#timeline\" class=\"playlist\">My Playlist</a>\n    </li>\n</ul>\n\n<form class=\"form\">\n    <input class=\"pull-left url\" name=\"url\" type=\"url\" placeholder=\"http://www.domain.com/\" required=\"required\">\n    <input class=\"pull-left add\" name=\"submit\" type=\"submit\" value=\"Add\">\n</form>\n\n";
+  buffer += "<ul class=\"timeline-nav pull-left\">\n    <li class=\"items active first last\">\n        <a href=\"#timeline\" class=\"playlist\">My Playlist</a>\n    </li>\n</ul>\n\n<form class=\"form\">\n    <input class=\"pull-left link\" name=\"link\" type=\"url\" placeholder=\"http://www.domain.com/\" required=\"required\">\n    <input class=\"pull-left add\" name=\"submit\" type=\"submit\" value=\"Add\">\n</form>\n\n";
   options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data};
   stack2 = ((stack1 = helpers.is || depth0.is),stack1 ? stack1.call(depth0, depth0.view, "timeline", options) : helperMissing.call(depth0, "is", depth0.view, "timeline", options));
   if(stack2 || stack2 === 0) { buffer += stack2; }

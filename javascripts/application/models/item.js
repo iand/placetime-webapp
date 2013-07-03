@@ -125,7 +125,7 @@ Application.Model.Item = Backbone.Model.extend({
             url: '/-jdetect',
             dataType: 'json',
             data: {
-                url: this.get('url')
+                url: this.get('link')
             }
         });
 

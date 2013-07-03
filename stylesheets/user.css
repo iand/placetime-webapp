@@ -959,7 +959,7 @@ h3 {
   padding: 0;
 }
 .timeline-header .search,
-.timeline-header .url,
+.timeline-header .link,
 .timeline-header .add {
   -webkit-border-radius: 16px;
   -moz-border-radius: 16px;
@@ -985,7 +985,7 @@ h3 {
   margin-left: 15px;
   width: 185px;
 }
-.timeline-header .url {
+.timeline-header .link {
   margin-left: 15px;
   width: 250px;
 }

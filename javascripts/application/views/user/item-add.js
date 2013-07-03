@@ -36,10 +36,8 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     initialize: function(options) {
         var self = this;
 
-
         this.model.set({
             loading: true,
-            link: '',
             text: '',
             ets: ''
         });
