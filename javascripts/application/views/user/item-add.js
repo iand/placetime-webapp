@@ -48,7 +48,12 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         var promise = this.model.detect();
 
         promise.done(function(data) {
+            if (data.images.length === 0) {
+                return;
+            }
+
             self.model.set('images', data.images);
+            self.model.set('image', data.images[0]);
         });
 
         promise.always(function(){
@@ -118,6 +123,11 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         $next.addClass('item-add-image-list-current');
         $current.removeClass('item-add-image-list-current');
 
+        this.model.set(
+            'image',
+            $next.css('background-image')
+        );
+
         return false;
     },
 
@@ -135,6 +145,11 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
 
         $prev.addClass('item-add-image-list-current');
         $current.removeClass('item-add-image-list-current');
+
+        this.model.set(
+            'image',
+            $prev.css('background-image')
+        );
 
         return false;
     },
