@@ -10,5 +10,5 @@ Handlebars.registerHelper('ifYoutube', function(value, options) {
 Handlebars.registerHelper('getYoutubeUrl', function(value) {
     return 'http://www.youtube.com/embed/' + value.replace(
         /https?:\/\/(?:gdata\.|www\.)?youtube.com\/(?:feeds\/api\/videos\/|watch\?v=)/, ''
-    );
+    ).replace('&', '?');
 });
