@@ -120,12 +120,19 @@ Application.Model.Item = Backbone.Model.extend({
     },
 
 
-    detect: function() {
+    detect: function(best) {
+        if (best === false) {
+            best = 0;
+        } else {
+            best = 1;
+        }
+
         var promise = $.ajax({
             url: '/-jdetect',
             dataType: 'json',
             data: {
-                url: this.get('link')
+                url: this.get('link'),
+                best: best
             }
         });
 

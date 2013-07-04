@@ -50,6 +50,10 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
                 return;
             }
 
+            data.images.unshift(
+                '/-img/' + data.bestImage
+            );
+
             self.model.set('images', data.images);
             self.model.set('image', data.images[0]);
         });
