@@ -63,7 +63,7 @@ Application.Model.SearchItem = Application.Model.Item.extend({
                 text: this.get('text'),
                 image: this.get('image'),
                 media: this.get('media'),
-                ets: this.get('ets'),
+                event: this.get('event'),
                 duration: this.get('duration')
             }
         });
