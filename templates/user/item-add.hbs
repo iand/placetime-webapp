@@ -29,13 +29,10 @@
                 <img src="/-assets/images/loading-image.gif" height="16" width="16" />
             {{else}}
                 <ul class="item-add-image-list">
-                    {{#each images}}
-                        {{#is @index 0}}
-                            <li class="item-add-image-list-item item-add-image-list-current" style="background-image: url({{this}});">
-                        {{else}}
-                            <li class="item-add-image-list-item" style="background-image: url({{this}});">
-                        {{/is}}
-                        </li>
+                    <li class="item-add-image-list-item item-add-image-list-current" style="background-image: url({{image}});"></li>
+
+                    {{#each alternates}}
+                        <li class="item-add-image-list-item" style="background-image: url({{this.url}});"></li>
                     {{/each}}
                 </ul>
             {{/if}}

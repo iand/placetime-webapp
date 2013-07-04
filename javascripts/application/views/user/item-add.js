@@ -46,16 +46,13 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         var promise = this.model.detect();
 
         promise.done(function(data) {
-            if (data.images.length === 0) {
-                return;
+            self.model.set('text', data.title);
+
+            if (data.alternates.length > 0) {
+                self.model.set('alternates', data.alternates);
             }
 
-            data.images.unshift(
-                '/-img/' + data.bestImage
-            );
-
-            self.model.set('images', data.images);
-            self.model.set('image', data.images[0]);
+            self.model.set('image', '/-img/' + data.bestImage);
         });
 
         promise.always(function(){

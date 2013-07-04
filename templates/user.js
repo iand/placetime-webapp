@@ -233,77 +233,62 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                <ul class=\"item-add-image-list\">\n                    ";
-  stack1 = helpers.each.call(depth0, depth0.images, {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  buffer += "\n                <ul class=\"item-add-image-list\">\n                    <li class=\"item-add-image-list-item item-add-image-list-current\" style=\"background-image: url(";
+  if (stack1 = helpers.image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + ");\"></li>\n\n                    ";
+  stack1 = helpers.each.call(depth0, depth0.alternates, {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                </ul>\n            ";
   return buffer;
   }
 function program4(depth0,data) {
   
-  var buffer = "", stack1, stack2, options;
-  buffer += "\n                        ";
-  options = {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data};
-  stack2 = ((stack1 = helpers.is || depth0.is),stack1 ? stack1.call(depth0, ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index), 0, options) : helperMissing.call(depth0, "is", ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index), 0, options));
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n                        </li>\n                    ";
-  return buffer;
-  }
-function program5(depth0,data) {
-  
-  var buffer = "";
-  buffer += "\n                            <li class=\"item-add-image-list-item item-add-image-list-current\" style=\"background-image: url("
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + ");\">\n                        ";
+  var buffer = "", stack1;
+  buffer += "\n                        <li class=\"item-add-image-list-item\" style=\"background-image: url("
+    + escapeExpression(((stack1 = depth0.url),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + ");\"></li>\n                    ";
   return buffer;
   }
 
-function program7(depth0,data) {
-  
-  var buffer = "";
-  buffer += "\n                            <li class=\"item-add-image-list-item\" style=\"background-image: url("
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + ");\">\n                        ";
-  return buffer;
-  }
-
-function program9(depth0,data) {
+function program6(depth0,data) {
   
   
   return "\n                <ul class=\"item-add-image-controls\">\n                    <li class=\"item-add-image-controls-next\">\n                        <i class=\"icon-circle-arrow-right\"></i>\n                    </li>\n                    <li class=\"item-add-image-controls-prev\">\n                        <i class=\"icon-circle-arrow-left\"></i>\n                    </li>\n                </ul>\n            ";
   }
 
-function program11(depth0,data) {
+function program8(depth0,data) {
   
   var buffer = "", stack1, stack2, options;
   buffer += "\n                <ul class=\"item-add-duration duration pull-left\">\n                    ";
-  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.days), {hash:{},inverse:self.noop,fn:self.program(12, program12, data),data:data});
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.days), {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n                    ";
-  options = {hash:{},inverse:self.noop,fn:self.program(14, program14, data),data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data};
   stack2 = ((stack1 = helpers.and || depth0.and),stack1 ? stack1.call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.days), ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.hours), options) : helperMissing.call(depth0, "and", ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.days), ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.hours), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n                    ";
-  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.hours), {hash:{},inverse:self.noop,fn:self.program(16, program16, data),data:data});
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.hours), {hash:{},inverse:self.noop,fn:self.program(13, program13, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n                    ";
-  options = {hash:{},inverse:self.noop,fn:self.program(14, program14, data),data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data};
   stack2 = ((stack1 = helpers.and || depth0.and),stack1 ? stack1.call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.hours), ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.minutes), options) : helperMissing.call(depth0, "and", ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.hours), ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.minutes), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n                    ";
-  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.minutes), {hash:{},inverse:self.noop,fn:self.program(18, program18, data),data:data});
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.minutes), {hash:{},inverse:self.noop,fn:self.program(15, program15, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n                    ";
-  options = {hash:{},inverse:self.noop,fn:self.program(14, program14, data),data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data};
   stack2 = ((stack1 = helpers.and || depth0.and),stack1 ? stack1.call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.minutes), ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.seconds), options) : helperMissing.call(depth0, "and", ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.minutes), ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.seconds), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n                    ";
-  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.seconds), {hash:{},inverse:self.noop,fn:self.program(20, program20, data),data:data});
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.seconds), {hash:{},inverse:self.noop,fn:self.program(17, program17, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n                </ul>\n            ";
   return buffer;
   }
-function program12(depth0,data) {
+function program9(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n                    <li class=\"days\">"
@@ -312,13 +297,13 @@ function program12(depth0,data) {
   return buffer;
   }
 
-function program14(depth0,data) {
+function program11(depth0,data) {
   
   
   return "\n                    <li class=\"durationcolon\">:</li>\n                    ";
   }
 
-function program16(depth0,data) {
+function program13(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n                    <li class=\"hours\">"
@@ -327,7 +312,7 @@ function program16(depth0,data) {
   return buffer;
   }
 
-function program18(depth0,data) {
+function program15(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n                    <li class=\"minutes\">"
@@ -336,7 +321,7 @@ function program18(depth0,data) {
   return buffer;
   }
 
-function program20(depth0,data) {
+function program17(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n                    <li class=\"seconds\">"
@@ -353,10 +338,10 @@ function program20(depth0,data) {
   stack1 = helpers['if'].call(depth0, depth0.loading, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n\n            ";
-  stack1 = helpers.unless.call(depth0, depth0.loading, {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data});
+  stack1 = helpers.unless.call(depth0, depth0.loading, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n\n            ";
-  stack1 = helpers['if'].call(depth0, depth0.duration, {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.duration, {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n        </div>\n    </div>\n\n    <div class=\"field item-add-event\">\n        <label for=\"event\">\n            Add event or schedule date:\n            <input type=\"checkbox\" name=\"event\" id=\"event\">\n        </label>\n    </div>\n\n    <div class=\"field item-add-ets\">\n        <label for=\"ets\">Event Date</label>\n        <input type=\"date\" placeholder=\"dd/mm/yyyy\" min=\"1900-00-00\" name=\"ets\" value=\"";
   if (stack1 = helpers.ets) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
