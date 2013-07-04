@@ -4,23 +4,6 @@ Application.View.SearchItem = Application.View.TimelineItem.extend({
         template: JST['search-item']
     },
 
-    templateHelpers: {
-        time: Application.Helpers.time,
-        url: Application.Helpers.url,
-
-        hasEvent: Application.Helpers.hasEvent,
-        isEvent: Application.Helpers.isEvent,
-        isAdded: Application.Helpers.isAdded,
-
-        getDuration: Application.Helpers.getDuration,
-
-        getYoutubeUrl: Application.Helpers.getYoutubeUrl,
-        getSpotifyUrl: Application.Helpers.getSpotifyUrl,
-
-        isYoutube: Application.Helpers.isYoutube,
-        isSpotify: Application.Helpers.isSpotify
-    },
-
 
     className: function() {
         var className = 'item';
