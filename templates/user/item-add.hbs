@@ -1,22 +1,49 @@
 <form class="form item-add-form">
-    <div class="field item-add-media">
-        <label for="watch">
-            <input type="radio" name="media" value="video" id="watch" checked="checked">
+    <ul class="field item-add-media">
+        {{#is media 'video'}}
+        <li class="item-add-media-type item-add-media-type-is-selected item-add-media-type-watch" data-type="video">
+        {{else}}
+        <li class="item-add-media-type item-add-media-type-watch" data-type="video">
+        {{/is}}
+            <p class="sash video">
+                <i class="icon-facetime-video"></i>
+            </p>
             Watch
-        </label>
-        <label for="listen">
-            <input type="radio" name="media" value="audio" id="listen">
+        </li>
+
+        {{#is media 'audio'}}
+        <li class="item-add-media-type item-add-media-type-is-selected item-add-media-type-listen" data-type="audio">
+        {{else}}
+        <li class="item-add-media-type item-add-media-type-listen" data-type="audio">
+        {{/is}}
+            <p class="sash audio">
+                <i class="icon-headphones"></i>
+            </p>
             Listen
-        </label>
-        <label for="do">
-            <input type="radio" name="media" value="event" id="do">
+        </li>
+
+        {{#is media 'event'}}
+        <li class="item-add-media-type item-add-media-type-is-selected item-add-media-type-do" data-type="event">
+        {{else}}
+        <li class="item-add-media-type item-add-media-type-do" data-type="event">
+        {{/is}}
+            <p class="sash event">
+                <i class="icon-calendar"></i>
+            </p>
             Do
-        </label>
-        <label for="read">
-            <input type="radio" name="media" value="text" id="read">
+        </li>
+
+        {{#is media 'text'}}
+        <li class="item-add-media-type item-add-media-type-is-selected item-add-media-type-read" data-type="text">
+        {{else}}
+        <li class="item-add-media-type item-add-media-type-read" data-type="text">
+        {{/is}}
+            <p class="sash text">
+                <i class="icon-file-alt"></i>
+            </p>
             Read
-        </label>
-    </div>
+        </li>
+    </ul>
 
     <div class="field item-add-title">
         <input type="text" name="text" placeholder="Title" value="{{ text }}">
@@ -29,23 +56,29 @@
                 <img src="/-assets/images/loading-image.gif" height="16" width="16" />
             {{else}}
                 <ul class="item-add-image-list">
-                    <li class="item-add-image-list-item item-add-image-list-current" style="background-image: url({{image}});"></li>
+                    {{#unless alternates}}
+                        <li class="item-add-image-list-empty">No images</li>
+                    {{else}}
+                        <li class="item-add-image-list-item item-add-image-list-current" style="background-image: url({{image}});"></li>
 
-                    {{#each alternates}}
-                        <li class="item-add-image-list-item" style="background-image: url({{this.url}});"></li>
-                    {{/each}}
+                        {{#each alternates}}
+                            <li class="item-add-image-list-item" style="background-image: url({{this.url}});"></li>
+                        {{/each}}
+                    {{/unless}}
                 </ul>
             {{/if}}
 
             {{#unless loading}}
-                <ul class="item-add-image-controls">
-                    <li class="item-add-image-controls-next">
-                        <i class="icon-circle-arrow-right"></i>
-                    </li>
-                    <li class="item-add-image-controls-prev">
-                        <i class="icon-circle-arrow-left"></i>
-                    </li>
-                </ul>
+                {{#if alternates}}
+                    <ul class="item-add-image-controls">
+                        <li class="item-add-image-controls-next">
+                            <i class="icon-circle-arrow-right"></i>
+                        </li>
+                        <li class="item-add-image-controls-prev">
+                            <i class="icon-circle-arrow-left"></i>
+                        </li>
+                    </ul>
+                {{/if}}
             {{/unless}}
 
             {{#if duration}}
@@ -76,27 +109,27 @@
 
                     {{#if duration.seconds }}
                     <li class="seconds">{{ duration.seconds }}s</li>
-
                     {{/if}}
                 </ul>
             {{/if}}
         </div>
     </div>
 
-    <div class="field item-add-event">
+    <div class="field item-add-has-event">
         <label for="event">
             Add event or schedule date:
             <input type="checkbox" name="event" id="event">
         </label>
     </div>
 
-    <div class="field item-add-ets">
-        <label for="ets">Event Date</label>
-        <input type="date" placeholder="dd/mm/yyyy" min="1900-00-00" name="ets" value="{{ ets }}">
+    <div class="field item-add-event">
+        <label for="event">Event Date</label>
+        <input type="date" placeholder="dd/mm/yyyy" min="1900-00-00" name="event" value="{{ event }}">
     </div>
 
     <div class="actions">
         <input type="hidden" name="duration" value="{{ duration.original }}">
+        <input type="hidden" name="media" value="{{ media }}">
 
         <input type="submit" value="Add" class="item-add-btn-add">
         <input type="submit" value="Cancel" class="item-add-btn-cancel">

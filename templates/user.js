@@ -222,73 +222,145 @@ function program1(depth0,data) {
 this["JST"]["item-add"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
+  
+  
+  return "\n        <li class=\"item-add-media-type item-add-media-type-is-selected item-add-media-type-watch\" data-type=\"video\">\n        ";
+  }
+
+function program3(depth0,data) {
+  
+  
+  return "\n        <li class=\"item-add-media-type item-add-media-type-watch\" data-type=\"video\">\n        ";
+  }
+
+function program5(depth0,data) {
+  
+  
+  return "\n        <li class=\"item-add-media-type item-add-media-type-is-selected item-add-media-type-listen\" data-type=\"audio\">\n        ";
+  }
+
+function program7(depth0,data) {
+  
+  
+  return "\n        <li class=\"item-add-media-type item-add-media-type-listen\" data-type=\"audio\">\n        ";
+  }
+
+function program9(depth0,data) {
+  
+  
+  return "\n        <li class=\"item-add-media-type item-add-media-type-is-selected item-add-media-type-do\" data-type=\"event\">\n        ";
+  }
+
+function program11(depth0,data) {
+  
+  
+  return "\n        <li class=\"item-add-media-type item-add-media-type-do\" data-type=\"event\">\n        ";
+  }
+
+function program13(depth0,data) {
+  
+  
+  return "\n        <li class=\"item-add-media-type item-add-media-type-is-selected item-add-media-type-read\" data-type=\"text\">\n        ";
+  }
+
+function program15(depth0,data) {
+  
+  
+  return "\n        <li class=\"item-add-media-type item-add-media-type-read\" data-type=\"text\">\n        ";
+  }
+
+function program17(depth0,data) {
   
   
   return "\n                <img src=\"/-assets/images/loading-image.gif\" height=\"16\" width=\"16\" />\n            ";
   }
 
-function program3(depth0,data) {
+function program19(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                <ul class=\"item-add-image-list\">\n                    <li class=\"item-add-image-list-item item-add-image-list-current\" style=\"background-image: url(";
-  if (stack1 = helpers.image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + ");\"></li>\n\n                    ";
-  stack1 = helpers.each.call(depth0, depth0.alternates, {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  buffer += "\n                <ul class=\"item-add-image-list\">\n                    ";
+  stack1 = helpers.unless.call(depth0, depth0.alternates, {hash:{},inverse:self.program(22, program22, data),fn:self.program(20, program20, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                </ul>\n            ";
   return buffer;
   }
-function program4(depth0,data) {
+function program20(depth0,data) {
+  
+  
+  return "\n                        <li class=\"item-add-image-list-empty\">No images</li>\n                    ";
+  }
+
+function program22(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                        <li class=\"item-add-image-list-item\" style=\"background-image: url("
+  buffer += "\n                        <li class=\"item-add-image-list-item item-add-image-list-current\" style=\"background-image: url(";
+  if (stack1 = helpers.image) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.image; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + ");\"></li>\n\n                        ";
+  stack1 = helpers.each.call(depth0, depth0.alternates, {hash:{},inverse:self.noop,fn:self.program(23, program23, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n                    ";
+  return buffer;
+  }
+function program23(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n                            <li class=\"item-add-image-list-item\" style=\"background-image: url("
     + escapeExpression(((stack1 = depth0.url),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + ");\"></li>\n                    ";
+    + ");\"></li>\n                        ";
   return buffer;
   }
 
-function program6(depth0,data) {
+function program25(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n                ";
+  stack1 = helpers['if'].call(depth0, depth0.alternates, {hash:{},inverse:self.noop,fn:self.program(26, program26, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n            ";
+  return buffer;
+  }
+function program26(depth0,data) {
   
   
-  return "\n                <ul class=\"item-add-image-controls\">\n                    <li class=\"item-add-image-controls-next\">\n                        <i class=\"icon-circle-arrow-right\"></i>\n                    </li>\n                    <li class=\"item-add-image-controls-prev\">\n                        <i class=\"icon-circle-arrow-left\"></i>\n                    </li>\n                </ul>\n            ";
+  return "\n                    <ul class=\"item-add-image-controls\">\n                        <li class=\"item-add-image-controls-next\">\n                            <i class=\"icon-circle-arrow-right\"></i>\n                        </li>\n                        <li class=\"item-add-image-controls-prev\">\n                            <i class=\"icon-circle-arrow-left\"></i>\n                        </li>\n                    </ul>\n                ";
   }
 
-function program8(depth0,data) {
+function program28(depth0,data) {
   
   var buffer = "", stack1, stack2, options;
   buffer += "\n                <ul class=\"item-add-duration duration pull-left\">\n                    ";
-  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.days), {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data});
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.days), {hash:{},inverse:self.noop,fn:self.program(29, program29, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n                    ";
-  options = {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(31, program31, data),data:data};
   stack2 = ((stack1 = helpers.and || depth0.and),stack1 ? stack1.call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.days), ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.hours), options) : helperMissing.call(depth0, "and", ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.days), ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.hours), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n                    ";
-  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.hours), {hash:{},inverse:self.noop,fn:self.program(13, program13, data),data:data});
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.hours), {hash:{},inverse:self.noop,fn:self.program(33, program33, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n                    ";
-  options = {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(31, program31, data),data:data};
   stack2 = ((stack1 = helpers.and || depth0.and),stack1 ? stack1.call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.hours), ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.minutes), options) : helperMissing.call(depth0, "and", ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.hours), ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.minutes), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n                    ";
-  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.minutes), {hash:{},inverse:self.noop,fn:self.program(15, program15, data),data:data});
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.minutes), {hash:{},inverse:self.noop,fn:self.program(35, program35, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n                    ";
-  options = {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(31, program31, data),data:data};
   stack2 = ((stack1 = helpers.and || depth0.and),stack1 ? stack1.call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.minutes), ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.seconds), options) : helperMissing.call(depth0, "and", ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.minutes), ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.seconds), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n                    ";
-  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.seconds), {hash:{},inverse:self.noop,fn:self.program(17, program17, data),data:data});
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.seconds), {hash:{},inverse:self.noop,fn:self.program(37, program37, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n                </ul>\n            ";
   return buffer;
   }
-function program9(depth0,data) {
+function program29(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n                    <li class=\"days\">"
@@ -297,13 +369,13 @@ function program9(depth0,data) {
   return buffer;
   }
 
-function program11(depth0,data) {
+function program31(depth0,data) {
   
   
   return "\n                    <li class=\"durationcolon\">:</li>\n                    ";
   }
 
-function program13(depth0,data) {
+function program33(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n                    <li class=\"hours\">"
@@ -312,7 +384,7 @@ function program13(depth0,data) {
   return buffer;
   }
 
-function program15(depth0,data) {
+function program35(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n                    <li class=\"minutes\">"
@@ -321,34 +393,54 @@ function program15(depth0,data) {
   return buffer;
   }
 
-function program17(depth0,data) {
+function program37(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n                    <li class=\"seconds\">"
     + escapeExpression(((stack1 = ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.seconds)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "s</li>\n\n                    ";
+    + "s</li>\n                    ";
   return buffer;
   }
 
-  buffer += "<form class=\"form item-add-form\">\n    <div class=\"field item-add-media\">\n        <label for=\"watch\">\n            <input type=\"radio\" name=\"media\" value=\"video\" id=\"watch\" checked=\"checked\">\n            Watch\n        </label>\n        <label for=\"listen\">\n            <input type=\"radio\" name=\"media\" value=\"audio\" id=\"listen\">\n            Listen\n        </label>\n        <label for=\"do\">\n            <input type=\"radio\" name=\"media\" value=\"event\" id=\"do\">\n            Do\n        </label>\n        <label for=\"read\">\n            <input type=\"radio\" name=\"media\" value=\"text\" id=\"read\">\n            Read\n        </label>\n    </div>\n\n    <div class=\"field item-add-title\">\n        <input type=\"text\" name=\"text\" placeholder=\"Title\" value=\"";
-  if (stack1 = helpers.text) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.text; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  buffer += "<form class=\"form item-add-form\">\n    <ul class=\"field item-add-media\">\n        ";
+  options = {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data};
+  stack2 = ((stack1 = helpers.is || depth0.is),stack1 ? stack1.call(depth0, depth0.media, "video", options) : helperMissing.call(depth0, "is", depth0.media, "video", options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n            <p class=\"sash video\">\n                <i class=\"icon-facetime-video\"></i>\n            </p>\n            Watch\n        </li>\n\n        ";
+  options = {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data};
+  stack2 = ((stack1 = helpers.is || depth0.is),stack1 ? stack1.call(depth0, depth0.media, "audio", options) : helperMissing.call(depth0, "is", depth0.media, "audio", options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n            <p class=\"sash audio\">\n                <i class=\"icon-headphones\"></i>\n            </p>\n            Listen\n        </li>\n\n        ";
+  options = {hash:{},inverse:self.program(11, program11, data),fn:self.program(9, program9, data),data:data};
+  stack2 = ((stack1 = helpers.is || depth0.is),stack1 ? stack1.call(depth0, depth0.media, "event", options) : helperMissing.call(depth0, "is", depth0.media, "event", options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n            <p class=\"sash event\">\n                <i class=\"icon-calendar\"></i>\n            </p>\n            Do\n        </li>\n\n        ";
+  options = {hash:{},inverse:self.program(15, program15, data),fn:self.program(13, program13, data),data:data};
+  stack2 = ((stack1 = helpers.is || depth0.is),stack1 ? stack1.call(depth0, depth0.media, "text", options) : helperMissing.call(depth0, "is", depth0.media, "text", options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n            <p class=\"sash text\">\n                <i class=\"icon-file-alt\"></i>\n            </p>\n            Read\n        </li>\n    </ul>\n\n    <div class=\"field item-add-title\">\n        <input type=\"text\" name=\"text\" placeholder=\"Title\" value=\"";
+  if (stack2 = helpers.text) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.text; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "\">\n    </div>\n\n\n    <div class=\"field item-add-image\">\n        <div class=\"item-add-image-placeholder\">\n            ";
-  stack1 = helpers['if'].call(depth0, depth0.loading, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
+  stack2 = helpers['if'].call(depth0, depth0.loading, {hash:{},inverse:self.program(19, program19, data),fn:self.program(17, program17, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n            ";
-  stack1 = helpers.unless.call(depth0, depth0.loading, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
+  stack2 = helpers.unless.call(depth0, depth0.loading, {hash:{},inverse:self.noop,fn:self.program(25, program25, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n            ";
-  stack1 = helpers['if'].call(depth0, depth0.duration, {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </div>\n    </div>\n\n    <div class=\"field item-add-event\">\n        <label for=\"event\">\n            Add event or schedule date:\n            <input type=\"checkbox\" name=\"event\" id=\"event\">\n        </label>\n    </div>\n\n    <div class=\"field item-add-ets\">\n        <label for=\"ets\">Event Date</label>\n        <input type=\"date\" placeholder=\"dd/mm/yyyy\" min=\"1900-00-00\" name=\"ets\" value=\"";
-  if (stack1 = helpers.ets) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.ets; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  stack2 = helpers['if'].call(depth0, depth0.duration, {hash:{},inverse:self.noop,fn:self.program(28, program28, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n        </div>\n    </div>\n\n    <div class=\"field item-add-has-event\">\n        <label for=\"event\">\n            Add event or schedule date:\n            <input type=\"checkbox\" name=\"event\" id=\"event\">\n        </label>\n    </div>\n\n    <div class=\"field item-add-event\">\n        <label for=\"event\">Event Date</label>\n        <input type=\"date\" placeholder=\"dd/mm/yyyy\" min=\"1900-00-00\" name=\"event\" value=\"";
+  if (stack2 = helpers.event) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.event; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "\">\n    </div>\n\n    <div class=\"actions\">\n        <input type=\"hidden\" name=\"duration\" value=\""
     + escapeExpression(((stack1 = ((stack1 = depth0.duration),stack1 == null || stack1 === false ? stack1 : stack1.original)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\">\n        <input type=\"hidden\" name=\"media\" value=\"";
+  if (stack2 = helpers.media) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.media; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "\">\n\n        <input type=\"submit\" value=\"Add\" class=\"item-add-btn-add\">\n        <input type=\"submit\" value=\"Cancel\" class=\"item-add-btn-cancel\">\n    </div>\n</form>";
   return buffer;
   });

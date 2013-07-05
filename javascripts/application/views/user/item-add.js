@@ -7,8 +7,10 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
 
     events: {
         'submit .item-add-form': 'submit',
-        'click .item-add-event input': 'event',
-        'click .item-add-type input': 'toggle',
+
+        'click .item-add-media-type': 'changeMedia',
+        'click .item-add-has-event input': 'toggleEvent',
+        'click .item-add-type input': 'toggleType',
         'click .item-add-btn-cancel': 'cancel',
 
         'click .item-add-image-controls-next': 'next',
@@ -23,8 +25,8 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         form: '.item-add-form',
         title: '.item-add-title',
         type: '.item-add-type',
-        event: '.item-add-event',
-        ets: '.item-add-ets',
+        media: '.item-add',
+        hasEvent: '.item-add-has-event',
         duration: '.item-add-duration',
         error: '.form-error',
 
@@ -37,9 +39,11 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         var self = this;
 
         this.model.set({
+            alternates: [],
             loading: true,
             text: '',
-            ets: ''
+            event: '',
+            media: 'video'
         });
 
 
@@ -48,7 +52,7 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         promise.done(function(data) {
             self.model.set('text', data.title);
 
-            if (data.alternates.length > 0) {
+            if (data.alternates && data.alternates.length > 0) {
                 self.model.set('alternates', data.alternates);
             }
 
@@ -61,13 +65,23 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     },
 
 
-    event: function() {
-        this.ui.ets.toggle();
-        this.ui.ets.find('input').val(null);
+    changeMedia: function(event) {
+        var $target = $(event.target).closest('.item-add-media-type');
+
+        $target.siblings().removeClass('item-add-media-type-is-selected');
+        $target.addClass('item-add-media-type-is-selected');
+
+        this.model.set('media', $target.data('type'));
     },
 
 
-    toggle: function(event) {
+    toggleEvent: function() {
+        this.ui.event.toggle();
+        this.ui.event.find('input').val(null);
+    },
+
+
+    toggleType: function(event) {
         var value = $(event.target).val();
 
         if (value === 'text') {
@@ -77,9 +91,9 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         }
 
         if (value === 'event') {
-            this.ui.ets.show();
+            this.ui.event.show();
         } else {
-            this.ui.ets.hide();
+            this.ui.event.hide();
         }
     },
 
@@ -168,17 +182,9 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         }
 
         this.ui.title.find('input').focus();
-
-        this.$el.find('select, input[type=radio], input[type=checkbox]').uniform({
-            useID: false
-        });
     },
 
     onClose: function() {
         $('input[type=date]').datepicker('destroy');
-
-        $.uniform.restore('select');
-        $.uniform.restore('input[type=radio]');
-        $.uniform.restore('input[type=checkbox]');
     }
 });
