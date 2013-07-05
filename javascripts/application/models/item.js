@@ -109,7 +109,7 @@ Application.Model.Item = Backbone.Model.extend({
                 pid: Application.session.get('pid'),
                 link: this.get('link'),
                 text: this.get('text'),
-                image: this.get('image'),
+                image: this.get('image').replace('/-img/', ''),
                 media: this.get('media'),
                 ets: this.get('ets'),
                 duration: this.get('duration')
