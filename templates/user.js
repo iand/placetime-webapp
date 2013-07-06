@@ -374,6 +374,30 @@ function program1(depth0,data) {
   else { return ''; }
   }));
 
+this["JST"]["follower-empty"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, self=this;
+
+function program1(depth0,data) {
+  
+  
+  return "\n        <span>Loading followers</span>\n        <img alt=\"Loading\" class=\"loading\" src=\"/-assets/images/vendor/jquery/fancybox/fancybox_loading.gif\" height=\"24\" width=\"24\" />\n    ";
+  }
+
+function program3(depth0,data) {
+  
+  
+  return "\n        You have no followers\n    ";
+  }
+
+  buffer += "<p>\n    ";
+  stack1 = helpers['if'].call(depth0, depth0.loading, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</p>";
+  return buffer;
+  });
+
 this["JST"]["follower"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); partials = this.merge(partials, Handlebars.partials); data = data || {};
@@ -435,6 +459,30 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 
   return "<div class=\"scroller\">\n    <div class=\"collection-children\"></div>\n</div>";
+  });
+
+this["JST"]["following-empty"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, self=this;
+
+function program1(depth0,data) {
+  
+  
+  return "\n        <span>Loading following</span>\n        <img alt=\"Loading\" class=\"loading\" src=\"/-assets/images/vendor/jquery/fancybox/fancybox_loading.gif\" height=\"24\" width=\"24\" />\n    ";
+  }
+
+function program3(depth0,data) {
+  
+  
+  return "\n        You have no following\n    ";
+  }
+
+  buffer += "<p>\n    ";
+  stack1 = helpers['if'].call(depth0, depth0.loading, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</p>";
+  return buffer;
   });
 
 this["JST"]["following"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {

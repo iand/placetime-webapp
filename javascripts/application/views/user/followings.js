@@ -8,6 +8,8 @@ Application.View.Followings = Backbone.Marionette.CompositeView.extend({
     itemView: Application.View.Following,
     itemViewContainer: '.collection-children',
 
+    emptyView: Application.View.FollowingEmpty,
+
     modelEvents: {
         'change:loading': 'render'
     },
