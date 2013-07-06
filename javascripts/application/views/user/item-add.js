@@ -167,7 +167,7 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
             $('input[type=date]').datepicker({
                 changeMonth: true,
                 changeYear: true,
-                dateFormat: 'mm/dd/yy'
+                dateFormat: 'yy-mm-dd'
             });
         }
 
