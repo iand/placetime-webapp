@@ -52,34 +52,20 @@
 
     <div class="field item-add-image">
         <div class="item-add-image-placeholder">
-            {{#if loading}}
-                <img src="/-assets/images/loading-image.gif" height="16" width="16" />
-            {{else}}
-                <ul class="item-add-image-list">
-                    {{#unless alternates}}
-                        <li class="item-add-image-list-empty">No images</li>
-                    {{else}}
-                        <li class="item-add-image-list-item item-add-image-list-current" style="background-image: url({{image}});"></li>
+            <img class="item-add-loading" src="/-assets/images/loading-image.gif" height="16" width="16" />
+            <ul class="item-add-image-list">
+                <li class="item-add-image-list-empty">No images</li>
+                <li class="item-add-image-list-item item-add-image-best item-add-image-list-current"></li>
+            </ul>
 
-                        {{#each alternates}}
-                            <li class="item-add-image-list-item" style="background-image: url({{this.url}});"></li>
-                        {{/each}}
-                    {{/unless}}
-                </ul>
-            {{/if}}
-
-            {{#unless loading}}
-                {{#if alternates}}
-                    <ul class="item-add-image-controls">
-                        <li class="item-add-image-controls-next">
-                            <i class="icon-circle-arrow-right"></i>
-                        </li>
-                        <li class="item-add-image-controls-prev">
-                            <i class="icon-circle-arrow-left"></i>
-                        </li>
-                    </ul>
-                {{/if}}
-            {{/unless}}
+            <ul class="item-add-image-controls">
+                <li class="item-add-image-controls-next">
+                    <i class="icon-circle-arrow-right"></i>
+                </li>
+                <li class="item-add-image-controls-prev">
+                    <i class="icon-circle-arrow-left"></i>
+                </li>
+            </ul>
 
             {{#if duration}}
                 <ul class="item-add-duration duration pull-left">
@@ -130,6 +116,7 @@
     <div class="actions">
         <input type="hidden" name="duration" value="{{ duration.original }}">
         <input type="hidden" name="media" value="{{ media }}">
+        <input type="hidden" name="image" value="{{ image }}">
 
         <input type="submit" value="Add" class="item-add-btn-add">
         <input type="submit" value="Cancel" class="item-add-btn-cancel">

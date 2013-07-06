@@ -3,7 +3,10 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         type: 'handlebars',
         template: JST['item-add']
     },
+
+
     className: 'item item-add',
+
 
     events: {
         'submit .item-add-form': 'submit',
@@ -17,9 +20,6 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         'click .item-add-image-controls-prev': 'prev'
     },
 
-    modelEvents: {
-        'change': 'render'
-    },
 
     ui: {
         form: '.item-add-form',
@@ -31,17 +31,22 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         error: '.form-error',
 
         mediaInput: 'input[name=media]',
-        titleInput: 'input[name=text]',
+        textInput: 'input[name=text]',
+        imageInput: 'input[name=image]',
         durationInput: 'input[name=duration]',
 
-        list: '.item-add-image-list',
+        imageList: '.item-add-image-list',
+        imageBest: '.item-add-image-best',
+        imageEmpty: '.item-add-image-list-empty',
+        imageControls: '.item-add-image-controls',
+
+        loading: '.item-add-loading',
         controls: '.item-add-controls'
     },
 
 
-    initialize: function(options) {
-        var self = this;
 
+    initialize: function(options) {
         this.model.set({
             alternates: [],
             loading: true,
@@ -49,27 +54,8 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
             event: '',
             media: 'video'
         });
-
-
-        var promise = this.model.detect();
-
-        promise.done(function(data) {
-            if (data.alternates === undefined || data.alternates.length === 0) {
-                data.alternates = [];
-            }
-
-            self.model.set({
-                text: data.title,
-                image: '/-img/' + data.bestImage,
-                alternates: data.alternates,
-                loading: false
-            });
-        });
-
-        promise.fail(function() {
-            self.model.set('loading', false);
-        });
     },
+
 
 
     changeMedia: function(event) {
@@ -78,20 +64,16 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         $target.siblings().removeClass('item-add-media-type-is-selected');
         $target.addClass('item-add-media-type-is-selected');
 
-        this.model.set(
-            'media', $target.data('type'),
-            {
-                silent: true
-            }
-        );
         this.ui.mediaInput.val($target.data('type'));
     },
+
 
 
     toggleEvent: function() {
         this.ui.event.toggle();
         this.ui.event.find('input').val(null);
     },
+
 
 
     toggleType: function(event) {
@@ -109,6 +91,7 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
             this.ui.event.hide();
         }
     },
+
 
 
     submit: function(event) {
@@ -129,6 +112,7 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     },
 
 
+
     cancel: function() {
         this.trigger('cancelled');
 
@@ -136,60 +120,49 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     },
 
 
+
     next: function() {
-        var $current = this.ui.list.find('.item-add-image-list-current');
+        var $current = this.ui.imageList.find('.item-add-image-list-current');
 
 
-        var $next = $current.next();
+        var $next = $current.next('.item-add-image-list-item');
 
         if ($next.length === 0) {
-            $next = this.ui.list.find('.item-add-image-list-item').first();
+            $next = this.ui.imageList.find('.item-add-image-list-item').first();
         }
 
         $next.addClass('item-add-image-list-current');
         $current.removeClass('item-add-image-list-current');
 
-        this.model.set(
-            'image', $next.css('background-image'),
-            {
-                silent: true
-            }
-        );
+        this.ui.imageInput.val($next.data('image'));
 
         return false;
     },
 
 
+
     prev: function() {
-        var $current = this.ui.list.find('.item-add-image-list-current');
+        var $current = this.ui.imageList.find('.item-add-image-list-current');
 
 
-        var $prev = $current.prev();
+        var $prev = $current.prev('.item-add-image-list-item');
 
         if ($prev.length === 0) {
-            $prev = this.ui.list.find('.item-add-image-list-item').last();
+            $prev = this.ui.imageList.find('.item-add-image-list-item').last();
         }
 
 
         $prev.addClass('item-add-image-list-current');
         $current.removeClass('item-add-image-list-current');
 
-        this.model.set(
-            'image', $prev.css('background-image'),
-            {
-                silent: true
-            }
-        );
+        this.ui.imageInput.val($prev.data('image'));
 
         return false;
     },
 
 
-    onShow: function() {
-        this.ui.title.find('input').focus();
-    },
 
-    onRender: function() {
+    onShow: function() {
         if (Modernizr.inputtypes.date === false) {
             $('input[type=date]').datepicker({
                 changeMonth: true,
@@ -197,7 +170,55 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
                 dateFormat: 'mm/dd/yy'
             });
         }
+
+        this.ui.title.find('input').focus();
     },
+
+
+
+    onRender: function() {
+        var self = this;
+
+
+        var promise = this.model.detect();
+
+        promise.done(function(data) {
+            // Text
+            self.ui.textInput.val(data.title);
+
+            // Best image
+            self.ui.imageBest.css('background-image', 'url(/-img/'+data.bestImage+')');
+            self.ui.imageBest.data('image', data.bestImage);
+            self.ui.imageInput.val(data.bestImage);
+
+            if (data.alternates.length > 0) {
+                // Alternate images
+                $.each(data.alternates, function(index, alternate){
+                    var $li = $('<li />').addClass('item-add-image-list-item');
+                        $li.css('background-image', 'url('+alternate.url+')');
+                        $li.data('image', alternate.url);
+
+                    self.ui.imageList.append($li);
+                });
+
+                self.ui.imageControls.show();
+                self.ui.imageList.show();
+                self.ui.imageEmpty.hide();
+            } else {
+                self.ui.imageEmpty.show();
+            }
+
+            self.ui.loading.hide();
+        });
+
+
+        promise.fail(function() {
+            self.ui.loading.hide();
+            self.ui.imageEmpty.show();
+        });
+    },
+
+
 
     onClose: function() {
         $('input[type=date]').datepicker('destroy');

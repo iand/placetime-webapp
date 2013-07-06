@@ -74,9 +74,14 @@
 
 // Image list
 .item-add-image-list {
+    display: none;
     list-style: none;
     margin: 0;
     padding: 0
+}
+
+.item-add-image-list-empty {
+    display: none;
 }
 
 .item-add-image-list-item {
@@ -94,6 +99,7 @@
 
 // Controls
 .item-add-image-controls {
+    display: none;
     bottom: 2px;
     list-style: none;
     margin: 0;
