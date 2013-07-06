@@ -187,11 +187,13 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
             self.ui.textInput.val(data.title);
 
             // Best image
-            self.ui.imageBest.css('background-image', 'url(/-img/'+data.bestImage+')');
-            self.ui.imageBest.data('image', data.bestImage);
-            self.ui.imageInput.val(data.bestImage);
+            if (data.bestImage !== undefined) {
+                self.ui.imageBest.css('background-image', 'url(/-img/'+data.bestImage+')');
+                self.ui.imageBest.data('image', data.bestImage);
+                self.ui.imageInput.val(data.bestImage);
+            }
 
-            if (data.alternates.length > 0) {
+            if (data.alternates && data.alternates.length > 0) {
                 // Alternate images
                 $.each(data.alternates, function(index, alternate){
                     var $li = $('<li />').addClass('item-add-image-list-item');
@@ -202,12 +204,16 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
                 });
 
                 self.ui.imageControls.show();
-                self.ui.imageList.show();
                 self.ui.imageEmpty.hide();
             } else {
-                self.ui.imageEmpty.show();
+                if (data.bestImage === undefined) {
+                    self.ui.imageEmpty.show();
+                }
+
+                self.ui.imageControls.hide();
             }
 
+            self.ui.imageList.show();
             self.ui.loading.hide();
         });
 
