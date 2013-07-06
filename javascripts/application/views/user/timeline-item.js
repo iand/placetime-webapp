@@ -50,8 +50,7 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
                 width: 680
             });
 
-        // TODO: Add pid === user when pid is equal to promoting user
-        if (this.model.get('status') === 'm') {
+        if (this.model.get('session') === this.model.get('user') && this.model.get('status') === 'm') {
             $iframe.attr('width', 420);
         } else {
             $iframe.attr('width', 680);

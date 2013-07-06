@@ -16,7 +16,7 @@ Application.View.Timeline = Backbone.Marionette.ItemView.extend({
 
         // On view change update model
         // TODO: Find better way
-        this.on('all', function(event) {
+        this.on('view', function(event) {
             var match = event.match(/view:(.*)/);
 
             if (match === null) {

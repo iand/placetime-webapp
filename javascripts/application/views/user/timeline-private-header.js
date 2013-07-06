@@ -12,11 +12,6 @@ Application.View.PrivateTimelineHeader = Application.View.TimelineHeader.extend(
     },
 
 
-    modelEvents: {
-        'change': 'render'
-    },
-
-
     playlist: function() {
         this.trigger('view:playlist');
 
