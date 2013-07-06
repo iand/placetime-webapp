@@ -1,82 +1,18 @@
 <div class="overlay"></div>
 
 {{> sashes }}
+
 {{> notifications }}
 
-<div class="icon pull-left">
-    {{#ifSystemUser author.pid}}
-        <img src="/-assets/images/avatars/{{ author.pid }}.png" width="40" height="40" />
-    {{else}}
-        {{#if author.profileimageurlhttps}}
-            <img src="{{ author.profileimageurlhttps }}" width="40" height="40" />
-        {{else}}
-            <img src="/-assets/images/avatars/default.png" width="40" height="40" />
-        {{/if}}
-    {{/ifSystemUser}}
-</div>
-<p class="username username-item pull-left">
-    {{#ifSystemUser author.pid}}
-    <span>
-        {{ author.pid }}
-    </span>
-    {{else}}
-    <a href="#user/{{ author.pid }}">
-        {{ author.pid }}
-    </a>
-    {{/ifSystemUser}}
-</p>
+{{> icon }}
 
+{{> username }}
 
-{{#is media 'video'}}
-    <p class="item-text pull-left">
-        {{#ifYoutube link }}
-            <a class="fancybox fancybox.iframe" href="{{ getYoutubeUrl link }}">
-                <i class="icon-play-circle"></i>
-                {{ text }}
-            </a>
-        {{else}}
-            <a class="fancybox fancybox.iframe" href="{{ link }}">
-                <i class="icon-play-circle"></i>
-                {{ text }}
-            </a>
-        {{/ifYoutube}}
-    </p>
-{{else}}
-    {{#is media 'audio'}}
-        <p class="item-text pull-left">
-            {{#ifSpotify link }}
-                <a class="audio" href="{{ getSpotifyUrl link }}">
-                    <i class="icon-play-circle"></i>
-                    {{ text }}
-                </a>
-            {{else}}
-                <a class="audio" href="{{ link }}">
-                    <i class="icon-play-circle"></i>
-                    {{ text }}
-                </a>
-            {{/ifSpotify}}
-        </p>
-    {{else}}
-        <p class="item-text pull-left">
-            <a class="fancybox fancybox.iframe" href="{{ link }}">
-                <i class="icon-external-link"></i>
-                {{ text }}
-            </a>
-        </p>
-    {{/is}}
-{{/is}}
-
+{{> title }}
 
 {{> duration }}
 
-
-{{#if via}}
-    <p class="via pull-left">
-        <a href="#user/{{ via.pid }}">
-            copied by {{ via.name }}
-        </a>
-    </p>
-{{/if}}
+{{> via }}
 
 <p class="time pull-left">
     <a class="fancybox fancybox.iframe" href="{{ link }}">

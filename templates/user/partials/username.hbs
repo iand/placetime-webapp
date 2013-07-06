@@ -1,0 +1,11 @@
+<p class="username username-item pull-left">
+    {{#ifSystemUser author.pid}}
+    <span>
+        {{ author.pid }}
+    </span>
+    {{else}}
+    <a href="#user/{{ author.pid }}">
+        {{ author.pid }}
+    </a>
+    {{/ifSystemUser}}
+</p>

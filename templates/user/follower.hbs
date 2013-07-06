@@ -16,24 +16,11 @@
     </a>
 </p>
 
-{{#if bio }}
-<p class="bio pull-left">
-    {{#if name }}
-        <span class="name">{{ name }}</span>:
-    {{/if}}
 
-    {{ bio }}
-</p>
-{{/if}}
+{{> bio }}
 
-<ul class="statistics pull-left">
-    <li class="followings">
-        <a href="#followings/{{ pid }}">{{ followingcount }} following</a>
-    </li>
-    <li class='followers'>
-        <a href="#followers/{{ pid }}">{{ followercount }} followers</a>
-    </li>
-</ul>
+{{> statistics }}
+
 
 {{#is reciprocal false }}
 <a class="button button-follow">

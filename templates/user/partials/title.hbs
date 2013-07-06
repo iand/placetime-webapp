@@ -1,0 +1,38 @@
+{{#is media 'video'}}
+    <p class="item-text pull-left">
+        {{#ifYoutube link }}
+            <a class="fancybox fancybox.iframe" href="{{ getYoutubeUrl link }}">
+                <i class="icon-play-circle"></i>
+                {{ text }}
+            </a>
+        {{else}}
+            <a class="fancybox fancybox.iframe" href="{{ link }}">
+                <i class="icon-play-circle"></i>
+                {{ text }}
+            </a>
+        {{/ifYoutube}}
+    </p>
+{{else}}
+    {{#is media 'audio'}}
+        <p class="item-text pull-left">
+            {{#ifSpotify link }}
+                <a class="audio" href="{{ getSpotifyUrl link }}">
+                    <i class="icon-play-circle"></i>
+                    {{ text }}
+                </a>
+            {{else}}
+                <a class="audio" href="{{ link }}">
+                    <i class="icon-play-circle"></i>
+                    {{ text }}
+                </a>
+            {{/ifSpotify}}
+        </p>
+    {{else}}
+        <p class="item-text pull-left">
+            <a class="fancybox fancybox.iframe" href="{{ link }}">
+                <i class="icon-external-link"></i>
+                {{ text }}
+            </a>
+        </p>
+    {{/is}}
+{{/is}}

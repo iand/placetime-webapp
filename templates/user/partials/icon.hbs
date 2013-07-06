@@ -1,0 +1,11 @@
+<div class="icon pull-left">
+    {{#ifSystemUser author.pid}}
+        <img src="/-assets/images/avatars/{{ author.pid }}.png" width="40" height="40" />
+    {{else}}
+        {{#if author.profileimageurlhttps}}
+            <img src="{{ author.profileimageurlhttps }}" width="40" height="40" />
+        {{else}}
+            <img src="/-assets/images/avatars/default.png" width="40" height="40" />
+        {{/if}}
+    {{/ifSystemUser}}
+</div>
