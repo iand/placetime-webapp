@@ -67,37 +67,7 @@
 {{/is}}
 
 
-{{#if duration}}
-    <ul class="item-duration duration pull-left">
-        {{#if duration.days}}
-        <li class="days">{{ duration.days }}d</li>
-        {{/if}}
-
-        {{#and duration.days duration.hours }}
-        <li class="durationcolon">:</li>
-        {{/and}}
-
-        {{#if duration.hours }}
-        <li class="hours">{{ duration.hours }}h</li>
-        {{/if}}
-
-        {{#and duration.hours duration.minutes }}
-        <li class="durationcolon">:</li>
-        {{/and}}
-
-        {{#if duration.minutes }}
-        <li class="minutes">{{ duration.minutes }}m</li>
-        {{/if}}
-
-        {{#and duration.minutes duration.seconds }}
-        <li class="durationcolon">:</li>
-        {{/and}}
-
-        {{#if duration.seconds }}
-        <li class="seconds">{{ duration.seconds }}s</li>
-        {{/if}}
-    </ul>
-{{/if}}
+{{> duration }}
 
 
 {{#if via}}

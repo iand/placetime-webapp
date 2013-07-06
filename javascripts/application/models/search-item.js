@@ -53,6 +53,13 @@ Application.Model.SearchItem = Application.Model.Item.extend({
     add: function() {
         var self = this;
 
+        var duration;
+        if (typeof this.get('duration') === 'number') {
+            duration = this.get('duration');
+        } else {
+            duration = this.get('duration').original;
+        }
+
         var promise = $.ajax({
             url: '/-tadd',
             type: 'post',
@@ -64,7 +71,7 @@ Application.Model.SearchItem = Application.Model.Item.extend({
                 image: this.get('image'),
                 media: this.get('media'),
                 event: this.get('event'),
-                duration: this.get('duration')
+                duration: duration
             }
         });
 
