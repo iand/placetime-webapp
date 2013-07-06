@@ -14,6 +14,7 @@
     overflow: hidden;
 }
 
+
 .navbar-nav {
     padding: 0;
     list-style: none;
@@ -57,9 +58,14 @@
 }
 
 
+
 .navbar-dropdown {
     .icon-edit,
     .icon-signout {
         font-size: 20px;
     }
+}
+
+.navbar-dropdown-trigger {
+    cursor: pointer;
 }

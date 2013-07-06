@@ -213,6 +213,10 @@ h3 {
   font-size: 20px;
 }
 
+.navbar-dropdown-trigger {
+  cursor: pointer;
+}
+
 .pull-left {
   float: left;
 }

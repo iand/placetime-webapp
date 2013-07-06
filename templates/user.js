@@ -19,7 +19,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  return "\n        <img src=\"/-assets/images/user.png\" width=\"40\" height=\"40\" />\n    ";
+  return "\n        <img src=\"/-assets/images/avatars/default.png\" width=\"40\" height=\"40\" />\n    ";
   }
 
 function program5(depth0,data) {
@@ -117,7 +117,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  return "\n        <img src=\"/-assets/images/user.png\" width=\"40\" height=\"40\" />\n    ";
+  return "\n        <img src=\"/-assets/images/avatars/default.png\" width=\"40\" height=\"40\" />\n    ";
   }
 
 function program5(depth0,data) {
@@ -204,7 +204,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n    <ul class=\"navbar-nav pull-right\">\n        <li>\n            <a data-dropdown=\".navbar-dropdown\">\n                <i class=\"icon-cog\"></i>\n            </a>\n        </li>\n    </ul>\n\n    <div class=\"navbar-dropdown dropdown dropdown-tip dropdown-anchor-right\">\n        <ul class=\"dropdown-menu\">\n            <li>\n                <a href=\"#user\">\n                    <i class=\"icon-user\"></i>\n                    ";
+  buffer += "\n    <ul class=\"navbar-nav pull-right\">\n        <li class=\"navbar-dropdown-trigger\">\n            <a data-dropdown=\".navbar-dropdown\">\n                <i class=\"icon-cog\"></i>\n            </a>\n        </li>\n    </ul>\n\n    <div class=\"navbar-dropdown dropdown dropdown-tip dropdown-anchor-right\">\n        <ul class=\"dropdown-menu\">\n            <li>\n                <a href=\"#user\">\n                    <i class=\"icon-user\"></i>\n                    ";
   if (stack1 = helpers.pid) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.pid; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -523,7 +523,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  return "\n        <img src=\"/-assets/images/user.png\" width=\"40\" height=\"40\" />\n    ";
+  return "\n        <img src=\"/-assets/images/avatars/default.png\" width=\"40\" height=\"40\" />\n    ";
   }
 
 function program5(depth0,data) {
@@ -1227,7 +1227,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  return "\n        <img src=\"/-assets/images/user.png\" width=\"40\" height=\"40\" />\n    ";
+  return "\n        <img src=\"/-assets/images/avatars/default.png\" width=\"40\" height=\"40\" />\n    ";
   }
 
 function program5(depth0,data) {
@@ -1338,7 +1338,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  return "\n        <img src=\"/-assets/images/user.png\" width=\"40\" height=\"40\" />\n    ";
+  return "\n        <img src=\"/-assets/images/avatars/default.png\" width=\"40\" height=\"40\" />\n    ";
   }
 
 function program5(depth0,data) {

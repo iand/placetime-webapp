@@ -776,6 +776,10 @@ h3 {
   font-size: 20px;
 }
 
+.navbar-dropdown-trigger {
+  cursor: pointer;
+}
+
 .needle {
   -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.7);
