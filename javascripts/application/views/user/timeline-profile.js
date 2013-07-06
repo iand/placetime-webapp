@@ -56,7 +56,7 @@ Application.View.TimelineProfile = Backbone.Marionette.ItemView.extend({
 
             Backbone.Marionette.ItemView.prototype.remove.apply(self, args);
         });
-        this.$el.addClass('collapsed');
+        // this.$el.addClass('collapsed');
     },
 
 
@@ -73,14 +73,16 @@ Application.View.TimelineProfile = Backbone.Marionette.ItemView.extend({
 
 
     onFlagged: function() {
-        this.$el.addClass('flagged');
+        this.$el.addClass('is-flagged');
     },
 
 
     onFollowed: function() {
-        this.$el.addClass('followed');
+        this.$el.addClass('is-followed');
     },
 
 
-    onUnfollowed: function() {}
+    onUnfollowed: function() {
+        this.$el.addClass('is-unfollowed');
+    }
 });

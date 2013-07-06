@@ -602,15 +602,15 @@ h3 {
   width: 470px;
 }
 
-.item-add-image-list-empty {
-  display: none;
-}
-
 .item-add-image-list {
   display: none;
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.item-add-image-list-empty {
+  display: none;
 }
 
 .item-add-image-list-item {
@@ -867,6 +867,64 @@ h3 {
   margin: 0 auto;
 }
 
+.notification {
+  border-style: solid;
+  border-color: transparent transparent #ff6600 transparent;
+  border-width: 0 0 24px 24px;
+  bottom: 0;
+  color: #ffffff;
+  font-size: 12px;
+  height: 0px;
+  opacity: 0;
+  line-height: 0px;
+  margin: 0;
+  position: absolute;
+  text-align: right;
+  right: 0;
+  width: 0;
+  z-index: 3;
+}
+.notification span {
+  display: inline-block;
+  padding: 6px 4px 6px;
+}
+.notification .icon-plus {
+  padding-left: 6px;
+}
+
+.notification-added {
+  width: 120px;
+}
+
+.notification-followed {
+  width: 82px;
+}
+
+.notification-unfollowed {
+  width: 100px;
+}
+
+.notification-flagged {
+  width: 82px;
+}
+
+.is-promoted .notification-added,
+.is-added .notification-added {
+  opacity: 1;
+}
+
+.is-followed .notification-followed {
+  opacity: 1;
+}
+
+.is-unfollowed .notification-unfollowed {
+  opacity: 1;
+}
+
+.is-flagged .notification-flagged {
+  opacity: 1;
+}
+
 .sash {
   border-style: solid;
   color: #ffffff;
@@ -907,27 +965,6 @@ h3 {
   top: 0;
   width: 120px;
 }
-.sash.added, .sash.followed, .sash.flagged {
-  border-color: transparent transparent #ff6600 transparent;
-  border-width: 0 0 24px 24px;
-  bottom: 0;
-  font-size: 12px;
-  text-align: right;
-  z-index: 3;
-}
-.sash.added span, .sash.followed span, .sash.flagged span {
-  display: inline-block;
-  padding: 6px 4px 6px;
-}
-.sash.added {
-  width: 120px;
-}
-.sash.followed {
-  width: 82px;
-}
-.sash.flagged {
-  width: 82px;
-}
 .sash .icon-calendar,
 .sash .icon-file-alt,
 .sash .icon-headphones,
@@ -935,12 +972,8 @@ h3 {
   position: absolute;
   right: -42px;
 }
-.sash .icon-calendar,
-.sash .icon-facetime-video {
+.sash .icon-calendar {
   top: 5px;
-}
-.sash .icon-plus {
-  padding-left: 6px;
 }
 .sash .icon-facetime-video {
   top: 7px;
@@ -952,22 +985,6 @@ h3 {
 .sash .icon-headphones {
   font-size: 16px;
   top: 7px;
-}
-
-.promoted .added.sash {
-  opacity: 1;
-}
-
-.followed .followed.sash {
-  opacity: 1;
-}
-
-.unfollowed .unfollowed.sash {
-  opacity: 1;
-}
-
-.flagged .flagged.sash {
-  opacity: 1;
 }
 
 .timeline {

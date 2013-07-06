@@ -1,8 +1,26 @@
 this["JST"] = this["JST"] || {};
 
-this["JST"]["follower"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+Handlebars.registerPartial("notifications", Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<p class=\"notification notification-added\">\n    <span>\n        Added to playlist\n        <i class=\"icon-plus\"></i>\n    </span>\n</p>\n\n<p class=\"notification notification-unfollowed\">\n    <span>\n        Unfollowed\n        <i class=\"icon-minus\"></i>\n    </span>\n</p>\n\n<p class=\"notification notification-followed\">\n    <span>\n        Followed\n        <i class=\"icon-plus\"></i>\n    </span>\n</p>\n\n<p class=\"notification notification-flagged\">\n    <span>\n        Flagged\n        <i class=\"icon-flag\"></i>\n    </span>\n</p>";
+  }));
+
+Handlebars.registerPartial("sashes", Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<p class=\"sash event\">\n    <i class=\"icon-calendar\"></i>\n</p>\n\n<p class=\"sash video\">\n    <i class=\"icon-facetime-video\"></i>\n</p>\n\n<p class=\"sash audio\">\n    <i class=\"icon-headphones\"></i>\n</p>\n\n<p class=\"sash text\">\n    <i class=\"icon-file-alt\"></i>\n</p>";
+  }));
+
+this["JST"]["follower"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); partials = this.merge(partials, Handlebars.partials); data = data || {};
   var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
@@ -52,7 +70,9 @@ function program8(depth0,data) {
   return "\n<a class=\"button button-follow\">\n    <i class=\"icon-plus\"></i>\n</a>\n";
   }
 
-  buffer += "<p class=\"sash followed\">\n    <span>\n        Followed\n        <i class=\"icon-plus\"></i>\n    </span>\n</p>\n<p class=\"sash flagged\">\n    <span>\n        Flagged\n        <i class=\"icon-flag\"></i>\n    </span>\n</p>\n\n<div class=\"icon icon-profile pull-left\">\n    ";
+  stack1 = self.invokePartial(partials.notifications, 'notifications', depth0, helpers, partials, data);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n\n<div class=\"icon icon-profile pull-left\">\n    ";
   stack1 = helpers['if'].call(depth0, depth0.profileimageurl, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</div>\n\n<p class=\"username username-profile pull-left\">\n    <a href=\"#user/";
@@ -100,7 +120,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 this["JST"]["following"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+helpers = this.merge(helpers, Handlebars.helpers); partials = this.merge(partials, Handlebars.partials); data = data || {};
   var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
@@ -150,7 +170,9 @@ function program8(depth0,data) {
   return "\n<a class=\"button button-unfollow\">\n    <i class=\"icon-minus\"></i>\n</a>\n";
   }
 
-  buffer += "<p class=\"sash unfollowed\">\n    <span>\n        Unfollowed\n        <i class=\"icon-minus\"></i>\n    </span>\n</p>\n<p class=\"sash flagged\">\n    <span>\n        Flagged\n        <i class=\"icon-flag\"></i>\n    </span>\n</p>\n\n\n<div class=\"icon icon-profile pull-left\">\n    ";
+  stack1 = self.invokePartial(partials.notifications, 'notifications', depth0, helpers, partials, data);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n\n<div class=\"icon icon-profile pull-left\">\n    ";
   stack1 = helpers['if'].call(depth0, depth0.profileimageurl, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</div>\n\n<p class=\"username username-profile pull-left\">\n    <a href=\"#user/";
@@ -448,7 +470,7 @@ function program9(depth0,data) {
 
 this["JST"]["item"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+helpers = this.merge(helpers, Handlebars.helpers); partials = this.merge(partials, Handlebars.partials); data = data || {};
   var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
 function program1(depth0,data) {
@@ -700,7 +722,13 @@ function program40(depth0,data) {
   return "\n    <a class=\"button button-promote\">\n        <i class=\"icon-ok\"></i>\n    </a>\n";
   }
 
-  buffer += "<div class=\"overlay\"></div>\n\n<p class=\"sash event\">\n    <i class=\"icon-calendar\"></i>\n</p>\n<p class=\"sash event-added\">\n    <i class=\"icon-calendar\"></i>\n</p>\n<p class=\"sash video\">\n    <i class=\"icon-facetime-video\"></i>\n</p>\n<p class=\"sash audio\">\n    <i class=\"icon-headphones\"></i>\n</p>\n<p class=\"sash text\">\n    <i class=\"icon-file-alt\"></i>\n</p>\n<p class=\"sash added\">\n    <span>\n        Added to playlist\n        <i class=\"icon-plus\"></i>\n    </span>\n</p>\n<p class=\"sash flagged\">\n    <span>\n        Flagged\n        <i class=\"icon-flag\"></i>\n    </span>\n</p>\n\n\n<div class=\"icon pull-left\">\n    ";
+  buffer += "<div class=\"overlay\"></div>\n\n";
+  stack1 = self.invokePartial(partials.sashes, 'sashes', depth0, helpers, partials, data);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n";
+  stack1 = self.invokePartial(partials.notifications, 'notifications', depth0, helpers, partials, data);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n<div class=\"icon pull-left\">\n    ";
   stack2 = helpers['if'].call(depth0, ((stack1 = depth0.author),stack1 == null || stack1 === false ? stack1 : stack1.profileimageurlhttps), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n</div>\n<p class=\"username username-item pull-left\">\n    <a href=\"#user/"
@@ -863,7 +891,7 @@ function program3(depth0,data) {
 
 this["JST"]["search-item"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+helpers = this.merge(helpers, Handlebars.helpers); partials = this.merge(partials, Handlebars.partials); data = data || {};
   var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
@@ -1115,7 +1143,13 @@ function program38(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div class=\"overlay\"></div>\n\n<p class=\"sash event\">\n    <i class=\"icon-calendar\"></i>\n</p>\n<p class=\"sash event-added\">\n    <i class=\"icon-calendar\"></i>\n</p>\n<p class=\"sash video\">\n    <i class=\"icon-facetime-video\"></i>\n</p>\n<p class=\"sash audio\">\n    <i class=\"icon-headphones\"></i>\n</p>\n<p class=\"sash text\">\n    <i class=\"icon-file-alt\"></i>\n</p>\n<p class=\"sash added\">\n    <span>\n        Added to playlist\n        <i class=\"icon-plus\"></i>\n    </span>\n</p>\n<p class=\"sash flagged\">\n    <span>\n        Flagged\n        <i class=\"icon-flag\"></i>\n    </span>\n</p>\n\n\n<div class=\"icon pull-left\">\n    ";
+  buffer += "<div class=\"overlay\"></div>\n\n";
+  stack1 = self.invokePartial(partials.sashes, 'sashes', depth0, helpers, partials, data);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n";
+  stack1 = self.invokePartial(partials.notifications, 'notifications', depth0, helpers, partials, data);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n<div class=\"icon pull-left\">\n    ";
   options = {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data};
   stack2 = ((stack1 = helpers.ifSystemUser || depth0.ifSystemUser),stack1 ? stack1.call(depth0, ((stack1 = depth0.author),stack1 == null || stack1 === false ? stack1 : stack1.pid), options) : helperMissing.call(depth0, "ifSystemUser", ((stack1 = depth0.author),stack1 == null || stack1 === false ? stack1 : stack1.pid), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
@@ -1150,7 +1184,7 @@ function program38(depth0,data) {
 
 this["JST"]["search-profile"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+helpers = this.merge(helpers, Handlebars.helpers); partials = this.merge(partials, Handlebars.partials); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
@@ -1194,7 +1228,9 @@ function program6(depth0,data) {
   return buffer;
   }
 
-  buffer += "<p class=\"sash followed\">\n    <span>\n        Followed\n        <i class=\"icon-plus\"></i>\n    </span>\n</p>\n<p class=\"sash flagged\">\n    <span>\n        Flagged\n        <i class=\"icon-flag\"></i>\n    </span>\n</p>\n\n<div class=\"icon icon-profile pull-left\">\n    ";
+  stack1 = self.invokePartial(partials.notifications, 'notifications', depth0, helpers, partials, data);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n\n<div class=\"icon icon-profile pull-left\">\n    ";
   stack1 = helpers['if'].call(depth0, depth0.profileimageurl, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</div>\n\n<p class=\"username username-profile pull-left\">\n    <a href=\"#user/";
@@ -1261,7 +1297,7 @@ function program3(depth0,data) {
 
 this["JST"]["suggestion"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+helpers = this.merge(helpers, Handlebars.helpers); partials = this.merge(partials, Handlebars.partials); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
@@ -1305,7 +1341,9 @@ function program6(depth0,data) {
   return buffer;
   }
 
-  buffer += "<p class=\"sash followed\">\n    <span>\n        Followed\n        <i class=\"icon-plus\"></i>\n    </span>\n</p>\n<p class=\"sash flagged\">\n    <span>\n        Flagged\n        <i class=\"icon-flag\"></i>\n    </span>\n</p>\n\n<div class=\"icon icon-profile pull-left\">\n    ";
+  stack1 = self.invokePartial(partials.notifications, 'notifications', depth0, helpers, partials, data);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n<div class=\"icon icon-profile pull-left\">\n    ";
   stack1 = helpers['if'].call(depth0, depth0.profileimageurl, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</div>\n\n<p class=\"username username-profile pull-left\">\n    <a href=\"#user/";

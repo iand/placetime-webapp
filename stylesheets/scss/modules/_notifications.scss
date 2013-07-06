@@ -1,0 +1,70 @@
+.notification {
+    border-style: solid;
+    border-color: transparent transparent #ff6600 transparent;
+    border-width: 0 0 24px 24px;
+    bottom: 0;
+    color: #ffffff;
+    font-size: 12px;
+    height: 0px;
+    opacity: 0;
+    line-height: 0px;
+    margin: 0;
+    position: absolute;
+    text-align: right;
+    right: 0;
+    width: 0;
+    z-index: 3;
+
+
+    span {
+        display: inline-block;
+        padding: 6px 4px 6px;
+    }
+
+    .icon-plus {
+        padding-left: 6px;
+    }
+}
+
+.notification-added {
+    width: 120px;
+}
+
+.notification-followed {
+    width: 82px;
+}
+
+.notification-unfollowed {
+    width: 100px;
+}
+
+.notification-flagged {
+    width: 82px;
+}
+
+
+
+.is-promoted,
+.is-added {
+    .notification-added {
+        opacity: 1;
+    }
+}
+
+.is-followed {
+    .notification-followed {
+        opacity: 1;
+    }
+}
+
+.is-unfollowed {
+    .notification-unfollowed {
+        opacity: 1;
+    }
+}
+
+.is-flagged {
+    .notification-flagged {
+        opacity: 1;
+    }
+}

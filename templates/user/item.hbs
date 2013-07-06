@@ -1,33 +1,7 @@
 <div class="overlay"></div>
 
-<p class="sash event">
-    <i class="icon-calendar"></i>
-</p>
-<p class="sash event-added">
-    <i class="icon-calendar"></i>
-</p>
-<p class="sash video">
-    <i class="icon-facetime-video"></i>
-</p>
-<p class="sash audio">
-    <i class="icon-headphones"></i>
-</p>
-<p class="sash text">
-    <i class="icon-file-alt"></i>
-</p>
-<p class="sash added">
-    <span>
-        Added to playlist
-        <i class="icon-plus"></i>
-    </span>
-</p>
-<p class="sash flagged">
-    <span>
-        Flagged
-        <i class="icon-flag"></i>
-    </span>
-</p>
-
+{{> sashes }}
+{{> notifications }}
 
 <div class="icon pull-left">
     {{#if author.profileimageurlhttps}}

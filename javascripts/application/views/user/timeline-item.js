@@ -9,6 +9,7 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
 
     modelEvents: {
         'flagged'       : 'onFlagged',
+        'item:added'    : 'onAdded',
         'item:promoted' : 'onPromoted',
         'item:demoted'  : 'onDemoted'
     },
@@ -111,12 +112,17 @@ Application.View.TimelineItem = Backbone.Marionette.ItemView.extend({
 
 
     onFlagged: function() {
-        this.$el.addClass('flagged');
+        this.$el.removeClass('now').addClass('is-flagged');
+    },
+
+
+    onAdded: function() {
+        this.$el.removeClass('now').addClass('is-added');
     },
 
 
     onPromoted: function() {
-        this.$el.removeClass('now').addClass('promoted');
+        this.$el.removeClass('now').addClass('is-promoted');
     },
 
 

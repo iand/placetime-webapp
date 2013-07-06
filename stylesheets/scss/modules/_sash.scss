@@ -43,34 +43,6 @@
     }
 
 
-    &.added,
-    &.followed,
-    &.flagged {
-        border-color: transparent transparent #ff6600 transparent;
-        border-width: 0 0 24px 24px;
-        bottom: 0;
-        font-size: 12px;
-        text-align: right;
-        z-index: 3;
-
-        span {
-            display: inline-block;
-            padding: 6px 4px 6px;
-        }
-    }
-
-    &.added {
-        width: 120px;
-    }
-
-    &.followed {
-        width: 82px;
-    }
-
-    &.flagged {
-        width: 82px;
-    }
-
     .icon-calendar,
     .icon-file-alt,
     .icon-headphones,
@@ -79,19 +51,13 @@
         right: -42px;
     }
 
-    .icon-calendar,
-    .icon-facetime-video {
+    .icon-calendar {
         top: 5px;
-    }
-
-    .icon-plus {
-        padding-left: 6px;
     }
 
     .icon-facetime-video {
         top: 7px;
     }
-
 
     .icon-file-alt {
         font-size: 16px;
@@ -101,29 +67,5 @@
     .icon-headphones {
         font-size: 16px;
         top: 7px;
-    }
-}
-
-.promoted {
-    .added.sash {
-        opacity: 1;
-    }
-}
-
-.followed {
-    .followed.sash {
-        opacity: 1;
-    }
-}
-
-.unfollowed {
-    .unfollowed.sash {
-        opacity: 1;
-    }
-}
-
-.flagged {
-    .flagged.sash {
-        opacity: 1;
     }
 }
