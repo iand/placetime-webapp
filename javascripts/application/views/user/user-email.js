@@ -1,8 +1,20 @@
-// TODO: Don't extend Application.View.User
-Application.View.UserEmail = Application.View.User.extend({
+Application.View.UserEmail = Backbone.Marionette.ItemView.extend({
     template: {
         type: 'handlebars',
         template: JST['user-email']
+    },
+
+
+    className: 'user layout-container',
+
+
+    events: {
+        'submit form': 'submit'
+    },
+
+
+    modelEvents: {
+        'change': 'render'
     },
 
 
@@ -24,5 +36,10 @@ Application.View.UserEmail = Application.View.User.extend({
         });
 
         return false;
+    },
+
+
+    onShow: function() {
+        this.model.fetch();
     }
 });

@@ -3,7 +3,10 @@ Application.View.User = Backbone.Marionette.ItemView.extend({
         type: 'handlebars',
         template: JST['user']
     },
+
+
     className: 'user layout-container',
+
 
     events: {
         'submit form': 'submit',
@@ -73,6 +76,7 @@ Application.View.User = Backbone.Marionette.ItemView.extend({
 
         return false;
     },
+
 
     onShow: function() {
         this.model.fetch();

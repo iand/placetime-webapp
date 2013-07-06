@@ -32,7 +32,7 @@ Application.View.Suggestions = Backbone.Marionette.CompositeView.extend({
 
         var location = Application.session.location();
 
-        location.done(function(data){
+        location.done(function(data) {
             var location  = data.countryname + ' ';
                 location += data.region + ' ';
                 location += data.city;
@@ -64,7 +64,6 @@ Application.View.Suggestions = Backbone.Marionette.CompositeView.extend({
 
 
     load: function() {
-        console.log('load');
         var self    = this;
         var promise = this.collection.fetch({
             data: {
@@ -74,6 +73,10 @@ Application.View.Suggestions = Backbone.Marionette.CompositeView.extend({
 
         promise.always(function(){
             self.model.set('loading', false);
+        });
+
+        promise.always(function(){
+            self.render();
         });
     },
 
