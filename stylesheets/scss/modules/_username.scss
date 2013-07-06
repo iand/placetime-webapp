@@ -4,10 +4,6 @@
     position: relative;
     z-index: 2;
 
-    a {
-        border-bottom: 0;
-    }
-
     i {
         color: #ff6600;
         display: inline-block;
@@ -16,7 +12,8 @@
 }
 
 .username-item {
-    a {
+    a,
+    span {
         color: #ddd;
     }
 }

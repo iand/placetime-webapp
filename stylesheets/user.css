@@ -170,16 +170,14 @@ h3 {
   position: relative;
   z-index: 2;
 }
-.username a {
-  border-bottom: 0;
-}
 .username i {
   color: #ff6600;
   display: inline-block;
   margin-left: 5px;
 }
 
-.username-item a {
+.username-item a,
+.username-item span {
   color: #ddd;
 }
 
