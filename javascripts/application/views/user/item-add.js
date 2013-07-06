@@ -25,10 +25,14 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         form: '.item-add-form',
         title: '.item-add-title',
         type: '.item-add-type',
-        media: '.item-add',
+        event: '.item-add-event',
         hasEvent: '.item-add-has-event',
         duration: '.item-add-duration',
         error: '.form-error',
+
+        mediaInput: 'input[name=media]',
+        titleInput: 'input[name=text]',
+        durationInput: 'input[name=duration]',
 
         list: '.item-add-image-list',
         controls: '.item-add-controls'
@@ -50,16 +54,19 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         var promise = this.model.detect();
 
         promise.done(function(data) {
-            self.model.set('text', data.title);
-
-            if (data.alternates && data.alternates.length > 0) {
-                self.model.set('alternates', data.alternates);
+            if (data.alternates === undefined || data.alternates.length === 0) {
+                data.alternates = [];
             }
 
-            self.model.set('image', '/-img/' + data.bestImage);
+            self.model.set({
+                text: data.title,
+                image: '/-img/' + data.bestImage,
+                alternates: data.alternates,
+                loading: false
+            });
         });
 
-        promise.always(function(){
+        promise.fail(function() {
             self.model.set('loading', false);
         });
     },
@@ -71,7 +78,13 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
         $target.siblings().removeClass('item-add-media-type-is-selected');
         $target.addClass('item-add-media-type-is-selected');
 
-        this.model.set('media', $target.data('type'));
+        this.model.set(
+            'media', $target.data('type'),
+            {
+                silent: true
+            }
+        );
+        this.ui.mediaInput.val($target.data('type'));
     },
 
 
@@ -172,7 +185,11 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
     },
 
 
-    onShow: function(){
+    onShow: function() {
+        this.ui.title.find('input').focus();
+    },
+
+    onRender: function() {
         if (Modernizr.inputtypes.date === false) {
             $('input[type=date]').datepicker({
                 changeMonth: true,
@@ -180,8 +197,6 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
                 dateFormat: 'mm/dd/yy'
             });
         }
-
-        this.ui.title.find('input').focus();
     },
 
     onClose: function() {
