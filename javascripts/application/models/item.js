@@ -111,7 +111,7 @@ Application.Model.Item = Backbone.Model.extend({
                 text: this.get('text'),
                 image: this.get('image').replace('/-img/', ''),
                 media: this.get('media'),
-                ets: this.get('ets'),
+                event: this.get('event'),
                 duration: this.get('duration')
             }
         });
