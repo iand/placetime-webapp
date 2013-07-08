@@ -34,7 +34,8 @@
 
     a {
         background-color: rgba(170, 170, 170, 0.8);
-        padding: 3px 4px;
+        padding: 7px 7px;
+        @include border-radius(7px);
     }
 }
 

@@ -719,7 +719,12 @@ h3 {
 .login-register a,
 .login-login a {
   background-color: rgba(170, 170, 170, 0.8);
-  padding: 3px 4px;
+  padding: 7px 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 7px;
 }
 
 .login-form {
@@ -863,8 +868,13 @@ h3 {
 }
 .register-heading span {
   background-color: rgba(170, 170, 170, 0.8);
-  padding: 3px 4px;
+  padding: 7px 7px;
   margin: 0 auto;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 7px;
 }
 
 .notification {
