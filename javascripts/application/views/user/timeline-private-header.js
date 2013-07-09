@@ -11,6 +11,17 @@ Application.View.PrivateTimelineHeader = Application.View.TimelineHeader.extend(
         'submit .form': 'submit'
     },
 
+    ui: {
+        link: '.link'
+    },
+
+
+    initialize: function() {
+        this.on('created', function(){
+            this.ui.link.val(null);
+        });
+    },
+
 
     playlist: function() {
         this.trigger('view:playlist');

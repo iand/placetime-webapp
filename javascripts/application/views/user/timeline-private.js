@@ -55,6 +55,7 @@ Application.View.TimelinePrivate = Application.View.Timeline.extend({
         this.bindEvents(view);
 
         this.listenTo(view, 'created', function() {
+            this.regionManager.get('header').currentView.trigger('created');
             this.timeline();
         });
 
