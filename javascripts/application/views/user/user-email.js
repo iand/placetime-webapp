@@ -18,7 +18,7 @@ Application.View.UserEmail = Backbone.Marionette.ItemView.extend({
     },
 
 
-    submit: function() {
+    submit: function(event) {
         var data = $(event.target).serializeObject();
 
 
