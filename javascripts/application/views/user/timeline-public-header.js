@@ -93,6 +93,11 @@ Application.View.PublicTimelineHeader = Application.View.TimelineHeader.extend({
 
 
     change: function(event) {
+        var type = this.ui.type.val();
+
+        // Update placeholder
+        this.ui.search.attr('placeholder', this.placeholders[type]);
+
         // Trigger filter
         if (this.model.get('view') === 'search') {
             this.submit(event);
