@@ -34,6 +34,32 @@
             <li>Image: {{.Image}}</li>
         </ul>
 
+        <script src="/-assets/javascripts/vendor/jquery.js"></script>
+        <script src="/-assets/javascripts/vendor/jquery/fancybox.js"></script>
+        <script>
+        var closeBtn = '<a title="Close" class="fancybox-item fancybox-close">';
+            closeBtn += '<i class="icon-remove-circle"></i>';
+            closeBtn += '</a>';
 
+        $.fancybox({
+            type        : 'iframe',
+            href        : '{{.Link}}',
+            maxWidth    : 970,
+            maxHeight   : 800,
+            padding     : 5,
+            fitToView   : false,
+            width       : '70%',
+            height      : '90%',
+            autoSize    : false,
+            closeClick  : false,
+            openEffect  : 'none',
+            closeEffect : 'none',
+            arrows      : false,
+
+            tpl: {
+                closeBtn : closeBtn
+            }
+        })
+        </script>
     </body>
 </html>
