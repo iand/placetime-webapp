@@ -6,8 +6,8 @@ Handlebars.registerHelper('fromNow', function(value) {
 
 Handlebars.registerHelper('fromNowAdded', function(value) {
  
-    if ( moment.unix(value.toString().substr(0, 10)) > moment().unix()) {
-        return "just now " + moment.unix(value.toString().substr(0, 10)) + " > " + moment().unix();
+    if ( moment.unix(value.toString().substr(0, 10)) > moment().valueOf()) {
+        return "just now ";
     } else {
         return moment.unix(
             value.toString().substr(0, 10)
