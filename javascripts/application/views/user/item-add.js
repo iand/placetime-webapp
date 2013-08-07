@@ -187,18 +187,18 @@ Application.View.ItemAdd = Backbone.Marionette.ItemView.extend({
             self.ui.textInput.val(data.title);
 
             // Best image
-            if (data.bestImage !== undefined) {
-                self.ui.imageBest.css('background-image', 'url(/-img/'+data.bestImage+')');
-                self.ui.imageBest.data('image', data.bestImage);
-                self.ui.imageInput.val(data.bestImage);
+            if (data.bestimage !== undefined) {
+                self.ui.imageBest.css('background-image', 'url('+data.bestimage+')');
+                self.ui.imageBest.data('image', data.bestimage);
+                self.ui.imageInput.val(data.bestimage);
             }
 
-            if (data.alternates && data.alternates.length > 0) {
+            if (data.images && data.images.length > 0) {
                 // Alternate images
-                $.each(data.alternates, function(index, alternate){
+                $.each(data.images, function(index, alternate){
                     var $li = $('<li />').addClass('item-add-image-list-item');
                         $li.css('background-image', 'url('+alternate.url+')');
-                        $li.data('image', alternate.url);
+                        $li.data('image', alternate.url); 
 
                     self.ui.imageList.append($li);
                 });
