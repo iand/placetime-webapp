@@ -7,7 +7,7 @@ Handlebars.registerHelper('fromNow', function(value) {
 Handlebars.registerHelper('fromNowAdded', function(value) {
  
     if ( moment.unix(value.toString().substr(0, 10)) > moment().unix()) {
-        return "just now";
+        return "just now " + moment.unix(value.toString().substr(0, 10)) + " > " + moment().unix();
     } else {
         return moment.unix(
             value.toString().substr(0, 10)
