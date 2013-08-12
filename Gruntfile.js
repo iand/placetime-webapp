@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                         'javascripts/application/views/user/user.js',
 
                         'javascripts/application/views/**/*.js',
-                        'javascripts/application/routers/*.js'
+                        'javascripts/application/routers/*.js'  
                     ]
                 }
             },
