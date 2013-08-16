@@ -51,7 +51,7 @@
 
 	}
 	
-@media only screen and (max-width: 480px), screen and (max-device-width : 568px) and (orientation : landscape) {
+@media only screen and (max-device-width : 568px) and (orientation : landscape) {
 	
     .now-separator, .navbar-inner, .needle { max-width: 554px; min-width:270px; }
     .navbar-tagline, .form { display: none; }
