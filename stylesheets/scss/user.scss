@@ -45,8 +45,8 @@
 
 @media only screen and (max-width: 480px), screen and (max-device-width : 568px) {
 	
-    .now-separator, .layout-container-wide { max-width: 300px; }
-    .item { max-width: 270px; }
+    .now-separator, .navbar-inner, .needle { max-width: 305px; min-width:270px; }
+    .item { max-width: 275px; }
 
 	}
 
