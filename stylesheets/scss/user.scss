@@ -42,3 +42,10 @@
 .route-register {
     background-image: url('/-assets/images/numbers.jpg');
 }
+
+@media only screen and (max-width: 480px) {
+    
+    .item { max-width: 300px; }
+
+	}
+
