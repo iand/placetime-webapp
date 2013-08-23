@@ -44,7 +44,7 @@
 }
 
 @media only screen and (max-width: 767px), screen and (max-device-width : 767px) {
-    .timeline-public { padding 0 1% 0 1% }
+    .timeline-public { padding 0 1% 0 1%; }
     .item { padding: 2%; width: 96%;}
     .navbar-tagline, .form { display: none; }
     .layout-container-wide { min-width: 300px; }
