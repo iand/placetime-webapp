@@ -50,7 +50,7 @@
     .navbar-tagline, .form { display: none; }
     //.item { max-width: 275px; }
     .item { width: 90%; }
-
+    .layout-container-wide, .layout-column .public, .layout-column .private { width: 100%; }
 	}
 	
 @media only screen and (max-device-width : 568px) and (orientation : landscape) {
