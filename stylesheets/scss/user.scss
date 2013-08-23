@@ -46,20 +46,20 @@
 @media only screen and (max-width: 480px), screen and (max-device-width : 568px) and (orientation : portrait) {
 	
     //.now-separator, .navbar-inner, .needle, .timeline-header { max-width: 305px; min-width:270px; }
-    .now-separator, .navbar-inner, .needle, .timeline-header { max-width: 95%; }
+    .now-separator, .navbar-inner, .needle, .timeline-header { width: 95%; }
     .navbar-tagline, .form { display: none; }
     //.item { max-width: 275px; }
-    .item { max-width: 90%; }
+    .item { width: 90%; }
 
 	}
 	
 @media only screen and (max-device-width : 568px) and (orientation : landscape) {
 	
     //.now-separator, .navbar-inner, .needle, .timeline-header { max-width: 554px; min-width:270px; }
-    .now-separator, .navbar-inner, .needle, .timeline-header { max-width: 95%; }
+    .now-separator, .navbar-inner, .needle, .timeline-header { width: 95%; }
     .navbar-tagline, .form { display: none; }
     //.item { max-width: 524px; }
-    .item { max-width: 90%; }
+    .item { width: 90%; }
 	}
 
 
