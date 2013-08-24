@@ -48,7 +48,8 @@
     .item { padding: 2%; width: 96%;}
     .navbar-tagline, .form { display: none; }
     .layout-container-wide { min-width: 300px; }
-    .layout-column.public, .layout-column.private, .now-separator, .navbar-inner, .needle, .timeline-header { width: 98%; }
+    .layout-column.public, .layout-column.private { width: 100%; }
+    .now-separator, .navbar-inner, .needle, .timeline-header { width: 98%; }
 	}
 	
 
